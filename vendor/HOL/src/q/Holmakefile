@@ -1,0 +1,21 @@
+HOLHEAP = $(HOLDIR)/bin/hol.state0
+CLINE_OPTIONS = -j1
+UOFILES = $(patsubst %.sml,%.uo,$(wildcard *.sml))
+
+all: selftest.exe $(UOFILES)
+
+.PHONY: all
+
+selftest.exe: selftest.uo Q.uo
+	$(HOLMOSMLC) -o $@ $<
+
+ifdef HOLSELFTESTLEVEL
+
+all: q-selftest.log
+
+q-selftest.log: selftest.exe
+	$(tee ./selftest.exe 2>&1,$@)
+
+endif
+
+EXTRA_CLEANS = selftest.exe q-selftest.log

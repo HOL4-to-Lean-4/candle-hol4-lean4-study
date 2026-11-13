@@ -1,0 +1,13 @@
+ifdef POLY
+HOLHEAP = $(HOLDIR)/bin/hol.state0
+endif
+
+emptyscript-selftest.log: selftest.exe
+	@$(tee ./$<,$@)
+
+selftest.exe: selftest.uo
+	$(MOSMLC) -o $@ $<
+
+# selftest drives Holmake in dir/ -- not visited by parallel_tests
+# INCLUDES.  Add its .hol/ tree so build cleanAll removes it.
+EXTRA_CLEANS = selftest.exe emptyscript-selftest.log dir/make.log dir/.hol/

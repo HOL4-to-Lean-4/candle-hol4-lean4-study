@@ -1,0 +1,291 @@
+(*---------------------------------------------------------------------------*)
+(* Goedel's encoding : injection from num list to num. See also              *)
+(* numpairTheory in src/num/extra_theories.                                  *)
+(*---------------------------------------------------------------------------*)
+
+(* Interactive
+quietdec := true;
+app load ["primeFactorTheory", "bagTheory"];
+open arithmeticTheory dividesTheory primeFactorTheory bagTheory;
+quietdec := false;
+*)
+Theory goedelCode
+Ancestors
+  arithmetic divides primeFactor bag
+
+
+val P_EUCLIDES = gcdTheory.P_EUCLIDES;
+
+(*---------------------------------------------------------------------------*)
+(* Goedel coding                                                             *)
+(*---------------------------------------------------------------------------*)
+
+Definition GCODE_def:
+   (GCODE i [] = 1) /\
+   (GCODE i (h::t) = (PRIMES(i) ** (h+1)) * GCODE (i+1) t)
+End
+
+Definition ENCODE_def:   ENCODE list = GCODE 0 list
+End
+
+Theorem GCODE_EMPTY:
+  !n. GCODE n [] = 1
+Proof
+ GEN_TAC THEN EVAL_TAC
+QED
+
+Theorem ZERO_LT_GCODE:
+  !list n. 0 < GCODE n list
+Proof
+ Induct THEN RW_TAC list_ss [GCODE_EMPTY] THEN
+ Cases_on `h` THEN EVAL_TAC THEN
+ RW_TAC list_ss [ZERO_LT_EXP,ZERO_LESS_MULT] THEN
+ METIS_TAC [INDEX_LESS_PRIMES,primePRIMES,NOT_PRIME_0, DECIDE ``(x=0) \/ 0<x``]
+QED
+
+Theorem ONE_LT_GCODE:
+  !h t n. 1 < GCODE n (h::t)
+Proof
+ RW_TAC bool_ss [GCODE_def] THEN
+ MATCH_MP_TAC ONE_LT_MULT_IMP THEN CONJ_TAC THENL
+ [RW_TAC bool_ss [GSYM ADD1,EXP] THEN
+  METIS_TAC [ONE_LT_MULT_IMP,ONE_LT_PRIMES,ZERO_LT_PRIMES,ZERO_LT_EXP],
+  METIS_TAC [ZERO_LT_GCODE]]
+QED
+
+Theorem GCODE_EQ_1:
+  !l n. (GCODE n l = 1) = (l=[])
+Proof
+ Cases THEN RW_TAC list_ss [GCODE_EMPTY] THEN
+ MATCH_MP_TAC (DECIDE``b < a ==> a<>b``) THEN
+ RW_TAC arith_ss [GCODE_def] THEN
+ MATCH_MP_TAC ONE_LT_MULT_IMP THEN
+ RW_TAC bool_ss [ZERO_LT_GCODE,GSYM ADD1,EXP] THEN
+ METIS_TAC[ONE_LT_MULT_IMP,ONE_LT_PRIMES,ZERO_LT_PRIMES,ZERO_LT_EXP]
+QED
+
+val lem1 = Q.prove
+(`!p q x. prime p /\ prime q /\ divides p (q ** x) ==> (p=q)`,
+ Induct_on `x` THEN RW_TAC arith_ss [EXP,DIVIDES_ONE] THENL
+ [METIS_TAC[NOT_PRIME_1],
+  METIS_TAC [prime_divides_only_self,P_EUCLIDES]]);
+
+val lem2 = Q.prove
+(`!n l x. BAG_IN x (PRIME_FACTORS (GCODE (n+1) l)) ==> PRIMES n < x`,
+ Induct_on `l` THENL
+ [RW_TAC arith_ss [GCODE_def] THEN
+    METIS_TAC [PRIME_FACTORS_1,NOT_IN_EMPTY_BAG],
+  REPEAT STRIP_TAC THEN
+  `divides x (GCODE (n + 1) (h::l))`
+    by METIS_TAC [PRIME_FACTOR_DIVIDES,ZERO_LT_GCODE] THEN
+  `prime x` by METIS_TAC [PRIME_FACTORS_def,ZERO_LT_GCODE] THEN
+  Q.PAT_X_ASSUM `divides a b` MP_TAC THEN RW_TAC arith_ss [GCODE_def] THEN
+  `divides x (PRIMES (n + 1) ** (h + 1)) \/ divides x (GCODE (n + 2) l)`
+    by METIS_TAC [P_EUCLIDES] THENL
+  [`x = PRIMES(n+1)` by METIS_TAC [lem1,primePRIMES] THEN
+     RW_TAC arith_ss [] THEN METIS_TAC [INFINITE_PRIMES,ADD1],
+   `PRIMES (n+1) < x`
+     by METIS_TAC [DIVISOR_IN_PRIME_FACTORS,DECIDE``n+2 = n+1+1``,ZERO_LT_GCODE]
+    THEN METIS_TAC [LESS_TRANS,INFINITE_PRIMES,ADD1]]]);
+
+val lem3 = Q.prove
+(`!d m x l. BAG_IN x (PRIME_FACTORS (GCODE (m + SUC d) l)) ==> PRIMES m < x`,
+ Induct THEN RW_TAC bool_ss [ADD_CLAUSES] THENL
+ [METIS_TAC [ADD1,lem2],
+  `PRIMES (SUC m) < x` by METIS_TAC [DECIDE``SUC(SUC(m+d)) = SUC m + SUC d``] THEN
+  METIS_TAC [LESS_TRANS,INFINITE_PRIMES,ADD1]]);
+
+val lem4 = Q.prove
+(`!m n l x. m < n /\ BAG_IN x (PRIME_FACTORS (GCODE n l)) ==> PRIMES m < x`,
+ METIS_TAC[lem3,LESS_ADD_1,ADD1]);
+
+val lem5 = Q.prove
+(`!l a. PRIME_FACTORS (GCODE (a + 1) l) (PRIMES a) = 0`,
+ RW_TAC arith_ss [NOT_BAG_IN] THEN STRIP_TAC THEN
+ METIS_TAC [lem4,DECIDE ``~(x < x) /\ a < a+1``]);
+
+val lem6 = Q.prove
+(`PRIME_FACTORS ((PRIMES i ** (h+1)) * GCODE (i+1) t) (PRIMES i) = h+1`,
+ `0 < GCODE (i+1) t` by METIS_TAC [ZERO_LT_GCODE] THEN
+ `0 < PRIMES i ** (h+1)` by RW_TAC arith_ss [ZERO_LT_EXP,ZERO_LT_PRIMES] THEN
+ RW_TAC arith_ss [PRIME_FACTORS_MULT,ZERO_LT_EXP, ZERO_LT_PRIMES,
+       ZERO_LT_GCODE,BAG_UNION,PRIME_FACTORS_EXP,primePRIMES,lem5]);
+
+(*---------------------------------------------------------------------------*)
+(* Injectivity                                                               *)
+(*---------------------------------------------------------------------------*)
+
+Theorem GCODE_11:
+   !l1 l2 a. (GCODE a l1 = GCODE a l2) ==> (l1=l2)
+Proof
+ Induct THENL
+ [METIS_TAC [GCODE_EQ_1, GCODE_def],
+  GEN_TAC THEN Induct THENL
+  [METIS_TAC [GCODE_EQ_1, GCODE_def],
+   POP_ASSUM (K ALL_TAC) THEN REPEAT GEN_TAC THEN
+   SIMP_TAC list_ss [GCODE_def] THEN STRIP_TAC THEN
+   `0 < PRIMES a ** (h+1) /\ 0 < PRIMES a ** (h'+1) /\
+    0 < GCODE (a+1) l1 /\ 0 < GCODE (a+1) l2`
+      by METIS_TAC [primePRIMES,ZERO_LT_PRIMES,ZERO_LT_EXP,ZERO_LT_GCODE] THEN
+   `PRIME_FACTORS (PRIMES a ** (h + 1) * GCODE (a + 1) l1) =
+    PRIME_FACTORS (PRIMES a ** (h' + 1) * GCODE (a + 1) l2)`
+      by METIS_TAC[] THEN
+   `BAG_UNION (PRIME_FACTORS (PRIMES a ** (h + 1)))
+              (PRIME_FACTORS (GCODE (a + 1) l1))
+      =
+    BAG_UNION (PRIME_FACTORS (PRIMES a ** (h' + 1)))
+              (PRIME_FACTORS (GCODE (a + 1) l2))`
+     by METIS_TAC [PRIME_FACTORS_MULT] THEN
+   `(BAG_UNION (PRIME_FACTORS (PRIMES a ** (h + 1)))
+               (PRIME_FACTORS (GCODE (a + 1) l1))) (PRIMES a) = h+1`
+      by SIMP_TAC arith_ss [BAG_UNION,PRIME_FACTORS_EXP,primePRIMES,lem5] THEN
+   `(BAG_UNION (PRIME_FACTORS (PRIMES a ** (h' + 1)))
+               (PRIME_FACTORS (GCODE (a + 1) l2))) (PRIMES a) = h'+1`
+     by SIMP_TAC arith_ss [BAG_UNION,PRIME_FACTORS_EXP,primePRIMES,lem5] THEN
+   `h = h'` by METIS_TAC [DECIDE ``(a+1 = b+1) = (a=b)``] THEN
+   RW_TAC arith_ss [] THEN NTAC 2 (POP_ASSUM (K ALL_TAC)) THEN
+   `PRIME_FACTORS (GCODE (a + 1) l1) = PRIME_FACTORS (GCODE (a + 1) l2)`
+     by METIS_TAC [BAG_UNION_EQ_LEFT] THEN
+   METIS_TAC [PRIME_FACTORS_def]]]
+QED
+
+Theorem ENCODE_11:
+   !l1 l2. (ENCODE l1 = ENCODE l2) ==> (l1=l2)
+Proof
+ METIS_TAC [GCODE_11,ENCODE_def]
+QED
+
+(*---------------------------------------------------------------------------*)
+(* Explicitly give decoder ... similar development as                        *)
+(*                                                                           *)
+(*       src/num/extra_theories/numpairScript.                               *)
+(*---------------------------------------------------------------------------*)
+
+Definition GDECODE_def:
+ GDECODE i gn =
+   if gn = 0 then NONE else
+   if gn = 1 then SOME [] else
+   case PRIME_FACTORS gn (PRIMES i)
+     of 0 => NONE
+      | SUC n =>
+          case GDECODE (i+1) (gn DIV (PRIMES i ** (n+1)))
+           of NONE => NONE
+            | SOME l => SOME (n::l)
+Termination
+ WF_REL_TAC `measure SND` THEN
+ RW_TAC arith_ss [DECIDE “x ≠ 0 ⇔ 0 < x”] THEN
+ MATCH_MP_TAC DIV_LESS THEN
+ RW_TAC arith_ss [ONE_LT_EXP,ONE_LT_PRIMES,ZERO_LT_EXP]
+End
+
+val lem7 = Q.prove
+(`(PRIME_FACTORS (GCODE i (h::t)) (PRIMES i) = SUC n) ==> (h=n)`,
+ RW_TAC arith_ss [GCODE_def] THEN FULL_SIMP_TAC arith_ss [lem6]);
+
+val lem8 = Q.prove
+(`GCODE i (h::t) DIV (PRIMES i ** (h+1)) = GCODE (i+1) t`,
+ RW_TAC arith_ss [GCODE_def] THEN
+ RW_TAC bool_ss [Once MULT_SYM] THEN
+ `0 < PRIMES i ** (h+1)` by RW_TAC arith_ss [ZERO_LT_EXP,ZERO_LT_PRIMES] THEN
+ RW_TAC arith_ss [MULT_DIV]);
+
+val lem9 = Q.prove
+(`!i h t. GCODE (i+1) t < GCODE i (h::t)`,
+ RW_TAC arith_ss [GCODE_def,ZERO_LT_GCODE,ONE_LT_EXP,ONE_LT_PRIMES]);
+
+val lem10 = Q.prove
+(`!gn i nl. (gn = GCODE i nl) ==> (GDECODE i gn = SOME nl)`,
+ completeInduct_on `gn` THEN RW_TAC arith_ss [Once GDECODE_def] THENL
+ [
+  FULL_SIMP_TAC list_ss [GCODE_EQ_1],
+  METIS_TAC [ZERO_LT_GCODE,DECIDE ``0 < x ⇔ x ≠ 0``],
+  `?h t. nl = h::t` by METIS_TAC [listTheory.list_CASES,GCODE_EQ_1] THEN
+  Q.PAT_X_ASSUM `a <> b` (K ALL_TAC) THEN POP_ASSUM SUBST_ALL_TAC THEN
+  REPEAT CASE_TAC THENL
+  [POP_ASSUM MP_TAC THEN RW_TAC arith_ss [GCODE_def] THEN
+    `0 < GCODE (i+1) t` by METIS_TAC [ZERO_LT_GCODE] THEN
+     `0 < PRIMES i ** (h + 1)` by RW_TAC arith_ss [ZERO_LT_EXP,ZERO_LT_PRIMES] THEN
+     RW_TAC arith_ss
+           [PRIME_FACTORS_MULT,BAG_UNION,PRIME_FACTORS_EXP,primePRIMES],
+   `h = n` by METIS_TAC [lem7] THEN RW_TAC arith_ss [] THEN
+      FULL_SIMP_TAC arith_ss [lem8] THEN
+      METIS_TAC [lem9,optionTheory.NOT_SOME_NONE],
+   `h = n` by METIS_TAC [lem7] THEN RW_TAC arith_ss [] THEN
+      FULL_SIMP_TAC arith_ss [lem8] THEN
+      METIS_TAC [lem9,optionTheory.SOME_11]]]);
+
+Theorem GDECODE_GCODE:
+  !nl i. GDECODE i (GCODE i nl) = SOME nl
+Proof
+ METIS_TAC [lem10]
+QED
+
+Definition DECODE_def:   DECODE gn = THE (GDECODE 0 gn)
+End
+
+Theorem DECODE_ENCODE:
+  !nl. DECODE (ENCODE nl) = nl
+Proof
+ RW_TAC arith_ss [DECODE_def, ENCODE_def,GDECODE_GCODE,optionTheory.THE_DEF]
+QED
+
+
+(*---------------------------------------------------------------------------*)
+(* Standard list operators lifted to gnums                                   *)
+(*---------------------------------------------------------------------------*)
+
+Definition gNIL_def:    gNIL = ENCODE []
+End
+Definition gCONS_def:   gCONS n gn = ENCODE (n::DECODE gn)
+End
+Definition gHD_def:     gHD gn = HD (DECODE gn)
+End
+Definition gTL_def:     gTL gn = ENCODE (TL (DECODE gn))
+End
+Definition gLEN_def:    gLEN gn = LENGTH (DECODE gn)
+End
+Definition gAPPEND_def:  gAPPEND gn1 gn2 = ENCODE (DECODE gn1 ++ DECODE gn2)
+End
+Definition gMAP_def:     gMAP f gn = ENCODE (MAP f (DECODE gn))
+End
+Definition gFOLDL_def:   gFOLDL f a gn = FOLDL f a (DECODE gn)
+End
+Definition gFOLDR_def:   gFOLDR f a gn = FOLDR f a (DECODE gn)
+End
+
+Theorem gCONS_ENCODE:
+  !nl. gCONS n (ENCODE nl) = ENCODE (n::nl)
+Proof
+ RW_TAC arith_ss [gCONS_def, DECODE_ENCODE]
+QED
+
+Theorem gLEN_ENCODE:
+  !nl. gLEN (ENCODE nl) = LENGTH nl
+Proof
+ RW_TAC arith_ss [gLEN_def, DECODE_ENCODE]
+QED
+
+Theorem gAPPEND_ENCODE:
+  !nl1 nl2. gAPPEND (ENCODE nl1) (ENCODE nl2) = ENCODE (APPEND nl1 nl2)
+Proof
+ RW_TAC arith_ss [gAPPEND_def, DECODE_ENCODE]
+QED
+
+Theorem gMAP_ENCODE:
+  gMAP f (ENCODE nl) = ENCODE (MAP f nl)
+Proof
+ RW_TAC arith_ss [gMAP_def, DECODE_ENCODE]
+QED
+
+Theorem gFOLDL_ENCODE:
+  gFOLDL f a (ENCODE nl) = FOLDL f a nl
+Proof
+ RW_TAC arith_ss [gFOLDL_def, DECODE_ENCODE]
+QED
+
+Theorem gFOLDR_ENCODE:
+  gFOLDR f a (ENCODE nl) = FOLDR f a nl
+Proof
+ RW_TAC arith_ss [gFOLDR_def, DECODE_ENCODE]
+QED
+

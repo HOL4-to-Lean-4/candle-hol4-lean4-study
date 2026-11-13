@@ -1,0 +1,336 @@
+(* ------------------------------------------------------------------------- *)
+(* Count Monad                                                               *)
+(* ------------------------------------------------------------------------- *)
+
+(*===========================================================================*)
+
+(* ------------------------------------------------------------------------- *)
+Theory countMonad
+Ancestors
+  pair option arithmetic pred_set list errorStateMonad
+Libs
+  jcLib monadsyntax
+
+(* val _ = load "jcLib"; *)
+val _ = monadsyntax.enable_monadsyntax();
+val _ = monadsyntax.enable_monad "errorState";
+
+(* ------------------------------------------------------------------------- *)
+(* Count Monad Documentation                                                 *)
+(* ------------------------------------------------------------------------- *)
+(* Data type:
+   counter = Count num
+*)
+(* Overloading:
+#  ecm     = :('a # counter)
+*)
+(* Definitions and Theorems (# are exported):
+
+   Count:
+   unit_def      |- !x. unit x = (x,Count 0)
+   tick_def      |- !c. tick c = ((),Count c)
+   valueOf_def   |- !ac. valueOf ac = FST ac
+   stepsOf_def   |- !ac. stepsOf ac = case ac of (a,Count n) => n
+   bind_def      |- !ac f. bind ac f =
+                           case ac of
+                             (a,Count c1) => case f a of (b,Count c2) => (b,Count (c1 + c2))
+   bind_unit1    |- !f x. monad_bind (unit x) f = f x
+   bind_unit2    |- !m. monad_bind m unit = m
+   bind_assoc    |- !m f g. do a <- m; monad_bind (f a) g od = monad_bind (monad_bind m f) g
+   bind_cong     |- !m1 m2 fm1 fm2. m1 = m2 /\ (!mval. mval = valueOf m1 ==> fm1 mval = fm2 mval) ==>
+                     monad_bind m1 fm1 = monad_bind m2 fm2
+
+#  unit_value    |- !x. valueOf (unit x) = x
+#  tick_value    |- !n. valueOf (tick n) = ()
+#  bind_value    |- !m f. valueOf (monad_bind m f) = valueOf (f (valueOf m))
+#  unit_count    |- !x. stepsOf (unit x) = 0
+#  tick_count    |- !n. stepsOf (tick n) = n
+#  bind_count    |- !m f. stepsOf (monad_bind m f) = stepsOf m + stepsOf (f (valueOf m))
+
+   Count Monad:
+   Count  :=   {      bind = ``bind``,
+                    choice = NONE,
+                      fail = NONE,
+                     guard = NONE,
+                ignorebind = NONE,
+                      unit = ``unit``}
+
+   app1_def      |- !f xM. app1 f xM = monad_bind xM f
+   app2_def      |- !f xM yM. app2 f xM yM = do x <- xM; y <- yM; f x y od
+   map_def       |- !f m. map f m = (f ## I) m
+
+   ifM_def       |- !gM tM eM. ifM gM tM eM = do b <- gM; if b then tM else eM od
+   ifM_value     |- !gM tM eM. valueOf (ifM gM tM eM) =
+                               if valueOf gM then valueOf tM else valueOf eM
+   ifM_count     |- !gM tM eM. stepsOf (ifM gM tM eM) =
+                               stepsOf gM + if valueOf gM then stepsOf tM else stepsOf eM
+*)
+
+(* Eliminate parenthesis around equality *)
+val _ = ParseExtras.tight_equality();
+
+(* ------------------------------------------------------------------------- *)
+(* Helper Theorems                                                           *)
+(* ------------------------------------------------------------------------- *)
+
+(* ------------------------------------------------------------------------- *)
+(* Count Monad                                                               *)
+(* ------------------------------------------------------------------------- *)
+
+(* Define Count type *)
+Datatype: counter = Count num
+End
+
+(* value and counter of an elementary count monad *)
+val _ = temp_type_abbrev("ecm", ``:('a # counter)``);
+
+(* unit of an elementary count monad *)
+Definition unit_def:  unit (x:'a) : 'a ecm = (x, Count 0)
+End
+
+(* tick of an elementary count monad *)
+Definition tick_def:  tick c : unit ecm = ((), Count c)
+End
+
+(* value of an accumulating monad *)
+Definition valueOf_def:
+    valueOf (ac :('a # counter)) = FST ac
+End
+
+(* count of steps in an accumulating monad *)
+(*
+val stepsOf_def = Define`
+    stepsOf (ac :('a # counter)) = counter_size (SND (THE ac))
+`;
+*)
+Definition stepsOf_def:
+    stepsOf (ac :('a # counter)) =
+      case ac of
+      | (a, Count n) => n
+End
+
+(* binding an executing function with an accumulating monad *)
+Definition bind_def:
+  bind (ac : 'a ecm) (f : 'a -> 'b ecm) =
+    case ac of
+      | (a,Count c1) =>
+          (case f a of
+             | (b,Count c2) => (b, Count (c1 + c2)))
+End
+
+(* count cases and tactic *)
+val count_CASES = TypeBase.nchotomy_of ``:counter``;
+val cmetis = metis_tac[pair_CASES, count_CASES];
+
+(* Theorem: alternate form of bind *)
+(* Proof: by bind_def *)
+Theorem bind_alt:
+    !v1 c1 f. bind (v1, Count c1) f =
+    case f v1 of
+      (v2, Count c2) => (v2, Count (c1 + c2))
+Proof
+  rw[bind_def]
+QED
+
+(* Theorem: alternate form of valueOf *)
+(* Proof: by valueOf_def *)
+Theorem valueOf_alt:
+    !v c. valueOf (v, Count c) = v
+Proof
+  rw[valueOf_def]
+QED
+
+(* Theorem: alternate form of stepsOf *)
+(* Proof: by stepsOf_def *)
+Theorem stepsOf_alt:
+    !v c. stepsOf (v, Count c) = c
+Proof
+  rw[stepsOf_def]
+QED
+
+(* Theorem: bind (unit x) f = f x *)
+(* Proof: by bind_def, unit_def *)
+Theorem bind_unit1:
+    !f x. bind (unit x) f = f x
+Proof
+  rw[bind_def, unit_def] >>
+  (`?b c2. f x = (b, Count c2)` by cmetis >> simp[])
+QED
+
+(* Theorem: bind m unit = m *)
+(* Proof: by bind_def, unit_def *)
+Theorem bind_unit2:
+    !m. bind m unit = m
+Proof
+  rw[bind_def, unit_def, AllCaseEqs(), PULL_EXISTS] >>
+  cmetis
+QED
+
+(* Theorem: bind m (\a. bind (f a) g) = bind (bind m f) g *)
+(* Proof: by bind_def *)
+Theorem bind_assoc:
+    !m f g. bind m (\a. bind (f a) g) = bind (bind m f) g
+Proof
+  rw[bind_def, AllCaseEqs(), PULL_EXISTS] >>
+  csimp[] >>
+  cmetis
+QED
+
+(* Theorem: (m1 = m2) /\ (!mval. mval = valueOf m1 ==> fm1 mval = fm2 mval)
+            ==> (bind m1 fm1 = bind m2 fm2) *)
+(* Proof: by bind_def, valueOf_def *)
+Theorem bind_cong[defncong]:
+    !m1 m2 fm1 fm2. (m1 = m2) /\ (!mval. mval = valueOf m1 ==> fm1 mval = fm2 mval) ==>
+      (bind m1 fm1 = bind m2 fm2)
+Proof
+  rw[bind_def, valueOf_def] >>
+  Cases_on `m1` >>
+  Cases_on `r` >>
+  fs[]
+QED
+(* for total define, or tDefine *)
+
+(*
+If using try and catch,
+change to:   'a option # num
+
+ bind m1 f =
+    case m1 of
+      (NONE, c) => (NONE, c)
+    | (SOME v, c1) =>
+        case f v of
+          (NONE, c2) => (NONE, c1 + c2)
+       | (SOME v', c2) => (SOME v', c1 + c2)
+  choice m1 m2 =
+     case m1 of
+       (NONE, c1) => (FST m2, c1 + SND m2)
+     | (SOME v, c) => (SOME v, c)
+
+*)
+
+(* Theorem: valueOf (unit x) = x *)
+(* Proof: by valueOf_def, unit_def *)
+Theorem unit_value[simp]:
+    !x. valueOf (unit x) = x
+Proof
+  rw[valueOf_def, unit_def]
+QED
+
+(* Theorem: valueOf (tick n) = () *)
+(* Proof: by valueOf_def, tick_def *)
+Theorem tick_value[simp]:
+    !n. valueOf (tick n) = ()
+Proof
+  rw[valueOf_def, tick_def]
+QED
+
+(* Theorem: valueOf (bind m f) = valueOf (f (valueOf m)) *)
+(* Proof:
+   By definitions, and resolving cases.
+*)
+Theorem bind_value[simp]:
+    !m f. valueOf (bind m f) = valueOf (f (valueOf m))
+Proof
+  rw[bind_def, valueOf_def] >>
+  (Cases_on `m` >> simp[]) >>
+  (Cases_on `r` >> simp[]) >>
+  (Cases_on `f q` >> simp[]) >>
+  (Cases_on `r` >> simp[])
+QED
+(* Once in [simp], just rw[] proves it. *)
+
+(* Theorem: stepsOf (unit x) = 0 *)
+(* Proof: by stepsOf_def, unit_def *)
+Theorem unit_count[simp]:
+    !x. stepsOf (unit x) = 0
+Proof
+  rw[stepsOf_def, unit_def]
+QED
+
+(* Theorem: stepsOf (tick n) = n *)
+(* Proof: by stepsOf_def, tick_def *)
+Theorem tick_count[simp]:
+    !n. stepsOf (tick n) = n
+Proof
+  rw[stepsOf_def, tick_def]
+QED
+
+(* Theorem: stepsOf (bind m f) = stepsOf m + stepsOf (f (valueOf m)) *)
+(* Proof:
+   By definitions, this is to show:
+      ?a a' c1 c2. m = (a',Count c1) /\ f a' = (a,Count c2)
+   The values exists by pair_CASES and count_CASES.
+*)
+Theorem bind_count[simp]:
+    !m f. stepsOf (bind m f) = stepsOf m + stepsOf (f (valueOf m))
+Proof
+  rw[bind_def, stepsOf_def, valueOf_def, AllCaseEqs(), PULL_EXISTS] >>
+  csimp[] >>
+  cmetis
+QED
+(* Once in [simp], this proof is not repeatable. Just rw[] proves it. *)
+
+(* ------------------------------------------------------------------------- *)
+(* Count Monad                                                               *)
+(* ------------------------------------------------------------------------- *)
+
+(* The Count monad *)
+val _ = declare_monad ("Count",
+            {      bind = ``bind``,
+                 choice = NONE,
+                   fail = NONE,
+                  guard = NONE,
+             ignorebind = NONE,
+                   unit = ``unit``});
+
+(* constant as unit *)
+(* val _ = add_bare_numeral_form(#"c", SOME "unit"); *)
+(* original:
+val cnum_def = Define`cnum n = UNIT n`;
+val _ = add_numeral_form(#"c", SOME "cnum");
+*)
+
+(* unary application monad *)
+Definition app1_def:  app1 f xM = bind xM f
+End
+
+(* binary application monad *)
+Definition app2_def:  app2 f xM yM = bind xM (\x. bind yM (\y. f x y))
+End
+
+(* Map monad *)
+Definition map_def:  map (f:'a -> 'b) m : 'b ecm = (f ## I) m
+End
+
+
+(* IF monad *)
+Definition ifM_def:
+  ifM (gM : bool ecm) (tM : 'a ecm) eM = bind gM (\b. if b then tM else eM)
+End
+(* for EVAL ifM *)
+val _ = computeLib.set_EVAL_skip ``ifM`` (SOME 1);
+
+(* Theorem: valueOf (ifM gM tM eM) = if valueOf gM then valueOf tM else valueOf eM *)
+(* Proof: by ifM_def *)
+Theorem ifM_value[simp]:
+    !gM tM eM. valueOf (ifM gM tM eM) = if valueOf gM then valueOf tM else valueOf eM
+Proof
+  rw[ifM_def]
+QED
+
+(* Theorem: stepsOf (ifM gM tM eM) =
+            stepsOf gM + if valueOf gM then stepsOf tM else stepsOf eM *)
+(* Proof: by ifM_def *)
+Theorem ifM_count[simp]:
+    !gM tM eM. stepsOf (ifM gM tM eM) =
+    stepsOf gM + if valueOf gM then stepsOf tM else stepsOf eM
+Proof
+  rw[ifM_def]
+QED
+
+(* for EVAL IFm *)
+val _ = computeLib.set_EVAL_skip ``ifM`` (SOME 1);
+(* This EVAL IFm is not stored in the theory file! *)
+
+(* ------------------------------------------------------------------------- *)
+(*===========================================================================*)

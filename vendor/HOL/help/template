@@ -1,0 +1,28 @@
+## `MLname`
+
+``` hol4
+qualified-MLname : MLtype
+```
+
+------------------------------------------------------------------------
+
+<one line summary>
+
+<multi-paragraph description>
+
+### Failure
+
+<description of when and how the function might fail> 
+
+### Example
+
+<If appropriate>
+
+### Comments
+
+<If appropriate>
+
+### See also
+
+([`Struct.entrypoint`](#Struct.entrypoint),)*
+[`Struct.entrypoint`](#Struct.entrypoint).

@@ -1,0 +1,69 @@
+signature Systeml =
+sig
+
+  val systeml : string list -> OS.Process.status
+  val system_ps : string -> OS.Process.status
+  val systeml_out : {outfile:string} -> string list -> OS.Process.status
+  val exec : string * string list -> 'a
+  val protect : string -> string
+  val xable_string : string -> string
+  val mk_xable : string -> OS.Process.status
+
+(* Generate HOL shell script supporting --bare and --noquote flags.
+   First argument is the target path, second is quotation end patterns. *)
+  val emit_hol_script : string -> {boss_qend: string, bare_qend: string} ->
+                        OS.Process.status
+
+  val find_my_path : unit -> string
+
+  (* configuration time constants *)
+  val HOLDIR : string
+  val POLYMLLIBDIR : string
+  val POLY : string
+  val POLYC : string
+  val POLY_VERSION : int
+  val POLY_LDFLAGS : string list
+  val POLY_LDFLAGS_STATIC : string list
+  val CC : string
+  val MOSMLDIR : string
+  val OS : string
+  val DEPDIR : string
+  val LOGDIR : string
+  val GNUMAKE : string
+  val DYNLIB : bool
+  val ML_SYSNAME : string
+  val DOT_PATH : string option
+  val MV : string
+  val CP : string
+
+  (* Command for cloning a file with copy-on-write semantics
+     (independent inode, shared backing blocks where the filesystem
+     allows it; byte-copy fallback otherwise).  Used by the Holmake
+     product cache to avoid the metadata-sharing trap of hardlinks
+     across repos that share a cache directory.  NONE on platforms
+     where no such command is available. *)
+  val clone_cmd : string option
+  val SHASUM : string
+  val DEFAULT_STATE : string
+  val haveWord64 : bool
+
+  val isUnix : bool
+  val pointer_eq : 'a * 'a -> bool
+  val canBindStr : bool
+  val bindstr : string -> string
+   (* emits code that tries to quietly emulate the action of the argument
+      when fed to the compiler.  For MoscowML, this is the identity function
+      (and it won't be quiet). *)
+
+  (* other system-wide constants, shared between build tools and the
+     running hol *)
+  val build_log_dir : string
+  val build_log_file : string
+  val make_log_file : string
+  val build_after_reloc_envvar : string
+
+  (* canonical source of version information *)
+  val release : string
+  val version : int
+
+end

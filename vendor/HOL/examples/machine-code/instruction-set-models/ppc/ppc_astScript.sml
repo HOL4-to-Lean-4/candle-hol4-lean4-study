@@ -1,0 +1,113 @@
+
+Theory ppc_ast
+Ancestors
+  ppc_coretypes
+
+(* ---------------------------------------------------------------------------------- *>
+
+  This theory defines the abstract syntax tree (AST) for PowerPC instructions.
+
+  It leaves out the following which don't correspond to a PowerPC instruction:
+
+    | Pallocframe Z Z       (* allocate new stack frame *)
+    | Pallocblock                 (* allocate new heap block *)
+    | Plfi freg float       (* load float constant *)
+    | Plabel label             (* define a code label *)
+    | Pfreeframe                  (* deallocate stack frame and restore previous frame *)
+    | Pmfcrbit ireg crbit   (* move condition bit to reg *)
+
+  Types ireg, freg, ppc_constant, and crbit are used from ppc_coretypesTheory.
+
+  Also added adde and subfe which is used for multiword arithmetic.
+
+<* ---------------------------------------------------------------------------------- *)
+
+
+Datatype:
+  instruction =
+    Padd ireg ireg ireg                     (* integer addition *)
+  | Padde ireg ireg ireg                    (* add include carry bit *)
+  | Paddi ireg ireg ppc_constant            (* add immediate *)
+  | Paddis ireg ireg ppc_constant           (* add immediate high *)
+  | Paddze ireg ireg                        (* add carry bit *)
+  | Pand_ ireg ireg ireg                    (* bitwise and *)
+  | Pandc ireg ireg ireg                    (* bitwise and-complement *)
+  | Pandi_ ireg ireg ppc_constant           (* and immediate and set conditions *)
+  | Pandis_ ireg ireg ppc_constant          (* and immediate high and set conditions *)
+  | Pb word24                               (* unconditional branch *)
+  | Pbc word5 crbit (14 word)               (* conditional branch *)
+  | Pbctr                                   (* branch to contents of register CTR *)
+  | Pbctrl                                  (* branch to contents of CTR and link *)
+  | Pbl word24                              (* branch and link *)
+  | Pblr                                    (* branch to contents of register LR *)
+  | Pcmplw ireg ireg                        (* unsigned integer comparison *)
+  | Pcmplwi ireg ppc_constant               (* same, with immediate argument *)
+  | Pcmpw ireg ireg                         (* signed integer comparison *)
+  | Pcmpwi ireg ppc_constant                (* same, with immediate argument *)
+  | Pcror crbit crbit crbit                 (* or between condition bits *)
+  | Pdivw ireg ireg ireg                    (* signed division *)
+  | Pdivwu ireg ireg ireg                   (* unsigned division *)
+  | Peqv ireg ireg ireg                     (* bitwise not-xor *)
+  | Pextsb ireg ireg                        (* 8-bit sign extension *)
+  | Pextsh ireg ireg                        (* 16-bit sign extension *)
+  | Pfabs freg freg                         (* float absolute value *)
+  | Pfadd freg freg freg                    (* float addition *)
+  | Pfcmpu freg freg                        (* float comparison *)
+  | Pfcti ireg freg                         (* float-to-int conversion *)
+  | Pfdiv freg freg freg                    (* float division *)
+  | Pfmadd freg freg freg freg              (* float multiply-add *)
+  | Pfmr freg freg                          (* float move *)
+  | Pfmsub freg freg freg freg              (* float multiply-sub *)
+  | Pfmul freg freg freg                    (* float multiply *)
+  | Pfneg freg freg                         (* float negation *)
+  | Pfrsp freg freg                         (* float round to single precision *)
+  | Pfsub freg freg freg                    (* float subtraction *)
+  | Pictf freg ireg                         (* int-to-float conversion *)
+  | Piuctf freg ireg                        (* unsigned int-to-float conversion *)
+  | Plbz ireg ppc_constant ireg             (* load 8-bit unsigned word32 *)
+  | Plbzx ireg ireg ireg                    (* same, with 2 index regs *)
+  | Plfd freg ppc_constant ireg             (* load 64-bit float *)
+  | Plfdx freg ireg ireg                    (* same, with 2 index regs *)
+  | Plfs freg ppc_constant ireg             (* load 32-bit float *)
+  | Plfsx freg ireg ireg                    (* same, with 2 index regs *)
+  | Plha ireg ppc_constant ireg             (* load 16-bit signed word32 *)
+  | Plhax ireg ireg ireg                    (* same, with 2 index regs *)
+  | Plhz ireg ppc_constant ireg             (* load 16-bit unsigned word32 *)
+  | Plhzx ireg ireg ireg                    (* same, with 2 index regs *)
+  | Plwz ireg ppc_constant ireg             (* load 32-bit word32 *)
+  | Plwzx ireg ireg ireg                    (* same, with 2 index regs *)
+  | Pmfcrbit ireg crbit                     (* move condition bit to reg *)
+  | Pmflr ireg                              (* move LR to reg *)
+  | Pmr ireg ireg                           (* integer move *)
+  | Pmtctr ireg                             (* move ireg to CTR *)
+  | Pmtlr ireg                              (* move ireg to LR *)
+  | Pmulli ireg ireg ppc_constant           (* integer multiply immediate *)
+  | Pmullw ireg ireg ireg                   (* integer multiply *)
+  | Pnand ireg ireg ireg                    (* bitwise not-and *)
+  | Pnor ireg ireg ireg                     (* bitwise not-or *)
+  | Por ireg ireg ireg                      (* bitwise or *)
+  | Porc ireg ireg ireg                     (* bitwise or-complement *)
+  | Pori ireg ireg ppc_constant             (* or with immediate *)
+  | Poris ireg ireg ppc_constant            (* or with immediate high *)
+  | Prlwinm ireg ireg word5 word5 word5     (* rotate and mask *)
+  | Pslw ireg ireg ireg                     (* shift left *)
+  | Psraw ireg ireg ireg                    (* shift right signed *)
+  | Psrawi ireg ireg word5                  (* shift right signed immediate *)
+  | Psrw ireg ireg ireg                     (* shift right unsigned *)
+  | Pstb ireg ppc_constant ireg             (* store 8-bit word *)
+  | Pstbx ireg ireg ireg                    (* same, with 2 index regs *)
+  | Pstfd freg ppc_constant ireg            (* store 64-bit float *)
+  | Pstfdx freg ireg ireg                   (* same, with 2 index regs *)
+  | Pstfs freg ppc_constant ireg            (* store 32-bit float *)
+  | Pstfsx freg ireg ireg                   (* same, with 2 index regs *)
+  | Psth ireg ppc_constant ireg             (* store 16-bit word *)
+  | Psthx ireg ireg ireg                    (* same, with 2 index regs *)
+  | Pstw ireg ppc_constant ireg             (* store 32-bit word*)
+  | Pstwx ireg ireg ireg                    (* same, with 2 index regs *)
+  | Psubfc ireg ireg ireg                   (* reversed integer subtraction *)
+  | Psubfe ireg ireg ireg                   (* reversed integer subtraction, carry bit *)
+  | Psubfic ireg ireg ppc_constant          (* integer subtraction from immediate *)
+  | Pxor ireg ireg ireg                     (* bitwise xor *)
+  | Pxori ireg ireg ppc_constant            (* bitwise xor with immediate *)
+  | Pxoris ireg ireg ppc_constant           (* bitwise xor with immediate high *)
+End

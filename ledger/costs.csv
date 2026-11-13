@@ -1,0 +1,3 @@
+arm,phase,round,workflow,run,tool,model_id,start_utc,end_utc,input_tokens,output_tokens,cache_read_tokens,cache_write_tokens,reasoning_tokens,usd_billed,usd_api_equivalent,aristotle_tasks,aristotle_minutes,human_minutes,machine,notes
+setup,setup,,astra-smoke-test,,codex-cli,gpt-6-astra,2026-11-13T16:36:53.068Z,2026-11-13T16:36:58.063Z,22848,5,0,0,0,,,,,0,my-pc,session=01a1d5c4-e2b5-7ce3-a8e4-ffa427cf6f98;codex exec smoke test; prompt 'Reply with the single word OK';effort=medium
+setup,setup,,week1-setup,,claude-code,claude-opus-5-5+claude-haiku-5-5,2026-11-13T16:35:50.395Z,2026-11-13T16:49:46.760Z,112,32907,5613592,186338,,,,,,,my-pc,session=953eb197-3195-4992-8c80-fe916a63133a;partial: setup session still running at time of extraction;files=3;api_messages=55

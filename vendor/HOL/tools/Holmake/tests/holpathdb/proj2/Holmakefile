@@ -1,0 +1,26 @@
+CLINE_OPTIONS = -r
+INCLUDES = ../proj1 heaptest
+
+all: $(DEFAULT_TARGETS) $(HOLHEAP) test
+.PHONY: all
+
+
+ifdef POLY
+HOLHEAP = heap
+EXTRA_CLEANS = $(HOLHEAP) test
+all: $(HOLHEAP)
+
+BARE_THYS = ../proj1/proj1ATheory ../proj1/proj1BTheory
+DEPS = $(patsubst %,%.uo,$(BARE_THYS))
+
+$(HOLHEAP): $(DEPS) $(dprot $(HOLDIR)/bin/hol.state0)
+	$(protect $(HOLDIR)/bin/hol) buildheap -b $(protect $(HOLDIR)/bin/hol.state0) -o $(HOLHEAP) $(BARE_THYS)
+else
+  EXTRA_CLEANS = test
+endif
+
+# this test checks that proj1ATheory.sml uses #(FILE) to locate its
+# .dat file (not an absolute or holpath-variable path).
+test: ../proj1/proj1ATheory.sml
+	grep '#(FILE)' $(hol2fs $<)
+	touch $@

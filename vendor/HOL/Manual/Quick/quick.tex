@@ -1,0 +1,53 @@
+% =====================================================================
+% HOL Manual: Quick Reference (PDF driver)
+%
+% This is a thin LaTeX driver.  The body is generated from
+% quickref.md -- the same source the mdbook Quick manual uses -- by
+% pandoc (into quickref.tex) and \input here, so the PDF and the
+% online page never drift apart.  Cross-references are written in the
+% source as \refentry{Mod.entry}; the mdbook build rewrites them to
+% relative links, and the \refentry definition below turns them into
+% links to the online Reference manual in the PDF.
+% =====================================================================
+\documentclass[10pt,a4paper]{article}
+\usepackage[a4paper,margin=14mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% Packages emitted/used by pandoc-generated tables; see
+% Manual/Logic/logic.tex for the same set and rationale.
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{calc}
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\newcounter{none}    % referenced by pandoc longtable captions
+
+\usepackage[hidelinks]{hyperref}
+\hypersetup{pdftitle={HOL Quick Reference}}
+
+% \refentry{Mod.entry}: smdpp rewrites these to relative links for the
+% mdbook build; in the PDF, point at the online Reference manual page
+% (the same target, absolute).  pandoc passes the macro through
+% verbatim from quickref.md.
+\newcommand{\refentry}[1]{%
+  \href{https://hol-theorem-prover.org/docs/latest/Reference/#1.html}%
+       {\texttt{#1}}}
+
+% Make `_` printable in text and \texttt (entry names like EQ_MP) and
+% in the \refentry URLs.  [strings] also handles underscores in
+% \href/\url arguments.  See Manual/Logic/logic.tex.
+\usepackage[strings]{underscore}
+
+% Compact, unnumbered headings for a dense reference sheet.
+\setcounter{secnumdepth}{0}
+\setlength{\parindent}{0pt}
+\renewcommand{\arraystretch}{1.1}
+\pagestyle{empty}
+
+\begin{document}
+\input{quickref}
+\end{document}

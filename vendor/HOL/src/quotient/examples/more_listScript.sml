@@ -1,0 +1,164 @@
+Theory more_list
+Ancestors
+  combin num arithmetic list rich_list more_set
+Libs
+  listLib numLib Psyntax tactics
+
+Theorem MAP2_APPEND:
+     !s1 s2 t1 t2 (f:'a->'b->'c).
+          (LENGTH s1 = LENGTH s2) ==>
+          (MAP2 f (APPEND s1 t1) (APPEND s2 t2) =
+          APPEND (MAP2 f s1 s2) (MAP2 f t1 t2))
+Proof
+    LIST_INDUCT_TAC
+    THENL
+       [ LIST_INDUCT_TAC
+         THEN REWRITE_TAC[LENGTH,APPEND,MAP2,SUC_NOT],
+
+         GEN_TAC
+         THEN LIST_INDUCT_TAC
+         THEN REWRITE_TAC[LENGTH,NOT_SUC]
+         THEN REWRITE_TAC[ADD1,EQ_MONO_ADD_EQ]
+         THEN REWRITE_TAC[APPEND,MAP2]
+         THEN REPEAT GEN_TAC
+         THEN DISCH_TAC
+         THEN RES_TAC
+         THEN ASM_REWRITE_TAC[]
+      ]
+QED
+
+Theorem AND_EL:
+     (AND_EL [] = T) /\
+        (!x l. AND_EL (CONS x l) = (x /\ AND_EL l))
+Proof
+    REWRITE_TAC[AND_EL_DEF]
+    THEN REWRITE_TAC[ALL_EL]
+    THEN REWRITE_TAC[combinTheory.I_THM]
+QED
+
+Theorem AND_EL_APPEND:
+     !s t. AND_EL (APPEND s t) = (AND_EL s /\ AND_EL t)
+Proof
+    REWRITE_TAC[AND_EL_DEF]
+    THEN LIST_INDUCT_TAC
+    THEN REWRITE_TAC[APPEND,ALL_EL]
+    THEN ASM_REWRITE_TAC[CONJ_ASSOC]
+QED
+
+(* =============================================================== *)
+(* LENGTH_FILTER says that if we filter a list into two using P    *)
+(* as a predicate, then the sum of the lengths of the two parts    *)
+(* must equal the length of the whole.                             *)
+(* =============================================================== *)
+
+Theorem LENGTH_FILTER:
+     !(l:'a list) P.
+          LENGTH (FILTER P l) + LENGTH (FILTER ($~ o P) l) = LENGTH l
+Proof
+    LIST_INDUCT_TAC
+    THEN REWRITE_TAC[FILTER]
+    THENL
+       [ REWRITE_TAC[LENGTH,ADD_0],
+
+         REWRITE_TAC[o_THM]
+         THEN REPEAT GEN_TAC
+         THEN COND_CASES_TAC
+         THEN ASM_REWRITE_TAC[LENGTH,ADD_CLAUSES]
+      ]
+QED
+
+(* =============================================================== *)
+(* Applying LENGTH_FILTER to a specific filter, we can calculate   *)
+(* the length of the partitions of num lists where the partition   *)
+(* separates the bottom of a range from the larger members.        *)
+(* For all lists of numbers l, the number of elements of value n   *)
+(* or more equals the number of elements of value n plus the       *)
+(* number of elements of value more than n.                        *)
+(* =============================================================== *)
+
+Theorem LENGTH_FILTER_LESS_EQ:
+  !l n.  LENGTH (FILTER (\y. n = y) l) + LENGTH (FILTER (\y. n < y) l) =
+         LENGTH (FILTER (\y. n <= y) l)
+Proof
+    REWRITE_TAC
+    [(GENL [“l:num list”,“n:num”]
+      o REWRITE_RULE[ARITH_PROVE “ (n=y) /\ (n <= y) <=> (n = y)”,
+                     ARITH_PROVE “~(n=y) /\ (n <= y) <=> (n < y)”]
+      o CONV_RULE (DEPTH_CONV BETA_CONV)
+      o REWRITE_RULE[FILTER_FILTER,o_THM]
+      o ISPECL[“FILTER (\y. n <= y) l”,“\y:num. n = y”])
+     LENGTH_FILTER]
+QED
+
+
+(*
+FILTER_MAP;
+    |- !f1 f2 l. FILTER f1 (MAP f2 l) = MAP f2 (FILTER (f1 o f2) l)
+*)
+
+
+Definition SL[nocompute]:
+  (SL NIL = {}) /\
+  (SL (CONS (y:'a) l) = y INSERT (SL l))
+End
+
+
+Theorem SL_APPEND:
+  !(l1: 'a list) l2. SL (APPEND l1 l2) = (SL l1 UNION SL l2)
+Proof
+    LIST_INDUCT_TAC
+    THEN ASM_REWRITE_TAC[APPEND,SL,UNION]
+QED
+
+
+Theorem SL_FLAT:
+  !(l: 'a list list). SL (FLAT l) = UNION_SET (SL (MAP SL l))
+Proof
+    LIST_INDUCT_TAC
+    THEN REWRITE_TAC[FLAT,MAP,SL,UNION_SET]
+    THEN ASM_REWRITE_TAC[SL_APPEND]
+QED
+
+Theorem SL_MAP:
+  !l (f: 'a->'b). SL (MAP f l) = IMAGE f (SL l)
+Proof
+    LIST_INDUCT_TAC
+    THEN ASM_REWRITE_TAC[MAP,SL,IMAGE]
+QED
+
+Theorem DELETE_DIFF_SL:
+    !xs s (e:'a).
+        s DELETE e DIFF SL xs = s DIFF SL (e::xs)
+Proof
+   LIST_INDUCT_TAC
+   THEN REWRITE_TAC[SL,DIFFF]
+QED
+
+
+Definition DL[nocompute]:
+  (DL NIL = T) /\
+  (DL (CONS (y:'a) l) = (~(y IN SL l) /\ DL l))
+End
+
+(* Two generic length lemmas used by the quotient-examples barendregt
+   library.  Landed here so those libraries don't fire load-time
+   TAC_PROOF calls. *)
+
+Theorem EVERY_LENGTH_LEMMA:
+  !os (a:'a) as.
+    LENGTH os = LENGTH (a::as) ==>
+    ?(o':'b) os'. LENGTH os' = LENGTH as /\ os = o'::os'
+Proof
+  Cases_on `os` \\ rw []
+QED
+
+Theorem NIL_LENGTH_LEMMA:
+  !os:'b list. LENGTH os = LENGTH ([]:'a list) ==> os = []
+Proof
+  REWRITE_TAC [LENGTH, LENGTH_NIL]
+QED
+
+
+val _ = print_theory_to_file "-" "more_list.lst";
+
+val _ = html_theory "more_list";

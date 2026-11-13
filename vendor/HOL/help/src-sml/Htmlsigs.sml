@@ -1,0 +1,642 @@
+(* Htmlsigs: some hacks to turn Moscow ML annotated signature files into
+   HTML-files.  Peter Sestoft 1997-05-08, 1997-07-31, 2000-01-10, 2000-06-01
+*)
+structure Htmlsigs :> Htmlsigs = struct
+
+fun die s =
+    (TextIO.output(TextIO.stdErr, s ^ "\n");
+     OS.Process.exit OS.Process.failure)
+
+(* URL prefix for per-entry docfile hyperlinks.  See Htmlsigs.sig. *)
+val entry_url_base = ref ""
+
+(* URL prefix for per-theory hyperlinks in TheoryIndex.html.  See
+   Htmlsigs.sig. *)
+val theory_url_base = ref ""
+
+(* URL prefix for the per-page "Source File" hyperlink.  See
+   Htmlsigs.sig. *)
+val source_url_base = ref ""
+
+
+(* Target for the per-page "Source File" link.  With source_url_base
+   set (web/deploy builds -- e.g. a GitHub blob URL), emit
+   <base><path-relative-to-HOLDIR>, stripping any `.hol/objs/`
+   object-directory indirection so the link lands on the committed
+   source/Script file.  Otherwise fall back to a local file:// URL,
+   which is what a developer browsing a local build wants. *)
+fun sourceHref HOLpath srcpath =
+    if !source_url_base = "" then "file://" ^ srcpath
+    else
+      case (if String.isPrefix HOLpath srcpath
+            then SOME (String.extract (srcpath, String.size HOLpath, NONE))
+            else NONE)
+       of NONE => "file://" ^ srcpath  (* not under HOLDIR; best effort *)
+        | SOME rest =>
+          let
+            val rel = if String.isPrefix "/" rest
+                      then String.extract (rest, 1, NONE) else rest
+            (* drop a ".hol/objs/" path segment (length 10) if present *)
+            val (pre, suf) =
+                Substring.position ".hol/objs/" (Substring.full rel)
+            val rel = if Substring.isEmpty suf then rel
+                      else Substring.string pre ^
+                           String.extract (Substring.string suf, 10, NONE)
+          in
+            !source_url_base ^ rel
+          end
+
+fun indexbar out HOLpath srcpath = out (String.concat
+   ["<hr><table width=\"100%\">",
+    "<tr align = center>\n",
+    "<th><a href=\"", sourceHref HOLpath srcpath,
+    "\" type=\"text/plain\">Source File</a>\n",
+    "<th><a href=\"idIndex.html\">Identifier index</A>\n",
+    "<th><a href=\"TheoryIndex.html\">Theory binding index</A>\n",
+    "</table><hr>\n"]);
+
+val smlIdCharSym = Char.contains "'_!%&$#+-/:<=>?@\\~`^|*"
+fun smlIdChar c = Char.isAlphaNum c orelse smlIdCharSym c
+
+fun destProperSuffix s1 s2 =
+  let val sz1 = String.size s1
+      val sz2 = String.size s2
+      open Substring
+ in
+   if sz1 >= sz2 then NONE
+   else let val (prefix, suffix) = splitAt(full s2, sz2 - sz1)
+        in if string suffix = s1 then SOME (string prefix) else NONE
+       end
+ end;
+
+fun isTheorysig path =
+  let open OS.Path
+      val {dir,file} = splitDirFile path
+      val {base,ext} = splitBaseExt file
+  in ext=SOME "sig" andalso Option.isSome (destProperSuffix "Theory" base)
+  end
+  handle _ => false;
+
+fun assoc item =
+  let fun assc ((key,ob)::rst) = if item=key then ob else assc rst
+        | assc [] = raise Fail ("assoc: "^item^" not found")
+  in assc
+  end
+
+fun find_most_appealing HOLpath docfile =
+  let open OS.Path OS.FileSys
+      val {dir,file} = splitDirFile docfile
+      val {base,ext} = splitBaseExt file
+  in
+    (* When entry_url_base is set, callers want hyperlinks that resolve
+       relative to the generated htmlsigs/ page -- not absolute file://
+       paths.  The chosen base (e.g. mdbook Reference output, or the
+       fallback Docfiles/HTML directory) was decided by build_help and
+       passed in via makebase's --entry-url-base flag. *)
+    if !entry_url_base <> "" then
+      SOME (!entry_url_base ^ base ^ ".html")
+    else
+      let
+        val docfile_dir = concat(HOLpath,dir)
+        val htmldir  = concat(docfile_dir,"HTML")
+        val htmlfile = joinBaseExt{base=base,ext=SOME "html"}
+        val adocfile = joinBaseExt{base=base,ext=SOME "txt"}
+        val htmlpath = concat(htmldir,htmlfile)
+        val adocpath = concat(docfile_dir,adocfile)
+        val docpath  = concat(docfile_dir,file)
+      in
+        if OS.FileSys.access(htmlpath,[A_READ]) then SOME htmlpath else
+        if OS.FileSys.access(adocpath,[A_READ]) then SOME adocpath else
+        if OS.FileSys.access(file,[A_READ]) then SOME docpath
+        else NONE
+      end
+  end;
+
+(* Generated pages carry an inline stylesheet rather than linking a shared
+   one: they are served standalone and live at varying depths.  Keep the
+   historical light background, but honour the reader's dark-mode preference
+   via prefers-color-scheme, so the pages aren't a bright panel when the rest
+   of the browser is dark. *)
+fun emit_head_style out bgcolor =
+    (out "<style type=\"text/css\">\n";
+     out "  body {background: "; out bgcolor; out "}\n";
+     out "  @media (prefers-color-scheme: dark) {\n";
+     out "    body {background: #1b1d23; color: #d6d6d6}\n";
+     out "    a {color: #6cb6ff}\n";
+     out "    a:visited {color: #d2a8ff}\n";
+     out "    hr {border-color: #444}\n";
+     out "  }\n";
+     out "</style>\n")
+
+fun processSig db version bgcolor HOLpath SRCFILES sigfile htmlfile =
+    let val strName = OS.Path.base (OS.Path.file sigfile)
+	val is = TextIO.openIn sigfile
+                 handle e as IO.Io _ => die (General.exnMessage e)
+	val lines = Substring.fields (fn c => c = #"\n")
+	                             (Substring.full (TextIO.inputAll is))
+	val _ = TextIO.closeIn is
+
+	(* Line-scan for "structure X : sig" ... "end" so that per-id docfile
+	   resolution inside such a block can use the inner structure's name
+	   as the qualifier.  Only handles one-line opens; comments and string
+	   literals are not parsed, but real signature files don't put either
+	   "structure ... sig" or a bare "end" inside them. *)
+	val substructRanges : (string * int * int) list =
+	    let open Substring
+		fun openStruct line =
+		    let val ws = dropl Char.isSpace line
+		    in
+		      if isPrefix "structure " ws then
+			let val rest = dropl Char.isSpace (triml 10 ws)
+			    val (id, after) = splitl smlIdChar rest
+			    val after = dropl Char.isSpace after
+			in
+			  if not (isEmpty id) andalso isPrefix ":" after
+			  then let val tail =
+				       dropl Char.isSpace (triml 1 after)
+			       in
+				 if isPrefix "sig" tail andalso
+				    (size tail = 3 orelse
+				     not (smlIdChar (sub (tail, 3))))
+				 then SOME (string id)
+				 else NONE
+			       end
+			  else NONE
+			end
+		      else NONE
+		    end
+		fun isCloser line =
+		    let val ws = dropl Char.isSpace line
+		    in isPrefix "end" ws andalso
+		       (size ws = 3 orelse not (smlIdChar (sub (ws, 3))))
+		    end
+		fun scan _ stack acc [] = acc
+		  | scan lineno stack acc (line :: rest) =
+		    case openStruct line of
+			SOME name =>
+			  let val prefix =
+				  case stack of [] => ""
+					      | (q, _) :: _ => q ^ "."
+			  in scan (lineno + 1)
+				  ((prefix ^ name, lineno) :: stack) acc rest
+			  end
+		      | NONE =>
+			  if isCloser line then
+			    case stack of
+				[] => scan (lineno + 1) stack acc rest
+			      | (qname, startLine) :: stack' =>
+				  scan (lineno + 1) stack'
+				       ((qname, startLine, lineno) :: acc) rest
+			  else scan (lineno + 1) stack acc rest
+	    in
+		scan 1 [] [] lines
+	    end
+
+	fun currentStruct lineno =
+	    let
+	      fun fits (_, s, e) = s <= lineno andalso lineno <= e
+	      fun smaller ((_, s, e), (_, s', e')) = e - s < e' - s'
+	      fun pick (entry, NONE) = if fits entry then SOME entry else NONE
+		| pick (entry, best as SOME b) =
+		    if fits entry andalso smaller (entry, b) then SOME entry
+		    else best
+	    in
+	      case List.foldl pick NONE substructRanges of
+		  NONE => strName
+		| SOME (n, _, _) => n
+	    end
+
+	fun comp2str comp =
+	    let open Database
+	    in
+		case comp of
+		    Exc _  => "exc"
+		  | Typ _  => "typ"
+		  | Con _  => "con"
+		  | Val _  => "val"
+		  | Str    => "str"
+		  | Term _ => "ter"
+	    end
+
+	(* Skip 'tyvar and ('tyvar, ..., 'tyvar), return the id that
+	   follows *)
+
+	fun scanident getc src =
+	    let open StringCvt
+		fun isn't c1 c2 = c1 <> c2
+		fun is    c1 c2 = c1 = c2
+		val sus1 = skipWS getc src
+		fun readident sus =
+		    splitl smlIdChar getc (skipWS getc sus)
+	    in
+		case getc sus1 of
+		    SOME(#"'", sus2) =>
+			let val sus3 = dropl (not o Char.isSpace) getc sus2
+			in readident sus3 end
+		  | SOME(#"(", sus2) =>
+			let val sus3 = dropl (isn't #")") getc sus2
+			    val sus4 = dropl (is #")") getc sus3
+			in readident sus4 end
+		  | SOME _ => readident sus1
+		  | NONE   => readident sus1
+	    end
+
+	val scanident = scanident Substring.getc
+
+	fun definition susline isntdef isdef =
+	    let open Database Substring
+		val (id, after) = scanident (triml 4 susline)
+		fun relevant {file, ...} = file=strName
+		val comps =
+		    List.map #comp (List.filter relevant (lookup (db, id)))
+		fun linehas s = not (isEmpty (#2 (position s after)))
+		fun indexcomp comp =
+		    case comp of
+			Exc i  => if i=id then SOME comp else NONE
+		      | Typ i  => if i=id andalso linehas "type" then SOME comp
+				  else NONE
+		      | Con i  => if i=id then SOME comp else NONE
+		      | Val i  => if i=id then SOME comp else NONE
+		      | Str    => if linehas "structure" then SOME comp
+				  else NONE
+		      | Term _ => SOME comp
+		fun kindof Str      = 3
+		  | kindof (Val _)  = 4
+		  | kindof (Typ _)  = 1
+		  | kindof (Exc _)  = 2
+		  | kindof (Con _)  = 5
+		  | kindof (Term _) = 6
+		fun kindCompare (c1, c2) = Int.compare(kindof c1, kindof c2)
+		val comps = Listsort.sort kindCompare
+		                          (List.mapPartial indexcomp comps)
+	    in
+		case comps of
+		    []        => isntdef susline		(* No def *)
+		  | comp :: _ => isdef susline id after comp    (* Def    *)
+	    end
+
+	(* First pass over the file: record anchors of identifier defs *)
+
+	val anchors = ref (Binaryset.empty String.compare)
+
+	fun pass1 susline lineno =
+	    let open Substring
+		fun nameanchor _ id _ comp =
+                  anchors := (Binaryset.add (!anchors, id ^ "-" ^ comp2str comp))
+	    in
+		if isPrefix "   [" susline then
+		    definition susline ignore nameanchor
+		else ()
+	    end
+
+	(* Second pass over the file *)
+
+	val os = TextIO.openOut htmlfile
+	fun out s = TextIO.output(os, s)
+
+	fun encode #"<" = "&lt;"
+	  | encode #">" = "&gt;"
+(*	  | encode #"&" = "&amp;" *)
+	  | encode c    = str c
+
+	fun outSubstr s = TextIO.output(os, Substring.translate encode s)
+
+	val seenDefinition = ref false
+
+	fun name anchor target =
+	    (out "<a name=\""; out target; out "\">"; out anchor; out "</a>")
+
+	fun idhref link id =
+	    (out "<a href=\"#"; out link; out "\">"; out id; out"</a>")
+	(* When entry_url_base is set, find_most_appealing has already
+	   produced a complete URL; otherwise `link` is a filesystem path
+	   that needs the file:// scheme. *)
+	fun idhref_full link id =
+	    let val scheme = if !entry_url_base <> "" then "" else "file://"
+	    in
+	      (out "<a href=\""; out scheme; out link;
+	       out "\">"; out id; out"</a>")
+	    end
+
+        fun removeTrailingColon id =
+           let
+              val n = String.size id - 1
+           in
+              if 0 < n andalso String.sub (id, n) = #":"
+                 then String.substring (id, 0, n)
+              else id
+           end
+
+        val aliasStrName =
+           fn "FinalType" => "Type"
+            | "FinalTerm" => "Term"
+            | "FinalThm" => "Thm"
+            | "HolKernelDoc" => "HolKernel"
+            | s => s
+
+        fun locate_docfile curStr id =
+           let open OS.FileSys OS.Path Database
+               val id = removeTrailingColon id
+               val qualid = aliasStrName curStr ^ "." ^ id
+               fun trav [] = NONE
+                 | trav({comp=Database.Term(x,SOME "HOL"),file,line}::rst)
+                   = if x=qualid
+                        then find_most_appealing HOLpath file
+                        else trav rst
+                 | trav (_::rst) = trav rst
+           in
+             Option.map (fn x => (x, id)) (trav (lookup(db,id)))
+           end
+
+	fun declaration isThryFile lineno space1 decl kindtag =
+	    let open Substring
+		fun isKind c = Char.isAlpha c orelse c = #"_"
+		val (kind, rest) = splitl isKind decl
+		val (id, after)  = scanident rest
+		val preflen = size decl - size after - String.size id
+		val preid = slice(decl, 0, SOME preflen)
+		val link = id ^ "-" ^ kindtag
+	    in
+		outSubstr space1;
+		outSubstr preid
+               ;
+		if id = "" then ()
+                 else if not (Binaryset.member (!anchors, link))
+                      then if isThryFile then out id (* shouldn't happen *)
+                           else case locate_docfile (currentStruct lineno) id
+                                 of NONE => out id
+                                  | SOME (file, id2) =>
+                                      (idhref_full file id2
+                                       ; if id <> id2 then out ":" else ())
+                      else idhref link id
+               ;
+		outSubstr after
+	    end
+
+	(* Format susline which defines identifier id of kind comp: *)
+
+	fun outisdef susline id after comp =
+	    let open Substring
+		fun namebold id s =
+		    (out "<a name=\""; out id; out "-"; out s;
+		     out "\"><b>"; out id; out "</b></a>")
+		val preflen = size susline - size after - String.size id
+		val pref = slice(susline, 0, SOME preflen)
+	    in
+		outSubstr pref; namebold id (comp2str comp);
+		outSubstr after
+	    end
+
+	fun pass2 isThryFile susline lineno =
+	    let open Substring
+	    in
+		(if isPrefix "   [" susline
+                 then (definition susline outSubstr outisdef;
+		       seenDefinition := true)
+		 else if not (!seenDefinition) then
+		     (name "" ("line" ^ Int.toString lineno);
+		      let val (space, suff) = splitl Char.isSpace susline
+			  val dec = declaration isThryFile lineno space suff
+		      in
+			  if isPrefix "val " suff
+			      orelse isPrefix "prim_val " suff then
+			      dec "val"
+			  else if isPrefix "prim_type " suff
+			      orelse isPrefix "prim_EQtype " suff
+			      orelse isPrefix "type " suff
+			      orelse isPrefix "eqtype " suff
+			      orelse isPrefix "datatype " suff then
+			      dec "typ"
+			  else if isPrefix "structure " suff then
+			      dec "str"
+			  else if isPrefix "exception " suff then
+			      dec "exc"
+			  else
+			      outSubstr susline
+		      end)
+		 else
+		     outSubstr susline);
+		 out "\n"
+	    end
+
+	fun traverse process =
+	    let fun loop []        lineno = ()
+		  | loop (ln::lnr) lineno =
+		    (process ln lineno; loop lnr (lineno+1))
+	    in loop lines 1 end
+
+        val srcfile = assoc (OS.Path.base(OS.Path.file sigfile)) SRCFILES
+    in
+	(*print "Creating "; print htmlfile; print " from ";
+	print sigfile; print "\n"
+       ; *)
+        traverse pass1;
+        out "<!DOCTYPE html>\n";
+        out "<html><head>\n";
+        out "<meta charset=\"utf-8\">\n";
+        out "<title>Structure ";
+        out strName; out "</title>\n";
+        emit_head_style out bgcolor;
+        out "</head>\n";
+        out "<body>\n";
+        out "<h1>Structure "; out strName; out "</h1>\n";
+        indexbar out HOLpath srcfile;
+        out "<pre>\n";
+        traverse (pass2 (isTheorysig sigfile));
+        out "</pre>";
+        indexbar out HOLpath srcfile;
+        out "<p><em>"; out version; out "</em></p>";
+        out "</body></html>\n";
+        TextIO.closeOut os
+    end
+
+fun processSigfile db version bgcolor stoplist
+                   sigdir htmldir HOLpath SRCFILES sigfile =
+ let val {base, ext} = OS.Path.splitBaseExt sigfile
+     val htmlfile = OS.Path.joinBaseExt{base=base, ext=SOME "html"}
+ in
+   case ext
+    of SOME "sig" =>
+	if List.exists (fn name => base = name) stoplist then ()
+	(* Theory.sig files are now rendered into per-theory HTML by
+	   export_theory at <src>/.hol/docs/<thy>Theory.html, so we no
+	   longer produce a sigobj-driven copy here. *)
+	else if isTheorysig sigfile then ()
+	else processSig db version bgcolor HOLpath SRCFILES
+	                (OS.Path.concat(sigdir, sigfile))
+	                (OS.Path.concat(htmldir, htmlfile))
+     | otherwise => ()
+ end handle e => die ("processSigfile: " ^ General.exnMessage e)
+
+fun listDir s = let
+  val ds = OS.FileSys.openDir s
+  fun recurse acc =
+      case OS.FileSys.readDir ds of
+        NONE => acc
+      | SOME f => recurse (f :: acc)
+in
+  recurse [] before OS.FileSys.closeDir ds
+end
+
+fun sigsToHtml version bgcolor stoplist
+               helpfile HOLpath SRCFILES (sigdir, htmldir) =
+    let open OS.FileSys Database
+	val db = readbase helpfile
+	fun mkdir htmldir =
+	    if access(htmldir, [A_WRITE, A_EXEC]) andalso isDir htmldir then
+		(print "Directory "; print htmldir; print " exists\n")
+	    else
+		(OS.FileSys.mkDir htmldir;
+		 print "Created directory "; print htmldir; print "\n");
+    in
+     mkdir htmldir;
+     app (processSigfile db version bgcolor
+                         stoplist sigdir htmldir HOLpath SRCFILES)
+	 (listDir sigdir)
+    end
+    handle exn as OS.SysErr (str, _) => (print(str ^ "\n\n"); raise exn)
+
+fun printHTMLBase version bgcolor HOLpath pred header (sigfile, outfile) =
+    let open Database
+	val db = readbase sigfile
+	val os = TextIO.openOut outfile
+	fun out s = TextIO.output(os, s)
+	fun href anchor target =
+	    app out ["<a href=\"", target, "\">", anchor, "</a>"]
+	fun idhref file line anchor =
+	    href anchor (concat [file, ".html#line", Int.toString line])
+	fun strhref file anchor =
+	    href anchor (file ^ ".html")
+        fun mkalphaindex seps =
+             (out "<hr>\n<center><b>";
+              List.app
+                (fn c => (href (str c) ("#" ^ str c); out "&nbsp;&nbsp;"))
+                seps;
+              out "</b></center><hr>\n")
+	fun subheader txt = app out ["\n<h2>", txt, "</h2>\n"]
+
+	(* Insert a subheader when meeting a new initial letter *)
+	val lastc1 = ref #" "
+	val firstsymb = ref true
+	fun separator k1 =
+	    let val c1 = Char.toUpper k1
+	    in
+		if Char.isAlpha c1 andalso c1 <> !lastc1 then
+		    (lastc1 := c1;
+		     app out ["\n</ul>\n\n<a name=\"", str c1, "\">"];
+		     subheader (str c1);
+		     out "</a>\n<ul>")
+		else if !firstsymb andalso not (Char.isAlpha c1)
+                      then (subheader "Symbolic Identifiers";
+                            out "<ul>";
+                            firstsymb := false)
+                      else ()
+	    end
+	(* Per-theory doc URL.  When theory_url_base is set (the mdbook
+	   layout, where staged theory pages all live at
+	   <book>/theories/<thy>Theory.html), emit a flat
+	   `<base><thy_file>.html` href.  Otherwise resolve
+	   sigobj/<thy>Theory.sig to the source tree's `.hol/docs/`
+	   location, relative to the file we are currently writing.
+	   Returns NONE for non-theory files or if the legacy symlink
+	   resolution fails. *)
+	val outfile_dir = OS.Path.dir outfile
+	fun theory_doc_url thy_file =
+	    if !theory_url_base <> "" then
+	      SOME (!theory_url_base ^ thy_file ^ ".html")
+	    else
+	    let val sigobj_sig =
+		    OS.Path.concat (HOLpath,
+		      OS.Path.concat ("sigobj", thy_file ^ ".sig"))
+	    in
+	      if OS.FileSys.isLink sigobj_sig then
+		let val tgt = OS.FileSys.readLink sigobj_sig
+		    val {dir, ...} = OS.Path.splitDirFile tgt
+		    val src = OS.Path.dir (OS.Path.dir dir)
+		    val abs_doc =
+			OS.Path.concat (src,
+			  OS.Path.concat (".hol/docs", thy_file ^ ".html"))
+		in
+		  SOME (OS.Path.mkRelative
+			  {path = abs_doc, relativeTo = outfile_dir})
+		end
+	      else NONE
+	    end handle OS.SysErr _ => NONE
+		     | OS.Path.Path => NONE
+	fun is_theory_file f = isSome (destProperSuffix "Theory" f)
+	fun mkref key line file =
+	    if is_theory_file file then
+	      case theory_doc_url file of
+		  SOME url => href file (url ^ "#" ^ key)
+		| NONE => idhref file line file
+	    else idhref file line file
+	fun mkstrref file =
+	    if is_theory_file file then
+	      case theory_doc_url file of
+		  SOME url => href "structure" url
+		| NONE => strhref file "structure"
+	    else strhref file "structure"
+	fun mkHOLref docfile =
+            case find_most_appealing HOLpath docfile
+             of SOME file => href "Docfile" file
+              | NONE => out "not linked"
+	fun nextfile last [] = out ")\n"
+	  | nextfile last ((e1 as {comp, file, line}) :: erest) =
+	    if comp=last then (
+	      let val key = Database.getname e1 in
+		out ", "; mkref key line file; nextfile last erest
+	      end
+	    ) else (out ")\n"; newitem e1 erest)
+	and newitem (e1 as {comp, file, line}) erest =
+	    let val key = Database.getname e1
+	    in separator (String.sub(key, 0))
+             ; out "<li><b>"; out key; out "</b> ("
+             ; (case comp
+                 of Str    => mkstrref file
+                  | Val id => (out "value; "; mkref key line file)
+                  | Typ id => (out "type; ";  mkref key line file)
+                  | Exc id => (out "exception; "; mkref key line file)
+                  | Con id => (out "constructor; "; mkref key line file)
+                  | Term (id, NONE) => mkref key line file
+(*                | Term (id, SOME "HOL") => (out "HOL; "; mkHOLref file) *)
+                  | Term (id, SOME kind) =>
+		      (out kind;out"; ";mkref key line file)
+             ; nextfile comp erest)
+	    end
+	fun prentries []            = ()
+	  | prentries (e1 :: erest) = newitem e1 erest
+	fun prtree Empty = ()
+	  | prtree (Node(key, entries, t1, t2)) =
+	    (prtree t1;
+	     prentries (List.filter pred entries);
+	     prtree t2)
+
+	(* Get list of initial letters *)
+        fun separators Empty l = l
+          | separators (Node(key, entries, t1, t2)) l =
+              separators t2 (separators t1
+               (let val k = Char.toUpper (String.sub(key, 0)) in
+                  if Char.isAlpha k andalso
+                     not (null (List.filter pred entries)) andalso
+                     not (Option.isSome (List.find (fn x => x = k) l))
+                  then
+                    k :: l
+                  else
+                    l
+                end))
+        val seps = Listsort.sort Char.compare (separators db [])
+    in
+	out "<!DOCTYPE html><html><head><meta charset=\"utf-8\"><title>"; out header; out "</title>\n";
+	emit_head_style out bgcolor;
+	out "</head>\n";
+	out "<body>\n";
+	out "<h1>"; out header; out "</h1>\n";
+	mkalphaindex seps;
+	prtree db;
+	out "</ul>\n";
+	mkalphaindex seps;
+	out "<p><em>"; out version; out "</em></p>";
+	out "</body></html>\n";
+	TextIO.closeOut os
+    end
+end

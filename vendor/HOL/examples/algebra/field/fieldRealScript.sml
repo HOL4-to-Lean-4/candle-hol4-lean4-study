@@ -1,0 +1,23 @@
+(* ------------------------------------------------------------------------- *)
+(* The field of reals.                                                       *)
+(* ------------------------------------------------------------------------- *)
+Theory fieldReal
+Ancestors
+  group field real_algebra
+
+
+Theorem FieldReals[simp]:
+  Field Reals
+Proof
+  rewrite_tac[Field_def]
+  \\ conj_tac >- simp[]
+  \\ simp[Reals_def]
+  \\ metis_tac[real_mul_group, AbelianGroup_def]
+QED
+
+Theorem IntegralDomainReals[simp]:
+  IntegralDomain Reals
+Proof
+  metis_tac[field_is_integral_domain, FieldReals]
+QED
+

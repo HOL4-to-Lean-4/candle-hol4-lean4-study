@@ -1,0 +1,2 @@
+INCLUDES = ../lisp-runtime/parse ../lisp-runtime/spec ../lisp-runtime/extract \
+           $(HOLDIR)/src/pred_set/src/more_theories # for ordinalNotation

@@ -1,0 +1,34 @@
+open OS.Process qfilter_util
+
+(* magic to ensure that interruptions (SIGINTs) are actually seen by the
+   linked executable as Interrupt exceptions *)
+prim_val catch_interrupt : bool -> unit = 1 "sys_catch_break";
+val _ = catch_interrupt true;
+
+val {instrm = instream, outstrm = outstream, interactive = intp,
+     quotefixp = qfixp, quietOpen = qopn, closefn = callback, infilename} =
+    processArgs (false,false,false,false) (CommandLine.arguments())
+
+(* with many thanks to Ken Friis Larsen, Peter Sestoft, Claudio Russo and
+   Kenn Heinrich who helped me see the light with respect to this code *)
+fun read _ = TextIO.input instream
+fun write s = (TextIO.output (outstream, s); TextIO.flushOut outstream)
+
+val {print = errPrint, hadError} =
+    HOLSourceParser.trackingPrint
+      (fn s => TextIO.output (TextIO.stdErr, s))
+
+val _ = if qfixp then
+  quotefix.run read write
+else let
+  open HOLSource.ToSML
+  val {read = read', ...} = mkPullTranslator {
+    read = read,
+    filename = infilename,
+    parseError = HOLSourceParser.filelineParseError errPrint,
+    quietOpen = qopn }
+  fun loop () = case read' () of "" => () | s => (write s; loop ())
+  in loop () end
+
+val _ = callback()
+val _ = exit (if hadError () then failure else success)

@@ -1,0 +1,14 @@
+Theory bag248
+
+Definition BAG_IN[nocompute]:
+  BAG_IN (e:'a) b <=> 1 <= b e
+End
+
+val _ = set_fixity "<:" (Infix(NONASSOC, 425))
+Overload "<:" = ``BAG_IN``
+val _ = Unicode.unicode_version {tmnm = "<:", u = UTF8.chr 0x22F2}
+   (* U+22F2 looks like ⋲ in your current font; unfortunately this
+      symbol doesn't seem to correspond to anything in LaTeX... *)
+val _ = TeX_notation {hol = "<:", TeX = ("\\HOLTokenIn{}:",2)}
+val _ = TeX_notation {hol = UTF8.chr 0x22F2, TeX = ("\\HOLTokenIn{}:",2)}
+

@@ -1,0 +1,42 @@
+#!/bin/sh
+# Rebuild the reduced package from a clean checkout.
+#   scripts/build.sh native   build Poly/ML and HOL4 from vendor/ into _build/, then the package (Linux or WSL)
+#   scripts/build.sh docker   build the docker image from vendor/, then the package inside it
+# Timings are written to logs/build-*.log.
+set -eu
+ROOT=$(cd "$(dirname "$0")/.." && pwd)
+MODE=${1:-native}
+mkdir -p "$ROOT/logs"
+stamp() { date -u +%Y-%m-%dT%H:%M:%SZ; }
+
+case "$MODE" in
+native)
+  B="$ROOT/_build"; mkdir -p "$B"
+  if [ ! -x "$B/polyml/bin/poly" ]; then
+    echo "polyml start $(stamp)" >> "$ROOT/logs/build-native.log"
+    rm -rf "$B/polyml-src"; cp -R "$ROOT/vendor/polyml" "$B/polyml-src"
+    (cd "$B/polyml-src" && ./configure --prefix="$B/polyml" --enable-intinf-as-int \
+       && make -j"$(nproc)" && make compiler && make install)
+    echo "polyml end $(stamp)" >> "$ROOT/logs/build-native.log"
+  fi
+  export PATH="$B/polyml/bin:$PATH" LD_LIBRARY_PATH="$B/polyml/lib:${LD_LIBRARY_PATH:-}"
+  if [ ! -x "$B/HOL/bin/Holmake" ]; then
+    echo "hol start $(stamp)" >> "$ROOT/logs/build-native.log"
+    rm -rf "$B/HOL"; cp -R "$ROOT/vendor/HOL" "$B/HOL"
+    (cd "$B/HOL" && poly --script tools/smart-configure.sml && bin/build)
+    echo "hol end $(stamp)" >> "$ROOT/logs/build-native.log"
+  fi
+  echo "package start $(stamp)" >> "$ROOT/logs/build-native.log"
+  (cd "$ROOT/package" && "$B/HOL/bin/Holmake")
+  echo "package end $(stamp)" >> "$ROOT/logs/build-native.log"
+  ;;
+docker)
+  echo "image start $(stamp)" >> "$ROOT/logs/build-docker.log"
+  docker build -f "$ROOT/docker/Dockerfile" -t candle-hol4:pinned "$ROOT"
+  echo "image end $(stamp)" >> "$ROOT/logs/build-docker.log"
+  echo "package start $(stamp)" >> "$ROOT/logs/build-docker.log"
+  docker run --rm -v "$ROOT/package:/work" candle-hol4:pinned Holmake
+  echo "package end $(stamp)" >> "$ROOT/logs/build-docker.log"
+  ;;
+*) echo "usage: $0 [native|docker]" >&2; exit 2 ;;
+esac

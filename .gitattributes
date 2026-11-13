@@ -1,0 +1,4 @@
+# Keep every file byte-for-byte as committed (upstream line endings preserved).
+* -text
+/scripts/*.sh text eol=lf
+vendor/** linguist-vendored

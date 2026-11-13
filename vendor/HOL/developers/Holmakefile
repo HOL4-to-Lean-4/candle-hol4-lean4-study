@@ -1,0 +1,27 @@
+OPTIONS = NO_OVERLAY
+EXTRA_CLEANS = generateBuildSummary genUseScript
+
+.PHONY: all
+all: generateBuildSummary
+
+ifdef POLY
+
+all: genUseScript
+
+genUseScript: genUseScript.sml $(dprot $(HOLDIR)/tools/util/GetOpt.sml)
+	$(POLYC) $< -o $@
+
+endif
+
+poly_gbsdep = poly-gbs.ML generateBuildSummary.sml
+mosml_gbsdep = mosmlgbs.uo generateBuildSummary.uo
+
+poly_gbscomm = $(POLYC) -o $@ $<
+mosml_gbscomm = $(MOSMLC) -o $@ $<
+
+
+generateBuildSummary: $($(ML_SYSNAME)_gbsdep)
+	$($(ML_SYSNAME)_gbscomm)
+
+generateBuildSummary.o: poly-gbs.ML generateBuildSummary.sml
+	$(POLY) < $<

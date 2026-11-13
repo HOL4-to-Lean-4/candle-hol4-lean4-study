@@ -1,0 +1,13 @@
+CLINE_OPTIONS = -r
+ifdef POLY
+CLINE_OPTIONS += --poly_not_hol
+endif
+
+INCLUDES = sub1 sub2
+
+all: final_test
+
+.PHONY: all final_test
+
+final_test: sub1/test1 sub2/test2
+	[ -r sub1/foo ]  && [ -r sub2/foo ]

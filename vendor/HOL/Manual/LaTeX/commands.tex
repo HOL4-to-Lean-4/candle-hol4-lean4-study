@@ -1,0 +1,362 @@
+% =====================================================================
+%
+% Macros for typesetting the HOL system manual
+%
+% =====================================================================
+
+% ---------------------------------------------------------------------
+% Abbreviations for words and phrases
+% ---------------------------------------------------------------------
+
+\newcommand\TUTORIAL{{\footnotesize\sl TUTORIAL}}
+\newcommand\DESCRIPTION{{\footnotesize\sl DESCRIPTION}}
+\newcommand\REFERENCE{{\footnotesize\sl REFERENCE}}
+\newcommand\LOGIC{{\footnotesize\sl LOGIC}}
+\newcommand\LIBRARIES{{\footnotesize\sl LIBRARIES}}
+\usepackage{textcomp}
+
+\newcommand{\bs}{\texttt{\char'134}} % backslash
+\newcommand{\lb}{\texttt{\char'173}} % left brace
+\newcommand{\rb}{\texttt{\char'175}} % right brace
+\newcommand{\td}{\texttt{\char'176}} % tilde
+\newcommand{\lt}{\texttt{\char'74}} % less than
+\newcommand{\gt}{\texttt{\char'76}} % greater than
+\newcommand{\dol}{\texttt{\char'44}} % dollar
+\newcommand{\pipe}{\texttt{\char'174}}
+\newcommand{\apost}{\texttt{\textquotesingle}}
+% back quote (tt font)
+\newcommand{\bq}{\texttt{\char'140}}
+% double back quotes ``
+\newcommand{\dq}{\bq\bq}
+% "fancy" versions of the same
+\newcommand{\fldq}{\mbox{\textrm{\textquotedblleft}}}
+\newcommand{\frdq}{\mbox{\textrm{\textquotedblright}}}
+\newcommand{\fholquote}[1]{\fldq#1\frdq}
+\newcommand{\ldquo}{\mbox{\textrm{``}}}
+\newcommand{\rdquo}{\mbox{\textrm{''}}}
+\newcommand{\lsquo}{\mbox{\textrm{`}}}
+\newcommand{\rsquo}{\mbox{\textrm{'}}}
+
+%These macros were included by slind:
+
+\newcommand{\holquote}[1]{\dq#1\dq}
+\newcommand{\uholquote}[1]{\mbox{\rmfamily\upshape ``}#1\mbox{\rmfamily\upshape ''}}
+
+\def\HOL{\textsc{Hol}}
+\def\holn{\HOL}  % i.e. hol n(inety-eight), no digits in
+                 % macro names is a bit of a pain; deciding to do away
+                 % with hol98 nomenclature means that we just want to
+                 % write HOL for hol98.
+\def\holnversion{Trindemossen-2}
+\def\holnsversion{Trindemossen~2} % version with space rather than hyphen
+\def\LCF{{\small LCF}}
+\def\LCFLSM{{\small LCF{\kern-.2em}{\normalsize\_}{\kern0.1em}LSM}}
+\def\PPL{{\small PP}{\kern-.095em}$\lambda$}
+\def\PPLAMBDA{{\small PPLAMBDA}}
+\def\ML{{\small ML}}
+\def\holmake{\texttt{Holmake}}
+
+\newcommand\ie{\mbox{\textit{i{.}e{.}}}}
+\newcommand\eg{\mbox{\textit{e{.}g{.}}}}
+\newcommand\viz{\mbox{viz{.}}}
+\newcommand\adhoc{\mbox{\it ad hoc}}
+\newcommand\etal{{\it et al.\/}}
+% NOTE: \etc produces wrong spacing if used between sentences, that is
+% like here \etc End such sentences with non-macro etc.
+\newcommand\etc{\mbox{\textit{etc{.}}}}
+
+% ---------------------------------------------------------------------
+% Simple abbreviations and macros for mathematical typesetting
+% ---------------------------------------------------------------------
+
+\newcommand\fun{{\to}}
+\newcommand\prd{{\times}}
+
+\newcommand\conj{\ \wedge\ }
+\newcommand\disj{\ \vee\ }
+\newcommand\imp{ \Rightarrow }
+\newcommand\eqv{\ \equiv\ }
+\newcommand\cond{\rightarrow}
+\newcommand\vbar{\mid}
+\newcommand\turn{\ \vdash\ } % FIXME: "\ " results in extra space
+\newcommand\hilbert{\varepsilon}
+\providecommand\eqdef{\ \equiv\ }
+\renewcommand\eqdef{\ \equiv\ }
+
+\newcommand\natnums{\mbox{${\sf N}\!\!\!\!{\sf N}$}}
+\newcommand\bools{\mbox{${\sf T}\!\!\!\!{\sf T}$}}
+
+\newcommand\p{$\prime$}
+\newcommand\f{$\forall$\ }
+\newcommand\e{$\exists$\ }
+
+\newcommand\orr{$\vee$\ }
+\newcommand\negg{$\neg$\ }
+
+\newcommand\arrr{$\rightarrow$}
+\newcommand\hex{$\sharp $}
+
+\newcommand{\uquant}[1]{\forall #1.\ }
+\newcommand{\equant}[1]{\exists #1.\ }
+\newcommand{\hquant}[1]{\hilbert #1.\ }
+\newcommand{\iquant}[1]{\exists ! #1.\ }
+\newcommand{\lquant}[1]{\lambda #1.\ }
+
+\newcommand{\leave}[1]{\\[#1]\noindent}
+\newcommand\entails{\mbox{\rule{.3mm}{4mm}\rule[2mm]{.2in}{.3mm}}}
+
+% ---------------------------------------------------------------------
+% Font-changing commands
+% ---------------------------------------------------------------------
+
+\newcommand{\theory}[1]{\hbox{{\small\tt #1}}}
+\newcommand{\theoryimp}[1]{\texttt{#1}}
+
+% Chapter-local macros for the theories chapter (used in the
+% Pairs/Lists/Bit-vectors subsections).  Originally defined inside
+% theories.stex; promoted here so math.smd (which also uses \konst)
+% and any future .smd chapters get them too.  Use \providecommand to
+% avoid clashing with any chapter-local redefinitions.
+\providecommand{\konst}[1]{\ensuremath{\mbox{\small{\textbf{\sf{#1}}}}}}
+\providecommand{\nil}{\mathbf{[} \;\mathbf{]}}
+\providecommand{\cons}[2]{{#1}\mathbf{:}\mathbf{:}{#2}}
+\providecommand{\subr}{\sb{\mathsf{r}}}
+\providecommand{\fcp}[2]{#1[#2]}
+\providecommand{\worda}{\fcp{\mathit{bool}}{\alpha}}
+\providecommand{\wordb}{\fcp{\mathit{bool}}{\beta}}
+\providecommand{\wordc}{\fcp{\mathit{bool}}{\gamma}}
+
+\newcommand{\con}[1]{{\sf #1}}
+\newcommand{\rul}[1]{{\tt #1}}
+\newcommand{\ty}[1]{\textsl{#1}}
+
+\newcommand{\ml}[1]{\mbox{{\def\_{\char'137}\texttt{#1}}}}
+\newcommand{\holtxt}[1]{\ml{#1}}
+\newcommand\ms{\tt}
+\newcommand{\s}[1]{{\small #1}}
+
+\newcommand{\pin}[1]{{\bf #1}}
+% FIXME: for multichar symbols \mathit should be used.
+\def\m#1{\mbox{\normalsize$#1$}}
+
+% ---------------------------------------------------------------------
+% Abbreviations for particular mathematical constants etc.
+% ---------------------------------------------------------------------
+
+\providecommand{\T}{\con{T}}
+\renewcommand{\T}{\con{T}}
+\newcommand\F{\con{F}}
+\newcommand\OneOne{\con{One\_One}}
+\newcommand\OntoSubset{\con{Onto\_Subset}}
+\newcommand\Onto{\con{Onto}}
+\newcommand\TyDef{\con{Type\_Definition}}
+\newcommand\Inv{\con{Inv}}
+\newcommand\com{\con{o}}
+\newcommand\Id{\con{I}}
+\newcommand\MkPair{\con{Mk\_Pair}}
+\newcommand\IsPair{\con{Is\_Pair}}
+\newcommand\Fst{\con{Fst}}
+\newcommand\Snd{\con{Snd}}
+\newcommand\Suc{\con{Suc}}
+\newcommand\Nil{\con{Nil}}
+\newcommand\Cons{\con{Cons}}
+\newcommand\Hd{\con{Hd}}
+\newcommand\Tl{\con{Tl}}
+\newcommand\Null{\con{Null}}
+\newcommand\ListPrimRec{\con{List\_Prim\_Rec}}
+
+
+\newcommand\SimpRec{\con{Simp\_Rec}}
+\newcommand\SimpRecRel{\con{Simp\_Rec\_Rel}}
+\newcommand\SimpRecFun{\con{Simp\_Rec\_Fun}}
+\newcommand\PrimRec{\con{Prim\_Rec}}
+\newcommand\PrimRecRel{\con{Prim\_Rec\_Rel}}
+\newcommand\PrimRecFun{\con{Prim\_Rec\_Fun}}
+
+\newcommand\bool{\ty{bool}}
+\newcommand\num{\ty{num}}
+\newcommand\ind{\ty{ind}}
+\newcommand\lst{\ty{list}}
+
+% ---------------------------------------------------------------------
+% \minipagewidth = \textwidth minus 1.02 em
+% ---------------------------------------------------------------------
+
+\newlength{\minipagewidth}
+\setlength{\minipagewidth}{\textwidth}
+\addtolength{\minipagewidth}{-1.02em}
+
+% ---------------------------------------------------------------------
+% Environment for the items on the title page of a case study
+% ---------------------------------------------------------------------
+
+\newenvironment{inset}[1]{\noindent{\large\bf #1}\begin{list}%
+{}{\setlength{\leftmargin}{\parindent}%
+\setlength{\topsep}{-.1in}}\item }{\end{list}\vskip .4in}
+
+% ---------------------------------------------------------------------
+% Macros for little HOL sessions displayed in boxes.
+%
+% Usage:  \begin{session}\begin{alltt}
+%             .
+%              < lines from hol session >
+%             .
+%         \end{alltt}\end{session}
+%
+% Renders the body with a heavy coloured rule down the left margin
+% and a small indent, matching the mdbook side's
+% `pre > code.language-repl` styling.  The session counter and
+% numbered framebox that earlier versions of this command used are
+% gone -- the counter wasn't referenced anywhere outside the env
+% itself.
+% ---------------------------------------------------------------------
+
+\usepackage{xcolor}
+\usepackage{mdframed}
+
+\newcommand\HOLSpacing{13pt}
+% Bar colour matches mdbook's --links variable (Light theme); the
+% PDF doesn't have themes so we just use the light default.
+% Background tint mirrors the HTML side's `pre > code.language-repl`
+% rule (rgba(120,144,156,0.10) over white) so REPL sessions are
+% visually distinct from same-bar-colour admonitions like `[!NOTE]`.
+\definecolor{HOLsessionbar}{rgb}{0.255,0.514,0.812}
+\definecolor{HOLsessionbg}{HTML}{F1F3F5}
+
+\newmdenv[
+  topline=false, bottomline=false, rightline=false,
+  leftline=true,
+  linewidth=3pt,
+  linecolor=HOLsessionbar,
+  backgroundcolor=HOLsessionbg,
+  leftmargin=0pt, rightmargin=0pt,
+  innerleftmargin=0.6em, innerrightmargin=0.6em,
+  innertopmargin=1mm, innerbottommargin=1mm,
+  skipabove=0.5\baselineskip,
+  skipbelow=0.5\baselineskip,
+]{sessionframe}
+\newenvironment{session}
+  {\begin{sessionframe}\small}
+  {\end{sessionframe}}
+
+% GFM-style admonition blocks (`> [!NOTE]`, `[!TIP]`, `[!IMPORTANT]`,
+% `[!WARNING]`, `[!CAUTION]`).  Colours match mdbook 0.5's defaults,
+% which themselves match GitHub.  Lowered into LaTeX by the
+% `BlockQuote` handler in Manual/Tools/pdf-macros.lua.
+\definecolor{HOLalertNote}{HTML}{0969DA}
+\definecolor{HOLalertTip}{HTML}{1A7F37}
+\definecolor{HOLalertImportant}{HTML}{8250DF}
+\definecolor{HOLalertWarning}{HTML}{9A6700}
+\definecolor{HOLalertCaution}{HTML}{B52731}
+
+\newcommand\HOLnewAdmonition[3]{%
+  \newmdenv[
+    topline=false, bottomline=false, rightline=false,
+    leftline=true,
+    linewidth=3pt,
+    linecolor=#2,
+    leftmargin=0pt, rightmargin=0pt,
+    innerleftmargin=0.8em, innerrightmargin=0.6em,
+    innertopmargin=0.2ex, innerbottommargin=0.4ex,
+    skipabove=0.6\baselineskip,
+    skipbelow=0.6\baselineskip,
+    frametitle={\color{#2}\textbf{#3}},
+    frametitlerule=false,
+    frametitleaboveskip=0pt,
+    frametitlebelowskip=0.4ex,
+  ]{#1frame}%
+  \newenvironment{#1}{\begin{#1frame}}{\end{#1frame}}%
+}
+\HOLnewAdmonition{holnote}     {HOLalertNote}     {Note}
+\HOLnewAdmonition{holtip}      {HOLalertTip}      {Tip}
+\HOLnewAdmonition{holimportant}{HOLalertImportant}{Important}
+\HOLnewAdmonition{holwarning}  {HOLalertWarning}  {Warning}
+\HOLnewAdmonition{holcaution}  {HOLalertCaution}  {Caution}
+
+% ---------------------------------------------------------------------
+% Macro for boxed ML functions, etc.
+%
+% Usage: (1) \begin{holboxed}\begin{verbatim}
+%               .
+%               < lines giving names and types of mk functions >
+%               .
+%            \end{verbatim}\end{holboxed}
+%
+%            typesets the given lines in a box.
+%
+%            Conventions: lines are left-aligned under the "g" of begin,
+%            and used to highlight primary reference for the ml function(s)
+%            that appear in the box.
+% ---------------------------------------------------------------------
+
+\newenvironment{holboxed}{\begin{flushleft}
+  \begin{tabular}{@{}|c@{}|@{}}\hline
+  \begin{minipage}[b]{\hsbw}
+% \vspace*{-.55in}
+  \vspace*{.06in}
+  \begingroup\small\baselineskip\HOLSpacing}{\endgroup\end{minipage}\\ \hline
+  \end{tabular}
+  \end{flushleft}}
+
+% ---------------------------------------------------------------------
+% Macro for unboxed ML functions, etc.
+%
+% Usage: (1) \begin{hol}\begin{verbatim}
+%               .
+%               < lines giving names and types of mk functions >
+%               .
+%            \end{verbatim}\end{hol}
+%
+%            typesets the given lines exactly like {boxed}, except there's
+%            no box.
+%
+%            Conventions: lines are left-aligned under the "g" of begin,
+%            and used to display ML code in verbatim, left aligned.
+% ---------------------------------------------------------------------
+
+\newenvironment{hol}{\begin{flushleft}
+ \begin{tabular}{c@{}@{}}
+ \begin{minipage}[b]{\hsbw}
+% \vspace*{-.55in}
+ \vspace*{.06in}
+ \begingroup\small\baselineskip\HOLSpacing}{\endgroup\end{minipage}\\
+ \end{tabular}
+ \end{flushleft}}
+
+% ---------------------------------------------------------------------
+% Emphatic brackets
+% ---------------------------------------------------------------------
+
+\newcommand\leb{\lbrack\!\lbrack}
+\newcommand\reb{\rbrack\!\rbrack}
+
+
+% ---------------------------------------------------------------------
+% Quotations
+% ---------------------------------------------------------------------
+
+
+%These macros were included by ap; they are used in Chapters 9 and 10
+%of the HOL DESCRIPTION
+
+\newcommand{\inds}%standard infinite set
+ {\mbox{\rm I}}
+
+\newcommand{\ch}%standard choice function
+ {\mbox{\rm ch}}
+
+\newcommand{\den}[1]%denotational brackets
+ {[\![#1]\!]}
+
+\newcommand{\two}%standard 2-element set
+ {\mbox{\rm 2}}
+
+
+\usepackage{scalerel}
+\usepackage[only,llbracket,rrbracket,llparenthesis,rrparenthesis]{stmaryrd}
+\parskip 1ex
+\parindent 0ex
+% \llbrace / \rrbrace (U+2983 / U+2984) live in
+% Manual/Description/desc-unicode.sty alongside their \DeclareUnicode-
+% Character mappings; the accsupp \BeginAccSupp wrapper they use is
+% loaded via desc-unicode.sty's \RequirePackage.

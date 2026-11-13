@@ -1,0 +1,417 @@
+(* ===================================================================== *)
+(* FILE          : boolLib.sml                                           *)
+(* DESCRIPTION   : boolTheory and related support.                       *)
+(* ===================================================================== *)
+
+structure boolLib =
+struct
+
+open boolTheory boolSyntax Hol_pp ParseExtras
+     Drule Tactical Tactic Thm_cont Conv Rewrite Prim_rec Abbrev DB
+     BoundedRewrites TexTokenMap term_tactic
+
+local open TypeBase Ho_Rewrite Psyntax Rsyntax in end
+
+val parse_from_grammars = Parse.parse_from_grammars;
+
+val ERR = Feedback.mk_HOL_ERR "boolLib"
+
+(*---------------------------------------------------------------------------
+      Stock the rewriter in Ho_Rewrite with COND_BOOL_CLAUSES from
+      boolTheory.  IF_THEN_T_IMP, EXISTS_UNIQUE_ALT, UNIQUE_SKOLEM_ALT
+      and UNIQUE_SKOLEM_THM are proved there too; boolLib's historical
+      load-time proofs of these are gone.
+ ---------------------------------------------------------------------------*)
+
+val _ = Ho_Rewrite.add_implicit_rewrites [COND_BOOL_CLAUSES]
+
+val def_suffix = ref "_def"
+
+fun has_suspended_subgoals th =
+    let
+      open HolKernel
+      fun issusp_hyp t =
+          let
+            val (fx,_) = dest_comb t
+            val (sl_c, lnm) = dest_comb fx
+            val {Thy,Name,...} = dest_thy_const sl_c
+          in
+            Thy = "marker" andalso Name = "suspendlabel" andalso
+            is_var lnm
+          end handle HOL_ERR _ => false
+    in
+      isSome (HOLset.find issusp_hyp (hypset th))
+    end
+
+(* The label variable's name encodes a closure-variable count in the
+   format "N name". Decode to extract the user-visible name and count. *)
+fun decode_suspend_label s =
+    let val (prefix, rest) =
+            Substring.splitl (fn c => c <> #" ") (Substring.full s)
+    in
+      if Substring.isEmpty rest then (s, 0)
+      else case Int.fromString (Substring.string prefix) of
+               SOME n => (Substring.string (Substring.triml 1 rest), n)
+             | NONE => (s, 0)
+    end
+
+fun dest_suspended t =
+    let
+      open HolKernel
+      val (fx,y) = dest_comb t
+      val (sl_c, lnm) = dest_comb fx
+      val {Thy,Name,...} = dest_thy_const sl_c
+    in
+      if Thy = "marker" andalso Name = "suspendlabel" then
+        SOME (#1 (decode_suspend_label (#1 (dest_var lnm))), y)
+      else NONE
+    end handle Feedback.HOL_ERR _ => NONE
+
+fun get_suspended_names th =
+    let
+      fun foldthis (t,A) =
+          case dest_suspended t of NONE => A | SOME (nm,_) => nm::A
+    in
+      HOLset.foldl foldthis [] (Thm.hypset th)
+    end
+
+(* Shims for markerLib to install hooks that route suspended theorems
+   into, and consult, the suspension.theorems AncestryData store.
+   This module (boolLib) sits below markerLib in the dependency
+   graph, so we cannot call into it directly; markerLib populates the
+   refs when it loads.  Same pattern as term_pp.casesplit_munger. *)
+val suspended_theorem_recorder : (string * thm -> unit) ref =
+    ref (fn _ => ())
+
+(* Hook used by the dump-on-failure path below: proofManagerLib loads
+   later in the build than boolLib, so it cannot be referenced
+   statically; instead proofManagerLib installs the real implementation
+   (essentially proofManagerLib.set_goal) into this ref at load time.
+   The hook seeds the proof manager's state so that the dumped heap,
+   when reloaded via "bin/hol --holstate=<file>", presents the failing
+   goal ready for interactive exploration. *)
+val dump_setup_hook : (goal -> unit) ref = ref (fn _ => ())
+
+(* Name of the theorem being proved, for whatever downstream of the
+   prover needs to say *which* proof it is looking at: the
+   dump-on-failure path names its heap file with it, and the LSP's
+   deferred-proof pool labels its entries with it.
+
+   It travels in the context rather than beside it.  Every reader is a
+   prover installed through `Tactical.set_prover`, whose type is
+   `Context.t -> goal * tactic -> thm`, so each already holds the
+   context the name arrives in; and `prove_named` below is the one place
+   that puts it there.  A cell would have to be set before the proof and
+   cleared after -- with the clearing existing only so that a later
+   unrelated `Tactical.prove` does not inherit a stale name, a hazard a
+   value simply does not have.  A proof given no name has none in its
+   context.
+
+   It was a `string ref`, then thread-local once the LSP's worker pool
+   made two proofs concurrent.  That removed the cross-thread clobbering
+   without asking whether the cell should exist. *)
+val thm_name_slot : string Context.Data.slot =
+    Context.Data.new {name = "boolLib.thm_name", empty = "", pp = Lib.I}
+
+fun current_thm_name ctxt = Context.Data.get thm_name_slot ctxt
+
+(* A named proof attempt.  The name is how anything downstream of the
+   prover says *which* proof it is looking at: the dump-on-failure path
+   names its heap file with it, and the LSP's deferred-proof pool labels
+   its entries with it.  There are several routes into the prover that
+   have a name to offer besides `store_thm_at` -- a `Resume` body, a
+   termination obligation -- and each of them used to arrive anonymously,
+   so the pool reported them with an empty label.
+
+   Failure handling deliberately stays with the caller.  `store_thm_at`
+   dies loudly and dumps a heap; a termination obligation may be one of
+   several candidates being tried in turn, where a dump per failed
+   candidate would be wrong.
+
+   A proof nested inside another sees the inner name, and the outer
+   context is unchanged, so nothing has to be put back. *)
+fun prove_named ctxt {name, goal, tac} =
+    Tactical.prove_goal_in (Context.Data.put thm_name_slot name ctxt)
+                           (goal, tac)
+
+(* Counter used by dump_failure_state when no theorem name is in
+   scope (e.g. raw Tactical.prove invocations outside store_thm_at):
+   yields "anon_<N>.dumpedheap" rather than "<thy>..dumpedheap". *)
+local val n = ref 0 in
+  fun next_anon_thm_name () =
+      (n := !n + 1; "anon_" ^ Int.toString (!n))
+end
+
+(* Given a suspendlabel term, return SOME (thy, name) for the
+   already-registered suspended theorem that carries it as a hyp,
+   or NONE if no registered theorem owns it.  save_thm_attrs uses
+   this to reject theorems that cite still-suspended theorems. *)
+val slab_owner_lookup : (term -> (string * string) option) ref =
+    ref (fn _ => NONE)
+
+(* printable_keys: collapse duplicate label names with a count annotation.
+   Used when reporting which suspended subgoals remain in a theorem. *)
+fun printable_keys nms =
+    let val ctab =
+            List.foldl
+              (fn (nm,T) => Symtab.map_default (nm,0) (fn c => c + 1) T)
+              Symtab.empty
+              nms
+    in
+      Symtab.fold_rev
+        (fn (nm,c) => fn A =>
+            (if c = 1 then nm
+             else nm ^ "(" ^ Int.toString c ^ ")") ::
+            A)
+        ctab
+        []
+    end
+
+local
+open Feedback Theory
+fun prove_local loc privp (n,th) =
+   (if not (!Globals.interactive) then
+      print ("Proved triviality ___ \"" ^ String.toString n ^ "\"\n")
+    else ();
+    DB.store_local {private=privp,loc=loc,class=DB_dtype.Thm} n th;
+    th)
+val _ = app ThmAttribute.reserve_word ["local", "unlisted", "allow_rebind"]
+fun extract_localpriv (loc,priv,rebindok,acc) attrs =
+    case attrs of
+        [] => (loc,priv,rebindok,List.rev acc)
+      | ("unlisted",_) :: rest => extract_localpriv (loc,true,rebindok,acc) rest
+      | ("local",_) :: rest => extract_localpriv (true,priv,rebindok,acc) rest
+      | ("allow_rebind",_) :: rest => extract_localpriv (loc,priv,true,acc) rest
+      | a :: rest => extract_localpriv (loc,priv,rebindok,a::acc) rest
+in
+fun save_thm_attrs loc (attrblock:ThmAttribute.attrblock, th) = let
+  val {thmname=n,attrs,unknown,reserved} = attrblock
+  val _ = null unknown orelse
+          raise ERR "save_thm_attrs"
+                ("Unknown attributes: " ^
+                 String.concatWith ", " (map #1 unknown))
+  val (localp,privp,rebindok,reserved_leftover) =
+      extract_localpriv (false,false,false,[]) reserved
+  val _ = null reserved_leftover orelse
+          raise ERR "save_thm_attrs"
+                ("Unhandled attributes: " ^
+                 String.concatWith ", " (map #1 reserved_leftover))
+  val save =
+      if localp then prove_local loc privp
+      else
+        fn (n,th) => Theory.gen_save_thm{name=n,private=privp,thm=th,loc=loc}
+  val attrf = if localp then ThmAttribute.local_attribute
+              else ThmAttribute.store_at_attribute
+  val storemod = if rebindok then trace("Theory.allow_rebinds", 1)
+                 else (fn f => f)
+  fun do_attr (k,vs) = attrf {thm = th, name = n, attrname = k, args = vs}
+  val slabs_with_labels =
+      HOLset.foldl
+        (fn (t,A) =>
+            case dest_suspended t of NONE => A | SOME (lab,_) => (t,lab)::A)
+        [] (Thm.hypset th)
+  fun classify_foreign (slab, lab) =
+      case !slab_owner_lookup slab of
+          NONE => NONE
+        | SOME (Thy,Name) =>
+            if Thy = Theory.current_theory () andalso Name = n then NONE
+            else SOME (lab, {Thy=Thy, Name=Name})
+  val foreign = List.mapPartial classify_foreign slabs_with_labels
+in
+  case (slabs_with_labels, foreign) of
+      ([], _) => storemod save(n,th) before app do_attr attrs
+    | (_, []) =>
+        let
+        in
+          (case printable_keys (map #2 slabs_with_labels) of
+               [nstr] =>
+               HOL_MESG (
+                 "Stashing suspended theorem " ^ n ^
+                 " with pending subgoal: " ^ nstr ^ "."
+               )
+             | strs =>
+               HOL_MESG (
+                 "Stashing suspended theorem " ^ n ^
+                 " with pending subgoals: " ^
+                 String.concatWith ", " strs ^ "."
+               ));
+          if localp orelse not (null attrs) then
+            HOL_WARNING "boolLib" "save_thm_attrs"
+                        ("Ignoring attributes on suspended theorem " ^ n ^
+                         "; apply them at Finalise time instead")
+          else ();
+          (* Route the suspended theorem into markerLib's AncestryData
+             store for suspensions rather than saving it to the normal
+             theorem DB.  Finalise will save the clean form under this
+             name when all subgoals have been resumed. *)
+          !suspended_theorem_recorder (n, th);
+          th
+        end
+    | (_, foreigns) =>
+        let
+          fun fmt (lab, kn) =
+              KernelSig.name_toString kn ^ "[" ^ lab ^ "]"
+          val refs = String.concatWith ", " (map fmt foreigns)
+          val plural = case foreigns of [_] => " " | _ => "s "
+        in
+          raise ERR "save_thm_attrs"
+            ("Theorem " ^ Lib.quote n ^
+             " cites still-suspended theorem" ^ plural ^ refs ^
+             ".  Only `Resume X[label]` may consume a still-suspended X; \
+             \finalise the cited theorem(s) first.")
+        end
+end
+end (* local *)
+
+(* finalise_suspended_thm lives in markerLib (it uses AncestryData and
+   needs to see the suspension dictionaries).  The parser-level Finalise
+   expansion calls markerLib.finalise_suspended_thm directly. *)
+
+(* Seed the proof manager with the failing goal, then write a Poly/ML
+   heap (a no-op under Moscow ML) to <theory>.<name>.dumpedheap in the
+   current directory.  Returns the file name so the caller can quote it
+   in messages, or NONE if no heap was written.
+
+   The dump is a diagnostic convenience, so neither half may bring the
+   build down: saveChild can fail for perfectly ordinary reasons (an
+   unwritable directory, a name that is already an ancestor of the
+   running heap).  Under --noqof in particular, failing to write a heap
+   must not turn a CHEAT into an abort. *)
+fun dump_failure_state (name, g) =
+  let val nm = if name = "" then next_anon_thm_name () else name
+      val file = Theory.current_theory() ^ "." ^ nm ^ ".dumpedheap"
+  in
+    (!dump_setup_hook) g;
+    Portable.save_heap file;
+    SOME file
+  end
+  handle Interrupt => raise Interrupt
+       | e => (Feedback.HOL_WARNING "boolLib" "dump_failure_state"
+                 ("Could not write a dumpedheap: " ^ General.exnMessage e);
+               NONE)
+
+local
+  open Feedback
+  fun tac_failure s1 s2 =
+      String.concat ["Failed to prove theorem ", Lib.quote s1, ":\n", s2]
+in
+fun store_thm_at loc (n0,t,tac) ctxt =
+  let val attrblock = ThmAttribute.extract_attributes n0
+      val name = #thmname attrblock
+      val th = prove_named ctxt {name = name, goal = ([], t), tac = tac}
+               handle HOL_ERR herr =>
+               if !Globals.dumpheap_on_failure andalso
+                  not (!Globals.interactive)
+               then
+                 let val fileopt = dump_failure_state (name, ([], t))
+                     val mesg =
+                         case fileopt of
+                             NONE => ".\n"
+                           | SOME file =>
+                             "; heap saved to " ^ file ^
+                             ".\nResume with: bin/hol --holstate=" ^
+                             file ^ "\n"
+                 in
+                   TextIO.output (TextIO.stdErr,
+                     "Tactic failure proving " ^ Lib.quote name ^ mesg);
+                   OS.Process.exit OS.Process.failure
+                 end
+               else
+                 let val err_mesg = tac_failure name (message_of herr)
+                     val err = HOL_ERR (set_message err_mesg herr)
+                 in render_exn
+                      (wrap_exn "boolLib" "store_thm_at" err) end
+  in
+    save_thm_attrs loc (attrblock,th)
+    handle e => render_exn
+                    (wrap_exn "boolLib" "store_thm_at" e)
+  end
+end
+
+fun store_thm arg = store_thm_at DB.Unknown arg (Context.snapshot())
+
+fun save_thm_at loc (n0,th) =
+  save_thm_attrs loc (ThmAttribute.extract_attributes n0,th)
+
+val save_thm = save_thm_at DB.Unknown
+
+fun new_recursive_definition rcd =
+    let val thm = Prim_rec.new_recursive_definition rcd
+        val genind = gen_indthm {lookup_ind = TypeBase.induction_of}
+    in
+      DefnBaseCore.register_indn (genind thm);
+      thm
+    end
+
+(* ----------------------------------------------------------------------
+    Gets a variant of an arbitrary term instead of a single variable.
+    Besides the resulting term, it returns also the substitution used to
+    get it.
+   ---------------------------------------------------------------------- *)
+
+fun variant_of_term vs t =
+  let
+    open HolKernel
+    val check_vars = free_vars t
+    val (_,sub) =
+        foldl (fn (v, (vs,sub)) =>
+                  let
+                    val v' = variant vs v
+                    val vs' = v'::vs
+                    val sub' = if (aconv v v') then sub else
+                               (v |-> v')::sub
+                  in
+                    (vs',sub')
+                  end) (vs,[]) check_vars
+    val t' = subst sub t
+  in
+    (t', sub)
+  end
+
+
+datatype pel = pLeft | pRight | pAbs
+fun term_diff t1 t2 =
+  let
+    open Term HolKernel
+    fun recurse p t1 t2 =
+      if aconv t1 t2 then []
+      else
+        case (dest_term t1, dest_term t2) of
+            (COMB(f1,x1), COMB (f2,x2)) =>
+            if aconv f1 f2 then recurse (pRight :: p) x1 x2
+            else if aconv x1 x2 then recurse (pLeft :: p) f1 f2
+            else recurse (pLeft :: p) f1 f2 @ recurse (pRight :: p) x1 x2
+          | (LAMB(v1,b1), LAMB(v2,b2)) =>
+            if aconv v1 v2 then recurse (pAbs :: p) b1 b2
+            else if Type.compare(type_of v1,type_of v2) = EQUAL then
+              let val v1' = variant (free_vars b2) v1
+              in
+                recurse (pAbs :: p) b1 (subst [v2 |-> v1'] b2)
+              end
+            else recurse (pAbs :: p) b1 b2
+          | (CONST _, CONST _) => if same_const t1 t2 then []
+                                  else [(List.rev p,t1,t2)]
+          | _ => [(List.rev p,t1,t2)]
+  in
+    recurse [] t1 t2
+  end
+
+fun tyvar_sequence n =
+    let
+      val mkvt = Type.mk_vartype
+      fun pretty A n =
+          if n <= 0 then A
+          else if n > 26 then
+            pretty (mkvt ("'a" ^ Int.toString (n - 26))::A) (n - 1)
+          else
+            pretty
+              (mkvt ("'" ^ str (Char.chr (Char.ord #"a" + (n - 1))))::A)
+              (n - 1)
+    in
+      pretty [] n
+    end
+
+val Fld = FunctionalRecordUpdate.U
+val $$ = FunctionalRecordUpdate.$$
+
+end;

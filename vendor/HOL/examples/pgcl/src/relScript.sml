@@ -1,0 +1,137 @@
+(* ========================================================================= *)
+(* Create "relTheory" containing the relational semantics of a small         *)
+(* imperative probabilistic language.                                        *)
+(* ========================================================================= *)
+
+(* ------------------------------------------------------------------------- *)
+(* Load and open relevant theories                                           *)
+(* (Comment out "load" and "quietdec"s for compilation)                      *)
+(* ------------------------------------------------------------------------- *)
+(*
+app load
+  ["bossLib","realLib","rich_listTheory","stringTheory",
+   "metisLib","posrealLib","expectationTheory","intLib"];
+quietdec := true;
+*)
+Theory rel
+Ancestors
+  combin list rich_list string integer real poset posreal measure
+  expectation syntax
+Libs
+  intLib realLib metisLib posrealLib
+
+
+(*
+quietdec := false;
+*)
+
+(* ------------------------------------------------------------------------- *)
+(* Start a new theory called "rel"                                           *)
+(* ------------------------------------------------------------------------- *)
+
+(* ------------------------------------------------------------------------- *)
+(* Helpful proof tools                                                       *)
+(* ------------------------------------------------------------------------- *)
+
+val Know = Q_TAC KNOW_TAC;
+val Suff = Q_TAC SUFF_TAC;
+val REVERSE = Tactical.REVERSE;
+val lemma = I prove;
+
+(* ------------------------------------------------------------------------- *)
+(* Measures.                                                                 *)
+(* ------------------------------------------------------------------------- *)
+
+Definition point_measure_def:
+   point_measure (p : 'a -> bool) x =
+   <| carrier := p;
+      sets := UNIV;
+      mu := \s. if x IN s then 1 else 0 |>
+End
+
+Definition linear_measure_def:
+   linear_measure p m1 m2 =
+   <| carrier := m1.carrier;
+      sets := m1.sets INTER m2.sets;
+      mu := \s. p * m1.mu s + (1 - p) * m2.mu s |>
+End
+
+Definition ConvexClosed_def:
+   ConvexClosed =
+   { s |
+     !p. !m1 m2 :: s.
+       p <= 1 /\ (m1.carrier = m2.carrier) ==>
+       linear_measure p m1 m2 IN s }
+End
+
+(* ------------------------------------------------------------------------- *)
+(* The HOL type we use to model relations.                                   *)
+(* ------------------------------------------------------------------------- *)
+
+val () = type_abbrev ("rel", Type `:'a state -> 'a state measure -> bool`);
+
+(* ------------------------------------------------------------------------- *)
+(* Well-formed relations.                                                    *)
+(* ------------------------------------------------------------------------- *)
+
+Definition Measure_def:
+   Measure =
+   { m : 'a state measure |
+     m IN ProbabilitySpace /\
+     (m.carrier = UNIV) /\
+     (m.sets = UNIV) /\
+     countable m.carrier }
+End
+
+Definition Rel_def:
+   Rel =
+   { r : 'a rel |
+     (!s m. r s m ==> m IN Measure) /\
+     (!s. { m | r s m } IN ConvexClosed) }
+End
+
+(* ------------------------------------------------------------------------- *)
+(* Relation operations.                                                      *)
+(* ------------------------------------------------------------------------- *)
+
+Definition union_rel_def:
+   union_rel r1 r2 s m =
+   ?p m1 m2.
+     p <= 1 /\ r1 s m1 /\ r2 s m2 /\
+     (m = linear_measure p m1 m2)
+End
+
+Definition lin_rel_def:
+   lin_rel p r1 r2 s m =
+   ?m1 m2.
+     r1 s m1 /\ r2 s m2 /\
+     (m = linear_measure (p s) m1 m2)
+End
+
+(* Got stuck on sequential composition
+
+val seq_rel_def = Define
+  `seq_rel r1 r2 s m =
+   ?m' m''.
+     r1 s m' /\ (!s'. r2 s' (m'' s')) /\
+     (m IN ProbabilitySpace) /\
+     (m.carrier = UNIV) /\
+     (m.sets = BIGINTER (IMAGE (\s'. (m'' s').sets)) UNIV) /\
+     (m.mu = \a''. integrate m' UNIV (\s'. (m'' s').mu a''))`;
+*)
+
+(* ------------------------------------------------------------------------- *)
+(* Relational semantics.                                                     *)
+(* ------------------------------------------------------------------------- *)
+
+(*
+val rel_def = Define
+  `(rel Abort = \s m. m IN Measure) /\
+   (rel (Consume k) = \s m. m = point_measure UNIV s) /\
+   (rel (Assign v e) = \s m. m = point_measure UNIV (assign v e s)) /\
+   (rel (Seq a b) = seq_rel (rel a) (rel b)) /\
+   (rel (Nondet a b) = union_rel (rel a) (rel b)) /\
+   (rel (Prob p a b) = lin_rel p (rel a r) (rel b r)) /\
+   (rel (While c b) = \r. expect_lfp (\e. Cond c (wp b e) r))`;
+*)
+

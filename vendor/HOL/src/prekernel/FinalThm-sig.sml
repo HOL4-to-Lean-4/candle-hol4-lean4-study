@@ -1,0 +1,171 @@
+signature FinalThm =
+sig
+  type thm
+  type tag
+  type term
+  type hol_type
+  type 'a set   = 'a HOLset.set
+  type depdisk  = (string * int) * ((string * int list) list)
+
+  val kernelid : string
+
+  (* Simple operations on the type of theorems *)
+
+  val tag           : thm -> tag
+  val hyp           : thm -> term list
+  val hypset        : thm -> term set
+  val concl         : thm -> term
+  val dest_thm      : thm -> term list * term
+  val thm_frees     : thm -> term list
+  val hyp_frees     : thm -> term set
+  val hyp_tyvars    : thm -> hol_type set
+
+
+  (* The primitive rules of inference *)
+
+  val ASSUME        : term -> thm
+  val REFL          : term -> thm
+  val BETA_CONV     : term -> thm
+  val ABS           : term -> thm -> thm
+  val DISCH         : term -> thm -> thm
+  val MP            : thm -> thm -> thm
+  val SUBST         : (term,thm)Lib.subst -> term -> thm -> thm
+  val INST_TYPE     : (hol_type,hol_type)Lib.subst -> thm -> thm
+
+
+  (* Now some derivable-but-primitive rules of inference *)
+
+
+  (* Lambda calculus rules *)
+
+  val ALPHA         : term -> term -> thm
+  val MK_COMB       : thm * thm -> thm
+  val AP_TERM       : term -> thm -> thm
+  val AP_THM        : thm -> term -> thm
+
+
+  (* Equality *)
+
+  val SYM           : thm -> thm
+  val TRANS         : thm -> thm -> thm
+  val EQ_MP         : thm -> thm -> thm
+  val EQ_IMP_RULE   : thm -> thm * thm
+
+
+  (* Free variable instantiation *)
+
+  val INST          : (term,term)Lib.subst -> thm -> thm
+
+
+  (* Universal quantification *)
+
+  val SPEC          : term -> thm -> thm
+  val GEN           : term -> thm -> thm
+  val GENL          : term list -> thm -> thm
+
+
+  (* Existential quantification *)
+
+  val EXISTS        : term * term -> thm -> thm
+  val CHOOSE        : term * thm -> thm -> thm
+
+
+  (* Conjunction *)
+
+  val CONJ          : thm -> thm -> thm
+  val CONJUNCT1     : thm -> thm
+  val CONJUNCT2     : thm -> thm
+
+
+  (* Disjunction *)
+
+  val DISJ1         : thm -> term -> thm
+  val DISJ2         : term -> thm -> thm
+  val DISJ_CASES    : thm -> thm -> thm -> thm
+
+
+  (* Negation *)
+
+  val NOT_INTRO     : thm -> thm
+  val NOT_ELIM      : thm -> thm
+  val CCONTR        : term -> thm -> thm
+
+
+  (* Computing with explicit substitutions *)
+
+  val Beta          : thm -> thm
+  val Mk_comb       : thm -> thm * thm * (thm -> thm -> thm)
+  val Mk_abs        : thm -> term * thm * (thm -> thm)
+  val Specialize    : term -> thm -> thm
+
+  (* Multiple binders *)
+
+  val GEN_ABS       : term option -> term list -> thm -> thm
+
+  (* Oracle invocation *)
+
+  val mk_thm        : term list * term -> thm
+  val mk_oracle_thm : string -> term list * term -> thm
+  val mk_axiom_thm  : (string Nonce.t * term) -> thm
+  val add_tag       : tag * thm -> thm
+
+  (* registration of bool constants *)
+  val register_T               : thm -> unit
+  val register_forall          : thm -> unit
+  val register_exists          : thm -> unit
+  val register_F               : thm -> unit
+  val register_neg             : thm -> unit
+  val register_conj            : thm -> unit
+  val register_disj            : thm -> unit
+  val register_type_definition : thm -> unit
+
+  (* Current-theory guard: definitional rules mint fresh constants into
+     the *current* theory only.  The current theory is threaded through
+     Thm-owned state below rather than accepted as a parameter, so
+     callers cannot direct a mint into a different theory's segment.
+
+     `setCT` is the sanctioned setter, invoked by `Theory.new_theory`;
+     it refuses to move the current theory to a sealed one. *)
+  val setCT       : string -> unit
+  val getCT       : unit -> string option
+
+  (* Sealed theories are locked against further change.  A theory
+     becomes sealed on export or on load-from-disk and stays sealed
+     for the rest of the session.  `setCT` refuses to enter a sealed
+     theory, so the only way to be *in* one is to have entered it
+     while it was still open and sealed it afterwards --- at which
+     point the definitional rules below cease to accept new mints
+     into it either. *)
+  val mark_sealed : string -> unit
+  val is_sealed   : string -> bool
+
+  (* definitional rules of inference *)
+  val prim_type_definition : string * thm -> thm
+  val prim_specification : string list -> thm -> thm
+  val gen_prim_specification : thm -> string list * thm
+
+  (* Fetching theorems from disk *)
+
+  datatype thm_id = SavedName of string | SavedAnon of int
+  val disk_thm : (string * thm_id) -> (depdisk * string list) * term list -> thm
+
+  (* Saving proof dependencies *)
+
+  val save_dep : string -> thm -> thm
+
+  (* Computing with first-order lisp-style expressions *)
+
+  type compute_args =
+    { cval_terms : (string * term) list,
+      cval_type  : hol_type,
+      num_type   : hol_type,
+      char_eqns  : (string * thm) list }
+
+  val compute :
+    (* initialization: *)
+    compute_args
+    (* code equations: *)
+    -> thm list
+    -> term -> thm
+
+end;

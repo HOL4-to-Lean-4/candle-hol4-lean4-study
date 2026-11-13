@@ -1,0 +1,8 @@
+#include sequences/base-hol
+
+[poly]src/AI
+[poly]src/AI/sml_inspection
+[poly]src/AI/proof_search
+[poly]src/AI/machine_learning
+[poly]src/tactictoe/src
+[poly]src/holyhammer

@@ -1,0 +1,233 @@
+(*---------------------------------------------------------------------------
+                An ML script for building HOL
+ ---------------------------------------------------------------------------*)
+
+structure build =
+struct
+
+open buildutils
+datatype phase = Initial | Bare | Full
+
+(* utilities *)
+
+  fun main () = let
+
+    val _ = startup_check()
+    val phase = ref Initial
+
+
+    open buildutils
+
+(* ----------------------------------------------------------------------
+    Analysing the command-line
+   ---------------------------------------------------------------------- *)
+
+val cline_record = process_cline ()
+val {cmdline,build_theory_graph,selftest_level,...} = cline_record
+val {debug,jobcount,relocbuild,extra={SRCDIRS,...},...} = cline_record
+val {multithread,keepgoing,timelimit,thmsrc,...} = cline_record
+
+(* Forward only the cache options the user actually wrote, so that a
+   Holmakefile's CLINE_OPTIONS = --no-cache (etc.) isn't quietly
+   overridden by a synthesised default at the sub-Holmake command-line.
+   Defaults are left to each sub-Holmake to compute for itself. *)
+val cache_args = extract_cache_args (CommandLine.arguments())
+
+open Systeml;
+
+fun phase_extras () =
+  case !phase of
+    Initial => ["--poly_not_hol"]
+  | Bare => ["--holstate", fullPath [HOLDIR, "bin", "hol.state0"]]
+  | Full => []
+
+fun aug_systeml proc args = let
+  open Posix.Process
+  val env' =
+      "SELFTESTLEVEL="^Int.toString selftest_level :: Posix.ProcEnv.environ()
+in
+  case fork() of
+    NONE => (exece(proc,proc::args,env')
+             handle _ => die ("Exece of "^proc^" failed"))
+  | SOME cpid => let
+      val (_, result) = waitpid(W_CHILD cpid, [])
+    in
+      result
+    end
+end
+
+
+val Holmake = let
+  fun isSuccess Posix.Process.W_EXITED = true
+    | isSuccess _ = false
+  fun analysis hmstatus = let
+    open Posix.Process
+  in
+    case hmstatus of
+      W_EXITSTATUS w8 => "exited with code "^Word8.toString w8
+    | W_EXITED => "exited normally???"
+    | W_SIGNALED sg => "with signal " ^
+                       SysWord.toString (Posix.Signal.toWord sg)
+    | W_STOPPED sg => "stopped with signal " ^
+                      SysWord.toString (Posix.Signal.toWord sg)
+  end
+in
+  buildutils.Holmake aug_systeml isSuccess
+    (fn () => (case jobcount of NONE => [] | SOME j => ["-j"^Int.toString j]) @
+              (if relocbuild then ["--relocbuild"] else []) @
+              (if debug then ["--dbg"] else []) @
+              (if keepgoing then ["-k"] else []) @
+              (case multithread of
+                   NONE => []
+                 | SOME i => ["--mt="^Int.toString i]) @
+              (case timelimit of
+                   NONE => []
+                 | SOME d => ["--time_limit="^Int.toString d]) @
+              (case thmsrc of
+                   NONE => []
+                 | SOME s => ["--thmsrc="^s]) @
+              cache_args @
+              phase_extras())
+    analysis selftest_level
+end
+
+(* create a symbolic link - Unix only *)
+fun link b s1 s2 =
+    let val actual_old = case HFS_NameMunge.HOLtoFS s1 of
+                             NONE => s1
+                           | SOME {fullfile, ...} => fullfile
+    in
+      Posix.FileSys.symlink {new = s2, old = actual_old}
+    end
+    handle OS.SysErr (s, _) =>
+           die ("Unable to link old file "^quote s1^" to new file "
+                ^quote s2^": "^s)
+
+fun symlink_check() =
+    if OS = "winNT" then
+      die "Sorry; symbolic linking isn't available under Windows NT"
+    else link
+val default_link = if OS = "winNT" then cp else link
+
+(*---------------------------------------------------------------------------
+        Transport a compiled directory to another location. The
+        symlink argument says whether this is via a symbolic link,
+        or by copying. The ".uo", ".ui", ".so", ".xable" and ".sig"
+        files are transported.
+ ---------------------------------------------------------------------------*)
+
+fun upload ((src, regulardir), target, symlink) =
+    if regulardir = 0 then
+      (print ("Uploading files to "^target^"\n");
+       map_dir (transfer_file symlink target) src)
+      handle OS.SysErr(s, erropt) =>
+             die ("OS error: "^s^" - "^
+                  (case erropt of SOME s' => OS.errorMsg s'
+                                | _ => ""))
+    else if selftest_level >= regulardir then
+      print ("Self-test directory "^src^" built successfully.\n")
+    else ()
+
+(*---------------------------------------------------------------------------
+    For each element in SRCDIRS, build it, then upload it to SIGOBJ.
+    This allows us to have the build process only occur w.r.t. SIGOBJ
+    (thus requiring only a single place to look for things).
+ ---------------------------------------------------------------------------*)
+
+val hol_state0 = fullPath [HOLDIR, "bin", "hol.state0"]
+val sigobj_proofmanLib = fullPath [HOLDIR, "sigobj", "proofManagerLib.uo"]
+fun buildDir symlink s =
+  if #1 s = fullPath [HOLDIR, "bin/hol"] then phase := Full
+  else (
+    build_dir Holmake selftest_level s;
+    upload(s,SIGOBJ,symlink);
+    if !phase = Initial andalso OS.FileSys.access(hol_state0, []) andalso
+       OS.FileSys.access(sigobj_proofmanLib, [])
+    then phase := Bare
+    else ()
+  )
+
+fun build_src symlink = List.app (buildDir symlink) SRCDIRS
+
+
+fun build_hol symlink = let
+in
+  remove_all_holmkdirs();
+  clean_sigobj();
+  setup_logfile();
+  build_src symlink
+    handle SML90.Interrupt =>
+      (finish_logging {buildok = false, selftest_level = selftest_level};
+       die "Interrupted");
+  finish_logging {buildok = true, selftest_level = selftest_level};
+  make_buildstamp();
+  build_help {graph = build_theory_graph,
+              no_mdbook = #no_mdbook cline_record,
+              no_helpdocs = #no_helpdocs cline_record};
+  print "\nHol built successfully.\n"
+end
+
+
+(*---------------------------------------------------------------------------
+       Get rid of compiled code and dependency information.
+ ---------------------------------------------------------------------------*)
+
+val check_againstB = check_against EXECUTABLE
+val _ = check_againstB "tools-poly/smart-configure.sml"
+val _ = check_againstB "tools-poly/configure.sml"
+val _ = check_againstB "tools-poly/build.sml"
+val _ = check_againstB "tools/Holmake/Systeml.sig"
+
+val _ = let
+  val fP = fullPath
+  open HOLFileSys
+  val hmake = fP [HOLDIR,"bin",xable_string "Holmake"]
+in
+  if access(hmake, [A_READ, A_EXEC]) then
+    (app_sml_files (check_against hmake)
+                   {dirname = fP [HOLDIR, "tools-poly", "Holmake"]};
+     app_sml_files (check_against hmake)
+                   {dirname = fP [HOLDIR, "tools", "Holmake"]})
+  else
+    die ("No Holmake executable in " ^ fP [HOLDIR, "bin"])
+end
+
+(* bin/hol is compiled by configure and by no Holmakefile rule, from
+   tools-poly/hol.ML, the Holmake sources, and tools/parsing (the quote
+   filter is linked in rather than run as bin/unquote; HolLex.sml is
+   generated from HolLex by configure).  The sweep above compares those
+   sources against bin/Holmake only, so hol can be stale while Holmake
+   is current, and hol.ML is checked nowhere.  A stale bin/hol
+   misdirects the interactive load path and fails
+   tools/Holmake/tests/repl, which -t reaches while still inside
+   sequences/kernel -- so the whole selftest build stops there.
+   Checking hol covers Holmake's embedded filter too: configure builds
+   Holmake first. *)
+val _ = let
+  val fP = fullPath
+  open HOLFileSys
+  val hol = fP [HOLDIR,"bin",xable_string "hol"]
+in
+  if access(hol, [A_READ, A_EXEC]) then
+    (check_against hol "tools-poly/hol.ML";
+     app_sml_files (check_against hol)
+                   {dirname = fP [HOLDIR, "tools-poly", "Holmake"]};
+     app_sml_files (check_against hol)
+                   {dirname = fP [HOLDIR, "tools", "Holmake"]};
+     check_against hol "tools/parsing/HolLex";
+     app_sml_files (check_against hol)
+                   {dirname = fP [HOLDIR, "tools", "parsing"]})
+  else ()
+end
+
+
+
+
+
+in
+    case cmdline of
+      []            => build_hol default_link
+    | _ => die "Multi-dir build not implemented yet"
+
+  end
+end (* struct *)

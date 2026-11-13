@@ -1,0 +1,907 @@
+(*****************************************************************************)
+(* Create "PSLPathTheory", the theory of (finite and infinite) sequences.    *)
+(* Note that finite paths can be empty.                                      *)
+(*****************************************************************************)
+
+Theory PSLPath
+Ancestors
+  rich_list FinitePSLPath
+Libs
+  intLib
+
+(******************************************************************************
+* Simpsets to deal properly with theorems containing SUC
+******************************************************************************)
+val simp_arith_ss = simpLib.++ (arith_ss, numSimps.SUC_FILTER_ss);
+
+val _ = ParseExtras.temp_loose_equality()
+
+(******************************************************************************
+* A path is finite or infinite
+******************************************************************************)
+Datatype:
+   path = FINITE   ('s list)
+        | INFINITE (num -> 's)
+End
+
+(******************************************************************************
+* Tests
+******************************************************************************)
+Definition IS_FINITE_def:
+  (IS_FINITE(FINITE p)   = T)
+         /\
+         (IS_FINITE(INFINITE f) = F)
+End
+
+Definition IS_INFINITE_def:
+  (IS_INFINITE(FINITE p)   = F)
+         /\
+         (IS_INFINITE(INFINITE f) = T)
+End
+
+(******************************************************************************
+* HEAD (p0 p1 p2 p3 ...) = p0
+******************************************************************************)
+Definition HEAD_def:
+  (HEAD (FINITE p) = HD p)
+         /\
+         (HEAD (INFINITE f)  = f 0)
+End
+
+(******************************************************************************
+* REST (p0 p1 p2 p3 ...) = (p1 p2 p3 ...)
+******************************************************************************)
+Definition REST_def:
+  (REST (FINITE p) = FINITE(TL p))
+         /\
+         (REST (INFINITE f) = INFINITE(\n. f(n+1)))
+End
+
+(******************************************************************************
+* RESTN (p0 p1 p2 p3 ...) n = (pn p(n+1) p(n+2) ...)
+******************************************************************************)
+Definition RESTN_def:
+  (RESTN p 0 = p) /\ (RESTN p (SUC n) = RESTN (REST p) n)
+End
+
+(******************************************************************************
+* Simple properties
+******************************************************************************)
+Theorem NOT_IS_INFINITE:
+     IS_INFINITE p = ~(IS_FINITE p)
+Proof
+   Cases_on `p`
+    THEN RW_TAC std_ss [IS_INFINITE_def,IS_FINITE_def]
+QED
+
+Theorem NOT_IS_FINITE:
+     IS_FINITE p = ~(IS_INFINITE p)
+Proof
+   Cases_on `p`
+    THEN RW_TAC std_ss [IS_INFINITE_def,IS_FINITE_def]
+QED
+
+Theorem IS_INFINITE_REST:
+     !p. IS_INFINITE(REST p) = IS_INFINITE p
+Proof
+   Induct
+    THEN RW_TAC list_ss [REST_def,IS_INFINITE_def,IS_FINITE_def]
+QED
+
+Theorem IS_INFINITE_RESTN:
+     !n p. IS_INFINITE(RESTN p n) = IS_INFINITE p
+Proof
+   Induct
+    THEN RW_TAC list_ss [RESTN_def,IS_INFINITE_REST]
+QED
+
+Theorem IS_FINITE_REST:
+     !p. IS_FINITE(REST p) = IS_FINITE p
+Proof
+   Induct
+    THEN RW_TAC list_ss [REST_def,IS_INFINITE_def,IS_FINITE_def]
+QED
+
+Theorem IS_FINITE_RESTN:
+     !n p. IS_FINITE(RESTN p n) = IS_FINITE p
+Proof
+   Induct
+    THEN RW_TAC list_ss [RESTN_def,IS_FINITE_REST]
+QED
+
+Theorem RESTN_FINITE:
+     !l n. RESTN (FINITE l) n = FINITE(RESTN l n)
+Proof
+   Induct_on `n`
+    THEN RW_TAC std_ss
+          [RESTN_def,FinitePSLPathTheory.RESTN_def,
+           REST_def,FinitePSLPathTheory.REST_def]
+QED
+
+Theorem FINITE_TL:
+     !l. 0 < LENGTH l ==> (FINITE(TL l) = REST(FINITE l))
+Proof
+   Induct
+    THEN RW_TAC list_ss [REST_def]
+QED
+
+(******************************************************************************
+* Extended numbers.
+******************************************************************************)
+Datatype:
+   xnum = INFINITY                            (* length of an infinite path  *)
+        | XNUM num                            (* length of a finite path     *)
+End
+
+(******************************************************************************
+* The constant ``to`` is a left associative infix with precedence 500.
+* It is overloaded so that
+* (m to n) i        means m <= i /\ i < n  (num_to_def)
+* (m to XNUM n) i   means m <= i /\ i < n  (xnum_to_def)
+* (m to INFINITY) i means m <= i           (xnum_to_def)
+******************************************************************************)
+Definition num_to_def:
+  $num_to m n i = m <= i /\ i < n
+End
+
+Definition xnum_to_def:
+   ($xnum_to m (XNUM n) i = m <= i /\ i < n)
+   /\
+   ($xnum_to m INFINITY i = m <= i)
+End
+
+val _ = overload_on("to", ``num_to``);
+val _ = overload_on("to", ``xnum_to``);
+
+val _ = set_fixity "to" (Infixl 500);
+
+(******************************************************************************
+* Extend subtraction (-) to extended numbers
+******************************************************************************)
+Definition SUB_num_xnum_def:
+   ($SUB_num_xnum (m:num) (XNUM (n:num)) = XNUM((m:num) - (n:num)))
+   /\
+   ($SUB_num_xnum (m:num) INFINITY = INFINITY)
+End
+
+Definition SUB_xnum_num_def:
+   ($SUB_xnum_num (XNUM (m:num)) (n:num) = XNUM((m:num) - (n:num)))
+   /\
+   ($SUB_xnum_num INFINITY (n:num) = INFINITY)
+End
+
+Definition SUB_xnum_xnum_def:
+   ($SUB_xnum_xnum (XNUM (m:num)) (XNUM (n:num)) = XNUM((m:num) - (n:num)))
+   /\
+   ($SUB_xnum_xnum (XNUM (m:num)) INFINITY = XNUM 0)
+   /\
+   ($SUB_xnum_xnum INFINITY (XNUM (n:num)) = INFINITY)
+End
+
+val SUB =
+ save_thm
+  ("SUB", LIST_CONJ[SUB_num_xnum_def,SUB_xnum_num_def,SUB_xnum_xnum_def]);
+
+val _ = overload_on("-", ``SUB_num_xnum``);
+val _ = overload_on("-", ``SUB_xnum_num``);
+val _ = overload_on("-", ``SUB_xnum_xnum``);
+
+(******************************************************************************
+* Extend less-than predicate (<) to extended numbers
+******************************************************************************)
+Definition LS_num_xnum_def:
+   ($LS_num_xnum (m:num) (XNUM (n:num)) = (m:num) < (n:num))
+   /\
+   ($LS_num_xnum (m:num) INFINITY = T)
+End
+
+Definition LS_xnum_num_def:
+   ($LS_xnum_num (XNUM (m:num)) (n:num) = (m:num) < (n:num))
+   /\
+   ($LS_xnum_num INFINITY (n:num) = F)
+End
+
+Definition LS_xnum_xnum_def:
+   ($LS_xnum_xnum (XNUM (m:num)) (XNUM (n:num)) = (m:num) < (n:num))
+   /\
+   ($LS_xnum_xnum (XNUM (m:num)) INFINITY = T)
+   /\
+   ($LS_xnum_xnum INFINITY (XNUM (n:num)) = F)
+End
+
+val LS =
+ save_thm
+  ("LS", LIST_CONJ[LS_num_xnum_def,LS_xnum_num_def,LS_xnum_xnum_def]);
+
+val _ = overload_on("<", ``LS_num_xnum``);
+val _ = overload_on("<", ``LS_xnum_num``);
+val _ = overload_on("<", ``LS_xnum_xnum``);
+
+(******************************************************************************
+* Extend less-than-or-equal predicate (<=) to extended numbers
+******************************************************************************)
+Definition LE_num_xnum_def:
+   ($LE_num_xnum (m:num) (XNUM (n:num)) = (m:num) <= (n:num))
+   /\
+   ($LE_num_xnum (m:num) INFINITY = T)
+End
+
+Definition LE_xnum_num_def:
+   ($LE_xnum_num (XNUM (m:num)) (n:num) = (m:num) <= (n:num))
+   /\
+   ($LE_xnum_num INFINITY (n:num) = F)
+End
+
+Definition LE_xnum_xnum_def:
+   ($LE_xnum_xnum (XNUM (m:num)) (XNUM (n:num)) = (m:num) <= (n:num))
+   /\
+   ($LE_xnum_xnum (XNUM (m:num)) INFINITY = T)
+   /\
+   ($LE_xnum_xnum INFINITY (XNUM (n:num)) = F)
+   /\
+   ($LE_xnum_xnum INFINITY INFINITY = T)
+End
+
+val LE =
+ save_thm("LE",LIST_CONJ[LE_num_xnum_def,LE_xnum_num_def,LE_xnum_xnum_def]);
+
+val _ = overload_on("<=", ``LE_num_xnum``);
+val _ = overload_on("<=", ``LE_xnum_num``);
+val _ = overload_on("<=", ``LE_xnum_xnum``);
+
+(******************************************************************************
+* Extend greater-than predicate (>) to extended numbers
+******************************************************************************)
+
+Definition GT_num_xnum_def:
+  ($GT_num_xnum (m:num) (XNUM (n:num)) <=> (m:num) > (n:num))
+   /\
+  ($GT_num_xnum (m:num) INFINITY <=> F)
+End
+
+Definition GT_xnum_num_def:
+   ($GT_xnum_num (XNUM (m:num)) (n:num) = (m:num) > (n:num))
+   /\
+   ($GT_xnum_num INFINITY (n:num) = T)
+End
+
+Definition GT_xnum_xnum_def:
+   ($GT_xnum_xnum (XNUM (m:num)) (XNUM (n:num)) = (m:num) > (n:num))
+   /\
+   ($GT_xnum_xnum (XNUM (m:num)) INFINITY = F)
+   /\
+   ($GT_xnum_xnum INFINITY (XNUM (n:num)) = T)
+End
+
+val GT =
+ save_thm("GT",LIST_CONJ[GT_num_xnum_def,GT_xnum_num_def,GT_xnum_xnum_def]);
+
+val _ = overload_on(">", ``GT_num_xnum``);
+val _ = overload_on(">", ``GT_xnum_num``);
+val _ = overload_on(">", ``GT_xnum_xnum``);
+
+(******************************************************************************
+* Extend greater-than-or-equal predicate (>=) to extended numbers
+******************************************************************************)
+
+Definition GE_num_xnum_def:
+  ($GE_num_xnum (m:num) (XNUM (n:num)) = (m:num) >= (n:num))
+   /\
+  ($GE_num_xnum (m:num) INFINITY = F)
+End
+
+Definition GE_xnum_num_def:
+   ($GE_xnum_num (XNUM (m:num)) (n:num) = (m:num) >= (n:num))
+   /\
+   ($GE_xnum_num INFINITY (n:num) = T)
+End
+
+Definition GE_xnum_xnum_def:
+   ($GE_xnum_xnum (XNUM (m:num)) (XNUM (n:num)) = (m:num) >= (n:num))
+   /\
+   ($GE_xnum_xnum (XNUM (m:num)) INFINITY = F)
+   /\
+   ($GE_xnum_xnum INFINITY (XNUM (n:num)) = T)
+End
+
+val GE =
+ save_thm("GE",LIST_CONJ[GE_num_xnum_def,GE_xnum_num_def,GE_xnum_xnum_def]);
+
+val _ = overload_on(">=", ``GE_num_xnum``);
+val _ = overload_on(">=", ``GE_xnum_num``);
+val _ = overload_on(">=", ``GE_xnum_xnum``);
+
+Theorem GT_LS:
+     !x:xnum n:num. (x > n) = (n < x)
+Proof
+   Cases_on `x`
+    THEN RW_TAC arith_ss [GT_xnum_num_def,LS_num_xnum_def]
+QED
+
+(******************************************************************************
+* LESS m is predicate to test if a number is less than m
+* LESS : num -> num -> bool
+******************************************************************************)
+Definition LESS_def:
+  LESS (m:num) (n:num) = n < m
+End
+
+(******************************************************************************
+* LESSX m is predicate to test if a number is less than extended number m
+* LESSX : xnum -> num -> bool
+******************************************************************************)
+Definition LESSX_def:
+  LESSX (m:xnum) (n:num) = n < m
+End
+
+val _ = overload_on ("LESS", Term`LESSX`);
+
+Theorem IN_LESS:
+     !m n:num. m IN LESS n = m < n
+Proof
+   RW_TAC arith_ss [IN_DEF,LESS_def]
+QED
+
+Theorem IN_LESSX:
+     !m:num. (m IN LESSX INFINITY) /\ !n:num. m IN LESSX (XNUM n) = m < n
+Proof
+   RW_TAC arith_ss [IN_DEF,LESSX_def,LS]
+QED
+
+(******************************************************************************
+* LENGTH(FINITE l)   = XNUM(LENGTH l)
+* LENGTH(INFINITE l) = INFINITY
+******************************************************************************)
+Definition LENGTH_def:
+  (LENGTH(FINITE l)   = XNUM(list$LENGTH l))
+         /\
+         (LENGTH(INFINITE p) = INFINITY)
+End
+
+(******************************************************************************
+* ELEM (p0 p1 p2 p3 ...) n = pn
+******************************************************************************)
+Definition ELEM_def:   ELEM p n = HEAD(RESTN p n)
+End
+
+Theorem LENGTH_REST:
+     !p. IS_FINITE p /\ 0 < LENGTH p
+           ==> (LENGTH(REST p) = LENGTH p - 1)
+Proof
+    Cases
+     THEN RW_TAC std_ss
+           [LENGTH_def,REST_def,IS_FINITE_def,LENGTH_CONS,SUB,LS,IS_FINITE_def,
+           Cooper.COOPER_PROVE``0 < n = ?m. n = SUC m``]
+     THEN RW_TAC list_ss []
+QED
+
+Theorem LENGTH_REST_COR:
+     !l. 0 < LENGTH(FINITE l) ==> (LENGTH(REST(FINITE l)) = LENGTH(FINITE l) - 1)
+Proof
+    PROVE_TAC[LENGTH_REST,IS_FINITE_def]
+QED
+
+Theorem LENGTH_RESTN:
+     !n p. IS_FINITE p /\ n < LENGTH p
+           ==> (LENGTH(RESTN p n) = LENGTH p - n)
+Proof
+   Induct
+    THEN Cases
+    THEN RW_TAC list_ss
+          [LENGTH_def,RESTN_def,IS_FINITE_REST,SUB,
+           IS_FINITE_def,REST_def,LENGTH_RESTN,LS,EL]
+    THEN `PSLPath$LENGTH(FINITE(TL l)) = XNUM(list$LENGTH(TL l))` by RW_TAC std_ss [LENGTH_def]
+    THEN Cases_on `l`
+    THEN FULL_SIMP_TAC list_ss [DECIDE ``~(SUC n < 0)``]
+    THEN ASSUM_LIST(fn thl => ASSUME_TAC(Q.SPEC `FINITE t` (el 3 thl)))
+    THEN FULL_SIMP_TAC std_ss [IS_FINITE_def,LENGTH_def,LS,SUB,EL]
+QED
+
+Theorem LENGTH_RESTN_COR:
+     !n l. n < LENGTH(FINITE l)
+           ==>
+           (LENGTH(RESTN(FINITE l) n) = LENGTH(FINITE l) - n)
+Proof
+   PROVE_TAC[LENGTH_RESTN,IS_FINITE_def]
+QED
+
+(******************************************************************************
+* 0 < i ==> (RESTN (REST(INFINITE f)) (i-1) = RESTN (INFINITE f) i)
+******************************************************************************)
+Theorem RESTN_REST_INFINITE:
+     !f i. 0 < i ==> (RESTN (REST(INFINITE f)) (i-1) = RESTN (INFINITE f) i)
+Proof
+   Induct_on `i`
+    THEN RW_TAC list_ss [RESTN_def]
+QED
+
+(******************************************************************************
+* RESTN (REST (INFINITE f)) k = RESTN (INFINITE f) (k + 1)
+******************************************************************************)
+val RESTN_REST_INFINITE_COR =
+ save_thm
+  ("RESTN_REST_INFINITE_COR",
+   SIMP_RULE arith_ss
+    [DECIDE``(k+1)-1=k``](Q.SPECL[`f`,`k+1`]RESTN_REST_INFINITE));
+
+(******************************************************************************
+* Form needeed for computeLib
+******************************************************************************)
+Theorem RESTN_AUX:
+     RESTN p n = if n=0 then p else RESTN (REST p) (n-1)
+Proof
+   Cases_on `n` THEN RW_TAC arith_ss [RESTN_def]
+QED
+
+val _ = computeLib.add_funs[RESTN_AUX];
+
+(******************************************************************************
+* SEL_REC m n p = [p(n); p(n+1); ... ; p(n+m)]
+* (Recursive form for easy definition using Define)
+******************************************************************************)
+Definition SEL_REC_def:
+   (SEL_REC 0 n p = [])
+   /\
+   (SEL_REC (SUC m) 0 p = (HEAD p)::SEL_REC m 0 (REST p))
+   /\
+   (SEL_REC (SUC m) (SUC n) p = SEL_REC (SUC m) n (REST p))
+End
+
+(******************************************************************************
+* SEL_REC m n p = [p(n); p(n+1); ... ; p(n+m-1)]
+* (Version for computeLib)
+******************************************************************************)
+Theorem SEL_REC_AUX:
+     SEL_REC m n p =
+      if m = 0   then [] else
+      if (n = 0) then (HEAD p)::SEL_REC (m-1) 0 (REST p)
+                 else SEL_REC m (n-1) (REST p)
+Proof
+    Cases_on `m` THEN Cases_on `n` THEN RW_TAC arith_ss [SEL_REC_def]
+QED
+
+val _ = computeLib.add_funs[SEL_REC_AUX];
+
+Theorem SEL_REC_SUC:
+     !p. SEL_REC (SUC m) n p = ELEM p n :: SEL_REC m (SUC n) p
+Proof
+   Induct_on `n`
+    THEN RW_TAC arith_ss [SEL_REC_def,ELEM_def,RESTN_def]
+    THEN Induct_on `m`
+    THEN RW_TAC simp_arith_ss [SEL_REC_def,ELEM_def,RESTN_def]
+QED
+
+(******************************************************************************
+* SEL p (m,n) = [p m; ... ; p n]
+******************************************************************************)
+Definition SEL_def:   SEL p (m,n) = SEL_REC (n-m+1) m p
+End
+
+(******************************************************************************
+* CONS(x,p) add x to the front of p
+******************************************************************************)
+Definition CONS_def:
+   (CONS(x, FINITE l) = FINITE(list$CONS x l))
+   /\
+   (CONS(x, INFINITE f) =
+     INFINITE(\n. if n=0 then x else f(n-1)))
+End
+
+Theorem IS_INFINITE_CONS:
+     !p x. IS_INFINITE(CONS(x,p)) = IS_INFINITE p
+Proof
+   Induct
+    THEN RW_TAC list_ss [IS_INFINITE_def,CONS_def]
+QED
+
+Theorem IS_FINITE_CONS:
+     !p x. IS_FINITE(CONS(x,p)) = IS_FINITE p
+Proof
+   Induct
+    THEN RW_TAC list_ss [IS_FINITE_def,CONS_def]
+QED
+
+Theorem HEAD_CONS:
+     !x p. HEAD(CONS(x,p)) = x
+Proof
+   REPEAT GEN_TAC
+    THEN Cases_on `p`
+    THEN RW_TAC list_ss [HEAD_def,CONS_def]
+QED
+
+Theorem REST_CONS:
+     !x p. REST(CONS(x,p)) = p
+Proof
+   REPEAT GEN_TAC
+    THEN Cases_on `p`
+    THEN RW_TAC list_ss [REST_def,CONS_def,ETA_AX]
+QED
+
+(******************************************************************************
+* RESTN (RESTN p m) n = RESTN p (m+n)
+******************************************************************************)
+Theorem RESTN_RESTN:
+     !m n p. RESTN (RESTN p m) n = RESTN p (m+n)
+Proof
+   Induct
+    THEN RW_TAC arith_ss [RESTN_def,arithmeticTheory.ADD_CLAUSES]
+QED
+
+(******************************************************************************
+* ELEM (RESTN p m) n = ELEM p (m+n)
+******************************************************************************)
+Theorem ELEM_RESTN:
+     !m n p.  ELEM (RESTN p m) n = ELEM p (n+m)
+Proof
+   Induct
+    THEN RW_TAC arith_ss [RESTN_def,ELEM_def,RESTN_RESTN]
+QED
+
+(******************************************************************************
+* 0 < i /\ 0 < LENGTH l ==> (ELEM (FINITE(TL l)) (i-1) = ELEM (FINITE l) i)
+******************************************************************************)
+Theorem ELEM_FINITE_TL:
+     !l i. 0 < i /\ 0 < LENGTH l
+           ==>
+           (ELEM (FINITE(TL l)) (i-1) = ELEM (FINITE l) i)
+Proof
+   Induct_on `i`
+    THEN RW_TAC list_ss [ELEM_def,REST_def,RESTN_def]
+QED
+
+(******************************************************************************
+* 0 < LENGTH l ==> (ELEM (FINITE (TL l)) k = ELEM (FINITE l) (k + 1))
+******************************************************************************)
+val ELEM_FINITE_TL_COR =
+ save_thm
+  ("ELEM_FINITE_TL_COR",
+   SIMP_RULE arith_ss [DECIDE``(k+1)-1=k``](Q.SPECL[`l`,`k+1`]ELEM_FINITE_TL));
+
+(******************************************************************************
+* REST(INFINITE f) = INFINITE(\n. f(n+1))
+******************************************************************************)
+Theorem REST_INFINITE:
+     !f. REST (INFINITE f) = INFINITE(\n. f(n+1))
+Proof
+   RW_TAC list_ss [REST_def]
+QED
+
+(******************************************************************************
+* RESTN (INFINITE f) i = INFINITE(\n. f(n+i))
+******************************************************************************)
+Theorem RESTN_INFINITE:
+     !f i. RESTN (INFINITE f) i = INFINITE(\n. f(n+i))
+Proof
+   Induct_on `i`
+    THEN RW_TAC list_ss
+          [REST_INFINITE,ETA_AX,RESTN_def,
+           DECIDE``i + (n + 1) = n + SUC i``]
+QED
+
+(******************************************************************************
+* LENGTH (RESTN (INFINITE p) n) = INFINITY
+******************************************************************************)
+Theorem LENGTH_RESTN_INFINITE:
+     !p n. LENGTH (RESTN (INFINITE p) n) = INFINITY
+Proof
+   RW_TAC std_ss [RESTN_INFINITE,LENGTH_def]
+QED
+
+Theorem LENGTH_RESTN_THM:
+     n < LENGTH p ==> (LENGTH (RESTN p n) = LENGTH p - n)
+Proof
+   Cases_on `p`
+    THEN RW_TAC std_ss
+          [LS_num_xnum_def,LENGTH_RESTN,LENGTH_RESTN_INFINITE,RESTN_FINITE,
+           LENGTH_def,SUB,FinitePSLPathTheory.LENGTH_RESTN]
+QED
+
+(******************************************************************************
+* 0 < i  ==> (ELEM (FINITE(TL l)) (i-1) = ELEM (FINITE l) i)
+******************************************************************************)
+Theorem ELEM_REST_INFINITE:
+     !f i. 0 < i ==> (ELEM (REST(INFINITE f)) (i-1) = ELEM (INFINITE f) i)
+Proof
+   Induct_on `i`
+    THEN RW_TAC list_ss [ELEM_def,RESTN_def]
+QED
+
+(******************************************************************************
+* ELEM (REST (INFINITE l)) k = ELEM (INFINITE l) (k + 1)
+******************************************************************************)
+val ELEM_REST_INFINITE_COR =
+ save_thm
+  ("ELEM_REST_INFINITE_COR",
+   SIMP_RULE arith_ss [DECIDE``(k+1)-1=k``](Q.SPECL[`l`,`k+1`]ELEM_REST_INFINITE));
+
+(******************************************************************************
+* CAT(w,p) creates a new path by concatenating w in front of p
+******************************************************************************)
+Definition CAT_def:
+   (CAT([], p) = p)
+   /\
+   (CAT((x::w), p) = CONS(x, CAT(w,p)))
+End
+
+Theorem CAT_FINITE_APPEND:
+     !l p. CAT(l, FINITE p) = FINITE(APPEND l p)
+Proof
+   Induct
+    THEN RW_TAC list_ss [CAT_def,CONS_def]
+QED
+
+Theorem LENGTH_CAT_FINITE:
+     !l1 l2. LENGTH(CAT(l1, FINITE l2)) = XNUM(LENGTH l1 + LENGTH l2)
+Proof
+   Induct
+    THEN RW_TAC list_ss
+          [CAT_def,LENGTH_def,CAT_FINITE_APPEND,CONS_def]
+QED
+
+Theorem IS_INFINITE_EXISTS:
+     !w. IS_INFINITE w = ?p. w = INFINITE p
+Proof
+   Induct
+    THEN RW_TAC list_ss [IS_INFINITE_def]
+QED
+
+Theorem CAT_INFINITE:
+     !l p. IS_INFINITE(CAT(l, INFINITE p))
+Proof
+   Induct
+    THEN RW_TAC list_ss [CAT_def,CONS_def,IS_INFINITE_def]
+    THEN POP_ASSUM(ASSUME_TAC o SPEC_ALL)
+    THEN IMP_RES_TAC IS_INFINITE_EXISTS
+    THEN RW_TAC std_ss [CONS_def,IS_INFINITE_def]
+QED
+
+Theorem LENGTH_CAT_INFINITE:
+     !l p. LENGTH(CAT(l, INFINITE p)) = INFINITY
+Proof
+   Induct
+    THEN RW_TAC list_ss
+          [CAT_def,LENGTH_def,CONS_def]
+    THEN `IS_INFINITE(CAT (l,INFINITE p))` by PROVE_TAC[CAT_INFINITE]
+    THEN IMP_RES_TAC IS_INFINITE_EXISTS
+    THEN RW_TAC std_ss [CONS_def,LENGTH_def]
+QED
+
+val LENGTH_CAT =
+ save_thm("LENGTH_CAT",CONJ LENGTH_CAT_FINITE LENGTH_CAT_INFINITE);
+
+
+(******************************************************************************
+* Append paths
+******************************************************************************)
+Definition PATH_APPEND_def:
+   (PATH_APPEND (FINITE l1) (FINITE l2) = FINITE(APPEND l1 l2))
+   /\
+   (PATH_APPEND (FINITE l) p = CAT(l, p))
+   /\
+   (PATH_APPEND (INFINITE f) _ = INFINITE f)
+End
+
+(******************************************************************************
+* Infix list concatenation
+******************************************************************************)
+val _ = set_fixity "<>" (Infixl 500);
+val _ = overload_on ("<>", Term`APPEND`);
+val _ = overload_on ("<>", Term`PATH_APPEND`);
+
+Theorem IS_INFINITE_CAT:
+     !p l. IS_INFINITE(CAT(l,p)) = IS_INFINITE p
+Proof
+   Induct_on `l`
+    THEN RW_TAC list_ss [IS_INFINITE_def,CAT_def,IS_INFINITE_CONS]
+QED
+
+Theorem IS_FINITE_CAT:
+     !p l. IS_FINITE(CAT(l,p)) = IS_FINITE p
+Proof
+   Induct_on `l`
+    THEN RW_TAC list_ss [IS_FINITE_def,CAT_def,IS_FINITE_CONS]
+QED
+
+Theorem ELEM_CAT_SEL:
+     !(w:'a path) i (w':'a path). ELEM (CAT (SEL w (0,i),w')) 0 = ELEM w 0
+Proof
+   Induct_on `i`
+    THEN RW_TAC simp_arith_ss
+          [SEL_ELEM,CAT_def,ELEM_def,HEAD_def,RESTN_def,REST_def,HEAD_CONS,
+           SEL_def,SEL_REC_def,FinitePSLPathTheory.SEL_def,FinitePSLPathTheory.SEL_REC_def,
+           CAT_def,DECIDE``SUC i + 1= SUC(i+1)``]
+QED
+
+Theorem SEL_REC_SPLIT:
+     !n. SEL_REC (m+k) n p =
+          APPEND (SEL_REC k n p) (SEL_REC m (n+k) p)
+Proof
+    Induct_on `k`
+     THEN RW_TAC list_ss [SEL_def,SEL_REC_def,arithmeticTheory.ONE]
+     THEN RW_TAC std_ss [DECIDE ``m + SUC k = SUC(m+k)``,
+                         SEL_REC_SUC,APPEND,arithmeticTheory.ADD]
+QED
+
+Theorem SEL_SPLIT:
+     !p k m n.
+      m <= k /\ k < n
+      ==>
+      (SEL p (m,n) = APPEND (SEL p (m,k)) (SEL p (k+1,n)))
+Proof
+   RW_TAC list_ss [SEL_def]
+    THEN IMP_RES_TAC
+          (DECIDE ``m <= k ==> k < n ==> (n + 1 - m = (n-k) + (k+1-m))``)
+    THEN IMP_RES_TAC(DECIDE ``m <= k ==> (k+ 1 = m + (k + 1 - m))``)
+    THEN ASSUM_LIST(fn thl => CONV_TAC(LHS_CONV(ONCE_REWRITE_CONV[el 2 thl])))
+    THEN ASSUM_LIST(fn thl => CONV_TAC(RHS_CONV(RAND_CONV(ONCE_REWRITE_CONV[el 1 thl]))))
+    THEN REWRITE_TAC[SEL_REC_SPLIT]
+QED
+
+Theorem SEL_ELEM:
+     !p m. SEL p (m,m) = [ELEM p m]
+Proof
+   Induct_on `m`
+    THEN RW_TAC simp_arith_ss [SEL_def,SEL_REC_def,ELEM_def,
+                               RESTN_def, SEL_REC_SUC]
+QED
+
+Theorem SEL_APPEND_SINGLETON_IMP:
+     j > i
+     ==>
+     (SEL p (i,j) = APPEND w [l]) ==> (SEL p (i,j-1) = w) /\ (ELEM p j = l)
+Proof
+   REPEAT DISCH_TAC
+    THEN IMP_RES_TAC(DECIDE ``j:num > i:num ==> (i <= (j-1) /\ (j-1) < j)``)
+    THEN IMP_RES_TAC(DECIDE``j:num > i:num ==> (j - 1 + 1 = j)``)
+    THEN IMP_RES_TAC(ISPEC ``p :'a path`` SEL_SPLIT)
+    THEN POP_ASSUM(ASSUME_TAC o SPEC_ALL)
+    THEN ASSUM_LIST(fn thl => ASSUME_TAC(TRANS (GSYM(el 5 thl)) (el 1 thl)))
+    THEN ASSUM_LIST(fn thl => ASSUME_TAC(SIMP_RULE std_ss [SEL_ELEM,el 3 thl] (el 1 thl)))
+    THEN POP_ASSUM(ASSUME_TAC o SIMP_RULE std_ss [APPEND_LAST_CANCEL])
+    THEN RW_TAC std_ss []
+QED
+
+Theorem SEL_APPEND_SINGLETON:
+     j > i
+     ==>
+     ((SEL p (i,j) = APPEND w [l])
+      =
+      (SEL p (i,j-1) = w) /\ (ELEM p j = l))
+Proof
+   REPEAT STRIP_TAC
+    THEN EQ_TAC
+    THEN ZAP_TAC std_ss [SEL_APPEND_SINGLETON_IMP]
+    THEN IMP_RES_TAC(DECIDE ``j:num > i:num ==> i <= j - 1 /\ j - 1 < j``)
+    THEN IMP_RES_TAC
+          (ISPECL [``p :'a path``,``j:num-1``,``i:num``,``j:num``] SEL_SPLIT)
+    THEN POP_ASSUM(ASSUME_TAC o SPEC_ALL)
+    THEN IMP_RES_TAC(DECIDE``j:num > i:num ==> (j - 1 + 1 = j)``)
+    THEN ASSUM_LIST(fn thl => ASSUME_TAC(SIMP_RULE std_ss [SEL_ELEM,el 1 thl] (el 2 thl)))
+    THEN ZAP_TAC arith_ss [APPEND_LAST_CANCEL,SEL_ELEM]
+QED
+
+Theorem LENGTH_SEL_REC:
+     !m n p. LENGTH(SEL_REC m n p) = m
+Proof
+   Induct_on `m`THEN Induct_on `n`
+    THEN RW_TAC list_ss [SEL_REC_def]
+QED
+
+Theorem LENGTH_SEL:
+     !m n p. LENGTH(SEL p (m,n)) = n-m+1
+Proof
+   RW_TAC arith_ss [SEL_def,SEL_REC_def,LENGTH_SEL_REC]
+QED
+
+Theorem HD_SEL:
+     !i j p. i <= j ==> (HD(SEL p (i,j)) = ELEM p i)
+Proof
+   Induct
+    THEN RW_TAC list_ss
+          [SEL_def,SEL_REC_def,GSYM arithmeticTheory.ADD1,
+           ELEM_def,RESTN_def]
+    THEN IMP_RES_TAC(DECIDE ``SUC i <= j ==> ((SUC (j - SUC i)) = (j-i))``)
+    THEN RW_TAC arith_ss []
+    THEN ASSUM_LIST
+          (fn thl =>
+           ASSUME_TAC
+            (GSYM
+             (Q.GEN `p`
+              (SIMP_RULE arith_ss thl (Q.SPECL [`p`,`i`,`j-1`] SEL_def)))))
+    THEN RW_TAC arith_ss [ELEM_def]
+QED
+
+Theorem HD_SEL0:
+     HD(SEL p (0,i)) = HEAD p
+Proof
+   RW_TAC list_ss [SEL_def,SEL_REC_def,GSYM arithmeticTheory.ADD1]
+QED
+
+Theorem TL_SEL_SUC:
+     !i j p. i <= j ==> (TL(SEL p (i,SUC j)) = SEL (REST p) (i,j))
+Proof
+   Induct
+    THEN RW_TAC list_ss
+          [SEL_def,SEL_REC_def,GSYM arithmeticTheory.ADD1,
+           ELEM_def,RESTN_def]
+    THEN IMP_RES_TAC(DECIDE ``SUC i:num <= j:num ==> ((SUC (j - SUC i)) = (j-i))``)
+    THEN RW_TAC arith_ss []
+    THEN ASSUM_LIST
+          (fn thl =>
+           ASSUME_TAC
+            (GSYM
+             (Q.GEN `p`
+              (SIMP_RULE arith_ss thl (Q.SPECL [`p`,`i`,`j`] SEL_def)))))
+    THEN IMP_RES_TAC(DECIDE ``SUC i:num <= j:num ==> (SUC (j - i) = j + 1 - i)``)
+    THEN RW_TAC arith_ss []
+    THEN IMP_RES_TAC(DECIDE ``SUC i:num <= j:num ==> i <= j-1``)
+    THEN RES_TAC
+    THEN IMP_RES_TAC(DECIDE ``SUC i:num <= j:num ==> (SUC(j-1)=j)``)
+    THEN ASSUM_LIST
+          (fn thl => ASSUME_TAC(SIMP_RULE std_ss [el 1 thl] (el 2 thl)))
+    THEN RW_TAC arith_ss [SEL_def]
+QED
+
+Theorem TL_SEL:
+     !i j p. i < j ==> (TL(SEL p (i,j)) = SEL (REST p) (i,j-1))
+Proof
+   RW_TAC std_ss []
+    THEN IMP_RES_TAC(DECIDE ``i:num < j:num ==> i <= j-1``)
+    THEN IMP_RES_TAC TL_SEL_SUC
+    THEN IMP_RES_TAC(DECIDE ``i:num < j:num ==> (SUC(j-1)=j)``)
+    THEN ASSUM_LIST
+          (fn thl => ASSUME_TAC(SIMP_RULE std_ss [el 1 thl] (el 2 thl)))
+    THEN RW_TAC arith_ss []
+QED
+
+Theorem TL_SEL0:
+     TL(SEL p (0,SUC i)) = SEL (REST p) (0,i)
+Proof
+   RW_TAC list_ss [SEL_def,SEL_REC_def,GSYM arithmeticTheory.ADD1]
+QED
+
+val EL_SEL_LEMMA =
+ prove
+  (``!m i j p.
+      i <= j /\ m <= j-i ==> (EL m (SEL p (i,j)) = ELEM p (i+m))``,
+   Induct
+    THEN RW_TAC list_ss
+          [SEL_REC_def,ELEM_def,RESTN_def,EL,
+           HD_SEL,TL_SEL,RESTN_def,DECIDE``i + SUC m = SUC(i+m)``]);
+
+Theorem EL_SEL:
+     !i k j p.
+      i <= k ==> k <= j  ==> (EL (k-i) (SEL p (i,j)) = ELEM p k)
+Proof
+   RW_TAC arith_ss [EL_SEL_LEMMA]
+QED
+
+Theorem EL_SEL0:
+     !j i p. j <= i ==> (EL j (SEL p (0,i)) = ELEM p j)
+Proof
+   Induct
+    THEN RW_TAC list_ss [SEL_REC_def,ELEM_def,RESTN_def,HD_SEL0,EL]
+    THEN Induct_on `i`
+    THEN RW_TAC list_ss [SEL_REC_def,ELEM_def,RESTN_def,TL_SEL0,EL]
+QED
+
+Theorem SEL_REC_REST:
+     !p. SEL_REC m n (REST p) = SEL_REC m (SUC n) p
+Proof
+   Induct_on `m`
+    THEN RW_TAC arith_ss [SEL_REC_def]
+QED
+
+Theorem SEL_REC_RESTN:
+     !p. SEL_REC m n (RESTN p r) = SEL_REC m (n + r) p
+Proof
+   Induct_on `r`
+    THEN RW_TAC arith_ss [SEL_REC_def,RESTN_def,arithmeticTheory.ADD_CLAUSES]
+    THEN PROVE_TAC[SEL_REC_REST]
+QED
+
+Theorem SEL_RESTN:
+     !p. SEL (RESTN p r) (n,m) = SEL p (r + n, r + m)
+Proof
+   RW_TAC arith_ss [SEL_def,SEL_REC_RESTN]
+QED

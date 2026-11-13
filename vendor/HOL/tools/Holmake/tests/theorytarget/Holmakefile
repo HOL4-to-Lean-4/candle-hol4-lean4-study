@@ -1,0 +1,13 @@
+ifdef POLY
+HOLHEAP = $(HOLDIR)/bin/hol.state0
+endif
+
+theorytarget-selftest.log: selftest.exe
+	@$(tee ./$<, $@)
+
+selftest.exe: selftest.uo
+	$(HOLMOSMLC) -o $@ $<
+
+# selftest drives Holmake in subdir/ -- not visited by parallel_tests
+# INCLUDES.  List its .hol/ tree here so build cleanAll removes it.
+EXTRA_CLEANS = selftest.exe theorytarget-selftest.log subdir/.hol/

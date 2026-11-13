@@ -1,0 +1,412 @@
+(* ---------------------------------------------------------------------*)
+(* Enumerated datatypes. An enumerated type with k constructors is      *)
+(* represented by the natural numbers < k.                              *)
+(* ---------------------------------------------------------------------*)
+
+structure EnumType :> EnumType =
+struct
+
+open HolKernel boolLib Parse numLib EnumTypeContextTheory;
+
+type tyinfo = TypeBasePure.tyinfo;
+
+val ERR = mk_HOL_ERR "EnumType";
+val NUM = num;
+
+(* Fix the grammar used by this file *)
+val ambient_grammars = Parse.current_grammars();
+val SOME arithmetic_grammars = Parse.grammarDB {thyname="arithmetic"}
+val _ = Parse.temp_set_grammars arithmetic_grammars;
+val _ = ParseExtras.temp_loose_equality();
+
+fun enum_pred k =
+ let val n = mk_var("n",num)
+     val topnum = term_of_int k
+ in mk_abs(n,mk_less(n,topnum))
+ end;
+
+fun type_exists k =
+ let val n = mk_var("n",num)
+ in prove (mk_exists(n, mk_comb(enum_pred k, n)),
+           EXISTS_TAC zero_tm THEN REDUCE_TAC)
+ end
+
+fun num_values REP_ABS defs =
+ let val len = length defs
+     val top_numeral = term_of_int len
+     fun rep_of def =
+      let val n = rand(rhs(concl def))
+          val less_thm = EQT_ELIM (REDUCE_CONV (mk_less(n,top_numeral)))
+          val thm = EQ_MP (SPEC n REP_ABS) less_thm
+      in SUBS [SYM def] thm
+      end
+ in
+   map rep_of defs
+ end;
+
+(* ----------------------------------------------------------------------
+    Prove the datatype's cases theorem.  I.e.,
+       !a. (a = c1) \/ (a = c2) \/ ... (a = cn)
+   ---------------------------------------------------------------------- *)
+
+(* n_less_cases from EnumTypeContextTheory *)
+
+fun onestep thm = let
+  (* thm of form x < n, where n is a non-zero numeral *)
+  val (x,n) = dest_less (concl thm)
+  val thm0 = SPECL [n,x] n_less_cases
+  val thm1 = EQ_MP thm0 thm
+in
+  CONV_RULE numLib.REDUCE_CONV thm1
+end
+
+fun prove_cases_thm repthm eqns = let
+  (* repthm of form !a. ?n. (a = f n) /\ (n < x) *)
+  val (avar, spec_rep_t) = dest_forall (concl repthm)
+  val (nvar, rep_body_t) = dest_exists spec_rep_t
+  val ass_rep_body = ASSUME rep_body_t
+  val (aeq_thm, nlt_thm) = CONJ_PAIR ass_rep_body
+  (* aeq_thm is of the form |- a = f n *)
+  val repfn = rator (rand (concl aeq_thm))
+  fun prove_cases nlt_thm eqns = let
+    (* nlt_thm is of the form |- n < x     where x is non-zero *)
+    (* eqns are of the form   |- d = f m   for various d and decreasing m *)
+    (*                                     the first m is x - 1 *)
+    fun prove_aeq neq eqn = let
+      (* neq is of the form n = x *)
+      (* eqn is of the form d = f x *)
+      val fn_eq_fx = AP_TERM repfn neq
+    in
+      TRANS aeq_thm (TRANS fn_eq_fx (SYM eqn))
+    end
+    val ndisj_thm = onestep nlt_thm
+    val ndisj_t = concl ndisj_thm
+  in
+    if is_disj ndisj_t then let
+        (* recursive case *)
+        val (new_lt_t, eq_t) = dest_disj ndisj_t
+        val eq_thm = prove_aeq (ASSUME eq_t) (hd eqns)
+        val eq_t = concl eq_thm
+        val lt_thm = prove_cases (ASSUME new_lt_t) (tl eqns)
+        val lt_t = concl lt_thm
+      in
+        DISJ_CASES ndisj_thm (DISJ1 lt_thm eq_t) (DISJ2 lt_t eq_thm)
+      end
+    else
+      (* ndisjthm is |- n = 0   (base case) *)
+      prove_aeq ndisj_thm (hd eqns)
+  end
+in
+  REWRITE_RULE [GSYM DISJ_ASSOC]
+  (GEN avar (CHOOSE (nvar, SPEC avar repthm) (prove_cases nlt_thm eqns)))
+end
+
+(* ----------------------------------------------------------------------
+    Prove a datatype's induction theorem
+   ---------------------------------------------------------------------- *)
+
+fun prove_induction_thm cases_thm = let
+  val (avar, cases_body) = dest_forall (concl cases_thm)
+  val body_cases_thm = SPEC avar cases_thm
+  val Pvar = mk_var("P", type_of avar --> bool)
+  fun basecase eqthm = let
+    (* eqthm of form |- a = c *)
+    val ass_P = ASSUME (mk_comb(Pvar, rand (concl eqthm)))
+  in
+    EQ_MP (SYM (AP_TERM Pvar eqthm)) ass_P
+  end
+  fun recurse thm = let
+    val (d1, d2) = dest_disj (concl thm)
+  in
+    DISJ_CASES thm (basecase (ASSUME d1)) (recurse (ASSUME d2))
+  end handle HOL_ERR _ => basecase thm
+  val base_thm = GEN avar (recurse body_cases_thm)
+  val hyp_thm = ASSUME (list_mk_conj (hyp base_thm))
+  fun foldfn (ass,th) = PROVE_HYP ass th
+in
+  GEN Pvar (DISCH_ALL (foldl foldfn base_thm (CONJUNCTS hyp_thm)))
+end
+
+(* ----------------------------------------------------------------------
+    Make a size definition for an enumerated type (everywhere zero)
+   ---------------------------------------------------------------------- *)
+
+fun mk_size_definition ty =
+ let val tyname = #1 (dest_type ty)
+     val cname = tyname^"_size"
+     val var_t = mk_var(cname, ty --> NUM)
+     val avar = mk_var("x", ty)
+     val def = new_definition(cname^"_def",
+                              mk_eq(mk_comb(var_t, avar), zero_tm))
+ in
+   SOME (rator (lhs (#2 (strip_forall (concl def)))), TypeBasePure.ORIG def)
+ end
+
+(* ----------------------------------------------------------------------
+    Prove distinctness theorem for an enumerated type
+      (only done if there are not too many possibilities as there will
+       be n-squared many of these)
+   ---------------------------------------------------------------------- *)
+
+fun gen_triangle l = let
+  (* generate the upper triangle of the cross product of the list with *)
+  (* itself.  Leave out the diagonal *)
+  fun gen_row i [] acc = acc
+    | gen_row i (h::t) acc = gen_row i t ((i,h)::acc)
+  fun doitall [] acc = acc
+    | doitall (h::t) acc = doitall t (gen_row h t acc)
+in
+  List.rev (doitall l [])
+end
+
+fun prove_distinctness_thm simpls constrs =
+ let val upper_triangle = gen_triangle constrs
+     fun prove_inequality (c1, c2) =
+        (REWRITE_CONV simpls THENC numLib.REDUCE_CONV) (mk_eq(c1,c2))
+ in
+   if null upper_triangle then NONE else
+   SOME (LIST_CONJ (map (EQF_ELIM o prove_inequality) upper_triangle))
+ end
+
+(* ----------------------------------------------------------------------
+    Prove initiality theorem for type
+   ---------------------------------------------------------------------- *)
+
+fun alphavar n = mk_var("x"^Int.toString n, alpha)
+
+local
+  val n = mk_var("n", NUM)
+in
+fun prove_initiality_thm rep ty constrs simpls = let
+  val ncases = length constrs
+
+  fun generate_ntree lo hi =
+      (* invariant: lo <= hi *)
+      if lo = hi then alphavar lo
+      else let
+          val midpoint = (lo + hi) div 2
+          val ltree = generate_ntree lo midpoint
+          val rtree = generate_ntree (midpoint + 1) hi
+        in
+          mk_cond (mk_leq(n, term_of_int midpoint), ltree, rtree)
+        end
+
+  val witness = let
+    val x = mk_var("x", ty)
+    val body = generate_ntree 0 (ncases - 1)
+  in
+    mk_abs(x, mk_let(mk_abs(n, body), mk_comb(rep, x)))
+  end
+
+  fun prove_clause (n, constr) =
+      EQT_ELIM
+        ((LAND_CONV BETA_CONV THENC REWRITE_CONV simpls THENC
+                    numLib.REDUCE_CONV)
+           (mk_eq(mk_comb(witness, constr), alphavar n)))
+
+  fun gen_clauses (_, []) = []
+    | gen_clauses (n, (h::t)) = prove_clause (n, h) :: gen_clauses (n + 1, t)
+
+  val clauses_thm = LIST_CONJ (gen_clauses (0, constrs))
+  val f = mk_var("f", ty --> alpha)
+  val clauses = subst [witness |-> f] (concl clauses_thm)
+
+  val exists_thm = EXISTS(mk_exists(f, clauses), witness) clauses_thm
+
+  fun gen_it n th = if n < 0 then th
+                    else gen_it (n - 1) (GEN (alphavar n) th)
+in
+  gen_it (ncases - 1) exists_thm
+end;
+
+end (* local *)
+
+
+(*---------------------------------------------------------------------------*)
+(* The main entrypoints                                                      *)
+(*---------------------------------------------------------------------------*)
+
+fun define_enum_type(name,clist,ABS,REP) =
+ let val tydef = new_type_definition(name, type_exists (length clist))
+     val bij = define_new_type_bijections
+                  {ABS=ABS, REP=REP,name=name^"_BIJ", tyax=tydef}
+     val ABS_REP  = save_thm(ABS^"_"^REP, CONJUNCT1 bij)
+     val REP_ABS  = save_thm(REP^"_"^ABS, BETA_RULE (CONJUNCT2 bij))
+     val ABS_11   = save_thm(ABS^"_11",   BETA_RULE (prove_abs_fn_one_one bij))
+     val REP_11   = save_thm(REP^"_11",   BETA_RULE (prove_rep_fn_one_one bij))
+     val ABS_ONTO = save_thm(ABS^"_ONTO", BETA_RULE (prove_abs_fn_onto bij))
+     val REP_ONTO = save_thm(REP^"_ONTO", BETA_RULE (prove_rep_fn_onto bij))
+     val TYPE     = type_of(fst(dest_forall(concl REP_11)))
+     val ABSconst = mk_const(ABS, NUM --> TYPE)
+     val REPconst = mk_const(REP, TYPE --> NUM)
+     val nclist   = enumerate 0 clist
+     fun def(n,s) = (temp_binding (s ^ "_def"),
+                     mk_eq(mk_var(s,TYPE),
+                           mk_comb(ABSconst,term_of_int n)))
+     val defs     = map (Definition.new_definition o def) nclist
+     val constrs  = map (lhs o concl) defs
+ in
+    {TYPE     = TYPE,
+     constrs  = constrs,
+     defs     = defs,
+     ABSconst = ABSconst,
+     REPconst = REPconst,
+     ABS_REP  = ABS_REP,
+     REP_ABS  = REP_ABS,
+     ABS_11   = ABS_11,
+     REP_11   = REP_11,
+     ABS_ONTO = ABS_ONTO,
+     REP_ONTO = REP_ONTO
+    }
+ end;
+
+val (COND_T, COND_F) = CONJ_PAIR (SPEC_ALL COND_CLAUSES)
+fun define_case (type_name, rep_t, rep_th, constrs) = let
+  val sz = length constrs
+  val m = mk_var("m", numSyntax.num)
+  fun V n = mk_var("v" ^ Int.toString n, alpha)
+  open numSyntax
+  fun mk_decision_tree lo hi =
+      if lo < hi then
+        if lo + 1 = hi then
+          mk_cond(mk_eq(m, mk_numeral (Arbnum.fromInt lo)),
+                  V lo, V hi)
+        else let
+            val mid = (lo + hi) div 2
+          in
+            mk_cond(mk_less(m, mk_numeral (Arbnum.fromInt mid)),
+                    mk_decision_tree lo (mid - 1),
+                    mk_decision_tree mid hi)
+          end
+      else if lo = hi then V lo
+      else raise Fail "can't happen 101"
+  val (ty, _) = dom_rng (type_of rep_t)
+  val case_const_name = case_constant_name{type_name = type_name}
+  val case_t = mk_var(case_const_name,
+                      ty --> list_mk_fun(List.tabulate(sz, K alpha), alpha))
+  val args = List.tabulate(sz, (fn n => mk_var("v" ^ Int.toString n,
+                                               alpha)))
+  val e_t = mk_var("x", ty)
+  val def_t = mk_eq(list_mk_comb(case_t, e_t::args),
+                    mk_comb(mk_abs(m, mk_decision_tree 0 (sz - 1)),
+                            mk_comb(rep_t, e_t)))
+  val def_th = new_definition(case_const_name, def_t)
+  val bare_def_th = SPEC_ALL def_th
+  fun mk_consequence e = let
+    val th = INST [e_t |-> e] bare_def_th
+    val th = CONV_RULE (RAND_CONV (RAND_CONV (REWRITE_CONV [rep_th]) THENC
+                                   BETA_CONV)) th
+    fun follow_conds t =
+        if is_cond t then
+          (RATOR_CONV (RATOR_CONV (RAND_CONV (numLib.REDUCE_CONV))) THENC
+           (REWR_CONV COND_T ORELSEC REWR_CONV COND_F) THENC follow_conds) t
+        else ALL_CONV t
+  in
+    GENL args (CONV_RULE (RAND_CONV follow_conds) th)
+  end
+in
+  save_thm(case_constant_defn_name {type_name = type_name},
+           LIST_CONJ (map mk_consequence constrs))
+end
+
+fun enum_eq_CONV repth =
+  let
+    val r_rwts = repth |> CONJUNCTS
+    val r_t = r_rwts |> hd |> concl |> lhs |> strip_comb |> #1
+    val (d_ty, _) = dom_rng (type_of r_t)
+    fun cnv t =
+      let
+        val reqn = AP_TERM r_t (ASSUME t)
+        val (r1, r2) = dest_eq (concl reqn)
+        val rth = FIRST_CONV (map REWR_CONV r_rwts)
+        val r1th = rth r1 and r2th = rth r2
+        val num_eqn = TRANS (SYM r1th) (TRANS reqn r2th)
+        val falsity = CONV_RULE numLib.REDUCE_CONV num_eqn
+      in
+        DISCH_ALL falsity |> EQ_MP (SPEC t boolTheory.IMP_F_EQ_F)
+      end
+    fun finalconv _ _ t =
+      let
+        (* keying will have already ensured that t is an equality between two
+           values in the enumerated type *)
+        val (l, r) = boolSyntax.dest_eq t
+      in
+        if Term.is_const l andalso Term.is_const r andalso
+           type_of l = d_ty
+        then cnv t
+        else raise ERR "enum_eq_CONV"
+                   "Equality not between constants of right type"
+      end
+  in
+    {name = #1 (dest_type d_ty) ^ "_enum_neq_conv",
+     key = SOME ([], mk_eq(mk_var("x", d_ty), mk_var("y", d_ty))),
+     trace = 2,
+     conv = finalconv} : simpfrag.convdata
+  end
+
+val _ = simpfrag.register_simpfrag_conv {name = "EnumType", code = enum_eq_CONV}
+
+fun enum_type_to_tyinfo (ty, clist) = let
+  val abs = "num2" ^ ty
+  val rep = ty ^ "2num"
+  val (result as {constrs,TYPE,...}) = define_enum_type (ty,clist,abs,rep)
+  val abs_name = abs ^ "_thm"
+  val abs_thm = save_thm (abs_name, LIST_CONJ (map SYM (#defs result)))
+  val rep_name = rep ^ "_thm"
+  val rep_thm = save_thm (rep_name,
+                   LIST_CONJ (num_values (#REP_ABS result) (#defs result)))
+  val eq_elim_name = ty ^ "_EQ_" ^ ty
+  val eq_elim_th = save_thm (eq_elim_name, GSYM (#REP_11 result))
+  val simpls = [rep_thm, eq_elim_th]
+  val nchotomy = prove_cases_thm (#ABS_ONTO result) (List.rev (#defs result))
+  val induction = prove_induction_thm nchotomy
+  val size = mk_size_definition TYPE
+  val distinct = if length constrs > 15 then NONE
+                 else prove_distinctness_thm simpls constrs
+  val initiality = prove_initiality_thm (#REPconst result) TYPE constrs simpls
+  val rep_t = rator (lhs (hd (strip_conj (concl rep_thm))))
+  val case_def = define_case (ty, rep_t, rep_thm, constrs)
+  val case_cong = Prim_rec.case_cong_thm nchotomy case_def
+  fun add_rewrs l tyi =
+    let
+      val {convs, rewrs} = TypeBasePure.simpls_of tyi
+    in
+      TypeBasePure.put_simpls {convs=convs, rewrs = rewrs @ l} tyi
+    end
+
+  val tyinfo0 =
+    TypeBasePure.mk_datatype_info
+       {ax = TypeBasePure.ORIG initiality,
+        induction = TypeBasePure.ORIG induction,
+        case_def = case_def,
+        case_cong = case_cong,
+        case_eq =
+          Prim_rec.prove_case_eq_thm{case_def = case_def, nchotomy = nchotomy},
+        case_elim =
+          Prim_rec.prove_case_ho_elim_thm{case_def = case_def, nchotomy = nchotomy},
+        nchotomy = nchotomy,
+        size = size,
+        encode = NONE,
+        lift = NONE,
+        one_one = NONE,
+        fields = [],
+        accessors = [],
+        updates = [],
+        recognizers = [],
+        destructors = [],
+        distinct = distinct }
+       |> add_rewrs [rep_thm, abs_thm]
+  open ThyDataSexp
+in
+    List.app (fn s => Theory.delete_binding (s ^ "_def")) clist
+  ; Theory.add_ML_dependency "EnumType"
+  ; if isSome distinct then tyinfo0
+    else tyinfo0
+           |> TypeBasePure.add_extra
+               [List [Sym simpfrag.simpfrag_conv_tag,
+                      String "EnumType", Thm rep_thm]]
+end
+
+val _ = Parse.temp_set_grammars ambient_grammars
+
+end (* struct *)

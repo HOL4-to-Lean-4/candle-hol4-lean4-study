@@ -1,0 +1,16 @@
+# Build outputs. Scoped so that vendor/ sources (e.g. HOL's src/postkernel/Theory.sml)
+# are never ignored; vendor/ trees keep their own upstream .gitignore files.
+/_build/
+/logs/
+/package/**/.hol/
+/package/**/.HOLMK/
+/package/**/*.uo
+/package/**/*.ui
+/package/**/*Theory.sml
+/package/**/*Theory.sig
+/package/**/*Theory.dat
+/package/**/*.dat
+/package/**/heap
+/lean/**/.lake/
+**/.lake/
+__pycache__/
