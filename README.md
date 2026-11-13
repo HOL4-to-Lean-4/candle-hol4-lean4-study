@@ -28,7 +28,10 @@ Aristotle runs used. Revisit when Aristotle's Lean support returns and states a 
 ## Layout
 
 - `package/`: reduced HOL4 package (closure of `proves_sound`) with CakeML's LICENSE.
+  How it was reduced: `REDUCTION.md`.
 - `manifest/manifest.json`: every definition, datatype, inductive relation and theorem in the closure.
+- `manifest/files.tsv`: per-file upstream path, SHA-256 and modification reason.
+- `tools/reduce/`: the reduction scripts and their records.
 - `vendor/HOL`, `vendor/polyml`: unmodified upstream source trees at the pins.
   Per-file SHA-256 lists are in `vendor/HOL.sha256` and `vendor/polyml.sha256`.
 - `docker/Dockerfile`: builds Poly/ML and HOL4 from `vendor/` (no network clone).
@@ -54,6 +57,17 @@ scripts\build.ps1 -Mode wsl   # WSL
 ```
 
 Start and end times of each stage are written to `logs/` (git-ignored).
+
+To rebuild only the package against an already built HOL4 (Linux, WSL or Docker),
+set `HOLDIR` to the built vendor HOL and run:
+
+```sh
+cd package/candle/standard/semantics
+CAKEMLDIR=<repo>/package $HOLDIR/bin/Holmake holSoundnessTheory
+```
+
+`<repo>` is the absolute path of this repository. On 4 cores in the cloud this took
+about 1 min 40 s.
 
 ## Cost ledger
 

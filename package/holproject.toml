@@ -1,0 +1,10 @@
+name = "candle-package"
+
+holpath = "CAKEMLDIR"
+
+external_includes = [
+  "$(HOLDIR)/examples/pl-semantics/lprefix_lub",
+  "$(HOLDIR)/examples/machine-code/hoare-triple",
+  "$(HOLDIR)/examples/formal-languages/context-free",
+  "$(HOLDIR)/examples/algorithms",
+]

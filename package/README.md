@@ -1,7 +1,13 @@
 # package/
 
 Reduced HOL4 package for CakeML's `candle/standard/semantics/holSoundnessScript.sml`,
-theorem `proves_sound`: the scripts reduced to the kernel-recorded dependency closure
-of that theorem. Not yet added. The reduction runs on a Linux machine with the pinned
-HOL4 build; its output (scripts, Holmakefile, CakeML LICENSE) lands here and is
-recorded file by file in ../PROVENANCE.md.
+theorem `proves_sound`: the 10 theory scripts reduced to what the HOL4 build of that
+theorem needs, with CakeML's `LICENSE`. Method and counts: ../REDUCTION.md. Per-file
+upstream path, SHA-256 and modification reason: ../manifest/files.tsv.
+
+Rebuild (Linux, WSL or Docker), with HOLDIR set to the built vendor HOL:
+
+```sh
+cd candle/standard/semantics
+CAKEMLDIR=<repo>/package $HOLDIR/bin/Holmake holSoundnessTheory
+```

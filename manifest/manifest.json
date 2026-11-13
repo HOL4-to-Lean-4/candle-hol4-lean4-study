@@ -1,0 +1,7119 @@
+{
+ "main_theorem": "holSoundness.proves_sound",
+ "files": [
+  {
+   "script": "basis/pure/mllistScript.sml",
+   "theory": "mllist",
+   "lines": 453
+  },
+  {
+   "script": "basis/pure/mlstringScript.sml",
+   "theory": "mlstring",
+   "lines": 1096
+  },
+  {
+   "script": "candle/set-theory/setSpecScript.sml",
+   "theory": "setSpec",
+   "lines": 395
+  },
+  {
+   "script": "candle/standard/semantics/holSemanticsExtraScript.sml",
+   "theory": "holSemanticsExtra",
+   "lines": 455
+  },
+  {
+   "script": "candle/standard/semantics/holSemanticsScript.sml",
+   "theory": "holSemantics",
+   "lines": 248
+  },
+  {
+   "script": "candle/standard/semantics/holSoundnessScript.sml",
+   "theory": "holSoundness",
+   "lines": 329
+  },
+  {
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "theory": "holSyntaxExtra",
+   "lines": 3207
+  },
+  {
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "theory": "holSyntax",
+   "lines": 673
+  },
+  {
+   "script": "candle/syntax-lib/holSyntaxLibScript.sml",
+   "theory": "holSyntaxLib",
+   "lines": 279
+  },
+  {
+   "script": "misc/miscScript.sml",
+   "theory": "misc",
+   "lines": 1631
+  }
+ ],
+ "counts": {
+  "theorem": 517,
+  "definition": 165,
+  "datatype": 6,
+  "overload": 77,
+  "type_abbrev": 12,
+  "inductive": 8
+ },
+ "total_lines": 8766,
+ "declarations": [
+  {
+   "kind": "theorem",
+   "name": "merge_tail_MEM",
+   "theory": "mllist",
+   "script": "basis/pure/mllistScript.sml",
+   "line": 11,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "mergesortN_tail_MEM",
+   "theory": "mllist",
+   "script": "basis/pure/mllistScript.sml",
+   "line": 26,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "mergesort_tail_MEM",
+   "theory": "mllist",
+   "script": "basis/pure/mllistScript.sml",
+   "line": 54,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "merge_tail_PERM",
+   "theory": "mllist",
+   "script": "basis/pure/mllistScript.sml",
+   "line": 60,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "sort2_tail_PERM",
+   "theory": "mllist",
+   "script": "basis/pure/mllistScript.sml",
+   "line": 96,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "sort3_tail_PERM",
+   "theory": "mllist",
+   "script": "basis/pure/mllistScript.sml",
+   "line": 104,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "mergesortN_tail_PERM",
+   "theory": "mllist",
+   "script": "basis/pure/mllistScript.sml",
+   "line": 140,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "sort_def",
+   "theory": "mllist",
+   "script": "basis/pure/mllistScript.sml",
+   "line": 243,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "sort_MEM",
+   "theory": "mllist",
+   "script": "basis/pure/mllistScript.sml",
+   "line": 247,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "sort_PERM",
+   "theory": "mllist",
+   "script": "basis/pure/mllistScript.sml",
+   "line": 253,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "sort_LENGTH",
+   "theory": "mllist",
+   "script": "basis/pure/mllistScript.sml",
+   "line": 263,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "sort_set",
+   "theory": "mllist",
+   "script": "basis/pure/mllistScript.sml",
+   "line": 269,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "mapi_def",
+   "theory": "mllist",
+   "script": "basis/pure/mllistScript.sml",
+   "line": 275,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "MAPI_thm_gen",
+   "theory": "mllist",
+   "script": "basis/pure/mllistScript.sml",
+   "line": 280,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "MAPI_thm",
+   "theory": "mllist",
+   "script": "basis/pure/mllistScript.sml",
+   "line": 291,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "index_find_thm",
+   "theory": "mllist",
+   "script": "basis/pure/mllistScript.sml",
+   "line": 298,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "partition_aux_def",
+   "theory": "mllist",
+   "script": "basis/pure/mllistScript.sml",
+   "line": 304,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "partition_def",
+   "theory": "mllist",
+   "script": "basis/pure/mllistScript.sml",
+   "line": 311,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "partition_aux_thm",
+   "theory": "mllist",
+   "script": "basis/pure/mllistScript.sml",
+   "line": 315,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "partition_pos_thm",
+   "theory": "mllist",
+   "script": "basis/pure/mllistScript.sml",
+   "line": 325,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "partition_neg_thm",
+   "theory": "mllist",
+   "script": "basis/pure/mllistScript.sml",
+   "line": 331,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "foldl_def",
+   "theory": "mllist",
+   "script": "basis/pure/mllistScript.sml",
+   "line": 337,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "foldli_aux_def",
+   "theory": "mllist",
+   "script": "basis/pure/mllistScript.sml",
+   "line": 342,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "foldli_aux_thm",
+   "theory": "mllist",
+   "script": "basis/pure/mllistScript.sml",
+   "line": 347,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "foldl_intro",
+   "theory": "mllist",
+   "script": "basis/pure/mllistScript.sml",
+   "line": 356,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "collate_def",
+   "theory": "mllist",
+   "script": "basis/pure/mllistScript.sml",
+   "line": 362,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "collate_equal_thm",
+   "theory": "mllist",
+   "script": "basis/pure/mllistScript.sml",
+   "line": 372,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "collate_short_thm",
+   "theory": "mllist",
+   "script": "basis/pure/mllistScript.sml",
+   "line": 378,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "collate_long_thm",
+   "theory": "mllist",
+   "script": "basis/pure/mllistScript.sml",
+   "line": 386,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "LENGTH_AUX_def",
+   "theory": "mllist",
+   "script": "basis/pure/mllistScript.sml",
+   "line": 394,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "LENGTH_AUX_THM",
+   "theory": "mllist",
+   "script": "basis/pure/mllistScript.sml",
+   "line": 399,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "map_rev'_def",
+   "theory": "mllist",
+   "script": "basis/pure/mllistScript.sml",
+   "line": 404,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "map_rev'_lemma",
+   "theory": "mllist",
+   "script": "basis/pure/mllistScript.sml",
+   "line": 409,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "filter_rev'_def",
+   "theory": "mllist",
+   "script": "basis/pure/mllistScript.sml",
+   "line": 420,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "filter_rev'_lemma",
+   "theory": "mllist",
+   "script": "basis/pure/mllistScript.sml",
+   "line": 425,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "flat_rev'_def",
+   "theory": "mllist",
+   "script": "basis/pure/mllistScript.sml",
+   "line": 438,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "flat_rev'_lemma",
+   "theory": "mllist",
+   "script": "basis/pure/mllistScript.sml",
+   "line": 443,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "datatype",
+   "name": "mlstring",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 20
+  },
+  {
+   "kind": "overload",
+   "name": "strlit",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 26,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "strlen_def",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 28,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "strsub_def",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 32,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "substring_def",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 36,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "concat_def",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 42,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "concat_nil",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 46,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "explode_aux_def",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 52,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "explode_aux_thm",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 58,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "explode_def",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 68,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "explode_thm",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 72,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "explode_implode",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 78,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "implode_explode",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 84,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "explode_11",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 90,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "explode_BIJ",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 96,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "LENGTH_explode",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 105,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "concat_thm",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 111,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "strlen_implode",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 119,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "strlen_substring",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 125,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "extract_def",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 133,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "strsub_substring_0_thm",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 142,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "substring_full",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 149,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "substring_too_long",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 155,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "strcat_def",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 162,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "overload",
+   "name": "\"^\"",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 166,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "concat_cons",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 168,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "strcat_thm",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 174,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "strcat_assoc",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 181,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "strcat_o",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 188,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "strcat_nil",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 194,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "mlstring_common_prefix",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 201,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "mlstring_common_char_prefix",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 207,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "mlstring_common_suffix",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 214,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "concat_append",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 220,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "implode_STRCAT",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 226,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "explode_strcat",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 233,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "strlen_strcat",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 239,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "chr_to_str_def",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 245,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "overload",
+   "name": "toString",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 249,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "explode_toString",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 251,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "strlen_toString",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 257,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "translate_aux_def",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 263,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "translate_aux_thm",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 268,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "splitl_aux_def",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 276,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "splitl_aux_SPLITP",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 287,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "tokens_aux_def",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 329,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "tokens_def",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 344,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "tokens_aux_filter",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 349,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "tokens_filter",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 358,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "TOKENS_eq_tokens_aux",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 364,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "TOKENS_eq_tokens",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 431,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "TOKENS_eq_tokens_sym",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 445,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "tokens_append",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 452,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "tokens_alt_aux_def",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 464,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "substring_1_strsub",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 482,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "substring_0",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 491,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "substring_add",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 498,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "tokens_alt_tokens_alt_aux",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 511,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "tokens_alt",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 570,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "fields_aux_def",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 579,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "fields_def",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 589,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "fields_aux_filter",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 595,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "fields_filter",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 603,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "fields_aux_length",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 609,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "fields_length",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 618,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "fields_alt_aux_def",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 624,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "fields_alt_fields_alt_aux",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 639,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "fields_alt",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 662,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "isStringThere_aux_def",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 672,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "isprefix_thm_aux",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 693,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "isStringThere_SEG",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 710,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "strlit_STRCAT",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 721,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "compare_aux_def",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 727,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "compare_def",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 738,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "mlstring_lt_def",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 746,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "overload",
+   "name": "\"<\"",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 750,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "overload",
+   "name": "\"<",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 751,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "overload",
+   "name": "\">\"",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 752,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "overload",
+   "name": "\">",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 753,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "overload",
+   "name": "flip_ord",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 756,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "compare_aux_spec",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 758,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "compare_aux_refl",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 784,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "compare_aux_equal",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 795,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "compare_aux_sym",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 809,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "string_lt_take_mono",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 840,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "string_lt_remove_take",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 851,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "string_prefix_le",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 861,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "take_prefix",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 870,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "mlstring_lt_inv_image",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 879,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "transitive_mlstring_lt",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 903,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "irreflexive_mlstring_lt",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 911,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "trichotomous_mlstring_lt",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 919,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "StrongLinearOrder_mlstring_lt",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 928,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "collate_aux_def",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 935,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "collate_def",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 943,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "collate_aux_less_thm",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 953,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "collate_aux_equal_thm",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 964,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "collate_aux_greater_thm",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 976,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "collate_thm",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 987,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "ALL_DISTINCT_MAP_implode",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 993,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "ALL_DISTINCT_MAP_explode",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 1001,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "datatype",
+   "name": "app_list_ann",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 1012
+  },
+  {
+   "kind": "definition",
+   "name": "sum_sizes_def",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 1017,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "overload",
+   "name": "size_limit",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 1022,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "make_app_list_ann_def",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 1024,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "shrink_def",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 1043,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "str_app_list_opt_def",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 1049,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "str_app_list_opt_test",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 1055,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "str_app_list_opt_thm",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 1063,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "concat_sing",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 1080,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "char_to_word8_def",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 1086,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "word8_to_char_def",
+   "theory": "mlstring",
+   "script": "basis/pure/mlstringScript.sml",
+   "line": 1090,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "overload",
+   "name": "\"<:\"",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 23,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "extensional_def",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 25,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "is_separation_def",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 29,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "is_power_def",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 33,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "is_union_def",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 37,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "is_upair_def",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 41,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "is_set_theory_def",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 45,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "sub_def",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 54,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "power_def",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 58,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "union_def",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 62,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "upair_def",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 66,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "is_extensional",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 70,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "is_separation_sub",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 76,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "is_power_power",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 82,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "is_union_union",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 88,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "is_upair_upair",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 94,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "overload",
+   "name": "suchthat",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 101,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "overload",
+   "name": "Pow",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 102,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "overload",
+   "name": "\"+\"",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 103,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "mem_sub",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 105,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "mem_power",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 111,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "mem_union",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 118,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "mem_upair",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 125,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "empty_def",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 131,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "overload",
+   "name": "\"\u2205\"",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 135,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "mem_empty",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 137,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "unit_def",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 144,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "overload",
+   "name": "Unit",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 148,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "mem_unit",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 150,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "unit_inj",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 158,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "one_def",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 168,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "overload",
+   "name": "One",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 172,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "mem_one",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 174,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "two_def",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 181,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "overload",
+   "name": "Two",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 185,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "mem_two",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 187,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "pair_def",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 194,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "overload",
+   "name": "\",\"",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 198,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "upair_inj",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 200,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "unit_eq_upair",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 210,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "pair_inj",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 220,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "binary_union_def",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 229,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "overload",
+   "name": "UNION",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 233,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "mem_binary_union",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 235,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "product_def",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 243,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "overload",
+   "name": "CROSS",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 249,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "mem_product",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 251,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "relspace_def",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 262,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "overload",
+   "name": "Relspace",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 266,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "funspace_def",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 268,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "overload",
+   "name": "Funspace",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 274,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "apply_def",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 276,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "overload",
+   "name": "\"'\"",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 281,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "overload",
+   "name": "boolset",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 283,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "true_def",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 285,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "false_def",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 289,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "overload",
+   "name": "True",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 293,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "overload",
+   "name": "False",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 294,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "true_neq_false",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 296,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "mem_boolset",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 306,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "boolean_def",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 313,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "overload",
+   "name": "Boolean",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 317,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "boolean_in_boolset",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 319,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "boolean_eq_true",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 327,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "overload",
+   "name": "Holds",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 333,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "abstract_def",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 335,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "overload",
+   "name": "Abstract",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 339,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "apply_abstract",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 341,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "apply_in_rng",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 351,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "abstract_in_funspace",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 362,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "abstract_eq",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 371,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "overload",
+   "name": "M",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 390,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "overload",
+   "name": "tuple",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 392,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "overload",
+   "name": "bigcross",
+   "theory": "setSpec",
+   "script": "candle/set-theory/setSpecScript.sml",
+   "line": 394,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "is_std_interpretation_is_type",
+   "theory": "holSemanticsExtra",
+   "script": "candle/standard/semantics/holSemanticsExtraScript.sml",
+   "line": 17,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "typesem_inhabited",
+   "theory": "holSemanticsExtra",
+   "script": "candle/standard/semantics/holSemanticsExtraScript.sml",
+   "line": 25,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "typesem_Fun",
+   "theory": "holSemanticsExtra",
+   "script": "candle/standard/semantics/holSemanticsExtraScript.sml",
+   "line": 43,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "typesem_Bool",
+   "theory": "holSemanticsExtra",
+   "script": "candle/standard/semantics/holSemanticsExtraScript.sml",
+   "line": 52,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "typesem_TYPE_SUBST",
+   "theory": "holSemanticsExtra",
+   "script": "candle/standard/semantics/holSemanticsExtraScript.sml",
+   "line": 60,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "typesem_tyvars",
+   "theory": "holSemanticsExtra",
+   "script": "candle/standard/semantics/holSemanticsExtraScript.sml",
+   "line": 70,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "termsem_typesem",
+   "theory": "holSemanticsExtra",
+   "script": "candle/standard/semantics/holSemanticsExtraScript.sml",
+   "line": 81,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "termsem_Equal",
+   "theory": "holSemanticsExtra",
+   "script": "candle/standard/semantics/holSemanticsExtraScript.sml",
+   "line": 145,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "termsem_equation",
+   "theory": "holSemanticsExtra",
+   "script": "candle/standard/semantics/holSemanticsExtraScript.sml",
+   "line": 174,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "termsem_raconv",
+   "theory": "holSemanticsExtra",
+   "script": "candle/standard/semantics/holSemanticsExtraScript.sml",
+   "line": 206,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "termsem_aconv",
+   "theory": "holSemanticsExtra",
+   "script": "candle/standard/semantics/holSemanticsExtraScript.sml",
+   "line": 235,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "termsem_frees",
+   "theory": "holSemanticsExtra",
+   "script": "candle/standard/semantics/holSemanticsExtraScript.sml",
+   "line": 246,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "termsem_simple_subst",
+   "theory": "holSemanticsExtra",
+   "script": "candle/standard/semantics/holSemanticsExtraScript.sml",
+   "line": 261,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "termsem_VSUBST",
+   "theory": "holSemanticsExtra",
+   "script": "candle/standard/semantics/holSemanticsExtraScript.sml",
+   "line": 342,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "termsem_simple_inst",
+   "theory": "holSemanticsExtra",
+   "script": "candle/standard/semantics/holSemanticsExtraScript.sml",
+   "line": 371,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "termsem_INST",
+   "theory": "holSemanticsExtra",
+   "script": "candle/standard/semantics/holSemanticsExtraScript.sml",
+   "line": 421,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "overload",
+   "name": "inhabited",
+   "theory": "holSemantics",
+   "script": "candle/standard/semantics/holSemanticsScript.sml",
+   "line": 21,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "type_abbrev",
+   "name": "tyass",
+   "theory": "holSemantics",
+   "script": "candle/standard/semantics/holSemanticsScript.sml",
+   "line": 29,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "is_type_assignment_def",
+   "theory": "holSemantics",
+   "script": "candle/standard/semantics/holSemanticsScript.sml",
+   "line": 31,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "overload",
+   "name": "is_type_assignment",
+   "theory": "holSemantics",
+   "script": "candle/standard/semantics/holSemanticsScript.sml",
+   "line": 40,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "type_abbrev",
+   "name": "tyval",
+   "theory": "holSemantics",
+   "script": "candle/standard/semantics/holSemanticsScript.sml",
+   "line": 44,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "is_type_valuation_def",
+   "theory": "holSemantics",
+   "script": "candle/standard/semantics/holSemanticsScript.sml",
+   "line": 46,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "overload",
+   "name": "is_type_valuation",
+   "theory": "holSemantics",
+   "script": "candle/standard/semantics/holSemanticsScript.sml",
+   "line": 50,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "typesem_def",
+   "theory": "holSemantics",
+   "script": "candle/standard/semantics/holSemanticsScript.sml",
+   "line": 54,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "type_abbrev",
+   "name": "tmass",
+   "theory": "holSemantics",
+   "script": "candle/standard/semantics/holSemanticsScript.sml",
+   "line": 66,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "is_term_assignment_def",
+   "theory": "holSemantics",
+   "script": "candle/standard/semantics/holSemanticsScript.sml",
+   "line": 68,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "overload",
+   "name": "is_term_assignment",
+   "theory": "holSemantics",
+   "script": "candle/standard/semantics/holSemanticsScript.sml",
+   "line": 77,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "type_abbrev",
+   "name": "tmval",
+   "theory": "holSemantics",
+   "script": "candle/standard/semantics/holSemanticsScript.sml",
+   "line": 83,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "is_term_valuation_def",
+   "theory": "holSemantics",
+   "script": "candle/standard/semantics/holSemanticsScript.sml",
+   "line": 85,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "overload",
+   "name": "is_term_valuation",
+   "theory": "holSemantics",
+   "script": "candle/standard/semantics/holSemanticsScript.sml",
+   "line": 90,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "type_abbrev",
+   "name": "interpretation",
+   "theory": "holSemantics",
+   "script": "candle/standard/semantics/holSemanticsScript.sml",
+   "line": 95,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "overload",
+   "name": "tyaof",
+   "theory": "holSemantics",
+   "script": "candle/standard/semantics/holSemanticsScript.sml",
+   "line": 96,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "overload",
+   "name": "tmaof",
+   "theory": "holSemantics",
+   "script": "candle/standard/semantics/holSemanticsScript.sml",
+   "line": 97,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "type_abbrev",
+   "name": "valuation",
+   "theory": "holSemantics",
+   "script": "candle/standard/semantics/holSemanticsScript.sml",
+   "line": 98,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "overload",
+   "name": "tyvof",
+   "theory": "holSemantics",
+   "script": "candle/standard/semantics/holSemanticsScript.sml",
+   "line": 99,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "overload",
+   "name": "tmvof",
+   "theory": "holSemantics",
+   "script": "candle/standard/semantics/holSemanticsScript.sml",
+   "line": 100,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "is_valuation_def",
+   "theory": "holSemantics",
+   "script": "candle/standard/semantics/holSemanticsScript.sml",
+   "line": 102,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "overload",
+   "name": "is_valuation",
+   "theory": "holSemantics",
+   "script": "candle/standard/semantics/holSemanticsScript.sml",
+   "line": 108,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "termsem_def",
+   "theory": "holSemantics",
+   "script": "candle/standard/semantics/holSemanticsScript.sml",
+   "line": 134,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "overload",
+   "name": "termsem",
+   "theory": "holSemantics",
+   "script": "candle/standard/semantics/holSemanticsScript.sml",
+   "line": 144,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "satisfies_def",
+   "theory": "holSemantics",
+   "script": "candle/standard/semantics/holSemanticsScript.sml",
+   "line": 148,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "overload",
+   "name": "satisfies",
+   "theory": "holSemantics",
+   "script": "candle/standard/semantics/holSemanticsScript.sml",
+   "line": 156,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "is_interpretation_def",
+   "theory": "holSemantics",
+   "script": "candle/standard/semantics/holSemanticsScript.sml",
+   "line": 161,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "overload",
+   "name": "is_interpretation",
+   "theory": "holSemantics",
+   "script": "candle/standard/semantics/holSemanticsScript.sml",
+   "line": 167,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "is_std_type_assignment_def",
+   "theory": "holSemantics",
+   "script": "candle/standard/semantics/holSemanticsScript.sml",
+   "line": 172,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "overload",
+   "name": "is_std_type_assignment",
+   "theory": "holSemantics",
+   "script": "candle/standard/semantics/holSemanticsScript.sml",
+   "line": 178,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "interprets_def",
+   "theory": "holSemantics",
+   "script": "candle/standard/semantics/holSemanticsScript.sml",
+   "line": 191,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "overload",
+   "name": "interprets",
+   "theory": "holSemantics",
+   "script": "candle/standard/semantics/holSemanticsScript.sml",
+   "line": 195,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "is_std_interpretation_def",
+   "theory": "holSemantics",
+   "script": "candle/standard/semantics/holSemanticsScript.sml",
+   "line": 197,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "overload",
+   "name": "is_std_interpretation",
+   "theory": "holSemantics",
+   "script": "candle/standard/semantics/holSemanticsScript.sml",
+   "line": 205,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "models_def",
+   "theory": "holSemantics",
+   "script": "candle/standard/semantics/holSemanticsScript.sml",
+   "line": 210,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "overload",
+   "name": "models",
+   "theory": "holSemantics",
+   "script": "candle/standard/semantics/holSemanticsScript.sml",
+   "line": 218,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "entails_def",
+   "theory": "holSemantics",
+   "script": "candle/standard/semantics/holSemanticsScript.sml",
+   "line": 222,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "overload",
+   "name": "\"|",
+   "theory": "holSemantics",
+   "script": "candle/standard/semantics/holSemanticsScript.sml",
+   "line": 233,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "is_structure_def",
+   "theory": "holSemantics",
+   "script": "candle/standard/semantics/holSemanticsScript.sml",
+   "line": 238,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "overload",
+   "name": "is_structure",
+   "theory": "holSemantics",
+   "script": "candle/standard/semantics/holSemanticsScript.sml",
+   "line": 246,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "binary_inference_rule",
+   "theory": "holSoundness",
+   "script": "candle/standard/semantics/holSoundnessScript.sml",
+   "line": 15,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "ABS_correct",
+   "theory": "holSoundness",
+   "script": "candle/standard/semantics/holSoundnessScript.sml",
+   "line": 40,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "ASSUME_correct",
+   "theory": "holSoundness",
+   "script": "candle/standard/semantics/holSoundnessScript.sml",
+   "line": 81,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "BETA_correct",
+   "theory": "holSoundness",
+   "script": "candle/standard/semantics/holSoundnessScript.sml",
+   "line": 89,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "DEDUCT_ANTISYM_correct",
+   "theory": "holSoundness",
+   "script": "candle/standard/semantics/holSoundnessScript.sml",
+   "line": 124,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "EQ_MP_correct",
+   "theory": "holSoundness",
+   "script": "candle/standard/semantics/holSoundnessScript.sml",
+   "line": 180,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "INST_correct",
+   "theory": "holSoundness",
+   "script": "candle/standard/semantics/holSoundnessScript.sml",
+   "line": 198,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "INST_TYPE_correct",
+   "theory": "holSoundness",
+   "script": "candle/standard/semantics/holSoundnessScript.sml",
+   "line": 235,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "MK_COMB_correct",
+   "theory": "holSoundness",
+   "script": "candle/standard/semantics/holSoundnessScript.sml",
+   "line": 272,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "REFL_correct",
+   "theory": "holSoundness",
+   "script": "candle/standard/semantics/holSoundnessScript.sml",
+   "line": 295,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "proves_sound",
+   "theory": "holSoundness",
+   "script": "candle/standard/semantics/holSoundnessScript.sml",
+   "line": 313,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "ALOOKUP_MAP_dest_var",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 18,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "TYPE_SUBST_NIL",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 30,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "TYPE_SUBST_Bool",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 38,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "is_instance_refl",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 44,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "swap_ff",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 50,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "ff_def",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 56,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "TYPE_SUBST_compose",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 62,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "TYPE_SUBST_tyvars",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 75,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "WELLTYPED_LEMMA",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 93,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "WELLTYPED",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 100,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "WELLTYPED_CLAUSES",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 106,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "RACONV",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 121,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "RACONV_REFL",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 146,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "ACONV_REFL",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 152,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "RACONV_TRANS",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 158,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "ACONV_TRANS",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 176,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "RACONV_SYM",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 182,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "ACONV_SYM",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 193,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "ALPHAVARS_TYPE",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 199,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "RACONV_TYPE",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 209,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "ACONV_TYPE",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 222,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "inductive",
+   "name": "subtype1",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 230,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "overload",
+   "name": "subtype",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 235,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "subtype_Tyvar",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 237,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "inductive",
+   "name": "subterm1",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 242,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "overload",
+   "name": "subterm",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 250,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "subterm_Var",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 251,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "subterm_Const",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 255,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "subterm_Comb",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 260,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "subterm_Abs",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 264,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "subterm_welltyped_helper",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 269,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "type_lt_thm",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 277,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "term_lt_thm",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 287,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "type_cmp_refl",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 311,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "term_cmp_refl",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 317,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "irreflexive_type_lt",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 323,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "trichotomous_type_lt",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 333,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "transitive_type_lt",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 352,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "StrongLinearOrder_type_lt",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 419,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "TotOrd_type_cmp",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 426,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "irreflexive_term_lt",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 434,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "trichotomous_term_lt",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 444,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "transitive_term_lt",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 456,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "StrongLinearOrder_term_lt",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 466,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "TotOrd_term_cmp",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 473,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "StrongLinearOrder_irreflexive",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 481,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "irreflexive_mlstring_lt",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 487,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "LLEX_irreflexive",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 489,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "irreflexive_LLEX_type_lt",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 495,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "ALPHAVARS_ordav",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 497,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "ordav_ALPHAVARS",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 506,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "ALPHAVARS_eq_ordav",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 515,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "RACONV_orda",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 521,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "orda_RACONV",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 529,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "RACONV_eq_orda",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 551,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "ACONV_eq_orda",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 557,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "ordav_sym",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 563,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "orda_sym",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 571,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "orda_thm",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 587,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "ordav_lx_trans",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 597,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "undo_zip_map_fst",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 616,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "orda_lx_trans",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 623,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "transitive_alpha_lt",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 727,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "alpha_lt_trans_ACONV",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 735,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "alpha_lt_not_refl",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 745,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "VFREE_IN_RACONV",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 753,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "VFREE_IN_ACONV",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 765,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "hypset_ok_nil",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 771,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "hypset_ok_sing",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 777,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "hypset_ok_cons",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 783,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "hypset_ok_append",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 791,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "hypset_ok_el_less",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 795,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "term_union_idem",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 801,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "term_union_thm",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 808,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "MEM_term_union_imp",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 830,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "hypset_ok_term_union",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 840,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "EVERY_term_union",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 868,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "MEM_term_union",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 874,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "term_union_sing_lt",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 890,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "term_union_insert",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 897,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "term_union_replace",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 912,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "term_union_insert_mem",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 925,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "term_union_insert_remove",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 938,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "term_remove_nil",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 961,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "MEM_term_remove_imp",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 967,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "hypset_ok_term_remove",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 985,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "EVERY_term_remove",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 996,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "MEM_term_remove",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1002,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "term_image_nil",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1011,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "MEM_term_image_imp",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1017,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "hypset_ok_term_image",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1025,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "MEM_term_image",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1031,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "VSUBST_HAS_TYPE",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1042,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "VSUBST_WELLTYPED",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1067,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "VFREE_IN_VSUBST",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1076,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "VSUBST_NIL",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1126,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "INST_CORE_HAS_TYPE",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1135,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "INST_CORE_NIL_IS_RESULT",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1265,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "INST_HAS_TYPE",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1273,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "INST_WELLTYPED",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1283,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "tyvars_ALL_DISTINCT",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1289,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "tvars_ALL_DISTINCT",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1298,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "tyvars_Tyapp_MAP_Tyvar",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1304,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "STRING_SORT_SET_TO_LIST_set_tvars",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1312,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "EQUATION_HAS_TYPE_BOOL",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1324,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "welltyped_equation",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1332,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "typeof_equation",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1338,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "vfree_in_equation",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1344,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "equation_intro",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1350,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "type_ok_TYPE_SUBST",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1358,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "type_ok_TYPE_SUBST_imp",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1370,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "term_ok_welltyped",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1381,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "term_ok_type_ok",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1387,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "term_ok_equation",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1395,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "term_ok_VSUBST",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1410,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "term_ok_INST_CORE",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1432,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "term_ok_INST",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1468,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "term_ok_raconv",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1478,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "term_ok_aconv",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1491,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "datatype",
+   "name": "dbterm",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1498
+  },
+  {
+   "kind": "definition",
+   "name": "bind_def",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1508,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "db_def",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1518,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "dbVSUBST_def",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1527,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "dbVFREE_IN_def",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1535,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "bind_not_free",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1543,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "bind_dbVSUBST",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1549,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "bind_dbVSUBST_cons",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1569,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "dbVSUBST_frees",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1584,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "dbVFREE_IN_bind",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1593,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "dbVFREE_IN_VFREE_IN",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1608,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "MAP_db_FILTER_neq",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1619,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "REV_ASSOCD_MAP_db",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1627,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "dbVFREE_IN_dbVSUBST",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1641,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "VSUBST_dbVSUBST",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1651,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "dbINST_def",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1762,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "dbINST_bind",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1770,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "dbVSUBST_nil",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1782,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "INST_CORE_dbINST",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1788,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "INST_dbINST",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1908,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "dbterm_def",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1923,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "bind_list_aux_def",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1931,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "bind_list_aux_clauses",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1936,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "dbterm_bind",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1945,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "dbterm_db",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1956,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "dbterm_RACONV",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1964,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "RACONV_dbterm",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 1995,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "dbterm_ACONV",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 2016,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "ACONV_db",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 2025,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "ACONV_VSUBST",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 2033,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "ACONV_INST",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 2046,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "bv_names_def",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 2057,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "simple_subst_def",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 2069,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "simple_inst_def",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 2077,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "VSUBST_simple_subst",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 2084,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "INST_CORE_simple_inst",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 2110,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "INST_simple_inst",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 2162,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "simple_subst_has_type",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 2175,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "simple_inst_has_type",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 2195,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "rename_bvars_def",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 2203,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "FST_rename_bvars",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 2218,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "rename_bvars_RACONV",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 2231,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "rename_bvars_ACONV",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 2292,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "rename_bvars_has_type",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 2306,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "rename_bvars_welltyped",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 2317,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "fresh_union",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 2333,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "fresh_names_exist",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 2339,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "bv_names_rename_bvars",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 2348,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "FINITE_VFREE_IN",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 2368,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "FINITE_VFREE_IN_2",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 2387,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "FINITE_VFREE_IN_list",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 2412,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "FINITE_MEM_Var",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 2425,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "vfree_in_def",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 2466,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "vfree_in_thm",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 2474,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "variant_def",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 2487,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "variant_vsubst_thm",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 2511,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "VSUBST_thm",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 2548,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "subtract_def",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 2551,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "insert_def",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 2555,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "itlist_def",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 2559,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "union_def",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 2566,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "MEM_union",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 2570,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "EXISTS_union",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 2578,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "frees_def",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 2584,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "MEM_frees_EQ",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 2593,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "variant_inst_thm",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 2605,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "proves_theory_ok",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 2655,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "theory_ok_sig",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 2661,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "proves_term_ok",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 2667,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "deductAntisym_equation",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 2728,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "eqMp_equation",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 2730,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "refl_equation",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 2733,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "addAssum",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 2735,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "proves_concl_ACONV",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 2772,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "proves_ACONV_lemma",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 2784,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "updates_DISJOINT",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 2872,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "type_ok_extend",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 2884,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "term_ok_extend",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 2896,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "is_std_sig_extend",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 2908,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "updates_theory_ok",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 2918,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "overload",
+   "name": "ConstDef",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 3027,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "update_extension",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 3029,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "types_in_def",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 3159,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "Var_subterm_types_in",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 3166,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "Const_subterm_types_in",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 3173,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "arities_match_def",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 3180,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "arities_match_length",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 3189,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "arities_match_nil",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 3195,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "arities_match_Tyvar",
+   "theory": "holSyntaxExtra",
+   "script": "candle/standard/syntax/holSyntaxExtraScript.sml",
+   "line": 3202,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "overload",
+   "name": "Fun",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 18,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "overload",
+   "name": "Bool",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 19,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "domain_raw",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 21,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "domain_def",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 25,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "codomain_raw",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 31,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "codomain_def",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 35,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "datatype",
+   "name": "term",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 49
+  },
+  {
+   "kind": "overload",
+   "name": "Equal",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 55,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "dest_var_def",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 57,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "inductive",
+   "name": "has_type",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 65,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "welltyped_def",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 78,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "typeof_def",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 82,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "inductive",
+   "name": "RACONV",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 92,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "ACONV_def",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 104,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "inductive",
+   "name": "type_lt",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 113,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "inductive",
+   "name": "term_lt",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 120,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "term_cmp_def",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 137,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "type_cmp_def",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 141,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "ordav_def",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 145,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "orda_def",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 155,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "term_union_def",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 185,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "term_remove_def",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 197,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "term_image_def",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 209,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "VFREE_IN_def",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 222,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "CLOSED_def",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 231,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "VFREE_IN_FINITE",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 238,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "VFREE_IN_FINITE_ALT",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 256,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "PRIMED_NAME_EXISTS",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 266,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "LEAST_EXISTS",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 275,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "VARIANT_def",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 289,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "VARIANT_THM",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 293,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "TYPE_SUBST_def",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 301,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "overload",
+   "name": "is_instance",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 308,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "VSUBST_def",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 312,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "sizeof_def",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 330,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "SIZEOF_VSUBST",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 337,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "INST_CORE_def",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 351,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "INST_def",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 384,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "tyvars_def",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 390,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "tvars_def",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 399,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "equation_def",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 410,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "type_abbrev",
+   "name": "tysig",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 418,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "type_abbrev",
+   "name": "tmsig",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 419,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "type_abbrev",
+   "name": "sig",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 420,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "overload",
+   "name": "tysof",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 421,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "overload",
+   "name": "tmsof",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 422,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "type_ok_def",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 426,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "term_ok_def",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 435,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "alpha_lt_def",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 455,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "hypset_ok_def",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 459,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "type_abbrev",
+   "name": "thy",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 467,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "overload",
+   "name": "sigof",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 468,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "overload",
+   "name": "axsof",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 469,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "overload",
+   "name": "tysof",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 470,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "overload",
+   "name": "tmsof",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 471,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "is_std_sig_def",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 475,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "theory_ok_def",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 482,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "inductive",
+   "name": "proves",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 493,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "types_of_upd_def",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 566,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "consts_of_upd_def",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 574,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "overload",
+   "name": "type_list",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 586,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "overload",
+   "name": "tysof",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 587,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "overload",
+   "name": "const_list",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 588,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "overload",
+   "name": "tmsof",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 589,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "overload",
+   "name": "sigof",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 592,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "axexts_of_upd_def",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 596,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "conexts_of_upd_def",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 601,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "overload",
+   "name": "axexts",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 617,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "overload",
+   "name": "conexts",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 618,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "overload",
+   "name": "axioms_of_upd",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 620,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "overload",
+   "name": "axiom_list",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 621,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "overload",
+   "name": "axsof",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 622,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "overload",
+   "name": "thyof",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 625,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "inductive",
+   "name": "updates",
+   "theory": "holSyntax",
+   "script": "candle/standard/syntax/holSyntaxScript.sml",
+   "line": 633,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "ALPHAVARS_def",
+   "theory": "holSyntaxLib",
+   "script": "candle/syntax-lib/holSyntaxLibScript.sml",
+   "line": 10,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "ALPHAVARS_REFL",
+   "theory": "holSyntaxLib",
+   "script": "candle/syntax-lib/holSyntaxLibScript.sml",
+   "line": 17,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "ALPHAVARS_MEM",
+   "theory": "holSyntaxLib",
+   "script": "candle/syntax-lib/holSyntaxLibScript.sml",
+   "line": 23,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "REV_ASSOCD_def",
+   "theory": "holSyntaxLib",
+   "script": "candle/syntax-lib/holSyntaxLibScript.sml",
+   "line": 29,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "REV_ASSOCD",
+   "theory": "holSyntaxLib",
+   "script": "candle/syntax-lib/holSyntaxLibScript.sml",
+   "line": 34,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "REV_ASSOCD_ALOOKUP",
+   "theory": "holSyntaxLib",
+   "script": "candle/syntax-lib/holSyntaxLibScript.sml",
+   "line": 42,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "PRIMED_INFINITE",
+   "theory": "holSyntaxLib",
+   "script": "candle/syntax-lib/holSyntaxLibScript.sml",
+   "line": 49,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "REV_ASSOCD_FILTER",
+   "theory": "holSyntaxLib",
+   "script": "candle/syntax-lib/holSyntaxLibScript.sml",
+   "line": 59,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "REV_ASSOCD_MEM",
+   "theory": "holSyntaxLib",
+   "script": "candle/syntax-lib/holSyntaxLibScript.sml",
+   "line": 68,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "datatype",
+   "name": "result",
+   "theory": "holSyntaxLib",
+   "script": "candle/syntax-lib/holSyntaxLibScript.sml",
+   "line": 75
+  },
+  {
+   "kind": "definition",
+   "name": "IS_RESULT_def",
+   "theory": "holSyntaxLib",
+   "script": "candle/syntax-lib/holSyntaxLibScript.sml",
+   "line": 78,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "IS_CLASH_def",
+   "theory": "holSyntaxLib",
+   "script": "candle/syntax-lib/holSyntaxLibScript.sml",
+   "line": 83,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "RESULT_def",
+   "theory": "holSyntaxLib",
+   "script": "candle/syntax-lib/holSyntaxLibScript.sml",
+   "line": 88,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "CLASH_def",
+   "theory": "holSyntaxLib",
+   "script": "candle/syntax-lib/holSyntaxLibScript.sml",
+   "line": 92,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "LIST_INSERT_def",
+   "theory": "holSyntaxLib",
+   "script": "candle/syntax-lib/holSyntaxLibScript.sml",
+   "line": 97,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "MEM_LIST_INSERT",
+   "theory": "holSyntaxLib",
+   "script": "candle/syntax-lib/holSyntaxLibScript.sml",
+   "line": 101,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "LIST_UNION_def",
+   "theory": "holSyntaxLib",
+   "script": "candle/syntax-lib/holSyntaxLibScript.sml",
+   "line": 108,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "MEM_LIST_UNION",
+   "theory": "holSyntaxLib",
+   "script": "candle/syntax-lib/holSyntaxLibScript.sml",
+   "line": 112,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "MEM_FOLDR_LIST_UNION",
+   "theory": "holSyntaxLib",
+   "script": "candle/syntax-lib/holSyntaxLibScript.sml",
+   "line": 119,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "LIST_UNION_NIL",
+   "theory": "holSyntaxLib",
+   "script": "candle/syntax-lib/holSyntaxLibScript.sml",
+   "line": 125,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "set_LIST_UNION",
+   "theory": "holSyntaxLib",
+   "script": "candle/syntax-lib/holSyntaxLibScript.sml",
+   "line": 131,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "LIST_UNION_NIL_2",
+   "theory": "holSyntaxLib",
+   "script": "candle/syntax-lib/holSyntaxLibScript.sml",
+   "line": 137,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "LIST_UNION_same",
+   "theory": "holSyntaxLib",
+   "script": "candle/syntax-lib/holSyntaxLibScript.sml",
+   "line": 144,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "INORDER_INSERT_def",
+   "theory": "holSyntaxLib",
+   "script": "candle/syntax-lib/holSyntaxLibScript.sml",
+   "line": 152,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "LENGTH_INORDER_INSERT",
+   "theory": "holSyntaxLib",
+   "script": "candle/syntax-lib/holSyntaxLibScript.sml",
+   "line": 158,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "ALL_DISTINCT_INORDER_INSERT",
+   "theory": "holSyntaxLib",
+   "script": "candle/syntax-lib/holSyntaxLibScript.sml",
+   "line": 173,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "ALL_DISTINCT_FOLDR_INORDER_INSERT",
+   "theory": "holSyntaxLib",
+   "script": "candle/syntax-lib/holSyntaxLibScript.sml",
+   "line": 183,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "MEM_FOLDR_INORDER_INSERT",
+   "theory": "holSyntaxLib",
+   "script": "candle/syntax-lib/holSyntaxLibScript.sml",
+   "line": 190,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "STRING_SORT_def",
+   "theory": "holSyntaxLib",
+   "script": "candle/syntax-lib/holSyntaxLibScript.sml",
+   "line": 197,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "PERM_STRING_SORT",
+   "theory": "holSyntaxLib",
+   "script": "candle/syntax-lib/holSyntaxLibScript.sml",
+   "line": 201,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "LENGTH_STRING_SORT",
+   "theory": "holSyntaxLib",
+   "script": "candle/syntax-lib/holSyntaxLibScript.sml",
+   "line": 219,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "MEM_STRING_SORT",
+   "theory": "holSyntaxLib",
+   "script": "candle/syntax-lib/holSyntaxLibScript.sml",
+   "line": 225,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "ALL_DISTINCT_STRING_SORT",
+   "theory": "holSyntaxLib",
+   "script": "candle/syntax-lib/holSyntaxLibScript.sml",
+   "line": 233,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "STRING_SORT_SORTED",
+   "theory": "holSyntaxLib",
+   "script": "candle/syntax-lib/holSyntaxLibScript.sml",
+   "line": 247,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "STRING_SORT_EQ",
+   "theory": "holSyntaxLib",
+   "script": "candle/syntax-lib/holSyntaxLibScript.sml",
+   "line": 260,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "ALL_DISTINCT_LIST_UNION",
+   "theory": "holSyntaxLib",
+   "script": "candle/syntax-lib/holSyntaxLibScript.sml",
+   "line": 274,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "the_def",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 21,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "DROP_NIL",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 43,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "revdroprev",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 49,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "revtakerev",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 56,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "SORTED_inv_image_LESS_PLUS",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 65,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "read_bytearray_def",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 75,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "read_bytearray_LENGTH",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 86,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "SUM_SET_IN_LT",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 94,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "CARD_IMAGE_ID_BIJ",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 101,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "DISJOINT_IMAGE_SUC",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 112,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "overload",
+   "name": "LLOOKUP",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 119,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "datatype",
+   "name": "app_list",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 122
+  },
+  {
+   "kind": "definition",
+   "name": "append_aux_def",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 125,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "append_def",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 131,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "append_aux_thm",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 135,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "append_thm",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 141,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "SmartAppend_def",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 150,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "SmartAppend_thm",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 156,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "append_SmartAppend",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 165,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "MAP_REVERSE_STEP",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 173,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "LENGTH_TAKE_EQ_MIN",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 183,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "LIST_REL_MEM",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 191,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "LIST_REL_GENLIST_I",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 199,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "LIST_REL_FRONT_LAST",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 206,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "fromList2_def",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 217,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "EVEN_fromList2_lemma",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 221,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "BIJ_FLOOKUP_MAP_KEYS",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 233,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "EVERY_ZIP",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 247,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "every_zip_split",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 257,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "every_shim",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 269,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "every_shim2",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 278,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "ZIP_MAP_FST_SND_EQ",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 288,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "MAP_FST_I_PAIR_MAP",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 294,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "EVERY_FST_SND",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 300,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "tlookup_def",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 307,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "tlookup_bij_suff",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 311,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "tlookup_bij_iff",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 335,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "MAX_LIST_APPEND",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 368,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "MAX_LIST_SNOC",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 375,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "max3_def",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 381,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "ALOOKUP_SNOC",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 386,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "ALOOKUP_GENLIST",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 395,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "MEM_ALOOKUP",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 402,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "type_abbrev",
+   "name": "num_set",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 415,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "type_abbrev",
+   "name": "num_map",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 416,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "toAList_domain",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 418,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "domain_nat_set_from_list",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 424,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "UPDATE_LIST_def",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 432,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "overload",
+   "name": "\"",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 437,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "UPDATE_LIST_THM",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 439,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "APPLY_UPDATE_LIST_ALOOKUP",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 445,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "find_index_def",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 454,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "find_index_ALL_DISTINCT_EL",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 469,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "find_index_shift_0",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 478,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "EVERY2_RC_same",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 496,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "FST_triple",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 503,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "FST_pair",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 509,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "SND_pair",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 516,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "I_PERMUTES",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 524,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "MAP_EQ_ID",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 530,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "FUN_FMAP_FAPPLY_FEMPTY_FAPPLY",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 538,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "NOT_MEM_FLOOKUP_ZIP",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 547,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "LESS_1",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 557,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "map_fst",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 565,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "LENGTH_EQ_FILTER_FILTER",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 576,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "num_to_hex_string_length_1",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 586,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "num_to_hex_string_length_2",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 597,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "num_from_hex_string_num_to_hex_string",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 607,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "MAPi_ID",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 615,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "MAPi_MAP",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 621,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "enumerate_def",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 633,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "LENGTH_enumerate",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 639,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "EL_enumerate",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 645,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "MAP_enumerate_MAPi",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 654,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "MAPi_enumerate_MAP",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 661,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "MEM_enumerate",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 668,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "MAP_FST_enumerate",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 678,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "ALOOKUP_enumerate",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 685,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "SUM_MAP_LENGTH_REPLICATE",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 695,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "SUM_MAP_COUNT_LIST",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 701,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "SUM_MOD",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 715,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "MOD_SUB_LEMMA",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 723,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "FLAT_REPLICATE_NIL",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 733,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "MEM_REPLICATE_EQ",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 739,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "FDOM_FLOOKUP",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 747,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "FLAT_MAP_SING",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 753,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "FLAT_MAP_NIL",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 759,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "PERM_MAP_BIJ",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 765,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "lookup_fromList2",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 778,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "domain_fromList2",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 802,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "EXP2_EVEN",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 810,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "ALL_DISTINCT_FLAT",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 816,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "o_PAIR_MAP",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 826,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "MOD_MINUS",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 833,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "EL_CONS_IF",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 842,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "DROP_EMPTY",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 847,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "OPT_MMAP_SOME",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 856,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "DISJOINT_set_simp",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 862,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "LUPDATE_commutes",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 869,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "LUPDATE_APPEND",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 880,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "FILTER_EL_EQ",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 889,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "FST_EL_AFUPDKEY",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 903,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "EL_AFUPDKEY_unchanged",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 911,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "HD_LUPDATE",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 920,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "DROP_LUPDATE",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 926,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "w2n_lt_256",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 934,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "CHR_w2n_n2w_ORD",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 938,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "n2w_ORD_CHR_w2n",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 944,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "CHR_w2n_n2w_ORD_simp",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 950,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "n2w_ORD_CHR_w2n_simp",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 956,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "MAP_K_REPLICATE",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 962,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "TL_DROP_SUC",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 968,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "DROP_EQ_CONS_IMP_DROP_SUC",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 974,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "DROP_IMP_EL",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 982,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "LENGTH_FIELDS",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 988,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "FIELDS_NEQ_NIL",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1012,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "FIELDS_next",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1019,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "FIELDS_full",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1052,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "FLAT_MAP_TOKENS_FIELDS",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1084,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "splitlines_def",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1101,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "splitlines_nil",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1108,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "splitlines_eq_nil",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1110,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "splitlines_CONS_FST_SPLITP",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1123,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "irreflexive_inv_image",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1134,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "trichotomous_inv_image",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1140,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "plus_0_I",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1147,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "SUM_COUNT_LIST",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1154,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "OPTION_MAP_I",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1157,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "the_OPTION_MAP",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1164,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "TAKE_FLAT_REPLICATE_LEQ",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1172,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "ADD_MOD_EQ_LEMMA",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1183,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "TAKE_DROP_SUBLIST",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1194,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "ALL_DISTINCT_alist_to_fmap_REVERSE",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1204,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "SUM_MAP_K",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1210,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "TOKENS_unchanged",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1216,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "insert_atI_def",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1239,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "insert_atI_NIL",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1244,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "insert_atI_CONS",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1250,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "LENGTH_insert_atI",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1261,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "insert_atI_end",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1267,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "insert_atI_insert_atI",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1273,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "IN_EVEN",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1283,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "is_subseq_def",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1286,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "is_subseq_refl",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1298,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "is_subseq_nil",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1305,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "definition",
+   "name": "make_even_def",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1312,
+   "simp": false,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "EVEN_make_even",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1316,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "v2w_32_F",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1322,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "v2w_32_T",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1328,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "MULT_DIV_MULT",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1334,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "steps_def",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1340,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "steps_rel_def",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1348,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "LAST_MAP_SND_steps_FOLDL",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1357,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "all_words_def",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1363,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "IN_all_words",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1368,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "eq_shape_def",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1383,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "eq_shape_map",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1391,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "eq_shape_IMP_domain",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1397,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "copy_shape_def",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1404,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "eq_shape_copy_shape",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1424,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "num_lemma",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1430,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "lookup_copy_shape_LN",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1439,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "domain_EMPTY_lookup",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1445,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "lookup_copy_shape",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1453,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "fromList2_value",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1464,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "TWOxDIV2",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1476,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "good_dimindex_def",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1483,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "good_dimindex_get_byte_set_byte",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1487,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "byte_index_LESS_IMP",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1496,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "NOT_w2w_bit",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1513,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "DIV_EQ_DIV_IMP",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1523,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "get_byte_set_byte_diff",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1532,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "definition",
+   "name": "fmap_update_def",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1582,
+   "simp": true,
+   "kernel_closure": true
+  },
+  {
+   "kind": "theorem",
+   "name": "ALOOKUP_MAP_3",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1587,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "ALOOKUP_MAP_names",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1594,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "ALOOKUP_MAP_const",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1605,
+   "simp": false,
+   "kernel_closure": false
+  },
+  {
+   "kind": "theorem",
+   "name": "LIST_REL_MAP_FST",
+   "theory": "misc",
+   "script": "misc/miscScript.sml",
+   "line": 1616,
+   "simp": false,
+   "kernel_closure": false
+  }
+ ]
+}

@@ -28,10 +28,16 @@ Everything in this repository that came from elsewhere, with its origin and lice
 
 - Upstream: https://github.com/CakeML/cakeml
 - Commit: `48ee98a76be82e08a3a5613e34a1b8ec3c24c835` (2026-11-13T15:47:08+01:00), branch master
-- License: CakeML LICENSE, to be copied unchanged into `package/LICENSE`.
-- Files: not yet added. The table below lists, for each copied file, its upstream path,
-  its path here, its SHA-256 and whether it was modified (and why).
+- License: CakeML LICENSE, copied unchanged into `package/LICENSE`.
+- Files: see "Reduced package" below.
 
-| Upstream path | Repo path | SHA-256 | Modified |
-|---|---|---|---|
-| (pending closure reduction) | | | |
+## Reduced package
+
+The CakeML files are now in `package/`, reduced to the closure of `holSoundness.proves_sound`.
+
+- Per-file record: `manifest/files.tsv`, one row per file in `package/`, with its upstream
+  path, the upstream and package SHA-256, whether it was modified, and the reason
+  for each modification.
+- How the reduction was done, with counts: `REDUCTION.md`. The scripts and their records
+  are in `tools/reduce/`.
+- License: CakeML `LICENSE`, copied unchanged to `package/LICENSE`.

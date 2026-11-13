@@ -1,0 +1,13 @@
+INCLUDES = $(HOLDIR)/examples/pl-semantics/lprefix_lub
+
+all: $(DEFAULT_TARGETS)
+.PHONY: all
+
+EXTRA_CLEANS = cakeml-heap
+
+ifdef POLY
+all: cakeml-heap
+
+cakeml-heap: preamble.uo
+	$(HOLDIR)/bin/hol buildheap -o $@ $<
+endif
