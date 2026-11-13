@@ -2,6 +2,9 @@
 # so this uses Docker Desktop (default) or WSL.
 #   scripts\build.ps1            # Docker
 #   scripts\build.ps1 -Mode wsl  # run scripts/build.sh native inside the default WSL distribution
+# The package is built with CAKEMLDIR=/work (the mounted package/) and HOLDIR=/opt/HOL
+# (set in docker/Dockerfile), running Holmake holSoundnessTheory in
+# package/candle/standard/semantics.
 param([ValidateSet('docker','wsl')][string]$Mode = 'docker')
 $ErrorActionPreference = 'Stop'
 $Root = Split-Path -Parent $PSScriptRoot
@@ -14,7 +17,8 @@ if ($Mode -eq 'docker') {
     if ($LASTEXITCODE -ne 0) { throw 'docker build failed' }
     Add-Content $log "image end $(Stamp)"
     Add-Content $log "package start $(Stamp)"
-    docker run --rm -v "$(Join-Path $Root 'package'):/work" candle-hol4:pinned Holmake
+    docker run --rm -v "$(Join-Path $Root 'package'):/work" -w /work/candle/standard/semantics `
+        candle-hol4:pinned Holmake holSoundnessTheory
     if ($LASTEXITCODE -ne 0) { throw 'Holmake failed' }
     Add-Content $log "package end $(Stamp)"
 } else {

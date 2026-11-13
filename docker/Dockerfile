@@ -21,6 +21,16 @@ RUN cd /opt/HOL \
     && poly --script tools/smart-configure.sml \
     && bin/build
 
+# HOL example directories the package uses (package/holproject.toml, external_includes).
+RUN for d in examples/pl-semantics/lprefix_lub examples/machine-code/hoare-triple \
+             examples/formal-languages/context-free examples/algorithms; do \
+      (cd /opt/HOL/$d && /opt/HOL/bin/Holmake) || exit 1; \
+    done
+
+# The package is mounted at /work; build it with
+#   docker run --rm -v <repo>/package:/work -w /work/candle/standard/semantics
+#     candle-hol4:pinned Holmake holSoundnessTheory
 ENV HOLDIR=/opt/HOL
+ENV CAKEMLDIR=/work
 ENV PATH=/opt/HOL/bin:$PATH
 WORKDIR /work
