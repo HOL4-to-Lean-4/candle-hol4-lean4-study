@@ -290,6 +290,18 @@ Phase~2 applies the same workflow, unchanged, to further closures in order of si
 \end{enumerate}
 Phase~1's ledger gives the cost and time per theorem for translation, validation, review and proving. Multiplied by the theorem count of a candidate closure, it sizes each Phase~2 target before it starts. Merging closures needs one shared prelude and one naming convention, which Phase~1's \code{CONVENTIONS.md} starts.
 
+\paragraph{Repository (decided 22 Nov).} Phase~2 lives in its own repository, \code{HOL4-to-Lean-4/cakeml-lean4}. The Candle repository stays the Phase~1 case study and the ITP artifact. Layout:
+\begin{itemize}
+\item \code{vendor/}: pinned CakeML, HOL4 and Poly/ML commits, and the Docker recipe for HOL4.
+\item \code{manifest/}: freeze pins, the theories in scope, dependency order and batch plan.
+\item \code{lean/}: one Lake project, one module per HOL4 theory, mirroring CakeML's directory tree.
+\item \code{workflow/}: briefs and scripts for translation, Astra validation, Neon review and HOL4 grounding, carried over from Phase~1.
+\item \code{runs/<batch>/}: transcripts, findings and reports per batch.
+\item \code{ledger/costs.csv}: same format as Phase~1.
+\item \code{plan/}: this plan's Phase~2 successor, in \LaTeX.
+\end{itemize}
+The order of migration (bottom-up by directory, or by milestone theorems) is still open.
+
 \section{Threats to validity}
 \begin{itemize}
 \item \textbf{No human expert.} The reviewer's decisions are checked only by HOL4 and Lean grounding, by the seeded-defect experiment and by proofs. A meaning question that none of these can settle stays open and is reported as such. The author designs the protocol and reads the results, but does not adjudicate.
@@ -308,5 +320,6 @@ Phase~1's ledger gives the cost and time per theorem for translation, validation
 \item Everything runs on the author's PC; everything is kept in the organization repository (22 Nov).
 \item Target venue ITP 2027: abstract 8 Feb, paper 15 Feb 2027 (22 Nov, from the published call).
 \item Add the no-lessons ablation, the known-defect target and a conditional Sonnet 5.5 arm (22 Nov).
+\item Phase~2 gets its own repository, \code{cakeml-lean4} (22 Nov).
 \end{enumerate}
 \end{document}
