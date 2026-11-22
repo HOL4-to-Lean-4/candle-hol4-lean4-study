@@ -127,3 +127,19 @@ run is the real test: a statement that is false as translated will show up there
   token usage, build log, transcript scan script.
 - `audit/`: audit briefs and findings.
 - `transcripts/`: the gzipped Claude Code transcripts of the five translators and three auditors.
+
+## Input-context check (added 22 Nov 2026)
+
+The start of every translator and auditor transcript and every tool call in both baseline runs
+(Fable 5.2 and Opus 5.5) were checked. No agent saw project memory, the study-1 repositories, the
+study plan or the other run's results, and the auditors read only their own workspace. Two inputs
+carry earlier knowledge:
+
+- **Study-1 lessons in the briefs, in both runs.** The audit brief says "Earlier translations of
+  CakeML had real defects of these kinds, so check them on purpose" and lists division and modulus,
+  truncated subtraction, 8-bit `char`, derived `BEq`, finite maps, choice and `ARB`, overloads and
+  ML-generated statements. Rule 1 of the translator briefs lists the same edge cases more briefly.
+  Both baselines are therefore direct translation with study-1 lessons in the prompt. No part of
+  the proposed workflow (validator, reviewer, grounding) was in any prompt.
+- **Chat messages, Opus run only.** The two `queued_command` attachments described in the Opus
+  RESULTS.md. The Fable transcripts have none.
