@@ -122,7 +122,7 @@ choices:
   with `is_fmap`). **Sets** are `α → Prop` with impredicative `FINITE`. **Words** are `BitVec n`
   (width 0 allowed, unused).
 - **Unspecified values.** `HD []`, `LAST []`, `dest_var` of a non-variable, `RESULT`/`CLASH` on the
-  wrong constructor are one fixed `ARB` (HOL4's pattern completion); `SEG`, `FUN_FMAP`,
+  wrong constructor are one fixed `ARB`. The auditors called this HOL4's pattern completion, but these HOL4 definitions go through `Prim_rec` (`Defn.sml` `non_wfrec_defn`), which leaves the missing cases unspecified, so Fable's choice is the literal one; `SEG`, `FUN_FMAP`,
   `VARIANT_PRIMES`, `fresh`, `instance` are `Classical.epsilon` of their specifications, with the
   HOL4 defining theorems proved.
 - **Inductive relations.** `type_lt`, `term_lt` are the least relation closed under the rules
