@@ -300,7 +300,13 @@ Phase~1's ledger gives the cost and time per theorem for translation, validation
 \item \code{ledger/costs.csv}: same format as Phase~1.
 \item \code{plan/}: this plan's Phase~2 successor, in \LaTeX.
 \end{itemize}
-The order of migration (bottom-up by directory, or by milestone theorems) is still open.
+\paragraph{Order (decided 22 Nov).} By milestone theorems. Each milestone's dependency closure is translated bottom-up in dependency order, and modules already done by an earlier milestone are reused, not translated again. Each milestone ends with a usable, checked result, and the shared modules grow with every step. Sequence:
+\begin{enumerate}
+\item Semantics and type soundness (study~1's closure), with the new workflow.
+\item Candle \code{proves\_sound} (done in Phase~1; merged in).
+\item \code{small\_big\_decs\_equiv}, the parser's \code{completeness}, and \code{infer\_prog\_sound}, in order of new scripts.
+\item Larger milestones towards the compiler's top-level correctness theorem, sized from the ledger before each starts.
+\end{enumerate}
 
 \section{Threats to validity}
 \begin{itemize}
@@ -320,6 +326,6 @@ The order of migration (bottom-up by directory, or by milestone theorems) is sti
 \item Everything runs on the author's PC; everything is kept in the organization repository (22 Nov).
 \item Target venue ITP 2027: abstract 8 Feb, paper 15 Feb 2027 (22 Nov, from the published call).
 \item Add the no-lessons ablation, the known-defect target and a conditional Sonnet 5.5 arm (22 Nov).
-\item Phase~2 gets its own repository, \code{cakeml-lean4} (22 Nov).
+\item Phase~2 gets its own repository, \code{cakeml-lean4}, and proceeds by milestone theorems (22 Nov).
 \end{enumerate}
 \end{document}
