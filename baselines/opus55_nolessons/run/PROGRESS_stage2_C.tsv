@@ -1,0 +1,62 @@
+time	name	status	note
+2026-11-22T14:43:17Z	ALOOKUP_MAP_dest_var	done	
+2026-11-22T14:43:17Z	TYPE_SUBST_NIL	done	
+2026-11-22T14:43:17Z	TYPE_SUBST_Bool	done	
+2026-11-22T14:43:17Z	is_instance_refl	done	
+2026-11-22T14:43:17Z	swap_ff	done	
+2026-11-22T14:43:17Z	ff_def	done	
+2026-11-22T14:43:17Z	TYPE_SUBST_compose	done	
+2026-11-22T14:43:17Z	TYPE_SUBST_tyvars	done	
+2026-11-22T14:43:17Z	WELLTYPED_LEMMA	done	
+2026-11-22T14:43:17Z	WELLTYPED	done	
+2026-11-22T14:43:17Z	WELLTYPED_CLAUSES	done	
+2026-11-22T14:43:17Z	RACONV	done	Lean name RACONV_thm (RACONV is the inductive relation; Lean rejects the duplicate name)
+2026-11-22T14:43:17Z	RACONV_REFL	done	
+2026-11-22T14:43:17Z	ACONV_REFL	done	
+2026-11-22T14:43:17Z	RACONV_TRANS	done	
+2026-11-22T14:43:17Z	ACONV_TRANS	done	
+2026-11-22T14:43:17Z	RACONV_SYM	done	
+2026-11-22T14:43:17Z	ACONV_SYM	done	
+2026-11-22T14:43:17Z	ALPHAVARS_TYPE	done	
+2026-11-22T14:43:17Z	RACONV_TYPE	done	
+2026-11-22T14:43:17Z	ACONV_TYPE	done	
+2026-11-22T14:43:17Z	subtype_Tyvar	done	statement is the result of the SIMP_CONV derivation (lhs <-> equality), stated by hand
+2026-11-22T14:43:17Z	subterm_Var	done	statement is the result of the SIMP_CONV derivation (lhs <-> equality), stated by hand
+2026-11-22T14:43:17Z	subterm_Const	done	statement is the result of the SIMP_CONV derivation (lhs <-> equality), stated by hand
+2026-11-22T14:43:17Z	type_lt_thm	done	
+2026-11-22T14:43:17Z	term_lt_thm	done	
+2026-11-22T14:43:17Z	type_cmp_refl	done	
+2026-11-22T14:43:17Z	term_cmp_refl	done	
+2026-11-22T14:43:17Z	StrongLinearOrder_type_lt	done	
+2026-11-22T14:43:17Z	TotOrd_type_cmp	done	
+2026-11-22T14:43:17Z	StrongLinearOrder_term_lt	done	
+2026-11-22T14:43:17Z	TotOrd_term_cmp	done	
+2026-11-22T14:43:17Z	ALPHAVARS_eq_ordav	done	
+2026-11-22T14:43:17Z	RACONV_eq_orda	done	
+2026-11-22T14:43:17Z	ACONV_eq_orda	done	
+2026-11-22T14:43:17Z	ordav_sym	done	
+2026-11-22T14:43:17Z	orda_sym	done	
+2026-11-22T14:43:17Z	transitive_alpha_lt	done	
+2026-11-22T14:43:17Z	alpha_lt_not_refl	done	
+2026-11-22T14:43:17Z	VFREE_IN_RACONV	done	
+2026-11-22T14:43:17Z	VFREE_IN_ACONV	done	
+2026-11-22T14:43:17Z	hypset_ok_nil	done	
+2026-11-22T14:43:17Z	hypset_ok_sing	done	
+2026-11-22T14:43:17Z	hypset_ok_cons	done	
+2026-11-22T14:43:17Z	term_union_idem	done	
+2026-11-22T14:43:17Z	term_union_thm	done	
+2026-11-22T14:43:17Z	MEM_term_union_imp	done	
+2026-11-22T14:43:17Z	hypset_ok_term_union	done	
+2026-11-22T14:43:17Z	EVERY_term_union	done	
+2026-11-22T14:43:17Z	MEM_term_union	done	
+2026-11-22T14:43:17Z	term_remove_nil	done	
+2026-11-22T14:43:17Z	MEM_term_remove_imp	done	
+2026-11-22T14:43:17Z	hypset_ok_term_remove	done	
+2026-11-22T14:43:17Z	EVERY_term_remove	done	
+2026-11-22T14:43:17Z	MEM_term_remove	done	
+2026-11-22T14:43:17Z	term_image_nil	done	
+2026-11-22T14:43:17Z	MEM_term_image_imp	done	
+2026-11-22T14:43:17Z	hypset_ok_term_image	done	
+2026-11-22T14:43:17Z	MEM_term_image	done	
+2026-11-22T14:43:17Z	VSUBST_HAS_TYPE	done	
+2026-11-22T14:43:17Z	VSUBST_WELLTYPED	done	
