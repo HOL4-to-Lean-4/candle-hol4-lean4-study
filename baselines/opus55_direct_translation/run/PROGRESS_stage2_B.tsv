@@ -1,0 +1,79 @@
+2026-11-22T07:42:06Z	is_extensional	done	stated in CandleLean/SetSpec.lean
+2026-11-22T07:42:06Z	is_separation_sub	done	stated in CandleLean/SetSpec.lean
+2026-11-22T07:42:06Z	is_power_power	done	stated in CandleLean/SetSpec.lean
+2026-11-22T07:42:06Z	is_union_union	done	stated in CandleLean/SetSpec.lean
+2026-11-22T07:42:06Z	is_upair_upair	done	stated in CandleLean/SetSpec.lean
+2026-11-22T07:42:06Z	mem_sub	done	stated in CandleLean/SetSpec.lean
+2026-11-22T07:42:06Z	mem_power	done	stated in CandleLean/SetSpec.lean
+2026-11-22T07:42:06Z	mem_union	done	stated in CandleLean/SetSpec.lean
+2026-11-22T07:42:06Z	mem_upair	done	stated in CandleLean/SetSpec.lean
+2026-11-22T07:42:06Z	mem_empty	done	stated in CandleLean/SetSpec.lean
+2026-11-22T07:42:06Z	mem_unit	done	stated in CandleLean/SetSpec.lean
+2026-11-22T07:42:06Z	unit_inj	done	stated in CandleLean/SetSpec.lean
+2026-11-22T07:42:06Z	mem_one	done	stated in CandleLean/SetSpec.lean
+2026-11-22T07:42:06Z	mem_two	done	stated in CandleLean/SetSpec.lean
+2026-11-22T07:42:06Z	upair_inj	done	stated in CandleLean/SetSpec.lean
+2026-11-22T07:42:06Z	unit_eq_upair	done	stated in CandleLean/SetSpec.lean
+2026-11-22T07:42:06Z	pair_inj	done	stated in CandleLean/SetSpec.lean
+2026-11-22T07:42:06Z	mem_binary_union	done	stated in CandleLean/SetSpec.lean
+2026-11-22T07:42:06Z	mem_product	done	stated in CandleLean/SetSpec.lean
+2026-11-22T07:42:06Z	true_neq_false	done	stated in CandleLean/SetSpec.lean
+2026-11-22T07:42:06Z	mem_boolset	done	stated in CandleLean/SetSpec.lean
+2026-11-22T07:42:06Z	boolean_in_boolset	done	stated in CandleLean/SetSpec.lean
+2026-11-22T07:42:06Z	boolean_eq_true	done	stated in CandleLean/SetSpec.lean
+2026-11-22T07:42:06Z	apply_abstract	done	stated in CandleLean/SetSpec.lean
+2026-11-22T07:42:06Z	apply_in_rng	done	stated in CandleLean/SetSpec.lean
+2026-11-22T07:42:06Z	abstract_in_funspace	done	stated in CandleLean/SetSpec.lean
+2026-11-22T07:42:06Z	abstract_eq	done	stated in CandleLean/SetSpec.lean
+2026-11-22T07:42:06Z	ALPHAVARS_REFL	done	stated in CandleLean/HolSyntaxLib.lean
+2026-11-22T07:42:06Z	ALPHAVARS_MEM	done	stated in CandleLean/HolSyntaxLib.lean
+2026-11-22T07:42:06Z	REV_ASSOCD	done	stated in CandleLean/HolSyntaxLib.lean; Lean name REV_ASSOCD_thm (Candle.REV_ASSOCD is the definition)
+2026-11-22T07:42:06Z	REV_ASSOCD_ALOOKUP	done	stated in CandleLean/HolSyntaxLib.lean
+2026-11-22T07:42:06Z	PRIMED_INFINITE	done	stated in CandleLean/HolSyntaxLib.lean; free vars quantified as theorem arguments
+2026-11-22T07:42:06Z	REV_ASSOCD_FILTER	done	stated in CandleLean/HolSyntaxLib.lean; unused bound var d given its own type variable γ, P quantified outermost
+2026-11-22T07:42:06Z	REV_ASSOCD_MEM	done	stated in CandleLean/HolSyntaxLib.lean
+2026-11-22T07:42:06Z	MEM_LIST_INSERT	done	stated in CandleLean/HolSyntaxLib.lean
+2026-11-22T07:42:06Z	MEM_LIST_UNION	done	stated in CandleLean/HolSyntaxLib.lean
+2026-11-22T07:42:06Z	MEM_FOLDR_LIST_UNION	done	stated in CandleLean/HolSyntaxLib.lean
+2026-11-22T07:42:06Z	LIST_UNION_NIL	done	stated in CandleLean/HolSyntaxLib.lean
+2026-11-22T07:42:06Z	set_LIST_UNION	done	stated in CandleLean/HolSyntaxLib.lean
+2026-11-22T07:42:06Z	MEM_FOLDR_INORDER_INSERT	done	stated in CandleLean/HolSyntaxLib.lean
+2026-11-22T07:42:06Z	PERM_STRING_SORT	done	stated in CandleLean/HolSyntaxLib.lean
+2026-11-22T07:42:06Z	LENGTH_STRING_SORT	done	stated in CandleLean/HolSyntaxLib.lean
+2026-11-22T07:42:06Z	MEM_STRING_SORT	done	stated in CandleLean/HolSyntaxLib.lean
+2026-11-22T07:42:06Z	ALL_DISTINCT_STRING_SORT	done	stated in CandleLean/HolSyntaxLib.lean
+2026-11-22T07:42:06Z	ALL_DISTINCT_LIST_UNION	done	stated in CandleLean/HolSyntaxLib.lean
+2026-11-22T07:42:06Z	domain_def	done	stated in CandleLean/HolSyntax.lean
+2026-11-22T07:42:06Z	codomain_def	done	stated in CandleLean/HolSyntax.lean
+2026-11-22T07:42:06Z	VFREE_IN_FINITE	done	stated in CandleLean/HolSyntax.lean
+2026-11-22T07:42:06Z	VFREE_IN_FINITE_ALT	done	stated in CandleLean/HolSyntax.lean
+2026-11-22T07:42:06Z	PRIMED_NAME_EXISTS	done	stated in CandleLean/HolSyntax.lean; free vars quantified as theorem arguments
+2026-11-22T07:42:06Z	VARIANT_THM	done	stated in CandleLean/HolSyntax.lean
+2026-11-22T07:42:06Z	SIZEOF_VSUBST	done	stated in CandleLean/HolSyntax.lean
+2026-11-22T07:42:06Z	is_std_interpretation_is_type	done	stated in CandleLean/HolSemanticsExtra.lean
+2026-11-22T07:42:06Z	typesem_inhabited	done	stated in CandleLean/HolSemanticsExtra.lean
+2026-11-22T07:42:06Z	typesem_Fun	done	stated in CandleLean/HolSemanticsExtra.lean
+2026-11-22T07:42:06Z	typesem_Bool	done	stated in CandleLean/HolSemanticsExtra.lean
+2026-11-22T07:42:06Z	typesem_TYPE_SUBST	done	stated in CandleLean/HolSemanticsExtra.lean
+2026-11-22T07:42:06Z	typesem_tyvars	done	stated in CandleLean/HolSemanticsExtra.lean
+2026-11-22T07:42:06Z	termsem_typesem	done	stated in CandleLean/HolSemanticsExtra.lean
+2026-11-22T07:42:06Z	termsem_Equal	done	stated in CandleLean/HolSemanticsExtra.lean; ^Equalsem written as in CONVENTIONS §8, applied to the list
+2026-11-22T07:42:06Z	termsem_equation	done	stated in CandleLean/HolSemanticsExtra.lean
+2026-11-22T07:42:06Z	termsem_raconv	done	stated in CandleLean/HolSemanticsExtra.lean
+2026-11-22T07:42:06Z	termsem_aconv	done	stated in CandleLean/HolSemanticsExtra.lean
+2026-11-22T07:42:06Z	termsem_frees	done	stated in CandleLean/HolSemanticsExtra.lean
+2026-11-22T07:42:06Z	termsem_simple_subst	done	stated in CandleLean/HolSemanticsExtra.lean
+2026-11-22T07:42:06Z	termsem_VSUBST	done	stated in CandleLean/HolSemanticsExtra.lean
+2026-11-22T07:42:06Z	termsem_simple_inst	done	stated in CandleLean/HolSemanticsExtra.lean
+2026-11-22T07:42:06Z	termsem_INST	done	stated in CandleLean/HolSemanticsExtra.lean
+2026-11-22T07:42:06Z	binary_inference_rule	done	stated in CandleLean/HolSoundness.lean
+2026-11-22T07:42:06Z	ABS_correct	done	stated in CandleLean/HolSoundness.lean
+2026-11-22T07:42:06Z	ASSUME_correct	done	stated in CandleLean/HolSoundness.lean
+2026-11-22T07:42:06Z	BETA_correct	done	stated in CandleLean/HolSoundness.lean
+2026-11-22T07:42:06Z	DEDUCT_ANTISYM_correct	done	stated in CandleLean/HolSoundness.lean
+2026-11-22T07:42:06Z	EQ_MP_correct	done	stated in CandleLean/HolSoundness.lean
+2026-11-22T07:42:06Z	INST_correct	done	stated in CandleLean/HolSoundness.lean; free ilist quantified outermost
+2026-11-22T07:42:06Z	INST_TYPE_correct	done	stated in CandleLean/HolSoundness.lean; free tyin quantified outermost
+2026-11-22T07:42:06Z	MK_COMB_correct	done	stated in CandleLean/HolSoundness.lean
+2026-11-22T07:42:06Z	REFL_correct	done	stated in CandleLean/HolSoundness.lean
+2026-11-22T07:42:06Z	proves_sound	done	stated in CandleLean/HolSoundness.lean

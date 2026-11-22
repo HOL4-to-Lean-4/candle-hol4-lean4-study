@@ -1,0 +1,131 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}\usepackage{lmodern}
+\usepackage[margin=2.2cm]{geometry}
+\usepackage{booktabs,tabularx,enumitem,xcolor}
+\usepackage[hidelinks]{hyperref}
+\newcommand{\code}[1]{\texttt{#1}}
+\setlist{itemsep=2pt,topsep=3pt}
+\title{Migrating Candle's soundness theorem from HOL4 to Lean~4 with a human and an AI adjudicator: study plan}
+\author{Draft, version 2, 13 November 2026}
+\date{}
+\begin{document}\sloppy
+\maketitle
+
+\section{Goal}
+The FormaliSE 2027 paper studied one dependency closure: CakeML's type soundness theorem \code{semantics\_type\_sound} (20 theory scripts after kernel-level reduction, 269 canonical theorems). Its limitations section says results may differ for other developments, and its conclusion asks for repeated proving runs under fixed budgets and a second development. This study reruns the workflow on a second development, Candle's soundness theorem, and adds two things the first study lacked: an arm in which an AI model replaces the human expert, and a full record of costs and token usage. It is a full research paper.
+
+Target venue: ITP 2027 (regular paper, 16 pages LIPIcs, double-blind). ITP 2026 had its abstract deadline on 12 February and its paper deadline on 19 February, so we plan for about 18 February 2027. Fallback: CICM 2027 (regular paper, 15 pages LNCS); CICM 2026 closed on 1 April. Neither 2027 call is out yet.
+
+Migrating the whole of CakeML is out of scope. The repository has about 1{,}000 theory scripts, so a full migration could not finish by February.
+
+\section{Target}
+The target is \code{proves\_sound} in \code{holSoundnessScript.sml}:
+\[
+\code{is\_set\_theory mem} \Rightarrow \forall\,\code{thyh c}.\ \code{thyh |- c} \Rightarrow \code{thyh |= c}
+\]
+Every sequent that HOL Light's inference rules derive is valid in the set-theoretic semantics. It underlies the verified Candle theorem prover (Kumar et al., ITP 2014 and JAR 2016). A script-level scan of upstream CakeML at commit \code{48ee98a7} (13 November 2026) gives 9 scripts in the closure. Two of them are the string and list utility libraries \code{mlstring} and \code{mllist}, which the first study also used, and no CakeML language semantics is shared. The other 7 scripts have 7{,}237 lines and 381 theorems. The first study's kernel-level reduction kept about a third of the theorems, which suggests 130 to 200 canonical theorems here. HOL4's dependency tracking gives the exact closure in week~1. The consistency theorem \code{hol\_consistent} (15 scripts, 424 new theorems) is a stretch target that we attempt only if \code{proves\_sound} finishes early in both arms.
+
+Expected difficulty is medium to high. The semantics is parametric in a set-theory model given as a variable \code{mem} with Hilbert choice. Terms use de Bruijn-style substitution and type instantiation, and \code{holSyntaxExtra} is a 4{,}148-line collection that the reduction should shrink a lot.
+
+We pin current CakeML upstream on the day we freeze the package, together with the HOL4 commit that CakeML builds with, and record both hashes.
+
+Appendix~\ref{app:candidates} keeps the other three candidates for the record.
+
+\section{Design: a human arm and an AI arm}
+\paragraph{Why the same target for both arms.} Running the AI arm on a second theorem would change two things at once, the theorem and the adjudicator, so a difference in results could come from either. Running both arms on the same frozen package changes only the adjudicator.
+
+\paragraph{Shared start.} One translation agent produces one round-0 translation from the frozen manifest, and the round-1 validator runs once on it. Up to this point the arms are identical.
+
+\paragraph{Fork at the first adjudication.}
+\begin{itemize}
+\item \textbf{Arm H (human).} The human expert adjudicates every validator finding, as in the first study.
+\item \textbf{Arm M (machine).} An AI adjudicator receives the same material the human expert receives: the HOL4 and Lean pair, the finding and the same written instructions. It returns accept or reject with a reason. No person touches arm M until it ends, except to start runs.
+\end{itemize}
+From there each arm has its own repair and review loop, its own stopping rule, and its own two proving rounds. Repairs, validator, agent, prompts and budgets are the same in both arms.
+
+\paragraph{The AI adjudicator.} It should come from a third model family, different from the translation agent (Claude) and from the validator, so that no model judges its own family's output. We use OpenAI's GPT-6 Astra (released September 2026) through the Codex CLI on the author's PC under a ChatGPT subscription, or the strongest GPT model that Codex offers there if Astra is not available to the account. We record its exact model identifier, reasoning setting and Codex version, and keep them fixed for the whole study. Codex reports token usage per session; because the runs use a subscription, the ledger also gives an API-equivalent cost at OpenAI's list price on the run date.
+
+\paragraph{Shadow verdicts in arm H.} The AI adjudicator also judges every arm-H finding, and its verdict stays hidden from the human expert until the study ends. This gives a direct agreement measure on identical findings at small cost.
+
+\paragraph{Ground truth for arm M.} After both arms finish, the human expert labels every arm-M finding without seeing the AI verdict; a script hides the verdicts and shuffles the order. The proving rounds give a second, independent check: every defect that a proof attempt exposes is counted against the arm whose translation contained it.
+
+\paragraph{Research questions.}
+\begin{enumerate}[label=RQ\arabic*.]
+\item Do the first study's findings hold for a different logic? In particular, do proof attempts again expose defects that review missed?
+\item How far does an AI adjudicator agree with the human expert, and how many defects reach the proving stage and the final translation in each arm?
+\item How much do proving results vary across repeated runs of the same workflow?
+\item What does each step cost, in tokens, money, wall-clock time and human time, per accepted statement and per proved theorem?
+\end{enumerate}
+
+\section{Protocol}
+The workflow stays as published, so results compare. The changes come from the first study's lessons and are fixed before any model sees the target.
+\begin{enumerate}
+\item \textbf{Scope and freeze.} Pin the commits. Reduce to the kernel-level dependency closure with the round-2 tooling and rebuild in HOL4 after each step. Freeze the canonical manifest of definitions and theorems.
+\item \textbf{Translation.} Same contract: keep definition bodies and statements, defer proofs, never weaken a statement. One translation agent (Claude Code with the current Opus model). HOL4 library notions go into a prelude. Translators in every arm get the full HOL4 scripts, proofs included.
+\item \textbf{Scripted structural scans from the start}: \code{True} statements, definitions without bodies, \code{partial def}, admitted instances.
+\item \textbf{Validator rounds.} One validator from another model family, chosen now and kept for the whole study. Each round runs three times. The prelude is paired with the HOL4 library sources from round~1. Every finding goes to the arm's adjudicator, and no finding changes the translation without an adjudicator's decision. Stopping rule: the loop stops in the first round in which no finding survives adjudication.
+\item \textbf{Proving round 1}, per arm. Five workflows with the published prompts word for word: Skills, Docs, Second pass, Aristotle offered, Direct. Three runs each under a fixed budget per run, for example a 6-hour wall-clock cap and at most 5 Aristotle tasks for Direct. Provers never see the HOL4 proofs: their workspace holds the Lean translation, the prelude and the frozen statements, with the HOL4 scripts removed. Measures as before: Local, complete modulo admissions (main), strict transitive audit, unchanged statements.
+\item \textbf{Back to review.} Every defect that a proof attempt exposes goes back to the arm's adjudicator and repair. Counts are taken again only on the repaired translation.
+\item \textbf{Proving round 2} on each arm's repaired translation, with the same runs.
+\item \textbf{Records.} Session logs, commits, validator and adjudicator records, the cost ledger and a scripted counter, packaged as an anonymous Zenodo artifact.
+\end{enumerate}
+
+\section{Recording costs and token usage}
+Every model call and every human session goes into one ledger (\code{costs.csv}) from day one. Each row has: arm, phase, round, workflow, run number, tool, exact model identifier, start and end time, input tokens, output tokens, cache-read and cache-write tokens, cost in US dollars, Aristotle tasks and their duration, and human minutes.
+\begin{itemize}
+\item \textbf{Claude Code} (translation, repair, proving): token usage per message from the session transcripts. Runs under a subscription also get an API-equivalent cost at the list price on the run date, reported as such.
+\item \textbf{Validator}: token counts from the API response metadata and the billed cost.
+\item \textbf{AI adjudicator} (Codex CLI): token usage that Codex reports per session, plus an API-equivalent cost.
+\item \textbf{Aristotle}: number of tasks, duration, and the billed cost from its account.
+\item \textbf{Human expert}: minutes per adjudication session and per labelling session, logged at the time.
+\item \textbf{Compute}: wall-clock time per run and the machine used.
+\end{itemize}
+A script checks the ledger against the session logs before each proving round, so that no run is missing.
+
+\section{Budget}
+\begin{itemize}
+\item Proving: 60 runs (2 arms $\times$ 2 rounds $\times$ 5 workflows $\times$ 3 runs). With a 6-hour cap this is up to 360 hours of PC time, about 5 days per proving round with 3 runs in parallel. We test in week~1 that the PC can run 3 at once; otherwise some runs move to a cloud machine.
+\item Aristotle: at most 60 tasks for Direct (5 per run), plus any that the Aristotle-offered workflow chooses to make.
+\item Validator: the first study's Gemini rounds cost about US\$2 each. With 2 arms, 3 runs per round and 4 to 6 rounds, about US\$50 to 75.
+\item AI adjudicator: one short call per finding in both arms, likely under US\$20 in total.
+\item Claude Code tokens are probably the largest item. The ledger will measure them; we have no estimate from the first study.
+\item Human expert: one adjudication session per arm-H round, one after each arm-H proving round, and one blind labelling session for arm M at the end.
+\end{itemize}
+
+\section{Timeline}
+\begin{tabularx}{\textwidth}{@{}lX@{}}
+\toprule
+16--22 Nov & Pin commits, reduce the closure on the PC, freeze the manifest. Fix the validator, the AI adjudicator and the cost ledger. Test parallel runs.\\
+23 Nov--13 Dec & Round-0 translation, structural scans, round-1 validator, then fork. Both arms review until their stopping rules hold.\\
+14 Dec--3 Jan & Proving round 1 in both arms (30 runs) and audits.\\
+4--17 Jan & Review and repair of exposed defects; proving round 2 (30 runs). FormaliSE notification on 11 Jan.\\
+18--31 Jan & FormaliSE camera-ready (29 Jan). Blind labelling of arm-M findings. Start the ITP draft. \textbf{Go/no-go on 25 Jan}: if proving round 2 is not done, move to CICM (about 1 Apr).\\
+1--18 Feb & Write and submit the ITP paper and anonymous artifact.\\
+\bottomrule
+\end{tabularx}
+
+\section{Threats to validity to report}
+\begin{itemize}
+\item One human expert, who is also the author, adjudicates arm H and labels arm M. The blind, shuffled labelling reduces the bias but cannot remove it.
+\item One target in one source logic, though a different one from the first study.
+\item CakeML and Candle are public, so the models may have seen them in training.
+\end{itemize}
+
+\appendix
+\section{Other candidates considered}\label{app:candidates}
+Script-level scan at \code{48ee98a7}. ``Overlap'' counts scripts shared with the script-level closure of \code{typeSound} (24 scripts, 825 theorems).
+
+\begin{table}[h]\small
+\begin{tabularx}{\textwidth}{@{}lXrrrr@{}}
+\toprule
+& Main theorem (script) & Scripts & Overlap & New lines & New thms\\
+\midrule
+A & \code{proves\_sound} (holSoundness), chosen & 9 & 2 & 7{,}237 & 381\\
+B & \code{small\_big\_decs\_equiv} (bigSmallEquiv) & 21 & 11 & 8{,}021 & 227\\
+C & \code{infer\_prog\_sound} (inferSound) & 26 & 14 & 18{,}397 & 659\\
+D & \code{completeness} (pegComplete) & 11 & 6 & 7{,}096 & 241\\
+\bottomrule
+\end{tabularx}
+\end{table}
+B tests lazy lists and divergence and reuses the semantics repaired in the first study. C tests unification and termination and is the largest. D is the smallest but also needs HOL4's PEG library, which lives outside CakeML.
+\end{document}

@@ -1,0 +1,63 @@
+time	theorem	status	note
+2026-11-22T07:41:04Z	VFREE_IN_VSUBST	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	VSUBST_NIL	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	INST_CORE_HAS_TYPE	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	INST_CORE_NIL_IS_RESULT	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	INST_HAS_TYPE	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	INST_WELLTYPED	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	tyvars_ALL_DISTINCT	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	tvars_ALL_DISTINCT	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	EQUATION_HAS_TYPE_BOOL	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	type_ok_TYPE_SUBST	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	type_ok_TYPE_SUBST_imp	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	term_ok_welltyped	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	term_ok_type_ok	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	term_ok_equation	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	term_ok_VSUBST	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	term_ok_INST_CORE	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	term_ok_INST	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	term_ok_raconv	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	term_ok_aconv	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	bind_not_free	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	bind_dbVSUBST	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	bind_dbVSUBST_cons	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	dbVSUBST_frees	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	dbVFREE_IN_bind	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry; unused HOL4 bound var b has type variable 'a, translated as (b : α) with {α : Type u}
+2026-11-22T07:41:04Z	dbVFREE_IN_VFREE_IN	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	MAP_db_FILTER_neq	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	REV_ASSOCD_MAP_db	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	dbVFREE_IN_dbVSUBST	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	VSUBST_dbVSUBST	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	dbINST_bind	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	dbVSUBST_nil	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	INST_CORE_dbINST	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	INST_dbINST	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	bind_list_aux_clauses	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry; free vars n x ty are explicit theorem arguments
+2026-11-22T07:41:04Z	dbterm_bind	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	dbterm_db	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	dbterm_RACONV	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	RACONV_dbterm	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	dbterm_ACONV	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	ACONV_db	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	ACONV_VSUBST	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	ACONV_INST	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	VSUBST_simple_subst	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	INST_CORE_simple_inst	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	INST_simple_inst	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	simple_subst_has_type	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	simple_inst_has_type	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	FST_rename_bvars	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	rename_bvars_RACONV	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	rename_bvars_ACONV	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	rename_bvars_has_type	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	rename_bvars_welltyped	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	fresh_union	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry; free vars s t : Set string are theorem arguments
+2026-11-22T07:41:04Z	fresh_names_exist	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	bv_names_rename_bvars	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	FINITE_VFREE_IN	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	FINITE_VFREE_IN_2	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	FINITE_VFREE_IN_list	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	FINITE_MEM_Var	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	theory_ok_sig	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry
+2026-11-22T07:41:04Z	arities_match_nil	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry; bool equality as Prop equality; free vars are theorem arguments
+2026-11-22T07:41:04Z	arities_match_Tyvar	done	stated in CandleLean/HolSyntaxExtra2.lean, proof sorry; bool equality as Prop equality; free vars are theorem arguments

@@ -1,0 +1,77 @@
+time	theorem	status	note
+2026-11-22T07:42:47Z	append_aux_thm	done	stated with sorry
+2026-11-22T07:42:47Z	append_thm	done	stated; the three conjuncts use independent type variables (as HOL4 infers)
+2026-11-22T07:42:47Z	SmartAppend_thm	done	stated with sorry
+2026-11-22T07:42:47Z	append_SmartAppend	done	stated with sorry
+2026-11-22T07:42:47Z	MAP_FST_I_PAIR_MAP	done	stated with sorry
+2026-11-22T07:42:47Z	MAX_LIST_APPEND	done	stated with sorry
+2026-11-22T07:42:47Z	MAX_LIST_SNOC	done	stated with sorry
+2026-11-22T07:42:47Z	domain_nat_set_from_list	done	stated with sorry
+2026-11-22T07:42:47Z	UPDATE_LIST_THM	done	stated with sorry
+2026-11-22T07:42:47Z	APPLY_UPDATE_LIST_ALOOKUP	done	stated with sorry
+2026-11-22T07:42:47Z	find_index_ALL_DISTINCT_EL	done	stated; [Nonempty α] for EL (no extra assumption)
+2026-11-22T07:42:47Z	find_index_shift_0	done	stated with sorry
+2026-11-22T07:42:47Z	EVERY2_RC_same	done	stated with sorry
+2026-11-22T07:42:47Z	I_PERMUTES	done	stated with sorry
+2026-11-22T07:42:47Z	MAP_EQ_ID	done	stated with sorry
+2026-11-22T07:42:47Z	FUN_FMAP_FAPPLY_FEMPTY_FAPPLY	done	stated; [Nonempty β] for FAPPLY (no extra assumption)
+2026-11-22T07:42:47Z	LESS_1	done	stated with sorry
+2026-11-22T07:42:47Z	num_from_hex_string_num_to_hex_string	done	stated with sorry
+2026-11-22T07:42:47Z	MAPi_ID	done	stated with sorry
+2026-11-22T07:42:47Z	OPT_MMAP_SOME	done	stated with sorry
+2026-11-22T07:42:47Z	w2n_lt_256	done	stated as ∀ w : word8, w2n w < 256 (result of INST_TYPE + SIMP_RULE on w2n_lt)
+2026-11-22T07:42:47Z	CHR_w2n_n2w_ORD	done	stated with sorry
+2026-11-22T07:42:47Z	n2w_ORD_CHR_w2n	done	stated with sorry
+2026-11-22T07:42:47Z	CHR_w2n_n2w_ORD_simp	done	stated with sorry
+2026-11-22T07:42:47Z	n2w_ORD_CHR_w2n_simp	done	stated with sorry
+2026-11-22T07:42:47Z	LENGTH_FIELDS	done	stated with sorry
+2026-11-22T07:42:47Z	FIELDS_NEQ_NIL	done	stated with sorry
+2026-11-22T07:42:47Z	FIELDS_next	done	stated with sorry
+2026-11-22T07:42:47Z	splitlines_nil	done	stated as splitlines (str "") = [] (the EVAL result)
+2026-11-22T07:42:47Z	splitlines_eq_nil	done	stated with sorry
+2026-11-22T07:42:47Z	irreflexive_inv_image	done	stated with sorry
+2026-11-22T07:42:47Z	trichotomous_inv_image	done	stated with sorry
+2026-11-22T07:42:47Z	plus_0_I	done	stated with sorry
+2026-11-22T07:42:47Z	OPTION_MAP_I	done	stated with sorry
+2026-11-22T07:42:47Z	is_subseq_refl	done	stated with sorry
+2026-11-22T07:42:47Z	is_subseq_nil	done	stated with sorry
+2026-11-22T07:42:47Z	EVEN_make_even	done	stated with sorry
+2026-11-22T07:42:47Z	v2w_32_F	done	stated with sorry
+2026-11-22T07:42:47Z	v2w_32_T	done	stated with sorry
+2026-11-22T07:42:47Z	merge_tail_MEM	done	stated with sorry
+2026-11-22T07:42:47Z	mergesortN_tail_MEM	done	stated with sorry
+2026-11-22T07:42:47Z	mergesort_tail_MEM	done	stated with sorry
+2026-11-22T07:42:47Z	merge_tail_PERM	done	stated with sorry
+2026-11-22T07:42:47Z	sort2_tail_PERM	done	stated with sorry
+2026-11-22T07:42:47Z	sort3_tail_PERM	done	stated with sorry
+2026-11-22T07:42:47Z	mergesortN_tail_PERM	done	stated with sorry
+2026-11-22T07:42:47Z	sort_MEM	done	stated with sorry
+2026-11-22T07:42:47Z	sort_PERM	done	stated with sorry
+2026-11-22T07:42:47Z	sort_LENGTH	done	stated with sorry
+2026-11-22T07:42:47Z	sort_set	done	stated with sorry
+2026-11-22T07:42:47Z	concat_nil	done	stated with sorry
+2026-11-22T07:42:47Z	explode_aux_thm	done	stated with sorry
+2026-11-22T07:42:47Z	explode_thm	done	stated with sorry
+2026-11-22T07:42:47Z	explode_implode	done	stated with sorry
+2026-11-22T07:42:47Z	implode_explode	done	stated with sorry
+2026-11-22T07:42:47Z	explode_11	done	stated with sorry
+2026-11-22T07:42:47Z	explode_BIJ	done	stated with sorry
+2026-11-22T07:42:47Z	LENGTH_explode	done	stated with sorry
+2026-11-22T07:42:47Z	strlen_implode	done	stated with sorry
+2026-11-22T07:42:47Z	substring_full	done	stated with sorry
+2026-11-22T07:42:47Z	strcat_thm	done	stated with sorry
+2026-11-22T07:42:47Z	strcat_assoc	done	stated with sorry
+2026-11-22T07:42:47Z	strcat_nil	done	stated with sorry
+2026-11-22T07:42:47Z	mlstring_common_prefix	done	stated with sorry
+2026-11-22T07:42:47Z	mlstring_common_char_prefix	done	stated; free t1 c2 quantified outermost; duplicated binder t2 kept (outer one vacuous)
+2026-11-22T07:42:47Z	mlstring_common_suffix	done	stated with sorry
+2026-11-22T07:42:47Z	explode_strcat	done	stated with sorry
+2026-11-22T07:42:47Z	strlen_strcat	done	stated with sorry
+2026-11-22T07:42:47Z	explode_toString	done	stated with sorry
+2026-11-22T07:42:47Z	strlen_toString	done	stated with sorry
+2026-11-22T07:42:47Z	substring_0	done	stated with sorry
+2026-11-22T07:42:47Z	mlstring_lt_inv_image	done	stated with sorry
+2026-11-22T07:42:47Z	StrongLinearOrder_mlstring_lt	done	stated with sorry
+2026-11-22T07:42:47Z	ALL_DISTINCT_MAP_implode	done	stated with sorry
+2026-11-22T07:42:47Z	ALL_DISTINCT_MAP_explode	done	stated with sorry
+2026-11-22T07:42:47Z	concat_sing	done	stated with sorry
