@@ -1,0 +1,125 @@
+=== setSpec.pair_inj
+⊢ is_set_theory (mem :'U -> 'U -> bool) ⇒
+  ∀(a :'U) (b :'U) (c :'U) (d :'U). ((a,b) :'U) = ((c,d) :'U) ⇔ a = c ∧ b = d
+
+=== holSyntax.dest_var_def
+⊢ ∀(x :mlstring) (ty :type). dest_var (Var x ty) = ((x,ty) :mlstring # type)
+
+=== list.HD
+⊢ ∀(h :α) (t :α list). HD (h::t) = h
+
+=== list.LAST_DEF
+⊢ ∀(h :α) (t :α list). LAST (h::t) = if t = ([] :α list) then h else LAST t
+
+=== holSyntaxLib.RESULT_def
+⊢ ∀(t :α). RESULT (Result t) = t
+
+=== holSyntaxLib.CLASH_def
+⊢ ∀(t :α). CLASH (Clash t) = t
+
+=== holSyntaxLib.REV_ASSOCD
+⊢ (∀(a :α) (d :β). REV_ASSOCD a ([] :(β # α) list) d = d) ∧
+  ∀(a :γ) (x :δ) (y :γ) (t :(δ # γ) list) (d :δ).
+    REV_ASSOCD a (((x,y) :δ # γ)::t) d =
+    if y = a then x else REV_ASSOCD a t d
+
+=== holSyntaxExtra.VSUBST_WELLTYPED
+⊢ ∀(tm :term) (ty :α) (ilist :(term # term) list).
+    welltyped tm ∧
+    (∀(s :term) (s' :term).
+       MEM ((s',s) :term # term) ilist ⇒
+       ∃(x :mlstring) (ty :type). s = Var x ty ∧ s' has_type ty) ⇒
+    welltyped (VSUBST ilist tm)
+
+=== mlstring.mlstring_common_char_prefix
+⊢ ∀(c1 :char) (s1 :string) (s2 :string) (t2 :α) (t2 :mlstring).
+    implode (STRING c1 s1) ^ (t1 :mlstring) =
+    implode (STRING (c2 :char) s2) ^ t2 ⇔
+    c1 = c2 ∧ implode s1 ^ t1 = implode s2 ^ t2
+
+=== holSyntaxExtra.subtype_Tyvar
+⊢ (ty :type) subtype Tyvar (x :mlstring) ⇔ ty = Tyvar x
+
+=== holSyntaxExtra.subterm_Var
+⊢ (tm :term) subterm Var (x :mlstring) (ty :type) ⇔ tm = Var x ty
+
+=== holSyntaxExtra.subterm_Const
+⊢ (tm :term) subterm Const (x :mlstring) (ty :type) ⇔ tm = Const x ty
+
+=== holSyntaxExtra.type_lt_thm
+⊢ (∀(x2 :mlstring) (x1 :mlstring). type_lt (Tyvar x1) (Tyvar x2) ⇔ x1 < x2) ∧
+  (∀(_2 :type list) (_1 :mlstring) (_0 :mlstring).
+     type_lt (Tyvar _0) (Tyapp _1 _2) ⇔ T) ∧
+  (∀(_5 :mlstring) (_4 :type list) (_3 :mlstring).
+     type_lt (Tyapp _3 _4) (Tyvar _5) ⇔ F) ∧
+  ∀(x2 :mlstring) (x1 :mlstring) (args2 :type list) (args1 :type list).
+    type_lt (Tyapp x1 args1) (Tyapp x2 args2) ⇔
+    (mlstring_lt LEX LLEX type_lt) ((x1,args1) :mlstring # type list)
+      ((x2,args2) :mlstring # type list)
+
+=== holSyntaxExtra.term_lt_thm
+⊢ (∀(x2 :mlstring) (x1 :mlstring) (ty2 :type) (ty1 :type).
+     term_lt (Var x1 ty1) (Var x2 ty2) ⇔
+     (mlstring_lt LEX type_lt) ((x1,ty1) :mlstring # type)
+       ((x2,ty2) :mlstring # type)) ∧
+  (∀(_3 :type) (_2 :mlstring) (_1 :type) (_0 :mlstring).
+     term_lt (Var _0 _1) (Const _2 _3) ⇔ T) ∧
+  (∀(_7 :term) (_6 :term) (_5 :type) (_4 :mlstring).
+     term_lt (Var _4 _5) (Comb _6 _7) ⇔ T) ∧
+  (∀(_9 :type) (_8 :mlstring) (_11 :term) (_10 :term).
+     term_lt (Var _8 _9) (Abs _10 _11) ⇔ T) ∧
+  (∀(_15 :type) (_14 :mlstring) (_13 :type) (_12 :mlstring).
+     term_lt (Const _12 _13) (Var _14 _15) ⇔ F) ∧
+  (∀(x2 :mlstring) (x1 :mlstring) (ty2 :type) (ty1 :type).
+     term_lt (Const x1 ty1) (Const x2 ty2) ⇔
+     (mlstring_lt LEX type_lt) ((x1,ty1) :mlstring # type)
+       ((x2,ty2) :mlstring # type)) ∧
+  (∀(_19 :term) (_18 :term) (_17 :type) (_16 :mlstring).
+     term_lt (Const _16 _17) (Comb _18 _19) ⇔ T) ∧
+  (∀(_23 :term) (_22 :term) (_21 :type) (_20 :mlstring).
+     term_lt (Const _20 _21) (Abs _22 _23) ⇔ T) ∧
+  (∀(_27 :type) (_26 :mlstring) (_25 :term) (_24 :term).
+     term_lt (Comb _24 _25) (Var _26 _27) ⇔ F) ∧
+  (∀(_31 :type) (_30 :mlstring) (_29 :term) (_28 :term).
+     term_lt (Comb _28 _29) (Const _30 _31) ⇔ F) ∧
+  (∀(t2 :term) (t1 :term) (s2 :term) (s1 :term).
+     term_lt (Comb s1 s2) (Comb t1 t2) ⇔
+     (term_lt LEX term_lt) ((s1,s2) :term # term) ((t1,t2) :term # term)) ∧
+  (∀(_35 :term) (_34 :term) (_33 :term) (_32 :term).
+     term_lt (Comb _32 _33) (Abs _34 _35) ⇔ T) ∧
+  (∀(_39 :type) (_38 :mlstring) (_37 :term) (_36 :term).
+     term_lt (Abs _36 _37) (Var _38 _39) ⇔ F) ∧
+  (∀(_43 :type) (_42 :mlstring) (_41 :term) (_40 :term).
+     term_lt (Abs _40 _41) (Const _42 _43) ⇔ F) ∧
+  (∀(_47 :term) (_46 :term) (_45 :term) (_44 :term).
+     term_lt (Abs _44 _45) (Comb _46 _47) ⇔ F) ∧
+  ∀(t2 :term) (t1 :term) (s2 :term) (s1 :term).
+    term_lt (Abs s1 s2) (Abs t1 t2) ⇔
+    (term_lt LEX term_lt) ((s1,s2) :term # term) ((t1,t2) :term # term)
+
+=== MISSING holSyntax.subtype_Tyvar
+
+=== MISSING holSyntax.subterm_Var
+
+=== MISSING holSyntax.subterm_Const
+
+=== MISSING holSyntax.type_lt_thm
+
+=== MISSING holSyntax.term_lt_thm
+
+=== misc.w2n_lt_256
+⊢ ∀(w :word8). w2n w < (256 :num)
+
+=== MISSING mlstring.splitlines_nil
+
+=== misc.splitlines_nil
+⊢ splitlines ("" :string) = ([] :string list)
+
+=== MISSING holSemanticsExtra.Equalsem
+
+=== MISSING holSemantics.Equalsem
+
+=== DB.find dest_var
+holSyntax.dest_var_def
+holSyntaxExtra.ALOOKUP_MAP_dest_var
+> 

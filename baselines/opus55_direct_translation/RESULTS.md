@@ -169,3 +169,24 @@ the other two.
 - `audit/`: audit briefs, findings, and the Fable comparison.
 - `transcripts/`: gzipped Claude Code transcripts of the five translators, three auditors and the
   comparison agent.
+
+## HOL4 check of the open points (added 22 Nov 2026)
+
+HOL4 (`vendor/HOL`) and the package were built in the cloud (`scripts/build.sh native`, all 10
+theories OK). `run/hol4_check.sml` prints the HOL4 theorems with types; output in
+`run/hol4_check.txt`.
+
+- **`pair_inj`** is stated over `'U` with `is_set_theory mem`, so `,` is the set-theory pair. Both
+  translations are right.
+- **Unspecified values.** `dest_var_def`, `HD`, `LAST_DEF`, `RESULT_def` and `CLASH_def` have only
+  the constructor cases, and no other theorem in the closure mentions the missing cases. HOL4 does
+  not fix `dest_var (Const x ty)`, `HD []` and so on, which confirms the correction above.
+- **Type signatures.** `REV_ASSOCD` has 4 type variables (α β in the first conjunct, γ δ in the
+  second). In `VSUBST_WELLTYPED` the outer `ty` has type `α`. Both match the table above.
+- **`mlstring_common_char_prefix`** is `∀(c1:char) (s1 s2:string) (t2:α) (t2:mlstring). implode
+  (STRING c1 s1) ^ t1 = implode (STRING c2 s2) ^ t2 ⇔ …`. The outer `t2 : α` is unused, and `t1`
+  and `c2` are free in the HOL4 theorem (the binder list repeats `t2` where `t1` and `c2` were
+  meant). Both translations bind `t1` and `c2` as parameters and type the outer `t2` as `mlstring`.
+- **ML-built statements.** `subtype_Tyvar`, `subterm_Var`, `subterm_Const`, `type_lt_thm` and
+  `term_lt_thm` (holSyntaxExtra), `w2n_lt_256` and `splitlines_nil` (misc) print as both
+  translations state them, up to binder names.
