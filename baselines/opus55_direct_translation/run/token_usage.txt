@@ -1,0 +1,7 @@
+stage1	2026-11-22T06:58:05.125Z	2026-11-22T07:35:21.043Z	resp=129	tools=132	in=260	out=207004	cache_read=24017727	cache_write=472857	usd=11.31
+A	2026-11-22T07:36:50.285Z	2026-11-22T07:43:02.302Z	resp=29	tools=30	in=58	out=38275	cache_read=3571626	cache_write=120806	usd=2.08
+B	2026-11-22T07:36:50.845Z	2026-11-22T07:42:23.430Z	resp=25	tools=26	in=50	out=38131	cache_read=3090786	cache_write=132043	usd=2.04
+C	2026-11-22T07:36:51.282Z	2026-11-22T07:41:26.956Z	resp=22	tools=23	in=44	out=30029	cache_read=2373097	cache_write=100486	usd=1.58
+D	2026-11-22T07:36:50.624Z	2026-11-22T07:41:27.754Z	resp=20	tools=21	in=40	out=30227	cache_read=2238844	cache_write=118581	usd=1.65
+TOTAL {'in': 452, 'out': 343666, 'cr': 35292080, 'cw': 944773} usd=18.66 (cache write at 1h rate: 21.49)
+prices claude-opus-5-5 per MTok: input 4, output 20, cache read 0.20, cache write 5m 5 (1h 8); all cache writes were 5m (ephemeral_5m)
