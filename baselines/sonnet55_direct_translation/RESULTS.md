@@ -56,9 +56,8 @@ Output: 20 Lean modules (5 prelude), 5,403 lines.
 ## Clean room and context
 
 The transcript scan shows no access outside each workspace and the Lean toolchain, and no web or
-git use. Stage 1, C and D kept scratch files under `/tmp/claude-0/` (outside the session
-scratchpad's name pattern but inside the forbidden `/tmp/claude*` prefix); they held only the
-agents' own extracts. No agent received any `queued_command` attachment in this run.
+git use. Stage 1, C and D kept their own scratch files under `/tmp/claude-0/`, which the brief
+listed as off-limits; the files held only their own extracts and scripts. No agent received any `queued_command` attachment in this run.
 
 ## Comparison with the Opus baseline
 
