@@ -6,7 +6,7 @@
 \newcommand{\code}[1]{\texttt{#1}}
 \setlist{itemsep=2pt,topsep=3pt}
 \title{Migrating CakeML from HOL4 to Lean~4 with a three-family AI workflow: study plan}
-\author{Draft, version 3.1, 22 November 2026}
+\author{Draft, version 3.2, 22 November 2026}
 \date{}
 \begin{document}\sloppy
 \maketitle
@@ -161,6 +161,15 @@ HOL4 runs on the PC in the pinned Docker image (\code{scripts/build.sh docker}).
 \end{itemize}
 Both the validator's evidence and the grounding step call it. Its log is part of the artifact.
 
+\section{Baselines and ablations}\label{sec:ablation}
+Both direct baselines (Fable 5.2, Opus 5.5) have no meaning defects on Candle. Their briefs, however, carry study~1's lessons: the translator briefs list the edge cases that went wrong before (division and modulus, truncated subtraction, characters, finite maps, choice and \code{ARB}), and the audit brief lists the defect kinds found in study~1. So final fidelity alone cannot separate the workflow from the baselines. Three additions measure where the quality comes from.
+\begin{enumerate}
+\item \textbf{No-lessons ablation (Opus 5.5).} The same two-stage run, with every study-1 lesson removed from the briefs; everything else is unchanged. Compared with the Opus baseline, it shows how much the lessons from study~1 contribute. Cost about US\$20.
+\item \textbf{A target with known real defects.} The study-1 type-soundness closure, where real defects are known (\code{CARD}; Euclidean instead of floored integer division). The no-lessons and with-lessons Opus runs are repeated there, so that ``near perfect'' is tested beyond Candle.
+\item \textbf{Cheaper translator (Sonnet 5.5), if the no-lessons Opus run is also clean.} Sonnet 5.5 runs the baseline procedure, and then the full workflow. The question is whether the workflow brings a cheaper translator to the quality of Opus at lower total cost.
+\end{enumerate}
+If the baselines stay near perfect, the workflow's value is certification: evidence that a translation can be trusted, and what that evidence costs. The seeded-defect experiment (Section~\ref{sec:audit}) measures this directly.
+
 \section{Audit experiment with seeded defects}\label{sec:audit}
 This experiment measures how well each checking setup works. It runs on the clean Opus 5.5 baseline translation, apart from the main workflow, so that its results do not depend on which defects the workflow happened to make.
 
@@ -214,7 +223,7 @@ Study~1's five proving workflows assumed Aristotle, which now rejects Lean proje
 \begin{enumerate}[label=RQ\arabic*.]
 \item Does study~1's workflow hold on a second development once an AI reviewer replaces the human expert? In particular, do proof attempts again expose defects that review missed?
 \item How well do the checking setups find known defects, and how many false alarms and wrong reasons do they produce? Does a validator plus reviewer from two other families beat a single auditor, and does HOL4 grounding change the result?
-\item How does the workflow's final translation compare with the direct-translation baselines (Fable 5.2, Opus 5.5) in defects, literalness and cost?
+\item How does the workflow's final translation compare with the direct-translation baselines (Fable 5.2, Opus 5.5) in defects, literalness and cost? How much of the baselines' quality comes from study~1's lessons in the briefs, and can the workflow bring a cheaper translator (Sonnet 5.5) to the same quality?
 \item How much do validation and proving vary across repeated runs?
 \item What does each step cost, in tokens, money and time, per accepted statement and per proved theorem?
 \end{enumerate}
@@ -247,10 +256,12 @@ Validation: up to 5 rounds $\times$ 3 Astra runs & 100--250\\
 Review: Neon, one call per finding & 20--50\\
 Repairs and re-checks & 30--80\\
 Audit experiment: 30 audits plus grounding & 270--350\\
+No-lessons ablation on Candle and both Opus runs on the type-soundness closure & 60--100\\
+Sonnet 5.5 arm (baseline and workflow), if run & 100--250\\
 Claude proving: 2 rounds $\times$ 3 runs, at about \$40--150 per run (the Fable type-soundness test cost about \$60) & 360--900\\
 Astra prover, 2 rounds $\times$ 3 runs & 200--500\\
 \midrule
-Total & about 1{,}000--2{,}200\\
+Total & about 1{,}150--2{,}550\\
 \bottomrule
 \end{tabularx}
 
@@ -284,6 +295,7 @@ Phase~1's ledger gives the cost and time per theorem for translation, validation
 \item \textbf{No human expert.} The reviewer's decisions are checked only by HOL4 and Lean grounding, by the seeded-defect experiment and by proofs. A meaning question that none of these can settle stays open and is reported as such. The author designs the protocol and reads the results, but does not adjudicate.
 \item \textbf{One target in Phase~1}, in one source logic, though a different one from study~1.
 \item \textbf{Seeded defects come from known classes.} The experiment measures detection of those classes, not of unknown ones.
+\item \textbf{Lessons in the prompts.} The baseline briefs list study~1's defect kinds; the no-lessons ablation measures their effect. In the Opus baseline, two chat messages of the author were also attached to the agents' context by the harness; runs from now on start agents in isolated sessions.
 \item \textbf{Training data.} CakeML and Candle are public, so all three model families may have seen them.
 \item \textbf{Model drift.} Model versions can change during the study. We pin identifiers and record dates.
 \end{itemize}
@@ -294,5 +306,7 @@ Phase~1's ledger gives the cost and time per theorem for translation, validation
 \item Translator Opus 5.5 with the two-stage method (22 Nov).
 \item Astra is the validator and also a second prover; Neon runs through the \code{agy} CLI (22 Nov).
 \item Everything runs on the author's PC; everything is kept in the organization repository (22 Nov).
+\item Target venue ITP 2027: abstract 8 Feb, paper 15 Feb 2027 (22 Nov, from the published call).
+\item Add the no-lessons ablation, the known-defect target and a conditional Sonnet 5.5 arm (22 Nov).
 \end{enumerate}
 \end{document}
