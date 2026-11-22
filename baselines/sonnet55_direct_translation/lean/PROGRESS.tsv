@@ -1,0 +1,15 @@
+2026-11-22T15:22:40Z	Prelude.Basic	sets, option/pair/combinator, relations, RTC, LEX, MAX/MIN, ordering, LEAST	done	no sorry
+2026-11-22T15:22:40Z	Prelude.List	list library constants	done	no sorry
+2026-11-22T15:22:40Z	Prelude.FMap	FMap and operations	done	no sorry
+2026-11-22T15:22:40Z	Prelude.String	char, string, num/string conversions, words, spt	done	no sorry
+2026-11-22T15:22:40Z	Prelude.Sort	mergesort_tail family	done	no sorry
+2026-11-22T15:22:40Z	Misc	the, app_list, append, SmartAppend, max3, UPDATE_LIST, find_index, splitlines, is_subseq, make_even, fmap_update	done	no sorry
+2026-11-22T15:22:40Z	Mllist	sort, mapi, partition, foldl, foldli_aux, collate, rev variants	done	no sorry
+2026-11-22T15:22:40Z	Mlstring	mlstring and string ops, app_list_ann, shrink, char/word8	done	no sorry
+2026-11-22T15:22:40Z	SetSpec	set-theory spec predicates and constructions	done	no sorry
+2026-11-22T15:22:40Z	HolSyntaxLib	ALPHAVARS, REV_ASSOCD, result, list insert/union/sort	done	no sorry
+2026-11-22T15:22:40Z	HolSyntax	type, term, typing, RACONV, orders, VSUBST, INST, theory, proves, update, updates	done	no sorry
+2026-11-22T15:22:40Z	HolSyntaxExtra	subtype/subterm, DbTerm and db ops, variant, fresh, frees, ConstDef, types_in, arities_match	done	no sorry
+2026-11-22T15:22:40Z	HolSemantics	type/term assignments, typesem, termsem, models, entails, is_structure	done	no sorry
+2026-11-22T15:22:40Z	HolSemanticsExtra	Equalsem	done	no sorry
+2026-11-22T15:22:40Z	HolSoundness	empty (no definitions needed)	done	no sorry

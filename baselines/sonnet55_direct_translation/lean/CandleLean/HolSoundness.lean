@@ -1,0 +1,155 @@
+import CandleLean.HolSemanticsExtra
+/-
+  `candle/standard/semantics/holSoundnessScript.sml` contains only theorems (stage 2).
+-/
+namespace Candle.HolSoundness
+
+open HOL Candle.Misc Candle.Mllist Candle.Mlstring Candle.SetSpec Candle.HolSyntaxLib Candle.HolSyntax
+  Candle.HolSyntaxExtra Candle.HolSemantics Candle.HolSemanticsExtra
+universe u
+
+open Classical
+
+noncomputable section
+
+variable {U : Type u}
+
+
+/- HOL4: Theorem binary_inference_rule:
+   is_set_theory ^mem ⇒
+    ∀thy h1 h2 p1 p2 q.
+    q has_type Bool ∧ term_ok (sigof thy) q ∧
+    (∀i v. is_structure (sigof thy) i v ∧
+           termsem (tmsof thy) i v p1 = True ∧
+           termsem (tmsof thy) i v p2 = True ⇒
+           termsem (tmsof thy) i v q = True) ∧
+    (thy,h1) |= p1 ∧ (thy,h2) |= p2
+    ⇒ (thy, term_union h1 h2) |= q -/
+theorem binary_inference_rule [Inhabited U] (mem : U → U → Prop) : is_set_theory mem →
+    ∀ (thy : thy) (h1 h2 : List term) (p1 p2 q : term),
+    has_type q BoolTy ∧ term_ok (sigof thy) q ∧
+    (∀ (i : interpretation U) (v : valuation U),
+           is_structure mem (sigof thy) i v ∧
+           termsem mem (tmsof thy) i v p1 = mtrue mem ∧
+           termsem mem (tmsof thy) i v p2 = mtrue mem →
+           termsem mem (tmsof thy) i v q = mtrue mem) ∧
+    entails mem (thy, h1) p1 ∧ entails mem (thy, h2) p2
+    → entails mem (thy, term_union h1 h2) q := by sorry
+
+/- HOL4: Theorem ABS_correct:
+   is_set_theory ^mem ⇒
+    ∀thy x ty h l r.
+    ¬EXISTS (VFREE_IN (Var x ty)) h ∧ type_ok (tysof thy) ty ∧
+    (thy,h) |= l === r
+    ⇒ (thy,h) |= Abs (Var x ty) l === Abs (Var x ty) r -/
+theorem ABS_correct [Inhabited U] (mem : U → U → Prop) : is_set_theory mem →
+    ∀ (thy : thy) (x : mlstring) (ty : type) (h : List term) (l r : term),
+    ¬ EXISTS (VFREE_IN (Var x ty)) h ∧ type_ok (tysof thy) ty ∧
+    entails mem (thy, h) (l === r)
+    → entails mem (thy, h) (Abs (Var x ty) l === Abs (Var x ty) r) := by sorry
+
+/- HOL4: Theorem ASSUME_correct:
+   ∀thy p.
+      theory_ok thy ∧ p has_type Bool ∧ term_ok (sigof thy) p
+      ⇒ (thy,[p]) |= p -/
+theorem ASSUME_correct [Inhabited U] (mem : U → U → Prop) :
+    ∀ (thy : thy) (p : term),
+      theory_ok thy ∧ has_type p BoolTy ∧ term_ok (sigof thy) p
+      → entails mem (thy, [p]) p := by sorry
+
+/- HOL4: Theorem BETA_correct:
+   is_set_theory ^mem ⇒
+    ∀thy x ty t.
+      theory_ok thy ∧ type_ok (tysof thy) ty ∧ term_ok (sigof thy) t ⇒
+      (thy,[]) |= Comb (Abs (Var x ty) t) (Var x ty) === t -/
+theorem BETA_correct [Inhabited U] (mem : U → U → Prop) : is_set_theory mem →
+    ∀ (thy : thy) (x : mlstring) (ty : type) (t : term),
+      theory_ok thy ∧ type_ok (tysof thy) ty ∧ term_ok (sigof thy) t →
+      entails mem (thy, []) (Comb (Abs (Var x ty) t) (Var x ty) === t) := by sorry
+
+/- HOL4: Theorem DEDUCT_ANTISYM_correct:
+   is_set_theory ^mem ⇒
+    ∀thy h1 p1 h2 p2.
+      (thy,h1) |= p1 ∧ (thy,h2) |= p2 ⇒
+      (thy,
+       term_union (term_remove p2 h1)
+                  (term_remove p1 h2))
+      |= p1 === p2 -/
+theorem DEDUCT_ANTISYM_correct [Inhabited U] (mem : U → U → Prop) : is_set_theory mem →
+    ∀ (thy : thy) (h1 : List term) (p1 : term) (h2 : List term) (p2 : term),
+      entails mem (thy, h1) p1 ∧ entails mem (thy, h2) p2 →
+      entails mem (thy,
+       term_union (term_remove p2 h1)
+                  (term_remove p1 h2))
+      (p1 === p2) := by sorry
+
+/- HOL4: Theorem EQ_MP_correct:
+   is_set_theory ^mem ⇒
+    ∀thy h1 h2 p q p'.
+      (thy,h1) |= p === q ∧ (thy,h2) |= p' ∧ ACONV p p' ⇒
+      (thy,term_union h1 h2) |= q -/
+theorem EQ_MP_correct [Inhabited U] (mem : U → U → Prop) : is_set_theory mem →
+    ∀ (thy : thy) (h1 h2 : List term) (p q p' : term),
+      entails mem (thy, h1) (p === q) ∧ entails mem (thy, h2) p' ∧ ACONV p p' →
+      entails mem (thy, term_union h1 h2) q := by sorry
+
+/- HOL4: Theorem INST_correct:
+   is_set_theory ^mem ⇒
+    ∀thy h c.
+      (∀s s'. MEM (s',s) ilist ⇒
+              ∃x ty. (s = Var x ty) ∧ s' has_type ty ∧ term_ok (sigof thy) s') ∧
+      (thy, h) |= c
+    ⇒ (thy, term_image (VSUBST ilist) h) |= VSUBST ilist c
+   (`ilist` is free in HOL4, hence universally quantified: a parameter here) -/
+theorem INST_correct [Inhabited U] (mem : U → U → Prop) (ilist : List (term × term)) :
+    is_set_theory mem →
+    ∀ (thy : thy) (h : List term) (c : term),
+      (∀ s s', MEM (s', s) ilist →
+              ∃ x ty, (s = Var x ty) ∧ has_type s' ty ∧ term_ok (sigof thy) s') ∧
+      entails mem (thy, h) c
+    → entails mem (thy, term_image (VSUBST ilist) h) (VSUBST ilist c) := by sorry
+
+/- HOL4: Theorem INST_TYPE_correct:
+   is_set_theory ^mem ⇒
+    ∀thy h c.
+      EVERY (type_ok (tysof thy)) (MAP FST tyin) ∧
+      (thy, h) |= c
+    ⇒ (thy, term_image (INST tyin) h) |= INST tyin c
+   (`tyin` is free in HOL4, hence universally quantified: a parameter here) -/
+theorem INST_TYPE_correct [Inhabited U] (mem : U → U → Prop) (tyin : List (type × type)) :
+    is_set_theory mem →
+    ∀ (thy : thy) (h : List term) (c : term),
+      EVERY (type_ok (tysof thy)) (MAP FST tyin) ∧
+      entails mem (thy, h) c
+    → entails mem (thy, term_image (INST tyin) h) (INST tyin c) := by sorry
+
+/- HOL4: Theorem MK_COMB_correct:
+   is_set_theory ^mem ⇒
+    ∀thy h1 h2 l1 r1 l2 r2.
+      (thy,h1) |= l1 === r1 ∧ (thy,h2) |= l2 === r2 ∧
+      welltyped (Comb l1 l2)
+      ⇒ (thy,term_union h1 h2) |= Comb l1 l2 === Comb r1 r2 -/
+theorem MK_COMB_correct [Inhabited U] (mem : U → U → Prop) : is_set_theory mem →
+    ∀ (thy : thy) (h1 h2 : List term) (l1 r1 l2 r2 : term),
+      entails mem (thy, h1) (l1 === r1) ∧ entails mem (thy, h2) (l2 === r2) ∧
+      welltyped (Comb l1 l2)
+      → entails mem (thy, term_union h1 h2) (Comb l1 l2 === Comb r1 r2) := by sorry
+
+/- HOL4: Theorem REFL_correct:
+   is_set_theory ^mem ⇒
+    ∀thy t.
+      theory_ok thy ∧ term_ok (sigof thy) t ⇒
+      (thy,[]) |= t === t -/
+theorem REFL_correct [Inhabited U] (mem : U → U → Prop) : is_set_theory mem →
+    ∀ (thy : thy) (t : term),
+      theory_ok thy ∧ term_ok (sigof thy) t →
+      entails mem (thy, []) (t === t) := by sorry
+
+/- HOL4: Theorem proves_sound:
+   is_set_theory ^mem ⇒ ∀thyh c. thyh |- c ⇒ thyh |= c -/
+theorem proves_sound [Inhabited U] (mem : U → U → Prop) : is_set_theory mem →
+    ∀ (thyh : thy × List term) (c : term), proves thyh c → entails mem thyh c := by sorry
+
+end
+
+end Candle.HolSoundness

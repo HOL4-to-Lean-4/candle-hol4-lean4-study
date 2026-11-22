@@ -1,0 +1,10 @@
+load "holSyntaxLibTheory"; load "holSyntaxTheory";
+val _ = show_types := true;
+fun pr (n,th) = print (n ^ ":\n" ^ thm_to_string th ^ "\n\n");
+val _ = app pr (List.filter (fn (n,_) => String.isSubstring "RESULT" n orelse String.isSubstring "CLASH" n) (definitions "holSyntaxLib"));
+val _ = app pr (List.filter (fn (n,_) => String.isSubstring "dest_var" n) (definitions "holSyntax"));
+val _ = app pr (List.filter (fn (n,_) => n = "HD" orelse String.isSubstring "HD" n) (definitions "list"));
+val t1 = (SOME (prove(``RESULT (Clash (a:'a)) = RESULT (Clash b)``, SIMP_TAC (srw_ss()) [definition "RESULT_def"]))) handle _ => NONE;
+val _ = print ("RESULT proved by simp: " ^ (if isSome t1 then "YES" else "NO") ^ "\n");
+val t2 = (SOME (prove(``RESULT (Clash (a:'a)) = RESULT (Clash b)``, REWRITE_TAC [definition "RESULT_def"] THEN METIS_TAC [definition "RESULT_def"]))) handle _ => NONE;
+val _ = print ("RESULT via metis: " ^ (if isSome t2 then "YES" else "NO") ^ "\n");
