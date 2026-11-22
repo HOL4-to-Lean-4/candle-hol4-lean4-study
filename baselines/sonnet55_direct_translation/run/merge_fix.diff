@@ -1,0 +1,16 @@
+184c184
+< theorem term_ok_raconv : ∀ (env : List (term × term)) (tp : term × term), RACONV env tp →
+---
+> theorem term_ok_raconv : ∀ (env : List (term × term)) (tp : term × term), HolSyntax.RACONV env tp →
+356c356
+<     RACONV (ZIP (MAP (UNCURRY Var) env1, MAP (UNCURRY Var) env2)) (t1, t2) := by sorry
+---
+>     HolSyntax.RACONV (ZIP (MAP (UNCURRY Var) env1, MAP (UNCURRY Var) env2)) (t1, t2) := by sorry
+364c364
+< theorem RACONV_dbterm : ∀ (env : List (term × term)) (tp : term × term), RACONV env tp →
+---
+> theorem RACONV_dbterm : ∀ (env : List (term × term)) (tp : term × term), HolSyntax.RACONV env tp →
+487c487
+<     RACONV (MAP (fun p : mlstring × (mlstring × type) => (Var p.2.1 p.2.2, Var p.1 p.2.2)) env)
+---
+>     HolSyntax.RACONV (MAP (fun p : mlstring × (mlstring × type) => (Var p.2.1 p.2.2, Var p.1 p.2.2)) env)
