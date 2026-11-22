@@ -1,0 +1,62 @@
+2026-11-22T14:43:29Z	VFREE_IN_VSUBST	done	stated in CandleLean/HolSyntaxExtra2.lean
+2026-11-22T14:43:29Z	VSUBST_NIL	done	stated in CandleLean/HolSyntaxExtra2.lean
+2026-11-22T14:43:29Z	INST_CORE_HAS_TYPE	done	stated in CandleLean/HolSyntaxExtra2.lean
+2026-11-22T14:43:29Z	INST_CORE_NIL_IS_RESULT	done	stated in CandleLean/HolSyntaxExtra2.lean
+2026-11-22T14:43:29Z	INST_HAS_TYPE	done	stated in CandleLean/HolSyntaxExtra2.lean
+2026-11-22T14:43:29Z	INST_WELLTYPED	done	stated in CandleLean/HolSyntaxExtra2.lean
+2026-11-22T14:43:29Z	tyvars_ALL_DISTINCT	done	stated in CandleLean/HolSyntaxExtra2.lean
+2026-11-22T14:43:29Z	tvars_ALL_DISTINCT	done	stated in CandleLean/HolSyntaxExtra2.lean
+2026-11-22T14:43:29Z	EQUATION_HAS_TYPE_BOOL	done	stated in CandleLean/HolSyntaxExtra2.lean
+2026-11-22T14:43:29Z	type_ok_TYPE_SUBST	done	stated in CandleLean/HolSyntaxExtra2.lean
+2026-11-22T14:43:29Z	type_ok_TYPE_SUBST_imp	done	stated in CandleLean/HolSyntaxExtra2.lean
+2026-11-22T14:43:29Z	term_ok_welltyped	done	stated in CandleLean/HolSyntaxExtra2.lean
+2026-11-22T14:43:29Z	term_ok_type_ok	done	stated in CandleLean/HolSyntaxExtra2.lean
+2026-11-22T14:43:29Z	term_ok_equation	done	free HOL4 variables bound by explicit outer ∀
+2026-11-22T14:43:29Z	term_ok_VSUBST	done	stated in CandleLean/HolSyntaxExtra2.lean
+2026-11-22T14:43:29Z	term_ok_INST_CORE	done	stated in CandleLean/HolSyntaxExtra2.lean
+2026-11-22T14:43:29Z	term_ok_INST	done	stated in CandleLean/HolSyntaxExtra2.lean
+2026-11-22T14:43:29Z	term_ok_raconv	done	stated in CandleLean/HolSyntaxExtra2.lean
+2026-11-22T14:43:29Z	term_ok_aconv	done	stated in CandleLean/HolSyntaxExtra2.lean
+2026-11-22T14:43:29Z	bind_not_free	done	HOL4 bind is Lean bind_
+2026-11-22T14:43:29Z	bind_dbVSUBST	done	HOL4 bind is Lean bind_
+2026-11-22T14:43:29Z	bind_dbVSUBST_cons	done	HOL4 bind is Lean bind_
+2026-11-22T14:43:29Z	dbVSUBST_frees	done	stated in CandleLean/HolSyntaxExtra2.lean
+2026-11-22T14:43:29Z	dbVFREE_IN_bind	done	HOL4 ∀b of unconstrained type 'a: Lean {α : Type} (b : α); bind is bind_
+2026-11-22T14:43:29Z	dbVFREE_IN_VFREE_IN	done	stated in CandleLean/HolSyntaxExtra2.lean
+2026-11-22T14:43:29Z	MAP_db_FILTER_neq	done	stated in CandleLean/HolSyntaxExtra2.lean
+2026-11-22T14:43:29Z	REV_ASSOCD_MAP_db	done	stated in CandleLean/HolSyntaxExtra2.lean
+2026-11-22T14:43:29Z	dbVFREE_IN_dbVSUBST	done	stated in CandleLean/HolSyntaxExtra2.lean
+2026-11-22T14:43:29Z	VSUBST_dbVSUBST	done	stated in CandleLean/HolSyntaxExtra2.lean
+2026-11-22T14:43:29Z	dbINST_bind	done	HOL4 bind is Lean bind_
+2026-11-22T14:43:29Z	dbVSUBST_nil	done	stated in CandleLean/HolSyntaxExtra2.lean
+2026-11-22T14:43:29Z	INST_CORE_dbINST	done	stated in CandleLean/HolSyntaxExtra2.lean
+2026-11-22T14:43:29Z	INST_dbINST	done	stated in CandleLean/HolSyntaxExtra2.lean
+2026-11-22T14:43:29Z	bind_list_aux_clauses	done	free HOL4 variables bound by explicit outer ∀
+2026-11-22T14:43:29Z	dbterm_bind	done	stated in CandleLean/HolSyntaxExtra2.lean
+2026-11-22T14:43:29Z	dbterm_db	done	stated in CandleLean/HolSyntaxExtra2.lean
+2026-11-22T14:43:29Z	dbterm_RACONV	done	stated in CandleLean/HolSyntaxExtra2.lean
+2026-11-22T14:43:29Z	RACONV_dbterm	done	stated in CandleLean/HolSyntaxExtra2.lean
+2026-11-22T14:43:29Z	dbterm_ACONV	done	stated in CandleLean/HolSyntaxExtra2.lean
+2026-11-22T14:43:29Z	ACONV_db	done	stated in CandleLean/HolSyntaxExtra2.lean
+2026-11-22T14:43:29Z	ACONV_VSUBST	done	stated in CandleLean/HolSyntaxExtra2.lean
+2026-11-22T14:43:29Z	ACONV_INST	done	stated in CandleLean/HolSyntaxExtra2.lean
+2026-11-22T14:43:29Z	VSUBST_simple_subst	done	stated in CandleLean/HolSyntaxExtra2.lean
+2026-11-22T14:43:29Z	INST_CORE_simple_inst	done	stated in CandleLean/HolSyntaxExtra2.lean
+2026-11-22T14:43:29Z	INST_simple_inst	done	stated in CandleLean/HolSyntaxExtra2.lean
+2026-11-22T14:43:29Z	simple_subst_has_type	done	stated in CandleLean/HolSyntaxExtra2.lean
+2026-11-22T14:43:29Z	simple_inst_has_type	done	stated in CandleLean/HolSyntaxExtra2.lean
+2026-11-22T14:43:29Z	FST_rename_bvars	done	stated in CandleLean/HolSyntaxExtra2.lean
+2026-11-22T14:43:29Z	rename_bvars_RACONV	done	stated in CandleLean/HolSyntaxExtra2.lean
+2026-11-22T14:43:29Z	rename_bvars_ACONV	done	stated in CandleLean/HolSyntaxExtra2.lean
+2026-11-22T14:43:29Z	rename_bvars_has_type	done	stated in CandleLean/HolSyntaxExtra2.lean
+2026-11-22T14:43:29Z	rename_bvars_welltyped	done	stated in CandleLean/HolSyntaxExtra2.lean
+2026-11-22T14:43:29Z	fresh_union	done	free HOL4 variables bound by explicit outer ∀
+2026-11-22T14:43:29Z	fresh_names_exist	done	stated in CandleLean/HolSyntaxExtra2.lean
+2026-11-22T14:43:29Z	bv_names_rename_bvars	done	stated in CandleLean/HolSyntaxExtra2.lean
+2026-11-22T14:43:29Z	FINITE_VFREE_IN	done	stated in CandleLean/HolSyntaxExtra2.lean
+2026-11-22T14:43:29Z	FINITE_VFREE_IN_2	done	stated in CandleLean/HolSyntaxExtra2.lean
+2026-11-22T14:43:29Z	FINITE_VFREE_IN_list	done	stated in CandleLean/HolSyntaxExtra2.lean
+2026-11-22T14:43:29Z	FINITE_MEM_Var	done	stated in CandleLean/HolSyntaxExtra2.lean
+2026-11-22T14:43:29Z	theory_ok_sig	done	stated in CandleLean/HolSyntaxExtra2.lean
+2026-11-22T14:43:29Z	arities_match_nil	done	free HOL4 variables bound by explicit outer ∀
+2026-11-22T14:43:29Z	arities_match_Tyvar	done	free HOL4 variables bound by explicit outer ∀

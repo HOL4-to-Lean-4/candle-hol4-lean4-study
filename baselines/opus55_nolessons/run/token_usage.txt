@@ -1,0 +1,5 @@
+stage1 2026-11-22T14:05:30.545Z 2026-11-22T14:39:00.868Z 111 114 {'claude-opus-5-5'} {'input_tokens': 222, 'output_tokens': 187353, 'cache_read_input_tokens': 23087513, 'cache_creation_input_tokens': 396282}
+A 2026-11-22T14:11:36.716745Z 2026-11-22T14:43:30.736Z 15 17 {'claude-opus-5-5'} {'input_tokens': 30, 'output_tokens': 19959, 'cache_read_input_tokens': 1472786, 'cache_creation_input_tokens': 92309}
+B 2026-11-22T14:11:36.716745Z 2026-11-22T14:45:01.973Z 23 25 {'claude-opus-5-5'} {'input_tokens': 46, 'output_tokens': 29567, 'cache_read_input_tokens': 2306755, 'cache_creation_input_tokens': 103027}
+C 2026-11-22T14:11:36.716745Z 2026-11-22T14:43:34.942Z 13 15 {'claude-opus-5-5'} {'input_tokens': 26, 'output_tokens': 22459, 'cache_read_input_tokens': 1191685, 'cache_creation_input_tokens': 87267}
+D 2026-11-22T14:11:36.716745Z 2026-11-22T14:43:47.839Z 13 14 {'claude-opus-5-5'} {'input_tokens': 26, 'output_tokens': 23706, 'cache_read_input_tokens': 1131919, 'cache_creation_input_tokens': 89019}
