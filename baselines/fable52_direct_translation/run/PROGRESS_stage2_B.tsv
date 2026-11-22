@@ -1,0 +1,79 @@
+2026-11-21T18:56:15Z	is_extensional	done	stated; compiles
+2026-11-21T18:56:15Z	is_separation_sub	done	stated; compiles
+2026-11-21T18:56:15Z	is_power_power	done	stated; compiles
+2026-11-21T18:56:15Z	is_union_union	done	stated; compiles
+2026-11-21T18:56:15Z	is_upair_upair	done	stated; compiles
+2026-11-21T18:56:15Z	mem_sub	done	stated; compiles
+2026-11-21T18:56:15Z	mem_power	done	stated; compiles
+2026-11-21T18:56:15Z	mem_union	done	stated; compiles
+2026-11-21T18:56:15Z	mem_upair	done	stated; compiles
+2026-11-21T18:56:15Z	mem_empty	done	the empty-set symbol is empty ^mem (overload), not pred_set EMPTY
+2026-11-21T18:56:15Z	mem_unit	done	stated; compiles
+2026-11-21T18:56:15Z	unit_inj	done	stated; compiles
+2026-11-21T18:56:15Z	mem_one	done	stated; compiles
+2026-11-21T18:56:15Z	mem_two	done	stated; compiles
+2026-11-21T18:56:15Z	upair_inj	done	stated; compiles
+2026-11-21T18:56:15Z	unit_eq_upair	done	stated; compiles
+2026-11-21T18:56:15Z	pair_inj	done	(a,b) is the set-theory pair (overload of ',' to pair ^mem, the last overload; the HOL4 proof uses pair_def)
+2026-11-21T18:56:15Z	mem_binary_union	done	stated; compiles
+2026-11-21T18:56:15Z	mem_product	done	stated; compiles
+2026-11-21T18:56:15Z	true_neq_false	done	stated; compiles
+2026-11-21T18:56:15Z	mem_boolset	done	stated; compiles
+2026-11-21T18:56:15Z	boolean_in_boolset	done	stated; compiles
+2026-11-21T18:56:15Z	boolean_eq_true	done	stated; compiles
+2026-11-21T18:56:15Z	apply_abstract	done	stated; compiles
+2026-11-21T18:56:15Z	apply_in_rng	done	stated; compiles
+2026-11-21T18:56:15Z	abstract_in_funspace	done	stated; compiles
+2026-11-21T18:56:15Z	abstract_eq	done	stated; compiles
+2026-11-21T18:56:15Z	ALPHAVARS_REFL	done	UNCURRY $= is UNCURRY (fun x y => x = y)
+2026-11-21T18:56:15Z	ALPHAVARS_MEM	done	stated; compiles
+2026-11-21T18:56:15Z	REV_ASSOCD	done	Lean name REV_ASSOCD_thm (CONVENTIONS section 1); the two conjuncts bind their variables separately, so HOL4 gives them independent type variables: 4 type variables in Lean
+2026-11-21T18:56:15Z	REV_ASSOCD_ALOOKUP	done	case on option is a Lean match; \(x,y). is fun (x, y) =>
+2026-11-21T18:56:15Z	PRIMED_INFINITE	done	free variable x : string is a theorem argument; UNIV is at Set Nat
+2026-11-21T18:56:15Z	REV_ASSOCD_FILTER	done	free variable P is a theorem argument; the unused bound variable d has its own type variable (as HOL4 infers)
+2026-11-21T18:56:15Z	REV_ASSOCD_MEM	done	stated; compiles
+2026-11-21T18:56:15Z	MEM_LIST_INSERT	done	stated; compiles
+2026-11-21T18:56:15Z	MEM_LIST_UNION	done	stated; compiles
+2026-11-21T18:56:15Z	MEM_FOLDR_LIST_UNION	done	stated; compiles
+2026-11-21T18:56:15Z	LIST_UNION_NIL	done	stated; compiles
+2026-11-21T18:56:15Z	set_LIST_UNION	done	stated; compiles
+2026-11-21T18:56:15Z	MEM_FOLDR_INORDER_INSERT	done	stated; compiles
+2026-11-21T18:56:15Z	PERM_STRING_SORT	done	stated; compiles
+2026-11-21T18:56:15Z	LENGTH_STRING_SORT	done	stated; compiles
+2026-11-21T18:56:15Z	MEM_STRING_SORT	done	stated; compiles
+2026-11-21T18:56:15Z	ALL_DISTINCT_STRING_SORT	done	stated; compiles
+2026-11-21T18:56:15Z	ALL_DISTINCT_LIST_UNION	done	stated; compiles
+2026-11-21T18:56:15Z	domain_def	done	stated; compiles
+2026-11-21T18:56:15Z	codomain_def	done	stated; compiles
+2026-11-21T18:56:15Z	VFREE_IN_FINITE	done	stated; compiles
+2026-11-21T18:56:15Z	VFREE_IN_FINITE_ALT	done	stated; compiles
+2026-11-21T18:56:15Z	PRIMED_NAME_EXISTS	done	free variables x, ty, t are theorem arguments
+2026-11-21T18:56:15Z	VARIANT_THM	done	stated; compiles
+2026-11-21T18:56:15Z	SIZEOF_VSUBST	done	stated; compiles
+2026-11-21T18:56:15Z	is_std_interpretation_is_type	done	free variables mem and i are theorem arguments
+2026-11-21T18:56:15Z	typesem_inhabited	done	stated; compiles
+2026-11-21T18:56:15Z	typesem_Fun	done	stated; compiles
+2026-11-21T18:56:15Z	typesem_Bool	done	stated; compiles
+2026-11-21T18:56:15Z	typesem_TYPE_SUBST	done	no mem in the statement: only the type variable U
+2026-11-21T18:56:15Z	typesem_tyvars	done	no mem in the statement: only the type variable U
+2026-11-21T18:56:15Z	termsem_typesem	done	stated; compiles
+2026-11-21T18:56:15Z	termsem_Equal	done	^Equalsem is Equalsem mem (stage 1 abbreviation)
+2026-11-21T18:56:15Z	termsem_equation	done	stated; compiles
+2026-11-21T18:56:15Z	termsem_raconv	done	stated; compiles
+2026-11-21T18:56:15Z	termsem_aconv	done	stated; compiles
+2026-11-21T18:56:15Z	termsem_frees	done	stated; compiles
+2026-11-21T18:56:15Z	termsem_simple_subst	done	stated; compiles
+2026-11-21T18:56:15Z	termsem_VSUBST	done	stated; compiles
+2026-11-21T18:56:15Z	termsem_simple_inst	done	stated; compiles
+2026-11-21T18:56:15Z	termsem_INST	done	stated; compiles
+2026-11-21T18:56:15Z	binary_inference_rule	done	tmsof thy at a theory is tmsof (sigof thy); True is true0 mem
+2026-11-21T18:56:15Z	ABS_correct	done	stated; compiles
+2026-11-21T18:56:15Z	ASSUME_correct	done	no is_set_theory hypothesis in HOL4; mem is free (theorem argument)
+2026-11-21T18:56:15Z	BETA_correct	done	stated; compiles
+2026-11-21T18:56:15Z	DEDUCT_ANTISYM_correct	done	stated; compiles
+2026-11-21T18:56:15Z	EQ_MP_correct	done	stated; compiles
+2026-11-21T18:56:15Z	INST_correct	done	free variable ilist is a theorem argument
+2026-11-21T18:56:15Z	INST_TYPE_correct	done	free variable tyin is a theorem argument
+2026-11-21T18:56:15Z	MK_COMB_correct	done	stated; compiles
+2026-11-21T18:56:15Z	REFL_correct	done	stated; compiles
+2026-11-21T18:56:15Z	proves_sound	done	stated; compiles

@@ -1,0 +1,62 @@
+2026-11-21T18:54:13Z	VFREE_IN_VSUBST	done	stated; compiles
+2026-11-21T18:54:13Z	VSUBST_NIL	done	stated; compiles
+2026-11-21T18:54:13Z	INST_CORE_HAS_TYPE	done	stated; compiles
+2026-11-21T18:54:13Z	INST_CORE_NIL_IS_RESULT	done	stated; compiles
+2026-11-21T18:54:13Z	INST_HAS_TYPE	done	stated; compiles
+2026-11-21T18:54:13Z	INST_WELLTYPED	done	stated; compiles
+2026-11-21T18:54:13Z	tyvars_ALL_DISTINCT	done	stated; compiles
+2026-11-21T18:54:13Z	tvars_ALL_DISTINCT	done	stated; compiles
+2026-11-21T18:54:13Z	EQUATION_HAS_TYPE_BOOL	done	stated; compiles
+2026-11-21T18:54:13Z	type_ok_TYPE_SUBST	done	stated; compiles
+2026-11-21T18:54:13Z	type_ok_TYPE_SUBST_imp	done	stated; compiles
+2026-11-21T18:54:13Z	term_ok_welltyped	done	stated; compiles
+2026-11-21T18:54:13Z	term_ok_type_ok	done	FST sig kept as FST sig
+2026-11-21T18:54:13Z	term_ok_equation	done	free variables sig, s, t bound as theorem arguments
+2026-11-21T18:54:13Z	term_ok_VSUBST	done	stated; compiles
+2026-11-21T18:54:13Z	term_ok_INST_CORE	done	FST sig kept as FST sig
+2026-11-21T18:54:13Z	term_ok_INST	done	FST sig kept as FST sig
+2026-11-21T18:54:13Z	term_ok_raconv	done	paired lambda written fun (s, s') => ... (CONVENTIONS section 3)
+2026-11-21T18:54:13Z	term_ok_aconv	done	stated; compiles
+2026-11-21T18:54:13Z	bind_not_free	done	stated; compiles
+2026-11-21T18:54:13Z	bind_dbVSUBST	done	stated; compiles
+2026-11-21T18:54:13Z	bind_dbVSUBST_cons	done	stated; compiles
+2026-11-21T18:54:13Z	dbVSUBST_frees	done	stated; compiles
+2026-11-21T18:54:13Z	dbVFREE_IN_bind	done	bound variable b is unused in HOL4, so it has a type variable 'a: stated with {α : Type} [Nonempty α] (b : α)
+2026-11-21T18:54:13Z	dbVFREE_IN_VFREE_IN	done	stated; compiles
+2026-11-21T18:54:13Z	MAP_db_FILTER_neq	done	paired lambdas written fun (x, y) => ... (CONVENTIONS section 3)
+2026-11-21T18:54:13Z	REV_ASSOCD_MAP_db	done	inner ∀k v hides the outer k (mlstring) with k : term, as in HOL4
+2026-11-21T18:54:13Z	dbVFREE_IN_dbVSUBST	done	stated; compiles
+2026-11-21T18:54:13Z	VSUBST_dbVSUBST	done	paired lambda written fun (x, y) => ... (CONVENTIONS section 3)
+2026-11-21T18:54:13Z	dbINST_bind	done	stated; compiles
+2026-11-21T18:54:13Z	dbVSUBST_nil	done	stated; compiles
+2026-11-21T18:54:13Z	INST_CORE_dbINST	done	stated; compiles
+2026-11-21T18:54:13Z	INST_dbINST	done	stated; compiles
+2026-11-21T18:54:13Z	bind_list_aux_clauses	done	free variables n, x, ty bound as theorem arguments; ty is bound again in the last conjunct, as in HOL4
+2026-11-21T18:54:13Z	dbterm_bind	done	stated; compiles
+2026-11-21T18:54:13Z	dbterm_db	done	stated; compiles
+2026-11-21T18:54:13Z	dbterm_RACONV	done	stated; compiles
+2026-11-21T18:54:13Z	RACONV_dbterm	done	stated; compiles
+2026-11-21T18:54:13Z	dbterm_ACONV	done	stated; compiles
+2026-11-21T18:54:13Z	ACONV_db	done	stated; compiles
+2026-11-21T18:54:13Z	ACONV_VSUBST	done	stated; compiles
+2026-11-21T18:54:13Z	ACONV_INST	done	stated; compiles
+2026-11-21T18:54:13Z	VSUBST_simple_subst	done	stated; compiles
+2026-11-21T18:54:13Z	INST_CORE_simple_inst	done	stated; compiles
+2026-11-21T18:54:13Z	INST_simple_inst	done	stated; compiles
+2026-11-21T18:54:13Z	simple_subst_has_type	done	paired lambda written fun (s', s) => ... (CONVENTIONS section 3)
+2026-11-21T18:54:13Z	simple_inst_has_type	done	stated; compiles
+2026-11-21T18:54:13Z	FST_rename_bvars	done	stated; compiles
+2026-11-21T18:54:13Z	rename_bvars_RACONV	done	paired lambda written fun (s', (s, ty)) => ... (CONVENTIONS section 3)
+2026-11-21T18:54:13Z	rename_bvars_ACONV	done	stated; compiles
+2026-11-21T18:54:13Z	rename_bvars_has_type	done	stated; compiles
+2026-11-21T18:54:13Z	rename_bvars_welltyped	done	stated; compiles
+2026-11-21T18:54:13Z	fresh_union	done	free variables s, t : Set string bound as theorem arguments
+2026-11-21T18:54:13Z	fresh_names_exist	done	stated; compiles
+2026-11-21T18:54:13Z	bv_names_rename_bvars	done	stated; compiles
+2026-11-21T18:54:13Z	FINITE_VFREE_IN	done	stated; compiles
+2026-11-21T18:54:13Z	FINITE_VFREE_IN_2	done	set {(x,ty) | P} written {p | ∃ x ty, p = (x, ty) ∧ P} as CONVENTIONS section 4 says (HOL4 term is GSPEC with a paired lambda; same set)
+2026-11-21T18:54:13Z	FINITE_VFREE_IN_list	done	stated; compiles
+2026-11-21T18:54:13Z	FINITE_MEM_Var	done	set {(x,ty) | P} written {p | ∃ x ty, p = (x, ty) ∧ P} as CONVENTIONS section 4 says (HOL4 term is GSPEC with a paired lambda; same set)
+2026-11-21T18:54:13Z	theory_ok_sig	done	stated; compiles
+2026-11-21T18:54:13Z	arities_match_nil	done	free variable ls bound as theorem argument; = between bool is ↔
+2026-11-21T18:54:13Z	arities_match_Tyvar	done	free variables v, ps, ty, obs bound as theorem arguments; = between bool is ↔

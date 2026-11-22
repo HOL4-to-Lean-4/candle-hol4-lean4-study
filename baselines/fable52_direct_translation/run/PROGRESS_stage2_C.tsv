@@ -1,0 +1,61 @@
+2026-11-21T18:55:56Z	ALOOKUP_MAP_dest_var	done	2 type variables
+2026-11-21T18:55:56Z	TYPE_SUBST_NIL	done	statement written, proof sorry
+2026-11-21T18:55:56Z	TYPE_SUBST_Bool	done	statement written, proof sorry
+2026-11-21T18:55:56Z	is_instance_refl	done	statement written, proof sorry
+2026-11-21T18:55:56Z	swap_ff	done	4 type variables; paired lambdas written fun ((x, y) : _ × _) => ...
+2026-11-21T18:55:56Z	ff_def	done	4 type variables; paired lambda written fun ((x, y) : α × γ) => ...
+2026-11-21T18:55:56Z	TYPE_SUBST_compose	done	statement written, proof sorry
+2026-11-21T18:55:56Z	TYPE_SUBST_tyvars	done	statement written, proof sorry
+2026-11-21T18:55:56Z	WELLTYPED_LEMMA	done	statement written, proof sorry
+2026-11-21T18:55:56Z	WELLTYPED	done	statement written, proof sorry
+2026-11-21T18:55:56Z	WELLTYPED_CLAUSES	done	statement written, proof sorry
+2026-11-21T18:55:56Z	RACONV	done	Lean name RACONV_thm (CONVENTIONS section 1); free variables bound as theorem arguments
+2026-11-21T18:55:56Z	RACONV_REFL	done	UNCURRY $= written UNCURRY (fun (x y : term) => x = y)
+2026-11-21T18:55:56Z	ACONV_REFL	done	statement written, proof sorry
+2026-11-21T18:55:56Z	RACONV_TRANS	done	statement written, proof sorry
+2026-11-21T18:55:56Z	ACONV_TRANS	done	statement written, proof sorry
+2026-11-21T18:55:56Z	RACONV_SYM	done	statement written, proof sorry
+2026-11-21T18:55:56Z	ACONV_SYM	done	statement written, proof sorry
+2026-11-21T18:55:56Z	ALPHAVARS_TYPE	done	statement written, proof sorry
+2026-11-21T18:55:56Z	RACONV_TYPE	done	statement written, proof sorry
+2026-11-21T18:55:56Z	ACONV_TYPE	done	statement written, proof sorry
+2026-11-21T18:55:56Z	subtype_Tyvar	done	no source statement (Theorem = SIMP_CONV ...); stated as: subtype ty (Tyvar x) <-> ty = Tyvar x
+2026-11-21T18:55:56Z	subterm_Var	done	no source statement (Theorem = SIMP_CONV ...); stated as: subterm tm (Var x ty) <-> tm = Var x ty
+2026-11-21T18:55:56Z	subterm_Const	done	no source statement (Theorem = SIMP_CONV ...); stated as: subterm tm (Const x ty) <-> tm = Const x ty
+2026-11-21T18:55:56Z	type_lt_thm	done	Q.prove |> CONJUNCTS |> map GEN_ALL |> LIST_CONJ: each conjunct quantified over its own variables; each wildcard _ is a different variable
+2026-11-21T18:55:56Z	term_lt_thm	done	Q.prove |> CONJUNCTS |> map GEN_ALL |> LIST_CONJ: each conjunct quantified over its own variables; each wildcard _ is a different variable
+2026-11-21T18:55:56Z	type_cmp_refl	done	free variable t bound as theorem argument
+2026-11-21T18:55:56Z	term_cmp_refl	done	free variable t bound as theorem argument
+2026-11-21T18:55:56Z	StrongLinearOrder_type_lt	done	statement written, proof sorry
+2026-11-21T18:55:56Z	TotOrd_type_cmp	done	statement written, proof sorry
+2026-11-21T18:55:56Z	StrongLinearOrder_term_lt	done	statement written, proof sorry
+2026-11-21T18:55:56Z	TotOrd_term_cmp	done	statement written, proof sorry
+2026-11-21T18:55:56Z	ALPHAVARS_eq_ordav	done	statement written, proof sorry
+2026-11-21T18:55:56Z	RACONV_eq_orda	done	statement written, proof sorry
+2026-11-21T18:55:56Z	ACONV_eq_orda	done	statement written, proof sorry
+2026-11-21T18:55:56Z	ordav_sym	done	statement written, proof sorry
+2026-11-21T18:55:56Z	orda_sym	done	statement written, proof sorry
+2026-11-21T18:55:56Z	transitive_alpha_lt	done	statement written, proof sorry
+2026-11-21T18:55:56Z	alpha_lt_not_refl	done	statement written, proof sorry
+2026-11-21T18:55:56Z	VFREE_IN_RACONV	done	statement written, proof sorry
+2026-11-21T18:55:56Z	VFREE_IN_ACONV	done	statement written, proof sorry
+2026-11-21T18:55:56Z	hypset_ok_nil	done	statement written, proof sorry
+2026-11-21T18:55:56Z	hypset_ok_sing	done	statement written, proof sorry
+2026-11-21T18:55:56Z	hypset_ok_cons	done	free variables h hs bound as theorem arguments
+2026-11-21T18:55:56Z	term_union_idem	done	statement written, proof sorry
+2026-11-21T18:55:56Z	term_union_thm	done	case on ordering written as Lean match
+2026-11-21T18:55:56Z	MEM_term_union_imp	done	statement written, proof sorry
+2026-11-21T18:55:56Z	hypset_ok_term_union	done	statement written, proof sorry
+2026-11-21T18:55:56Z	EVERY_term_union	done	free variables P l1 l2 bound as theorem arguments
+2026-11-21T18:55:56Z	MEM_term_union	done	statement written, proof sorry
+2026-11-21T18:55:56Z	term_remove_nil	done	statement written, proof sorry
+2026-11-21T18:55:56Z	MEM_term_remove_imp	done	statement written, proof sorry
+2026-11-21T18:55:56Z	hypset_ok_term_remove	done	statement written, proof sorry
+2026-11-21T18:55:56Z	EVERY_term_remove	done	free variables P ls t bound as theorem arguments
+2026-11-21T18:55:56Z	MEM_term_remove	done	statement written, proof sorry
+2026-11-21T18:55:56Z	term_image_nil	done	free variable f bound as theorem argument
+2026-11-21T18:55:56Z	MEM_term_image_imp	done	statement written, proof sorry
+2026-11-21T18:55:56Z	hypset_ok_term_image	done	statement written, proof sorry
+2026-11-21T18:55:56Z	MEM_term_image	done	statement written, proof sorry
+2026-11-21T18:55:56Z	VSUBST_HAS_TYPE	done	statement written, proof sorry
+2026-11-21T18:55:56Z	VSUBST_WELLTYPED	done	outer bound variable ty is not used in the body (inner exists rebinds ty), so HOL4 gives it a type variable: Lean (ty : α) with {α : Type} [Nonempty α]
