@@ -1,0 +1,76 @@
+2026-11-21T18:54:48Z	append_aux_thm	done	statement written, builds
+2026-11-21T18:54:48Z	append_thm	done	three type variables, as HOL4 infers them: the three conjuncts are independent
+2026-11-21T18:54:48Z	SmartAppend_thm	done	statement written, builds
+2026-11-21T18:54:48Z	append_SmartAppend	done	statement written, builds
+2026-11-21T18:54:48Z	MAP_FST_I_PAIR_MAP	done	free variable f is a theorem argument; three type variables
+2026-11-21T18:54:48Z	MAX_LIST_APPEND	done	statement written, builds
+2026-11-21T18:54:48Z	MAX_LIST_SNOC	done	statement written, builds
+2026-11-21T18:54:48Z	domain_nat_set_from_list	done	domain, insert are the sptree constants; ns : num_set, ls : List Nat
+2026-11-21T18:54:48Z	UPDATE_LIST_THM	done	(FST h =+ SND h) f =++ t is UPDATE_LIST (UPDATE (FST h) (SND h) f) t
+2026-11-21T18:54:48Z	APPLY_UPDATE_LIST_ALOOKUP	done	statement written, builds
+2026-11-21T18:54:48Z	find_index_ALL_DISTINCT_EL	done	statement written, builds
+2026-11-21T18:54:48Z	find_index_shift_0	done	statement written, builds
+2026-11-21T18:54:48Z	EVERY2_RC_same	done	statement written, builds
+2026-11-21T18:54:48Z	I_PERMUTES	done	statement written, builds
+2026-11-21T18:54:48Z	MAP_EQ_ID	done	statement written, builds
+2026-11-21T18:54:48Z	FUN_FMAP_FAPPLY_FEMPTY_FAPPLY	done	the two FEMPTY have the same type fmap α β; s, x are theorem arguments
+2026-11-21T18:54:48Z	LESS_1	done	statement written, builds
+2026-11-21T18:54:48Z	num_from_hex_string_num_to_hex_string	done	statement written, builds
+2026-11-21T18:54:48Z	MAPi_ID	done	I at type List α → List α
+2026-11-21T18:54:48Z	OPT_MMAP_SOME	done	statement written, builds
+2026-11-21T18:54:48Z	w2n_lt_256	done	no source statement; wrote the result of the ML expression: !w:word8. w2n w < 256
+2026-11-21T18:54:48Z	CHR_w2n_n2w_ORD	done	statement written, builds
+2026-11-21T18:54:48Z	n2w_ORD_CHR_w2n	done	statement written, builds
+2026-11-21T18:54:48Z	CHR_w2n_n2w_ORD_simp	done	statement written, builds
+2026-11-21T18:54:48Z	n2w_ORD_CHR_w2n_simp	done	statement written, builds
+2026-11-21T18:54:48Z	LENGTH_FIELDS	done	statement written, builds
+2026-11-21T18:54:48Z	FIELDS_NEQ_NIL	done	statement written, builds
+2026-11-21T18:54:48Z	FIELDS_next	done	statement written, builds
+2026-11-21T18:54:48Z	splitlines_nil	done	no source statement; wrote the result of EVAL: splitlines "" = []
+2026-11-21T18:54:48Z	splitlines_eq_nil	done	statement written, builds
+2026-11-21T18:54:48Z	irreflexive_inv_image	done	statement written, builds
+2026-11-21T18:54:48Z	trichotomous_inv_image	done	statement written, builds
+2026-11-21T18:54:48Z	plus_0_I	done	$+ 0n written as fun n => 0 + n (CONVENTIONS section 3)
+2026-11-21T18:54:48Z	OPTION_MAP_I	done	statement written, builds
+2026-11-21T18:54:48Z	is_subseq_refl	done	statement written, builds
+2026-11-21T18:54:48Z	is_subseq_nil	done	statement written, builds
+2026-11-21T18:54:48Z	EVEN_make_even	done	statement written, builds
+2026-11-21T18:54:48Z	v2w_32_F	done	0w is n2w 0 at word32
+2026-11-21T18:54:48Z	v2w_32_T	done	1w is n2w 1 at word32
+2026-11-21T18:54:48Z	merge_tail_MEM	done	statement written, builds
+2026-11-21T18:54:48Z	mergesortN_tail_MEM	done	statement written, builds
+2026-11-21T18:54:48Z	mergesort_tail_MEM	done	statement written, builds
+2026-11-21T18:54:48Z	merge_tail_PERM	done	statement written, builds
+2026-11-21T18:54:48Z	sort2_tail_PERM	done	statement written, builds
+2026-11-21T18:54:48Z	sort3_tail_PERM	done	statement written, builds
+2026-11-21T18:54:48Z	mergesortN_tail_PERM	done	statement written, builds
+2026-11-21T18:54:48Z	sort_MEM	done	statement written, builds
+2026-11-21T18:54:48Z	sort_PERM	done	statement written, builds
+2026-11-21T18:54:48Z	sort_LENGTH	done	statement written, builds
+2026-11-21T18:54:48Z	sort_set	done	statement written, builds
+2026-11-21T18:54:48Z	concat_nil	done	statement written, builds
+2026-11-21T18:54:48Z	explode_aux_thm	done	statement written, builds
+2026-11-21T18:54:48Z	explode_thm	done	statement written, builds
+2026-11-21T18:54:48Z	explode_implode	done	statement written, builds
+2026-11-21T18:54:48Z	implode_explode	done	statement written, builds
+2026-11-21T18:54:48Z	explode_11	done	statement written, builds
+2026-11-21T18:54:48Z	explode_BIJ	done	statement written, builds
+2026-11-21T18:54:48Z	LENGTH_explode	done	statement written, builds
+2026-11-21T18:54:48Z	strlen_implode	done	statement written, builds
+2026-11-21T18:54:48Z	substring_full	done	statement written, builds
+2026-11-21T18:54:48Z	strcat_thm	done	statement written, builds
+2026-11-21T18:54:48Z	strcat_assoc	done	^ is left associative: s1 ^ s2 ^ s3 is strcat (strcat s1 s2) s3
+2026-11-21T18:54:48Z	strcat_nil	done	statement written, builds
+2026-11-21T18:54:48Z	mlstring_common_prefix	done	statement written, builds
+2026-11-21T18:54:48Z	mlstring_common_char_prefix	done	free variables t1, c2 are theorem arguments; kept the duplicate binder t2 t2 of the source
+2026-11-21T18:54:48Z	mlstring_common_suffix	done	statement written, builds
+2026-11-21T18:54:48Z	explode_strcat	done	statement written, builds
+2026-11-21T18:54:48Z	strlen_strcat	done	statement written, builds
+2026-11-21T18:54:48Z	explode_toString	done	toString is chr_to_str
+2026-11-21T18:54:48Z	strlen_toString	done	toString is chr_to_str
+2026-11-21T18:54:48Z	substring_0	done	statement written, builds
+2026-11-21T18:54:48Z	mlstring_lt_inv_image	done	statement written, builds
+2026-11-21T18:54:48Z	StrongLinearOrder_mlstring_lt	done	statement written, builds
+2026-11-21T18:54:48Z	ALL_DISTINCT_MAP_implode	done	statement written, builds
+2026-11-21T18:54:48Z	ALL_DISTINCT_MAP_explode	done	statement written, builds
+2026-11-21T18:54:48Z	concat_sing	done	statement written, builds
