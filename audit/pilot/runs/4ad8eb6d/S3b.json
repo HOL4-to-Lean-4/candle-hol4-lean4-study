@@ -1,0 +1,18 @@
+{
+ "module": "CandleLean.HolSyntaxLib",
+ "checked": 31,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "Candle.REV_ASSOCD_ALOOKUP",
+   "lean": "lean/CandleLean/HolSyntaxLib.lean:116",
+   "hol4": "hol4/package/candle/syntax-lib/holSyntaxLibScript.sml:42",
+   "class": "V-P",
+   "explanation": "HOL4 looks x up in `MAP (λ(x,y). (y,x)) ls`; the Lean statement looks it up in the reverse of that list. REV_ASSOCD and ALOOKUP both return the first match, so with the reversal the right side returns the last match. The Lean statement is therefore false when a key occurs twice with different values. Example: ls = [(1,0),(2,0)], x = 0, d = 5. REV_ASSOCD gives 1, but the Lean right-hand side gives 2.",
+   "repair": "theorem REV_ASSOCD_ALOOKUP {α : Type u} {β : Type v} :\n    ∀ (ls : List (α × β)) (x : β) (d : α),\n      REV_ASSOCD x ls d =\n        match ALOOKUP (ls.map (fun (x, y) => (y, x))) x with\n        | none => d\n        | some y => y := by\n  sorry",
+   "confidence": 0.99,
+   "lean_check": "import CandleLean.HolSyntaxLib\n\nnamespace Candle\n\nopen HOL Classical\n\ntheorem Aux.check_REV_ASSOCD_ALOOKUP_false :\n    ¬ (∀ (ls : List (Nat × Nat)) (x : Nat) (d : Nat),\n      REV_ASSOCD x ls d =\n        match ALOOKUP (List.reverse (ls.map (fun (x, y) => (y, x)))) x with\n        | none => d\n        | some y => y) := by\n  intro h\n  have h1 := h [(1, 0), (2, 0)] 0 5\n  simp [REV_ASSOCD, ALOOKUP] at h1\n\nend Candle\n",
+   "hol4_check": "(REV_ASSOCD 0n [(1n,0n);(2n,0n)] 5n = 1n) /\\ (ALOOKUP (MAP (\\(x,y). (y,x)) [(1n,0n);(2n,0n)]) 0n = SOME 1n) /\\ (ALOOKUP (REVERSE (MAP (\\(x,y). (y,x)) [(1n,0n);(2n,0n)])) 0n = SOME 2n)"
+  }
+ ]
+}

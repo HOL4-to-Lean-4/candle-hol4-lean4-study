@@ -1,0 +1,18 @@
+{
+ "module": "CandleLean.HolSyntaxLib",
+ "checked": 37,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "Candle.RESULT",
+   "lean": "lean/CandleLean/HolSyntaxLib.lean:34",
+   "hol4": "hol4/package/candle/syntax-lib/holSyntaxLibScript.sml:89",
+   "class": "V-C",
+   "explanation": "HOL4 specifies only `RESULT (Result t) = t`. The transparent `RESULT_pkg` also makes `RESULT (Clash t) = t` provable by `rfl`. For example, HOL4’s saved equation permits a selector that returns 0 on `Clash 1`, while Lean proves that this input returns 1.",
+   "repair": "private opaque RESULT_pkg {α : Type u} : {f : result α → α // ∀ t, f (Result t) = t} :=\n  ⟨fun r => match r with | Result t => t | Clash t => t, fun _ => rfl⟩",
+   "confidence": 1,
+   "lean_check": "import CandleLean.HolSyntaxLib\n\nexample : Candle.RESULT (Candle.result.Clash (1 : Nat)) = 1 := rfl",
+   "hol4_check": "∃f : num result -> num. (∀t. f (Result t) = t) ∧ f (Clash 1) = 0"
+  }
+ ]
+}

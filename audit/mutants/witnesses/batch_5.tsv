@@ -1,0 +1,30 @@
+MUT-0005	witness	mutated statement is false: tm = dbVar a, ls = [], ls' = [(dbVar b, dbVar a)], k = dbBound 0 makes the exists premise hold vacuously, but dbVSUBST differs
+MUT-0011	witness	vacuous weakening: the mutated exists-statement holds for an arbitrary conclusion C (tp = pair of ill-typed Comb terms, welltyped premise fails); proved MUT-0011.lean; base forall-statement is strictly stronger
+MUT-0017	witness	mergesortN_tail with negate=False, R=True on [0,1,2,3] (n=4) loses one element in the mutant (length 3 vs 4)
+MUT-0023	witness	theory with axiom Const foo Bool where foo is not in the signature (and a standard signature): Mut.theory_ok holds, base theory_ok fails (term_ok fails); proved in MUT-0023.lean
+MUT-0029	witness	Mut.subtype1 holds for Tyvar x, Tyapp c [] but base does not (x not in []); relation differs (MUT-0029.lean)
+MUT-0035	witness	On Unit with mem=False and power=id the mutated is_power holds, base fails; relations differ
+MUT-0041	equivalent	only the binder names x1 ty1 of the Var/Const clause are exchanged together with their uses: Var ty1 x1 with x1:type, ty1:mlstring is the same clause up to alpha; proved Mut.term_lt = term_lt (MUT-0041_equiv.lean)
+MUT-0047	witness	type_ok FEMPTY (Tyapp c []) holds in mutant (no signature lookup), fails in base (FLOOKUP FEMPTY c = none)
+MUT-0053	witness	mutated statement is false: tm = dbVar x, ls = [(dbVar w, dbVar x)], z = (z,Bool), x = (x,Bool), n = 0 (premise holds, LHS = dbVar w, RHS = dbBound 0)
+MUT-0059	witness	On Bool with mem a b := (b = true), union := fun _ => true the mutated is_union holds and base fails
+MUT-0065	witness	for t1 = t2 the mutated alpha_lt holds vacuously; base needs orda [] t t = LESS but it is EQUAL
+MUT-0071	witness	sizeof (Var x BoolTy) differs (2 vs 1)
+MUT-0077	witness	On Bool with mem x _ := (x = true) the base inhabited holds and mutated (forall) fails
+MUT-0083	witness	no inhabited sets (mem = False), tysig = {c:0}, tmsig empty: mutated (or) holds via the empty term assignment, base (and) fails on the type assignment; proved MUT-0083.lean
+MUT-0089	witness	mergesortN_tail with negate=False, R=True on [0,1,2,3] (n=4): (0-4)-2 = 0 sorts nothing in the second half, length differs from base
+MUT-0095	witness	make_even 0 differs (1 vs 0)
+MUT-0101	witness	in a hereditarily-finite-set model on Nat (separation and power proved) the empty set is in funspace 0 1 but not in funspace 1 0, so the mutated clause (swapped arguments) is satisfied by a delta that violates the base clause; proved MUT-0101.lean
+MUT-0107	witness	field 0 0 [] = [] in mutant vs [False] in base
+MUT-0113	witness	HEX 16 = CHR 71 in mutant, CHR 0 in base (CHR_of_lt, distinct chars)
+MUT-0119	witness	bind (x,BoolTy) 0 (dbVar x BoolTy) gives dbVar in mutant, dbBound 0 in base
+MUT-0125	witness	term_union [] [t] = [] in mutant (match returns l1 = []), [t] in base
+MUT-0131	witness	VFREE_IN (Var x ty) (Abs (Var x ty) (Var x ty)) holds in mutant (w = v) but fails in base (w <> v needed)
+MUT-0137	witness	term_remove t [t] = [t] in mutant (EQUAL branch returns l), [] in base
+MUT-0143	witness	bind_list_aux 0 [(a,ty),(b,ty)] (Comb a b) gives Bound 0 / Bound 0 in mutant, Bound 0 / Bound 1 in base
+MUT-0149	witness	is_subseq [] [] is False in mutant, True in base (Nat lists)
+MUT-0155	witness	simple_subst [] (Comb a b) = Comb b a in mutant, Comb a b in base
+MUT-0161	witness	arities_match [Tyapp c [Tyvar x]] [Tyapp c []] holds in mutant (compares a1 with itself), fails in base
+MUT-0167	witness	U1: mutant proves HD [] = ARB (rfl); base HD_pkg is opaque and cannot; HOL4 clause list$HD: |- HD (h::t) = h leaves HD [] open
+MUT-0173	equivalent	n occurs only in sizeof tm = n; Nat vs Int (coerced) quantification is logically the same statement; proved Mut statement iff base statement (MUT-0173_equiv.lean)
+MUT-0179	witness	UPDATE 0 1 (fun _ => 0) 0 is 0 in mutant, 1 in base

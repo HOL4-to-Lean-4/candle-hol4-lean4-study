@@ -1,0 +1,14 @@
+{
+ "step": "S4",
+ "unit": "0574b745",
+ "seconds": 51,
+ "rc": 0,
+ "usage": {
+  "input_tokens": 18143,
+  "output_tokens": 3033,
+  "thinking_tokens": 2735,
+  "cache_read_tokens": 23455,
+  "total_tokens": 21176
+ },
+ "status": "SUCCESS"
+}

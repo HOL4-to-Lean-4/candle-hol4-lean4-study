@@ -1,0 +1,18 @@
+{
+ "module": "CandleLean.HolSemantics",
+ "checked": 30,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "Candle.is_term_valuation0",
+   "lean": "lean/CandleLean/HolSemantics.lean:45",
+   "hol4": "hol4/package/candle/standard/semantics/holSemanticsScript.sml:87",
+   "class": "V-P",
+   "explanation": "HOL4 requires ∀v ty. type_ok tysig ty ⇒ σ (v,ty) <: typesem δ τ ty. Lean has ∃ v ty of the same implication. Any ty that is not type_ok satisfies that implication vacuously, so the predicate is trivially true whenever some type is ill-formed. For tysig = FEMPTY the witness is Tyapp \"x\" [], so it holds for every σ. With mem = (λx y. F) the HOL4 predicate is false there, because Tyvar a is type_ok. The error propagates to is_valuation0, satisfies0, models0, entails0 and is_structure0, which then quantify over valuations that are not well-typed.",
+   "repair": "def is_term_valuation0 (mem : U → U → Prop) (tysig : tysig) (δ : tyass U) (τ : tyval U)\n    (σ : tmval U) : Prop :=\n  ∀ v ty, type_ok tysig ty → mem (σ (v, ty)) (typesem δ τ ty)",
+   "confidence": 0.99,
+   "lean_check": "import CandleLean.HolSemantics\n\nnamespace Candle\nopen HOL Classical\n\nexample : ∃ (mem : Unit → Unit → Prop) (δ : tyass Unit) (τ : tyval Unit) (σ : tmval Unit),\n    is_term_valuation0 mem (FEMPTY : fmap mlstring Nat) δ τ σ ∧\n    ¬ (∀ (v : mlstring) (ty : type), type_ok (FEMPTY : fmap mlstring Nat) ty →\n        mem (σ (v, ty)) (typesem δ τ ty)) := by\n  refine ⟨fun _ _ => False, fun _ _ => (), fun _ => (), fun _ => (), ?_, ?_⟩\n  · refine ⟨mls \"x\", Tyapp (mls \"x\") [], fun h => ?_⟩\n    rw [type_ok] at h\n    have h1 := h.1\n    have hn : ¬ (mls \"x\" ∈ FDOM (FEMPTY : fmap mlstring Nat)) := by\n      intro hm\n      exact (show (FEMPTY : fmap mlstring Nat).rep (mls \"x\") ≠ none from hm) rfl\n    unfold FLOOKUP at h1\n    rw [if_neg hn] at h1\n    cases h1\n  · intro h\n    exact h (mls \"x\") (Tyvar (mls \"a\")) (by simp [type_ok])\n\nend Candle\n",
+   "hol4_check": "!(d:mlstring -> 'a list -> 'a) (t:mlstring -> 'a) (s:mlstring # type -> 'a). ~is_term_valuation0 (\\(x:'a) (y:'a). F) (FEMPTY:mlstring |-> num) d t s"
+  }
+ ]
+}

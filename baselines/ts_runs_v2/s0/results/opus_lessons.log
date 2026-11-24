@@ -1,0 +1,12 @@
+[s0] dumping Lean statements from /e/ts_ws/runs/opus_lessons_v2/merged (root CmlTS)
+[s0] scanning
+statements 267 flagged 9
+  binders            7
+  structure          7
+  connectives        6
+  constants          3
+  literals           1
+  unmapped           1
+  binder-types       1
+  instances          1
+[s0] wrote /e/ts_ws/s0/results/opus_lessons/report.json and /e/ts_ws/s0/results/opus_lessons/summary.txt

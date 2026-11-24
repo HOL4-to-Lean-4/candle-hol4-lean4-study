@@ -1,0 +1,30 @@
+MUT-0001	witness	Statement strictly stronger (theory_ok premise dropped); proved negation with an explicit set-theory model (HF sets coded in Nat, is_set_theory proved) and the empty theory, which is not theory_ok so entails0 fails.
+MUT-0007	witness	Statement is strictly stronger (premise dropped); proved negation: empty signature thy is not theory_ok, so entails0 fails (U=Nat).
+MUT-0013	undecided	Mutant REFL (no term_ok) is strictly weaker-premised, so Mut.proves strictly contains proves in principle, but proving a base underivable conclusion needs an invariant over proves that survives INST_TYPE, whose output INST = RESULT (INST_CORE ..) is unspecified on Clash; that needs the non-clash lemma for INST_CORE [] (VARIANT freshness), not done within budget.
+MUT-0019	witness	Statement strictly stronger (FINITE premises dropped); proved negation: with s = universal set, fresh (UNION s t) is a member of s.
+MUT-0025	witness	Statement strictly stronger/false: second REV_ASSOCD clause with t ++ [(x,y)] refuted by t=[(0,0)], (x,y)=(1,0), a=0 (LHS 0, RHS 1).
+MUT-0031	witness	Restated conexts_of_upd with VSUBST [] prop; ConstSpec [(c,y)] (Var c a) gives Const c a in base, Var c a in mutant.
+MUT-0037	undecided	Dropping the union axiom from is_set_theory: need a model (ext+separation+power+upair) with no union function; not derivable by hand cheaply (needs infinite-set construction, e.g. transitive closure containing evens, odds but not their union, or a ZFSet-style model); no such model built within budget. HF model satisfies the base.
+MUT-0043	witness	Restated compare with swapped compare_aux args; s1="a", s2="bb": base LESS, mutant GREATER.
+MUT-0049	witness	Restated sptree.lookup with BN branches swapped; lookup 1 (BN (LS 5) LN): mutant some 5, base none.
+MUT-0055	witness	Restated sptree.insert with (k-1)/1; insert 2 7 (LS 3): base BS (LS 7) 3 LN, mutant BS (BN LN (LS 7)) 3 LN.
+MUT-0061	witness	Restated orda with '_, Comb _ _ => LESS'; orda [] (Abs v v) (Comb v v): base GREATER, mutant LESS.
+MUT-0067	undecided	DEDUCT_ANTISYM without second premise (c2,h2 free): base underivability of e.g. equation p c2 needs the same invariant over proves incl. INST_TYPE/RESULT (Clash) as MUT-0013; not done within budget.
+MUT-0073	undecided	Mutant uses CLASH (Result _) (private opaque, unspecified: only CLASH (Clash t)=t is known) where base uses RESULT; Lean cannot prove CLASH (Result x) <> x, so no proved difference; label V-P looks wrong (behaviour hinges on an unspecified value, V-C-like).
+MUT-0079	witness	Restated arities_match with recursive call (xs xs); l1=[Tyapp c []], l2=[Tyapp c [], Tyapp c []]: mutant True, base False.
+MUT-0085	witness	Restated INJ with exists in the injectivity conjunct; f=const 0, s={x<=1}, t=univ: mutant holds (witness x=2 outside s), base INJ fails (0,1 collide).
+MUT-0091	witness	Restated is_structure0 without is_std_sig; empty (non-standard) signature with an explicitly defined standard interpretation and trivial valuation: mutant holds, base fails (is_std_sig of empty sig).
+MUT-0097	witness	Restated splitlines with swapped if branches; ls=[]: FIELDS gives [[]], last is null: base [] , mutant [[]].
+MUT-0103	equivalent	Swapped UNION arguments in types_in (Abs case); UNION is commutative on Set, so Mut.types_in = types_in for all terms (proved, MUT-0103_equiv.lean).
+MUT-0109	witness	Restated consts_of_upd with abs type signature using (abs_type -> rep_type); TypeDefn t (Var p (bool->bool)) abs rep: rep_type = bool <> abs_type = Tyapp t _, so lists differ.
+MUT-0115	witness	Restated Order without antisymmetric; Z = (fun _ _ => True) on Nat is transitive but not antisymmetric, so Mut.Order holds and base Order fails.
+MUT-0121	witness	Restated type_lt without the LEX premise of the Tyapp/Tyapp rule; the mutant relates Tyapp b [] to Tyapp a [], the base does not (explicit relation closed under base rules refutes it).
+MUT-0127	witness	Restated BIJ as INJ only; succ on Nat with s=t=univ is injective but not surjective (0 not hit): mutant true, base false.
+MUT-0133	witness	Restated is_structure0 with ∨ (parses as (std_sig ∧ std_int ∧ is_int) ∨ is_valuation); empty signature, trivial mem: valuation clause holds so mutant true, base false (empty sig not std).
+MUT-0139	witness	Restated n2l with recursive call n2l (n/b) (n/b); n2l 10 123: base [3,2,1], mutant [3,0,0].
+MUT-0145	witness	Restated term_ok with ∨ in Const case; Const c a in the empty signature: mutant holds (instance of itself), base fails (no FLOOKUP).
+MUT-0151	witness	Restated type_ok without EVERY on args; Tyapp fun [Tyapp q []] over signature {fun:1}: mutant holds, base fails (q undeclared).
+MUT-0157	witness	Restated apply with pair a y; in the HF model (is_upair proved) and x={(0,1),(2,0)}: base returns 1, mutant returns 2 (Kuratowski pair injectivity proved).
+MUT-0163	witness	Restated simple_subst with FILTER (p.2 = v); Abs y (Var x) with ilist [(Const c, Var x)]: base substitutes under the binder, mutant does not.
+MUT-0169	equivalent	T1 changes the type of a variable that is never used (shadowed by the inner exists x ty); both types inhabited, so mutated statement <-> base statement (proved in MUT-0169_equiv.lean).
+MUT-0175	witness	U1: private def instead of opaque; proved Mut.dest_var (Const a ty) = Mut.dest_var (Abs u w) (both default) by rfl; HOL4 clause that leaves it open: holSyntax dest_var_def, dest_var (Var x ty) = (x,ty) only.

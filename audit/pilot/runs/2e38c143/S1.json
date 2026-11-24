@@ -1,0 +1,18 @@
+{
+ "module": "CandleLean.HolSemantics",
+ "checked": 35,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "Candle.is_term_valuation0",
+   "lean": "lean/CandleLean/HolSemantics.lean:45",
+   "hol4": "hol4/package/candle/standard/semantics/holSemanticsScript.sml:87",
+   "class": "V-P",
+   "explanation": "Lean uses `∃ v ty` where HOL4 uses `∀ v ty`. Take an empty type signature and a membership relation that is always false. In Lean, any variable name and the type `Tyapp (mls \"missing\") []` witness the existential because that type fails `type_ok`. In HOL4, every `Tyvar` passes `type_ok`, so the universal condition requires a membership fact that is false.",
+   "repair": "  ∀ v ty, type_ok tysig ty → mem (σ (v, ty)) (typesem δ τ ty)",
+   "confidence": 1,
+   "lean_check": "import CandleLean.HolSemantics\n\nopen Candle\n\nexample (ts : tysig) (bad : type) (hbad : ¬ type_ok ts bad)\n    (δ : tyass Unit) (τ : tyval Unit) (σ : tmval Unit) :\n    is_term_valuation0 (fun _ _ => False) ts δ τ σ := by\n  exact ⟨mls \"x\", bad, fun h => hbad h⟩",
+   "hol4_check": "¬(is_term_valuation0 (λ(x:unit) (y:unit). F) tysig δ τ σ)"
+  }
+ ]
+}

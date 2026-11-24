@@ -1,0 +1,10 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "Confirmed V-P violation: holSemanticsScript.sml:87 defines is_term_valuation0 universally (∀v ty. type_ok tysig ty ⇒ ...), whereas HolSemantics.lean:45 uses an existential (∃ v ty, type_ok tysig ty → ...). Because type_ok holds for every Tyvar and fails for any Tyapp missing from tysig, Lean's definition is trivially true (e.g., with empty tysig and always-false mem) while HOL4's is false."
+  }
+ ]
+}

@@ -1,0 +1,30 @@
+MUT-0002	equivalent	FST_rename_bvars is provable outright (MUT-0002_equiv.lean, induction on tm), so the extra hypothesis names<>[] changes nothing: mutated and base statements are provably equivalent props
+MUT-0008	witness	TypeDefn update: first conext uses Var "b" instead of Var "a" (a is the bound var of the abs/rep equation), lists differ
+MUT-0014	witness	field 0 0 [] has length 2 in mutant, 1 in base
+MUT-0080	witness	value with toNat = 2^31 exists in base word32 (BitVec 32) but not in mutated BitVec 31
+MUT-0122	witness	base word8 has toNat < 256 for all values; mutated BitVec 9 has a value with toNat = 256
+MUT-0020	witness	UNHEX (ch A): 9 in mutant, 10 in base
+MUT-0074	witness	f=id, s=empty, t=univ on Nat: Mut.BIJ (INJ or SURJ) holds, base BIJ fails (not SURJ)
+MUT-0092	witness	P = (fun b => b = true) on Bool: base EXISTS_UNIQUE holds, Mut fails (true, false)
+MUT-0098	witness	L1=[1], L2=[2]: Mut.PERM holds with x=0, base PERM fails at x=1
+MUT-0128	witness	L1=[], L2=[1]: Mut.PERM vacuously true, base PERM false at x=1
+MUT-0116	witness	R x y := x=true and y=false on Bool: Mut.symmetric (x=y) holds, base symmetric fails
+MUT-0032	witness	dbINST [] (dbComb (dbBound 0) (dbBound 1)) swaps the two subterms in mutant
+MUT-0038	witness	merge_tail False (<=) [1] [2,3] []: base [3,2,1], mutant [2,3,1]
+MUT-0056	witness	lookup 1 (BS (LS 5) 0 LN): base none, mutant some 5 (ODD instead of EVEN picks t1)
+MUT-0068	witness	insert 3 7 (BN LN LN): mutant BN LN (LS 7) with /3, base BN LN (BN LN (LS 7))
+MUT-0110	witness	sizeof (Abs x x): 2 in mutant vs 3 in base
+MUT-0140	equivalent	x>y vs x>=y differ only at x=y where both branches return max z x; proved in MUT-0140_equiv.lean (by_cases + omega)
+MUT-0146	witness	ctxt [NewType n 1, NewType n 2]: base alist_to_fmap keeps first binding, mutant (reversed) keeps last; rep n differs
+MUT-0152	witness	U=Bool, mem=False, delta returns boolset only at "bool": base holds, mutant (needs delta "boom" [] = boolset) fails
+MUT-0158	witness	dbterm [(x,a)] (Var x a): base dbBound 0, mutant dbBound 1
+MUT-0164	witness	compare_aux "a" "a" EQUAL 0 1: base EQUAL, mutant LESS
+MUT-0170	witness	db (Var x a): mutant dbConst, base dbVar
+MUT-0176	witness	U1: mutant (def, not opaque) proves CLASH (Result t) = t by rfl; saved clause CLASH_def (CLASH (Clash t) = t) leaves it open: two functions on result Bool satisfy it and differ on Result true
+MUT-0050	witness	VSUBST [(y,x)] (Abs y (Comb x x)): base renames the bound var (VARIANT_PRIMES_def forces a name /= y), mutant tests VFREE_IN t p.2 (false) and keeps Abs y; results differ
+MUT-0062	witness	U=Bool, mem a _ := (a=true), union=id: base is_union holds, mutant fails at a=false
+MUT-0086	witness	U=Bool, mem a b := (a=false and b=true), power=id: mutant is_power holds (x/=a only), base fails (decide)
+MUT-0044	witness	U=Bool, empty signature, delta returns not boolset everywhere: mutant (or) holds via is_interpretation0, base fails is_std_type_assignment0
+MUT-0104	witness	U=Bool, mem=False: no valuation is valid so base satisfies0 holds vacuously; mutant (no is_valuation0 guard) fails on a junk valuation that sends x to not true_
+MUT-0026	witness	mutated statement refuted in an explicit model of is_set_theory (Nat, mem a b := testBit b a; proved extensional+separation+power+union+upair): s=t1={0}, t2=empty, f=g=const 0; mutant hypothesis holds by the first disjunct, abstract s t1 f has the member pair(0,0), abstract s t2 g has none
+MUT-0134	witness	Explicit model of is_set_theory on Nat (mem a b := testBit b a, proved). With tyvar A := {1}, the base-side "=" interpretation is not an interpretation of the mutant: abstract D (D->Bool) (fun x => abstract D Bool ..) /= the version with swapped inner domain/range (pair injectivity, funspace membership proved)

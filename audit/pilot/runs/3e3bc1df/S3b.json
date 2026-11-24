@@ -1,0 +1,18 @@
+{
+ "module": "CandleLean.HolSyntaxLib",
+ "checked": 31,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "Candle.RESULT",
+   "lean": "lean/CandleLean/HolSyntaxLib.lean:34",
+   "hol4": "hol4/package/candle/syntax-lib/holSyntaxLibScript.sml:88",
+   "class": "V-C",
+   "explanation": "HOL4 specifies RESULT only on Result: RESULT_def is `RESULT (Result t) = t`, and the value on `Clash t` is left open. In Lean, RESULT_pkg is a transparent `private def` (the sibling CLASH_pkg is `private opaque`), so RESULT unfolds and Lean proves `RESULT (Clash t) = t` by rfl. This equation does not follow from the theorems HOL4 saves. It also breaks CONVENTIONS section 5, which requires partly unspecified constants to be opaque. The extra value is visible to INST_CORE and INST in HolSyntax, which apply RESULT to INST_CORE results.",
+   "repair": "private opaque RESULT_pkg {α : Type u} : {f : result α → α // ∀ t, f (Result t) = t} :=\n  ⟨fun r => match r with | Result t => t | Clash t => t, fun _ => rfl⟩",
+   "confidence": 0.98,
+   "lean_check": "import CandleLean.HolSyntaxLib\n\nuniverse u\n\ntheorem RESULT_Clash_leak {α : Type u} (t : α) : Candle.RESULT (Candle.result.Clash t) = t := rfl\n",
+   "hol4_check": "?(f:bool result -> bool) (g:bool result -> bool). (!t. f (Result t) = t) /\\ (!t. g (Result t) = t) /\\ f (Clash T) <> g (Clash T)"
+  }
+ ]
+}

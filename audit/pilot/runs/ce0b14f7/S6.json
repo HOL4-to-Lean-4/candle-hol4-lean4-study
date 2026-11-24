@@ -1,0 +1,10 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "HOL4 sort3_tail_def (mergesortScript.sml:114-117) returns [x;z;y] when R x z <> neg, else [z;x;y]. Lean (List.lean:188) returns [z,x,y], else [x,z,y], so the branches are swapped. With neg=F, R a b = (a=0), inputs 0,1,2 give [0;2;1] in HOL4 and [2,0,1] in Lean. CONVENTIONS.md:114 maps it under the same name with no recorded deviation. The error propagates to mergesortN_tail, mergesort_tail and Candle.sort: [1,3,2] with ≤ gives [2,1,3]."
+  }
+ ]
+}

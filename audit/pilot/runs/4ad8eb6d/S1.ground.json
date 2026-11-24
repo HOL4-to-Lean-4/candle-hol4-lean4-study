@@ -1,0 +1,10 @@
+{
+ "F1": {
+  "declaration": "Candle.REV_ASSOCD_ALOOKUP",
+  "lean": "fails",
+  "hol4": "not proved",
+  "lean_out": "_chk.lean:7:2: error: 'change' tactic failed, pattern\n  REV_ASSOCD 0 [(1, 0), (2, 0)] 3 =\n    match ALOOKUP [(0, 2), (0, 1)] 0 with\n    | none => 3\n    | some y => y\nis not definitionally equal to target\n  REV_ASSOCD 0 [(1, 0), (2, 0)] 3 =\n    match\n      ALOOKUP\n        (List.map\n            (fun x =>\n              match x with\n              | (x, y) => (y, x))\n            [(1, 0), (2, 0)]).reverse\n        0 with\n    | none => 3\n    | some y => y\n",
+  "hol4_out": "<<HOL message: Created theory \"hol4q_scratch\">>\r\nFAILED (not a refutation): \r\nException raised at Tactical.TAC_PROOF: unsolved goals\r\n\r\nexit=0\r\n\r\n",
+  "hol4_2": "proved by tactic 0"
+ }
+}

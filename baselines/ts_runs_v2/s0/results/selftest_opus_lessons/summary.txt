@@ -1,0 +1,339 @@
+S0 structural scan
+statements: 267
+flagged: 23 (8.6%)
+flagged statements per reason class (a statement can have several):
+  structure          21
+  connectives        10
+  binders            9
+  constants          6
+  literals           4
+  hypotheses         3
+  unmapped           1
+  binder-types       1
+  instances          1
+Lean project theorems without a HOL4 export counterpart (not scanned): 0
+map rows by status: {'convention': 419, 'fitted': 7, 'lean-core': 28}
+
+no   misc.CARD_IMAGE_ID_BIJ
+no   misc.tlookup_bij_suff
+YES  misc.tlookup_bij_iff
+       [structure] HOL4 ...IV pred_set$UNIV)=((list$LIST_TO_SET (sptree$toList v0))=(sptree$ | Lean ...IV pred_set$UNIV)=((sptree$domain v0)=(list$LIST_TO_SET (sptree$t
+YES  misc.find_index_LESS_LENGTH
+       [constants] c:arithmetic$<=: HOL4 1 vs Lean 2; c:prim_rec$<: HOL4 1 vs Lean 0
+       [structure] HOL4 ...ithmetic$<= v2 v3);(prim_rec$< v3 (arithmetic$+ v2 (list$LENGTH v | Lean ...ithmetic$<= v2 v3);(arithmetic$<= v3 (arithmetic$+ v2 (list$LENGT
+YES  misc.ALOOKUP_find_index_SOME
+       [constants] c:list$LENGTH: HOL4 1 vs Lean 0; c:prim_rec$<: HOL4 1 vs Lean 0
+       [connectives] and:items: HOL4 3 vs Lean 2
+       [structure] HOL4 ...=(option$SOME v3));(prim_rec$< v3 (list$LENGTH v0));(v2=(pair$SND | Lean ...=(option$SOME v3));(v2=(pair$SND (list$EL v3 v0)))]}}
+YES  misc.IS_PREFIX_THM
+       [literals] num:1: HOL4 0 vs Lean 1; num:2: HOL4 0 vs Lean 1
+       [binders] leading universal binders: HOL4 2 vs Lean 0
+       [hypotheses] premises: HOL4 1 vs Lean 2
+       [connectives] eq: HOL4 2 vs Lean 3
+       [structure] HOL4 ...A2{((list$isPREFIX v0 v1)=AND[(arithmetic$<=  | Lean ...IMP[(1=2)]=>A2{((list$isPREFIX v0 v1)=AND[(ar
+no   misc.FST_pair
+YES  misc.LESS_1
+       [literals] num:1: HOL4 1 vs Lean 0; num:2: HOL4 0 vs Lean 1
+       [structure] HOL4 ...A1{((prim_rec$< v0 1)=(v0=0))} | Lean ...A1{((prim_rec$< v0 2)=(v0=0))}
+no   misc.map_some_eq
+YES  misc.map_some_eq_append
+       [structure] HOL4 ...v2))=((list$APPEND v0 v1)=v2))} | Lean ...v2))=((list$APPEND v1 v0)=v2))}
+YES  misc.MAP_EQ_MAP_IMP
+       [hypotheses] premises: HOL4 5 vs Lean 3
+       [connectives] and:items: HOL4 0 vs Lean 2; or:items: HOL4 0 vs Lean 2
+       [structure] HOL4 ...A3{IMP[A2{IMP[(LMEM v3 v0);(LMEM v4 v1);((v2 v3)=(v2 v4))]= | Lean ...A3{IMP[A2{IMP[OR[(LMEM v3 v0);AND[(LMEM v4 v1);((v2 v3)=(v2
+YES  misc.FDOM_FLOOKUP
+       [binders] binder:all: HOL4 2 vs Lean 3; binder:ex: HOL4 1 vs Lean 0
+       [structure] HOL4 ...inite_map$FDOM v1))=E1{((finite_map$FLOOKUP v1 v0)=(option$SOME v | Lean ...inite_map$FDOM v1))=A1{((finite_map$FLOOKUP v1 v0)=(option$SOME v
+YES  misc.DROP_EMPTY
+       [constants] c:arithmetic$>: HOL4 0 vs Lean 1; c:arithmetic$>=: HOL4 1 vs Lean 0
+       [structure] HOL4 ...NIL)]=>(arithmetic$>= v0 (list$LENGTH v1))} | Lean ...NIL)]=>(arithmetic$> v0 (list$LENGTH v1))}
+no   misc.plus_0_I
+no   mlstring.explode_aux_thm
+no   mlstring.explode_thm
+no   mlstring.explode_implode
+no   mlstring.implode_explode
+YES  mlstring.explode_11
+       [hypotheses] premises: HOL4 0 vs Lean 1
+       [connectives] eq: HOL4 3 vs Lean 2
+       [structure] HOL4 ...A2{(((mlstring$explode v0)=(mlstring$explode v1) | Lean ...A2{IMP[((mlstring$explode v0)=(mlstring$explode 
+no   mlstring.TOKENS_eq_tokens_aux
+no   mlstring.TOKENS_eq_tokens
+no   namespaceProps.mk_id_surj
+no   namespaceProps.mk_id_thm
+YES  namespaceProps.nsSub_mono
+       [structure] HOL4 ...};(namespace$nsSub v0 v2 v3)]=>(namespace$nsSub v1 v2 v3)} | Lean ...};(namespace$nsSub v1 v2 v3)]=>(namespace$nsSub v0 v2 v3)}
+no   namespaceProps.nsAll2_mono
+no   namespaceProps.nsLookup_nsEmpty
+no   namespaceProps.nsLookupMod_nsEmpty
+no   namespaceProps.nsAppend_nsEmpty
+no   namespaceProps.alist_to_ns_nil
+no   namespaceProps.nsSub_nsEmpty
+no   namespaceProps.nsAll_nsEmpty
+no   namespaceProps.nsAll2_nsEmpty
+no   namespaceProps.alist_to_ns_cons
+no   namespaceProps.nsAppend_nsBind
+no   namespaceProps.nsAppend_assoc
+no   namespaceProps.nsLookup_nsBind
+no   namespaceProps.nsAppend_nsSing
+no   namespaceProps.nsLookup_nsSing
+no   namespaceProps.nsAll_nsSing
+no   namespaceProps.nsAll2_nsSing
+no   namespaceProps.nsBind_11
+no   namespaceProps.alist_to_ns_11
+no   namespaceProps.nsLookup_nsLift
+no   namespaceProps.nsLookupMod_nsLift
+no   namespaceProps.nsLookup_nsAppend_some
+no   namespaceProps.nsAppend_to_nsBindList
+no   namespaceProps.nsLookupMod_nsAppend_none
+no   namespaceProps.eALL_T
+no   namespaceProps.nsLookup_nsAll
+no   namespaceProps.nsAll_nsAppend
+no   namespaceProps.nsAll_alist_to_ns
+no   namespaceProps.nsAll_nsLift
+no   namespaceProps.nsAll_nsAppend_left
+no   namespaceProps.nsSub_conj
+no   namespaceProps.nsSub_refl
+no   namespaceProps.nsSub_nsBind
+no   namespaceProps.nsSub_nsAppend2
+no   namespaceProps.alist_rel_restr_thm
+no   namespaceProps.alistSub_cong
+no   namespaceProps.nsLookup_FOLDR_nsLift
+no   namespaceProps.nsLookup_FOLDR_nsLift_some
+no   namespaceProps.nsLookupMod_FOLDR_nsLift_none
+no   namespaceProps.nsAll2_conj
+no   namespaceProps.nsAll2_nsLookup2
+no   namespaceProps.nsAll2_nsLookup_none
+no   namespaceProps.nsAll2_nsBind
+no   namespaceProps.nsAll2_nsBindList
+no   namespaceProps.nsAll2_nsAppend
+no   namespaceProps.nsAll2_alist_to_ns
+no   namespaceProps.nsAll2_nsLift
+no   semanticPrimitivesProps.with_same_v
+no   semanticPrimitivesProps.unchanged_env
+no   semanticPrimitivesProps.with_same_clock
+no   semanticPrimitivesProps.Boolv_11
+no   semanticPrimitivesProps.extend_dec_env_assoc
+no   semanticPrimitivesProps.pat_bindings_accum
+YES  semanticPrimitivesProps.do_app_cases
+       [unmapped] Lean constants without a map row: CmlTS.ffi_result.FFI_final, CmlTS.ffi_result.FFI_return, Sum.inl, Sum.inr
+       [constants] c:L:CmlTS.ffi_result.FFI_final: HOL4 0 vs Lean 1; c:L:CmlTS.ffi_result.FFI_return: HOL4 0 vs Lean 1; c:L:Sum.inl: HOL4 0 vs Lean 2; c:L:Sum.inr: HOL4 0 vs Lean 2; c:arithmetic$>=: HOL4 20 vs Lean 16; c:ast$Aalloc: HOL4 1 vs Lean 2; c:ast$Arith: HOL4 1 vs Lean 2; c:ast$Asub: HOL4 1 vs Lean 3; c:ast$Aupdate: HOL4 1 vs Lean 3; c:ast$Aw8alloc: HOL4 1 vs Lean 2; c:ast$Aw8sub: HOL4 1 vs Lean 3; c:ast$Aw
+       [literals] num:0: HOL4 26 vs Lean 27
+       [binders] binder:ex: HOL4 181 vs Lean 246; binder:lam: HOL4 9 vs Lean 1
+       [connectives] and:items: HOL4 336 vs Lean 366; case: HOL4 4 vs Lean 0; eq: HOL4 282 vs Lean 320; not: HOL4 25 vs Lean 28; or:items: HOL4 130 vs Lean 64
+       [structure] HOL4 ...v7 v3)=(option$SOME v8));(CASE[v8]{(lam.(option$SOME (pair$, (pai | Lean ...v7 v3)=(option$SOME (L:Sum.inr v8)));((pair$, v0 v1)=v4);((semant
+no   semanticPrimitivesProps.build_rec_env_merge
+no   semanticPrimitivesProps.do_con_check_build_conv
+no   semanticPrimitivesProps.FV_pes_MAP
+no   semanticPrimitivesProps.FV_defs_MAP
+no   semanticPrimitivesProps.concrete_v_list
+no   semanticPrimitivesProps.prim_type_cases
+no   evaluate.evaluate_clock
+no   evaluate.fix_clock_do_eval_res
+no   evaluate.fix_clock_evaluate
+no   evaluateProps.io_events_mono_trans
+no   evaluateProps.call_FFI_rel_io_events_mono
+no   evaluateProps.io_events_mono_refl
+no   evaluateProps.do_app_call_FFI_rel
+YES  evaluateProps.do_app_io_events_mono
+       [structure] HOL4 ...ops$io_events_mono v1 v5)} | Lean ...ops$io_events_mono v5 v1)}
+no   evaluateProps.is_clock_io_mono_cong
+no   evaluateProps.is_clock_io_mono_return
+no   evaluateProps.is_clock_io_mono_err
+no   evaluateProps.pair_CASE_eq_forall
+no   evaluateProps.is_clock_io_mono_bind
+no   evaluateProps.is_clock_io_mono_check
+no   evaluateProps.dec_inc_clock
+no   evaluateProps.do_app_refs_length
+YES  evaluateProps.is_clock_io_mono_do_app_simple
+       [constants] c:pair$FST: HOL4 3 vs Lean 0; c:pair$SND: HOL4 2 vs Lean 0
+       [binders] binder:lam: HOL4 2 vs Lean 4
+       [structure] HOL4 ...type_error)));(lam.(pair$, (@upd:semanticPrimitives$recordtype.st | Lean ...type_error)));(lam.(lam.(lam.(pair$, (@upd:semanticPrimitives$rec
+no   evaluateProps.is_clock_io_mono_evaluate
+no   evaluateProps.is_clock_io_mono_evaluate_decs
+no   evaluateProps.is_clock_io_mono_extra
+no   evaluateProps.list_result_eq_Rval
+no   evaluateProps.evaluate_length
+no   evaluateProps.is_clock_io_mono_set_clock
+no   evaluateProps.is_clock_io_mono_minimal
+no   evaluateProps.can_pmatch_all_EVERY
+no   weakening.weak_tenv_refl
+no   weakening.weakS_refl
+no   weakening.weak_tenvE_freevars
+YES  weakening.weak_tenvE_bind
+       [structure] HOL4 ...Bind_name v2 v3 v4 v0) (typeSystem$Bind_name v2 v3 v4 v1))} | Lean ...Bind_name v2 v3 v4 v1) (typeSystem$Bind_name v2 v3 v4 v0))}
+no   weakening.weak_tenvE_opt_bind
+no   weakening.weak_tenvE_bind_tvar
+no   weakening.weak_tenvE_bind_tvar2
+YES  weakening.weak_tenvE_bind_var_list
+       [literals] num:0: HOL4 0 vs Lean 1
+       [structure] HOL4 ...ystem$bind_var_list v2 v3 v0) (typeSystem$bind_var_list v2 v3 v1) | Lean ...ystem$bind_var_list 0 v2 v0) (typeSystem$bind_var_list v3 v2 v1))
+no   weakening.eLookupC_weak
+no   weakening.eLookupV_weak
+no   weakening.type_p_weakening
+no   weakening.type_e_weakening_lem
+no   weakening.type_e_weakening
+no   weakening.gt_0
+no   weakening.weak_ctMap_lookup
+no   weakening.weakCT_refl
+no   weakening.weakCT_trans
+no   weakening.disjoint_env_weakCT
+no   weakening.type_tenv_ctor_weakening
+no   weakening.type_tenv_val_weakening_lemma
+no   weakening.type_v_weakening
+no   weakening.type_all_env_weakening
+no   weakening.type_sv_weakening
+no   weakening.type_s_weakening
+no   weakening.weak_tenv_extend_dec_tenv
+no   typeSysProps.unchanged_tenv
+no   typeSysProps.extend_dec_tenv_assoc
+no   typeSysProps.tenv_val_ok_nsEmpty
+no   typeSysProps.tenv_ctor_ok_nsEmpty
+no   typeSysProps.tenv_abbrev_ok_nsEmpty
+no   typeSysProps.tenv_ok_empty
+no   typeSysProps.check_freevars_add
+no   typeSysProps.check_freevars_subst_single
+no   typeSysProps.deBruijn_inc0
+no   typeSysProps.deBruijn_inc_deBruijn_inc
+no   typeSysProps.deBuijn_inc_lem1
+no   typeSysProps.type_subst_deBruijn_inc_single
+no   typeSysProps.type_subst_deBruijn_inc_list
+no   typeSysProps.check_freevars_deBruijn_inc
+no   typeSysProps.nil_deBruijn_inc
+no   typeSysProps.deBruijn_subst_check_freevars
+no   typeSysProps.deBruijn_subst_check_freevars2
+no   typeSysProps.check_freevars_subst_inc
+no   typeSysProps.check_freevars_subst
+no   typeSysProps.type_subst_deBruijn_subst_single
+no   typeSysProps.type_subst_deBruijn_subst_list
+no   typeSysProps.check_freevars_lem
+no   typeSysProps.nil_deBruijn_subst
+no   typeSysProps.deBruijn_subst2
+no   typeSysProps.type_e_subst_lem3
+no   typeSysProps.type_e_subst_lem5
+no   typeSysProps.subst_inc_cancel
+no   typeSysProps.type_e_subst_lem7
+no   typeSysProps.deBruijn_subst_id
+no   typeSysProps.deBruijn_subst_freevars
+no   typeSysProps.tenv_abbrev_ok_lookup
+no   typeSysProps.check_freevars_type_name_subst
+no   typeSysProps.tenv_ctor_ok_merge
+no   typeSysProps.tenv_ctor_ok_lookup
+no   typeSysProps.bind_tvar_rewrites
+no   typeSysProps.bind_tvar0
+no   typeSysProps.tveLookup_subst_none
+no   typeSysProps.tveLookup_db_merge_none
+no   typeSysProps.tveLookup_inc_none
+no   typeSysProps.tveLookup_freevars
+no   typeSysProps.bind_var_list_append
+no   typeSysProps.num_tvs_bind_var_list
+no   typeSysProps.tenv_val_exp_ok_bvl
+no   typeSysProps.tveLookup_subst_some
+no   typeSysProps.num_tvs_db_merge
+no   typeSysProps.num_tvs_deBruijn_subst_tenvE
+no   typeSysProps.tveLookup_inc_some
+no   typeSysProps.tveLookup_freevars_subst
+no   typeSysProps.tenv_val_exp_ok_db_merge
+no   typeSysProps.tveLookup_freevars_local
+no   typeSysProps.tveLookup_no_tvs
+no   typeSysProps.deBruijn_subst_E_bvl
+no   typeSysProps.db_merge_bvl
+no   typeSysProps.tveLookup_db_merge_some
+YES  typeSysProps.type_op_cases
+       [constants] c:list$CONS: HOL4 82 vs Lean 81; c:list$NIL: HOL4 116 vs Lean 115; c:typeSystem$Tapp: HOL4 83 vs Lean 82; c:typeSystem$Tlist_num: HOL4 7 vs Lean 5; c:typeSystem$t_of: HOL4 6 vs Lean 5
+       [binders] binder:ex: HOL4 22 vs Lean 78
+       [connectives] and:items: HOL4 101 vs Lean 157; eq: HOL4 100 vs Lean 156
+       [structure] HOL4 ...1 v2)=OR[E2{AND[(v0=(ast$Arith v3 v4));(list$EVERY (lam.(v5=(type | Lean ...1 v2)=OR[E2{AND[(v0=ast$Opapp);(v1=(list$CONS v3 (list$CONS v4 li
+no   typeSysProps.type_ps_length
+no   typeSysProps.type_p_freevars
+no   typeSysProps.type_p_subst
+no   typeSysProps.type_p_bvl
+no   typeSysProps.type_p_tenvV_indep
+no   typeSysProps.type_es_list_rel
+no   typeSysProps.type_es_length
+no   typeSysProps.tenv_val_exp_ok_bvl_funs
+no   typeSysProps.type_e_freevars
+no   typeSysProps.type_e_subst
+no   typeSysProps.type_funs_Tfn
+no   typeSysProps.type_funs_lookup
+no   typeSysProps.type_funs_find_recfun
+no   typeSysProps.type_recfun_lookup
+no   typeSysProps.type_funs_distinct
+no   typeSysProps.type_e_subst_lem
+no   typeSysProps.mem_type_def_to_ctMap
+no   typeSysProps.ctMap_ok_merge_imp
+no   typeSysProps.ctMap_ok_lookup
+no   typeSysProps.type_def_to_ctMap_mem
+no   typeSysProps.fupdate2_union
+no   typeSysProps.ctMap_ok_type_defs
+no   typeSysProps.nsLookup_add_tenvE1
+no   typeSysProps.nsLookup_add_tenvE2
+no   typeSysProps.nsLookup_add_tenvE3
+no   typeSysProps.add_tenvE_bvl
+no   typeSysProps.type_v_freevars
+no   typeSysProps.type_subst
+YES  typeSysProps.check_ctor_tenv_ok
+       [binder-types] HOL4 ...t_t>>>>>>,list$list<T0>,namespace$namespace<mlstring$mlstring,mls | Lean ...t_t>>>>>>,list$list<num$num>,namespace$namespace<mlstring$mlstrin
+no   typeSysProps.type_d_check_uniq
+no   typeSysProps.extend_dec_tenv_ok
+no   typeSysProps.type_d_tenv_ok_helper
+no   typeSysProps.type_d_tenv_ok
+no   typeSysProps.type_ds_empty
+no   typeSysProps.type_ds_sing
+no   typeSound.fst_triple
+no   typeSound.sing_list
+no   typeSound.EVERY_LIST_REL
+no   typeSound.v_unchanged
+no   typeSound.check_dup_ctors_thm
+no   typeSound.prim_canonical_values_thm
+no   typeSound.has_lists_v_to_list
+no   typeSound.ctor_canonical_values_thm
+no   typeSound.same_type_refl
+no   typeSound.eq_same_type
+YES  typeSound.type_env_conv_thm
+       [instances] extra instance hypotheses: Nonempty
+no   typeSound.type_funs_fst
+no   typeSound.type_recfun_env_help
+no   typeSound.type_recfun_env
+no   typeSound.type_v_exn
+no   typeSound.type_v_Boolv
+no   typeSound.remove_lambda_prod
+no   typeSound.opapp_type_sound
+no   typeSound.store_type_extension_weakS
+no   typeSound.store_type_extension_refl
+no   typeSound.store_type_extension_trans
+no   typeSound.store_assign_type_sound
+no   typeSound.store_alloc_type_sound
+no   typeSound.type_v_list_to_v
+no   typeSound.type_v_list_to_v_APPEND
+no   typeSound.do_eq_Boolv
+no   typeSound.prim_canonical_Boolv_thm
+no   typeSound.prim_canonical_Boolv_cases
+YES  typeSound.op_type_sound
+       [binders] binder:lam: HOL4 5 vs Lean 4
+       [connectives] case: HOL4 3 vs Lean 1; false: HOL4 2 vs Lean 1
+       [structure] HOL4 ...v0 v8 v12 v5));(lam.CASE[v12]{(lam.(typeSoundInvariants$type_v 0  | Lean ...v0 v8 v12 v5));(lam.(typeSoundInvariants$type_v 0 v0 v8 v12 (type
+no   typeSound.build_conv_type_sound
+no   typeSound.same_ctor_and_same_tid
+no   typeSound.pat_type_sound
+no   typeSound.lookup_var_sound
+no   typeSound.EVERY_REPLICATE
+no   typeSound.EVERY_LIST_REL_local
+YES  typeSound.exp_type_sound
+       [binders] binder:lam: HOL4 10 vs Lean 6
+       [connectives] case: HOL4 6 vs Lean 2
+       [structure] HOL4 ...v11) v12 v10));(lam.CASE[v12]{(lam.(typeSoundInvariants$type_v 0  | Lean ...v11) v12 v10));(lam.(typeSoundInvariants$type_v 0 v0 v11 v12 (typ
+no   typeSound.build_tdefs_build_tenv
+no   typeSound.type_sound_invariant_union
+no   typeSound.check_ctor_tenv_dups
+no   typeSound.type_all_env_extend
+no   typeSound.type_e_con_check
+YES  typeSound.decs_type_sound_no_check
+       [binders] binder:lam: HOL4 5 vs Lean 3
+       [connectives] case: HOL4 3 vs Lean 1
+       [structure] HOL4 ...tenv v7 v5))]);(lam.CASE[v12]{(lam.AND[(typeSoundInvariants$type_ | Lean ...tenv v7 v5))]);(lam.AND[(typeSoundInvariants$type_v 0 v10 v11 v12
+YES  typeSound.decs_type_sound
+       [binders] binder:lam: HOL4 5 vs Lean 3
+       [connectives] case: HOL4 3 vs Lean 1
+       [structure] HOL4 ...tenv v8 v6))]);(lam.CASE[v13]{(lam.AND[(typeSoundInvariants$type_ | Lean ...tenv v8 v6))]);(lam.AND[(typeSoundInvariants$type_v 0 v11 v12 v13
+no   typeSound.semantics_type_sound

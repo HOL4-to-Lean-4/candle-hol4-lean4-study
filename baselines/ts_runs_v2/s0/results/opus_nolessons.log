@@ -1,0 +1,10 @@
+[s0] dumping Lean statements from /e/ts_ws/runs/opus_nolessons_v2/merged (root CmlTS)
+[s0] scanning
+statements 267 flagged 7
+  binders            6
+  structure          6
+  connectives        5
+  constants          2
+  literals           1
+  instances          1
+[s0] wrote /e/ts_ws/s0/results/opus_nolessons/report.json and /e/ts_ws/s0/results/opus_nolessons/summary.txt

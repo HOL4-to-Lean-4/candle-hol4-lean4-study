@@ -1,0 +1,1813 @@
+=== misc.CARD_IMAGE_ID_BIJ
+⊢ ∀(s :α -> bool). FINITE s ⇒ (∀(x :α). x ∈ s ⇒ (f :α -> α) x ∈ s) ∧ CARD (IMAGE f s) = CARD s ⇒ f PERMUTES s
+
+=== misc.tlookup_bij_suff
+⊢ set (toList (names :num sptree$num_map) :num list) = (domain names :num -> bool) ⇒ tlookup names PERMUTES 𝕌(:num)
+
+=== misc.tlookup_bij_iff
+⊢ tlookup (names :num sptree$num_map) PERMUTES 𝕌(:num) ⇔ set (toList names :num list) = (domain names :num -> bool)
+
+=== misc.find_index_LESS_LENGTH
+⊢ ∀(ls :α list) (n :α) (m :num) (i :num). find_index n ls m = SOME i ⇒ m ≤ i ∧ i < m + LENGTH ls
+
+=== misc.ALOOKUP_find_index_SOME
+⊢ ALOOKUP (env :(β # α) list) (k :β) = SOME (v :α) ⇒
+  ∃(i :num). find_index k (MAP (FST :β # α -> β) env) (0 :num) = SOME i ∧ i < LENGTH env ∧ v = SND env❲i❳
+
+=== misc.IS_PREFIX_THM
+⊢ ∀(l2 :α list) (l1 :α list). l2 ≼ l1 ⇔ LENGTH l2 ≤ LENGTH l1 ∧ ∀(n :num). n < LENGTH l2 ⇒ l2❲n❳ = l1❲n❳
+
+=== misc.FST_pair
+⊢ (λ((n :α),(v :β)). n) = (FST :α # β -> α)
+
+=== misc.LESS_1
+⊢ (x :num) < (1 :num) ⇔ x = (0 :num)
+
+=== misc.map_some_eq
+⊢ ∀(l1 :α list) (l2 :α list). MAP (SOME :α -> α option) l1 = MAP (SOME :α -> α option) l2 ⇔ l1 = l2
+
+=== misc.map_some_eq_append
+⊢ ∀(l1 :α list) (l2 :α list) (l3 :α list).
+    MAP (SOME :α -> α option) l1 ++ MAP (SOME :α -> α option) l2 = MAP (SOME :α -> α option) l3 ⇔ l1 ++ l2 = l3
+
+=== misc.MAP_EQ_MAP_IMP
+⊢ ∀(xs :α list) (ys :α list) (f :α -> β).
+    (∀(x :α) (y :α). MEM x xs ∧ MEM y ys ∧ f x = f y ⇒ x = y) ⇒ MAP f xs = MAP f ys ⇒ xs = ys
+
+=== misc.FDOM_FLOOKUP
+⊢ (x :α) ∈ FDOM (f :α |-> β) ⇔ ∃(v :β). FLOOKUP f x = SOME v
+
+=== misc.DROP_EMPTY
+⊢ ∀(ls :α list) (n :num). DROP n ls = ([] :α list) ⇒ n ≥ LENGTH ls
+
+=== misc.plus_0_I
+⊢ $+ (0 :num) = (I :num -> num)
+
+=== mlstring.explode_aux_thm
+⊢ ∀(max :num) (n :num) (ls :string). n + max = STRLEN ls ⇒ explode_aux (strlit ls) n max = DROP n ls
+
+=== mlstring.explode_thm
+⊢ explode (strlit (ls :string)) = ls
+
+=== mlstring.explode_implode
+⊢ ∀(x :string). explode (implode x) = x
+
+=== mlstring.implode_explode
+⊢ ∀(x :mlstring). implode (explode x) = x
+
+=== mlstring.explode_11
+⊢ ∀(s1 :mlstring) (s2 :mlstring). explode s1 = explode s2 ⇔ s1 = s2
+
+=== mlstring.TOKENS_eq_tokens_aux
+⊢ ∀(P :char -> bool) (ls :mlstring) (ss :string) (n :num) (len :num).
+    n + len = STRLEN (explode ls) ⇒
+    MAP explode (tokens_aux P ls ss n len) =
+    case ss of
+      ("" :string) => TOKENS P (DROP n (explode ls))
+    | STRING h t =>
+      if len ≠ (0 :num) ∧ ¬P (explode ls)❲n❳ then
+        STRCAT (REVERSE (STRING h t)) (HD (TOKENS P (DROP n (explode ls))))::TL (TOKENS P (DROP n (explode ls)))
+      else if len ≠ (0 :num) then REVERSE (STRING h t)::TOKENS P (DROP n (explode ls))
+      else [REVERSE (STRING h t)]
+
+=== mlstring.TOKENS_eq_tokens
+⊢ ∀(P :char -> bool) (ls :mlstring). MAP explode (tokens P ls) = TOKENS P (explode ls)
+
+=== namespaceProps.mk_id_surj
+⊢ ∀(id :(α, β) id). ∃(p :α list) (n :β). id = mk_id p n
+
+=== namespaceProps.mk_id_thm
+⊢ ∀(id :(α, β) id). mk_id (id_to_mods id) (id_to_n id) = id
+
+=== namespaceProps.nsSub_mono
+⊢ (∀(x :(α, β) id) (y :γ) (z :δ). (R1 :(α, β) id -> γ -> δ -> bool) x y z ⇒ (R2 :(α, β) id -> γ -> δ -> bool) x y z) ⇒
+  nsSub R1 (e1 :(α, β, γ) namespace) (e2 :(α, β, δ) namespace) ⇒
+  nsSub R2 e1 e2
+
+=== namespaceProps.nsAll2_mono
+⊢ (∀(x :(α, β) id) (y :γ) (z :δ). (R1 :(α, β) id -> γ -> δ -> bool) x y z ⇒ (R2 :(α, β) id -> γ -> δ -> bool) x y z) ⇒
+  nsAll2 R1 (e1 :(α, β, γ) namespace) (e2 :(α, β, δ) namespace) ⇒
+  nsAll2 R2 e1 e2
+
+=== namespaceProps.nsLookup_nsEmpty
+⊢ ∀(id :(α, β) id). nsLookup (nsEmpty :(α, β, γ) namespace) id = (NONE :γ option)
+
+=== namespaceProps.nsLookupMod_nsEmpty
+⊢ ∀(x :α) (y :α list). nsLookupMod (nsEmpty :(α, β, γ) namespace) (x::y) = (NONE :(α, β, γ) namespace option)
+
+=== namespaceProps.nsAppend_nsEmpty
+⊢ ∀(env :(α, β, γ) namespace).
+    nsAppend env (nsEmpty :(α, β, γ) namespace) = env ∧ nsAppend (nsEmpty :(α, β, γ) namespace) env = env
+
+=== namespaceProps.alist_to_ns_nil
+⊢ (alist_to_ns ([] :(β # γ) list) :(α, β, γ) namespace) = (nsEmpty :(α, β, γ) namespace)
+
+=== namespaceProps.nsSub_nsEmpty
+⊢ ∀(r :(α, β) id -> γ -> δ -> bool) (env :(α, β, δ) namespace). nsSub r (nsEmpty :(α, β, γ) namespace) env
+
+=== namespaceProps.nsAll_nsEmpty
+⊢ ∀(f :(α, β) id -> γ -> bool). nsAll f (nsEmpty :(α, β, γ) namespace)
+
+=== namespaceProps.nsAll2_nsEmpty
+⊢ ∀(f :(α, β) id -> γ -> δ -> bool). nsAll2 f (nsEmpty :(α, β, γ) namespace) (nsEmpty :(α, β, δ) namespace)
+
+=== namespaceProps.alist_to_ns_cons
+⊢ ∀(k :α) (v :β) (l :(α # β) list).
+    (alist_to_ns ((k,v)::l) :(γ, α, β) namespace) = nsBind k v (alist_to_ns l :(γ, α, β) namespace)
+
+=== namespaceProps.nsAppend_nsBind
+⊢ ∀(k :α) (v :β) (e1 :(γ, α, β) namespace) (e2 :(γ, α, β) namespace).
+    nsAppend (nsBind k v e1) e2 = nsBind k v (nsAppend e1 e2)
+
+=== namespaceProps.nsAppend_assoc
+⊢ ∀(e1 :(α, β, γ) namespace) (e2 :(α, β, γ) namespace) (e3 :(α, β, γ) namespace).
+    nsAppend e1 (nsAppend e2 e3) = nsAppend (nsAppend e1 e2) e3
+
+=== namespaceProps.nsLookup_nsBind
+⊢ (∀(n :α) (v :β) (e :(γ, α, β) namespace). nsLookup (nsBind n v e) (Short n :(γ, α) id) = SOME v) ∧
+  ∀(n :(δ, ε) id) (n' :ε) (v :ζ) (e :(δ, ε, ζ) namespace).
+    n ≠ (Short n' :(δ, ε) id) ⇒ nsLookup (nsBind n' v e) n = nsLookup e n
+
+=== namespaceProps.nsAppend_nsSing
+⊢ ∀(n :α) (x :β) (e :(γ, α, β) namespace). nsAppend (nsSing n x :(γ, α, β) namespace) e = nsBind n x e
+
+=== namespaceProps.nsLookup_nsSing
+⊢ ∀(n :α) (v :β) (id :(γ, α) id).
+    nsLookup (nsSing n v :(γ, α, β) namespace) id = if id = (Short n :(γ, α) id) then SOME v else (NONE :β option)
+
+=== namespaceProps.nsAll_nsSing
+⊢ ∀(R :(α, β) id -> γ -> bool) (n :β) (v :γ). nsAll R (nsSing n v :(α, β, γ) namespace) ⇔ R (Short n :(α, β) id) v
+
+=== namespaceProps.nsAll2_nsSing
+⊢ ∀(R :(α, β) id -> γ -> δ -> bool) (n1 :β) (v1 :γ) (n2 :β) (v2 :δ).
+    nsAll2 R (nsSing n1 v1 :(α, β, γ) namespace) (nsSing n2 v2 :(α, β, δ) namespace) ⇔
+    n1 = n2 ∧ R (Short n1 :(α, β) id) v1 v2
+
+=== namespaceProps.nsBind_11
+⊢ ∀(x :α) (y :β) (n :(γ, α, β) namespace) (x' :α) (y' :β) (n' :(γ, α, β) namespace).
+    nsBind x y n = nsBind x' y' n' ⇔ x = x' ∧ y = y' ∧ n = n'
+
+=== namespaceProps.alist_to_ns_11
+⊢ ∀(l1 :(α # β) list) (l2 :(α # β) list).
+    (alist_to_ns l1 :(γ, α, β) namespace) = (alist_to_ns l2 :(γ, α, β) namespace) ⇔ l1 = l2
+
+=== namespaceProps.nsLookup_nsLift
+⊢ ∀(mn :α) (e :(α, β, γ) namespace) (id :(α, β) id).
+    nsLookup (nsLift mn e) id =
+    case id of
+      (Short v :(α, β) id) => (NONE :γ option)
+    | Long mn' id' => if mn = mn' then nsLookup e id' else (NONE :γ option)
+
+=== namespaceProps.nsLookupMod_nsLift
+⊢ ∀(mn :α) (e :(α, β, γ) namespace) (path :α list).
+    nsLookupMod (nsLift mn e) path =
+    case path of
+      ([] :α list) => SOME (nsLift mn e)
+    | mn'::path' => if mn = mn' then nsLookupMod e path' else (NONE :(α, β, γ) namespace option)
+
+=== namespaceProps.nsLookup_nsAppend_some
+⊢ ∀(e1 :(α, β, γ) namespace) (id :(α, β) id) (e2 :(α, β, γ) namespace) (v :γ).
+    nsLookup (nsAppend e1 e2) id = SOME v ⇔
+    nsLookup e1 id = SOME v ∨
+    nsLookup e1 id = (NONE :γ option) ∧ nsLookup e2 id = SOME v ∧
+    ∀(p1 :α list) (p2 :α list).
+      p1 ≠ ([] :α list) ∧ id_to_mods id = p1 ++ p2 ⇒ nsLookupMod e1 p1 = (NONE :(α, β, γ) namespace option)
+
+=== namespaceProps.nsAppend_to_nsBindList
+⊢ ∀(l :(α # β) list). nsAppend (alist_to_ns l :(γ, α, β) namespace) (e :(γ, α, β) namespace) = nsBindList l e
+
+=== namespaceProps.nsLookupMod_nsAppend_none
+⊢ ∀(e1 :(α, β, γ) namespace) (e2 :(α, β, γ) namespace) (path :α list).
+    nsLookupMod (nsAppend e1 e2) path = (NONE :(α, β, γ) namespace option) ⇔
+    nsLookupMod e1 path = (NONE :(α, β, γ) namespace option) ∧
+    (nsLookupMod e2 path = (NONE :(α, β, γ) namespace option) ∨
+     ∃(p1 :α list) (p2 :α list) (e3 :(α, β, γ) namespace).
+       p1 ≠ ([] :α list) ∧ path = p1 ++ p2 ∧ nsLookupMod e1 p1 = SOME e3)
+
+=== namespaceProps.eALL_T
+⊢ ∀(e :(α, β, γ) namespace). nsAll (λ(n :(α, β) id) (x :γ). T) e
+
+=== namespaceProps.nsLookup_nsAll
+⊢ ∀(env :(α, β, γ) namespace) (x :(α, β) id) (P :(α, β) id -> γ -> bool) (v :γ).
+    nsAll P env ∧ nsLookup env x = SOME v ⇒ P x v
+
+=== namespaceProps.nsAll_nsAppend
+⊢ ∀(f :(α, β) id -> γ -> bool) (e1 :(α, β, γ) namespace) (e2 :(α, β, γ) namespace).
+    nsAll f e1 ∧ nsAll f e2 ⇒ nsAll f (nsAppend e1 e2)
+
+=== namespaceProps.nsAll_alist_to_ns
+⊢ ∀(R :(α, β) id -> γ -> bool) (l :(β # γ) list).
+    EVERY (λ((n :β),(v :γ)). R (Short n :(α, β) id) v) l ⇒ nsAll R (alist_to_ns l :(α, β, γ) namespace)
+
+=== namespaceProps.nsAll_nsLift
+⊢ ∀(R :(α, β) id -> γ -> bool) (mn :α) (e :(α, β, γ) namespace).
+    nsAll R (nsLift mn e) ⇔ nsAll (λ(id :(α, β) id). R (Long mn id)) e
+
+=== namespaceProps.nsAll_nsAppend_left
+⊢ ∀(P :(α, β) id -> γ -> bool) (n1 :(α, β, γ) namespace) (n2 :(α, β, γ) namespace).
+    nsAll P (nsAppend n1 n2) ⇒ nsAll P n1
+
+=== namespaceProps.nsSub_conj
+⊢ ∀(P :(α, β) id -> γ -> δ -> bool) (Q :(α, β) id -> γ -> δ -> bool) (e1 :(α, β, γ) namespace)
+      (e2 :(α, β, δ) namespace).
+    nsSub (λ(id :(α, β) id) (x :γ) (y :δ). P id x y ∧ Q id x y) e1 e2 ⇔ nsSub P e1 e2 ∧ nsSub Q e1 e2
+
+=== namespaceProps.nsSub_refl
+⊢ ∀(P :(α, β) id -> γ -> bool) (R :(α, β) id -> γ -> γ -> bool).
+    (∀(n :(α, β) id) (x :γ). P n x ⇒ R n x x) ⇒ ∀(e :(α, β, γ) namespace). nsAll P e ⇒ nsSub R e e
+
+=== namespaceProps.nsSub_nsBind
+⊢ ∀(R :(α, β) id -> γ -> δ -> bool) (x :β) (v1 :γ) (v2 :δ) (e1 :(α, β, γ) namespace) (e2 :(α, β, δ) namespace).
+    R (Short x :(α, β) id) v1 v2 ∧ nsSub R e1 e2 ⇒ nsSub R (nsBind x v1 e1) (nsBind x v2 e2)
+
+=== namespaceProps.nsSub_nsAppend2
+⊢ ∀(R :(α, β) id -> γ -> γ -> bool) (e1 :(α, β, γ) namespace) (e2 :(α, β, γ) namespace) (e2' :(α, β, γ) namespace).
+    nsSub R e1 e1 ∧ nsSub R e2 e2' ⇒ nsSub R (nsAppend e1 e2) (nsAppend e1 e2')
+
+=== namespaceProps.alist_rel_restr_thm
+⊢ ∀(R :α -> β -> γ -> bool) (e1 :(α # β) list) (e2 :(α # γ) list) (keys :α list).
+    alist_rel_restr R e1 e2 keys ⇔
+    ∀(k :α). MEM k keys ⇒ ∃(v1 :β) (v2 :γ). ALOOKUP e1 k = SOME v1 ∧ ALOOKUP e2 k = SOME v2 ∧ R k v1 v2
+
+=== namespaceProps.alistSub_cong
+⊢ ∀(l1 :(α # β) list) (l2 :(α # γ) list) (l1' :(α # β) list) (l2' :(α # γ) list) (R :α -> β -> γ -> bool)
+      (R' :α -> β -> γ -> bool).
+    l1 = l1' ∧ l2 = l2' ∧
+    (∀(n :α) (x :β) (y :γ). ALOOKUP l1' n = SOME x ∧ ALOOKUP l2' n = SOME y ⇒ (R n x y ⇔ R' n x y)) ⇒
+    (alistSub R l1 l2 ⇔ alistSub R' l1' l2')
+
+=== namespaceProps.nsLookup_FOLDR_nsLift
+⊢ ∀(e :(α, β, γ) namespace) (p :α list) (k :β).
+    nsLookup (FOLDR (nsLift :α -> (α, β, γ) namespace -> (α, β, γ) namespace) e p) (mk_id p k) =
+    nsLookup e (Short k :(α, β) id)
+
+=== namespaceProps.nsLookup_FOLDR_nsLift_some
+⊢ ∀(e :(α, β, γ) namespace) (p :α list) (id :(α, β) id) (v :γ).
+    nsLookup (FOLDR (nsLift :α -> (α, β, γ) namespace -> (α, β, γ) namespace) e p) id = SOME v ⇔
+    p = ([] :α list) ∧ nsLookup e id = SOME v ∨
+    p ≠ ([] :α list) ∧ ∃(p2 :α list) (n :β). id = mk_id (p ++ p2) n ∧ nsLookup e (mk_id p2 n) = SOME v
+
+=== namespaceProps.nsLookupMod_FOLDR_nsLift_none
+⊢ ∀(e :(α, β, γ) namespace) (p1 :α list) (p2 :α list).
+    nsLookupMod (FOLDR (nsLift :α -> (α, β, γ) namespace -> (α, β, γ) namespace) e p1) p2 =
+    (NONE :(α, β, γ) namespace option) ⇔
+    p2 ≼ p1 ∨ p1 ≼ p2 ⇒ ∃(p3 :α list). p2 = p1 ++ p3 ∧ nsLookupMod e p3 = (NONE :(α, β, γ) namespace option)
+
+=== namespaceProps.nsAll2_conj
+⊢ ∀(P :(α, β) id -> γ -> δ -> bool) (Q :(α, β) id -> γ -> δ -> bool) (e1 :(α, β, γ) namespace)
+      (e2 :(α, β, δ) namespace).
+    nsAll2 (λ(id :(α, β) id) (x :γ) (y :δ). P id x y ∧ Q id x y) e1 e2 ⇔ nsAll2 P e1 e2 ∧ nsAll2 Q e1 e2
+
+=== namespaceProps.nsAll2_nsLookup2
+⊢ ∀(R :(α, β) id -> γ -> δ -> bool) (e1 :(α, β, γ) namespace) (e2 :(α, β, δ) namespace) (n :(α, β) id) (v2 :δ).
+    nsLookup e2 n = SOME v2 ∧ nsAll2 R e1 e2 ⇒ ∃(v1 :γ). nsLookup e1 n = SOME v1 ∧ R n v1 v2
+
+=== namespaceProps.nsAll2_nsLookup_none
+⊢ ∀(R :(α, β) id -> γ -> δ -> bool) (e1 :(α, β, γ) namespace) (e2 :(α, β, δ) namespace) (n :(α, β) id).
+    nsAll2 R e1 e2 ⇒ (nsLookup e1 n = (NONE :γ option) ⇔ nsLookup e2 n = (NONE :δ option))
+
+=== namespaceProps.nsAll2_nsBind
+⊢ ∀(R :(α, β) id -> γ -> δ -> bool) (x :β) (v1 :γ) (v2 :δ) (e1 :(α, β, γ) namespace) (e2 :(α, β, δ) namespace).
+    R (Short x :(α, β) id) v1 v2 ∧ nsAll2 R e1 e2 ⇒ nsAll2 R (nsBind x v1 e1) (nsBind x v2 e2)
+
+=== namespaceProps.nsAll2_nsBindList
+⊢ ∀(R :(α, β) id -> γ -> δ -> bool) (l1 :(β # γ) list) (l2 :(β # δ) list) (e1 :(α, β, γ) namespace)
+      (e2 :(α, β, δ) namespace).
+    LIST_REL (λ((x :β),(y :γ)) ((x' :β),(y' :δ)). x = x' ∧ R (Short x :(α, β) id) y y') l1 l2 ∧ nsAll2 R e1 e2 ⇒
+    nsAll2 R (nsBindList l1 e1) (nsBindList l2 e2)
+
+=== namespaceProps.nsAll2_nsAppend
+⊢ ∀(R :(α, β) id -> γ -> δ -> bool) (e1 :(α, β, γ) namespace) (e1' :(α, β, γ) namespace) (e2 :(α, β, δ) namespace)
+      (e2' :(α, β, δ) namespace). nsAll2 R e1 e2 ∧ nsAll2 R e1' e2' ⇒ nsAll2 R (nsAppend e1 e1') (nsAppend e2 e2')
+
+=== namespaceProps.nsAll2_alist_to_ns
+⊢ ∀(R :(α, β) id -> γ -> δ -> bool) (l1 :(β # γ) list) (l2 :(β # δ) list).
+    LIST_REL (λ((x :β),(y :γ)) ((x' :β),(y' :δ)). x = x' ∧ R (Short x :(α, β) id) y y') l1 l2 ⇒
+    nsAll2 R (alist_to_ns l1 :(α, β, γ) namespace) (alist_to_ns l2 :(α, β, δ) namespace)
+
+=== namespaceProps.nsAll2_nsLift
+⊢ ∀(R :(α, β) id -> γ -> δ -> bool) (mn :α) (e1 :(α, β, γ) namespace) (e2 :(α, β, δ) namespace).
+    nsAll2 R (nsLift mn e1) (nsLift mn e2) ⇔ nsAll2 (λ(id :(α, β) id). R (Long mn id)) e1 e2
+
+=== semanticPrimitivesProps.with_same_v
+⊢ (env :φ sem_env) with v := env.v = env
+
+=== semanticPrimitivesProps.unchanged_env
+⊢ ∀(env :α sem_env). <|v := env.v; c := env.c|> = env
+
+=== semanticPrimitivesProps.with_same_clock
+⊢ (st :'ffi state) with clock := st.clock = st
+
+=== semanticPrimitivesProps.Boolv_11
+⊢ Boolv (b1 :bool) = Boolv (b2 :bool) ⇔ (b1 ⇔ b2)
+
+=== semanticPrimitivesProps.extend_dec_env_assoc
+⊢ ∀(env1 :v sem_env) (env2 :v sem_env) (env3 :v sem_env).
+    ((env1 +++ ((env2 +++ env3) :v sem_env)) :v sem_env) = ((((env1 +++ env2) :v sem_env) +++ env3) :v sem_env)
+
+=== semanticPrimitivesProps.pat_bindings_accum
+⊢ (∀(p :pat) (acc :mlstring list). pat_bindings p acc = pat_bindings p ([] :mlstring list) ++ acc) ∧
+  ∀(ps :pat list) (acc :mlstring list). pats_bindings ps acc = pats_bindings ps ([] :mlstring list) ++ acc
+
+=== semanticPrimitivesProps.do_app_cases
+⊢ do_app ((s :v store_v list),(t :α ffi_state)) (op :op) (vs :v list) =
+  SOME ((st' :v store_v list # α ffi_state),(v :(v, v) result)) ⇔
+  (∃(a :arith) (ty :prim_type) (v' :v + v).
+     op = Arith a ty ∧ EVERY (check_type ty) vs ∧ do_arith a ty vs = SOME v' ∧
+     (case v' of
+        (INL exn :v + v) => SOME ((s,t),(Rerr (Rraise exn) :(v, v) result))
+      | (INR res :v + v) => SOME ((s,t),(Rval res :(v, v) result))) = SOME (st',v)) ∨
+  (∃(ty1 :prim_type) (ty2 :prim_type) (v'⁸' :v) (l :v list).
+     op = FromTo ty1 ty2 ∧ vs = v'⁸'::l ∧
+     (¬check_type ty1 v'⁸' ∨
+      ∃(v' :v + v).
+        l = ([] :v list) ∧ do_conversion v'⁸' ty1 ty2 = SOME v' ∧
+        (case v' of
+           (INL exn :v + v) => SOME ((s,t),(Rerr (Rraise exn) :(v, v) result))
+         | (INR res :v + v) => SOME ((s,t),(Rval res :(v, v) result))) = SOME (st',v)) ∧ check_type ty1 v'⁸') ∨
+  (∃(v50 :word_size) (op' :shift) (n :num) (v83 :lit).
+     op = Shift v50 op' n ∧ vs = [Litv v83] ∧
+     ((∃(w :word8).
+         v50 = W8 ∧ v83 = Word8 w ∧ (s,t) = st' ∧ (Rval (Litv (Word8 (shift8_lookup op' w n))) :(v, v) result) = v) ∨
+      ∃(w' :word64).
+        v50 = W64 ∧ v83 = Word64 w' ∧ (s,t) = st' ∧ (Rval (Litv (Word64 (shift64_lookup op' w' n))) :(v, v) result) = v)) ∨
+  (∃(v1 :v) (v2 :v) (b :bool).
+     op = Equality ∧ vs = [v1; v2] ∧ do_eq v1 v2 = Eq_val b ∧ (s,t) = st' ∧ (Rval (Boolv b) :(v, v) result) = v) ∨
+  (∃(test :test) (test_ty :prim_type) (v1' :v) (v2' :v) (b :bool).
+     op = Test test test_ty ∧ vs = [v1'; v2'] ∧ do_test test test_ty v1' v2' = Eq_val b ∧ (s,t) = st' ∧
+     (Rval (Boolv b) :(v, v) result) = v) ∨
+  (∃(b :bool) (lnum :num) (v' :v) (s' :v store_v list).
+     op = Opassign ∧ vs = [Loc b lnum; v'] ∧ store_assign lnum (Refv v') s = SOME s' ∧ (s',t) = st' ∧
+     v = (Rval (Conv (NONE :stamp option) ([] :v list)) :(v, v) result)) ∨
+  (∃(v' :v) (s' :v store_v list) (n :num).
+     op = Opref ∧ vs = [v'] ∧ store_alloc (Refv v') s = (s',n) ∧ (s',t) = st' ∧ (Rval (Loc T n) :(v, v) result) = v) ∨
+  (∃(b' :bool) (n' :num) (v' :v).
+     op = Opderef ∧ vs = [Loc b' n'] ∧ store_lookup n' s = SOME (Refv v') ∧ (s,t) = st' ∧ (Rval v' :(v, v) result) = v) ∨
+  (∃(v240 :v list) (w'' :word8) (n'' :int).
+     op = Aw8alloc ∧ vs = Litv (IntLit n'')::Litv (Word8 w'')::v240 ∧
+     (¬(n'' < (0 :int)) ∨ v240 = ([] :v list) ∧ (s,t) = st' ∧ v = (Rerr (Rraise sub_exn_v) :(v, v) result)) ∧
+     (n'' < (0 :int) ∨
+      ∃(s' :v store_v list) (lnum :num).
+        v240 = ([] :v list) ∧ store_alloc (W8array (REPLICATE (Num (ABS n'')) w'') :v store_v) s = (s',lnum) ∧
+        (s',t) = st' ∧ (Rval (Loc T lnum) :(v, v) result) = v)) ∨
+  (∃(v352 :bool) (lnum' :num) (v360 :v list) (i :int).
+     op = Aw8sub ∧ vs = Loc v352 lnum'::Litv (IntLit i)::v360 ∧
+     (¬(i < (0 :int)) ∨
+      ∃(ws :word8 list).
+        v360 = ([] :v list) ∧ store_lookup lnum' s = SOME (W8array ws :v store_v) ∧ (s,t) = st' ∧
+        v = (Rerr (Rraise sub_exn_v) :(v, v) result)) ∧
+     (i < (0 :int) ∨
+      ∃(ws :word8 list).
+        v360 = ([] :v list) ∧ store_lookup lnum' s = SOME (W8array ws :v store_v) ∧
+        (¬(Num (ABS i) ≥ LENGTH ws) ∨ (s,t) = st' ∧ v = (Rerr (Rraise sub_exn_v) :(v, v) result)) ∧
+        (Num (ABS i) ≥ LENGTH ws ∨ (s,t) = st' ∧ (Rval (Litv (Word8 ws❲Num (ABS i)❳)) :(v, v) result) = v))) ∨
+  (∃(v432 :bool) (n'³' :num) (ws :word8 list).
+     op = Aw8length ∧ vs = [Loc v432 n'³'] ∧ store_lookup n'³' s = SOME (W8array ws :v store_v) ∧ (s,t) = st' ∧
+     (Rval (Litv (IntLit ((&LENGTH ws) :int))) :(v, v) result) = v) ∨
+  (∃(v468 :bool) (lnum'³' :num) (v480 :v list) (w'³' :word8) (i'' :int).
+     op = Aw8update ∧ vs = Loc v468 lnum'³'::Litv (IntLit i'')::Litv (Word8 w'³')::v480 ∧
+     (¬(i'' < (0 :int)) ∨
+      ∃(ws :word8 list).
+        v480 = ([] :v list) ∧ store_lookup lnum'³' s = SOME (W8array ws :v store_v) ∧ (s,t) = st' ∧
+        v = (Rerr (Rraise sub_exn_v) :(v, v) result)) ∧
+     (i'' < (0 :int) ∨
+      ∃(ws :word8 list).
+        v480 = ([] :v list) ∧ store_lookup lnum'³' s = SOME (W8array ws :v store_v) ∧
+        (¬(Num (ABS i'') ≥ LENGTH ws) ∨ (s,t) = st' ∧ v = (Rerr (Rraise sub_exn_v) :(v, v) result)) ∧
+        (Num (ABS i'') ≥ LENGTH ws ∨
+         ∃(s' :v store_v list).
+           store_assign lnum'³' (W8array ws❲Num (ABS i'') ↦ w'³'❳ :v store_v) s = SOME s' ∧ (s',t) = st' ∧
+           v = (Rval (Conv (NONE :stamp option) ([] :v list)) :(v, v) result)))) ∨
+  (∃(len :int) (off :int) (strng :mlstring).
+     op = CopyStrStr ∧ vs = [Litv (StrLit strng); Litv (IntLit off); Litv (IntLit len)] ∧ (s,t) = st' ∧
+     (copy_array (explode strng,off) len (NONE :(string # int) option) = (NONE :string option) ∧
+      v = (Rerr (Rraise sub_exn_v) :(v, v) result) ∨
+      ∃(cs :string).
+        copy_array (explode strng,off) len (NONE :(string # int) option) = SOME cs ∧
+        (Rval (Litv (StrLit (implode cs))) :(v, v) result) = v)) ∨
+  (∃(v740 :bool) (dst :num) (dstoff :int) (len' :int) (off' :int) (strng' :mlstring) (ws :word8 list).
+     op = CopyStrAw8 ∧
+     vs = [Litv (StrLit strng'); Litv (IntLit off'); Litv (IntLit len'); Loc v740 dst; Litv (IntLit dstoff)] ∧
+     store_lookup dst s = SOME (W8array ws :v store_v) ∧
+     (copy_array (explode strng',off') len' (SOME (ws_to_chars ws,dstoff)) = (NONE :string option) ∧ (s,t) = st' ∧
+      v = (Rerr (Rraise sub_exn_v) :(v, v) result) ∨
+      ∃(cs :string) (s' :v store_v list).
+        copy_array (explode strng',off') len' (SOME (ws_to_chars ws,dstoff)) = SOME cs ∧
+        store_assign dst (W8array (chars_to_ws cs) :v store_v) s = SOME s' ∧ (s',t) = st' ∧
+        v = (Rval (Conv (NONE :stamp option) ([] :v list)) :(v, v) result))) ∨
+  (∃(v940 :bool) (src :num) (len'' :int) (off'' :int) (ws :word8 list).
+     op = CopyAw8Str ∧ vs = [Loc v940 src; Litv (IntLit off''); Litv (IntLit len'')] ∧
+     store_lookup src s = SOME (W8array ws :v store_v) ∧ (s,t) = st' ∧
+     (copy_array (ws,off'') len'' (NONE :(word8 list # int) option) = (NONE :word8 list option) ∧
+      v = (Rerr (Rraise sub_exn_v) :(v, v) result) ∨
+      ∃(ws' :word8 list).
+        copy_array (ws,off'') len'' (NONE :(word8 list # int) option) = SOME ws' ∧
+        (Rval (Litv (StrLit (implode (ws_to_chars ws')))) :(v, v) result) = v)) ∨
+  (∃(v1064 :bool) (src' :num) (v1104 :bool) (dst' :num) (dstoff' :int) (len'³' :int) (off'³' :int) (ws :word8 list)
+       (ds :word8 list).
+     op = CopyAw8Aw8 ∧
+     vs = [Loc v1064 src'; Litv (IntLit off'³'); Litv (IntLit len'³'); Loc v1104 dst'; Litv (IntLit dstoff')] ∧
+     store_lookup src' s = SOME (W8array ws :v store_v) ∧ store_lookup dst' s = SOME (W8array ds :v store_v) ∧
+     (copy_array (ws,off'³') len'³' (SOME (ds,dstoff')) = (NONE :word8 list option) ∧ (s,t) = st' ∧
+      v = (Rerr (Rraise sub_exn_v) :(v, v) result) ∨
+      ∃(ws' :word8 list) (s' :v store_v list).
+        copy_array (ws,off'³') len'³' (SOME (ds,dstoff')) = SOME ws' ∧
+        store_assign dst' (W8array ws' :v store_v) s = SOME s' ∧ (s',t) = st' ∧
+        v = (Rval (Conv (NONE :stamp option) ([] :v list)) :(v, v) result))) ∨
+  (∃(v1264 :bool) (dst'' :num) (str_arg :mlstring) (bs :word8 list) (new_bs :word8 list) (s' :v store_v list).
+     op = XorAw8Str_unsafe ∧ vs = [Loc v1264 dst''; Litv (StrLit str_arg)] ∧
+     store_lookup dst'' s = SOME (W8array bs :v store_v) ∧
+     xor_bytes (MAP ((n2w :num -> word8) ∘ ORD) (explode str_arg)) bs = SOME new_bs ∧
+     store_assign dst'' (W8array new_bs :v store_v) s = SOME s' ∧ (s',t) = st' ∧
+     v = (Rval (Conv (NONE :stamp option) ([] :v list)) :(v, v) result)) ∨
+  (∃(v'' :v) (ls :string).
+     op = Implode ∧ vs = [v''] ∧ v_to_char_list v'' = SOME ls ∧ (s,t) = st' ∧
+     (Rval (Litv (StrLit (implode ls))) :(v, v) result) = v) ∨
+  (∃(strng :mlstring).
+     op = Explode ∧ vs = [Litv (StrLit strng)] ∧ (s,t) = st' ∧
+     (Rval (list_to_v (MAP (λ(c :char). Litv (Char c)) (explode strng))) :(v, v) result) = v) ∨
+  (∃(v1335 :v) (v1340 :v list) (i'⁴' :int).
+     op = Strsub ∧ vs = v1335::Litv (IntLit i'⁴')::v1340 ∧
+     (¬(i'⁴' < (0 :int)) ∨
+      ∃(strng'' :mlstring).
+        v1335 = Litv (StrLit strng'') ∧ v1340 = ([] :v list) ∧ (s,t) = st' ∧
+        v = (Rerr (Rraise sub_exn_v) :(v, v) result)) ∧
+     (i'⁴' < (0 :int) ∨
+      ∃(strng'' :mlstring).
+        v1335 = Litv (StrLit strng'') ∧ v1340 = ([] :v list) ∧
+        (¬(Num (ABS i'⁴') ≥ strlen strng'') ∨ (s,t) = st' ∧ v = (Rerr (Rraise sub_exn_v) :(v, v) result)) ∧
+        (Num (ABS i'⁴') ≥ strlen strng'' ∨
+         (s,t) = st' ∧ (Rval (Litv (Char (explode strng'')❲Num (ABS i'⁴')❳)) :(v, v) result) = v))) ∨
+  (∃(strng'³' :mlstring).
+     op = Strlen ∧ vs = [Litv (StrLit strng'³')] ∧ (s,t) = st' ∧
+     (Rval (Litv (IntLit ((&strlen strng'³') :int))) :(v, v) result) = v) ∨
+  (∃(v'³' :v) (vs' :v list) (strng :mlstring).
+     op = Strcat ∧ vs = [v'³'] ∧ v_to_list v'³' = SOME vs' ∧ vs_to_string vs' = SOME strng ∧ (s,t) = st' ∧
+     (Rval (Litv (StrLit strng)) :(v, v) result) = v) ∨
+  (∃(v'⁴' :v) (vs' :v list).
+     op = VfromList ∧ vs = [v'⁴'] ∧ v_to_list v'⁴' = SOME vs' ∧ (s,t) = st' ∧ (Rval (Vectorv vs') :(v, v) result) = v) ∨
+  (∃(v1491 :v) (v1496 :v list) (i'⁶' :int).
+     op = Vsub ∧ vs = v1491::Litv (IntLit i'⁶')::v1496 ∧
+     (¬(i'⁶' < (0 :int)) ∨
+      ∃(vs' :v list).
+        v1491 = Vectorv vs' ∧ v1496 = ([] :v list) ∧ (s,t) = st' ∧ v = (Rerr (Rraise sub_exn_v) :(v, v) result)) ∧
+     (i'⁶' < (0 :int) ∨
+      ∃(vs' :v list).
+        v1491 = Vectorv vs' ∧ v1496 = ([] :v list) ∧
+        (¬(Num (ABS i'⁶') ≥ LENGTH vs') ∨ (s,t) = st' ∧ v = (Rerr (Rraise sub_exn_v) :(v, v) result)) ∧
+        (Num (ABS i'⁶') ≥ LENGTH vs' ∨ (s,t) = st' ∧ (Rval vs'❲Num (ABS i'⁶')❳ :(v, v) result) = v))) ∨
+  (∃(vs'' :v list).
+     op = Vlength ∧ vs = [Vectorv vs''] ∧ (s,t) = st' ∧ (Rval (Litv (IntLit ((&LENGTH vs'') :int))) :(v, v) result) = v) ∨
+  (∃(v'⁵' :v) (v1612 :v list) (n'⁴' :int).
+     op = Aalloc ∧ vs = Litv (IntLit n'⁴')::v'⁵'::v1612 ∧
+     (¬(n'⁴' < (0 :int)) ∨ v1612 = ([] :v list) ∧ (s,t) = st' ∧ v = (Rerr (Rraise sub_exn_v) :(v, v) result)) ∧
+     (n'⁴' < (0 :int) ∨
+      ∃(s' :v store_v list) (lnum :num).
+        v1612 = ([] :v list) ∧ store_alloc (Varray (REPLICATE (Num (ABS n'⁴')) v'⁵')) s = (s',lnum) ∧ (s',t) = st' ∧
+        (Rval (Loc T lnum) :(v, v) result) = v)) ∨
+  (∃(s' :v store_v list) (lnum :num).
+     op = AallocEmpty ∧ vs = [Conv (NONE :stamp option) ([] :v list)] ∧
+     store_alloc (Varray ([] :v list)) s = (s',lnum) ∧ (s',t) = st' ∧ (Rval (Loc T lnum) :(v, v) result) = v) ∨
+  (∃(s' :v store_v list) (lnum :num).
+     op = AallocFixed ∧ store_alloc (Varray vs) s = (s',lnum) ∧ (s',t) = st' ∧ (Rval (Loc T lnum) :(v, v) result) = v) ∨
+  (∃(v1726 :bool) (lnum'⁵' :num) (v1734 :v list) (i'⁷' :int).
+     op = Asub ∧ vs = Loc v1726 lnum'⁵'::Litv (IntLit i'⁷')::v1734 ∧
+     (¬(i'⁷' < (0 :int)) ∨
+      ∃(vs :v list).
+        v1734 = ([] :v list) ∧ store_lookup lnum'⁵' s = SOME (Varray vs) ∧ (s,t) = st' ∧
+        v = (Rerr (Rraise sub_exn_v) :(v, v) result)) ∧
+     (i'⁷' < (0 :int) ∨
+      ∃(vs :v list).
+        v1734 = ([] :v list) ∧ store_lookup lnum'⁵' s = SOME (Varray vs) ∧
+        (¬(Num (ABS i'⁷') ≥ LENGTH vs) ∨ (s,t) = st' ∧ v = (Rerr (Rraise sub_exn_v) :(v, v) result)) ∧
+        (Num (ABS i'⁷') ≥ LENGTH vs ∨ (s,t) = st' ∧ (Rval vs❲Num (ABS i'⁷')❳ :(v, v) result) = v))) ∨
+  (∃(v1806 :bool) (n'⁵' :num) (ws :v list).
+     op = Alength ∧ vs = [Loc v1806 n'⁵'] ∧ store_lookup n'⁵' s = SOME (Varray ws) ∧ (s,t) = st' ∧
+     (Rval (Litv (IntLit ((&LENGTH ws) :int))) :(v, v) result) = v) ∨
+  (∃(v1842 :bool) (lnum'⁷' :num) (v'⁶' :v) (v1854 :v list) (i'⁹' :int).
+     op = Aupdate ∧ vs = Loc v1842 lnum'⁷'::Litv (IntLit i'⁹')::v'⁶'::v1854 ∧
+     (¬(i'⁹' < (0 :int)) ∨
+      ∃(vs :v list).
+        v1854 = ([] :v list) ∧ store_lookup lnum'⁷' s = SOME (Varray vs) ∧ (s,t) = st' ∧
+        v = (Rerr (Rraise sub_exn_v) :(v, v) result)) ∧
+     (i'⁹' < (0 :int) ∨
+      ∃(vs :v list).
+        v1854 = ([] :v list) ∧ store_lookup lnum'⁷' s = SOME (Varray vs) ∧
+        (¬(Num (ABS i'⁹') ≥ LENGTH vs) ∨ (s,t) = st' ∧ v = (Rerr (Rraise sub_exn_v) :(v, v) result)) ∧
+        (Num (ABS i'⁹') ≥ LENGTH vs ∨
+         ∃(s' :v store_v list).
+           store_assign lnum'⁷' (Varray vs❲Num (ABS i'⁹') ↦ v'⁶'❳) s = SOME s' ∧ (s',t) = st' ∧
+           v = (Rval (Conv (NONE :stamp option) ([] :v list)) :(v, v) result)))) ∨
+  (∃(v1906 :v list) (i'⁵' :int) (vs' :v list).
+     op = Vsub_unsafe ∧ vs = Vectorv vs'::Litv (IntLit i'⁵')::v1906 ∧
+     ((¬((0 :int) ≤ i'⁵') ∨ ¬(Num i'⁵' < LENGTH vs')) ∨
+      v1906 = ([] :v list) ∧ (s,t) = st' ∧ (Rval vs'❲Num i'⁵'❳ :(v, v) result) = v) ∧ (0 :int) ≤ i'⁵' ∧
+     Num i'⁵' < LENGTH vs') ∨
+  (∃(v2006 :bool) (lnum'⁶' :num) (v2014 :v list) (i'⁸' :int).
+     op = Asub_unsafe ∧ vs = Loc v2006 lnum'⁶'::Litv (IntLit i'⁸')::v2014 ∧ ¬(i'⁸' < (0 :int)) ∧
+     (i'⁸' < (0 :int) ∨
+      ∃(vs :v list).
+        v2014 = ([] :v list) ∧ store_lookup lnum'⁶' s = SOME (Varray vs) ∧ ¬(Num (ABS i'⁸') ≥ LENGTH vs) ∧
+        (Num (ABS i'⁸') ≥ LENGTH vs ∨ (s,t) = st' ∧ (Rval vs❲Num (ABS i'⁸')❳ :(v, v) result) = v))) ∨
+  (∃(v2086 :bool) (lnum'⁸' :num) (v'⁷' :v) (v2098 :v list) (i'¹⁰' :int).
+     op = Aupdate_unsafe ∧ vs = Loc v2086 lnum'⁸'::Litv (IntLit i'¹⁰')::v'⁷'::v2098 ∧ ¬(i'¹⁰' < (0 :int)) ∧
+     (i'¹⁰' < (0 :int) ∨
+      ∃(vs :v list).
+        v2098 = ([] :v list) ∧ store_lookup lnum'⁸' s = SOME (Varray vs) ∧ ¬(Num (ABS i'¹⁰') ≥ LENGTH vs) ∧
+        (Num (ABS i'¹⁰') ≥ LENGTH vs ∨
+         ∃(s' :v store_v list).
+           store_assign lnum'⁸' (Varray vs❲Num (ABS i'¹⁰') ↦ v'⁷'❳) s = SOME s' ∧ (s',t) = st' ∧
+           v = (Rval (Conv (NONE :stamp option) ([] :v list)) :(v, v) result)))) ∨
+  (∃(v2170 :bool) (lnum'' :num) (v2178 :v list) (i' :int).
+     op = Aw8sub_unsafe ∧ vs = Loc v2170 lnum''::Litv (IntLit i')::v2178 ∧ ¬(i' < (0 :int)) ∧
+     (i' < (0 :int) ∨
+      ∃(ws :word8 list).
+        v2178 = ([] :v list) ∧ store_lookup lnum'' s = SOME (W8array ws :v store_v) ∧ ¬(Num (ABS i') ≥ LENGTH ws) ∧
+        (Num (ABS i') ≥ LENGTH ws ∨ (s,t) = st' ∧ (Rval (Litv (Word8 ws❲Num (ABS i')❳)) :(v, v) result) = v))) ∨
+  (∃(v2250 :bool) (lnum'⁴' :num) (v2262 :v list) (w'⁴' :word8) (i'³' :int).
+     op = Aw8update_unsafe ∧ vs = Loc v2250 lnum'⁴'::Litv (IntLit i'³')::Litv (Word8 w'⁴')::v2262 ∧ ¬(i'³' < (0 :int)) ∧
+     (i'³' < (0 :int) ∨
+      ∃(ws :word8 list).
+        v2262 = ([] :v list) ∧ store_lookup lnum'⁴' s = SOME (W8array ws :v store_v) ∧ ¬(Num (ABS i'³') ≥ LENGTH ws) ∧
+        (Num (ABS i'³') ≥ LENGTH ws ∨
+         ∃(s' :v store_v list).
+           store_assign lnum'⁴' (W8array ws❲Num (ABS i'³') ↦ w'⁴'❳ :v store_v) s = SOME s' ∧ (s',t) = st' ∧
+           v = (Rval (Conv (NONE :stamp option) ([] :v list)) :(v, v) result)))) ∨
+  (∃(th_op :thunk_op).
+     op = ThunkOp th_op ∧
+     (thunk_op (s,t) th_op vs :((v store_v list # α ffi_state) # (v, v) result) option) = SOME (st',v)) ∨
+  (∃(x1 :v) (x2 :v) (xs :v list) (ys :v list).
+     op = ListAppend ∧ vs = [x1; x2] ∧ v_to_list x1 = SOME xs ∧ v_to_list x2 = SOME ys ∧ (s,t) = st' ∧
+     (Rval (list_to_v (xs ++ ys)) :(v, v) result) = v) ∨
+  (∃(j :int) (i'¹¹' :int).
+     op = ConfigGC ∧ vs = [Litv (IntLit i'¹¹'); Litv (IntLit j)] ∧ (s,t) = st' ∧
+     v = (Rval (Conv (NONE :stamp option) ([] :v list)) :(v, v) result)) ∨
+  (∃(n'⁶' :mlstring) (v2482 :bool) (lnum'⁹' :num) (conf :mlstring) (ws :word8 list).
+     op = FFI n'⁶' ∧ vs = [Litv (StrLit conf); Loc v2482 lnum'⁹'] ∧
+     store_lookup lnum'⁹' s = SOME (W8array ws :v store_v) ∧
+     (case call_FFI t (ExtCall n'⁶') (MAP ((n2w :num -> word8) ∘ ORD) (explode conf)) ws of
+        FFI_return t' ws' =>
+          (case store_assign lnum'⁹' (W8array ws' :v store_v) s of
+             (NONE :v store_v list option) => (NONE :((v store_v list # α ffi_state) # (v, v) result) option)
+           | SOME s' => SOME ((s',t'),(Rval (Conv (NONE :stamp option) ([] :v list)) :(v, v) result)))
+      | (FFI_final outcome :α ffi_result) =>
+        SOME ((s,t),(Rerr (Rabort (Rffi_error outcome) :v error_result) :(v, v) result))) = SOME (st',v)) ∨
+  ∃(v2533 :v).
+    op = Env_id ∧ vs = [v2533] ∧
+    ((∃(gen' :v) (id' :v).
+        v2533 = Conv (NONE :stamp option) [gen'; id'] ∧ (s,t) = st' ∧
+        (Rval (Conv (NONE :stamp option) [gen'; id']) :(v, v) result) = v) ∨
+     ∃(env :v sem_env) (gen :num) (id :num).
+       v2533 = Env env (gen,id) ∧ (s,t) = st' ∧
+       (Rval (Conv (NONE :stamp option) [nat_to_v gen; nat_to_v id]) :(v, v) result) = v)
+
+=== semanticPrimitivesProps.build_rec_env_merge
+⊢ ∀(funs :(mlstring # mlstring # exp) list) (funs' :α) (env :v sem_env) (env' :(mlstring, mlstring, v) namespace).
+    build_rec_env funs env env' =
+    nsAppend
+      (alist_to_ns (MAP (λ((f :mlstring),(n :mlstring),(e :exp)). (f,Recclosure env funs f)) funs) :
+       (mlstring, mlstring, v) namespace) env'
+
+=== semanticPrimitivesProps.do_con_check_build_conv
+⊢ ∀(tenvC :(mlstring, mlstring, num # stamp) namespace) (cn :(mlstring, mlstring) id option) (vs :v list) (l :num).
+    do_con_check tenvC cn l ⇒ ∃(v :v). build_conv tenvC cn vs = SOME v
+
+=== semanticPrimitivesProps.FV_pes_MAP
+⊢ FV_pes (pes :(pat # exp) list) =
+  BIGUNION
+    (IMAGE
+       (λ((p :pat),(e :exp)).
+          FV e DIFF IMAGE (Short :mlstring -> (mlstring, mlstring) id) (set (pat_bindings p ([] :mlstring list))))
+       (set pes))
+
+=== semanticPrimitivesProps.FV_defs_MAP
+⊢ ∀(ls :(mlstring # mlstring # exp) list).
+    FV_defs ls =
+    BIGUNION (IMAGE (λ((f :mlstring),(x :mlstring),(e :exp)). FV e DIFF {(Short x :(mlstring, mlstring) id)}) (set ls))
+
+=== semanticPrimitivesProps.concrete_v_list
+⊢ ∀(xs :v list). concrete_v_list xs ⇔ EVERY concrete_v xs
+
+=== semanticPrimitivesProps.prim_type_cases
+⊢ ∀(ty :prim_type). ty = BoolT ∨ ty = IntT ∨ ty = CharT ∨ ty = StrT ∨ ty = WordT W8 ∨ ty = WordT W64 ∨ ty = Float64T
+
+=== evaluate.evaluate_clock
+⊢ (∀(s1 :'ffi state) (env :v sem_env) (e :exp list) (r :(v list, v) result) (s2 :'ffi state).
+     evaluate s1 env e = (s2,r) ⇒ s2.clock ≤ s1.clock) ∧
+  (∀(s1 :'ffi state) (env :v sem_env) (v :v) (p :(pat # exp) list) (v' :v) (r :(v list, v) result) (s2 :'ffi state).
+     evaluate_match s1 env v p v' = (s2,r) ⇒ s2.clock ≤ s1.clock) ∧
+  ∀(s1 :'ffi state) (env :v sem_env) (ds :dec list) (r :(v sem_env, v) result) (s2 :'ffi state).
+    evaluate_decs s1 env ds = (s2,r) ⇒ s2.clock ≤ s1.clock
+
+=== evaluate.fix_clock_do_eval_res
+⊢ fix_clock (s :α state) (do_eval_res (vs :v list) s :α state # (v sem_env # dec list, β) result) =
+  (do_eval_res vs s :α state # (v sem_env # dec list, β) result)
+
+=== evaluate.fix_clock_evaluate
+⊢ fix_clock (s1 :α state) (evaluate s1 (env :v sem_env) (e :exp list)) = evaluate s1 env e ∧
+  fix_clock s1 (evaluate_decs s1 env (ds :dec list)) = evaluate_decs s1 env ds
+
+=== evaluateProps.io_events_mono_trans
+⊢ io_events_mono (ffi1 :α ffi_state) (ffi2 :α ffi_state) ∧ io_events_mono ffi2 (ffi3 :α ffi_state) ⇒
+  io_events_mono ffi1 ffi3
+
+=== evaluateProps.call_FFI_rel_io_events_mono
+⊢ ∀(s1 :α ffi_state) (s2 :α ffi_state). (call_FFI_rel :α ffi_state -> α ffi_state -> bool)꙳ s1 s2 ⇒ io_events_mono s1 s2
+
+=== evaluateProps.io_events_mono_refl
+⊢ io_events_mono (ffi :α ffi_state) ffi
+
+=== evaluateProps.do_app_call_FFI_rel
+⊢ do_app ((r :v store_v list),(ffi :α ffi_state)) (op :op) (vs :v list) =
+  SOME (((r' :v store_v list),(ffi' :α ffi_state)),(res :(v, v) result)) ⇒
+  (call_FFI_rel :α ffi_state -> α ffi_state -> bool)꙳ ffi ffi'
+
+=== evaluateProps.do_app_io_events_mono
+⊢ do_app ((r :v store_v list),(ffi :α ffi_state)) (op :op) (vs :v list) =
+  SOME (((r' :v store_v list),(ffi' :α ffi_state)),(res :(v, v) result)) ⇒
+  io_events_mono ffi ffi'
+
+=== evaluateProps.is_clock_io_mono_cong
+⊢ (s :α state) = (t :α state) ⇒
+  (∀(s :α state).
+     s.eval_state = t.eval_state ∧ s.refs = t.refs ∧ s.ffi = t.ffi ⇒
+     (f :α state -> α state # (β, γ) result) s = (g :α state -> α state # (β, γ) result) s) ⇒
+  (is_clock_io_mono f s ⇔ is_clock_io_mono g t)
+
+=== evaluateProps.is_clock_io_mono_return
+⊢ is_clock_io_mono (λ(s :α state). (s,(Rval (r :β) :(β, γ) result))) (s :α state)
+
+=== evaluateProps.is_clock_io_mono_err
+⊢ is_clock_io_mono (λ(s :α state). (s,(Rerr (r :γ error_result) :(β, γ) result))) (s :α state)
+
+=== evaluateProps.pair_CASE_eq_forall
+⊢ (case (x :α # β) of (a,b) => (P :α -> β -> bool) a b) ⇔ ∀(a :α) (b :β). x = (a,b) ⇒ P a b
+
+=== evaluateProps.is_clock_io_mono_bind
+⊢ is_clock_io_mono (f :α state -> α state # (β, γ) result) (s :α state) ∧
+  (∀(s' :α state) (r :(β, γ) result).
+     f s = (s',r) ⇒ is_clock_io_mono ((g :(β, γ) result -> α state -> α state # (δ, ε) result) r) s') ∧
+  (∀(s' :α state).
+     g (Rerr (Rabort Rtimeout_error :γ error_result) :(β, γ) result) s' =
+     (s',(Rerr (Rabort Rtimeout_error :ε error_result) :(δ, ε) result))) ⇒
+  is_clock_io_mono (λ(s :α state). case f s of (s',r) => g r s') s
+
+=== evaluateProps.is_clock_io_mono_check
+⊢ ((s :α state).clock ≠ (0 :num) ⇒
+   is_clock_io_mono (λ(s :α state). (f :α state -> α state # (β, γ) result) (adj_clock (1 :num) (0 :num) s))
+     (dec_clock s)) ⇒
+  is_clock_io_mono
+    (λ(s :α state).
+       if s.clock = (0 :num) then (s,(Rerr (Rabort Rtimeout_error :γ error_result) :(β, γ) result)) else f s) s
+
+=== evaluateProps.dec_inc_clock
+⊢ dec_clock (adj_clock (1 :num) (0 :num) (s :α state)) = s
+
+=== evaluateProps.do_app_refs_length
+⊢ do_app (refs_ffi :v store_v list # α ffi_state) (op :op) (vs :v list) =
+  SOME (res :(v store_v list # α ffi_state) # (v, v) result) ⇒
+  LENGTH (FST refs_ffi) ≤ LENGTH (FST (FST res))
+
+=== evaluateProps.is_clock_io_mono_do_app_simple
+⊢ ∀(xs :v list) (st :'ffi state).
+    is_clock_io_mono
+      (λ(st' :'ffi state).
+         case do_app (st'.refs,st'.ffi) (op :op) xs of
+           (NONE :((v store_v list # 'ffi ffi_state) # (v, v) result) option) =>
+             (st',(Rerr (Rabort Rtype_error :v error_result) :(v list, v) result))
+         | SOME ((refs,ffi),r) => (st' with <|refs := refs; ffi := ffi|>,list_result r)) st
+
+=== evaluateProps.is_clock_io_mono_evaluate
+⊢ (∀(s :'ffi state) (env :v sem_env) (es :exp list). is_clock_io_mono (λ(s :'ffi state). evaluate s env es) s) ∧
+  (∀(s :'ffi state) (env :v sem_env) (v :v) (pes :(pat # exp) list) (err_v :v).
+     is_clock_io_mono (λ(s :'ffi state). evaluate_match s env v pes err_v) s) ∧
+  ∀(s :'ffi state) (env :v sem_env) (ds :dec list). is_clock_io_mono (λ(s :'ffi state). evaluate_decs s env ds) s
+
+=== evaluateProps.is_clock_io_mono_evaluate_decs
+⊢ ∀(s :α state) (e :v sem_env) (p :dec list). is_clock_io_mono (λ(s :α state). evaluate_decs s e p) s
+
+=== evaluateProps.is_clock_io_mono_extra
+⊢ (∀(s :α state). is_clock_io_mono (f :α state -> α state # (β, γ) result) s) ⇒
+  f (s :α state) = ((s' :α state),(r :(β, γ) result)) ∧
+  r ≠ (Rerr (Rabort Rtimeout_error :γ error_result) :(β, γ) result) ⇒
+  f (s with clock := s.clock + (extra :num)) = (s' with clock := s'.clock + extra,r)
+
+=== evaluateProps.list_result_eq_Rval
+⊢ list_result (r :(α, β) result) = (Rval (r' :α list) :(α list, β) result) ⇔
+  ∃(v :α). r' = [v] ∧ r = (Rval v :(α, β) result)
+
+=== evaluateProps.evaluate_length
+⊢ (∀(s :'ffi state) (e :v sem_env) (p :exp list) (s' :'ffi state) (r :v list).
+     evaluate s e p = (s',(Rval r :(v list, v) result)) ⇒ LENGTH r = LENGTH p) ∧
+  (∀(s :'ffi state) (e :v sem_env) (v :v) (p :(pat # exp) list) (er :v) (s' :'ffi state) (r :v list).
+     evaluate_match s e v p er = (s',(Rval r :(v list, v) result)) ⇒ LENGTH r = (1 :num)) ∧
+  ∀(s :'ffi state) (e :v sem_env) (ds :dec list) (s' :'ffi state) (r :v sem_env).
+    evaluate_decs s e ds = (s',(Rval r :(v sem_env, v) result)) ⇒ T
+
+=== evaluateProps.is_clock_io_mono_set_clock
+⊢ is_clock_io_mono (f :α state -> α state # (β, γ) result) (s :α state) ⇒
+  f s = ((s' :α state),(r :(β, γ) result)) ∧ r ≠ (Rerr (Rabort Rtimeout_error :γ error_result) :(β, γ) result) ⇒
+  ∃(ck0 :num). f (s with clock := ck0) = (s' with clock := (ck1 :num),r)
+
+=== evaluateProps.is_clock_io_mono_minimal
+⊢ is_clock_io_mono (f :α state -> α state # (β, γ) result) (s :α state) ⇒
+  f s = ((s' :α state),(r :(β, γ) result)) ∧ s'.clock = (0 :num) ∧
+  r ≠ (Rerr (Rabort Rtimeout_error :γ error_result) :(β, γ) result) ∧ s.clock > (k :num) ⇒
+  ∃(s'' :α state).
+    f (s with clock := k) = (s'',(Rerr (Rabort Rtimeout_error :γ error_result) :(β, γ) result)) ∧
+    io_events_mono s''.ffi s'.ffi
+
+=== evaluateProps.can_pmatch_all_EVERY
+⊢ can_pmatch_all (envC :(mlstring, mlstring, num # stamp) namespace) (refs :v store_v list) (ps :pat list) (v :v) ⇔
+  EVERY
+    (λ(p :pat). pmatch envC refs p v ([] :(mlstring # v) list) ≠ (Match_type_error :(mlstring # v) list match_result))
+    ps
+
+=== weakening.weak_tenv_refl
+⊢ ∀(tenv :type_env). tenv_val_ok tenv.v ⇒ weak_tenv tenv tenv
+
+=== weakening.weakS_refl
+⊢ ∀(tenvS :α |-> β). weakS tenvS tenvS
+
+=== weakening.weak_tenvE_freevars
+⊢ ∀(tenv :tenv_val_exp) (tenv' :tenv_val_exp) (tvs :mlstring list) (t :t).
+    weak_tenvE tenv' tenv ∧ check_freevars (num_tvs tenv) tvs t ⇒ check_freevars (num_tvs tenv') tvs t
+
+=== weakening.weak_tenvE_bind
+⊢ ∀(tenv :tenv_val_exp) (tenv' :tenv_val_exp) (n :mlstring) (tvs :num) (t :t).
+    weak_tenvE tenv' tenv ⇒ weak_tenvE (Bind_name n tvs t tenv') (Bind_name n tvs t tenv)
+
+=== weakening.weak_tenvE_opt_bind
+⊢ ∀(tenv :tenv_val_exp) (tenv' :tenv_val_exp) (n :mlstring option) (tvs :num) (t :t).
+    weak_tenvE tenv' tenv ⇒ weak_tenvE (opt_bind_name n tvs t tenv') (opt_bind_name n tvs t tenv)
+
+=== weakening.weak_tenvE_bind_tvar
+⊢ ∀(tenv :tenv_val_exp) (tenv' :tenv_val_exp) (tvs :num).
+    weak_tenvE tenv' tenv ⇒ weak_tenvE (bind_tvar tvs tenv') (bind_tvar tvs tenv)
+
+=== weakening.weak_tenvE_bind_tvar2
+⊢ ∀(tenv :tenv_val_exp) (tenv' :tenv_val_exp) (n :α) (tvs :num) (t :β).
+    tenv_val_exp_ok tenv ∧ num_tvs tenv = (0 :num) ∧ weak_tenvE tenv' tenv ⇒
+    weak_tenvE (bind_tvar tvs tenv') (bind_tvar (0 :num) tenv)
+
+=== weakening.weak_tenvE_bind_var_list
+⊢ ∀(bindings :(mlstring # t) list) (tenvE :tenv_val_exp) (tenvE' :tenv_val_exp) (n :α) (tvs :num) (t :β).
+    weak_tenvE tenvE' tenvE ⇒ weak_tenvE (bind_var_list tvs bindings tenvE') (bind_var_list tvs bindings tenvE)
+
+=== weakening.eLookupC_weak
+⊢ ∀(cn :(mlstring, mlstring) id) (tenv :type_env) (tenv' :type_env) (tvs :mlstring list) (ts :t list) (tn :num).
+    weak_tenv tenv' tenv ∧ nsLookup tenv.c cn = SOME (tvs,ts,tn) ⇒ nsLookup tenv'.c cn = SOME (tvs,ts,tn)
+
+=== weakening.eLookupV_weak
+⊢ ∀(n :(mlstring, mlstring) id) (tenv :type_env) (tenv' :type_env) (tvs :num) (t :t).
+    weak_tenv tenv' tenv ∧ nsLookup tenv.v n = SOME (tvs,t) ⇒
+    ∃(tvs' :num) (t' :t). nsLookup tenv'.v n = SOME (tvs',t') ∧ tscheme_inst (tvs,t) (tvs',t')
+
+=== weakening.type_p_weakening
+⊢ (∀(tvs :num) (tenv :type_env) (p :pat) (t :t) (bindings :(mlstring # t) list).
+     type_p tvs tenv p t bindings ⇒
+     ∀(tenv' :type_env) (tvs' :num). tvs' ≥ tvs ∧ weak tenv' tenv ⇒ type_p tvs' tenv' p t bindings) ∧
+  ∀(tvs :num) (tenv :type_env) (ps :pat list) (ts :t list) (bindings :(mlstring # t) list).
+    type_ps tvs tenv ps ts bindings ⇒
+    ∀(tenv' :type_env) (tvs' :num). tvs' ≥ tvs ∧ weak tenv' tenv ⇒ type_ps tvs' tenv' ps ts bindings
+
+=== weakening.type_e_weakening_lem
+⊢ (∀(tenv :type_env) (tenvE :tenv_val_exp) (e :exp) (t :t).
+     type_e tenv tenvE e t ⇒
+     ∀(tenv' :type_env) (tenvE' :tenv_val_exp). weak tenv' tenv ∧ weak_tenvE tenvE' tenvE ⇒ type_e tenv' tenvE' e t) ∧
+  (∀(tenv :type_env) (tenvE :tenv_val_exp) (es :exp list) (ts :t list).
+     type_es tenv tenvE es ts ⇒
+     ∀(tenv' :type_env) (tenvE' :tenv_val_exp). weak tenv' tenv ∧ weak_tenvE tenvE' tenvE ⇒ type_es tenv' tenvE' es ts) ∧
+  ∀(tenv :type_env) (tenvE :tenv_val_exp) (funs :(mlstring # mlstring # exp) list) (bindings :(mlstring # t) list).
+    type_funs tenv tenvE funs bindings ⇒
+    ∀(tenv' :type_env) (tenvE' :tenv_val_exp).
+      weak tenv' tenv ∧ weak_tenvE tenvE' tenvE ⇒ type_funs tenv' tenvE' funs bindings
+
+=== weakening.type_e_weakening
+⊢ (∀(tenv :type_env) (tenvE :tenv_val_exp) (e :exp) (t :t) (tenv' :type_env) (tenvE' :tenv_val_exp).
+     type_e tenv tenvE e t ∧ weak tenv' tenv ∧ weak_tenvE tenvE' tenvE ⇒ type_e tenv' tenvE' e t) ∧
+  (∀(tenv :type_env) (tenvE :tenv_val_exp) (es :exp list) (ts :t list) (tenv' :type_env) (tenvE' :tenv_val_exp).
+     type_es tenv tenvE es ts ∧ weak tenv' tenv ∧ weak_tenvE tenvE' tenvE ⇒ type_es tenv' tenvE' es ts) ∧
+  ∀(tenv :type_env) (tenvE :tenv_val_exp) (funs :(mlstring # mlstring # exp) list) (bindings :(mlstring # t) list)
+      (tenv' :type_env) (tenvE' :tenv_val_exp).
+    type_funs tenv tenvE funs bindings ∧ weak tenv' tenv ∧ weak_tenvE tenvE' tenvE ⇒
+    type_funs tenv' tenvE' funs bindings
+
+=== weakening.gt_0
+⊢ ∀(x :num). x ≥ (0 :num)
+
+=== weakening.weak_ctMap_lookup
+⊢ ∀(ctMap :α |-> β # γ) (ctMap' :α |-> β # γ) (tvs :β) (ts :γ) (stamp :α).
+    weakCT ctMap' ctMap ∧ FLOOKUP ctMap stamp = SOME (tvs,ts) ⇒ FLOOKUP ctMap' stamp = SOME (tvs,ts)
+
+=== weakening.weakCT_refl
+⊢ ∀(ctMap :α |-> β). weakCT ctMap ctMap
+
+=== weakening.weakCT_trans
+⊢ weakCT (C1 :α |-> β) (C2 :α |-> β) ∧ weakCT C2 (C3 :α |-> β) ⇒ weakCT C1 C3
+
+=== weakening.disjoint_env_weakCT
+⊢ ∀(ctMap :α |-> β) (ctMap' :α |-> β). DISJOINT (FDOM ctMap') (FDOM ctMap) ⇒ weakCT (ctMap' ⊌ ctMap) ctMap
+
+=== weakening.type_tenv_ctor_weakening
+⊢ ∀(ctMap :α |-> β # γ list # δ) (tenvC :(ε, ζ, β # γ list # δ) namespace) (envC :(ε, ζ, num # α) namespace)
+      (ctMap' :α |-> β # γ list # δ).
+    weakCT ctMap' ctMap ∧ nsAll2 (type_ctor ctMap :(ε, ζ) id -> num # α -> β # γ list # δ -> bool) envC tenvC ⇒
+    nsAll2 (type_ctor ctMap' :(ε, ζ) id -> num # α -> β # γ list # δ -> bool) envC tenvC
+
+=== weakening.type_tenv_val_weakening_lemma
+⊢ ∀(ctMap :stamp |-> mlstring list # t list # num) (tenvS :num |-> store_t) (tenvV :(α, β, num # t) namespace)
+      (envV :(α, β, v) namespace) (ctMap' :stamp |-> mlstring list # t list # num) (tenvS' :num |-> store_t).
+    weakCT ctMap' ctMap ∧ weakS tenvS' tenvS ∧
+    nsAll2
+      (λ(i :(α, β) id) (v :v) ((tvs :num),(t :t)).
+         ∀(tvs' :num) (ctMap' :stamp |-> mlstring list # t list # num) (tenvS' :num |-> store_t).
+           (tvs = (0 :num) ∨ tvs = tvs') ∧ weakCT ctMap' ctMap ∧ weakS tenvS' tenvS ⇒ type_v tvs' ctMap' tenvS' v t)
+      envV tenvV ⇒
+    nsAll2 (λ(i :(α, β) id) (v :v) ((tvs :num),(t :t)). type_v tvs ctMap' tenvS' v t) envV tenvV
+
+=== weakening.type_v_weakening
+⊢ ∀(tvs :num) (ctMap :stamp |-> mlstring list # t list # num) (tenvS :num |-> store_t) (v :v) (t :t).
+    type_v tvs ctMap tenvS v t ⇒
+    ∀(tvs' :num) (ctMap' :stamp |-> mlstring list # t list # num) (tenvS' :num |-> store_t).
+      (tvs = (0 :num) ∨ tvs = tvs') ∧ weakCT ctMap' ctMap ∧ weakS tenvS' tenvS ⇒ type_v tvs' ctMap' tenvS' v t
+
+=== weakening.type_all_env_weakening
+⊢ ∀(ctMap :stamp |-> mlstring list # t list # num) (tenvS :num |-> store_t) (tenv :type_env) (env :v sem_env)
+      (ctMap' :stamp |-> mlstring list # t list # num) (tenvS' :num |-> store_t).
+    weakCT ctMap' ctMap ∧ weakS tenvS' tenvS ∧ type_all_env ctMap tenvS env tenv ⇒ type_all_env ctMap' tenvS' env tenv
+
+=== weakening.type_sv_weakening
+⊢ ∀(ctMap :stamp |-> mlstring list # t list # num) (tenvS :num |-> store_t) (st :store_t) (sv :v store_v)
+      (ctMap' :stamp |-> mlstring list # t list # num) (tenvS' :num |-> store_t).
+    type_sv ctMap tenvS sv st ∧ weakCT ctMap' ctMap ∧ weakS tenvS' tenvS ⇒ type_sv ctMap' tenvS' sv st
+
+=== weakening.type_s_weakening
+⊢ ∀(ctMap :stamp |-> mlstring list # t list # num) (tenvS :num |-> store_t) (st :v store_v list)
+      (ctMap' :stamp |-> mlstring list # t list # num).
+    type_s ctMap st tenvS ∧ weakCT ctMap' ctMap ⇒ type_s ctMap' st tenvS
+
+=== weakening.weak_tenv_extend_dec_tenv
+⊢ ∀(tenv1 :type_env) (tenv2 :type_env) (tenv3 :type_env).
+    tenv_val_ok tenv1.v ∧ weak_tenv tenv2 tenv3 ⇒ weak_tenv (extend_dec_tenv tenv1 tenv2) (extend_dec_tenv tenv1 tenv3)
+
+=== typeSysProps.unchanged_tenv
+⊢ ∀(tenv :type_env). <|v := tenv.v; c := tenv.c; t := tenv.t|> = tenv
+
+=== typeSysProps.extend_dec_tenv_assoc
+⊢ ∀(tenv1 :type_env) (tenv2 :type_env) (tenv3 :type_env).
+    extend_dec_tenv tenv1 (extend_dec_tenv tenv2 tenv3) = extend_dec_tenv (extend_dec_tenv tenv1 tenv2) tenv3
+
+=== typeSysProps.tenv_val_ok_nsEmpty
+⊢ tenv_val_ok (nsEmpty :(α, β, num # t) namespace)
+
+=== typeSysProps.tenv_ctor_ok_nsEmpty
+⊢ tenv_ctor_ok (nsEmpty :(α, β, mlstring list # t list # γ) namespace)
+
+=== typeSysProps.tenv_abbrev_ok_nsEmpty
+⊢ tenv_abbrev_ok (nsEmpty :(α, β, mlstring list # t) namespace)
+
+=== typeSysProps.tenv_ok_empty
+⊢ tenv_ok
+    <|v := (nsEmpty :(mlstring, mlstring, num # t) namespace);
+      c := (nsEmpty :(mlstring, mlstring, mlstring list # t list # num) namespace);
+      t := (nsEmpty :(mlstring, mlstring, mlstring list # t) namespace)|>
+
+=== typeSysProps.check_freevars_add
+⊢ ∀(tvs :num) (tvs' :mlstring list) (t :t).
+    check_freevars tvs tvs' t ⇒ ∀(tvs'' :num). tvs'' ≥ tvs ⇒ check_freevars tvs'' tvs' t
+
+=== typeSysProps.check_freevars_subst_single
+⊢ ∀(dbmax :num) (tvs :mlstring list) (t :t) (tvs' :mlstring list) (ts :t list).
+    LENGTH tvs = LENGTH ts ∧ check_freevars dbmax tvs t ∧ EVERY (check_freevars dbmax tvs') ts ⇒
+    check_freevars dbmax tvs' (type_subst (alist_to_fmap (ZIP (tvs,ts))) t)
+
+=== typeSysProps.deBruijn_inc0
+⊢ (∀(t :t) (sk :num). deBruijn_inc sk (0 :num) t = t) ∧ ∀(ts :t list) (sk :num). MAP (deBruijn_inc sk (0 :num)) ts = ts
+
+=== typeSysProps.deBruijn_inc_deBruijn_inc
+⊢ ∀(sk :num) (i2 :num) (t :t) (i1 :num). deBruijn_inc sk i1 (deBruijn_inc sk i2 t) = deBruijn_inc sk (i1 + i2) t
+
+=== typeSysProps.deBuijn_inc_lem1
+⊢ ∀(sk :num) (i2 :num) (t :t) (i1 :num).
+    deBruijn_inc sk i1 (deBruijn_inc (0 :num) (sk + i2) t) = deBruijn_inc (0 :num) (i1 + (sk + i2)) t
+
+=== typeSysProps.type_subst_deBruijn_inc_single
+⊢ ∀(s :mlstring |-> t) (t :t) (ts :t list) (tvs :mlstring list) (inc :num) (sk :num).
+    LENGTH tvs = LENGTH ts ∧ s = alist_to_fmap (ZIP (tvs,ts)) ∧ check_freevars (0 :num) tvs t ⇒
+    deBruijn_inc sk inc (type_subst s t) =
+    type_subst (alist_to_fmap (ZIP (tvs,MAP (λ(t :t). deBruijn_inc sk inc t) ts))) t
+
+=== typeSysProps.type_subst_deBruijn_inc_list
+⊢ ∀(ts' :t list) (ts :t list) (tvs :mlstring list) (inc :num) (sk :num).
+    LENGTH tvs = LENGTH ts ∧ EVERY (check_freevars (0 :num) tvs) ts' ⇒
+    MAP (deBruijn_inc sk inc) (MAP (type_subst (alist_to_fmap (ZIP (tvs,ts)))) ts') =
+    MAP (type_subst (alist_to_fmap (ZIP (tvs,MAP (λ(t :t). deBruijn_inc sk inc t) ts)))) ts'
+
+=== typeSysProps.check_freevars_deBruijn_inc
+⊢ ∀(tvs :num) (tvs' :mlstring list) (t :t).
+    check_freevars tvs tvs' t ⇒ ∀(n :num) (n' :num). check_freevars (n + tvs) tvs' (deBruijn_inc n' n t)
+
+=== typeSysProps.nil_deBruijn_inc
+⊢ ∀(skip :num) (tvs :num) (t :t).
+    check_freevars skip ([] :mlstring list) t ∨ check_freevars skip ([] :mlstring list) (deBruijn_inc skip tvs t) ⇒
+    deBruijn_inc skip tvs t = t
+
+=== typeSysProps.deBruijn_subst_check_freevars
+⊢ ∀(tvs :num) (tvs' :mlstring list) (t :t) (ts :t list) (n :α).
+    check_freevars tvs tvs' t ∧ EVERY (check_freevars tvs tvs') ts ⇒
+    check_freevars tvs tvs' (deBruijn_subst (0 :num) ts t)
+
+=== typeSysProps.deBruijn_subst_check_freevars2
+⊢ ∀(tvs :num) (tvs' :mlstring list) (t :t) (ts :t list) (n :α) (tvs'' :β).
+    check_freevars (LENGTH ts) tvs' t ∧ EVERY (check_freevars tvs tvs') ts ⇒
+    check_freevars tvs tvs' (deBruijn_subst (0 :num) ts t)
+
+=== typeSysProps.check_freevars_subst_inc
+⊢ ∀(tvs :num) (tvs2 :mlstring list) (t :t).
+    check_freevars tvs tvs2 t ⇒
+    ∀(tvs' :num) (targs :t list) (tvs1 :num).
+      tvs = LENGTH targs + tvs' ∧ EVERY (check_freevars (tvs1 + tvs') tvs2) targs ⇒
+      check_freevars (tvs1 + tvs') tvs2 (deBruijn_subst (0 :num) targs (deBruijn_inc (LENGTH targs) tvs1 t))
+
+=== typeSysProps.check_freevars_subst
+⊢ ∀(tvs :num) (tvs2 :mlstring list) (t :t).
+    check_freevars tvs tvs2 t ⇒
+    ∀(tvs' :num) (targs :t list) (tvs1 :num).
+      tvs = LENGTH targs + tvs' ∧ EVERY (check_freevars (tvs1 + tvs') tvs2) targs ⇒
+      check_freevars (tvs1 + tvs') tvs2 (deBruijn_subst (0 :num) targs t)
+
+=== typeSysProps.type_subst_deBruijn_subst_single
+⊢ ∀(s :mlstring |-> t) (t :t) (tvs :mlstring list) (tvs' :α) (ts :t list) (ts' :t list) (inc :num).
+    LENGTH tvs = LENGTH ts ∧ check_freevars (0 :num) tvs t ∧ s = alist_to_fmap (ZIP (tvs,ts)) ⇒
+    deBruijn_subst inc ts' (type_subst (alist_to_fmap (ZIP (tvs,ts))) t) =
+    type_subst (alist_to_fmap (ZIP (tvs,MAP (λ(t :t). deBruijn_subst inc ts' t) ts))) t
+
+=== typeSysProps.type_subst_deBruijn_subst_list
+⊢ ∀(t :α) (tvs :mlstring list) (tvs' :β) (ts :t list) (ts' :t list) (ts'' :t list) (inc :num).
+    LENGTH tvs = LENGTH ts ∧ EVERY (check_freevars (0 :num) tvs) ts'' ⇒
+    MAP (deBruijn_subst inc ts') (MAP (type_subst (alist_to_fmap (ZIP (tvs,ts)))) ts'') =
+    MAP (type_subst (alist_to_fmap (ZIP (tvs,MAP (λ(t :t). deBruijn_subst inc ts' t) ts)))) ts''
+
+=== typeSysProps.check_freevars_lem
+⊢ ∀(l :num) (tvs' :mlstring list) (t :t).
+    check_freevars l tvs' t ⇒
+    ∀(targs :t list) (n1 :num) (tvs :num).
+      l = n1 + LENGTH targs ∧ EVERY (check_freevars tvs tvs') targs ⇒
+      check_freevars (n1 + tvs) tvs' (deBruijn_subst n1 (MAP (deBruijn_inc (0 :num) n1) targs) t)
+
+=== typeSysProps.nil_deBruijn_subst
+⊢ ∀(skip :num) (tvs :t list) (t :t). check_freevars skip ([] :mlstring list) t ⇒ deBruijn_subst skip tvs t = t
+
+=== typeSysProps.deBruijn_subst2
+⊢ (∀(t :t) (sk :num) (targs :t list) (targs' :t list) (tvs' :α).
+     check_freevars (LENGTH targs) ([] :mlstring list) t ⇒
+     deBruijn_subst sk (MAP (deBruijn_inc (0 :num) sk) targs') (deBruijn_subst (0 :num) targs t) =
+     deBruijn_subst (0 :num) (MAP (deBruijn_subst sk (MAP (deBruijn_inc (0 :num) sk) targs')) targs) t) ∧
+  ∀(ts :t list) (sk :num) (targs :t list) (targs' :t list) (tvs' :β).
+    EVERY (check_freevars (LENGTH targs) ([] :mlstring list)) ts ⇒
+    MAP (deBruijn_subst sk (MAP (deBruijn_inc (0 :num) sk) targs')) (MAP (deBruijn_subst (0 :num) targs) ts) =
+    MAP (deBruijn_subst (0 :num) (MAP (deBruijn_subst sk (MAP (deBruijn_inc (0 :num) sk) targs')) targs)) ts
+
+=== typeSysProps.type_e_subst_lem3
+⊢ ∀(tvs :num) (tvs2 :mlstring list) (t :t).
+    check_freevars tvs tvs2 t ⇒
+    ∀(tvs' :num) (targs :t list) (n :num).
+      tvs = n + LENGTH targs ∧ EVERY (check_freevars tvs' tvs2) targs ⇒
+      check_freevars (n + tvs') tvs2 (deBruijn_subst n (MAP (deBruijn_inc (0 :num) n) targs) t)
+
+=== typeSysProps.type_e_subst_lem5
+⊢ (∀(t :t) (n :num) (inc :num) (n' :num) (targs :t list).
+     deBruijn_inc n inc (deBruijn_subst (n + n') (MAP (deBruijn_inc (0 :num) (n + n')) targs) t) =
+     deBruijn_subst (n + inc + n') (MAP (deBruijn_inc (0 :num) (n + inc + n')) targs) (deBruijn_inc n inc t)) ∧
+  ∀(ts :t list) (n :num) (inc :num) (n' :num) (targs :t list).
+    MAP (deBruijn_inc n inc) (MAP (deBruijn_subst (n + n') (MAP (deBruijn_inc (0 :num) (n + n')) targs)) ts) =
+    MAP (deBruijn_subst (n + inc + n') (MAP (deBruijn_inc (0 :num) (n + inc + n')) targs)) (MAP (deBruijn_inc n inc) ts)
+
+=== typeSysProps.subst_inc_cancel
+⊢ (∀(t :t) (ts :t list) (inc :num).
+     deBruijn_subst (0 :num) ts (deBruijn_inc (0 :num) (inc + LENGTH ts) t) = deBruijn_inc (0 :num) inc t) ∧
+  ∀(ts' :t list) (ts :t list) (inc :num).
+    MAP (deBruijn_subst (0 :num) ts) (MAP (deBruijn_inc (0 :num) (inc + LENGTH ts)) ts') =
+    MAP (deBruijn_inc (0 :num) inc) ts'
+
+=== typeSysProps.type_e_subst_lem7
+⊢ (∀(t :t) (sk :num) (targs :t list) (targs' :t list) (tvs' :α) (tvs'' :β).
+     deBruijn_subst sk (MAP (deBruijn_inc (0 :num) sk) targs') (deBruijn_subst (0 :num) targs t) =
+     deBruijn_subst (0 :num) (MAP (deBruijn_subst sk (MAP (deBruijn_inc (0 :num) sk) targs')) targs)
+       (deBruijn_subst (LENGTH targs + sk) (MAP (deBruijn_inc (0 :num) (LENGTH targs + sk)) targs') t)) ∧
+  ∀(ts :t list) (sk :num) (targs :t list) (targs' :t list) (tvs' :γ) (tvs'' :δ).
+    MAP (deBruijn_subst sk (MAP (deBruijn_inc (0 :num) sk) targs')) (MAP (deBruijn_subst (0 :num) targs) ts) =
+    MAP (deBruijn_subst (0 :num) (MAP (deBruijn_subst sk (MAP (deBruijn_inc (0 :num) sk) targs')) targs))
+      (MAP (deBruijn_subst (LENGTH targs + sk) (MAP (deBruijn_inc (0 :num) (LENGTH targs + sk)) targs')) ts)
+
+=== typeSysProps.deBruijn_subst_id
+⊢ (∀(t :t) (n :num). check_freevars n ([] :mlstring list) t ⇒ deBruijn_subst (0 :num) (MAP Tvar_db (COUNT_LIST n)) t = t) ∧
+  ∀(ts :t list) (n :num).
+    EVERY (check_freevars n ([] :mlstring list)) ts ⇒ MAP (deBruijn_subst (0 :num) (MAP Tvar_db (COUNT_LIST n))) ts = ts
+
+=== typeSysProps.deBruijn_subst_freevars
+⊢ ∀(skip :num) (targs :t list) (t :t) (tvs :num).
+    skip = (0 :num) ∧ EVERY (check_freevars tvs ([] :mlstring list)) targs ∧
+    check_freevars (LENGTH targs) ([] :mlstring list) t ⇒
+    check_freevars tvs ([] :mlstring list) (deBruijn_subst skip targs t)
+
+=== typeSysProps.tenv_abbrev_ok_lookup
+⊢ ∀(tenvT :(α, β, mlstring list # t) namespace) (tn :(α, β) id) (tvs :mlstring list) (t :t).
+    tenv_abbrev_ok tenvT ∧ nsLookup tenvT tn = SOME (tvs,t) ⇒ check_freevars (0 :num) tvs t
+
+=== typeSysProps.check_freevars_type_name_subst
+⊢ ∀(tvs :mlstring list) (t :ast_t) (dbmax :num) (tenvT :(mlstring, mlstring, mlstring list # t) namespace).
+    tenv_abbrev_ok tenvT ∧ check_type_names tenvT t ∧ check_freevars_ast tvs t ⇒
+    check_freevars dbmax tvs (type_name_subst tenvT t)
+
+=== typeSysProps.tenv_ctor_ok_merge
+⊢ ∀(tenvC1 :(α, β, mlstring list # t list # γ) namespace) (tenvC2 :(α, β, mlstring list # t list # γ) namespace).
+    tenv_ctor_ok tenvC1 ∧ tenv_ctor_ok tenvC2 ⇒ tenv_ctor_ok (nsAppend tenvC1 tenvC2)
+
+=== typeSysProps.tenv_ctor_ok_lookup
+⊢ ∀(tenvC :(α, β, mlstring list # t list # γ) namespace) (cn :(α, β) id) (tvs :mlstring list) (ts :t list) (tn :γ).
+    tenv_ctor_ok tenvC ∧ nsLookup tenvC cn = SOME (tvs,ts,tn) ⇒ EVERY (check_freevars (0 :num) tvs) ts
+
+=== typeSysProps.bind_tvar_rewrites
+⊢ (∀(tvs :num) (e1 :tenv_val_exp) (e2 :tenv_val_exp). db_merge (bind_tvar tvs e1) e2 = bind_tvar tvs (db_merge e1 e2)) ∧
+  (∀(tvs :num) (e :tenv_val_exp). num_tvs (bind_tvar tvs e) = tvs + num_tvs e) ∧
+  (∀(tvs :num) (e :tenv_val_exp). num_tvs (Bind_tvar tvs e) = tvs + num_tvs e) ∧
+  (∀(tvs :num) (n :mlstring) (t :t) (e :tenv_val_exp). num_tvs (Bind_name n tvs t e) = num_tvs e) ∧
+  (∀(tvs :α) (e :β). num_tvs Empty = (0 :num)) ∧
+  (∀(n :mlstring) (inc :num) (tvs :num) (e :tenv_val_exp). tveLookup n inc (bind_tvar tvs e) = tveLookup n (inc + tvs) e) ∧
+  (∀(tvs :num) (e :tenv_val_exp). tenv_val_exp_ok (bind_tvar tvs e) ⇔ tenv_val_exp_ok e) ∧
+  ∀(targs :t list) (tvs :num) (e :tenv_val_exp).
+    deBruijn_subst_tenvE targs (bind_tvar tvs e) = bind_tvar tvs (deBruijn_subst_tenvE targs e)
+
+=== typeSysProps.bind_tvar0
+⊢ ∀(x :tenv_val_exp). bind_tvar (0 :num) x = x
+
+=== typeSysProps.tveLookup_subst_none
+⊢ ∀(n :mlstring) (inc :num) (e :tenv_val_exp).
+    tveLookup n inc (deBruijn_subst_tenvE (targs :t list) e) = (NONE :(num # t) option) ⇔
+    tveLookup n inc e = (NONE :(num # t) option)
+
+=== typeSysProps.tveLookup_db_merge_none
+⊢ ∀(n :mlstring) (inc :num) (e1 :tenv_val_exp) (e2 :tenv_val_exp).
+    tveLookup n inc (db_merge e1 e2) = (NONE :(num # t) option) ⇔
+    tveLookup n inc e1 = (NONE :(num # t) option) ∧ tveLookup n (num_tvs e1 + inc) e2 = (NONE :(num # t) option)
+
+=== typeSysProps.tveLookup_inc_none
+⊢ ∀(n :mlstring) (inc :num) (e :tenv_val_exp).
+    tveLookup n inc e = (NONE :(num # t) option) ⇔ tveLookup n (0 :num) e = (NONE :(num # t) option)
+
+=== typeSysProps.tveLookup_freevars
+⊢ ∀(n :mlstring) (tvs :num) (tenvE :tenv_val_exp) (tvs' :num) (t :t).
+    tenv_val_exp_ok tenvE ∧ num_tvs tenvE = (0 :num) ∧ tveLookup n tvs tenvE = SOME (tvs',t) ⇒
+    check_freevars tvs' ([] :mlstring list) t
+
+=== typeSysProps.bind_var_list_append
+⊢ ∀(n :num) (te1 :(mlstring # t) list) (te2 :(mlstring # t) list) (te3 :tenv_val_exp).
+    bind_var_list n (te1 ++ te2) te3 = bind_var_list n te1 (bind_var_list n te2 te3)
+
+=== typeSysProps.num_tvs_bind_var_list
+⊢ ∀(tvs :num) (env :(mlstring # t) list) (tenvE :tenv_val_exp). num_tvs (bind_var_list tvs env tenvE) = num_tvs tenvE
+
+=== typeSysProps.tenv_val_exp_ok_bvl
+⊢ ∀(tenvE :tenv_val_exp) (env :(mlstring # t) list).
+    tenv_val_exp_ok tenvE ∧
+    EVERY (check_freevars (num_tvs tenvE) ([] :mlstring list)) (MAP (SND :mlstring # t -> t) env) ⇒
+    tenv_val_exp_ok (bind_var_list (0 :num) env tenvE)
+
+=== typeSysProps.tveLookup_subst_some
+⊢ ∀(n :mlstring) (e :tenv_val_exp) (targs :t list) (tvs :num) (t :t) (inc :num).
+    tveLookup n inc e = SOME (tvs,t) ⇒
+    tveLookup n inc (deBruijn_subst_tenvE targs e) =
+    SOME (tvs,deBruijn_subst (tvs + inc + num_tvs e) (MAP (deBruijn_inc (0 :num) (tvs + inc + num_tvs e)) targs) t)
+
+=== typeSysProps.num_tvs_db_merge
+⊢ ∀(e1 :tenv_val_exp) (e2 :tenv_val_exp). num_tvs (db_merge e1 e2) = num_tvs e1 + num_tvs e2
+
+=== typeSysProps.num_tvs_deBruijn_subst_tenvE
+⊢ ∀(targs :t list) (tenvE :tenv_val_exp). num_tvs (deBruijn_subst_tenvE targs tenvE) = num_tvs tenvE
+
+=== typeSysProps.tveLookup_inc_some
+⊢ ∀(n :mlstring) (inc :num) (e :tenv_val_exp) (tvs :num) (t :t) (inc2 :num).
+    tveLookup n inc e = SOME (tvs,t) ⇒
+    ∃(t' :t). t = deBruijn_inc tvs inc t' ∧ tveLookup n inc2 e = SOME (tvs,deBruijn_inc tvs inc2 t')
+
+=== typeSysProps.tveLookup_freevars_subst
+⊢ ∀(tenvE :tenv_val_exp) (targs :t list) (n :mlstring) (t :t) (inc :num).
+    EVERY (check_freevars (inc + num_tvs tenvE) ([] :mlstring list)) targs ∧
+    tveLookup n inc tenvE = SOME (LENGTH targs,t) ∧ tenv_val_exp_ok tenvE ⇒
+    check_freevars (inc + num_tvs tenvE) ([] :mlstring list) (deBruijn_subst (0 :num) targs t)
+
+=== typeSysProps.tenv_val_exp_ok_db_merge
+⊢ ∀(e1 :tenv_val_exp) (e2 :tenv_val_exp). tenv_val_exp_ok (db_merge e1 e2) ⇒ tenv_val_exp_ok e2
+
+=== typeSysProps.tveLookup_freevars_local
+⊢ ∀(e :tenv_val_exp) (n :mlstring) (inc :num) (t :t) (tvs :num).
+    tenv_val_exp_ok e ∧ tveLookup n inc e = SOME (tvs,t) ⇒ check_freevars (tvs + inc + num_tvs e) ([] :mlstring list) t
+
+=== typeSysProps.tveLookup_no_tvs
+⊢ ∀(tvs :num) (l :num) (tenv :tenv_val_exp) (n :mlstring) (t :t).
+    tenv_val_exp_ok tenv ∧ num_tvs tenv = (0 :num) ⇒
+    (tveLookup n tvs tenv = SOME (l,t) ⇔ tveLookup n (0 :num) tenv = SOME (l,t))
+
+=== typeSysProps.deBruijn_subst_E_bvl
+⊢ ∀(tenv1 :(mlstring # t) list) (tenv2 :tenv_val_exp) (tvs :num).
+    deBruijn_subst_tenvE (targs :t list) (bind_var_list tvs tenv1 tenv2) =
+    bind_var_list tvs
+      (MAP
+         (λ((x :mlstring),(t :t)).
+            (x,deBruijn_subst (tvs + num_tvs tenv2) (MAP (deBruijn_inc (0 :num) (tvs + num_tvs tenv2)) targs) t)) tenv1)
+      (deBruijn_subst_tenvE targs tenv2)
+
+=== typeSysProps.db_merge_bvl
+⊢ ∀(tenv1 :(mlstring # t) list) (tenv2 :tenv_val_exp) (tenv3 :tenv_val_exp) (tvs :num).
+    db_merge (bind_var_list tvs tenv1 tenv2) tenv3 = bind_var_list tvs tenv1 (db_merge tenv2 tenv3)
+
+=== typeSysProps.tveLookup_db_merge_some
+⊢ ∀(n :mlstring) (inc :num) (tenvE1 :tenv_val_exp) (tenvE2 :tenv_val_exp) (tvs :num) (t :t).
+    tveLookup n inc (db_merge tenvE1 tenvE2) = SOME (tvs,t) ⇔
+    tveLookup n inc tenvE1 = SOME (tvs,t) ∨
+    tveLookup n inc tenvE1 = (NONE :(num # t) option) ∧ tveLookup n (num_tvs tenvE1 + inc) tenvE2 = SOME (tvs,t)
+
+=== typeSysProps.type_op_cases
+⊢ type_op (op :op) (ts :t list) (t3 :t) ⇔
+  (∃(a :arith) (ty :prim_type).
+     op = Arith a ty ∧ EVERY (λ(arg :t). arg = t_of ty) ts ∧ t3 = t_of ty ∧ supported_arith a ty = SOME (LENGTH ts)) ∨
+  (∃(ty1 :prim_type) (ty2 :prim_type).
+     op = FromTo ty1 ty2 ∧ ts = [t_of ty1] ∧ t3 = t_of ty2 ∧ supported_conversion ty1 ty2) ∨
+  ((∃(v20 :shift) (v21 :num).
+      op = Shift W8 v20 v21 ∧ ts = [Tapp ([] :t list) Tword8_num] ∧ t3 = Tapp ([] :t list) Tword8_num) ∨
+   ∃(v20 :shift) (v21 :num).
+     op = Shift W64 v20 v21 ∧ ts = [Tapp ([] :t list) Tword64_num] ∧ t3 = Tapp ([] :t list) Tword64_num) ∨
+  (∃(t1'' :t). op = Equality ∧ ts = [t1''; t1''] ∧ t3 = Tapp ([] :t list) Tbool_num) ∨
+  (∃(test :test) (ty' :prim_type).
+     op = Test test ty' ∧ ts = [t_of ty'; t_of ty'] ∧ t3 = Tapp ([] :t list) Tbool_num ∧ supported_test test ty') ∨
+  (∃(t2 :t). op = Opapp ∧ ts = [Tapp [t2; t3] Tfn_num; t2]) ∨
+  (∃(t2'³' :t). op = Opassign ∧ ts = [Tapp [t2'³'] Tref_num; t2'³'] ∧ t3 = Tapp ([] :t list) Ttup_num) ∨
+  (∃(t1'⁶' :t). op = Opref ∧ ts = [t1'⁶'] ∧ t3 = Tapp [t1'⁶'] Tref_num) ∨ op = Opderef ∧ ts = [Tapp [t3] Tref_num] ∨
+  op = Aw8alloc ∧ ts = [Tapp ([] :t list) Tint_num; Tapp ([] :t list) Tword8_num] ∧
+  t3 = Tapp ([] :t list) Tword8array_num ∨
+  op = Aw8sub ∧ ts = [Tapp ([] :t list) Tword8array_num; Tapp ([] :t list) Tint_num] ∧ t3 = Tapp ([] :t list) Tword8_num ∨
+  op = Aw8length ∧ ts = [Tapp ([] :t list) Tword8array_num] ∧ t3 = Tapp ([] :t list) Tint_num ∨
+  op = Aw8update ∧ ts = [Tapp ([] :t list) Tword8array_num; Tapp ([] :t list) Tint_num; Tapp ([] :t list) Tword8_num] ∧
+  t3 = Tapp ([] :t list) Ttup_num ∨
+  op = CopyStrStr ∧ ts = [Tapp ([] :t list) Tstring_num; Tapp ([] :t list) Tint_num; Tapp ([] :t list) Tint_num] ∧
+  t3 = Tapp ([] :t list) Tstring_num ∨
+  op = CopyStrAw8 ∧
+  ts =
+  [Tapp ([] :t list) Tstring_num; Tapp ([] :t list) Tint_num; Tapp ([] :t list) Tint_num;
+   Tapp ([] :t list) Tword8array_num; Tapp ([] :t list) Tint_num] ∧ t3 = Tapp ([] :t list) Ttup_num ∨
+  op = CopyAw8Str ∧ ts = [Tapp ([] :t list) Tword8array_num; Tapp ([] :t list) Tint_num; Tapp ([] :t list) Tint_num] ∧
+  t3 = Tapp ([] :t list) Tstring_num ∨
+  op = CopyAw8Aw8 ∧
+  ts =
+  [Tapp ([] :t list) Tword8array_num; Tapp ([] :t list) Tint_num; Tapp ([] :t list) Tint_num;
+   Tapp ([] :t list) Tword8array_num; Tapp ([] :t list) Tint_num] ∧ t3 = Tapp ([] :t list) Ttup_num ∨
+  op = Implode ∧ ts = [Tapp [Tapp ([] :t list) Tchar_num] Tlist_num] ∧ t3 = Tapp ([] :t list) Tstring_num ∨
+  op = Explode ∧ ts = [Tapp ([] :t list) Tstring_num] ∧ t3 = Tapp [Tapp ([] :t list) Tchar_num] Tlist_num ∨
+  op = Strsub ∧ ts = [Tapp ([] :t list) Tstring_num; Tapp ([] :t list) Tint_num] ∧ t3 = Tapp ([] :t list) Tchar_num ∨
+  op = Strlen ∧ ts = [Tapp ([] :t list) Tstring_num] ∧ t3 = Tapp ([] :t list) Tint_num ∨
+  op = Strcat ∧ ts = [Tapp [Tapp ([] :t list) Tstring_num] Tlist_num] ∧ t3 = Tapp ([] :t list) Tstring_num ∨
+  (∃(t1'²¹' :t). op = VfromList ∧ ts = [Tapp [t1'²¹'] Tlist_num] ∧ t3 = Tapp [t1'²¹'] Tvector_num) ∨
+  op = Vsub ∧ ts = [Tapp [t3] Tvector_num; Tapp ([] :t list) Tint_num] ∨
+  (∃(t1'²³' :t). op = Vlength ∧ ts = [Tapp [t1'²³'] Tvector_num] ∧ t3 = Tapp ([] :t list) Tint_num) ∨
+  (∃(t2'¹³' :t). op = Aalloc ∧ ts = [Tapp ([] :t list) Tint_num; t2'¹³'] ∧ t3 = Tapp [t2'¹³'] Tarray_num) ∨
+  (∃(t2 :t). op = AallocEmpty ∧ ts = [Tapp ([] :t list) Ttup_num] ∧ t3 = Tapp [t2] Tarray_num) ∨
+  op = Asub ∧ ts = [Tapp [t3] Tarray_num; Tapp ([] :t list) Tint_num] ∨
+  (∃(t1'²⁷' :t). op = Alength ∧ ts = [Tapp [t1'²⁷'] Tarray_num] ∧ t3 = Tapp ([] :t list) Tint_num) ∨
+  (∃(t3'⁵' :t).
+     op = Aupdate ∧ ts = [Tapp [t3'⁵'] Tarray_num; Tapp ([] :t list) Tint_num; t3'⁵'] ∧ t3 = Tapp ([] :t list) Ttup_num) ∨
+  (∃(t1'³¹' :t).
+     op = ListAppend ∧ ts = [Tapp [t1'³¹'] Tlist_num; Tapp [t1'³¹'] Tlist_num] ∧ t3 = Tapp [t1'³¹'] Tlist_num) ∨
+  op = ConfigGC ∧ ts = [Tapp ([] :t list) Tint_num; Tapp ([] :t list) Tint_num] ∧ t3 = Tapp ([] :t list) Ttup_num ∨
+  ∃(n :mlstring).
+    op = FFI n ∧ ts = [Tapp ([] :t list) Tstring_num; Tapp ([] :t list) Tword8array_num] ∧
+    t3 = Tapp ([] :t list) Ttup_num
+
+=== typeSysProps.type_ps_length
+⊢ ∀(tvs :num) (tenvC :type_env) (ps :pat list) (ts :t list) (tenv :(mlstring # t) list).
+    type_ps tvs tenvC ps ts tenv ⇒ LENGTH ps = LENGTH ts
+
+=== typeSysProps.type_p_freevars
+⊢ (∀(tvs :num) (tenvC :type_env) (p :pat) (t :t) (env' :(mlstring # t) list).
+     type_p tvs tenvC p t env' ⇒
+     check_freevars tvs ([] :mlstring list) t ∧
+     EVERY (check_freevars tvs ([] :mlstring list)) (MAP (SND :mlstring # t -> t) env')) ∧
+  ∀(tvs :num) (tenvC :type_env) (ps :pat list) (ts :t list) (env' :(mlstring # t) list).
+    type_ps tvs tenvC ps ts env' ⇒
+    EVERY (check_freevars tvs ([] :mlstring list)) ts ∧
+    EVERY (check_freevars tvs ([] :mlstring list)) (MAP (SND :mlstring # t -> t) env')
+
+=== typeSysProps.type_p_subst
+⊢ (∀(n :num) (tenv :type_env) (p :pat) (t :t) (new_bindings :(mlstring # t) list).
+     type_p n tenv p t new_bindings ⇒
+     ∀(targs' :t list) (inc :num) (tvs :num) (targs :t list).
+       tenv_abbrev_ok tenv.t ∧ tenv_ctor_ok tenv.c ∧ n = inc + LENGTH targs ∧
+       EVERY (check_freevars tvs ([] :mlstring list)) targs ∧ targs' = MAP (deBruijn_inc (0 :num) inc) targs ⇒
+       type_p (inc + tvs) tenv p (deBruijn_subst inc targs' t)
+         (MAP (λ((x :mlstring),(t :t)). (x,deBruijn_subst inc targs' t)) new_bindings)) ∧
+  ∀(n :num) (tenv :type_env) (ps :pat list) (ts :t list) (new_bindings :(mlstring # t) list).
+    type_ps n tenv ps ts new_bindings ⇒
+    ∀(targs' :t list) (inc :num) (targs :t list) (tvs :num).
+      tenv_abbrev_ok tenv.t ∧ tenv_ctor_ok tenv.c ∧ n = inc + LENGTH targs ∧
+      EVERY (check_freevars tvs ([] :mlstring list)) targs ∧ targs' = MAP (deBruijn_inc (0 :num) inc) targs ⇒
+      type_ps (inc + tvs) tenv ps (MAP (deBruijn_subst inc targs') ts)
+        (MAP (λ((x :mlstring),(t :t)). (x,deBruijn_subst inc targs' t)) new_bindings)
+
+=== typeSysProps.type_p_bvl
+⊢ (∀(tvs :num) (tenvC :type_env) (p :pat) (t :t) (bindings :(mlstring # t) list).
+     type_p tvs tenvC p t bindings ⇒
+     ∀(tenv' :tenv_val_exp). tenv_val_exp_ok tenv' ⇒ tenv_val_exp_ok (bind_var_list tvs bindings tenv')) ∧
+  ∀(tvs :num) (tenvC :type_env) (ps :pat list) (ts :t list) (bindings :(mlstring # t) list).
+    type_ps tvs tenvC ps ts bindings ⇒
+    ∀(tenv' :tenv_val_exp). tenv_val_exp_ok tenv' ⇒ tenv_val_exp_ok (bind_var_list tvs bindings tenv')
+
+=== typeSysProps.type_p_tenvV_indep
+⊢ (∀(p :pat) (tvs :num) (tenv :type_env) (t :t) (bindings :(mlstring # t) list)
+       (tenvV :(mlstring, mlstring, num # t) namespace).
+     type_p tvs tenv p t bindings ⇔ type_p tvs (tenv with v := tenvV) p t bindings) ∧
+  ∀(ps :pat list) (tvs :num) (tenv :type_env) (t :t list) (bindings :(mlstring # t) list)
+      (tenvV :(mlstring, mlstring, num # t) namespace).
+    type_ps tvs tenv ps t bindings ⇔ type_ps tvs (tenv with v := tenvV) ps t bindings
+
+=== typeSysProps.type_es_list_rel
+⊢ ∀(es :exp list) (ts :t list) (tenv :type_env) (tenvE :tenv_val_exp).
+    type_es tenv tenvE es ts ⇔ LIST_REL (type_e tenv tenvE) es ts
+
+=== typeSysProps.type_es_length
+⊢ ∀(tenv :type_env) (tenvE :tenv_val_exp) (es :exp list) (ts :t list). type_es tenv tenvE es ts ⇒ LENGTH es = LENGTH ts
+
+=== typeSysProps.tenv_val_exp_ok_bvl_funs
+⊢ ∀(funs :(mlstring # mlstring # exp) list) (env :(mlstring # t) list) (tenv :type_env) (bindings :(mlstring # t) list)
+      (tenv_val :α) (tenvE :tenv_val_exp).
+    type_funs tenv (bind_var_list (0 :num) bindings tenvE) funs env ∧ tenv_val_exp_ok tenvE ⇒
+    tenv_val_exp_ok (bind_var_list (0 :num) env tenvE)
+
+=== typeSysProps.type_e_freevars
+⊢ (∀(tenv :type_env) (tenvE :tenv_val_exp) (e :exp) (t :t).
+     type_e tenv tenvE e t ⇒
+     tenv_val_exp_ok tenvE ∧ tenv_val_ok tenv.v ⇒
+     check_freevars (num_tvs tenvE) ([] :mlstring list) t) ∧
+  (∀(tenv :type_env) (tenvE :tenv_val_exp) (es :exp list) (ts :t list).
+     type_es tenv tenvE es ts ⇒
+     tenv_val_exp_ok tenvE ∧ tenv_val_ok tenv.v ⇒
+     EVERY (check_freevars (num_tvs tenvE) ([] :mlstring list)) ts) ∧
+  ∀(tenv :type_env) (tenvE :tenv_val_exp) (funs :(mlstring # mlstring # exp) list) (env :(mlstring # t) list).
+    type_funs tenv tenvE funs env ⇒
+    tenv_val_exp_ok tenvE ∧ tenv_val_ok tenv.v ⇒
+    EVERY (check_freevars (num_tvs tenvE) ([] :mlstring list)) (MAP (SND :mlstring # t -> t) env)
+
+=== typeSysProps.type_e_subst
+⊢ (∀(tenv :type_env) (tenvE :tenv_val_exp) (e :exp) (t :t).
+     type_e tenv tenvE e t ⇒
+     ∀(tenvE1 :tenv_val_exp) (targs :t list) (tvs :num) (targs' :t list).
+       num_tvs (tenvE2 :tenv_val_exp) = (0 :num) ∧ tenv_abbrev_ok tenv.t ∧ tenv_ctor_ok tenv.c ∧ tenv_val_ok tenv.v ∧
+       tenv_val_exp_ok tenvE ∧ EVERY (check_freevars tvs ([] :mlstring list)) targs ∧
+       tenvE = db_merge tenvE1 (bind_tvar (LENGTH targs) tenvE2) ∧
+       targs' = MAP (deBruijn_inc (0 :num) (num_tvs tenvE1)) targs ⇒
+       type_e tenv (db_merge (deBruijn_subst_tenvE targs tenvE1) (bind_tvar tvs tenvE2)) e
+         (deBruijn_subst (num_tvs tenvE1) targs' t)) ∧
+  (∀(tenv :type_env) (tenvE :tenv_val_exp) (es :exp list) (ts :t list).
+     type_es tenv tenvE es ts ⇒
+     ∀(tenvE1 :tenv_val_exp) (targs :t list) (tvs :num) (targs' :t list).
+       num_tvs tenvE2 = (0 :num) ∧ tenv_abbrev_ok tenv.t ∧ tenv_ctor_ok tenv.c ∧ tenv_val_ok tenv.v ∧
+       tenv_val_exp_ok tenvE ∧ EVERY (check_freevars tvs ([] :mlstring list)) targs ∧
+       tenvE = db_merge tenvE1 (bind_tvar (LENGTH targs) tenvE2) ∧
+       targs' = MAP (deBruijn_inc (0 :num) (num_tvs tenvE1)) targs ⇒
+       type_es tenv (db_merge (deBruijn_subst_tenvE targs tenvE1) (bind_tvar tvs tenvE2)) es
+         (MAP (deBruijn_subst (num_tvs tenvE1) targs') ts)) ∧
+  ∀(tenv :type_env) (tenvE :tenv_val_exp) (funs :(mlstring # mlstring # exp) list) (env :(mlstring # t) list).
+    type_funs tenv tenvE funs env ⇒
+    ∀(tenvE1 :tenv_val_exp) (targs :t list) (tvs :num) (targs' :t list).
+      num_tvs tenvE2 = (0 :num) ∧ tenv_abbrev_ok tenv.t ∧ tenv_ctor_ok tenv.c ∧ tenv_val_ok tenv.v ∧
+      tenv_val_exp_ok tenvE ∧ EVERY (check_freevars tvs ([] :mlstring list)) targs ∧
+      tenvE = db_merge tenvE1 (bind_tvar (LENGTH targs) tenvE2) ∧
+      targs' = MAP (deBruijn_inc (0 :num) (num_tvs tenvE1)) targs ⇒
+      type_funs tenv (db_merge (deBruijn_subst_tenvE targs tenvE1) (bind_tvar tvs tenvE2)) funs
+        (MAP (λ((x :mlstring),(t :t)). (x,deBruijn_subst (num_tvs tenvE1) targs' t)) env)
+
+=== typeSysProps.type_funs_Tfn
+⊢ ∀(tenv :type_env) (tenvE :tenv_val_exp) (funs :(mlstring # mlstring # exp) list) (bindings :(mlstring # t) list)
+      (tvs :α) (t :t) (n :mlstring).
+    type_funs tenv tenvE funs bindings ∧ ALOOKUP bindings n = SOME t ⇒
+    ∃(t1 :t) (t2 :t). t = Tfn t1 t2 ∧ check_freevars (num_tvs tenvE) ([] :mlstring list) (Tfn t1 t2)
+
+=== typeSysProps.type_funs_lookup
+⊢ ∀(fn :mlstring) (tenvE :tenv_val_exp) (funs :(mlstring # mlstring # exp) list) (bindings :(mlstring # t) list)
+      (n :mlstring) (e :exp) (tenv :type_env).
+    MEM (fn,n,e) funs ∧ type_funs tenv tenvE funs bindings ⇒ ∃(t :t). ALOOKUP bindings fn = SOME t
+
+=== typeSysProps.type_funs_find_recfun
+⊢ ∀(fn :mlstring) (env :α) (funs :(mlstring # mlstring # exp) list) (bindings :(mlstring # t) list) (e :β)
+      (tenv :type_env) (tenvE :tenv_val_exp) (t :t).
+    ALOOKUP bindings fn = SOME t ∧ type_funs tenv tenvE funs bindings ⇒
+    ∃(n :mlstring) (e :exp). find_recfun fn funs = SOME (n,e)
+
+=== typeSysProps.type_recfun_lookup
+⊢ ∀(fn :mlstring) (funs :(mlstring # mlstring # exp) list) (n :mlstring) (e :exp) (tenv :type_env) (tenvE :tenv_val_exp)
+      (bindings :(mlstring # t) list) (tvs :α) (t1 :t) (t2 :t).
+    find_recfun fn funs = SOME (n,e) ∧ type_funs tenv tenvE funs bindings ∧ ALOOKUP bindings fn = SOME (Tfn t1 t2) ⇒
+    type_e tenv (Bind_name n (0 :num) t1 tenvE) e t2 ∧ check_freevars (num_tvs tenvE) ([] :mlstring list) (Tfn t1 t2)
+
+=== typeSysProps.type_funs_distinct
+⊢ ∀(tenv :type_env) (tenvE :tenv_val_exp) (funs :(mlstring # mlstring # exp) list) (bindings :(mlstring # t) list).
+    type_funs tenv tenvE funs bindings ⇒ ALL_DISTINCT (MAP (λ((x :mlstring),(y :mlstring),(z :exp)). x) funs)
+
+=== typeSysProps.type_e_subst_lem
+⊢ ∀(tenv :type_env) (tenvE :tenv_val_exp) (e :exp) (t :t) (targs :t list) (tvs :num) (targs' :α).
+    type_e tenv (Bind_name (x :mlstring) (0 :num) (t1 :t) (bind_tvar (LENGTH targs) tenvE)) e t ∧
+    num_tvs tenvE = (0 :num) ∧ tenv_abbrev_ok tenv.t ∧ tenv_ctor_ok tenv.c ∧ tenv_val_ok tenv.v ∧
+    tenv_val_exp_ok (bind_tvar (LENGTH targs) tenvE) ∧ EVERY (check_freevars tvs ([] :mlstring list)) targs ∧
+    check_freevars (LENGTH targs) ([] :mlstring list) t1 ⇒
+    type_e tenv (Bind_name x (0 :num) (deBruijn_subst (0 :num) targs t1) (bind_tvar tvs tenvE)) e
+      (deBruijn_subst (0 :num) targs t)
+
+=== typeSysProps.mem_type_def_to_ctMap
+⊢ ∀(tenvT :(mlstring, mlstring, mlstring list # t) namespace) (next :num)
+      (tds :(α # β # (mlstring # ast_t list) list) list) (ids :γ list) (stamp :stamp) (x :α # t list # γ).
+    MEM (stamp,x) (type_def_to_ctMap tenvT next tds ids) ∧ LENGTH tds = LENGTH ids ⇒
+    ∃(cn :mlstring) (i :num). stamp = TypeStamp cn i ∧ next ≤ i ∧ i < next + LENGTH tds
+
+=== typeSysProps.ctMap_ok_merge_imp
+⊢ ∀(ctMap1 :stamp |-> mlstring list # t list # num) (ctMap2 :stamp |-> mlstring list # t list # num).
+    DISJOINT (FRANGE (((SND :t list # num -> num) ∘ (SND :mlstring list # t list # num -> t list # num)) o_f ctMap1))
+      (FRANGE (((SND :t list # num -> num) ∘ (SND :mlstring list # t list # num -> t list # num)) o_f ctMap2)) ∧
+    ctMap_ok ctMap1 ∧ ctMap_ok ctMap2 ⇒
+    ctMap_ok (ctMap1 ⊌ ctMap2)
+
+=== typeSysProps.ctMap_ok_lookup
+⊢ ∀(ctMap :stamp |-> mlstring list # t list # num) (cn :α) (tvs :mlstring list) (ts :t list) (ti :num) (tn :stamp).
+    ctMap_ok ctMap ∧ FLOOKUP ctMap tn = SOME (tvs,ts,ti) ⇒ EVERY (check_freevars (0 :num) tvs) ts
+
+=== typeSysProps.type_def_to_ctMap_mem
+⊢ ∀(tenvT :(mlstring, mlstring, mlstring list # t) namespace) (next :num)
+      (tds :(α # β # (mlstring # ast_t list) list) list) (tids :γ list).
+    ALOOKUP (type_def_to_ctMap tenvT next tds tids) (k :stamp) = SOME (x :α # t list # γ) ∧ LENGTH tds = LENGTH tids ⇒
+    MEM (SND (SND x)) tids
+
+=== typeSysProps.fupdate2_union
+⊢ ∀(m :α |-> β) (a1 :(α # β) list) (a2 :(α # β) list). m |++ a1 |++ a2 = (FEMPTY :α |-> β) |++ a2 ⊌ (m |++ a1)
+
+=== typeSysProps.ctMap_ok_type_defs
+⊢ ∀(tenvT :(mlstring, mlstring, mlstring list # t) namespace) (next :num)
+      (tds :(mlstring list # mlstring # (mlstring # ast_t list) list) list) (tids :num list).
+    ALL_DISTINCT tids ∧ DISJOINT (set tids) (set prim_type_nums) ∧ LENGTH tds = LENGTH tids ∧
+    check_ctor_tenv tenvT tds ∧ tenv_abbrev_ok tenvT ⇒
+    ctMap_ok ((FEMPTY :stamp |-> mlstring list # t list # num) |++ REVERSE (type_def_to_ctMap tenvT next tds tids))
+
+=== typeSysProps.nsLookup_add_tenvE1
+⊢ ∀(tenvE :tenv_val_exp) (tenvV :(α, mlstring, num # t) namespace) (n :mlstring) (tvs :num) (t :t) (tvs2 :num).
+    check_freevars tvs2 ([] :mlstring list) t ∧ tveLookup n tvs tenvE = SOME (tvs2,t) ⇒
+    nsLookup (add_tenvE tenvE tenvV) (Short n :(α, mlstring) id) = SOME (tvs2,t)
+
+=== typeSysProps.nsLookup_add_tenvE2
+⊢ ∀(tenvE :tenv_val_exp) (tenvV :(α, mlstring, num # t) namespace) (n :mlstring) (tvs :num) (t :t) (tvs2 :num).
+    tveLookup n tvs tenvE = (NONE :(num # t) option) ∧ nsLookup tenvV (Short n :(α, mlstring) id) = SOME (tvs2,t) ⇒
+    nsLookup (add_tenvE tenvE tenvV) (Short n :(α, mlstring) id) = SOME (tvs2,t)
+
+=== typeSysProps.nsLookup_add_tenvE3
+⊢ ∀(tenvE :tenv_val_exp) (tenvV :(α, mlstring, num # t) namespace) (n :(α, mlstring) id) (t :t) (tvs2 :num) (mn :α).
+    nsLookup tenvV (Long mn n) = SOME (tvs2,t) ⇒ nsLookup (add_tenvE tenvE tenvV) (Long mn n) = SOME (tvs2,t)
+
+=== typeSysProps.add_tenvE_bvl
+⊢ ∀(n :num) (bindings :(mlstring # t) list) (tenvE :tenv_val_exp) (tenvV :(α, mlstring, num # t) namespace).
+    add_tenvE (bind_var_list n bindings tenvE) tenvV =
+    nsBindList (MAP (λ((x :mlstring),(t :t)). (x,n,t)) bindings) (add_tenvE tenvE tenvV)
+
+=== typeSysProps.type_v_freevars
+⊢ ∀(tvs :num) (tenvC :stamp |-> mlstring list # t list # num) (tenvS :num |-> store_t) (v :v) (t :t).
+    type_v tvs tenvC tenvS v t ⇒ check_freevars tvs ([] :mlstring list) t
+
+=== typeSysProps.type_subst
+⊢ ∀(tvs :num) (ctMap :stamp |-> mlstring list # t list # num) (tenvS :num |-> store_t) (v :v) (t :t).
+    type_v tvs ctMap tenvS v t ⇒
+    tvs = LENGTH (targs :t list) ∧ ctMap_ok ctMap ∧ EVERY (check_freevars (tvs' :num) ([] :mlstring list)) targs ∧
+    check_freevars (LENGTH targs) ([] :mlstring list) t ⇒
+    type_v tvs' ctMap tenvS v (deBruijn_subst (0 :num) targs t)
+
+=== typeSysProps.check_ctor_tenv_ok
+⊢ ∀(tenvT :(mlstring, mlstring, mlstring list # t) namespace)
+      (tds :(mlstring list # mlstring # (mlstring # ast_t list) list) list) (tis :α list).
+    LENGTH tds = LENGTH tis ∧ check_ctor_tenv tenvT tds ∧ tenv_abbrev_ok tenvT ⇒
+    tenv_ctor_ok (build_ctor_tenv tenvT tds tis :(β, mlstring, mlstring list # t list # α) namespace)
+
+=== typeSysProps.type_d_check_uniq
+⊢ (∀(check :bool) (tenv :type_env) (d :dec) (tdecs :num -> bool) (new_tenv :type_env).
+     type_d check tenv d tdecs new_tenv ⇒ type_d F tenv d tdecs new_tenv) ∧
+  ∀(check :bool) (tenv :type_env) (d :dec list) (tdecs :num -> bool) (new_tenv :type_env).
+    type_ds check tenv d tdecs new_tenv ⇒ type_ds F tenv d tdecs new_tenv
+
+=== typeSysProps.extend_dec_tenv_ok
+⊢ ∀(tenv :type_env) (tenv' :type_env). tenv_ok tenv ∧ tenv_ok tenv' ⇒ tenv_ok (extend_dec_tenv tenv tenv')
+
+=== typeSysProps.type_d_tenv_ok_helper
+⊢ (∀(check :bool) (tenv :type_env) (d :dec) (tdecs :num -> bool) (tenv' :type_env).
+     type_d check tenv d tdecs tenv' ⇒ tenv_ok tenv ⇒ tenv_ok tenv') ∧
+  ∀(check :bool) (tenv :type_env) (d :dec list) (tdecs :num -> bool) (tenv' :type_env).
+    type_ds check tenv d tdecs tenv' ⇒ tenv_ok tenv ⇒ tenv_ok tenv'
+
+=== typeSysProps.type_d_tenv_ok
+⊢ ∀(check :bool) (tenv :type_env) (d :dec) (tdecs :num -> bool) (tenv' :type_env).
+    type_d check tenv d tdecs tenv' ∧ tenv_ok tenv ⇒ tenv_ok (extend_dec_tenv tenv' tenv)
+
+=== typeSysProps.type_ds_empty
+⊢ ∀(check :bool) (tenv :type_env) (decls :num -> bool) (r :type_env).
+    type_ds check tenv ([] :dec list) decls r ⇔
+    decls = (∅ :num -> bool) ∧
+    r =
+    <|v := (nsEmpty :(mlstring, mlstring, num # t) namespace);
+      c := (nsEmpty :(mlstring, mlstring, mlstring list # t list # num) namespace);
+      t := (nsEmpty :(mlstring, mlstring, mlstring list # t) namespace)|>
+
+=== typeSysProps.type_ds_sing
+⊢ ∀(check :bool) (tenv :type_env) (d :dec) (decls :num -> bool) (r :type_env).
+    type_ds check tenv [d] decls r ⇔ type_d check tenv d decls r
+
+=== typeSound.fst_triple
+⊢ (λ((x :α),(y :β),(z :γ)). x) = (FST :α # β # γ -> α)
+
+=== typeSound.sing_list
+⊢ ∀(l :α list). LENGTH l = (1 :num) ⇔ ∃(x :α). l = [x]
+
+=== typeSound.EVERY_LIST_REL
+⊢ EVERY (λ(v :v). type_v (n :num) (ctMap :stamp |-> mlstring list # t list # num) (tenvS :num |-> store_t) v (t :t))
+    (vs :v list) ⇔ LIST_REL (type_v n ctMap tenvS) vs (REPLICATE (LENGTH vs) t)
+
+=== typeSound.v_unchanged
+⊢ ∀(tenv :type_env) (x :α). tenv with v := tenv.v = tenv
+
+=== typeSound.check_dup_ctors_thm
+⊢ check_dup_ctors ((tvs :mlstring list),(tn :mlstring),(condefs :(mlstring # ast_t list) list)) ⇔
+  ALL_DISTINCT (MAP (FST :mlstring # ast_t list -> mlstring) condefs)
+
+=== typeSound.prim_canonical_values_thm
+⊢ (type_v (tvs :num) (ctMap :stamp |-> mlstring list # t list # num) (tenvS :num |-> store_t) (v :v) Tint ∧
+   ctMap_ok ctMap ⇒
+   ∃(n :int). v = Litv (IntLit n)) ∧ (type_v tvs ctMap tenvS v Tchar ∧ ctMap_ok ctMap ⇒ ∃(c :char). v = Litv (Char c)) ∧
+  (type_v tvs ctMap tenvS v Tstring ∧ ctMap_ok ctMap ⇒ ∃(s :mlstring). v = Litv (StrLit s)) ∧
+  (type_v tvs ctMap tenvS v Tword8 ∧ ctMap_ok ctMap ⇒ ∃(n :word8). v = Litv (Word8 n)) ∧
+  (type_v tvs ctMap tenvS v Tword64 ∧ ctMap_ok ctMap ⇒ ∃(n :word64). v = Litv (Word64 n)) ∧
+  (type_v tvs ctMap tenvS v Tdouble ∧ ctMap_ok ctMap ⇒ ∃(n :word64). v = Litv (Float64 n)) ∧
+  (type_v tvs ctMap tenvS v (Ttup (ts :t list)) ∧ ctMap_ok ctMap ⇒
+   ∃(vs :v list). v = Conv (NONE :stamp option) vs ∧ LENGTH ts = LENGTH vs) ∧
+  (type_v tvs ctMap tenvS v (Tfn (t1 :t) (t2 :t)) ∧ ctMap_ok ctMap ⇒
+   (∃(env :v sem_env) (n :mlstring) (e :exp). v = Closure env n e) ∨
+   ∃(env :v sem_env) (funs :(mlstring # mlstring # exp) list) (n :mlstring). v = Recclosure env funs n) ∧
+  (type_v tvs ctMap tenvS v (Tref t1) ∧ ctMap_ok ctMap ∧ type_s ctMap (envS :v store_v list) tenvS ⇒
+   ∃(n :num) (v2 :v). v = Loc T n ∧ store_lookup n envS = SOME (Refv v2) ∧ type_v (0 :num) ctMap tenvS v2 t1) ∧
+  (type_v tvs ctMap tenvS v Tword8array ∧ ctMap_ok ctMap ∧ type_s ctMap envS tenvS ⇒
+   ∃(n :num) (ws :word8 list).
+     v = Loc T n ∧ store_lookup n envS = SOME (W8array ws :v store_v) ∧ FLOOKUP tenvS n = SOME W8array_t) ∧
+  (type_v tvs ctMap tenvS v (Tarray (t :t)) ∧ ctMap_ok ctMap ∧ type_s ctMap envS tenvS ⇒
+   ∃(n :num) (vs :v list).
+     v = Loc T n ∧ store_lookup n envS = SOME (Varray vs) ∧ EVERY (λ(v :v). type_v (0 :num) ctMap tenvS v t) vs ∧
+     FLOOKUP tenvS n = SOME (Varray_t t)) ∧
+  (type_v tvs ctMap tenvS v (Tvector t) ∧ ctMap_ok ctMap ⇒
+   ∃(vs :v list). v = Vectorv vs ∧ EVERY (λ(v :v). type_v tvs ctMap tenvS v t) vs)
+
+=== typeSound.has_lists_v_to_list
+⊢ ∀(ctMap :stamp |-> mlstring list # t list # num) (tvs :num) (tenvS :num |-> store_t) (t3 :t).
+    ctMap_ok ctMap ∧ ctMap_has_lists ctMap ∧ type_v tvs ctMap tenvS (v :v) (Tlist t3) ⇒
+    ∃(vs :v list).
+      v_to_list v = SOME vs ∧ EVERY (λ(v :v). type_v tvs ctMap tenvS v t3) vs ∧
+      (t3 = Tchar ⇒ ∃(vs :string). v_to_char_list v = SOME vs) ∧
+      (t3 = Tstring ⇒ ∃(str :mlstring). vs_to_string vs = SOME str)
+
+=== typeSound.ctor_canonical_values_thm
+⊢ (type_v (tvs :num) (ctMap :stamp |-> mlstring list # t list # num) (tenvS :num |-> store_t) (v :v) Tbool ∧
+   ctMap_ok ctMap ∧ ctMap_has_bools ctMap ⇒
+   ∃(b :bool). v = Boolv b) ∧
+  (type_v tvs ctMap tenvS v (Tlist (t :t)) ∧ ctMap_ok ctMap ∧ ctMap_has_lists ctMap ⇒
+   ∃(vs :v list).
+     v_to_list v = SOME vs ∧ EVERY (λ(v :v). type_v tvs ctMap tenvS v t) vs ∧
+     (t = Tchar ⇒ ∃(vs :string). v_to_char_list v = SOME vs) ∧
+     (t = Tstring ⇒ ∃(str :mlstring). vs_to_string vs = SOME str)) ∧
+  (type_v tvs ctMap tenvS v (Tapp (ts :t list) (ti :num)) ∧ ctMap_ok ctMap ∧
+   FLOOKUP ctMap (stamp :stamp) = SOME ((tvs' :mlstring list),(ts' :t list),ti) ⇒
+   (∃(cn :mlstring) (n :num) (vs :v list). same_type stamp (TypeStamp cn n) ∧ v = Conv (SOME (TypeStamp cn n)) vs) ∨
+   ∃(n :num) (vs :v list). same_type stamp (ExnStamp n) ∧ v = Conv (SOME (ExnStamp n)) vs)
+
+=== typeSound.same_type_refl
+⊢ ∀(t :stamp). same_type t t
+
+=== typeSound.eq_same_type
+⊢ (∀(v1 :v) (v2 :v) (tvs :num) (ctMap :stamp |-> mlstring list # t list # num) (cns :α) (tenvS :num |-> store_t) (t :t).
+     ctMap_ok ctMap ∧ type_v tvs ctMap tenvS v1 t ∧ type_v tvs ctMap tenvS v2 t ⇒ do_eq v1 v2 ≠ Eq_type_error) ∧
+  ∀(vs1 :v list) (vs2 :v list) (tvs :num) (ctMap :stamp |-> mlstring list # t list # num) (cns :β)
+      (tenvS :num |-> store_t) (ts :t list).
+    ctMap_ok ctMap ∧ LIST_REL (type_v tvs ctMap tenvS) vs1 ts ∧ LIST_REL (type_v tvs ctMap tenvS) vs2 ts ⇒
+    do_eq_list vs1 vs2 ≠ Eq_type_error
+
+=== typeSound.type_env_conv_thm
+⊢ ∀(ctMap :α |-> β # γ list # δ) (envC :(ε, ζ, num # α) namespace) (tenvC :(ε, ζ, β # γ list # δ) namespace).
+    nsAll2 (type_ctor ctMap :(ε, ζ) id -> num # α -> β # γ list # δ -> bool) envC tenvC ⇒
+    ∀(cn :(ε, ζ) id) (tvs :β) (ts :γ list) (tn :η) (ti :δ).
+      (nsLookup tenvC cn = SOME (tvs,ts,ti) ⇒
+       ∃(cn' :θ) (stamp :α). nsLookup envC cn = SOME (LENGTH ts,stamp) ∧ FLOOKUP ctMap stamp = SOME (tvs,ts,ti)) ∧
+      (nsLookup tenvC cn = (NONE :(β # γ list # δ) option) ⇒ nsLookup envC cn = (NONE :(num # α) option))
+
+=== typeSound.type_funs_fst
+⊢ ∀(tenv :type_env) (tenvE :tenv_val_exp) (funs :(mlstring # mlstring # exp) list) (tenv' :(mlstring # t) list).
+    type_funs tenv tenvE funs tenv' ⇒
+    MAP (FST :mlstring # mlstring # exp -> mlstring) funs = MAP (FST :mlstring # t -> mlstring) tenv'
+
+=== typeSound.type_recfun_env_help
+⊢ ∀(fn :α) (funs :(mlstring # mlstring # exp) list) (funs' :(mlstring # mlstring # exp) list)
+      (ctMap :stamp |-> mlstring list # t list # num) (tenv :type_env) (bindings :(mlstring # t) list)
+      (tenvE :tenv_val_exp) (env :v sem_env) (tenvS :num |-> store_t) (tvs :num) (bindings' :(mlstring # t) list).
+    ALL_DISTINCT (MAP (FST :mlstring # mlstring # exp -> mlstring) funs') ∧ tenv_ok tenv ∧
+    type_all_env ctMap tenvS env (tenv with v := add_tenvE tenvE tenv.v) ∧ tenv_val_exp_ok tenvE ∧
+    num_tvs tenvE = (0 :num) ∧ (∀(fn :mlstring) (t :t). ALOOKUP bindings fn = SOME t ⇒ ALOOKUP bindings' fn = SOME t) ∧
+    type_funs tenv (bind_var_list (0 :num) bindings' (bind_tvar tvs tenvE)) funs' bindings' ∧
+    type_funs tenv (bind_var_list (0 :num) bindings' (bind_tvar tvs tenvE)) funs bindings ⇒
+    LIST_REL
+      (λ((x :mlstring),(y :v)) ((x' :mlstring),(y' :num # t)).
+         x = x' ∧ (λ((tvs :num),(t :t)). type_v tvs ctMap tenvS y t) y')
+      (MAP (λ((fn :mlstring),(n :mlstring),(e :exp)). (fn,Recclosure env funs' fn)) funs)
+      (MAP (λ((x :mlstring),(t :t)). (x,tvs,t)) bindings)
+
+=== typeSound.type_recfun_env
+⊢ ∀(funs :(mlstring # mlstring # exp) list) (ctMap :stamp |-> mlstring list # t list # num) (tenvS :num |-> store_t)
+      (tvs :num) (tenv :type_env) (tenvE :tenv_val_exp) (env :v sem_env) (bindings :(mlstring # t) list).
+    tenv_ok tenv ∧ type_all_env ctMap tenvS env (tenv with v := add_tenvE tenvE tenv.v) ∧ tenv_val_exp_ok tenvE ∧
+    num_tvs tenvE = (0 :num) ∧ type_funs tenv (bind_var_list (0 :num) bindings (bind_tvar tvs tenvE)) funs bindings ∧
+    ALL_DISTINCT (MAP (FST :mlstring # mlstring # exp -> mlstring) funs) ⇒
+    LIST_REL
+      (λ((x :mlstring),(y :v)) ((x' :mlstring),(y' :num # t)).
+         x = x' ∧ (λ((tvs :num),(t :t)). type_v tvs ctMap tenvS y t) y')
+      (MAP (λ((fn :mlstring),(n :mlstring),(e :exp)). (fn,Recclosure env funs fn)) funs)
+      (MAP (λ((x :mlstring),(t :t)). (x,tvs,t)) bindings)
+
+=== typeSound.type_v_exn
+⊢ ∀(tvs :num) (cenv :stamp |-> mlstring list # t list # num) (senv :num |-> store_t).
+    ctMap_has_exns cenv ⇒
+    type_v tvs cenv senv (Conv (SOME chr_stamp) ([] :v list)) (Tapp ([] :t list) Texn_num) ∧
+    type_v tvs cenv senv (Conv (SOME subscript_stamp) ([] :v list)) (Tapp ([] :t list) Texn_num) ∧
+    type_v tvs cenv senv (Conv (SOME bind_stamp) ([] :v list)) (Tapp ([] :t list) Texn_num) ∧
+    type_v tvs cenv senv (Conv (SOME div_stamp) ([] :v list)) (Tapp ([] :t list) Texn_num)
+
+=== typeSound.type_v_Boolv
+⊢ ctMap_has_bools (ctMap :stamp |-> mlstring list # t list # num) ⇒
+  type_v (tvs :num) ctMap (tenvS :num |-> store_t) (Boolv (b :bool)) Tbool
+
+=== typeSound.remove_lambda_prod
+⊢ (λ((x :α),(y :β)). (P :α -> β -> γ) x y) = (λ(xy :α # β). P (FST xy) (SND xy))
+
+=== typeSound.opapp_type_sound
+⊢ ∀(ctMap :stamp |-> mlstring list # t list # num) (tenvS :num |-> store_t) (vs :v list) (ts :t list) (t :t).
+    ctMap_ok ctMap ∧ type_op Opapp ts t ∧ LIST_REL (type_v (0 :num) ctMap tenvS) vs ts ⇒
+    ∃(env :v sem_env) (e :exp) (tenv :type_env) (tenvE :tenv_val_exp).
+      tenv_ok tenv ∧ tenv_val_exp_ok tenvE ∧ num_tvs tenvE = (0 :num) ∧
+      type_all_env ctMap tenvS env (tenv with v := add_tenvE tenvE tenv.v) ∧ type_e tenv tenvE e t ∧
+      do_opapp vs = SOME (env,e)
+
+=== typeSound.store_type_extension_weakS
+⊢ ∀(tenvS1 :α |-> β) (tenvS2 :α |-> β). store_type_extension tenvS1 tenvS2 ⇒ weakS tenvS2 tenvS1
+
+=== typeSound.store_type_extension_refl
+⊢ ∀(tenvS :α |-> β). store_type_extension tenvS tenvS
+
+=== typeSound.store_type_extension_trans
+⊢ ∀(s1 :α |-> β) (s2 :α |-> β) (s3 :α |-> β).
+    store_type_extension s1 s2 ∧ store_type_extension s2 s3 ⇒ store_type_extension s1 s3
+
+=== typeSound.store_assign_type_sound
+⊢ ∀(ctMap :stamp |-> mlstring list # t list # num) (tenvS :num |-> store_t) (store :v store_v list) (sv :v store_v)
+      (st :store_t) (l :num).
+    type_s ctMap store tenvS ∧ FLOOKUP tenvS l = SOME st ∧ type_sv ctMap tenvS sv st ⇒
+    ∃(store' :v store_v list). store_assign l sv store = SOME store' ∧ type_s ctMap store' tenvS
+
+=== typeSound.store_alloc_type_sound
+⊢ ∀(ctMap :stamp |-> mlstring list # t list # num) (tenvS :num |-> store_t) (store :v store_v list) (sv :v store_v)
+      (st :store_t).
+    ctMap_ok ctMap ∧ type_s ctMap store tenvS ∧ type_sv ctMap tenvS sv st ⇒
+    ∃(store' :v store_v list) (tenvS' :num |-> store_t) (n :num).
+      store_type_extension tenvS tenvS' ∧ store_alloc sv store = (store',n) ∧ type_s ctMap store' tenvS' ∧
+      FLOOKUP tenvS' n = SOME st
+
+=== typeSound.type_v_list_to_v
+⊢ ∀(x :v) (xs :v list) (t :t).
+    type_v (n :num) (ctMap :stamp |-> mlstring list # t list # num) (tenvS :num |-> store_t) x t ∧ v_to_list x = SOME xs ⇒
+    type_v n ctMap tenvS (list_to_v xs) t
+
+=== typeSound.type_v_list_to_v_APPEND
+⊢ ∀(xs :v list) (ys :v list) (t :t).
+    ctMap_has_lists (ctMap :stamp |-> mlstring list # t list # num) ∧
+    type_v (0 :num) ctMap (tenvS :num |-> store_t) (list_to_v xs) (Tapp [t] Tlist_num) ∧
+    type_v (0 :num) ctMap tenvS (list_to_v ys) (Tapp [t] Tlist_num) ⇒
+    type_v (0 :num) ctMap tenvS (list_to_v (xs ++ ys)) (Tapp [t] Tlist_num)
+
+=== typeSound.do_eq_Boolv
+⊢ do_eq (Boolv (b :bool)) (Boolv (b' :bool)) = Eq_val (b ⇔ b')
+
+=== typeSound.prim_canonical_Boolv_thm
+⊢ type_v (tvs :num) (ctMap :stamp |-> mlstring list # t list # num) (tenvS :num |-> store_t) (v :v) Tbool ∧
+  ctMap_ok ctMap ∧ ctMap_has_bools ctMap ⇒
+  ∃(b :bool). v = Boolv b
+
+=== typeSound.prim_canonical_Boolv_cases
+⊢ type_v (tvs :num) (ctMap :stamp |-> mlstring list # t list # num) (tenvS :num |-> store_t) (v :v)
+    (Tapp ([] :t list) Tbool_num) ∧ ctMap_ok ctMap ∧ ctMap_has_bools ctMap ⇒
+  v = Boolv T ∨ v = Boolv F
+
+=== typeSound.op_type_sound
+⊢ ∀(ctMap :stamp |-> mlstring list # t list # num) (tenvS :num |-> store_t) (vs :v list) (op :op) (ts :t list) (t :t)
+      (store :v store_v list) (ffi :'ffi ffi_state).
+    good_ctMap ctMap ∧ op ≠ Opapp ∧ type_s ctMap store tenvS ∧ type_op op ts t ∧
+    check_freevars (0 :num) ([] :mlstring list) t ∧ LIST_REL (type_v (0 :num) ctMap tenvS) vs (REVERSE ts) ⇒
+    ∃(tenvS' :num |-> store_t) (store' :v store_v list) (ffi' :'ffi ffi_state) (r :(v, v) result).
+      store_type_extension tenvS tenvS' ∧ type_s ctMap store' tenvS' ∧
+      do_app (store,ffi) op (REVERSE vs) = SOME ((store',ffi'),r) ∧
+      case r of
+        (Rval v :(v, v) result) => type_v (0 :num) ctMap tenvS' v t
+      | (Rerr (Rraise v') :(v, v) result) => type_v (0 :num) ctMap tenvS' v' Texn
+      | (Rerr (Rabort Rtype_error :v error_result) :(v, v) result) => F
+      | (Rerr (Rabort Rtimeout_error :v error_result) :(v, v) result) => F
+      | (Rerr (Rabort (Rffi_error v6) :v error_result) :(v, v) result) => T
+
+=== typeSound.build_conv_type_sound
+⊢ ∀(envC :(mlstring, mlstring, num # stamp) namespace) (cn :(mlstring, mlstring) id) (vs :v list) (tvs :num)
+      (ts :t list) (ctMap :stamp |-> mlstring list # t list # num) (tenvS :num |-> store_t) (ts' :t list) (tn :num)
+      (tenvC :(mlstring, mlstring, mlstring list # t list # num) namespace) (tvs' :mlstring list) (tenvE :tenv_val_exp)
+      (l :num).
+    nsAll2 (type_ctor ctMap :(mlstring, mlstring) id -> num # stamp -> mlstring list # t list # num -> bool) envC tenvC ∧
+    do_con_check envC (SOME cn) l ∧ num_tvs tenvE = (0 :num) ∧
+    EVERY (check_freevars (num_tvs (bind_tvar tvs tenvE)) ([] :mlstring list)) ts' ∧ LENGTH tvs' = LENGTH ts' ∧
+    LIST_REL (type_v tvs ctMap tenvS) vs (REVERSE (MAP (type_subst (alist_to_fmap (ZIP (tvs',ts')))) ts)) ∧
+    nsLookup tenvC cn = SOME (tvs',ts,tn) ⇒
+    ∃(v :v). build_conv envC (SOME cn) (REVERSE vs) = SOME v ∧ type_v tvs ctMap tenvS v (Tapp ts' tn)
+
+=== typeSound.same_ctor_and_same_tid
+⊢ ∀(stamp1 :stamp) (stamp2 :stamp). same_ctor stamp1 stamp2 ∧ same_type stamp1 stamp2 ⇒ stamp1 = stamp2
+
+=== typeSound.pat_type_sound
+⊢ (∀(cenv :(mlstring, mlstring, num # stamp) namespace) (st :v store_v list) (p :pat) (v :v)
+       (bindings :(mlstring # v) list) (tenv :type_env) (ctMap :stamp |-> mlstring list # t list # num)
+       (tbindings :(mlstring # t) list) (t :t) (new_tbindings :(mlstring # t) list) (tenvS :num |-> store_t) (tvs :num).
+     ctMap_ok ctMap ∧
+     nsAll2 (type_ctor ctMap :(mlstring, mlstring) id -> num # stamp -> mlstring list # t list # num -> bool) cenv
+       tenv.c ∧ type_v tvs ctMap tenvS v t ∧ type_p tvs tenv p t new_tbindings ∧ type_s ctMap st tenvS ∧
+     LIST_REL (λ((x :mlstring),(v :v)) ((x' :mlstring),(t :t)). x = x' ∧ type_v tvs ctMap tenvS v t) bindings tbindings ⇒
+     pmatch cenv st p v bindings = (No_match :(mlstring # v) list match_result) ∨
+     ∃(bindings' :(mlstring # v) list).
+       pmatch cenv st p v bindings = Match bindings' ∧
+       LIST_REL (λ((x :mlstring),(v :v)) ((x' :mlstring),(t :t)). x = x' ∧ type_v tvs ctMap tenvS v t) bindings'
+         (new_tbindings ++ tbindings)) ∧
+  ∀(cenv :(mlstring, mlstring, num # stamp) namespace) (st :v store_v list) (ps :pat list) (vs :v list)
+      (bindings :(mlstring # v) list) (tenv :type_env) (ctMap :stamp |-> mlstring list # t list # num)
+      (tbindings :(mlstring # t) list) (new_tbindings :(mlstring # t) list) (ts :t list) (tenvS :num |-> store_t)
+      (tvs :num).
+    ctMap_ok ctMap ∧
+    nsAll2 (type_ctor ctMap :(mlstring, mlstring) id -> num # stamp -> mlstring list # t list # num -> bool) cenv tenv.c ∧
+    LIST_REL (type_v tvs ctMap tenvS) vs ts ∧ type_ps tvs tenv ps ts new_tbindings ∧ type_s ctMap st tenvS ∧
+    LIST_REL (λ((x :mlstring),(v :v)) ((x' :mlstring),(t :t)). x = x' ∧ type_v tvs ctMap tenvS v t) bindings tbindings ⇒
+    pmatch_list cenv st ps vs bindings = (No_match :(mlstring # v) list match_result) ∨
+    ∃(bindings' :(mlstring # v) list).
+      pmatch_list cenv st ps vs bindings = Match bindings' ∧
+      LIST_REL (λ((x :mlstring),(v :v)) ((x' :mlstring),(t :t)). x = x' ∧ type_v tvs ctMap tenvS v t) bindings'
+        (new_tbindings ++ tbindings)
+
+=== typeSound.lookup_var_sound
+⊢ ∀(n :(mlstring, mlstring) id) (tvs :num) (tenvE :tenv_val_exp) (targs :t list) (t :t)
+      (ctMap :stamp |-> mlstring list # t list # num) (tenvS :num |-> store_t) (env :v sem_env) (tenv :type_env).
+    lookup_var n (bind_tvar tvs tenvE) tenv = SOME (LENGTH targs,t) ∧ ctMap_ok ctMap ∧ tenv_val_exp_ok tenvE ∧
+    num_tvs tenvE = (0 :num) ∧ EVERY (check_freevars tvs ([] :mlstring list)) targs ∧
+    type_all_env ctMap tenvS env (tenv with v := add_tenvE tenvE tenv.v) ⇒
+    ∃(v :v). nsLookup env.v n = SOME v ∧ type_v tvs ctMap tenvS v (deBruijn_subst (0 :num) targs t)
+
+=== typeSound.EVERY_REPLICATE
+⊢ EVERY (λ(x :v). type_v (tvs :num) (ctMap :stamp |-> mlstring list # t list # num) (tenv :num |-> store_t) x (t' :t))
+    (vs :v list) ⇔ EVERY (λ(x :v # t). type_v tvs ctMap tenv (FST x) (SND x)) (ZIP (vs,REPLICATE (LENGTH vs) t'))
+
+=== typeSound.EVERY_LIST_REL_local
+⊢ EVERY (λ(x :α). (f :α -> β -> bool) x (y :β)) (l :α list) ⇔
+  LIST_REL (λ(x :α) (y :β). f x y) l (REPLICATE (LENGTH l) y)
+
+=== typeSound.exp_type_sound
+⊢ (∀(s :'ffi state) (env :v sem_env) (es :exp list) (r :(v list, v) result) (s' :'ffi state) (tenv :type_env)
+       (tenvE :tenv_val_exp) (ts :t list) (tvs :num) (tenvS :num |-> store_t).
+     evaluate s env es = (s',r) ∧ tenv_ok tenv ∧ tenv_val_exp_ok tenvE ∧
+     good_ctMap (ctMap :stamp |-> mlstring list # t list # num) ∧ num_tvs tenvE = (0 :num) ∧
+     type_all_env ctMap tenvS env (tenv with v := add_tenvE tenvE tenv.v) ∧ type_s ctMap s.refs tenvS ∧
+     (tvs ≠ (0 :num) ⇒ EVERY is_value es) ∧ type_es tenv (bind_tvar tvs tenvE) es ts ⇒
+     ∃(tenvS' :num |-> store_t).
+       type_s ctMap s'.refs tenvS' ∧ store_type_extension tenvS tenvS' ∧ s'.next_type_stamp = s.next_type_stamp ∧
+       s'.next_exn_stamp = s.next_exn_stamp ∧
+       case r of
+         (Rval vs :(v list, v) result) => LIST_REL (type_v tvs ctMap tenvS') vs ts
+       | (Rerr (Rraise v) :(v list, v) result) => type_v (0 :num) ctMap tenvS' v Texn
+       | (Rerr (Rabort Rtype_error :v error_result) :(v list, v) result) => F
+       | (Rerr (Rabort Rtimeout_error :v error_result) :(v list, v) result) => T
+       | (Rerr (Rabort (Rffi_error v5) :v error_result) :(v list, v) result) => T) ∧
+  ∀(s :'ffi state) (env :v sem_env) (v :v) (pes :(pat # exp) list) (err_v :v) (r :(v list, v) result) (s' :'ffi state)
+      (tenv :type_env) (tenvE :tenv_val_exp) (t1 :t) (t2 :t) (tvs :num) (tenvS :num |-> store_t).
+    evaluate_match s env v pes err_v = (s',r) ∧ tenv_ok tenv ∧ tenv_val_exp_ok tenvE ∧ good_ctMap ctMap ∧
+    num_tvs tenvE = (0 :num) ∧ type_all_env ctMap tenvS env (tenv with v := add_tenvE tenvE tenv.v) ∧
+    type_s ctMap s.refs tenvS ∧ type_v tvs ctMap tenvS v t1 ∧ type_v (0 :num) ctMap tenvS err_v Texn ∧
+    type_pes tvs tvs tenv tenvE pes t1 t2 ⇒
+    ∃(tenvS' :num |-> store_t).
+      type_s ctMap s'.refs tenvS' ∧ store_type_extension tenvS tenvS' ∧ s'.next_type_stamp = s.next_type_stamp ∧
+      s'.next_exn_stamp = s.next_exn_stamp ∧
+      case r of
+        (Rval vs :(v list, v) result) => type_v tvs ctMap tenvS' (HD vs) t2
+      | (Rerr (Rraise v) :(v list, v) result) => type_v (0 :num) ctMap tenvS' v Texn
+      | (Rerr (Rabort Rtype_error :v error_result) :(v list, v) result) => F
+      | (Rerr (Rabort Rtimeout_error :v error_result) :(v list, v) result) => T
+      | (Rerr (Rabort (Rffi_error v5) :v error_result) :(v list, v) result) => T
+
+=== typeSound.build_tdefs_build_tenv
+⊢ ∀(tenvT :(mlstring, mlstring, mlstring list # t) namespace)
+      (tds :(mlstring list # mlstring # (mlstring # ast_t list) list) list) (tids :num list) (next :num)
+      (ctMap :stamp |-> mlstring list # t list # num).
+    EVERY
+      (λ((_0 :mlstring list),(_1 :mlstring),(ctors :(mlstring # ast_t list) list)).
+         ALL_DISTINCT (MAP (FST :mlstring # ast_t list -> mlstring) ctors)) tds ∧ LENGTH tds = LENGTH tids ⇒
+    nsAll2
+      (type_ctor (ctMap |++ REVERSE (type_def_to_ctMap tenvT next tds tids)) :
+       (mlstring, mlstring) id -> num # stamp -> mlstring list # t list # num -> bool) (build_tdefs next tds)
+      (build_ctor_tenv tenvT tds tids :(mlstring, mlstring, mlstring list # t list # num) namespace)
+
+=== typeSound.type_sound_invariant_union
+⊢ type_sound_invariant (st :α state) (env :v sem_env) (ctMap :stamp |-> mlstring list # t list # num)
+    (tenvS :num |-> store_t) ((tids1 :num -> bool) ∪ (tids2 :num -> bool)) (tenv :type_env) ⇒
+  type_sound_invariant st env ctMap tenvS tids1 tenv
+
+=== typeSound.check_ctor_tenv_dups
+⊢ ∀(tenvT :(mlstring, mlstring, mlstring list # t) namespace)
+      (tds :(mlstring list # mlstring # (mlstring # ast_t list) list) list).
+    check_ctor_tenv tenvT tds ⇒ EVERY check_dup_ctors tds
+
+=== typeSound.type_all_env_extend
+⊢ type_all_env (ctMap :stamp |-> mlstring list # t list # num) (tenvS :num |-> store_t) (env1 :v sem_env)
+    (tenv1 :type_env) ∧ type_all_env ctMap tenvS (env2 :v sem_env) (tenv2 :type_env) ⇒
+  type_all_env ctMap tenvS ((env1 +++ env2) :v sem_env) (extend_dec_tenv tenv1 tenv2)
+
+=== typeSound.type_e_con_check
+⊢ (∀(tenv :type_env) (tenvE :tenv_val_exp) (e :exp) (t :t).
+     type_e tenv tenvE e t ⇒
+     nsAll2
+       (type_ctor (ctMap :stamp |-> mlstring list # t list # num) :
+        (mlstring, mlstring) id -> num # stamp -> mlstring list # t list # num -> bool)
+       (envc :(mlstring, mlstring, num # stamp) namespace) tenv.c ⇒
+     every_exp (one_con_check envc) e) ∧
+  (∀(tenv :type_env) (tenvE :tenv_val_exp) (es :exp list) (ts :t list).
+     type_es tenv tenvE es ts ⇒
+     nsAll2 (type_ctor ctMap :(mlstring, mlstring) id -> num # stamp -> mlstring list # t list # num -> bool) envc
+       tenv.c ⇒
+     EVERY (every_exp (one_con_check envc)) es) ∧
+  ∀(tenv :type_env) (tenvE :tenv_val_exp) (funs :(mlstring # mlstring # exp) list) (env :(mlstring # t) list).
+    type_funs tenv tenvE funs env ⇒
+    nsAll2 (type_ctor ctMap :(mlstring, mlstring) id -> num # stamp -> mlstring list # t list # num -> bool) envc tenv.c ⇒
+    EVERY (λ((f :mlstring),(n :mlstring),(e :exp)). every_exp (one_con_check envc) e) funs
+
+=== typeSound.decs_type_sound_no_check
+⊢ ∀(st :'ffi state) (env :v sem_env) (ds :dec list) (st' :'ffi state) (r :(v sem_env, v) result)
+      (ctMap :stamp |-> mlstring list # t list # num) (tenvS :num |-> store_t) (tenv :type_env) (tids :num -> bool)
+      (tenv' :type_env).
+    evaluate_decs st env ds = (st',r) ∧ type_ds F tenv ds tids tenv' ∧ type_sound_invariant st env ctMap tenvS tids tenv ⇒
+    ∃(ctMap' :stamp |-> mlstring list # t list # num) (tenvS' :num |-> store_t).
+      weakCT ctMap' ctMap ∧
+      FRANGE (((SND :t list # num -> num) ∘ (SND :mlstring list # t list # num -> t list # num)) o_f ctMap') DIFF
+      FRANGE (((SND :t list # num -> num) ∘ (SND :mlstring list # t list # num -> t list # num)) o_f ctMap) ⊆ tids ∧
+      store_type_extension tenvS tenvS' ∧
+      case r of
+        (Rval env' :(v sem_env, v) result) =>
+          type_all_env ctMap' tenvS' env' tenv' ∧
+          type_sound_invariant st' ((env' +++ env) :v sem_env) ctMap' tenvS' (∅ :num -> bool)
+            (extend_dec_tenv tenv' tenv)
+      | (Rerr (Rraise err_v) :(v sem_env, v) result) =>
+        type_v (0 :num) ctMap' tenvS' err_v Texn ∧ type_sound_invariant st' env ctMap' tenvS' (∅ :num -> bool) tenv
+      | (Rerr (Rabort Rtype_error :v error_result) :(v sem_env, v) result) => F
+      | (Rerr (Rabort Rtimeout_error :v error_result) :(v sem_env, v) result) => T
+      | (Rerr (Rabort (Rffi_error v4) :v error_result) :(v sem_env, v) result) => T
+
+=== typeSound.decs_type_sound
+⊢ ∀(st :'ffi state) (env :v sem_env) (ds :dec list) (extra_checks :bool) (st' :'ffi state) (r :(v sem_env, v) result)
+      (ctMap :stamp |-> mlstring list # t list # num) (tenvS :num |-> store_t) (tenv :type_env) (tids :num -> bool)
+      (tenv' :type_env).
+    evaluate_decs st env ds = (st',r) ∧ type_ds extra_checks tenv ds tids tenv' ∧
+    type_sound_invariant st env ctMap tenvS tids tenv ⇒
+    ∃(ctMap' :stamp |-> mlstring list # t list # num) (tenvS' :num |-> store_t).
+      weakCT ctMap' ctMap ∧
+      FRANGE (((SND :t list # num -> num) ∘ (SND :mlstring list # t list # num -> t list # num)) o_f ctMap') DIFF
+      FRANGE (((SND :t list # num -> num) ∘ (SND :mlstring list # t list # num -> t list # num)) o_f ctMap) ⊆ tids ∧
+      store_type_extension tenvS tenvS' ∧
+      case r of
+        (Rval env' :(v sem_env, v) result) =>
+          type_all_env ctMap' tenvS' env' tenv' ∧
+          type_sound_invariant st' ((env' +++ env) :v sem_env) ctMap' tenvS' (∅ :num -> bool)
+            (extend_dec_tenv tenv' tenv)
+      | (Rerr (Rraise err_v) :(v sem_env, v) result) =>
+        type_v (0 :num) ctMap' tenvS' err_v Texn ∧ type_sound_invariant st' env ctMap' tenvS' (∅ :num -> bool) tenv
+      | (Rerr (Rabort Rtype_error :v error_result) :(v sem_env, v) result) => F
+      | (Rerr (Rabort Rtimeout_error :v error_result) :(v sem_env, v) result) => T
+      | (Rerr (Rabort (Rffi_error v4) :v error_result) :(v sem_env, v) result) => T
+
+=== typeSound.semantics_type_sound
+⊢ ∀(st :'ffi state) (env :v sem_env) (tops :dec list) (r :behaviour) (checks :bool)
+      (ctMap :stamp |-> mlstring list # t list # num) (tenvS :num |-> store_t) (tenv :type_env) (new_tenv :type_env)
+      (tids :num -> bool).
+    semantics_prog st env tops r ∧ type_ds checks tenv tops tids new_tenv ∧
+    type_sound_invariant st env ctMap tenvS tids tenv ⇒
+    r ≠ Fail
+

@@ -1,0 +1,10 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "HOL4 has five antecedents (q has_type Bool, term_ok q, the semantic premise on p1/p2, and both entailments). Lean keeps only is_set_theory mem, with p1 and p2 unused, and claims (thy, term_union h1 h2) entails q for all inputs. entails0 requires theory_ok thy, has_type q BoolTy and hypset_ok, which fail for e.g. q = Abs (Const n ty) p. The statement is false whenever is_set_theory holds, unlike HOL4's theorem. The conventions do not license this."
+  }
+ ]
+}

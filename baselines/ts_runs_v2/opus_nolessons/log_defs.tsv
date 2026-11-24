@@ -1,0 +1,380 @@
+lit	CmlTS/Ast.lean	ok	constructors, order and field types compared with astScript.sml:10
+shift	CmlTS/Ast.lean	ok	constructors, order and field types compared with astScript.sml:20
+arith	CmlTS/Ast.lean	ok	constructors, order and field types compared with astScript.sml:24
+word_size	CmlTS/Ast.lean	ok	constructors, order and field types compared with astScript.sml:43
+thunk_mode	CmlTS/Ast.lean	ok	constructors, order and field types compared with astScript.sml:47
+thunk_op	CmlTS/Ast.lean	ok	constructors, order and field types compared with astScript.sml:51
+opb	CmlTS/Ast.lean	ok	constructors, order and field types compared with astScript.sml:58
+test	CmlTS/Ast.lean	ok	constructors, order and field types compared with astScript.sml:62
+prim_type	CmlTS/Ast.lean	ok	constructors, order and field types compared with astScript.sml:66
+op	CmlTS/Ast.lean	ok	constructors, order and field types compared with astScript.sml:75
+op_class	CmlTS/Ast.lean	ok	constructors, order and field types compared with astScript.sml:140
+getOpClass_def	CmlTS/Ast.lean	ok	clauses, argument order, types and corner cases compared with astScript.sml:148
+ast_t	CmlTS/Ast.lean	ok	constructors, order and field types compared with astScript.sml:158
+pat	CmlTS/Ast.lean	ok	constructors, order and field types compared with astScript.sml:172
+lop	CmlTS/Ast.lean	ok	constructors, order and field types compared with astScript.sml:187
+exp	CmlTS/Ast.lean	ok	constructors, order and field types compared with astScript.sml:192
+dec	CmlTS/Ast.lean	ok	constructors, order and field types compared with astScript.sml:227
+pat_bindings_def	CmlTS/Ast.lean	ok	clauses, argument order, types and corner cases compared with astScript.sml:252
+every_exp_def	CmlTS/Ast.lean	ok	clauses, argument order, types and corner cases compared with astScript.sml:265
+call_FFI_rel_def	CmlTS/EvaluateProps.lean	ok	clauses, argument order, types and corner cases compared with evaluatePropsScript.sml:13
+dest_IO_event_def	CmlTS/EvaluateProps.lean	ok	clauses, argument order, types and corner cases compared with evaluatePropsScript.sml:17
+io_events_mono_def	CmlTS/EvaluateProps.lean	ok	clauses, argument order, types and corner cases compared with evaluatePropsScript.sml:21
+is_clock_io_mono_def	CmlTS/EvaluateProps.lean	ok	clauses, argument order, types and corner cases compared with evaluatePropsScript.sml:71
+adj_clock_def	CmlTS/EvaluateProps.lean	ok	clauses, argument order, types and corner cases compared with evaluatePropsScript.sml:143
+fix_clock_def	CmlTS/Evaluate.lean	ok	clauses, argument order, types and corner cases compared with evaluateScript.sml:14
+dec_clock_def	CmlTS/Evaluate.lean	ok	clauses, argument order, types and corner cases compared with evaluateScript.sml:19
+do_eval_res_def	CmlTS/Evaluate.lean	ok	clauses, argument order, types and corner cases compared with evaluateScript.sml:23
+list_result_def	CmlTS/Evaluate.lean	ok	clauses, argument order, types and corner cases compared with evaluateScript.sml:32
+evaluate_def	CmlTS/Evaluate.lean	ok	clauses, argument order, types and corner cases compared with evaluateScript.sml:49
+ffi_outcome	CmlTS/Ffi.lean	ok	constructors, order and field types compared with ffiScript.sml:15
+oracle_result	CmlTS/Ffi.lean	ok	constructors, order and field types compared with ffiScript.sml:19
+shmem_op	CmlTS/Ffi.lean	ok	constructors, order and field types compared with ffiScript.sml:23
+ffiname	CmlTS/Ffi.lean	ok	constructors, order and field types compared with ffiScript.sml:27
+io_event	CmlTS/Ffi.lean	ok	constructors, order and field types compared with ffiScript.sml:38
+final_event	CmlTS/Ffi.lean	ok	constructors, order and field types compared with ffiScript.sml:42
+ffi_state	CmlTS/Ffi.lean	ok	constructors, order and field types compared with ffiScript.sml:46
+ffi_result	CmlTS/Ffi.lean	ok	constructors, order and field types compared with ffiScript.sml:54
+call_FFI_def	CmlTS/Ffi.lean	ok	clauses, argument order, types and corner cases compared with ffiScript.sml:59
+outcome	CmlTS/Ffi.lean	ok	constructors, order and field types compared with ffiScript.sml:77
+behaviour	CmlTS/Ffi.lean	ok	constructors, order and field types compared with ffiScript.sml:84
+fp_cmp	CmlTS/FpSem.lean	ok	constructors, order and field types compared with fpSemScript.sml:8
+fp_uop	CmlTS/FpSem.lean	ok	constructors, order and field types compared with fpSemScript.sml:12
+fp_bop	CmlTS/FpSem.lean	ok	constructors, order and field types compared with fpSemScript.sml:16
+fp_top	CmlTS/FpSem.lean	ok	constructors, order and field types compared with fpSemScript.sml:20
+fp_cmp_def	CmlTS/FpSem.lean	ok	clauses, argument order, types and corner cases compared with fpSemScript.sml:24
+locn	CmlTS/Location.lean	ok	constructors, order and field types compared with locationScript.sml:3
+locnrow_def	CmlTS/Location.lean	V-C1	Lean `locnrow | _ => ARB` makes `locnrow EOF = ARB` provable. HOL4 locnrow_def is a new_specification via Prim_rec (only the POSN clause saved; no _primitive theorem in locationTheory). Witness vc1_locnrow.
+locn_rowupdate_def	CmlTS/Location.lean	V-C1	Lean `| _ => ARB` for non-POSN; HOL4 only POSN clause saved. Witness vc1_locn_rowupdate.
+locncol_def	CmlTS/Location.lean	V-C1	Lean `locncol | _ => ARB`; HOL4 only POSN clause saved (spec). Witness vc1_locncol.
+locn_colupdate_def	CmlTS/Location.lean	V-C1	Lean `| _ => ARB` for non-POSN; HOL4 only POSN clause saved. Witness vc1_locn_colupdate.
+locs	CmlTS/Location.lean	ok	constructors, order and field types compared with locationScript.sml:25
+lprefix_lub_def	CmlTS/LprefixLub.lean	ok	clauses, argument order, types and corner cases compared with lprefix_lubScript.sml:10
+the_def	CmlTS/Misc.lean	ok	clauses, argument order, types and corner cases compared with miscScript.sml:20
+app_list	CmlTS/Misc.lean	ok	constructors, order and field types compared with miscScript.sml:60
+append_aux_def	CmlTS/Misc.lean	ok	clauses, argument order, types and corner cases compared with miscScript.sml:64
+append_def	CmlTS/Misc.lean	ok	clauses, argument order, types and corner cases compared with miscScript.sml:70
+MAP3_def	CmlTS/Misc.lean	V-C1	Lean adds `| _,_,_ => ARB` so `MAP3 f [] [x] [] = ARB` is provable. HOL4 saved MAP3_def has only the two listed clauses; TFL completion clauses are not in saved theorems (no MAP3 primitive theorem in miscTheory). Lower confidence: the kernel-level primitive definition has ARB there but is not a saved theorem. Witness vc1_MAP3.
+tlookup_def	CmlTS/Misc.lean	ok	clauses, argument order, types and corner cases compared with miscScript.sml:98
+max3_def	CmlTS/Misc.lean	ok	clauses, argument order, types and corner cases compared with miscScript.sml:157
+UPDATE_LIST_def	CmlTS/Misc.lean	ok	clauses, argument order, types and corner cases compared with miscScript.sml:169
+find_index_def	CmlTS/Misc.lean	ok	clauses, argument order, types and corner cases compared with miscScript.sml:176
+between_def	CmlTS/Misc.lean	ok	clauses, argument order, types and corner cases compared with miscScript.sml:221
+lookup_vars_def	CmlTS/Misc.lean	ok	clauses, argument order, types and corner cases compared with miscScript.sml:268
+enumerate_def	CmlTS/Misc.lean	ok	clauses, argument order, types and corner cases compared with miscScript.sml:281
+range_def	CmlTS/Misc.lean	ok	clauses, argument order, types and corner cases compared with miscScript.sml:312
+sort_def	CmlTS/Mllist.lean	ok	clauses, argument order, types and corner cases compared with mllistScript.sml:11
+nth_def	CmlTS/Mllist.lean	ok	clauses, argument order, types and corner cases compared with mllistScript.sml:15
+collate_def	CmlTS/Mllist.lean	ok	clauses, argument order, types and corner cases compared with mllistScript.sml:24
+mlstring	CmlTS/Mlstring.lean	ok	constructors, order and field types compared with mlstringScript.sml:16
+implode_def	CmlTS/Mlstring.lean	ok	clauses, argument order, types and corner cases compared with mlstringScript.sml:21
+strlen_def	CmlTS/Mlstring.lean	ok	clauses, argument order, types and corner cases compared with mlstringScript.sml:25
+strsub_def	CmlTS/Mlstring.lean	ok	clauses, argument order, types and corner cases compared with mlstringScript.sml:29
+concat_def	CmlTS/Mlstring.lean	ok	clauses, argument order, types and corner cases compared with mlstringScript.sml:36
+explode_aux_def	CmlTS/Mlstring.lean	ok	clauses, argument order, types and corner cases compared with mlstringScript.sml:40
+explode_def	CmlTS/Mlstring.lean	ok	clauses, argument order, types and corner cases compared with mlstringScript.sml:56
+strcat_def	CmlTS/Mlstring.lean	ok	clauses, argument order, types and corner cases compared with mlstringScript.sml:84
+str_def	CmlTS/Mlstring.lean	ok	clauses, argument order, types and corner cases compared with mlstringScript.sml:90
+tokens_aux_def	CmlTS/Mlstring.lean	ok	clauses, argument order, types and corner cases compared with mlstringScript.sml:94
+tokens_def	CmlTS/Mlstring.lean	ok	clauses, argument order, types and corner cases compared with mlstringScript.sml:109
+isStringThere_aux_def	CmlTS/Mlstring.lean	ok	clauses, argument order, types and corner cases compared with mlstringScript.sml:199
+isSubstring_aux_def	CmlTS/Mlstring.lean	ok	clauses, argument order, types and corner cases compared with mlstringScript.sml:219
+isSubstring_def	CmlTS/Mlstring.lean	ok	clauses, argument order, types and corner cases compared with mlstringScript.sml:227
+compare_aux_def	CmlTS/Mlstring.lean	ok	clauses, argument order, types and corner cases compared with mlstringScript.sml:237
+compare_def	CmlTS/Mlstring.lean	ok	clauses, argument order, types and corner cases compared with mlstringScript.sml:248
+mlstring_lt_def	CmlTS/Mlstring.lean	ok	clauses, argument order, types and corner cases compared with mlstringScript.sml:256
+mlstring_le_def	CmlTS/Mlstring.lean	ok	clauses, argument order, types and corner cases compared with mlstringScript.sml:260
+mlstring_gt_def	CmlTS/Mlstring.lean	ok	clauses, argument order, types and corner cases compared with mlstringScript.sml:264
+mlstring_ge_def	CmlTS/Mlstring.lean	ok	clauses, argument order, types and corner cases compared with mlstringScript.sml:268
+collate_aux_def	CmlTS/Mlstring.lean	ok	clauses, argument order, types and corner cases compared with mlstringScript.sml:279
+collate_def	CmlTS/Mlstring.lean	ok	clauses, argument order, types and corner cases compared with mlstringScript.sml:287
+app_list_ann	CmlTS/Mlstring.lean	ok	constructors, order and field types compared with mlstringScript.sml:298
+char_to_word8_def	CmlTS/Mlstring.lean	ok	clauses, argument order, types and corner cases compared with mlstringScript.sml:304
+word8_to_char_def	CmlTS/Mlstring.lean	ok	clauses, argument order, types and corner cases compared with mlstringScript.sml:308
+empty_ffi_def	CmlTS/Mlstring.lean	ok	clauses, argument order, types and corner cases compared with mlstringScript.sml:315
+alist_rel_restr_def	CmlTS/NamespaceProps.lean	ok	clauses, argument order, types and corner cases compared with namespacePropsScript.sml:381
+alistSub_def	CmlTS/NamespaceProps.lean	ok	clauses, argument order, types and corner cases compared with namespacePropsScript.sml:404
+nsSub_compute_def	CmlTS/NamespaceProps.lean	ok	clauses, argument order, types and corner cases compared with namespacePropsScript.sml:423
+id	CmlTS/Namespace.lean	ok	constructors, order and field types compared with namespaceScript.sml:14
+mk_id_def	CmlTS/Namespace.lean	ok	clauses, argument order, types and corner cases compared with namespaceScript.sml:18
+id_to_n_def	CmlTS/Namespace.lean	ok	clauses, argument order, types and corner cases compared with namespaceScript.sml:23
+id_to_mods_def	CmlTS/Namespace.lean	ok	clauses, argument order, types and corner cases compared with namespaceScript.sml:28
+namespace	CmlTS/Namespace.lean	ok	constructors, order and field types compared with namespaceScript.sml:33
+nsLookup_def	CmlTS/Namespace.lean	ok	clauses, argument order, types and corner cases compared with namespaceScript.sml:38
+nsLookupMod_def	CmlTS/Namespace.lean	ok	clauses, argument order, types and corner cases compared with namespaceScript.sml:47
+nsEmpty_def	CmlTS/Namespace.lean	ok	clauses, argument order, types and corner cases compared with namespaceScript.sml:53
+nsAppend_def	CmlTS/Namespace.lean	ok	clauses, argument order, types and corner cases compared with namespaceScript.sml:57
+nsLift_def	CmlTS/Namespace.lean	ok	clauses, argument order, types and corner cases compared with namespaceScript.sml:61
+alist_to_ns_def	CmlTS/Namespace.lean	ok	clauses, argument order, types and corner cases compared with namespaceScript.sml:65
+nsBind_def	CmlTS/Namespace.lean	ok	clauses, argument order, types and corner cases compared with namespaceScript.sml:69
+nsBindList_def	CmlTS/Namespace.lean	ok	clauses, argument order, types and corner cases compared with namespaceScript.sml:73
+nsOptBind_def	CmlTS/Namespace.lean	ok	clauses, argument order, types and corner cases compared with namespaceScript.sml:77
+nsSing_def	CmlTS/Namespace.lean	ok	clauses, argument order, types and corner cases compared with namespaceScript.sml:81
+nsSub_def	CmlTS/Namespace.lean	ok	clauses, argument order, types and corner cases compared with namespaceScript.sml:85
+nsAll_def	CmlTS/Namespace.lean	ok	clauses, argument order, types and corner cases compared with namespaceScript.sml:93
+nsAll2_def	CmlTS/Namespace.lean	ok	clauses, argument order, types and corner cases compared with namespaceScript.sml:97
+nsDom_def	CmlTS/Namespace.lean	ok	clauses, argument order, types and corner cases compared with namespaceScript.sml:102
+nsMap_def	CmlTS/Namespace.lean	ok	clauses, argument order, types and corner cases compared with namespaceScript.sml:107
+shift_lookup_def	CmlTS/SemanticPrimitivesProps.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesPropsScript.sml:44
+map_error_result_def	CmlTS/SemanticPrimitivesProps.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesPropsScript.sml:138
+map_result_def	CmlTS/SemanticPrimitivesProps.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesPropsScript.sml:143
+every_error_result_def	CmlTS/SemanticPrimitivesProps.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesPropsScript.sml:148
+every_result_def	CmlTS/SemanticPrimitivesProps.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesPropsScript.sml:153
+map_sv_def	CmlTS/SemanticPrimitivesProps.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesPropsScript.sml:158
+dest_Refv_def	CmlTS/SemanticPrimitivesProps.lean	V-C1	Lean `| _ => ARB` for non-Refv; HOL4 dest_Refv_def has only the Refv clause (plain definition entry, no _primitive theorem). Witness vc1_dest_Refv.
+store_v_vs_def	CmlTS/SemanticPrimitivesProps.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesPropsScript.sml:169
+ctors_of_tdef_def	CmlTS/SemanticPrimitivesProps.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesPropsScript.sml:176
+FV_def	CmlTS/SemanticPrimitivesProps.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesPropsScript.sml:182
+FV_dec_def	CmlTS/SemanticPrimitivesProps.lean	V-C1	dec has constructors Dmod, Dlocal, Denv beyond the 5 clauses of HOL4 FV_dec_def; Lean `| _ => ARB` makes FV_dec (Dmod m ds) = ARB provable; HOL4 saves only 5 clauses. Witness vc1_FV_dec.
+stamp	CmlTS/SemanticPrimitives.lean	ok	constructors, order and field types compared with semanticPrimitivesScript.sml:12
+sem_env	CmlTS/SemanticPrimitives.lean	ok	constructors, order and field types compared with semanticPrimitivesScript.sml:20
+v	CmlTS/SemanticPrimitives.lean	ok	constructors, order and field types compared with semanticPrimitivesScript.sml:29
+bind_stamp_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:51
+chr_stamp_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:54
+div_stamp_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:57
+subscript_stamp_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:60
+bind_exn_v_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:64
+chr_exn_v_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:67
+div_exn_v_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:70
+sub_exn_v_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:73
+bool_type_num_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:77
+list_type_num_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:80
+abort	CmlTS/SemanticPrimitives.lean	ok	constructors, order and field types compared with semanticPrimitivesScript.sml:85
+error_result	CmlTS/SemanticPrimitives.lean	ok	constructors, order and field types compared with semanticPrimitivesScript.sml:92
+result	CmlTS/SemanticPrimitives.lean	ok	constructors, order and field types compared with semanticPrimitivesScript.sml:98
+store_v	CmlTS/SemanticPrimitives.lean	ok	constructors, order and field types compared with semanticPrimitivesScript.sml:105
+store_v_same_type_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:117
+store_lookup_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:130
+store_alloc_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:135
+store_assign_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:139
+eval_decs_state	CmlTS/SemanticPrimitives.lean	ok	constructors, order and field types compared with semanticPrimitivesScript.sml:158
+eval_oracle_state	CmlTS/SemanticPrimitives.lean	ok	constructors, order and field types compared with semanticPrimitivesScript.sml:174
+eval_state	CmlTS/SemanticPrimitives.lean	ok	constructors, order and field types compared with semanticPrimitivesScript.sml:185
+state	CmlTS/SemanticPrimitives.lean	ok	constructors, order and field types compared with semanticPrimitivesScript.sml:191
+do_con_check_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:204
+one_con_check_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:211
+build_conv_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:216
+lit_same_type_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:226
+match_result	CmlTS/SemanticPrimitives.lean	ok	constructors, order and field types compared with semanticPrimitivesScript.sml:238
+same_type_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:245
+same_ctor_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:251
+ctor_same_type_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:255
+Boolv_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:263
+pmatch_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:277
+can_pmatch_all_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:322
+build_rec_env_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:330
+find_recfun_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:338
+eq_result	CmlTS/SemanticPrimitives.lean	ok	constructors, order and field types compared with semanticPrimitivesScript.sml:345
+do_eq_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:351
+do_opapp_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:382
+v_to_list_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:398
+list_to_v_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:408
+v_to_char_list_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:413
+vs_to_string_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:423
+nat_to_v_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:430
+maybe_all_list_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:434
+v_to_word8_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:443
+v_to_word8_list_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:450
+v_to_word64_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:457
+v_to_word64_list_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:464
+lookup_env_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:471
+add_decs_generation_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:476
+add_env_generation_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:483
+declare_env_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:488
+concrete_v_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:515
+compiler_agrees_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:530
+do_eval_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:541
+reset_env_generation_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:574
+copy_array_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:588
+ws_to_chars_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:610
+chars_to_ws_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:614
+shift8_lookup_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:657
+shift64_lookup_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:666
+exp_or_val	CmlTS/SemanticPrimitives.lean	ok	constructors, order and field types compared with semanticPrimitivesScript.sml:675
+xor_bytes_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:681
+thunk_op_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:690
+check_type_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:703
+dest_Litv_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:713
+the_Litv_IntLit_def	CmlTS/SemanticPrimitives.lean	ok	partial function: Lean `| _ => ARB` on other literals; HOL4 saves the_Litv_*_def_primitive (WFREC with ARB on omitted constructors) in semanticPrimitivesTheory, so the ARB equations are in Phi
+the_Litv_Word8_def	CmlTS/SemanticPrimitives.lean	ok	partial function: Lean `| _ => ARB` on other literals; HOL4 saves the_Litv_*_def_primitive (WFREC with ARB on omitted constructors) in semanticPrimitivesTheory, so the ARB equations are in Phi
+the_Litv_Word64_def	CmlTS/SemanticPrimitives.lean	ok	partial function: Lean `| _ => ARB` on other literals; HOL4 saves the_Litv_*_def_primitive (WFREC with ARB on omitted constructors) in semanticPrimitivesTheory, so the ARB equations are in Phi
+the_Litv_Float64_def	CmlTS/SemanticPrimitives.lean	ok	partial function: Lean `| _ => ARB` on other literals; HOL4 saves the_Litv_*_def_primitive (WFREC with ARB on omitted constructors) in semanticPrimitivesTheory, so the ARB equations are in Phi
+the_Litv_Char_def	CmlTS/SemanticPrimitives.lean	ok	partial function: Lean `| _ => ARB` on other literals; HOL4 saves the_Litv_*_def_primitive (WFREC with ARB on omitted constructors) in semanticPrimitivesTheory, so the ARB equations are in Phi
+the_Boolv_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:738
+num_cmp_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:742
+int_cmp_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:749
+do_test_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:756
+do_arith_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:773
+do_conversion_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:818
+do_app_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:849
+do_log_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:1185
+do_if_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:1193
+build_constrs_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:1200
+build_tdefs_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:1206
+check_dup_ctors_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:1215
+combine_dec_result_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:1222
+extend_dec_env_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:1229
+?	CmlTS/SemanticPrimitives.lean	ok	constructors, order and field types compared with semanticPrimitivesScript.sml:1245
+dest_thunk_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:1252
+update_thunk_def	CmlTS/SemanticPrimitives.lean	ok	clauses, argument order, types and corner cases compared with semanticPrimitivesScript.sml:1262
+evaluate_prog_with_clock_def	CmlTS/SemanticsMin.lean	ok	clauses, argument order, types and corner cases compared with semantics_minScript.sml:12
+semantics_prog_def	CmlTS/SemanticsMin.lean	ok	clauses, argument order, types and corner cases compared with semantics_minScript.sml:19
+store_t	CmlTS/TypeSoundInvariants.lean	ok	constructors, order and field types compared with typeSoundInvariantsScript.sml:9
+tenv_abbrev_ok_def	CmlTS/TypeSoundInvariants.lean	ok	clauses, argument order, types and corner cases compared with typeSoundInvariantsScript.sml:20
+tenv_ctor_ok_def	CmlTS/TypeSoundInvariants.lean	ok	clauses, argument order, types and corner cases compared with typeSoundInvariantsScript.sml:24
+tenv_val_ok_def	CmlTS/TypeSoundInvariants.lean	ok	clauses, argument order, types and corner cases compared with typeSoundInvariantsScript.sml:28
+tenv_ok_def	CmlTS/TypeSoundInvariants.lean	ok	clauses, argument order, types and corner cases compared with typeSoundInvariantsScript.sml:32
+tenv_val_exp_ok_def	CmlTS/TypeSoundInvariants.lean	ok	clauses, argument order, types and corner cases compared with typeSoundInvariantsScript.sml:39
+ctMap_ok_def	CmlTS/TypeSoundInvariants.lean	ok	clauses, argument order, types and corner cases compared with typeSoundInvariantsScript.sml:52
+type_ctor_def	CmlTS/TypeSoundInvariants.lean	ok	clauses, argument order, types and corner cases compared with typeSoundInvariantsScript.sml:72
+add_tenvE_def	CmlTS/TypeSoundInvariants.lean	ok	clauses, argument order, types and corner cases compared with typeSoundInvariantsScript.sml:78
+type_v	CmlTS/TypeSoundInvariants.lean	ok	rules and argument shapes compared with typeSoundInvariantsScript.sml:84
+type_sv_def	CmlTS/TypeSoundInvariants.lean	ok	clauses, argument order, types and corner cases compared with typeSoundInvariantsScript.sml:152
+type_s_def	CmlTS/TypeSoundInvariants.lean	ok	clauses, argument order, types and corner cases compared with typeSoundInvariantsScript.sml:162
+ctMap_has_exns_def	CmlTS/TypeSoundInvariants.lean	ok	clauses, argument order, types and corner cases compared with typeSoundInvariantsScript.sml:173
+ctMap_has_lists_def	CmlTS/TypeSoundInvariants.lean	ok	clauses, argument order, types and corner cases compared with typeSoundInvariantsScript.sml:182
+ctMap_has_bools_def	CmlTS/TypeSoundInvariants.lean	ok	clauses, argument order, types and corner cases compared with typeSoundInvariantsScript.sml:191
+good_ctMap_def	CmlTS/TypeSoundInvariants.lean	ok	clauses, argument order, types and corner cases compared with typeSoundInvariantsScript.sml:198
+consistent_ctMap_def	CmlTS/TypeSoundInvariants.lean	ok	clauses, argument order, types and corner cases compared with typeSoundInvariantsScript.sml:229
+type_all_env_def	CmlTS/TypeSoundInvariants.lean	ok	clauses, argument order, types and corner cases compared with typeSoundInvariantsScript.sml:243
+type_sound_invariant_def	CmlTS/TypeSoundInvariants.lean	ok	clauses, argument order, types and corner cases compared with typeSoundInvariantsScript.sml:249
+store_type_extension_def	CmlTS/TypeSound.lean	ok	clauses, argument order, types and corner cases compared with typeSoundScript.sml:487
+type_pes_def	CmlTS/TypeSysProps.lean	ok	clauses, argument order, types and corner cases compared with typeSysPropsScript.sml:103
+deBruijn_subst_tenvE_def	CmlTS/TypeSysProps.lean	ok	clauses, argument order, types and corner cases compared with typeSysPropsScript.sml:554
+db_merge_def	CmlTS/TypeSysProps.lean	ok	clauses, argument order, types and corner cases compared with typeSysPropsScript.sml:565
+type_def_to_ctMap_def	CmlTS/TypeSysProps.lean	V-C1	Lean `| _,_,_ => ARB` for unequal list lengths makes type_def_to_ctMap t n [] (i::is) = ARB provable; HOL4 saved type_def_to_ctMap_def has only the 2 clauses (no primitive theorem in typeSysPropsTheory). Lower confidence, as for MAP3. Witness vc1_type_def_to_ctMap.
+t	CmlTS/TypeSystem.lean	ok	constructors, order and field types compared with typeSystemScript.sml:13
+Tarray_num_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:26
+Tbool_num_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:30
+Tchar_num_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:34
+Texn_num_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:38
+Tfn_num_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:42
+Tint_num_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:46
+Tlist_num_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:50
+Tref_num_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:54
+Tstring_num_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:58
+Ttup_num_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:62
+Tvector_num_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:66
+Tword64_num_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:70
+Tword8_num_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:74
+Tword8array_num_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:78
+Tdouble_num_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:82
+prim_type_nums_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:87
+Tarray_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:94
+Tbool_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:98
+Tchar_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:102
+Texn_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:106
+Tfn_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:110
+Tint_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:114
+Tlist_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:118
+Tref_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:122
+Tstring_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:126
+Ttup_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:130
+Tvector_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:134
+Tword64_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:138
+Tword8_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:142
+Tword8array_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:146
+Tdouble_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:150
+check_freevars_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:157
+check_freevars_ast_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:167
+type_subst_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:182
+deBruijn_inc_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:197
+deBruijn_subst_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:210
+tenv_val_exp	CmlTS/TypeSystem.lean	ok	constructors, order and field types compared with typeSystemScript.sml:226
+bind_tvar_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:235
+opt_bind_name_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:239
+tveLookup_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:247
+type_env	CmlTS/TypeSystem.lean	ok	constructors, order and field types compared with typeSystemScript.sml:263
+extend_dec_tenv_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:271
+lookup_varE_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:278
+lookup_var_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:286
+num_tvs_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:294
+bind_var_list_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:302
+t_of_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:329
+supported_test_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:339
+supported_arith_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:345
+supported_conversion_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:359
+type_op_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:379
+check_type_names_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:424
+type_name_subst_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:443
+check_ctor_tenv_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:464
+build_ctor_tenv_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:477
+is_value_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:491
+type_p	CmlTS/TypeSystem.lean	ok	rules and argument shapes compared with typeSystemScript.sml:507
+type_e	CmlTS/TypeSystem.lean	ok	rules and argument shapes compared with typeSystemScript.sml:585
+tenv_add_tvs_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:745
+type_pe_determ_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:750
+tscheme_inst_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:759
+tenvLift_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:768
+type_d	CmlTS/TypeSystem.lean	ok	rules and argument shapes compared with typeSystemScript.sml:773
+tscheme_inst2_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:969
+weak_tenv_def	CmlTS/TypeSystem.lean	ok	clauses, argument order, types and corner cases compared with typeSystemScript.sml:973
+weak_tenvE_def	CmlTS/Weakening.lean	ok	clauses, argument order, types and corner cases compared with weakeningScript.sml:11
+weakS_def	CmlTS/Weakening.lean	ok	clauses, argument order, types and corner cases compared with weakeningScript.sml:19
+weak_def	CmlTS/Weakening.lean	ok	clauses, argument order, types and corner cases compared with weakeningScript.sml:151
+weakCT_def	CmlTS/Weakening.lean	ok	clauses, argument order, types and corner cases compared with weakeningScript.sml:281
+ARB	CmlTS/Prelude/Set.lean	ok	Classical.choice with [Nonempty]; faithful encoding of new_constant ARB (boolScript.sml:245)
+SELECT	CmlTS/Prelude/Set.lean	ok	Classical.epsilon with [Nonempty]; faithful encoding of @
+K	CmlTS/Prelude/Set.lean	ok	K x y = x
+I	CmlTS/Prelude/Set.lean	ok	I x = x
+C	CmlTS/Prelude/Set.lean	ok	C f x y = f y x
+UPDATE	CmlTS/Prelude/Set.lean	ok	compared
+UNCURRY	CmlTS/Prelude/Set.lean	ok	compared
+RTC	CmlTS/Prelude/Set.lean	ok	rules compared
+Set (type) and instances	CmlTS/Prelude/Set.lean	ok	set = alpha -> bool as predicate; Membership, Union, Inter, SDiff, Insert, Singleton, Subset compared with pred_set defs
+UNIV	CmlTS/Prelude/Set.lean	ok	compared
+DISJOINT	CmlTS/Prelude/Set.lean	ok	compared
+IMAGE	CmlTS/Prelude/Set.lean	ok	compared
+BIGUNION	CmlTS/Prelude/Set.lean	ok	compared
+INJ	CmlTS/Prelude/Set.lean	ok	compared
+SURJ	CmlTS/Prelude/Set.lean	ok	compared
+BIJ	CmlTS/Prelude/Set.lean	ok	PERMUTES overload is BIJ f s s (pred_setScript.sml:6275); BIJ compared
+FINITE	CmlTS/Prelude/Set.lean	ok	all-predicates definition as in HOL4
+CARD	CmlTS/Prelude/Set.lean	V-C1	HOL4 CARD_DEF is new_specification (pred_setScript.sml:3428): only EMPTY and FINITE INSERT clauses, CARD of an infinite set unspecified. Lean CARD s = SELECT over enumerations = ARB for every infinite s, so CARD of two different infinite sets is provably equal. Witness vc1_CARD_infinite.
+RES_FORALL	CmlTS/Prelude/Set.lean	ok	compared
+ordering	CmlTS/Prelude/Set.lean	ok	LESS EQUAL GREATER
+EVEN	CmlTS/Prelude/Set.lean	ok	n MOD 2 = 0
+DIV2	CmlTS/Prelude/Set.lean	ok	n DIV 2
+THE	CmlTS/Prelude/List.lean	V-C1	HOL4 THE_DEF only THE (SOME x) = x (optionScript.sml:176, spec). Lean THE none = ARB provable. Witness vc1_THE_none.
+NULL	CmlTS/Prelude/List.lean	ok	compared
+HD	CmlTS/Prelude/List.lean	V-C1	HOL4 HD only HD (h::t)=h (listScript.sml:138, no primitive theorem in listTheory). Lean HD [] = ARB provable. Witness vc1_HD_nil.
+EL	CmlTS/Prelude/List.lean	V-C1	EL 0 l = HD l and EL (n+1) l = EL n (TL l) as in HOL4, so Lean EL n [] = ARB is provable while HOL4 leaves it unspecified (follows from HD). Witness vc1_EL_nil.
+EVERY	CmlTS/Prelude/List.lean	ok	compared
+EXISTS	CmlTS/Prelude/List.lean	ok	compared
+LIST_REL	CmlTS/Prelude/List.lean	ok	4 HOL4 clauses compared
+EVERY2	CmlTS/Prelude/List.lean	ok	overload of LIST_REL
+LIST_TO_SET	CmlTS/Prelude/List.lean	ok	compared
+ALL_DISTINCT	CmlTS/Prelude/List.lean	ok	compared
+REV	CmlTS/Prelude/List.lean	ok	compared
+COUNT_LIST	CmlTS/Prelude/List.lean	ok	compared
+SPLITP	CmlTS/Prelude/List.lean	ok	compared
+ALOOKUP	CmlTS/Prelude/List.lean	ok	compared
+fmap (structure)	CmlTS/Prelude/Fmap.lean	ok	function to option with finite support; bijection with HOL4 fmap rep; faithful encoding
+FLOOKUP	CmlTS/Prelude/Fmap.lean	ok	compared
+FEMPTY	CmlTS/Prelude/Fmap.lean	ok	compared
+FUPDATE	CmlTS/Prelude/Fmap.lean	ok	compared
+FDOM	CmlTS/Prelude/Fmap.lean	ok	compared
+FAPPLY	CmlTS/Prelude/Fmap.lean	V-C1	HOL4 FAPPLY f x = OUTL (fmap_REP f x) (finite_mapScript.sml:180): off the domain it is OUTL (INR one), unspecified; only NOT_FDOM_FAPPLY_FEMPTY (finite_mapScript.sml:562) is saved. Lean FAPPLY = THE (FLOOKUP) so FAPPLY FEMPTY x = ARB is provable. Witness vc1_FAPPLY_FEMPTY.
+FUPDATE_LIST	CmlTS/Prelude/Fmap.lean	ok	FOLDL FUPDATE compared
+SUBMAP	CmlTS/Prelude/Fmap.lean	ok	compared
+FUNION	CmlTS/Prelude/Fmap.lean	ok	compared, left-biased
+o_f	CmlTS/Prelude/Fmap.lean	ok	compared
+FRANGE	CmlTS/Prelude/Fmap.lean	ok	compared
+FEVERY	CmlTS/Prelude/Fmap.lean	ok	compared
+alist_to_fmap	CmlTS/Prelude/Fmap.lean	ok	compared
+char	CmlTS/Prelude/String.lean	ok	Fin 256 with ORD/CHR bijection on 0..255 (char_BIJ); faithful encoding
+ORD	CmlTS/Prelude/String.lean	ok	compared
+CHR	CmlTS/Prelude/String.lean	V-C1	HOL4 char_BIJ (stringScript.sml:29): ORD (CHR r) = r only for r<256; CHR 256 unspecified. Lean CHR 256 = ARB provable. Witness vc1_CHR_256.
+string	CmlTS/Prelude/String.lean	ok	list of char
+str_lit	CmlTS/Prelude/String.lean	ok	compared
+TOKENS	CmlTS/Prelude/String.lean	ok	compared with stringScript TOKENS
+Num	CmlTS/Prelude/String.lean	ok	natAbs, HOL4 definition
+ABS	CmlTS/Prelude/String.lean	ok	compared
+int_div	CmlTS/Prelude/String.lean	V-C1	HOL4 int_div via new_specification (integerScript.sml:1988) only for j<>0; INT_DIV_0 (integerScript.sml:2034) is about 0/q with q<>0. Lean int_div i 0 = ARB provable. Witness vc1_int_div_0. Nonzero case floor division matches.
+int_mod	CmlTS/Prelude/String.lean	V-C1	HOL4 int_mod specification only for j<>0 (integerScript.sml:2074). Lean int_mod i 0 = ARB provable. Witness vc1_int_mod_0.
+word8 word64 n2w w2n i2w word_*	CmlTS/Prelude/String.lean	ok	compared with BitVec encoding
+spt lookup domain toListA toList	CmlTS/Prelude/Sptree.lean	ok	compared with sptreeScript
+sort2_tail sort3_tail merge_tail mergesortN_tail mergesort_tail	CmlTS/Prelude/Mergesort.lean	ok	compared with mergesortScript
+llist LNIL LCONS LHD LTL LTAKE LFINITE llength_rel LLENGTH llist_toList fromList LPREFIX	CmlTS/Prelude/Llist.lean	ok	compared with llistScript; LLENGTH uses SELECT as HOL4 (llistScript.sml:981)
+all (about 67 declarations)	CmlTS/Prelude/BinaryIeee.lean	unread	not compared with binary_ieeeScript; only the names were listed
+all (about 21 declarations including root via SELECT)	CmlTS/Prelude/Real.lean	unread	not compared with HOL4 real theory

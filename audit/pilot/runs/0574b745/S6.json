@@ -1,0 +1,10 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "HOL4 (holSyntaxScript.sml:96-97) requires both RACONV env (s1,s2) and RACONV env (t1,t2). Lean's RACONV.Comb (HolSyntax.lean:73-74) has only the second premise. So Lean derives ACONV (Comb (Const a ty) c) (Comb (Const b ty) c) for a constant c and a ≠ b, which HOL4 refutes. The relation is strictly larger, no convention covers it, and it weakens proves.EQ_MP's side condition. It also falsifies the Comb clause of RACONV_thm."
+  }
+ ]
+}

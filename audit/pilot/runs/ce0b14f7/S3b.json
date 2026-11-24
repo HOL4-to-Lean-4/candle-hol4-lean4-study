@@ -1,0 +1,18 @@
+{
+ "module": "CandleLean.Prelude.List",
+ "checked": 38,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "HOL.sort3_tail",
+   "lean": "lean/CandleLean/Prelude/List.lean:188",
+   "hol4": "hol4/HOL4-src/src/sort/mergesortScript.sml:114",
+   "class": "V-P",
+   "explanation": "The two result lists in the branch `R x y <> neg`, `~(R y z <> neg)` are swapped. HOL4 returns [x;z;y] when `R x z <> neg` and [z;x;y] otherwise. Lean returns [z,x,y] when `R x z ≠ neg` and [x,z,y] otherwise. Input: neg = F, R = (<=) on num, x=1, y=3, z=2. HOL4 gives [1;2;3], Lean gives [2,1,3], which is not sorted. The error propagates to mergesortN_tail and mergesort_tail, and so to Candle.sort.",
+   "repair": "    else if R x z ≠ neg then [x, z, y] else [z, x, y]",
+   "confidence": 0.99,
+   "lean_check": "import CandleLean.Prelude.List\n\nopen HOL\n\nexample : sort3_tail False (fun a b : Nat => a ≤ b) 1 3 2 = [2, 1, 3] := by\n  simp [sort3_tail]\n\nexample : sort3_tail False (fun a b : Nat => a ≤ b) 1 3 2 ≠ [1, 2, 3] := by\n  simp [sort3_tail]\n",
+   "hol4_check": "mergesort$sort3_tail F (\\a b. a <= (b:num)) 1 3 2 = [1;2;3]"
+  }
+ ]
+}

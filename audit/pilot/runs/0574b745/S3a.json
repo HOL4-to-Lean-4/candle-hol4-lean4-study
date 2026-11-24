@@ -1,0 +1,18 @@
+{
+ "module": "CandleLean.HolSyntax",
+ "checked": 76,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "Candle.RACONV",
+   "lean": "lean/CandleLean/HolSyntax.lean:73",
+   "hol4": "hol4/package/candle/standard/syntax/holSyntaxScript.sml:96",
+   "class": "V-P",
+   "explanation": "The HOL4 Comb rule has two premises, RACONV env (s1,s2) and RACONV env (t1,t2). The Lean constructor RACONV.Comb drops the first, so the operator parts s1 and s2 are unconstrained. Lean therefore proves ACONV (Comb s1 (Const n ty)) (Comb s2 (Const n ty)) for all s1 and s2, while HOL4 refutes it for, e.g., s1 = Const «a» Bool and s2 = Const «b» Bool. RACONV and ACONV are strictly larger than in HOL4, and proves.EQ_MP (premise ACONV p p') becomes unsound.",
+   "repair": "  | Comb {env : List (term × term)} {s1 s2 t1 t2 : term} :\n      RACONV env (s1, s2) → RACONV env (t1, t2) → RACONV env (Comb s1 t1, Comb s2 t2)",
+   "confidence": 0.99,
+   "lean_check": "import CandleLean.HolSyntax\n\nnamespace Candle\n\nopen HOL Classical\n\nexample (s1 s2 : term) (n : mlstring) (ty : type) :\n    ACONV (Comb s1 (Const n ty)) (Comb s2 (Const n ty)) := by\n  unfold ACONV\n  exact RACONV.Comb RACONV.Const\n\nend Candle\n",
+   "hol4_check": "~ACONV (Comb (Const (strlit \"a\") (Tyapp (strlit \"bool\") [])) (Const (strlit \"c\") (Tyapp (strlit \"bool\") []))) (Comb (Const (strlit \"b\") (Tyapp (strlit \"bool\") [])) (Const (strlit \"c\") (Tyapp (strlit \"bool\") [])))"
+  }
+ ]
+}

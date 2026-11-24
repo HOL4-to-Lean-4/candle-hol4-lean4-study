@@ -1,0 +1,22 @@
+S0 sensitivity self-test: 12 mutations of statements in a scratch copy of the base (selftest/mutate.py has the exact edits).
+flag = scan flags the mutated statement. base = flagged on the clean base. Without a manifest; with the base manifest all 12 are also flagged by the hash check.
+M01-dropped-hypothesis           explode_aux_thm            flag=True  base=False classes=connectives,constants,hypotheses,structure
+M03-changed-constant             mergesortN_tail_MEM        flag=True  base=False classes=constants,structure
+M04-off-by-one                   LENGTH_FIELDS              flag=True  base=False classes=literals,structure
+M05-strengthened-conclusion      type_ok_TYPE_SUBST         flag=True  base=False classes=connectives,constants,structure
+M06-changed-type                 is_subseq_refl             flag=True  base=False classes=binder-types
+M07-weaker-conclusion            strcat_nil                 flag=True  base=False classes=connectives,constants,literals,structure
+M08-swapped-arguments            mlstring_common_suffix     flag=True  base=False classes=structure
+M09-lt-to-le                     w2n_lt_256                 flag=True  base=False classes=constants,structure
+M10-and-to-or-in-hypothesis      VSUBST_WELLTYPED           flag=True  base=True  classes=connectives,hypotheses,structure
+M11-extra-instance-hypothesis    sort_PERM                  flag=True  base=False classes=instances
+M12-trivialised-conclusion       CHR_w2n_n2w_ORD_simp       flag=True  base=False classes=constants,structure,trivial
+M02-swapped-quantifier           PRIMED_NAME_EXISTS         flag=True  base=False classes=binders,quantifier-order,structure
+flagged 12 of 12; on statements clean in the base: 11 of 11
+statements flagged in the whole mutated copy: 13 (the 12 mutated ones and mlstring_common_char_prefix, which is flagged on the clean base too)
+
+Probes of blind classes (second scratch copy, not part of the 12):
+type argument inside the body changed (n2w at word32 instead of word8, CHR_w2n_n2w_ORD_simp): flag=False
+definition body changed (MAX returns the minimum), dependent statement MAX_LIST_APPEND: flag=False
+sorry in def EVEN / native_decide reached from make_even (EVEN_make_even): flag=True ['definitions']
+partial def find_index (find_index_shift_0): flag=True

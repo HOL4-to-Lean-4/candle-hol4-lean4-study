@@ -1,0 +1,62 @@
+13:27:45 stripped 20 files into E:/ts_ws/mut_work/stripped
+13:27:46 lake build in stripped copy: rc=0, "declaration uses sorry" warnings=278
+13:28:32 KernelCheck stripped vs base identical: True ; ['TOTAL_CANDLE\t903', 'SORRY_USERS\t278']
+13:28:32 parsed 20 modules, 671 declarations
+13:28:33 enumerated 5919 mutant candidates and 2658 decoy candidates (after eligibility 2-3)
+13:28:33 mutant candidates per operator: C1=31, C2=18, C3=86, D1=602, D2=220, D3=472, D4=376, H1=293, H2=395, H3=65, N1=164, N2=31, N3=58, N4=9, O1=228, T1=1283, U1=10, W1=476, W2=422, W3=300, W4=97, X1=56, X2=106, X3=121
+13:28:33 decoy candidates per operator: R1=205, R2=611, R3=72, R4=1441, R5=222, R6=107
+13:52:29 parsed 20 modules, 671 declarations
+13:52:30 enumerated 5919 mutant candidates and 2658 decoy candidates (after eligibility 2-3)
+13:52:30 mutant candidates per operator: C1=31, C2=18, C3=86, D1=602, D2=220, D3=472, D4=376, H1=293, H2=395, H3=65, N1=164, N2=31, N3=58, N4=9, O1=228, T1=1283, U1=10, W1=476, W2=422, W3=300, W4=97, X1=56, X2=106, X3=121
+13:52:30 decoy candidates per operator: R1=205, R2=611, R3=72, R4=1441, R5=222, R6=107
+13:57:31 mutant pool: 180 chosen; per scope {'prelude': 45, 'definition': 108, 'statement': 27}
+14:05:12 decoy pool: 60 chosen
+14:05:12 done in 762s
+14:05:39 parsed 20 modules, 671 declarations
+14:05:39 enumerated 5924 mutant candidates and 2658 decoy candidates (after eligibility 2-3)
+14:05:39 mutant candidates per operator: C1=31, C2=18, C3=86, D1=602, D2=220, D3=472, D4=376, H1=293, H2=395, H3=65, N1=164, N2=31, N3=58, N4=9, O1=228, T1=1283, U1=10, W1=476, W2=422, W3=300, W4=97, X1=62, X2=105, X3=121
+14:05:39 decoy candidates per operator: R1=205, R2=611, R3=72, R4=1441, R5=222, R6=107
+14:06:22 mutant pool: 180 chosen; per scope {'prelude': 45, 'definition': 108, 'statement': 27}
+14:06:22 decoy pool: 60 chosen
+14:06:22 done in 43s
+14:06:36 parsed 20 modules, 671 declarations
+14:06:36 enumerated 5924 mutant candidates and 2658 decoy candidates (after eligibility 2-3)
+14:06:36 mutant candidates per operator: C1=31, C2=18, C3=86, D1=602, D2=220, D3=472, D4=376, H1=293, H2=395, H3=65, N1=164, N2=31, N3=58, N4=9, O1=228, T1=1283, U1=10, W1=476, W2=422, W3=300, W4=97, X1=62, X2=105, X3=121
+14:06:36 decoy candidates per operator: R1=205, R2=611, R3=72, R4=1441, R5=222, R6=107
+14:06:37 mutant pool: 180 chosen; per scope {'prelude': 45, 'definition': 108, 'statement': 27}
+14:06:37 decoy pool: 60 chosen
+14:06:37 done in 1s
+14:09:55 parsed 20 modules, 671 declarations
+14:09:55 enumerated 5924 mutant candidates and 2658 decoy candidates (after eligibility 2-3)
+14:09:55 mutant candidates per operator: C1=31, C2=18, C3=86, D1=602, D2=220, D3=472, D4=376, H1=293, H2=395, H3=65, N1=164, N2=31, N3=58, N4=9, O1=228, T1=1283, U1=10, W1=476, W2=422, W3=300, W4=97, X1=62, X2=105, X3=121
+14:09:55 decoy candidates per operator: R1=205, R2=611, R3=72, R4=1441, R5=222, R6=107
+14:09:56 mutant pool: 180 chosen; per scope {'prelude': 45, 'definition': 108, 'statement': 27}
+14:09:56 decoy pool: 60 chosen
+14:09:56 done in 1s
+14:17:48 parsed 20 modules, 671 declarations
+14:17:53 enumerated 5114 mutant candidates and 1349 decoy candidates (after eligibility 2-3 and the paren filter)
+14:17:53 paren filter: mutants {'seen': 5216, 'dropped': 28, 'by_op': {'C3': 28}} ; decoys {'seen': 1478, 'dropped': 61, 'by_op': {'R5': 61}}
+14:17:53 mutant candidates per operator: C1=31, C2=18, C3=27, D1=602, D2=216, D3=472, D4=21, H1=293, H2=395, H3=65, N1=164, N2=31, N3=58, N4=9, O1=228, T1=891, U1=10, W1=476, W2=422, W3=300, W4=97, X1=62, X2=105, X3=121
+14:17:53 decoy candidates per operator: R1=205, R2=611, R3=72, R4=23, R5=202, R6=236
+14:17:58 parsed 20 modules, 671 declarations
+14:18:02 enumerated 5114 mutant candidates and 1349 decoy candidates (after eligibility 2-3 and the paren filter)
+14:18:02 paren filter: mutants {'seen': 5216, 'dropped': 28, 'by_op': {'C3': 28}} ; decoys {'seen': 1478, 'dropped': 61, 'by_op': {'R5': 61}}
+14:18:02 mutant candidates per operator: C1=31, C2=18, C3=27, D1=602, D2=216, D3=472, D4=21, H1=293, H2=395, H3=65, N1=164, N2=31, N3=58, N4=9, O1=228, T1=891, U1=10, W1=476, W2=422, W3=300, W4=97, X1=62, X2=105, X3=121
+14:18:02 decoy candidates per operator: R1=205, R2=611, R3=72, R4=23, R5=202, R6=236
+14:30:08 mutant pool: 180 chosen; per scope {'prelude': 45, 'definition': 108, 'statement': 27}
+14:33:26 decoy pool: 60 chosen
+14:42:41 eligibility-1 bias sample: {'sample_size': 1000, 'enumerated': 5114, 'classes': {'fail_self': 460, 'ok': 517, 'aux_only': 20, 'fail_other_decl': 2, 'fail_proved_lemma': 1}, 'by_scope': {'statement': {'fail_self': 194, 'ok': 297}, 'definition': {'fail_self': 182, 'ok': 140, 'aux_only': 9, 'fail_other_decl': 1, 'fail_proved_lemma': 1}, 'prelude': {'ok': 80, 'fail_self': 84, 'aux_only': 11, 'fail_other_decl': 1}}, 'aux_only_share_of_sample': 0.02, 'aux_only_share_of_failures': 0.0414, 'aux_only_extrapolated': 102}
+14:42:42 redundant-paren share (new text has more redundant parens than base): {'mutants_pool': 0.0, 'enumerated_before_filter': {'mut': {'seen': 5216, 'dropped': 28, 'by_op': {'C3': 28}}, 'dec': {'seen': 1478, 'dropped': 61, 'by_op': {'R5': 61}}}, 'decoys_pool': 0.0}
+14:42:42 unmet quotas: []
+14:42:42 done in 1483s
+14:42:58 parsed 20 modules, 671 declarations
+14:43:02 enumerated 5114 mutant candidates and 1349 decoy candidates (after eligibility 2-3 and the paren filter)
+14:43:02 paren filter: mutants {'seen': 5216, 'dropped': 28, 'by_op': {'C3': 28}} ; decoys {'seen': 1478, 'dropped': 61, 'by_op': {'R5': 61}}
+14:43:02 mutant candidates per operator: C1=31, C2=18, C3=27, D1=602, D2=216, D3=472, D4=21, H1=293, H2=395, H3=65, N1=164, N2=31, N3=58, N4=9, O1=228, T1=891, U1=10, W1=476, W2=422, W3=300, W4=97, X1=62, X2=105, X3=121
+14:43:02 decoy candidates per operator: R1=205, R2=611, R3=72, R4=23, R5=202, R6=236
+14:43:02 mutant pool: 180 chosen; per scope {'prelude': 45, 'definition': 108, 'statement': 27}
+14:43:02 decoy pool: 60 chosen
+14:43:02 eligibility-1 bias sample: {'sample_size': 1000, 'enumerated': 5114, 'classes': {'fail_self': 460, 'ok': 517, 'aux_only': 20, 'fail_other_decl': 2, 'fail_proved_lemma': 1}, 'by_scope': {'statement': {'fail_self': 194, 'ok': 297}, 'definition': {'fail_self': 182, 'ok': 140, 'aux_only': 9, 'fail_other_decl': 1, 'fail_proved_lemma': 1}, 'prelude': {'ok': 80, 'fail_self': 84, 'aux_only': 11, 'fail_other_decl': 1}}, 'aux_only_share_of_sample': 0.02, 'aux_only_share_of_failures': 0.0414, 'aux_only_extrapolated': 102}
+14:43:02 redundant-paren share (new text has more redundant parens than base): {'mutants_pool': 0.0, 'enumerated_before_filter': {'mut': {'seen': 5216, 'dropped': 28, 'by_op': {'C3': 28}}, 'dec': {'seen': 1478, 'dropped': 61, 'by_op': {'R5': 61}}}, 'decoys_pool': 0.0}
+14:43:02 unmet quotas: []
+14:43:02 done in 5s

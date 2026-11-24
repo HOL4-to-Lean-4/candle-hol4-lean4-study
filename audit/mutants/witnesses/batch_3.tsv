@@ -1,0 +1,30 @@
+MUT-0003	witness	Mutated statement (premise dropped) is false at U=Nat, mem=vmem (hereditarily finite sets, is_set_theory proved): entails0 needs has_type q Bool, fails for q = Var x (Tyvar a).
+MUT-0009	witness	ConstSpec [] (x=x) over a context with fun/bool/=: mutant accepts (swapped VFREE_IN is vacuous on a Comb), base rejects (x free, eqs empty). theory_ok and REFL proved.
+MUT-0015	witness	WEAKENING (forall->exists): mutated statement proved outright (ill-typed tm,ty makes premise false) and the same proof gives it for any conclusion Q, so it says nothing about simple_subst; base forall form is the real claim. Could not prove "not implied" since base is a true theorem.
+MUT-0021	witness	R _ b := b is Abs satisfies the mutant hypothesis (r9 ∧ r10) but not (Var,Const): mutant term_lt (Var x ty) (Const y ty) fails, base proves it from rule 2.
+MUT-0027	witness	WEAKENING (forall->exists): mutated statement proved outright with a constant tm (empty set) and for any predicate Q false on some tm; base forall form is the real claim.
+MUT-0033	witness	INORDER_INSERT [b] [[a]]: base [[a],[b]], mutant [[b]].
+MUT-0039	witness	In the hereditarily-finite model (proved is_set_theory), x={0}, y={1}: pair 0 1 is in base product but not in the mutant product (mutant only has pair 1 0); values differ.
+MUT-0045	witness	orda [] (Const c ty) (Var x ty): base GREATER, mutant LESS.
+MUT-0051	witness	sig with fun/1, bool/0 and standard "=" satisfies mutant is_std_sig, base requires fun/2 (FLOOKUP via alist_to_fmap lemma).
+MUT-0057	equivalent	MUT-0057_equiv.lean proves Mut.TotOrd c <-> TotOrd c: clause 2 at x=y forces c x x = EQUAL (ordering has 3 values), so EQUAL->x=y already gives the iff.
+MUT-0063	witness	compare (implode [a]) (implode []): base GREATER, mutant LESS.
+MUT-0069	witness	Mut.CLOSED (Const c ty) is false while base CLOSED holds (Const has no free Var).
+MUT-0075	witness	U=Nat, mem=True, tmass gives "=" its standard value F and other names F+1: base is_std_interpretation0 holds, mutant (tests name "a") fails.
+MUT-0081	witness	FCP_bits 1 (fun _ => True): mutant 0, base 1.
+MUT-0087	witness	R x y := x=0 ∧ y=0 on Nat: mutant irreflexive holds (x=1), base fails (x=0).
+MUT-0093	witness	R := both Tyapp satisfies the mutant disjunct r3 but not (Tyvar,Tyapp): mutant type_lt (Tyvar x) (Tyapp y []) fails, base proves it from rule 2.
+MUT-0099	witness	RACONV [] (Abs (Var x a) (Var x a), Abs (Var x b) (Var x b)): mutant derives it (Abs rule without type check), base cannot (needs typeof equal, a != b).
+MUT-0105	witness	merge_tail True (fun _ _ => True) [0,1] [2] []: base [1,0,2], mutant [0,1,2].
+MUT-0111	witness	bind (x,ty) 0 (dbAbs ty (dbVar x ty)): base dbBound 1 under the binder, mutant dbBound 0.
+MUT-0117	witness	f=id, s=empty, t={0}: mutant SURJ holds via disjunct f 0 = 0, base fails.
+MUT-0123	witness	c x y := if x=y then EQUAL else if x<y then LESS else GREATER on Nat is a base TotOrd, but mutant clause 3 fails at (0,1,0).
+MUT-0129	witness	sort3_tail with neg=True, R a b := a=1 ∧ b=2, (0,1,2): base [0,2,1], mutant [2,0,1].
+MUT-0135	witness	R=(<=) on Nat: base antisymmetric holds, mutant fails (0<=1, 0!=1).
+MUT-0141	witness	term_union [Var] [Const, Var]: base [h1,h2,k], mutant [h1,k,h2].
+MUT-0147	witness	mem=False, tysig=FEMPTY: mutant holds via ill-formed type Tyapp x [] (implication vacuous), base fails at Tyvar a.
+MUT-0153	witness	find_index 1 [1] 0: base some 0, mutant none.
+MUT-0159	witness	In the hereditarily-finite set model (proved is_set_theory), Mut.binary_union 0 0 has member 0 while base binary_union 0 0 has none; values differ.
+MUT-0165	witness	U=Bool, mem a _ := (a=false), sub x P := x: mutant holds (a=true makes both sides false), base fails at P=False, a=false.
+MUT-0171	equivalent	MUT-0171_equiv.lean: the changed binder (t2 : mlstring -> string) is shadowed by the second t2 and unused; both types are inhabited, so the statements are provably equivalent (T1 on an unused binder; spec says only used variables).
+MUT-0177	witness	HOL4 clause list$LAST_DEF (LAST (h::t) = if t=[] then h else LAST t): mutant proves LAST [] = Classical.choice (rfl); for every c a model of the clause has f [] != c (lastD), so the equation is not in Phi.

@@ -1,0 +1,553 @@
+UPDATE	Prelude/Basic.lean	ok	UPDATE a b f c = if a=c then b else f c
+FST	Prelude/Basic.lean	ok	compared, matches HOL4
+SND	Prelude/Basic.lean	ok	compared, matches HOL4
+UNCURRY	Prelude/Basic.lean	ok	compared, matches HOL4
+CURRY	Prelude/Basic.lean	ok	compared, matches HOL4
+Set	Prelude/Basic.lean	ok	sets as predicates
+UNIV	Prelude/Basic.lean	ok	compared, matches HOL4
+IN	Prelude/Basic.lean	ok	compared, matches HOL4
+DIFF	Prelude/Basic.lean	ok	compared, matches HOL4
+DISJOINT	Prelude/Basic.lean	ok	compared, matches HOL4
+IMAGE	Prelude/Basic.lean	ok	compared, matches HOL4
+BIGUNION	Prelude/Basic.lean	ok	compared, matches HOL4
+FINITE	Prelude/Basic.lean	ok	equivalent (contained in a list)
+CARD	Prelude/Basic.lean	V-C1	CARD of infinite set := 0; HOL4 pred_setScript.sml:3428 CARD_DEF (new_specification) only for FINITE
+INJ	Prelude/Basic.lean	ok	compared, matches HOL4
+SURJ	Prelude/Basic.lean	ok	compared, matches HOL4
+BIJ	Prelude/Basic.lean	ok	compared, matches HOL4
+RTC	Prelude/Basic.lean	ok	inductive RTC refl/step as relation theory
+LIST_TO_SET	Prelude/List.lean	ok	compared, matches HOL4
+MEM	Prelude/List.lean	ok	compared, matches HOL4
+LENGTH	Prelude/List.lean	ok	compared, matches HOL4
+MAP	Prelude/List.lean	ok	compared, matches HOL4
+REVERSE	Prelude/List.lean	ok	compared, matches HOL4
+FLAT	Prelude/List.lean	ok	compared, matches HOL4
+FOLDL	Prelude/List.lean	ok	compared, matches HOL4
+FOLDR	Prelude/List.lean	ok	compared, matches HOL4
+TAKE	Prelude/List.lean	ok	TAKE_def listScript.sml:2219 same clauses as List.take
+DROP	Prelude/List.lean	ok	DROP_def listScript.sml:2224 same as List.drop
+REPLICATE	Prelude/List.lean	ok	compared, matches HOL4
+MAP2	Prelude/List.lean	ok	MAP2_DEF second clause [] for mismatched lists = zipWith truncation
+ZIP	Prelude/List.lean	ok	ZIP_def listScript.sml:1784 truncates on both sides
+NULL	Prelude/List.lean	ok	compared, matches HOL4
+HD	Prelude/List.lean	V-C1	HD [] := ARB; HOL4 listScript.sml:138 saves only HD (h::t)=h
+TL	Prelude/List.lean	ok	TL [] = [] saved TL_DEF listScript.sml:142
+EL	Prelude/List.lean	ok	EL_def listScript.sml:245 identical equations; out-of-range value inherited from HD (counted under HD)
+EVERY	Prelude/List.lean	ok	compared, matches HOL4
+EXISTS	Prelude/List.lean	ok	compared, matches HOL4
+ALL_DISTINCT	Prelude/List.lean	ok	compared, matches HOL4
+LUPDATE	Prelude/List.lean	ok	LUPDATE_DEF listScript.sml:3939
+REV	Prelude/List.lean	ok	compared, matches HOL4
+COUNT_LIST	Prelude/List.lean	ok	compared, matches HOL4
+LIST_REL	Prelude/List.lean	ok	LIST_REL_def clauses
+oEL	Prelude/List.lean	ok	compared, matches HOL4
+isPREFIX	Prelude/List.lean	ok	compared, matches HOL4
+IS_PREFIX	Prelude/List.lean	ok	rich_listScript.sml:307 overload IS_PREFIX x y = isPREFIX y x
+OPT_MMAP	Prelude/List.lean	ok	compared, matches HOL4
+SPLITP	Prelude/List.lean	ok	compared, matches HOL4
+TOKENS	Prelude/List.lean	ok	stringScript.sml:277 same clauses, termination proved
+ALOOKUP	Prelude/List.lean	ok	compared, matches HOL4
+char	Prelude/Num.lean	ok	256 element structure; new_type_definition char n<256 stringScript.sml:25
+ORD	Prelude/Num.lean	ok	compared, matches HOL4
+CHR	Prelude/Num.lean	V-C1	CHR n (n>=256) := ARB; HOL4 stringScript.sml:29 char_BIJ fixes CHR only below 256
+LT_char	Prelude/Num.lean	ok	char_lt_def stringScript.sml:142
+string	Prelude/Num.lean	ok	compared, matches HOL4
+STRING	Prelude/Num.lean	ok	compared, matches HOL4
+HOLstr	Prelude/Num.lean	ok	literal embedding through CHR; ASCII only
+ordering	Prelude/Num.lean	ok	compared, matches HOL4
+DIV2	Prelude/Num.lean	ok	compared, matches HOL4
+int_of_num	Prelude/Num.lean	ok	compared, matches HOL4
+Num	Prelude/Num.lean	ok	integerScript.sml:1887 identical
+ABS	Prelude/Num.lean	ok	INT_ABS integerScript.sml:2542
+int_div	Prelude/Num.lean	V-C1	int_div i 0 := ARB; HOL4 integerScript.sml:1989 new_specification only for j<>0
+int_mod	Prelude/Num.lean	V-C1	int_mod i 0 := ARB; HOL4 integerScript.sml:2074 only for j<>0
+word	Prelude/Num.lean	ok	encoding BitVec n
+n2w	Prelude/Num.lean	ok	compared, matches HOL4
+w2n	Prelude/Num.lean	ok	compared, matches HOL4
+i2w	Prelude/Num.lean	ok	integer_wordScript.sml:29
+word_add	Prelude/Num.lean	ok	compared, matches HOL4
+word_sub	Prelude/Num.lean	ok	compared, matches HOL4
+word_and	Prelude/Num.lean	ok	compared, matches HOL4
+word_or	Prelude/Num.lean	ok	compared, matches HOL4
+word_xor	Prelude/Num.lean	ok	compared, matches HOL4
+word_lsl	Prelude/Num.lean	ok	wordsScript.sml:489-510 FCP definitions agree with BitVec shifts incl. amounts >= width
+word_lsr	Prelude/Num.lean	ok	wordsScript.sml:489-510 FCP definitions agree with BitVec shifts incl. amounts >= width
+word_asr	Prelude/Num.lean	ok	wordsScript.sml:489-510 FCP definitions agree with BitVec shifts incl. amounts >= width
+word_ror	Prelude/Num.lean	ok	wordsScript.sml:489-510 FCP definitions agree with BitVec shifts incl. amounts >= width
+the	Misc.lean	ok	compared, matches HOL4
+app_list	Misc.lean	ok	compared, matches HOL4
+append_aux	Misc.lean	ok	compared, matches HOL4
+append	Misc.lean	ok	compared, matches HOL4
+MAP3	Misc.lean	V-C1	unmatched list shapes := ARB; HOL4 miscScript.sml:74 two clauses only
+tlookup	Misc.lean	ok	compared, matches HOL4
+max3	Misc.lean	ok	compared, matches HOL4
+UPDATE_LIST	Misc.lean	ok	compared, matches HOL4
+find_index	Misc.lean	ok	compared, matches HOL4
+between	Misc.lean	ok	compared, matches HOL4
+lookup_vars	Misc.lean	ok	Nonempty on alpha is encoding; EL guarded by v<LENGTH env
+enumerate	Misc.lean	ok	compared, matches HOL4
+range	Misc.lean	ok	compared, matches HOL4
+sort	Mllist.lean	ok	= mergesort_tail
+nth	Mllist.lean	ok	nth l i = EL i l
+mllist.collate	Mllist.lean	ok	compared, matches HOL4
+mlstring	Mlstring.lean	ok	compared, matches HOL4
+implode	Mlstring.lean	ok	compared, matches HOL4
+strlen	Mlstring.lean	ok	compared, matches HOL4
+strsub	Mlstring.lean	ok	out of range inherited from HD
+concat	Mlstring.lean	ok	compared, matches HOL4
+explode_aux	Mlstring.lean	ok	compared, matches HOL4
+explode	Mlstring.lean	ok	compared, matches HOL4
+strcat	Mlstring.lean	ok	compared, matches HOL4
+str	Mlstring.lean	ok	compared, matches HOL4
+tokens_aux	Mlstring.lean	ok	compared, matches HOL4
+tokens	Mlstring.lean	ok	compared, matches HOL4
+isStringThere_aux	Mlstring.lean	ok	compared, matches HOL4
+isSubstring_aux	Mlstring.lean	ok	compared, matches HOL4
+isSubstring	Mlstring.lean	ok	compared, matches HOL4
+mlstring.compare_aux	Mlstring.lean	ok	compared, matches HOL4
+mlstring.compare	Mlstring.lean	ok	compared, matches HOL4
+mlstring_lt	Mlstring.lean	ok	compared, matches HOL4
+mlstring_le	Mlstring.lean	ok	compared, matches HOL4
+mlstring_gt	Mlstring.lean	ok	HOL4 overloads > ; Lean has no such notation (statements checked separately)
+mlstring_ge	Mlstring.lean	ok	HOL4 overloads >= ; Lean has no such notation (statements checked separately)
+mlstring.collate_aux	Mlstring.lean	ok	compared, matches HOL4
+mlstring.collate	Mlstring.lean	ok	compared, matches HOL4
+app_list_ann	Mlstring.lean	ok	compared, matches HOL4
+char_to_word8	Mlstring.lean	ok	compared, matches HOL4
+word8_to_char	Mlstring.lean	ok	CHR (w2n w) always < 256
+empty_ffi	Mlstring.lean	ok	compared, matches HOL4
+locn	Location.lean	ok	compared, matches HOL4
+locnrow	Location.lean	V-C1	other constructors := ARB; HOL4 locationScript.sml:6
+locn_rowupdate	Location.lean	V-C1	other constructors := ARB; HOL4 locationScript.sml:11
+locncol	Location.lean	V-C1	other constructors := ARB; HOL4 locationScript.sml:16
+locn_colupdate	Location.lean	V-C1	other constructors := ARB; HOL4 locationScript.sml:20
+locs	Location.lean	ok	compared, matches HOL4
+lprefix_lub	LprefixLub.lean	ok	compared, matches HOL4
+lit	Ast.lean	ok	compared, matches HOL4
+shift	Ast.lean	ok	compared, matches HOL4
+arith	Ast.lean	ok	compared, matches HOL4
+word_size	Ast.lean	ok	compared, matches HOL4
+thunk_mode	Ast.lean	ok	compared, matches HOL4
+thunk_op (datatype)	Ast.lean	ok	compared, matches HOL4
+opb	Ast.lean	ok	compared, matches HOL4
+test	Ast.lean	ok	compared, matches HOL4
+prim_type	Ast.lean	ok	compared, matches HOL4
+op	Ast.lean	ok	constructor order and fields identical
+op_class	Ast.lean	ok	compared, matches HOL4
+getOpClass	Ast.lean	ok	compared, matches HOL4
+ast_t	Ast.lean	ok	compared, matches HOL4
+pat	Ast.lean	ok	compared, matches HOL4
+lop	Ast.lean	ok	compared, matches HOL4
+exp	Ast.lean	ok	compared, matches HOL4
+dec	Ast.lean	ok	compared, matches HOL4
+pat_bindings	Ast.lean	ok	mutual with pats_bindings
+every_exp	Ast.lean	ok	nested recursion via aux functions with proved equations
+thunk_op	Ast.lean	ok	datatype compared with astScript.sml:51
+call_FFI_rel_def	EvaluateProps.lean	ok	definition compared with evaluatePropsScript.sml:13
+dest_IO_event_def	EvaluateProps.lean	ok	definition compared with evaluatePropsScript.sml:17
+io_events_mono_def	EvaluateProps.lean	ok	definition compared with evaluatePropsScript.sml:21
+is_clock_io_mono_def	EvaluateProps.lean	ok	definition compared with evaluatePropsScript.sml:71
+adj_clock_def	EvaluateProps.lean	ok	definition compared with evaluatePropsScript.sml:143
+fix_clock_def	Evaluate.lean	ok	definition compared with evaluateScript.sml:14
+dec_clock_def	Evaluate.lean	ok	definition compared with evaluateScript.sml:19
+do_eval_res_def	Evaluate.lean	ok	definition compared with evaluateScript.sml:23
+list_result_def	Evaluate.lean	ok	definition compared with evaluateScript.sml:32
+evaluate_def	Evaluate.lean	ok	definition compared with evaluateScript.sml:49
+ffi_outcome	Ffi.lean	ok	datatype compared with ffiScript.sml:15
+oracle_result	Ffi.lean	ok	datatype compared with ffiScript.sml:19
+shmem_op	Ffi.lean	ok	datatype compared with ffiScript.sml:23
+ffiname	Ffi.lean	ok	datatype compared with ffiScript.sml:27
+io_event	Ffi.lean	ok	datatype compared with ffiScript.sml:38
+final_event	Ffi.lean	ok	datatype compared with ffiScript.sml:42
+ffi_state	Ffi.lean	ok	datatype compared with ffiScript.sml:46
+ffi_result	Ffi.lean	ok	datatype compared with ffiScript.sml:54
+call_FFI_def	Ffi.lean	ok	definition compared with ffiScript.sml:59
+outcome	Ffi.lean	ok	datatype compared with ffiScript.sml:77
+behaviour	Ffi.lean	ok	datatype compared with ffiScript.sml:84
+fp_cmp	FpSem.lean	ok	datatype compared with fpSemScript.sml:8
+fp_uop	FpSem.lean	ok	datatype compared with fpSemScript.sml:12
+fp_bop	FpSem.lean	ok	datatype compared with fpSemScript.sml:16
+fp_top	FpSem.lean	ok	datatype compared with fpSemScript.sml:20
+fp_cmp_def	FpSem.lean	ok	definition compared with fpSemScript.sml:24
+locn	Location.lean	ok	datatype compared with locationScript.sml:3
+locnrow_def	Location.lean	V-C1	other constructors := ARB; HOL4 locationScript.sml:6
+locn_rowupdate_def	Location.lean	V-C1	other constructors := ARB; HOL4 locationScript.sml:11
+locncol_def	Location.lean	V-C1	other constructors := ARB; HOL4 locationScript.sml:16
+locn_colupdate_def	Location.lean	V-C1	other constructors := ARB; HOL4 locationScript.sml:20
+locs	Location.lean	ok	datatype compared with locationScript.sml:25
+lprefix_lub_def	LprefixLub.lean	ok	definition compared with lprefix_lubScript.sml:10
+the_def	Misc.lean	ok	definition compared with miscScript.sml:20
+app_list	Misc.lean	ok	datatype compared with miscScript.sml:60
+append_aux_def	Misc.lean	ok	definition compared with miscScript.sml:64
+append_def	Misc.lean	ok	definition compared with miscScript.sml:70
+MAP3_def	Misc.lean	V-C1	unmatched list shapes := ARB; HOL4 miscScript.sml:74 two clauses only
+tlookup_def	Misc.lean	ok	definition compared with miscScript.sml:98
+max3_def	Misc.lean	ok	definition compared with miscScript.sml:157
+UPDATE_LIST_def	Misc.lean	ok	definition compared with miscScript.sml:169
+find_index_def	Misc.lean	ok	definition compared with miscScript.sml:176
+between_def	Misc.lean	ok	definition compared with miscScript.sml:221
+lookup_vars_def	Misc.lean	ok	definition compared with miscScript.sml:268
+enumerate_def	Misc.lean	ok	definition compared with miscScript.sml:281
+range_def	Misc.lean	ok	definition compared with miscScript.sml:312
+sort_def	Mllist.lean	ok	definition compared with mllistScript.sml:11
+nth_def	Mllist.lean	ok	definition compared with mllistScript.sml:15
+collate_def	Mllist.lean	ok	definition compared with mllistScript.sml:24
+mlstring	Mlstring.lean	ok	datatype compared with mlstringScript.sml:16
+implode_def	Mlstring.lean	ok	definition compared with mlstringScript.sml:21
+strlen_def	Mlstring.lean	ok	definition compared with mlstringScript.sml:25
+strsub_def	Mlstring.lean	ok	definition compared with mlstringScript.sml:29
+concat_def	Mlstring.lean	ok	definition compared with mlstringScript.sml:36
+explode_aux_def	Mlstring.lean	ok	definition compared with mlstringScript.sml:40
+explode_def	Mlstring.lean	ok	definition compared with mlstringScript.sml:56
+strcat_def	Mlstring.lean	ok	definition compared with mlstringScript.sml:84
+str_def	Mlstring.lean	ok	definition compared with mlstringScript.sml:90
+tokens_aux_def	Mlstring.lean	ok	definition compared with mlstringScript.sml:94
+tokens_def	Mlstring.lean	ok	definition compared with mlstringScript.sml:109
+isStringThere_aux_def	Mlstring.lean	ok	definition compared with mlstringScript.sml:199
+isSubstring_aux_def	Mlstring.lean	ok	definition compared with mlstringScript.sml:219
+isSubstring_def	Mlstring.lean	ok	definition compared with mlstringScript.sml:227
+compare_aux_def	Mlstring.lean	ok	definition compared with mlstringScript.sml:237
+compare_def	Mlstring.lean	ok	definition compared with mlstringScript.sml:248
+mlstring_lt_def	Mlstring.lean	ok	definition compared with mlstringScript.sml:256
+mlstring_le_def	Mlstring.lean	ok	definition compared with mlstringScript.sml:260
+mlstring_gt_def	Mlstring.lean	ok	definition compared with mlstringScript.sml:264
+mlstring_ge_def	Mlstring.lean	ok	definition compared with mlstringScript.sml:268
+collate_aux_def	Mlstring.lean	ok	definition compared with mlstringScript.sml:279
+collate_def	Mlstring.lean	ok	definition compared with mlstringScript.sml:287
+app_list_ann	Mlstring.lean	ok	datatype compared with mlstringScript.sml:298
+char_to_word8_def	Mlstring.lean	ok	definition compared with mlstringScript.sml:304
+word8_to_char_def	Mlstring.lean	ok	definition compared with mlstringScript.sml:308
+empty_ffi_def	Mlstring.lean	ok	definition compared with mlstringScript.sml:315
+alist_rel_restr_def	NamespaceProps.lean	ok	definition compared with namespacePropsScript.sml:381
+alistSub_def	NamespaceProps.lean	ok	definition compared with namespacePropsScript.sml:404
+nsSub_compute_def	NamespaceProps.lean	ok	definition compared with namespacePropsScript.sml:423
+id	Namespace.lean	ok	datatype compared with namespaceScript.sml:14
+mk_id_def	Namespace.lean	ok	definition compared with namespaceScript.sml:18
+id_to_n_def	Namespace.lean	ok	definition compared with namespaceScript.sml:23
+id_to_mods_def	Namespace.lean	ok	definition compared with namespaceScript.sml:28
+namespace	Namespace.lean	ok	datatype compared with namespaceScript.sml:33
+nsLookup_def	Namespace.lean	ok	definition compared with namespaceScript.sml:38
+nsLookupMod_def	Namespace.lean	ok	definition compared with namespaceScript.sml:47
+nsEmpty_def	Namespace.lean	ok	definition compared with namespaceScript.sml:53
+nsAppend_def	Namespace.lean	ok	definition compared with namespaceScript.sml:57
+nsLift_def	Namespace.lean	ok	definition compared with namespaceScript.sml:61
+alist_to_ns_def	Namespace.lean	ok	definition compared with namespaceScript.sml:65
+nsBind_def	Namespace.lean	ok	definition compared with namespaceScript.sml:69
+nsBindList_def	Namespace.lean	ok	definition compared with namespaceScript.sml:73
+nsOptBind_def	Namespace.lean	ok	definition compared with namespaceScript.sml:77
+nsSing_def	Namespace.lean	ok	definition compared with namespaceScript.sml:81
+nsSub_def	Namespace.lean	ok	definition compared with namespaceScript.sml:85
+nsAll_def	Namespace.lean	ok	definition compared with namespaceScript.sml:93
+nsAll2_def	Namespace.lean	ok	definition compared with namespaceScript.sml:97
+nsDom_def	Namespace.lean	ok	definition compared with namespaceScript.sml:102
+nsMap_def	Namespace.lean	ok	definition compared with namespaceScript.sml:107
+shift_lookup_def	SemanticPrimitivesProps.lean	ok	definition compared with semanticPrimitivesPropsScript.sml:44
+map_error_result_def	SemanticPrimitivesProps.lean	ok	definition compared with semanticPrimitivesPropsScript.sml:138
+map_result_def	SemanticPrimitivesProps.lean	ok	definition compared with semanticPrimitivesPropsScript.sml:143
+every_error_result_def	SemanticPrimitivesProps.lean	ok	definition compared with semanticPrimitivesPropsScript.sml:148
+every_result_def	SemanticPrimitivesProps.lean	ok	definition compared with semanticPrimitivesPropsScript.sml:153
+map_sv_def	SemanticPrimitivesProps.lean	ok	definition compared with semanticPrimitivesPropsScript.sml:158
+dest_Refv_def	SemanticPrimitivesProps.lean	V-C1	non-Refv := ARB; HOL4 semanticPrimitivesPropsScript.sml:165
+store_v_vs_def	SemanticPrimitivesProps.lean	ok	definition compared with semanticPrimitivesPropsScript.sml:169
+ctors_of_tdef_def	SemanticPrimitivesProps.lean	ok	definition compared with semanticPrimitivesPropsScript.sml:176
+FV_def	SemanticPrimitivesProps.lean	ok	definition compared with semanticPrimitivesPropsScript.sml:182
+FV_dec_def	SemanticPrimitivesProps.lean	V-C1	Dmod/Dlocal/Denv := ARB; HOL4 semanticPrimitivesPropsScript.sml:220 has five clauses
+stamp	SemanticPrimitives.lean	ok	datatype compared with semanticPrimitivesScript.sml:12
+sem_env	SemanticPrimitives.lean	ok	datatype compared with semanticPrimitivesScript.sml:20
+v	SemanticPrimitives.lean	ok	datatype compared with semanticPrimitivesScript.sml:29
+bind_stamp_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:51
+chr_stamp_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:54
+div_stamp_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:57
+subscript_stamp_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:60
+bind_exn_v_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:64
+chr_exn_v_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:67
+div_exn_v_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:70
+sub_exn_v_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:73
+bool_type_num_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:77
+list_type_num_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:80
+abort	SemanticPrimitives.lean	ok	datatype compared with semanticPrimitivesScript.sml:85
+error_result	SemanticPrimitives.lean	ok	datatype compared with semanticPrimitivesScript.sml:92
+result	SemanticPrimitives.lean	ok	datatype compared with semanticPrimitivesScript.sml:98
+store_v	SemanticPrimitives.lean	ok	datatype compared with semanticPrimitivesScript.sml:105
+store_v_same_type_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:117
+store_lookup_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:130
+store_alloc_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:135
+store_assign_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:139
+eval_decs_state	SemanticPrimitives.lean	ok	datatype compared with semanticPrimitivesScript.sml:158
+eval_oracle_state	SemanticPrimitives.lean	ok	datatype compared with semanticPrimitivesScript.sml:174
+eval_state	SemanticPrimitives.lean	ok	datatype compared with semanticPrimitivesScript.sml:185
+state	SemanticPrimitives.lean	ok	datatype compared with semanticPrimitivesScript.sml:191
+do_con_check_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:204
+one_con_check_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:211
+build_conv_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:216
+lit_same_type_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:226
+match_result	SemanticPrimitives.lean	ok	datatype compared with semanticPrimitivesScript.sml:238
+same_type_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:245
+same_ctor_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:251
+ctor_same_type_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:255
+Boolv_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:263
+pmatch_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:277
+can_pmatch_all_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:322
+build_rec_env_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:330
+find_recfun_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:338
+eq_result	SemanticPrimitives.lean	ok	datatype compared with semanticPrimitivesScript.sml:345
+do_eq_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:351
+do_opapp_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:382
+v_to_list_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:398
+list_to_v_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:408
+v_to_char_list_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:413
+vs_to_string_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:423
+nat_to_v_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:430
+maybe_all_list_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:434
+v_to_word8_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:443
+v_to_word8_list_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:450
+v_to_word64_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:457
+v_to_word64_list_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:464
+lookup_env_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:471
+add_decs_generation_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:476
+add_env_generation_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:483
+declare_env_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:488
+concrete_v_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:515
+compiler_agrees_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:530
+do_eval_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:541
+reset_env_generation_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:574
+copy_array_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:588
+ws_to_chars_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:610
+chars_to_ws_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:614
+shift8_lookup_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:657
+shift64_lookup_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:666
+exp_or_val	SemanticPrimitives.lean	ok	datatype compared with semanticPrimitivesScript.sml:675
+xor_bytes_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:681
+thunk_op_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:690
+check_type_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:703
+dest_Litv_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:713
+the_Litv_IntLit_def	SemanticPrimitives.lean	V-C1	other values := ARB; HOL4 semanticPrimitivesScript.sml:718
+the_Litv_Word8_def	SemanticPrimitives.lean	V-C1	other values := ARB; HOL4 semanticPrimitivesScript.sml:722
+the_Litv_Word64_def	SemanticPrimitives.lean	V-C1	other values := ARB; HOL4 semanticPrimitivesScript.sml:726
+the_Litv_Float64_def	SemanticPrimitives.lean	V-C1	other values := ARB; HOL4 semanticPrimitivesScript.sml:730
+the_Litv_Char_def	SemanticPrimitives.lean	V-C1	other values := ARB; HOL4 semanticPrimitivesScript.sml:734
+the_Boolv_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:738
+num_cmp_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:742
+int_cmp_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:749
+do_test_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:756
+do_arith_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:773
+do_conversion_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:818
+do_app_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:849
+do_log_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:1185
+do_if_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:1193
+build_constrs_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:1200
+build_tdefs_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:1206
+check_dup_ctors_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:1215
+combine_dec_result_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:1222
+extend_dec_env_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:1229
+?	SemanticPrimitives.lean	ok	datatype compared with semanticPrimitivesScript.sml:1245
+dest_thunk_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:1252
+update_thunk_def	SemanticPrimitives.lean	ok	definition compared with semanticPrimitivesScript.sml:1262
+evaluate_prog_with_clock_def	SemanticsMin.lean	ok	definition compared with semantics_minScript.sml:12
+semantics_prog_def	SemanticsMin.lean	ok	definition compared with semantics_minScript.sml:19
+store_t	TypeSoundInvariants.lean	ok	datatype compared with typeSoundInvariantsScript.sml:9
+tenv_abbrev_ok_def	TypeSoundInvariants.lean	ok	definition compared with typeSoundInvariantsScript.sml:20
+tenv_ctor_ok_def	TypeSoundInvariants.lean	ok	definition compared with typeSoundInvariantsScript.sml:24
+tenv_val_ok_def	TypeSoundInvariants.lean	ok	definition compared with typeSoundInvariantsScript.sml:28
+tenv_ok_def	TypeSoundInvariants.lean	ok	definition compared with typeSoundInvariantsScript.sml:32
+tenv_val_exp_ok_def	TypeSoundInvariants.lean	ok	definition compared with typeSoundInvariantsScript.sml:39
+ctMap_ok_def	TypeSoundInvariants.lean	ok	definition compared with typeSoundInvariantsScript.sml:52
+type_ctor_def	TypeSoundInvariants.lean	ok	definition compared with typeSoundInvariantsScript.sml:72
+add_tenvE_def	TypeSoundInvariants.lean	ok	definition compared with typeSoundInvariantsScript.sml:78
+type_v	TypeSoundInvariants.lean	ok	inductive compared with typeSoundInvariantsScript.sml:84
+type_sv_def	TypeSoundInvariants.lean	ok	definition compared with typeSoundInvariantsScript.sml:152
+type_s_def	TypeSoundInvariants.lean	ok	definition compared with typeSoundInvariantsScript.sml:162
+ctMap_has_exns_def	TypeSoundInvariants.lean	ok	definition compared with typeSoundInvariantsScript.sml:173
+ctMap_has_lists_def	TypeSoundInvariants.lean	ok	definition compared with typeSoundInvariantsScript.sml:182
+ctMap_has_bools_def	TypeSoundInvariants.lean	ok	definition compared with typeSoundInvariantsScript.sml:191
+good_ctMap_def	TypeSoundInvariants.lean	ok	definition compared with typeSoundInvariantsScript.sml:198
+consistent_ctMap_def	TypeSoundInvariants.lean	ok	definition compared with typeSoundInvariantsScript.sml:229
+type_all_env_def	TypeSoundInvariants.lean	ok	definition compared with typeSoundInvariantsScript.sml:243
+type_sound_invariant_def	TypeSoundInvariants.lean	ok	definition compared with typeSoundInvariantsScript.sml:249
+store_type_extension_def	TypeSound.lean	ok	definition compared with typeSoundScript.sml:487
+type_pes_def	TypeSysProps.lean	ok	definition compared with typeSysPropsScript.sml:103
+deBruijn_subst_tenvE_def	TypeSysProps.lean	ok	definition compared with typeSysPropsScript.sml:554
+db_merge_def	TypeSysProps.lean	ok	definition compared with typeSysPropsScript.sml:565
+type_def_to_ctMap_def	TypeSysProps.lean	V-C1	mismatched list shapes := ARB; HOL4 typeSysPropsScript.sml:1502 two clauses only
+t	TypeSystem.lean	ok	datatype compared with typeSystemScript.sml:13
+Tarray_num_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:26
+Tbool_num_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:30
+Tchar_num_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:34
+Texn_num_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:38
+Tfn_num_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:42
+Tint_num_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:46
+Tlist_num_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:50
+Tref_num_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:54
+Tstring_num_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:58
+Ttup_num_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:62
+Tvector_num_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:66
+Tword64_num_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:70
+Tword8_num_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:74
+Tword8array_num_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:78
+Tdouble_num_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:82
+prim_type_nums_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:87
+Tarray_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:94
+Tbool_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:98
+Tchar_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:102
+Texn_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:106
+Tfn_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:110
+Tint_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:114
+Tlist_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:118
+Tref_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:122
+Tstring_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:126
+Ttup_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:130
+Tvector_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:134
+Tword64_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:138
+Tword8_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:142
+Tword8array_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:146
+Tdouble_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:150
+check_freevars_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:157
+check_freevars_ast_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:167
+type_subst_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:182
+deBruijn_inc_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:197
+deBruijn_subst_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:210
+tenv_val_exp	TypeSystem.lean	ok	datatype compared with typeSystemScript.sml:226
+bind_tvar_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:235
+opt_bind_name_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:239
+tveLookup_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:247
+type_env	TypeSystem.lean	ok	datatype compared with typeSystemScript.sml:263
+extend_dec_tenv_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:271
+lookup_varE_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:278
+lookup_var_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:286
+num_tvs_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:294
+bind_var_list_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:302
+t_of_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:329
+supported_test_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:339
+supported_arith_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:345
+supported_conversion_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:359
+type_op_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:379
+check_type_names_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:424
+type_name_subst_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:443
+check_ctor_tenv_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:464
+build_ctor_tenv_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:477
+is_value_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:491
+type_p	TypeSystem.lean	ok	inductive compared with typeSystemScript.sml:507
+type_e	TypeSystem.lean	ok	inductive compared with typeSystemScript.sml:585
+tenv_add_tvs_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:745
+type_pe_determ_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:750
+tscheme_inst_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:759
+tenvLift_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:768
+type_d	TypeSystem.lean	ok	inductive compared with typeSystemScript.sml:773
+tscheme_inst2_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:969
+weak_tenv_def	TypeSystem.lean	ok	definition compared with typeSystemScript.sml:973
+weak_tenvE_def	Weakening.lean	ok	definition compared with weakeningScript.sml:11
+weakS_def	Weakening.lean	ok	definition compared with weakeningScript.sml:19
+weak_def	Weakening.lean	ok	definition compared with weakeningScript.sml:151
+weakCT_def	Weakening.lean	ok	definition compared with weakeningScript.sml:281
+RealX	Prelude/Float.lean	ok	compared with HOL4 theory source
+lt_rat	Prelude/Float.lean	ok	compared with HOL4 theory source
+le_rat	Prelude/Float.lean	ok	compared with HOL4 theory source
+gt_rat	Prelude/Float.lean	ok	compared with HOL4 theory source
+ge_rat	Prelude/Float.lean	ok	compared with HOL4 theory source
+eq_rat	Prelude/Float.lean	ok	compared with HOL4 theory source
+abs	Prelude/Float.lean	ok	compared with HOL4 theory source
+distLe	Prelude/Float.lean	ok	compared with HOL4 theory source
+ratAbs	Prelude/Float.lean	ok	compared with HOL4 theory source
+float	Prelude/Float.lean	ok	compared with HOL4 theory source
+float_value_ty	Prelude/Float.lean	ok	compared with HOL4 theory source
+float_bias	Prelude/Float.lean	ok	compared with HOL4 theory source
+UINT_MAXw	Prelude/Float.lean	ok	compared with HOL4 theory source
+float_to_real	Prelude/Float.lean	ok	compared with HOL4 theory source
+float_value	Prelude/Float.lean	ok	compared with HOL4 theory source
+float_is_nan	Prelude/Float.lean	ok	compared with HOL4 theory source
+float_is_signalling	Prelude/Float.lean	ok	compared with HOL4 theory source
+float_is_infinite	Prelude/Float.lean	ok	compared with HOL4 theory source
+float_is_normal	Prelude/Float.lean	ok	compared with HOL4 theory source
+float_is_subnormal	Prelude/Float.lean	ok	compared with HOL4 theory source
+float_is_zero	Prelude/Float.lean	ok	compared with HOL4 theory source
+float_is_finite	Prelude/Float.lean	ok	compared with HOL4 theory source
+float_negate	Prelude/Float.lean	ok	compared with HOL4 theory source
+float_abs	Prelude/Float.lean	ok	compared with HOL4 theory source
+float_plus_infinity	Prelude/Float.lean	ok	compared with HOL4 theory source
+float_plus_zero	Prelude/Float.lean	ok	compared with HOL4 theory source
+float_top	Prelude/Float.lean	ok	compared with HOL4 theory source
+float_plus_min	Prelude/Float.lean	ok	compared with HOL4 theory source
+float_minus_infinity	Prelude/Float.lean	ok	compared with HOL4 theory source
+float_minus_zero	Prelude/Float.lean	ok	compared with HOL4 theory source
+float_bottom	Prelude/Float.lean	ok	compared with HOL4 theory source
+float_minus_min	Prelude/Float.lean	ok	compared with HOL4 theory source
+flags	Prelude/Float.lean	ok	compared with HOL4 theory source
+clear_flags	Prelude/Float.lean	ok	compared with HOL4 theory source
+invalidop_flags	Prelude/Float.lean	ok	compared with HOL4 theory source
+dividezero_flags	Prelude/Float.lean	ok	compared with HOL4 theory source
+rounding	Prelude/Float.lean	ok	compared with HOL4 theory source
+is_closest	Prelude/Float.lean	ok	compared with HOL4 theory source
+closest_such	Prelude/Float.lean	ok	compared with HOL4 theory source
+closest	Prelude/Float.lean	ok	compared with HOL4 theory source
+largest	Prelude/Float.lean	ok	compared with HOL4 theory source
+threshold	Prelude/Float.lean	ok	compared with HOL4 theory source
+round	Prelude/Float.lean	ok	compared with HOL4 theory source
+fp_op	Prelude/Float.lean	ok	compared with HOL4 theory source
+float_some_qnan	Prelude/Float.lean	ok	compared with HOL4 theory source
+float_round	Prelude/Float.lean	ok	compared with HOL4 theory source
+float_round_with_flags	Prelude/Float.lean	ok	compared with HOL4 theory source
+check_for_signalling	Prelude/Float.lean	ok	compared with HOL4 theory source
+float_sqrt	Prelude/Float.lean	ok	compared with HOL4 theory source
+float_add	Prelude/Float.lean	ok	compared with HOL4 theory source
+float_sub	Prelude/Float.lean	ok	compared with HOL4 theory source
+float_mul	Prelude/Float.lean	ok	compared with HOL4 theory source
+float_div	Prelude/Float.lean	ok	compared with HOL4 theory source
+float_mul_add	Prelude/Float.lean	ok	compared with HOL4 theory source
+float_compare_ty	Prelude/Float.lean	ok	compared with HOL4 theory source
+float_compare	Prelude/Float.lean	ok	compared with HOL4 theory source
+float_less_than	Prelude/Float.lean	ok	compared with HOL4 theory source
+float_less_equal	Prelude/Float.lean	ok	compared with HOL4 theory source
+float_greater_than	Prelude/Float.lean	ok	compared with HOL4 theory source
+float_greater_equal	Prelude/Float.lean	ok	compared with HOL4 theory source
+float_equal	Prelude/Float.lean	ok	compared with HOL4 theory source
+fp64_to_float	Prelude/Float.lean	ok	compared with HOL4 theory source
+float_to_fp64	Prelude/Float.lean	ok	compared with HOL4 theory source
+fp64_abs	Prelude/Float.lean	ok	compared with HOL4 theory source
+fp64_negate	Prelude/Float.lean	ok	compared with HOL4 theory source
+fp64_sqrt	Prelude/Float.lean	ok	compared with HOL4 theory source
+fp64_add	Prelude/Float.lean	ok	compared with HOL4 theory source
+fp64_sub	Prelude/Float.lean	ok	compared with HOL4 theory source
+fp64_mul	Prelude/Float.lean	ok	compared with HOL4 theory source
+fp64_div	Prelude/Float.lean	ok	compared with HOL4 theory source
+fp64_mul_add	Prelude/Float.lean	ok	compared with HOL4 theory source
+fp64_equal	Prelude/Float.lean	ok	compared with HOL4 theory source
+fp64_lessThan	Prelude/Float.lean	ok	compared with HOL4 theory source
+fp64_lessEqual	Prelude/Float.lean	ok	compared with HOL4 theory source
+fp64_greaterThan	Prelude/Float.lean	ok	compared with HOL4 theory source
+fp64_greaterEqual	Prelude/Float.lean	ok	compared with HOL4 theory source
+FMap	Prelude/FMap.lean	ok	compared with HOL4 theory source
+FEMPTY	Prelude/FMap.lean	ok	compared with HOL4 theory source
+FLOOKUP	Prelude/FMap.lean	ok	compared with HOL4 theory source
+FDOM	Prelude/FMap.lean	ok	compared with HOL4 theory source
+FAPPLY	Prelude/FMap.lean	V-C1	FAPPLY outside FDOM := ARB; HOL4 finite_mapScript FAPPLY f x = OUTL (fmap_REP f x), value outside FDOM not saved
+FUPDATE	Prelude/FMap.lean	ok	compared with HOL4 theory source
+FUPDATE_LIST	Prelude/FMap.lean	ok	compared with HOL4 theory source
+FUNION	Prelude/FMap.lean	ok	compared with HOL4 theory source
+FRANGE	Prelude/FMap.lean	ok	compared with HOL4 theory source
+FEVERY	Prelude/FMap.lean	ok	compared with HOL4 theory source
+o_f	Prelude/FMap.lean	ok	compared with HOL4 theory source
+SUBMAP	Prelude/FMap.lean	ok	compared with HOL4 theory source
+alist_to_fmap	Prelude/FMap.lean	ok	compared with HOL4 theory source
+spt	Prelude/Coalg.lean	ok	compared with HOL4 theory source
+num_map	Prelude/Coalg.lean	ok	compared with HOL4 theory source
+num_set	Prelude/Coalg.lean	ok	compared with HOL4 theory source
+lookup	Prelude/Coalg.lean	ok	compared with HOL4 theory source
+domain	Prelude/Coalg.lean	ok	compared with HOL4 theory source
+toListA	Prelude/Coalg.lean	ok	compared with HOL4 theory source
+toList	Prelude/Coalg.lean	ok	compared with HOL4 theory source
+llist	Prelude/Coalg.lean	ok	compared with HOL4 theory source
+LNIL	Prelude/Coalg.lean	ok	compared with HOL4 theory source
+LNTH	Prelude/Coalg.lean	ok	compared with HOL4 theory source
+fromList	Prelude/Coalg.lean	ok	compared with HOL4 theory source
+LFINITE	Prelude/Coalg.lean	ok	compared with HOL4 theory source
+llength_rel	Prelude/Coalg.lean	ok	compared with HOL4 theory source
+LLENGTH	Prelude/Coalg.lean	ok	compared with HOL4 theory source
+LTAKE	Prelude/Coalg.lean	ok	compared with HOL4 theory source
+llist.toList	Prelude/Coalg.lean	ok	compared with HOL4 theory source
+LPREFIX	Prelude/Coalg.lean	ok	compared with HOL4 theory source
+sort2_tail	Prelude/Sort.lean	ok	compared with HOL4 theory source
+sort3_tail	Prelude/Sort.lean	ok	compared with HOL4 theory source
+merge_tail	Prelude/Sort.lean	ok	compared with HOL4 theory source
+mergesortN_tail	Prelude/Sort.lean	ok	compared with HOL4 theory source
+mergesort_tail	Prelude/Sort.lean	ok	compared with HOL4 theory source
+ARB	Prelude/Basic.lean	V-C2	HOL4 bool ARB is new_constant (boolScript.sml:245) with no equations; Lean ARB is Classical.choice so Classical.epsilon of an unsatisfiable predicate equals ARB (witness vc2_eps_false_eq_ARB)

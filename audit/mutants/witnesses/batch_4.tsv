@@ -1,0 +1,30 @@
+MUT-0004	witness	append_aux List xs aux gives xs++xs: List [0] with aux [1] gives [0,0] in mutant vs [0,1] in base.
+MUT-0010	witness	Mutated statement (env hypothesis dropped) refuted: env=[(x:a, y:foo)], empty signature; x:a is term_ok but y:foo is not (RACONV holds by ALPHAVARS head).
+MUT-0016	witness	entails0 without models0 premise is strictly stronger: with axiom x:bool over the standard signature, base entails0 holds (axiom satisfied in every model) while mutant fails (trivial interpretation gives x the value {0} /= true_ in a small structure with separation). Proved both.
+MUT-0022	witness	dbVSUBST swaps the two components of dbComb: with ilist=[] and t = dbComb (dbBound 0) (dbBound 1) mutant gives dbComb (dbBound 1) (dbBound 0).
+MUT-0028	witness	Mutated statement (4th hypothesis dropped) refuted: tm=x:a, tyin=[a|->b], env=[(x:b,x:b)] satisfies the remaining hypotheses but INST_CORE yields Clash (proved, REV_ASSOCD finds the env pair), so it is not Result(simple_inst ..).
+MUT-0034	witness	sptree domain BN uses 1*n+2 for left subtree: BN (BN LN (LS ())) LN has 3 in mutant domain (proved) but not in base domain {4} (proved by omega).
+MUT-0046	witness	sptree domain BS left image uses 2*n-2 (Nat truncation): BS (LS ()) () LN has 2 in base domain {0,2} but mutant domain is {0}; proved.
+MUT-0052	witness	transitive with premise R x y dropped: equality on Nat is HOL.transitive but not Mut.transitive (R 1 1 gives R 0 1); proved.
+MUT-0058	witness	Mutated statement (lookup in the reversed swapped list) refuted at ls=[(0,5),(1,5)], x=5: LHS 0, RHS 1; proved.
+MUT-0064	undecided	Statement changed from TotOrd type_cmp to TotOrd term_cmp. Both are true in HOL4 (the base also states TotOrd_term_cmp), so no Lean-provable difference exists; only a proof of TotOrd for either order would show equivalence and that needs totality/transitivity of the nested lexicographic orders (beyond 20 min). Likely equivalent as a truth value, but a different statement.
+MUT-0070	witness	theory_ok without has_type p BoolTy on axioms is weaker: theory over the standard signature with axiom x:a (type variable) satisfies Mut.theory_ok but not theory_ok (has_type x:a Bool is impossible, by inversion); proved.
+MUT-0076	witness	Mutated statement (VFREE_IN arguments swapped) refuted: terms in which the variable a occurs free are infinite; FINITE is refuted with the predicate "bounded size" (Comb^k v v has size k and v free); proved.
+MUT-0082	witness	StrongOrder without transitive is weaker: successor relation on Nat is irreflexive (Mut.StrongOrder) but not HOL.StrongOrder (1,2 composes to (0,2) fails); proved.
+MUT-0088	witness	In the mutant the ConstSpec rule demands every pair (x,ty) be in eqs (unsatisfiable); in context [fun,bool,=] with theory_ok proved, base derives updates (ConstSpec [] (l=l)) with l the closed identity abstraction (via REFL), the mutant cannot. Proved. Note: the mutant makes the rule unusable (visible-ish: no ConstSpec update is derivable).
+MUT-0094	witness	typeof (Abs v t) swaps the arrow components: Abs (x:bool) (y:a) has type bool->a in base, a->bool in mutant; proved.
+MUT-0100	witness	The changed last conjunction makes entails0 parse as (theory_ok /\ ... /\ hypset_ok) \/ (forall i, models -> satisfies): weaker. With empty membership relation (no valuations, so satisfies0 vacuous) the mutant holds for the empty non-theory_ok theory while base fails (no "fun" in signature); proved.
+MUT-0106	witness	term_image branches swapped: f constantly y, l=[x] (x/=y): base [y], mutant [x]; proved.
+MUT-0112	witness	Mutated statement (n : Int) refuted at n = -1: no list has negative length; proved (set EMPTY is FINITE).
+MUT-0118	witness	is_set_theory without extensional is weaker: on Nat with mem a x := bit a of x/2, separation, power, union, upair exist (proved) but 0 and 1 are distinct with no members, so extensional fails; proved.
+MUT-0124	witness	is_subseq rotates second list: [1,2] vs [0,2,1] (is_subseq first second): mutant true (skip 0, rotate [1,2] to [2,1], then match), base false; proved by simp.
+MUT-0130	witness	word8 := BitVec 7: (128 : word8) = 0 holds in the mutant and fails in base, and (255 : word8).toNat = 255 in base but not in mutant; proved by decide.
+MUT-0136	witness	dbterm arms Var/Const swapped: Var x a with env [] gives dbConst in mutant, dbVar in base; proved.
+MUT-0142	witness	INORDER_INSERT uses string_le in first filter: inserting [] into [[]] gives [[],[]] in mutant, [[]] in base; proved by simp.
+MUT-0148	witness	db Abs binds with index 1: Abs (x:a) (x:a) gives dbBound 1 in mutant, dbBound 0 in base; proved.
+MUT-0154	witness	has_type Abs rule without premise: lambda x:bool. y:a has type bool->bool in mutant (Abs constructor), not in base (inversion); proved.
+MUT-0160	witness	product uses upair instead of pair: in a model with separation/power/union/upair (mem a x := bit a of x/2, proved) take e=0 (no members), s={e}: s is in the mutant product s x s but not in the base product (s=(e,e)=upair s s would give e in e); proved.
+MUT-0166	witness	extensional with exists in place of forall: Mut.extensional holds for any relation on a non-empty type (x=y), while the non-extensional structure on Nat (0 and 1 both empty, proved) fails the base; proved.
+MUT-0172	witness	U1: RESULT_pkg opaque -> def makes RESULT (Clash t) = t provable by rfl in the mutant; clause: holSyntaxLib RESULT_def only gives RESULT (Result t) = t; models_disagree proves two models of that clause (functions on result Bool) differ on RESULT (Clash true).
+MUT-0178	witness	U1: HD_pkg opaque -> def makes HD [] = @x. F (Classical.epsilon (fun _ => False), which is Classical.choice) provable by rfl-based proof in the mutant; clause: list HD defining theorem HD (h::t) = h only; models_disagree proves two models of that clause differing on HD [].
+MUT-0040	witness	satisfies0 without valuation/hypothesis premises is strictly stronger: with the empty membership relation on Nat no valuation exists so base satisfies0 holds vacuously, while the mutant would force two valuations (const 0 / const 1) to give x the same value true_; proved.

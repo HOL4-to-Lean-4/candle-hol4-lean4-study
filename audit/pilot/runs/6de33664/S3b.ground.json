@@ -1,0 +1,10 @@
+{
+ "F1": {
+  "declaration": "Candle.binary_inference_rule",
+  "lean": "compiles",
+  "hol4": "not proved",
+  "lean_out": "",
+  "hol4_out": "<<HOL message: Created theory \"hol4q_scratch\">>\r\nexit=1\r\nUncaught exception at /home/my-pc/candle_build/repo/_build/HOL/src/parse/TermParse.sml:256: HOL_ERR (HOL_ERROR {message = \"\\nType constraint failure: \\n  Term: (mem :\\206\\177 -> (\\206\\177, \\206\\178) path -> bool) :\\206\\177 -> (\\206\\177, \\206\\178) path -> bool\\n  Constraint: :'U -> 'U -> bool\\n\", origins = [{origin_function = \"type-analysis\", origin_structure = \"Preterm\", source_location = Loc (LocP (0, 0, 12), LocP (0, 0, 14))}]})\r\n\r\n",
+  "hol4_2": "not proved"
+ }
+}

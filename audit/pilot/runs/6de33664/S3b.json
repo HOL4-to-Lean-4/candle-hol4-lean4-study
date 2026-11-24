@@ -1,0 +1,18 @@
+{
+ "module": "CandleLean.HolSoundness",
+ "checked": 11,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "Candle.binary_inference_rule",
+   "lean": "lean/CandleLean/HolSoundness.lean:13",
+   "hol4": "hol4/package/candle/standard/semantics/holSoundnessScript.sml:15",
+   "class": "V-P",
+   "explanation": "All premises of the HOL4 theorem are dropped: q has_type Bool, term_ok (sigof thy) q, the semantic implication from p1 and p2 to q over all structures, and (thy,h1) |= p1, (thy,h2) |= p2. The Lean statement says that in any set theory every term q is entailed by every theory under any hypotheses, and p1 and p2 are unused. It is strictly stronger and false. Example: for q = Var x (Tyvar a), entails0 requires has_type q BoolTy, which fails. So the statement together with is_set_theory mem yields False, while the HOL4 theorem is a true conditional rule.",
+   "repair": "theorem binary_inference_rule [Nonempty U] (mem : U → U → Prop) :\n    is_set_theory mem →\n      ∀ (thy : thy) (h1 h2 : List term) (p1 p2 q : term),\n        has_type q BoolTy ∧ term_ok (sigof thy) q ∧\n        (∀ (i : interpretation U) (v : valuation U),\n          is_structure0 mem (sigof thy) i v ∧\n          termsem0 mem (thy_tmsof thy) i v p1 = true_ mem ∧\n          termsem0 mem (thy_tmsof thy) i v p2 = true_ mem →\n          termsem0 mem (thy_tmsof thy) i v q = true_ mem) ∧\n        entails0 mem (thy, h1) p1 ∧ entails0 mem (thy, h2) p2 →\n        entails0 mem (thy, term_union h1 h2) q := by sorry",
+   "confidence": 0.99,
+   "lean_check": "import CandleLean.HolSoundness\n\nuniverse u\n\nnamespace Candle\n\nopen HOL Classical\n\ntheorem binary_inference_rule_refuted {U : Type u} [Nonempty U] (mem : U → U → Prop)\n    (hs : is_set_theory mem) (H : type_of% (@binary_inference_rule U _ mem)) : False := by\n  have h := H hs ((FEMPTY, FEMPTY), EMPTY) [] [] (Var (mls \"x\") (Tyvar (mls \"a\")))\n    (Var (mls \"x\") (Tyvar (mls \"a\"))) (Var (mls \"x\") (Tyvar (mls \"a\")))\n  unfold entails0 at h\n  obtain ⟨_, _, h2, _⟩ := h\n  simp only [EVERY] at h2\n  have h3 : has_type (Var (mls \"x\") (Tyvar (mls \"a\"))) BoolTy := h2.1\n  cases h3\n\nend Candle\n",
+   "hol4_check": "~entails0 (mem:'U->'U->bool) (thy, term_union h1 h2) (Var x (Tyvar a))"
+  }
+ ]
+}

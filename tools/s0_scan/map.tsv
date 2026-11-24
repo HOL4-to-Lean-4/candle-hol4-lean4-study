@@ -1,0 +1,272 @@
+# S0 map (Lean theorem statements vs HOL4 kernel export). Tab separated; lines starting with # are comments.
+# Derived only from CONVENTIONS.md and the two naming systems. status=fitted marks rows added or changed after looking at base statements.
+# kind=CONST: hol4 constant | Lean names that count as it (comma list) | perm | status | note.
+#   perm: HOL4 argument j is Lean explicit argument perm[j] (empty = same order). Names starting with @ are rules implemented in scan.py.
+# kind=TYPE: HOL4 type constructor | Lean names. kind=UNFOLD: Lean definition that CONVENTIONS defines as an abbreviation; scan.py unfolds it.
+# Every other Lean definition marked @[reducible] is unfolded too, unless it is a Lean name listed in a CONST row (I, K, UNCURRY, PAIR_MAP).
+# kind=ALLOW: Lean constant that is allowed to be opaque (HOL4 unspecified value). kind=RULE: normalisation rule, documentation of scan.py.
+kind	hol4	lean	perm	status	note
+CONST	ASCIInumbers$num_from_hex_string	HOL.num_from_hex_string		convention	CONVENTIONS sections 1 and 4: library constant, same name in namespace HOL
+CONST	ASCIInumbers$num_to_hex_string	HOL.num_to_hex_string		convention	CONVENTIONS sections 1 and 4: library constant, same name in namespace HOL
+CONST	alist$ALOOKUP	HOL.ALOOKUP		convention	CONVENTIONS sections 1 and 4: library constant, same name in namespace HOL
+CONST	arithmetic$+	HAdd.hAdd		lean-core	
+CONST	arithmetic$<=	LE.le		lean-core	
+CONST	arithmetic$BIT1	@num		convention	rule NUM: numeral literal; HOL4 NUMERAL/BIT1/BIT2/ZERO/0 evaluated to a number, Lean OfNat.ofNat literal
+CONST	arithmetic$BIT2	@num		convention	rule NUM: numeral literal; HOL4 NUMERAL/BIT1/BIT2/ZERO/0 evaluated to a number, Lean OfNat.ofNat literal
+CONST	arithmetic$EVEN	HOL.EVEN		convention	
+CONST	arithmetic$MAX	HOL.MAX		convention	CONVENTIONS section 2: MAX is HOL.MAX
+CONST	arithmetic$NUMERAL	@num		convention	rule NUM: numeral literal; HOL4 NUMERAL/BIT1/BIT2/ZERO/0 evaluated to a number, Lean OfNat.ofNat literal
+CONST	arithmetic$ZERO	@num		convention	rule NUM: numeral literal; HOL4 NUMERAL/BIT1/BIT2/ZERO/0 evaluated to a number, Lean OfNat.ofNat literal
+CONST	bitstring$v2w	HOL.v2w		convention	CONVENTIONS sections 1 and 4: library constant, same name in namespace HOL
+CONST	bool$!	@forall		lean-core	binder: HOL4 abstraction under bool$! = Lean pi with non-Prop domain; Lean type binders and instance binders are skipped
+CONST	bool$/\	And		lean-core	conjunction; chains flattened
+CONST	bool$?	Exists		lean-core	binder: Lean Exists applied to a lambda
+CONST	bool$COND	ite		lean-core	if-then-else; Lean decidability instance ignored
+CONST	bool$F	False		lean-core	
+CONST	bool$IN	Membership.mem	1,0	lean-core	Lean mem takes the collection first. IN x (LIST_TO_SET l) identified with Lean list membership (rule LMEM)
+CONST	bool$T	True		lean-core	
+CONST	bool$\/	Or		lean-core	disjunction; chains flattened
+CONST	bool$~	Not,Ne		lean-core	negation; Lean Ne a b is Not (Eq a b)
+CONST	combin$I	HOL.I		convention	
+CONST	combin$K	HOL.K		convention	
+CONST	combin$UPDATE	HOL.UPDATE		convention	CONVENTIONS section 3: (a =+ b) f is UPDATE a b f
+CONST	combin$o	Function.comp		lean-core	
+CONST	finite_map$FAPPLY	HOL.FAPPLY		convention	CONVENTIONS sections 1 and 4: library constant, same name in namespace HOL
+CONST	finite_map$FEMPTY	HOL.FEMPTY		convention	CONVENTIONS sections 1 and 4: library constant, same name in namespace HOL
+CONST	finite_map$FUN_FMAP	HOL.FUN_FMAP		convention	CONVENTIONS sections 1 and 4: library constant, same name in namespace HOL
+CONST	holSemantics$entails0	Candle.entails0		convention	
+CONST	holSemantics$is_interpretation0	Candle.is_interpretation0		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSemantics$is_std_interpretation0	Candle.is_std_interpretation0		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSemantics$is_std_type_assignment0	Candle.is_std_type_assignment0		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSemantics$is_structure0	Candle.is_structure0		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSemantics$is_type_assignment0	Candle.is_type_assignment0		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSemantics$is_type_valuation0	Candle.is_type_valuation0		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSemantics$is_valuation0	Candle.is_valuation0		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSemantics$termsem0	Candle.termsem0		convention	
+CONST	holSemantics$typesem	Candle.typesem		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSyntax$===	Candle.equation		convention	CONVENTIONS section 4: s === t is equation s t
+CONST	holSyntax$ACONV	Candle.ACONV		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSyntax$Abs	Candle.term.Abs		convention	CONVENTIONS section 1: constructor of a type exported in namespace Candle
+CONST	holSyntax$Comb	Candle.term.Comb		convention	CONVENTIONS section 1: constructor of a type exported in namespace Candle
+CONST	holSyntax$Const	Candle.term.Const		convention	CONVENTIONS section 1: constructor of a type exported in namespace Candle
+CONST	holSyntax$INST	Candle.INST		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSyntax$INST_CORE	Candle.INST_CORE		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSyntax$RACONV	Candle.RACONV		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSyntax$TYPE_SUBST	Candle.TYPE_SUBST		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSyntax$Tyapp	Candle.type.Tyapp		convention	CONVENTIONS section 1: constructor of a type exported in namespace Candle
+CONST	holSyntax$Tyvar	Candle.type.Tyvar		convention	CONVENTIONS section 1: constructor of a type exported in namespace Candle
+CONST	holSyntax$VARIANT	Candle.VARIANT		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSyntax$VFREE_IN	Candle.VFREE_IN		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSyntax$VSUBST	Candle.VSUBST		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSyntax$Var	Candle.term.Var		convention	CONVENTIONS section 1: constructor of a type exported in namespace Candle
+CONST	holSyntax$alpha_lt	Candle.alpha_lt		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSyntax$codomain	Candle.codomain		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSyntax$dest_var	Candle.dest_var		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSyntax$domain	Candle.domain		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSyntax$has_type	Candle.has_type		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSyntax$hypset_ok	Candle.hypset_ok		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSyntax$is_std_sig	Candle.is_std_sig		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSyntax$orda	Candle.orda		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSyntax$ordav	Candle.ordav		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSyntax$sizeof	Candle.sizeof		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSyntax$term_cmp	Candle.term_cmp		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSyntax$term_image	Candle.term_image		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSyntax$term_lt	Candle.term_lt		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSyntax$term_ok	Candle.term_ok		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSyntax$term_remove	Candle.term_remove		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSyntax$term_union	Candle.term_union		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSyntax$theory_ok	Candle.theory_ok		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSyntax$tvars	Candle.tvars		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSyntax$type_cmp	Candle.type_cmp		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSyntax$type_lt	Candle.type_lt		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSyntax$type_ok	Candle.type_ok		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSyntax$typeof	Candle.typeof		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSyntax$tyvars	Candle.tyvars		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSyntax$welltyped	Candle.welltyped		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSyntax$|-	Candle.proves		convention	CONVENTIONS section 4: (thy,h) |- c is proves (thy,h) c
+CONST	holSyntaxExtra$arities_match	Candle.arities_match		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSyntaxExtra$bind	Candle.bind		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSyntaxExtra$bind_list_aux	Candle.bind_list_aux		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSyntaxExtra$bv_names	Candle.bv_names		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSyntaxExtra$db	Candle.db		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSyntaxExtra$dbAbs	Candle.dbterm_t.dbAbs		convention	CONVENTIONS section 1: constructor of a type exported in namespace Candle
+CONST	holSyntaxExtra$dbBound	Candle.dbterm_t.dbBound		convention	CONVENTIONS section 1: constructor of a type exported in namespace Candle
+CONST	holSyntaxExtra$dbComb	Candle.dbterm_t.dbComb		convention	CONVENTIONS section 1: constructor of a type exported in namespace Candle
+CONST	holSyntaxExtra$dbConst	Candle.dbterm_t.dbConst		convention	CONVENTIONS section 1: constructor of a type exported in namespace Candle
+CONST	holSyntaxExtra$dbINST	Candle.dbINST		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSyntaxExtra$dbVFREE_IN	Candle.dbVFREE_IN		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSyntaxExtra$dbVSUBST	Candle.dbVSUBST		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSyntaxExtra$dbVar	Candle.dbterm_t.dbVar		convention	CONVENTIONS section 1: constructor of a type exported in namespace Candle
+CONST	holSyntaxExtra$dbterm	Candle.dbterm		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSyntaxExtra$fresh	Candle.fresh		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSyntaxExtra$rename_bvars	Candle.rename_bvars		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSyntaxExtra$simple_inst	Candle.simple_inst		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSyntaxExtra$simple_subst	Candle.simple_subst		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSyntaxExtra$subterm1	Candle.subterm1		convention	CONVENTIONS section 4: subterm = RTC subterm1; subterm1 itself keeps its name
+CONST	holSyntaxExtra$subtype1	Candle.subtype1		convention	CONVENTIONS section 4: subtype = RTC subtype1
+CONST	holSyntaxLib$ALPHAVARS	Candle.ALPHAVARS		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSyntaxLib$Clash	Candle.result.Clash		convention	CONVENTIONS section 1: constructor of a type exported in namespace Candle
+CONST	holSyntaxLib$INORDER_INSERT	Candle.INORDER_INSERT		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSyntaxLib$IS_RESULT	Candle.IS_RESULT		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSyntaxLib$LIST_INSERT	Candle.LIST_INSERT		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSyntaxLib$LIST_UNION	Candle.LIST_UNION		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSyntaxLib$RESULT	Candle.RESULT		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSyntaxLib$REV_ASSOCD	Candle.REV_ASSOCD		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	holSyntaxLib$Result	Candle.result.Result		convention	CONVENTIONS section 1: constructor of a type exported in namespace Candle
+CONST	holSyntaxLib$STRING_SORT	Candle.STRING_SORT		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	indexedLists$MAPi	HOL.MAPi		convention	CONVENTIONS sections 1 and 4: library constant, same name in namespace HOL
+CONST	list$ALL_DISTINCT	HOL.ALL_DISTINCT		convention	CONVENTIONS sections 1 and 4: library constant, same name in namespace HOL
+CONST	list$APPEND	HAppend.hAppend,List.append		lean-core	
+CONST	list$CONS	List.cons		lean-core	
+CONST	list$DROP	List.drop		lean-core	
+CONST	list$EL	HOL.EL		convention	CONVENTIONS sections 1 and 4: library constant, same name in namespace HOL
+CONST	list$EVERY	HOL.EVERY		convention	CONVENTIONS sections 1 and 4: library constant, same name in namespace HOL
+CONST	list$EXISTS	HOL.EXISTS		convention	CONVENTIONS sections 1 and 4: library constant, same name in namespace HOL
+CONST	list$FILTER	HOL.FILTER		convention	CONVENTIONS sections 1 and 4: library constant, same name in namespace HOL
+CONST	list$FOLDL	List.foldl		lean-core	
+CONST	list$FOLDR	List.foldr		lean-core	
+CONST	list$GENLIST	HOL.GENLIST		convention	CONVENTIONS sections 1 and 4: library constant, same name in namespace HOL
+CONST	list$HD	HOL.HD		convention	CONVENTIONS sections 1 and 4: library constant, same name in namespace HOL
+CONST	list$LENGTH	List.length		lean-core	
+CONST	list$LIST_REL	HOL.LIST_REL		convention	CONVENTIONS sections 1 and 4: library constant, same name in namespace HOL
+CONST	list$LIST_TO_SET	HOL.LIST_TO_SET		convention	CONVENTIONS sections 1 and 4: library constant, same name in namespace HOL
+CONST	list$LLEX	HOL.LLEX		convention	CONVENTIONS sections 1 and 4: library constant, same name in namespace HOL
+CONST	list$MAP	List.map		lean-core	
+CONST	list$NIL	List.nil		lean-core	NIL at type char list is the empty string literal (rule STR)
+CONST	list$OPT_MMAP	HOL.OPT_MMAP		convention	CONVENTIONS sections 1 and 4: library constant, same name in namespace HOL
+CONST	list$REVERSE	List.reverse		lean-core	
+CONST	list$SNOC	HOL.SNOC		convention	CONVENTIONS sections 1 and 4: library constant, same name in namespace HOL
+CONST	list$TAKE	List.take		lean-core	
+CONST	list$ZIP	HOL.ZIP		convention	CONVENTIONS sections 1 and 4: library constant, same name in namespace HOL
+CONST	list$isPREFIX	HOL.isPREFIX		convention	CONVENTIONS sections 1 and 4: library constant, same name in namespace HOL
+CONST	mergesort$merge_tail	HOL.merge_tail		convention	CONVENTIONS sections 1 and 4: library constant, same name in namespace HOL
+CONST	mergesort$mergesortN_tail	HOL.mergesortN_tail		convention	CONVENTIONS sections 1 and 4: library constant, same name in namespace HOL
+CONST	mergesort$mergesort_tail	HOL.mergesort_tail		convention	CONVENTIONS sections 1 and 4: library constant, same name in namespace HOL
+CONST	mergesort$sort2_tail	HOL.sort2_tail		convention	CONVENTIONS sections 1 and 4: library constant, same name in namespace HOL
+CONST	mergesort$sort3_tail	HOL.sort3_tail		convention	CONVENTIONS sections 1 and 4: library constant, same name in namespace HOL
+CONST	min$=	Eq,Iff		lean-core	equality; HOL4 bool equality = Lean Iff or Eq on Prop
+CONST	min$==>	@imp		lean-core	implication: Lean pi with Prop domain; A /\ B ==> C and A ==> B ==> C are identified (rule IMP)
+CONST	misc$Append	Candle.app_list.Append		convention	CONVENTIONS section 1: constructor of a type exported in namespace Candle
+CONST	misc$List	Candle.app_list.List		convention	CONVENTIONS section 1: constructor of a type exported in namespace Candle
+CONST	misc$Nil	Candle.app_list.Nil		convention	CONVENTIONS section 1: constructor of a type exported in namespace Candle
+CONST	misc$SmartAppend	Candle.SmartAppend		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	misc$UPDATE_LIST	Candle.UPDATE_LIST		convention	CONVENTIONS section 3: f =++ l is UPDATE_LIST f l; misc is namespace Candle
+CONST	misc$append	Candle.append		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	misc$append_aux	Candle.append_aux		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	misc$find_index	Candle.find_index		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	misc$is_subseq	Candle.is_subseq		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	misc$make_even	Candle.make_even		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	misc$splitlines	Candle.splitlines		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	mllist$sort	Candle.sort		convention	CONVENTIONS section 4: mllist$sort is Candle.sort
+CONST	mlstring$chr_to_str	Candle.chr_to_str		convention	CONVENTIONS section 4: toString c is chr_to_str c
+CONST	mlstring$concat	Candle.concat		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	mlstring$explode	Candle.explode		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	mlstring$explode_aux	Candle.explode_aux		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	mlstring$implode	Candle.mlstring.implode		convention	CONVENTIONS section 1: constructor of a type exported in namespace Candle
+CONST	mlstring$mlstring_lt	Candle.mlstring_lt		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	mlstring$strcat	Candle.strcat		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	mlstring$strlen	Candle.strlen		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	mlstring$substring	Candle.substring		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	num$0	@num		convention	rule NUM: numeral literal; HOL4 NUMERAL/BIT1/BIT2/ZERO/0 evaluated to a number, Lean OfNat.ofNat literal
+CONST	num$SUC	@succ		convention	CONVENTIONS section 2: SUC n is n + 1; rule SUC rewrites to + n 1 on the HOL4 side
+CONST	one$one	Unit.unit		lean-core	
+CONST	option$OPTION_MAP	Option.map		lean-core	
+CONST	option$SOME	Option.some		lean-core	
+CONST	option$option_CASE	@match		fitted	rule MATCH: case on option is a Lean matcher (compared as a case node)
+CONST	pair$##	HOL.PAIR_MAP		convention	
+CONST	pair$,	Prod.mk		lean-core	
+CONST	pair$FST	Prod.fst		lean-core	
+CONST	pair$LEX	HOL.LEX		convention	
+CONST	pair$SND	Prod.snd		lean-core	
+CONST	pair$UNCURRY	HOL.UNCURRY,@match		convention	rule UNCURRY: UNCURRY f p is rewritten to f (FST p) (SND p) on both sides; a Lean matcher with one alternative on a pair is the same
+CONST	pred_set$BIJ	HOL.BIJ		convention	CONVENTIONS sections 1 and 4: library constant, same name in namespace HOL
+CONST	pred_set$DISJOINT	HOL.DISJOINT		convention	CONVENTIONS sections 1 and 4: library constant, same name in namespace HOL
+CONST	pred_set$FINITE	HOL.FINITE		convention	CONVENTIONS sections 1 and 4: library constant, same name in namespace HOL
+CONST	pred_set$GSPEC	HOL.GSPEC,HOL.setOf		convention	rule GSPEC: Lean setOf P is GSPEC (fun x => (x, P x)) (CONVENTIONS section 3)
+CONST	pred_set$IMAGE	HOL.IMAGE		convention	CONVENTIONS sections 1 and 4: library constant, same name in namespace HOL
+CONST	pred_set$INJ	HOL.INJ		convention	CONVENTIONS sections 1 and 4: library constant, same name in namespace HOL
+CONST	pred_set$INSERT	HOL.INSERT		convention	CONVENTIONS sections 1 and 4: library constant, same name in namespace HOL
+CONST	pred_set$UNION	HOL.UNION		convention	CONVENTIONS sections 1 and 4: library constant, same name in namespace HOL
+CONST	pred_set$UNIV	HOL.UNIV		convention	CONVENTIONS sections 1 and 4: library constant, same name in namespace HOL
+CONST	prim_rec$<	LT.lt		lean-core	
+CONST	relation$RC	HOL.RC		convention	CONVENTIONS sections 1 and 4: library constant, same name in namespace HOL
+CONST	relation$RTC	HOL.RTC		convention	CONVENTIONS sections 1 and 4: library constant, same name in namespace HOL
+CONST	relation$StrongLinearOrder	HOL.StrongLinearOrder		convention	CONVENTIONS sections 1 and 4: library constant, same name in namespace HOL
+CONST	relation$inv_image	HOL.inv_image		convention	CONVENTIONS sections 1 and 4: library constant, same name in namespace HOL
+CONST	relation$irreflexive	HOL.irreflexive		convention	CONVENTIONS sections 1 and 4: library constant, same name in namespace HOL
+CONST	relation$transitive	HOL.transitive		convention	CONVENTIONS sections 1 and 4: library constant, same name in namespace HOL
+CONST	relation$trichotomous	HOL.trichotomous		convention	CONVENTIONS sections 1 and 4: library constant, same name in namespace HOL
+CONST	rich_list$MAX_LIST	HOL.MAX_LIST		convention	CONVENTIONS sections 1 and 4: library constant, same name in namespace HOL
+CONST	setSpec$abstract	Candle.abstract		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	setSpec$apply	Candle.apply		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	setSpec$binary_union	Candle.binary_union		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	setSpec$boolean	Candle.boolean		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	setSpec$empty	Candle.empty		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	setSpec$extensional	Candle.extensional		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	setSpec$false	Candle.false_		convention	CONVENTIONS section 4: false is false_
+CONST	setSpec$funspace	Candle.funspace		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	setSpec$is_power	Candle.is_power		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	setSpec$is_separation	Candle.is_separation		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	setSpec$is_set_theory	Candle.is_set_theory		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	setSpec$is_union	Candle.is_union		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	setSpec$is_upair	Candle.is_upair		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	setSpec$one	Candle.one		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	setSpec$pair	Candle.pair		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	setSpec$power	Candle.power		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	setSpec$product	Candle.product		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	setSpec$sub	Candle.sub		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	setSpec$true	Candle.true_		convention	CONVENTIONS section 4: true is true_
+CONST	setSpec$two	Candle.two		convention	CONVENTIONS section 4: boolset mem = two mem (boolset unfolds, see UNFOLD)
+CONST	setSpec$union	Candle.union		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	setSpec$unit	Candle.unit		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	setSpec$upair	Candle.upair		convention	CONVENTIONS section 4, last line: same name in namespace Candle
+CONST	sorting$PERM	HOL.PERM		convention	CONVENTIONS sections 1 and 4: library constant, same name in namespace HOL
+CONST	sptree$domain	HOL.sptree.domain		convention	CONVENTIONS section 4: sptree functions are HOL.sptree.*
+CONST	sptree$insert	HOL.sptree.insert		convention	CONVENTIONS section 4: sptree functions are HOL.sptree.*
+CONST	string$CHR	HOL.CHR		convention	CONVENTIONS sections 1 and 4: library constant, same name in namespace HOL
+CONST	string$FIELDS	HOL.FIELDS		convention	CONVENTIONS sections 1 and 4: library constant, same name in namespace HOL
+CONST	string$ORD	HOL.ORD		convention	CONVENTIONS sections 1 and 4: library constant, same name in namespace HOL
+CONST	string$string_lt	HOL.string_lt		convention	CONVENTIONS sections 1 and 4: library constant, same name in namespace HOL
+CONST	ternaryComparisons$EQUAL	HOL.ordering.EQUAL		convention	ordering constructor
+CONST	ternaryComparisons$invert_comparison	HOL.invert_comparison		convention	CONVENTIONS section 4: flip_ord (reducible) = invert_comparison
+CONST	ternaryComparisons$ordering_CASE	@match		fitted	rule MATCH: case on ordering is a Lean matcher
+CONST	toto$TotOrd	HOL.TotOrd		convention	CONVENTIONS sections 1 and 4: library constant, same name in namespace HOL
+CONST	words$n2w	HOL.n2w		convention	CONVENTIONS sections 1 and 4: library constant, same name in namespace HOL
+CONST	words$w2n	HOL.w2n		convention	CONVENTIONS sections 1 and 4: library constant, same name in namespace HOL
+TYPE	min$bool	Prop		convention	Sort 0; CONVENTIONS section 2: bool is Prop everywhere
+TYPE	min$fun	@fun		convention	non-dependent pi
+TYPE	num$num	Nat		convention	CONVENTIONS section 2
+TYPE	list$list	List		convention	CONVENTIONS section 2
+TYPE	pair$prod	Prod		convention	CONVENTIONS section 2
+TYPE	option$option	Option		convention	CONVENTIONS section 2
+TYPE	one$one	Unit		convention	HOL4 one is the unit type
+TYPE	string$char	HOL.char		convention	CONVENTIONS section 2
+TYPE	mlstring$mlstring	Candle.mlstring		convention	CONVENTIONS section 2
+TYPE	holSyntax$type	Candle.type		convention	same name in Candle
+TYPE	holSyntax$term	Candle.term		convention	same name in Candle
+TYPE	holSyntaxExtra$dbterm	Candle.dbterm_t		convention	CONVENTIONS section 4: type dbterm is dbterm_t
+TYPE	misc$app_list	Candle.app_list		convention	same name in Candle
+TYPE	holSyntaxLib$result	Candle.result		convention	same name in Candle
+TYPE	finite_map$fmap	HOL.fmap		convention	CONVENTIONS section 2
+TYPE	sptree$spt	HOL.spt		convention	CONVENTIONS section 2
+TYPE	ternaryComparisons$ordering	HOL.ordering		convention	CONVENTIONS section 2
+TYPE	fcp$cart	BitVec		convention	rule WORD: HOL4 (bool, N) cart with N a bit0/bit1 numeral type is Lean BitVec n; the width N is decoded to a number (CONVENTIONS section 2: word8 := BitVec 8)
+UNFOLD		HOL.Set		convention	CONVENTIONS section 2: HOL.Set alpha := alpha -> Prop (HOL4 set = predicate)
+UNFOLD		Candle.mls		convention	CONVENTIONS section 3: mls "abc" = implode (str "abc")
+ALLOW		HOL.ARB		convention	opaque: HOL4 unspecified value ARB (CONVENTIONS section 5)
+NAME		_thm		fitted	Lean theorem name = HOL4 name in namespace Candle or HOL; suffix _thm when the plain name is a constant (needed for RACONV and REV_ASSOCD)
+RULE	VARS			convention	HOL4 free variables of a statement are implicitly universal: they join the leading universal block. A run of consecutive universal (or existential) binders is order-insensitive: binders are renamed by first occurrence in the body.
+RULE	IMP			convention	A /\ B ==> C, A ==> B ==> C and Lean A /\ B -> C, A -> B -> C are identified (premises are flattened into an ordered list); a Lean pi with Prop domain is an implication.
+RULE	FLAT			convention	Nested /\ and nested \/ chains are flattened. Lean Iff and Eq on Prop and HOL4 = on bool are the same node. Lean Ne a b is Not (a = b).
+RULE	NUM			convention	HOL4 NUMERAL (BIT1/BIT2/ZERO) and num$0, Lean OfNat.ofNat n literals and raw numerals become one number node; SUC n becomes n + 1.
+RULE	STR			convention	list$NIL at type char list, Lean List.nil at char, HOL.str "..." and a CONS chain of character literals become one string node; CHR n, HOL.ch c and Char.ofNat n become one character node.
+RULE	UNCURRY			convention	UNCURRY f p is rewritten to f (FST p) (SND p) on both sides (beta reduced); a Lean matcher (.match_N) with one alternative on a pair is the same.
+RULE	GSPEC			convention	Lean setOf P is GSPEC (fun x => (x, P x)).
+RULE	INST			convention	Instance-implicit arguments and instance binders are ignored in the structural comparison. Instance binders are compared as a set of classes with the classes needed by the Lean constants that the HOL4 constants map to (the instance binders of their Lean types).
+RULE	TYVARS			convention	Lean type-variable binders (Sort-typed) are skipped. Type variables are renamed by first occurrence in the binder types. Lean reducible abbreviations (thy, sig, tyval, string, word8, ...) are unfolded. Type annotations of non-binder terms (implicit type arguments) are NOT compared.
+RULE	LMEM			fitted	HOL4 MEM x l is IN x (LIST_TO_SET l) in the export (no MEM constant); it is identified with Lean x in l (List.instMembership). Needed for 100+ statements; found by reading the export, not stated in CONVENTIONS.
+RULE	COMP			fitted	combin$o f g x is rewritten to f (g x) on both sides (definition of o). Needed because HOL4 tmsof thy = (SND o FST) thy while Lean thy_tmsof is reducible to thy.1.2 (CONVENTIONS section 4 states the overload but not this rewrite).
+RULE	ETA			fitted	Eta: (fun x => f x) is f when x is not free in f. Needed for plus_0_I, where HOL4 has the partial application (+ 0) and Lean a lambda.
+RULE	MATCH			fitted	HOL4 option_CASE / ordering_CASE and Lean matchers with several alternatives become a case node; zero-parameter alternatives lose their Unit lambda.
+RULE	ALTORD			fitted	Lean matcher alternatives are put in constructor order (read from the casesOn in the matcher body, dumped as altctors) because Lean lists alternatives in source order. Needed for term_union_thm (source order EQUAL, LESS, GREATER).
+RULE	TYVARS-CONJ			fitted	Type variables are renamed independently inside each conjunct (HOL4 generalises each clause of a definition separately, Lean shares one set). Needed for REV_ASSOCD. Cost: type-variable identity across conjuncts is not compared.

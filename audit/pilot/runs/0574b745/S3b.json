@@ -1,0 +1,18 @@
+{
+ "module": "CandleLean.HolSyntax",
+ "checked": 80,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "RACONV",
+   "lean": "lean/CandleLean/HolSyntax.lean:73",
+   "hol4": "hol4/package/candle/standard/syntax/holSyntaxScript.sml:96",
+   "class": "V-P",
+   "explanation": "The Comb rule of RACONV omits the premise RACONV env (s1,s2). HOL4 requires both RACONV env (s1,s2) and RACONV env (t1,t2); Lean requires only the argument premise, so the function parts of two applications are unconstrained. For example, Lean derives ACONV (Comb (Const a ty) t) (Comb (Const b ty) t) for a ≠ b with t a Const, which HOL4 refutes. The weaker ACONV also makes the EQ_MP rule of proves too permissive.",
+   "repair": "  | Comb {env : List (term × term)} {s1 s2 t1 t2 : term} :\n      RACONV env (s1, s2) → RACONV env (t1, t2) → RACONV env (Comb s1 t1, Comb s2 t2)",
+   "confidence": 0.99,
+   "lean_check": "import CandleLean.HolSyntax\n\nexample (a b : Candle.mlstring) (ty : Candle.type) :\n    Candle.RACONV [] (Candle.term.Comb (Candle.term.Const a ty) (Candle.term.Const a ty),\n      Candle.term.Comb (Candle.term.Const b ty) (Candle.term.Const a ty)) :=\n  Candle.RACONV.Comb Candle.RACONV.Const\n",
+   "hol4_check": "∀a b ty. a ≠ b ⇒ ¬RACONV [] (Comb (Const a ty) (Const a ty), Comb (Const b ty) (Const a ty))"
+  }
+ ]
+}

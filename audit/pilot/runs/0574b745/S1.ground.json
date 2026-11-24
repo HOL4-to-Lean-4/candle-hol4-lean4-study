@@ -1,0 +1,10 @@
+{
+ "F1": {
+  "declaration": "Candle.RACONV.Comb",
+  "lean": "compiles",
+  "hol4": "not proved",
+  "lean_out": "",
+  "hol4_out": "<<HOL message: Created theory \"hol4q_scratch\">>\r\nFAILED (not a refutation): \r\nException raised at Tactical.TAC_PROOF: unsolved goals\r\n\r\nexit=0\r\n\r\n",
+  "hol4_2": "not proved"
+ }
+}

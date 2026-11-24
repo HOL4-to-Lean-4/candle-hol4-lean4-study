@@ -1,0 +1,505 @@
+ast.lit	Ast.lean	ok	constructors, order and argument types compared with the HOL4 Datatype source
+ast.shift	Ast.lean	ok	constructors, order and argument types compared with the HOL4 Datatype source
+ast.arith	Ast.lean	ok	constructors, order and argument types compared with the HOL4 Datatype source
+ast.word_size	Ast.lean	ok	constructors, order and argument types compared with the HOL4 Datatype source
+ast.thunk_mode	Ast.lean	ok	constructors, order and argument types compared with the HOL4 Datatype source
+ast.thunk_op	Ast.lean	ok	constructors, order and argument types compared with the HOL4 Datatype source
+ast.opb	Ast.lean	ok	constructors, order and argument types compared with the HOL4 Datatype source
+ast.test	Ast.lean	ok	constructors, order and argument types compared with the HOL4 Datatype source
+ast.prim_type	Ast.lean	ok	constructors, order and argument types compared with the HOL4 Datatype source
+ast.op	Ast.lean	ok	constructors, order and argument types compared with the HOL4 Datatype source
+ast.op_class	Ast.lean	ok	constructors, order and argument types compared with the HOL4 Datatype source
+ast.getOpClass_def	Ast.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+ast.ast_t	Ast.lean	ok	constructors, order and argument types compared with the HOL4 Datatype source
+ast.pat	Ast.lean	ok	constructors, order and argument types compared with the HOL4 Datatype source
+ast.lop	Ast.lean	ok	constructors, order and argument types compared with the HOL4 Datatype source
+ast.exp	Ast.lean	ok	constructors, order and argument types compared with the HOL4 Datatype source
+ast.dec	Ast.lean	ok	constructors, order and argument types compared with the HOL4 Datatype source
+ast.pat_bindings_def	Ast.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+ast.every_exp_def	Ast.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+evaluateProps.call_FFI_rel_def	EvaluateProps.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+evaluateProps.dest_IO_event_def	EvaluateProps.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+evaluateProps.io_events_mono_def	EvaluateProps.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+evaluateProps.is_clock_io_mono_def	EvaluateProps.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+evaluateProps.adj_clock_def	EvaluateProps.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+evaluate.fix_clock_def	Evaluate.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+evaluate.dec_clock_def	Evaluate.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+evaluate.do_eval_res_def	Evaluate.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+evaluate.list_result_def	Evaluate.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+evaluate.evaluate_def	Evaluate.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+ffi.ffi_outcome	Ffi.lean	ok	constructors, order and argument types compared with the HOL4 Datatype source
+ffi.oracle_result	Ffi.lean	ok	constructors, order and argument types compared with the HOL4 Datatype source
+ffi.shmem_op	Ffi.lean	ok	constructors, order and argument types compared with the HOL4 Datatype source
+ffi.ffiname	Ffi.lean	ok	constructors, order and argument types compared with the HOL4 Datatype source
+ffi.io_event	Ffi.lean	ok	constructors, order and argument types compared with the HOL4 Datatype source
+ffi.final_event	Ffi.lean	ok	constructors, order and argument types compared with the HOL4 Datatype source
+ffi.ffi_state	Ffi.lean	ok	constructors, order and argument types compared with the HOL4 Datatype source
+ffi.ffi_result	Ffi.lean	ok	constructors, order and argument types compared with the HOL4 Datatype source
+ffi.call_FFI_def	Ffi.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+ffi.outcome	Ffi.lean	ok	constructors, order and argument types compared with the HOL4 Datatype source
+ffi.behaviour	Ffi.lean	ok	constructors, order and argument types compared with the HOL4 Datatype source
+fpSem.fp_cmp	FpSem.lean	ok	constructors, order and argument types compared with the HOL4 Datatype source
+fpSem.fp_uop	FpSem.lean	ok	constructors, order and argument types compared with the HOL4 Datatype source
+fpSem.fp_bop	FpSem.lean	ok	constructors, order and argument types compared with the HOL4 Datatype source
+fpSem.fp_top	FpSem.lean	ok	constructors, order and argument types compared with the HOL4 Datatype source
+fpSem.fp_cmp_def	FpSem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+location.locn	Location.lean	ok	constructors, order and argument types compared with the HOL4 Datatype source
+location.locnrow_def	Location.lean	V-C1	HOL4 saves only locnrow (POSN r c) = r (locationScript.sml:6-8); Lean fixes UNKNOWNpt/EOFpt to ARB: locnrow UNKNOWNpt = ARB is provable, not in Phi
+location.locn_rowupdate_def	Location.lean	V-C1	HOL4 saves only the POSN clause (locationScript.sml:11-13); Lean makes locn_rowupdate f UNKNOWNpt = ARB provable
+location.locncol_def	Location.lean	V-C1	HOL4 saves only the POSN clause (locationScript.sml:16-18); Lean makes locncol UNKNOWNpt = ARB provable
+location.locn_colupdate_def	Location.lean	V-C1	HOL4 saves only the POSN clause (locationScript.sml:20-22); Lean makes locn_colupdate f EOFpt = ARB provable
+location.locs	Location.lean	ok	constructors, order and argument types compared with the HOL4 Datatype source
+lprefix_lub.lprefix_lub_def	LprefixLub.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+misc.the_def	Misc.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+misc.app_list	Misc.lean	ok	constructors, order and argument types compared with the HOL4 Datatype source
+misc.append_aux_def	Misc.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+misc.append_def	Misc.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+misc.MAP3_def	Misc.lean	V-C1	HOL4 saves only the [] [] [] and cons/cons/cons clauses (miscScript.sml:74-77); Lean makes MAP3 on lists of different length = ARB provable
+misc.tlookup_def	Misc.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+misc.max3_def	Misc.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+misc.UPDATE_LIST_def	Misc.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+misc.find_index_def	Misc.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+misc.between_def	Misc.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+misc.lookup_vars_def	Misc.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+misc.enumerate_def	Misc.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+misc.range_def	Misc.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+mllist.sort_def	Mllist.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+mllist.nth_def	Mllist.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+mllist.collate_def	Mllist.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+mlstring.mlstring	Mlstring.lean	ok	constructors, order and argument types compared with the HOL4 Datatype source
+mlstring.implode_def	Mlstring.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+mlstring.strlen_def	Mlstring.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+mlstring.strsub_def	Mlstring.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+mlstring.concat_def	Mlstring.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+mlstring.explode_aux_def	Mlstring.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+mlstring.explode_def	Mlstring.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+mlstring.strcat_def	Mlstring.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+mlstring.str_def	Mlstring.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+mlstring.tokens_aux_def	Mlstring.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+mlstring.tokens_def	Mlstring.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+mlstring.isStringThere_aux_def	Mlstring.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+mlstring.isSubstring_aux_def	Mlstring.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+mlstring.isSubstring_def	Mlstring.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+mlstring.compare_aux_def	Mlstring.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+mlstring.compare_def	Mlstring.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+mlstring.mlstring_lt_def	Mlstring.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+mlstring.mlstring_le_def	Mlstring.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+mlstring.mlstring_gt_def	Mlstring.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+mlstring.mlstring_ge_def	Mlstring.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+mlstring.collate_aux_def	Mlstring.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+mlstring.collate_def	Mlstring.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+mlstring.app_list_ann	Mlstring.lean	ok	constructors, order and argument types compared with the HOL4 Datatype source
+mlstring.char_to_word8_def	Mlstring.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+mlstring.word8_to_char_def	Mlstring.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+mlstring.empty_ffi_def	Mlstring.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+namespaceProps.alist_rel_restr_def	NamespaceProps.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+namespaceProps.alistSub_def	NamespaceProps.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+namespaceProps.nsSub_compute_def	NamespaceProps.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+namespace.id	Namespace.lean	ok	constructors, order and argument types compared with the HOL4 Datatype source
+namespace.mk_id_def	Namespace.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+namespace.id_to_n_def	Namespace.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+namespace.id_to_mods_def	Namespace.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+namespace.namespace	Namespace.lean	ok	constructors, order and argument types compared with the HOL4 Datatype source
+namespace.nsLookup_def	Namespace.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+namespace.nsLookupMod_def	Namespace.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+namespace.nsEmpty_def	Namespace.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+namespace.nsAppend_def	Namespace.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+namespace.nsLift_def	Namespace.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+namespace.alist_to_ns_def	Namespace.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+namespace.nsBind_def	Namespace.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+namespace.nsBindList_def	Namespace.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+namespace.nsOptBind_def	Namespace.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+namespace.nsSing_def	Namespace.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+namespace.nsSub_def	Namespace.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+namespace.nsAll_def	Namespace.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+namespace.nsAll2_def	Namespace.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+namespace.nsDom_def	Namespace.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+namespace.nsMap_def	Namespace.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitivesProps.shift_lookup_def	SemanticPrimitivesProps.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitivesProps.map_error_result_def	SemanticPrimitivesProps.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitivesProps.map_result_def	SemanticPrimitivesProps.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitivesProps.every_error_result_def	SemanticPrimitivesProps.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitivesProps.every_result_def	SemanticPrimitivesProps.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitivesProps.map_sv_def	SemanticPrimitivesProps.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitivesProps.dest_Refv_def	SemanticPrimitivesProps.lean	V-C1	HOL4 saves only dest_Refv (Refv v) = v (semanticPrimitivesPropsScript.sml:165-167); Lean makes dest_Refv (W8array ws) = ARB provable
+semanticPrimitivesProps.store_v_vs_def	SemanticPrimitivesProps.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitivesProps.ctors_of_tdef_def	SemanticPrimitivesProps.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitivesProps.FV_def	SemanticPrimitivesProps.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitivesProps.FV_dec_def	SemanticPrimitivesProps.lean	V-C1	HOL4 saves five clauses (semanticPrimitivesPropsScript.sml:220-225), none for Dmod/Dlocal/Denv; Lean makes FV_dec (Dmod ..) = ARB provable
+semanticPrimitives.stamp	SemanticPrimitives.lean	ok	constructors, order and argument types compared with the HOL4 Datatype source
+semanticPrimitives.sem_env	SemanticPrimitives.lean	ok	constructors, order and argument types compared with the HOL4 Datatype source
+semanticPrimitives.v	SemanticPrimitives.lean	ok	constructors, order and argument types compared with the HOL4 Datatype source
+semanticPrimitives.bind_stamp_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.chr_stamp_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.div_stamp_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.subscript_stamp_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.bind_exn_v_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.chr_exn_v_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.div_exn_v_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.sub_exn_v_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.bool_type_num_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.list_type_num_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.abort	SemanticPrimitives.lean	ok	constructors, order and argument types compared with the HOL4 Datatype source
+semanticPrimitives.error_result	SemanticPrimitives.lean	ok	constructors, order and argument types compared with the HOL4 Datatype source
+semanticPrimitives.result	SemanticPrimitives.lean	ok	constructors, order and argument types compared with the HOL4 Datatype source
+semanticPrimitives.store_v	SemanticPrimitives.lean	ok	constructors, order and argument types compared with the HOL4 Datatype source
+semanticPrimitives.store_v_same_type_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.store_lookup_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.store_alloc_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.store_assign_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.eval_decs_state	SemanticPrimitives.lean	ok	constructors, order and argument types compared with the HOL4 Datatype source
+semanticPrimitives.eval_oracle_state	SemanticPrimitives.lean	ok	constructors, order and argument types compared with the HOL4 Datatype source
+semanticPrimitives.eval_state	SemanticPrimitives.lean	ok	constructors, order and argument types compared with the HOL4 Datatype source
+semanticPrimitives.state	SemanticPrimitives.lean	ok	constructors, order and argument types compared with the HOL4 Datatype source
+semanticPrimitives.do_con_check_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.one_con_check_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.build_conv_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.lit_same_type_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.match_result	SemanticPrimitives.lean	ok	constructors, order and argument types compared with the HOL4 Datatype source
+semanticPrimitives.same_type_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.same_ctor_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.ctor_same_type_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.Boolv_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.pmatch_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.can_pmatch_all_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.build_rec_env_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.find_recfun_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.eq_result	SemanticPrimitives.lean	ok	constructors, order and argument types compared with the HOL4 Datatype source
+semanticPrimitives.do_eq_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.do_opapp_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.v_to_list_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.list_to_v_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.v_to_char_list_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.vs_to_string_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.nat_to_v_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.maybe_all_list_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.v_to_word8_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.v_to_word8_list_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.v_to_word64_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.v_to_word64_list_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.lookup_env_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.add_decs_generation_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.add_env_generation_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.declare_env_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.concrete_v_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.compiler_agrees_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.do_eval_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.reset_env_generation_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.copy_array_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.ws_to_chars_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.chars_to_ws_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.shift8_lookup_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.shift64_lookup_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.exp_or_val	SemanticPrimitives.lean	ok	constructors, order and argument types compared with the HOL4 Datatype source
+semanticPrimitives.xor_bytes_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.thunk_op_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.check_type_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.dest_Litv_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.the_Litv_IntLit_def	SemanticPrimitives.lean	V-C1	HOL4 saves only the Litv (IntLit i) clause (semanticPrimitivesScript.sml:718-720); Lean makes the_Litv_IntLit (Litv (Char c)) = ARB provable
+semanticPrimitives.the_Litv_Word8_def	SemanticPrimitives.lean	V-C1	HOL4 saves only the Litv (Word8 w) clause (semanticPrimitivesScript.sml:722-724); Lean fixes other values to ARB
+semanticPrimitives.the_Litv_Word64_def	SemanticPrimitives.lean	V-C1	HOL4 saves only the Litv (Word64 w) clause (semanticPrimitivesScript.sml:726-728); Lean fixes other values to ARB, and shares the same ARB with the_Litv_Float64 (the_Litv_Word64 x = the_Litv_Float64 x provable for x not a Word64/Float64 literal)
+semanticPrimitives.the_Litv_Float64_def	SemanticPrimitives.lean	V-C1	HOL4 saves only the Litv (Float64 w) clause (semanticPrimitivesScript.sml:730-732); Lean fixes other values to ARB (same ARB as the_Litv_Word64)
+semanticPrimitives.the_Litv_Char_def	SemanticPrimitives.lean	V-C1	HOL4 saves only the Litv (Char c) clause (semanticPrimitivesScript.sml:734-736); Lean fixes other values to ARB
+semanticPrimitives.the_Boolv_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.num_cmp_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.int_cmp_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.do_test_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.do_arith_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.do_conversion_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.do_app_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.do_log_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.do_if_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.build_constrs_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.build_tdefs_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.check_dup_ctors_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.combine_dec_result_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.extend_dec_env_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.?	SemanticPrimitives.lean	ok	constructors, order and argument types compared with the HOL4 Datatype source
+semanticPrimitives.dest_thunk_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semanticPrimitives.update_thunk_def	SemanticPrimitives.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semantics_min.evaluate_prog_with_clock_def	SemanticsMin.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+semantics_min.semantics_prog_def	SemanticsMin.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSoundInvariants.store_t	TypeSoundInvariants.lean	ok	constructors, order and argument types compared with the HOL4 Datatype source
+typeSoundInvariants.tenv_abbrev_ok_def	TypeSoundInvariants.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSoundInvariants.tenv_ctor_ok_def	TypeSoundInvariants.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSoundInvariants.tenv_val_ok_def	TypeSoundInvariants.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSoundInvariants.tenv_ok_def	TypeSoundInvariants.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSoundInvariants.tenv_val_exp_ok_def	TypeSoundInvariants.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSoundInvariants.ctMap_ok_def	TypeSoundInvariants.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSoundInvariants.type_ctor_def	TypeSoundInvariants.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSoundInvariants.add_tenvE_def	TypeSoundInvariants.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSoundInvariants.type_v	TypeSoundInvariants.lean	ok	rule set and hypotheses compared with the HOL4 Inductive source
+typeSoundInvariants.type_sv_def	TypeSoundInvariants.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSoundInvariants.type_s_def	TypeSoundInvariants.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSoundInvariants.ctMap_has_exns_def	TypeSoundInvariants.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSoundInvariants.ctMap_has_lists_def	TypeSoundInvariants.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSoundInvariants.ctMap_has_bools_def	TypeSoundInvariants.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSoundInvariants.good_ctMap_def	TypeSoundInvariants.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSoundInvariants.consistent_ctMap_def	TypeSoundInvariants.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSoundInvariants.type_all_env_def	TypeSoundInvariants.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSoundInvariants.type_sound_invariant_def	TypeSoundInvariants.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSound.store_type_extension_def	TypeSound.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSysProps.type_pes_def	TypeSysProps.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSysProps.deBruijn_subst_tenvE_def	TypeSysProps.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSysProps.db_merge_def	TypeSysProps.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSysProps.type_def_to_ctMap_def	TypeSysProps.lean	V-C1	HOL4 saves the [] [] and cons/cons clauses (typeSysPropsScript.sml:1502-1510); Lean makes the mismatched-length case = ARB provable
+typeSystem.t	TypeSystem.lean	ok	constructors, order and argument types compared with the HOL4 Datatype source
+typeSystem.Tarray_num_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.Tbool_num_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.Tchar_num_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.Texn_num_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.Tfn_num_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.Tint_num_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.Tlist_num_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.Tref_num_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.Tstring_num_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.Ttup_num_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.Tvector_num_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.Tword64_num_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.Tword8_num_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.Tword8array_num_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.Tdouble_num_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.prim_type_nums_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.Tarray_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.Tbool_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.Tchar_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.Texn_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.Tfn_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.Tint_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.Tlist_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.Tref_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.Tstring_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.Ttup_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.Tvector_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.Tword64_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.Tword8_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.Tword8array_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.Tdouble_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.check_freevars_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.check_freevars_ast_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.type_subst_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.deBruijn_inc_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.deBruijn_subst_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.tenv_val_exp	TypeSystem.lean	ok	constructors, order and argument types compared with the HOL4 Datatype source
+typeSystem.bind_tvar_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.opt_bind_name_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.tveLookup_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.type_env	TypeSystem.lean	ok	constructors, order and argument types compared with the HOL4 Datatype source
+typeSystem.extend_dec_tenv_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.lookup_varE_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.lookup_var_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.num_tvs_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.bind_var_list_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.t_of_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.supported_test_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.supported_arith_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.supported_conversion_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.type_op_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.check_type_names_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.type_name_subst_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.check_ctor_tenv_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.build_ctor_tenv_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.is_value_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.type_p	TypeSystem.lean	ok	rule set and hypotheses compared with the HOL4 Inductive source
+typeSystem.type_e	TypeSystem.lean	ok	rule set and hypotheses compared with the HOL4 Inductive source
+typeSystem.tenv_add_tvs_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.type_pe_determ_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.tscheme_inst_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.tenvLift_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.type_d	TypeSystem.lean	ok	rule set and hypotheses compared with the HOL4 Inductive source
+typeSystem.tscheme_inst2_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+typeSystem.weak_tenv_def	TypeSystem.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+weakening.weak_tenvE_def	Weakening.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+weakening.weakS_def	Weakening.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+weakening.weak_def	Weakening.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+weakening.weakCT_def	Weakening.lean	ok	Lean doc-comment equals the HOL4 source text (mechanical check) and the Lean body was read against it: clause order, argument order, types, corner cases
+prelude.float	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.float_value_t	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.float_to_real	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.float_value	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.float_is_nan	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.float_is_signalling	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.float_is_infinite	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.float_is_zero	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.float_is_finite	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.float_negate	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.float_abs	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.float_plus_infinity	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.float_plus_zero	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.float_top	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.float_minus_infinity	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.float_minus_zero	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.float_bottom	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.flags	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.clear_flags	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.invalidop_flags	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.dividezero_flags	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.rounding	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.is_closest	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.closest_such	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.closest	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.largest	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.threshold	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.round	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.fp_op	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.float_some_qnan	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.float_round	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.float_round_with_flags	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.check_for_signalling	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.float_sqrt	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.float_add	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.float_sub	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.float_mul	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.float_div	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.float_mul_add	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.float_compare_t	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.float_compare	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.float_less_than	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.float_less_equal	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.float_greater_than	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.float_greater_equal	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.float_equal	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.fp64_to_float	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.float_to_fp64	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.fp64_sqrt	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.fp64_negate	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.fp64_abs	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.fp64_add	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.fp64_sub	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.fp64_mul	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.fp64_div	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.fp64_mul_add	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.fp64_equal	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.fp64_lessThan	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.fp64_lessEqual	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.fp64_greaterThan	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.fp64_greaterEqual	Prelude/BinaryIeee.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.ARB	Prelude/Core.lean	ok	HOL4 ARB is an uninterpreted new_constant (boolScript.sml:245); Lean ARB = Classical.choice with Nonempty: no HOL4 fact about ARB is violated
+prelude.select	Prelude/Core.lean	ok	Lean Classical.epsilon with Nonempty: same axiom as HOL4 @
+prelude.I	Prelude/Core.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.K	Prelude/Core.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.C	Prelude/Core.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.UPDATE	Prelude/Core.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.UNCURRY	Prelude/Core.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.THE	Prelude/Core.lean	V-C1	HOL4 optionScript saves THE (SOME x) = x only; Lean fixes THE NONE = ARB (witness w_the_none_arb, w_hd_the_shared)
+prelude.RTC	Prelude/Core.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.ordering	Prelude/Core.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.fmap	Prelude/FiniteMap.lean	ok	finite-support option functions encode HOL4 fmap (subset of a -> b + one); extensionality equals fmap_EQ_THM
+prelude.FEMPTY	Prelude/FiniteMap.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.FUPDATE	Prelude/FiniteMap.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.FAPPLY	Prelude/FiniteMap.lean	V-C1	HOL4 FAPPLY_DEF (finite_mapScript.sml:180) = OUTL (fmap_REP f x), OUTL (INR _) unspecified; Lean fixes FAPPLY outside the domain to ARB (witness w_fapply_empty_arb)
+prelude.FDOM	Prelude/FiniteMap.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.FLOOKUP	Prelude/FiniteMap.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.SUBMAP	Prelude/FiniteMap.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.FUNION	Prelude/FiniteMap.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.FEVERY	Prelude/FiniteMap.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.o_f	Prelude/FiniteMap.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.FRANGE	Prelude/FiniteMap.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.FUPDATE_LIST	Prelude/FiniteMap.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.alist_to_fmap	Prelude/FiniteMap.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.llist	Prelude/LList.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.LNIL	Prelude/LList.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.LCONS	Prelude/LList.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.LHD	Prelude/LList.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.LTL	Prelude/LList.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.LTAKE	Prelude/LList.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.LFINITE	Prelude/LList.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.llength_rel	Prelude/LList.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.LLENGTH	Prelude/LList.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.llist_toList	Prelude/LList.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.fromList	Prelude/LList.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.LPREFIX	Prelude/LList.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.NULL	Prelude/ListLib.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.HD	Prelude/ListLib.lean	V-C1	HOL4 listScript.sml:138 saves only the cons clause; Lean fixes HD [] = ARB (witness w_hd_nil_arb)
+prelude.TL	Prelude/ListLib.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.EL	Prelude/ListLib.lean	V-C1	HOL4 EL 0 = HD, EL (SUC n) l = EL n (TL l): EL beyond the length reduces to HD [], which HOL4 does not fix; Lean proves EL n [] = ARB (witness w_el_oob_arb)
+prelude.oEL	Prelude/ListLib.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.LUPDATE	Prelude/ListLib.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.EVERY	Prelude/ListLib.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.EXISTS	Prelude/ListLib.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.LIST_REL	Prelude/ListLib.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.ALL_DISTINCT	Prelude/ListLib.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.isPREFIX	Prelude/ListLib.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.IS_PREFIX	Prelude/ListLib.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.REV	Prelude/ListLib.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.SPLITP	Prelude/ListLib.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.COUNT_LIST	Prelude/ListLib.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.ALOOKUP	Prelude/ListLib.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.sort2_tail	Prelude/Mergesort.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.sort3_tail	Prelude/Mergesort.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.merge_tail	Prelude/Mergesort.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.mergesortN_tail	Prelude/Mergesort.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.mergesort_tail	Prelude/Mergesort.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.Set	Prelude/PredSet.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.setOf	Prelude/PredSet.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.EMPTY	Prelude/PredSet.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.UNIV	Prelude/PredSet.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.INSERT	Prelude/PredSet.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.SUBSET	Prelude/PredSet.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.UNION	Prelude/PredSet.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.INTER	Prelude/PredSet.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.DIFF	Prelude/PredSet.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.DISJOINT	Prelude/PredSet.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.IMAGE	Prelude/PredSet.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.INJ	Prelude/PredSet.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.SURJ	Prelude/PredSet.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.BIJ	Prelude/PredSet.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.FINITE	Prelude/PredSet.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.CARD	Prelude/PredSet.lean	V-C1	HOL4 pred_setScript.sml:3428 CARD_DEF is a new_specification, saved CARD_EMPTY/CARD_INSERT only for FINITE; Lean gives all infinite sets one value (witness w_card_infinite_equal, w_card_univ_arb)
+prelude.BIGUNION	Prelude/PredSet.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.LIST_TO_SET	Prelude/PredSet.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.IsCut	Prelude/Real.lean	unread	helper of the Dedekind construction, no HOL4 counterpart; not compared
+prelude.real	Prelude/Real.lean	unread	type encoding of HOL4 real as Dedekind cuts of Rat; field axioms of the Lean instances not re-checked against realaxTheory
+prelude.ofRat	Prelude/Real.lean	unread	helper, no HOL4 counterpart; not compared
+prelude.ofNum	Prelude/Real.lean	ok	numerals OfNat real, compared with HOL4 &n by construction
+prelude.abs	Prelude/Real.lean	ok	HOL4 real_abs (realaxTheory) compared
+prelude.mulNonneg	Prelude/Real.lean	unread	helper, no HOL4 counterpart; not compared
+prelude.invPos	Prelude/Real.lean	unread	helper, no HOL4 counterpart; not compared
+prelude.inv	Prelude/Real.lean	ok	inv 0 = 0 matches HOL4 REAL_INV_0 (realaxScript.sml:71)
+prelude.pow	Prelude/Real.lean	ok	HOL4 realax pow equations match
+prelude.sqrt	Prelude/Real.lean	unsure	HOL4 realScript.sml:5436 sqrt x = @u. (0 < x ==> 0 < u) /\ (u pow 2 = x) is copied faithfully, so sqrt of a negative number is select of an unsatisfiable predicate; in Lean that is the image of ARB (see w_select_false_arb), a V-C candidate for real.sqrt (-1) = ARB, but no Lean proof of it was made (needs u*u >= 0 on the Dedekind reals)
+prelude.spt	Prelude/Sptree.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.lookup	Prelude/Sptree.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.domain	Prelude/Sptree.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.toListA	Prelude/Sptree.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.spt_toList	Prelude/Sptree.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.char	Prelude/StringLib.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.string	Prelude/StringLib.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.ORD	Prelude/StringLib.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.CHR	Prelude/StringLib.lean	V-C1	HOL4 stringScript.sml:29-45: CHR is the ABS of char_BIJ, ORD (CHR r) = r only for r < 256, nothing else saved; Lean fixes CHR n = ARB for n >= 256 (witness w_chr_256_257, w_chr_256_arb)
+prelude.char_lt	Prelude/StringLib.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.TOKENS	Prelude/StringLib.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.int_of_num	Prelude/Words.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.Num	Prelude/Words.lean	ok	HOL4 Num (integerScript.sml:1887) selects the unique n with i = &n or i = -&n; natAbs matches
+prelude.INT_ABS	Prelude/Words.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.int_div	Prelude/Words.lean	V-C1	HOL4 integerScript.sml:1970-1989 specification constrains only ~(j = 0); Lean fixes int_div i 0 = ARB (witnesses w_int_div_zero_arb, w_int_div_zero_same)
+prelude.int_mod	Prelude/Words.lean	V-C1	HOL4 integerScript.sml:2063-2073 specification constrains only ~(j = 0); Lean fixes int_mod i 0 (witness w_int_mod_zero_same)
+prelude.word8	Prelude/Words.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.word64	Prelude/Words.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.dimword	Prelude/Words.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.INT_MIN	Prelude/Words.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.UINT_MAX	Prelude/Words.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.INT_MAX	Prelude/Words.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.w2n	Prelude/Words.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.n2w	Prelude/Words.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.w2w	Prelude/Words.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.word_T	Prelude/Words.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.word_1comp	Prelude/Words.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.word_and	Prelude/Words.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.word_or	Prelude/Words.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.word_xor	Prelude/Words.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.word_lsb	Prelude/Words.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.word_msb	Prelude/Words.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.word_2comp	Prelude/Words.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.word_add	Prelude/Words.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.word_sub	Prelude/Words.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.word_ls	Prelude/Words.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.word_lsl	Prelude/Words.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.word_lsr	Prelude/Words.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.word_asr	Prelude/Words.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.word_ror	Prelude/Words.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.word_bits	Prelude/Words.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.word_extract	Prelude/Words.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.word_join	Prelude/Words.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.word_concat	Prelude/Words.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)
+prelude.i2w	Prelude/Words.lean	ok	compared with the HOL4 source (definition/equations/specification, argument order, fixity, corner cases)

@@ -1,0 +1,10 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "HOL4's one-clause definition goes through Prim_rec.new_recursive_definition (new_specification), saving only RESULT (Result t) = t; RESULT (Clash t) stays open. Lean's RESULT_pkg is a transparent `private def`, with no opaque or irreducible marking, whose witness returns t on Clash t. RESULT therefore unfolds and `RESULT (Clash t) = t` holds by rfl, also in importing modules, since private only hides the name. This contradicts CONVENTIONS §5; every other such package, e.g. CLASH_pkg, is opaque."
+  }
+ ]
+}

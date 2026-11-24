@@ -1,0 +1,10 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "In HolSyntax.lean:73-74, RACONV.Comb omits the premise RACONV env (s1, s2) present in holSyntaxScript.sml:96-97. Lean thus relates Comb s1 t1 and Comb s2 t2 for arbitrary s1, s2 whenever RACONV env (t1, t2) holds, including Comb (Var x ty) (Const x ty) and Comb (Const x ty) (Const x ty), which HOL4 rejects since no rule relates Var to Const."
+  }
+ ]
+}

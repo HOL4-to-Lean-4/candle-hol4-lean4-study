@@ -1,0 +1,2422 @@
+CONST	evaluateProps	is_clock_io_mono	3	:(α state -> α state # (β, γ) result) -> α state -> bool
+CONST	evaluateProps	io_events_mono	1	:α ffi_state -> α ffi_state -> bool
+CONST	evaluateProps	dest_IO_event	0	:io_event -> ffiname # word8 list # (word8 # word8) list
+CONST	evaluateProps	call_FFI_rel	1	:α ffi_state -> α ffi_state -> bool
+CONST	evaluateProps	adj_clock	1	:num -> num -> α state -> α state
+CONST	evaluate	list_result	2	:(α, β) result -> (α list, β) result
+CONST	evaluate	fix_clock	3	:γ state -> α state # β -> α state # β
+CONST	evaluate	evaluate_match	1	:'ffi state -> v sem_env -> v -> (pat # exp) list -> v -> 'ffi state # (v list, v) result
+CONST	evaluate	evaluate_decs	1	:'ffi state -> v sem_env -> dec list -> 'ffi state # (v sem_env, v) result
+CONST	evaluate	evaluate	1	:'ffi state -> v sem_env -> exp list -> 'ffi state # (v list, v) result
+CONST	evaluate	do_eval_res	2	:v list -> α state -> α state # (v sem_env # dec list, β) result
+CONST	evaluate	dec_clock	1	:α state -> α state
+CONST	semantics_min	semantics_prog	1	:α state -> v sem_env -> dec list -> behaviour -> bool
+CONST	semantics_min	evaluate_prog_with_clock	1	:α state -> v sem_env -> num -> dec list -> α ffi_state # (v sem_env, v) result
+CONST	semanticPrimitivesProps	store_v_vs	1	:α store_v -> α list
+CONST	semanticPrimitivesProps	shift_lookup	1	:shift -> α word -> num -> α word
+CONST	semanticPrimitivesProps	map_sv	2	:(β -> α) -> β store_v -> α store_v
+CONST	semanticPrimitivesProps	map_result	4	:(γ -> α) -> (δ -> β) -> (γ, δ) result -> (α, β) result
+CONST	semanticPrimitivesProps	map_error_result	2	:(β -> α) -> β error_result -> α error_result
+CONST	semanticPrimitivesProps	every_result	2	:(α -> bool) -> (β -> bool) -> (α, β) result -> bool
+CONST	semanticPrimitivesProps	every_error_result	1	:(α -> bool) -> α error_result -> bool
+CONST	semanticPrimitivesProps	dest_Refv	1	:α store_v -> α
+CONST	semanticPrimitivesProps	ctors_of_tdef	4	:β # γ # (α # δ) list -> α list
+CONST	semanticPrimitivesProps	FV_pes	0	:(pat # exp) list -> (mlstring, mlstring) id -> bool
+CONST	semanticPrimitivesProps	FV_list	0	:exp list -> (mlstring, mlstring) id -> bool
+CONST	semanticPrimitivesProps	FV_defs	0	:(mlstring # mlstring # exp) list -> (mlstring, mlstring) id -> bool
+CONST	semanticPrimitivesProps	FV_dec	0	:dec -> (mlstring, mlstring) id -> bool
+CONST	semanticPrimitivesProps	FV	0	:exp -> (mlstring, mlstring) id -> bool
+CONST	namespaceProps	nsSub_compute	4	:α list -> ((α, β) id -> γ -> δ -> bool) -> (α, β, γ) namespace -> (α, β, δ) namespace -> bool
+CONST	namespaceProps	alist_rel_restr	3	:(α -> β -> γ -> bool) -> (α # β) list -> (α # γ) list -> α list -> bool
+CONST	namespaceProps	alistSub	3	:(α -> β -> γ -> bool) -> (α # β) list -> (α # γ) list -> bool
+CONST	ffi	shmem_op_size	0	:shmem_op -> num
+CONST	ffi	shmem_op_CASE	1	:shmem_op -> α -> α -> α
+CONST	ffi	shmem_op2num	0	:shmem_op -> num
+CONST	ffi	recordtype.ffi_state.seldef.oracle_fupd	1	:((ffiname -> 'ffi -> word8 list -> word8 list -> 'ffi oracle_result) ->  ffiname -> 'ffi -> word8 list -> word8 list -> 'ffi oracle_result) -> 'ffi ffi_state -> 'ffi ffi_state
+CONST	ffi	recordtype.ffi_state.seldef.oracle	1	:'ffi ffi_state -> ffiname -> 'ffi -> word8 list -> word8 list -> 'ffi oracle_result
+CONST	ffi	recordtype.ffi_state.seldef.io_events_fupd	1	:(io_event list -> io_event list) -> 'ffi ffi_state -> 'ffi ffi_state
+CONST	ffi	recordtype.ffi_state.seldef.io_events	1	:'ffi ffi_state -> io_event list
+CONST	ffi	recordtype.ffi_state.seldef.ffi_state_fupd	1	:('ffi -> 'ffi) -> 'ffi ffi_state -> 'ffi ffi_state
+CONST	ffi	recordtype.ffi_state.seldef.ffi_state	1	:'ffi ffi_state -> 'ffi
+CONST	ffi	recordtype.ffi_state	1	:(ffiname -> 'ffi -> word8 list -> word8 list -> 'ffi oracle_result) -> 'ffi -> io_event list -> 'ffi ffi_state
+CONST	ffi	outcome_size	0	:outcome -> num
+CONST	ffi	outcome_REP	0	:outcome -> unit + unit + final_event
+CONST	ffi	outcome_CONS	0	:unit + unit + final_event -> outcome
+CONST	ffi	outcome_CASE	1	:outcome -> α -> α -> (final_event -> α) -> α
+CONST	ffi	outcome_ABS	0	:unit + unit + final_event -> outcome
+CONST	ffi	oracle_result_size	1	:('ffi -> num) -> 'ffi oracle_result -> num
+CONST	ffi	oracle_result_REP	1	:'b1 oracle_result -> 'b1 # word8 list + ffi_outcome
+CONST	ffi	oracle_result_CONS	1	:'b1 # word8 list + ffi_outcome -> 'b1 oracle_result
+CONST	ffi	oracle_result_CASE	2	:'ffi oracle_result -> ('ffi -> word8 list -> α) -> (ffi_outcome -> α) -> α
+CONST	ffi	oracle_result_ABS	1	:'b1 # word8 list + ffi_outcome -> 'b1 oracle_result
+CONST	ffi	oracle_resultSET	1	:'ffi oracle_result -> 'ffi -> bool
+CONST	ffi	oracle_resultREL	2	:('ffi -> α -> bool) -> 'ffi oracle_result -> α oracle_result -> bool
+CONST	ffi	oracle_resultMAP	2	:('ffi -> α) -> 'ffi oracle_result -> α oracle_result
+CONST	ffi	num2shmem_op	0	:num -> shmem_op
+CONST	ffi	num2ffi_outcome	0	:num -> ffi_outcome
+CONST	ffi	io_event_size	0	:io_event -> num
+CONST	ffi	io_event_REP	0	:io_event -> ffiname # word8 list # (word8 # word8) list
+CONST	ffi	io_event_CONS	0	:ffiname # word8 list # (word8 # word8) list -> io_event
+CONST	ffi	io_event_CASE	1	:io_event -> (ffiname -> word8 list -> (word8 # word8) list -> α) -> α
+CONST	ffi	io_event_ABS	0	:ffiname # word8 list # (word8 # word8) list -> io_event
+CONST	ffi	final_event_size	0	:final_event -> num
+CONST	ffi	final_event_REP	0	:final_event -> ffiname # word8 list # word8 list # ffi_outcome
+CONST	ffi	final_event_CONS	0	:ffiname # word8 list # word8 list # ffi_outcome -> final_event
+CONST	ffi	final_event_CASE	1	:final_event -> (ffiname -> word8 list -> word8 list -> ffi_outcome -> α) -> α
+CONST	ffi	final_event_ABS	0	:ffiname # word8 list # word8 list # ffi_outcome -> final_event
+CONST	ffi	ffiname_size	0	:ffiname -> num
+CONST	ffi	ffiname_REP	0	:ffiname -> mlstring + shmem_op
+CONST	ffi	ffiname_CONS	0	:mlstring + shmem_op -> ffiname
+CONST	ffi	ffiname_CASE	1	:ffiname -> (mlstring -> α) -> (shmem_op -> α) -> α
+CONST	ffi	ffiname_ABS	0	:mlstring + shmem_op -> ffiname
+CONST	ffi	ffi_state_size	1	:('ffi -> num) -> 'ffi ffi_state -> num
+CONST	ffi	ffi_state_REP	1	:'b1 ffi_state -> (ffiname -> 'b1 -> word8 list -> word8 list -> 'b1 oracle_result) # 'b1 # io_event list
+CONST	ffi	ffi_state_CONS	1	:(ffiname -> 'b1 -> word8 list -> word8 list -> 'b1 oracle_result) # 'b1 # io_event list -> 'b1 ffi_state
+CONST	ffi	ffi_state_CASE	2	:'ffi ffi_state -> ((ffiname -> 'ffi -> word8 list -> word8 list -> 'ffi oracle_result) ->  'ffi -> io_event list -> α) -> α
+CONST	ffi	ffi_state_ABS	1	:(ffiname -> 'b1 -> word8 list -> word8 list -> 'b1 oracle_result) # 'b1 # io_event list -> 'b1 ffi_state
+CONST	ffi	ffi_result_size	1	:('ffi -> num) -> 'ffi ffi_result -> num
+CONST	ffi	ffi_result_REP	1	:'b1 ffi_result -> 'b1 ffi_state # word8 list + final_event
+CONST	ffi	ffi_result_CONS	1	:'b1 ffi_state # word8 list + final_event -> 'b1 ffi_result
+CONST	ffi	ffi_result_CASE	2	:'ffi ffi_result -> ('ffi ffi_state -> word8 list -> α) -> (final_event -> α) -> α
+CONST	ffi	ffi_result_ABS	1	:'b1 ffi_state # word8 list + final_event -> 'b1 ffi_result
+CONST	ffi	ffi_outcome_size	0	:ffi_outcome -> num
+CONST	ffi	ffi_outcome_CASE	1	:ffi_outcome -> α -> α -> α
+CONST	ffi	ffi_outcome2num	0	:ffi_outcome -> num
+CONST	ffi	call_FFI	1	:'ffi ffi_state -> ffiname -> word8 list -> word8 list -> 'ffi ffi_result
+CONST	ffi	behaviour_size	0	:behaviour -> num
+CONST	ffi	behaviour_REP	0	:behaviour -> io_event llist + outcome # io_event list + unit
+CONST	ffi	behaviour_CONS	0	:io_event llist + outcome # io_event list + unit -> behaviour
+CONST	ffi	behaviour_CASE	1	:behaviour -> (io_event llist -> α) -> (outcome -> io_event list -> α) -> α -> α
+CONST	ffi	behaviour_ABS	0	:io_event llist + outcome # io_event list + unit -> behaviour
+CONST	ffi	Terminate	0	:outcome -> io_event list -> behaviour
+CONST	ffi	Success	0	:outcome
+CONST	ffi	SharedMem	0	:shmem_op -> ffiname
+CONST	ffi	Resource_limit_hit	0	:outcome
+CONST	ffi	Oracle_return	1	:'ffi -> word8 list -> 'ffi oracle_result
+CONST	ffi	Oracle_final	1	:ffi_outcome -> 'ffi oracle_result
+CONST	ffi	MappedWrite	0	:shmem_op
+CONST	ffi	MappedRead	0	:shmem_op
+CONST	ffi	IO_event	0	:ffiname -> word8 list -> (word8 # word8) list -> io_event
+CONST	ffi	Final_event	0	:ffiname -> word8 list -> word8 list -> ffi_outcome -> final_event
+CONST	ffi	Fail	0	:behaviour
+CONST	ffi	FFI_return	1	:'ffi ffi_state -> word8 list -> 'ffi ffi_result
+CONST	ffi	FFI_outcome	0	:final_event -> outcome
+CONST	ffi	FFI_final	1	:final_event -> 'ffi ffi_result
+CONST	ffi	FFI_failed	0	:ffi_outcome
+CONST	ffi	FFI_diverged	0	:ffi_outcome
+CONST	ffi	ExtCall	0	:mlstring -> ffiname
+CONST	ffi	Diverge	0	:io_event llist -> behaviour
+CONST	location	locs_size	0	:locs -> num
+CONST	location	locs_REP	0	:locs -> locn # locn
+CONST	location	locs_CONS	0	:locn # locn -> locs
+CONST	location	locs_CASE	1	:locs -> (locn -> locn -> α) -> α
+CONST	location	locs_ABS	0	:locn # locn -> locs
+CONST	location	locnrow	0	:locn -> num
+CONST	location	locncol	0	:locn -> num
+CONST	location	locn_size	0	:locn -> num
+CONST	location	locn_rowupdate	0	:(num -> num) -> locn -> locn
+CONST	location	locn_colupdate	0	:(num -> num) -> locn -> locn
+CONST	location	locn_REP	0	:locn -> unit + unit + num # num
+CONST	location	locn_CONS	0	:unit + unit + num # num -> locn
+CONST	location	locn_CASE	1	:locn -> α -> α -> (num -> num -> α) -> α
+CONST	location	locn_ABS	0	:unit + unit + num # num -> locn
+CONST	location	UNKNOWNpt	0	:locn
+CONST	location	POSN	0	:num -> num -> locn
+CONST	location	Locs	0	:locn -> locn -> locs
+CONST	location	EOFpt	0	:locn
+CONST	mergesort	stable	1	:(α -> α -> bool) -> α list -> α list -> bool
+CONST	mergesort	sort3_tail	1	:bool -> (α -> α -> bool) -> α -> α -> α -> α list
+CONST	mergesort	sort3	1	:(α -> α -> bool) -> α -> α -> α -> α list
+CONST	mergesort	sort2_tail	1	:bool -> (α -> α -> bool) -> α -> α -> α list
+CONST	mergesort	sort2	1	:(α -> α -> bool) -> α -> α -> α list
+CONST	mergesort	mergesort_tail	1	:(α -> α -> bool) -> α list -> α list
+CONST	mergesort	mergesortN_tail	1	:bool -> (α -> α -> bool) -> num -> α list -> α list
+CONST	mergesort	mergesortN	1	:(α -> α -> bool) -> num -> α list -> α list
+CONST	mergesort	mergesort	1	:(α -> α -> bool) -> α list -> α list
+CONST	mergesort	merge_tail	1	:bool -> (α -> α -> bool) -> α list -> α list -> α list -> α list
+CONST	mergesort	merge	1	:(α -> α -> bool) -> α list -> α list -> α list
+CONST	alignment	byte_aligned	1	:α word -> bool
+CONST	alignment	byte_align	1	:α word -> α word
+CONST	alignment	aligned	1	:num -> α word -> bool
+CONST	alignment	align	1	:num -> α word -> α word
+CONST	bitstring	zero_extend	0	:num -> bool list -> bool list
+CONST	bitstring	w2v	1	:α word -> bool list
+CONST	bitstring	v2w	1	:bool list -> α word
+CONST	bitstring	v2s	0	:bool list -> string
+CONST	bitstring	v2n	0	:bool list -> num
+CONST	bitstring	testbit	0	:num -> bool list -> bool
+CONST	bitstring	sign_extend	1	:num -> α list -> α list
+CONST	bitstring	shiftr	0	:bool list -> num -> bool list
+CONST	bitstring	shiftl	0	:bool list -> num -> bool list
+CONST	bitstring	s2v	0	:string -> bool list
+CONST	bitstring	rotate	0	:bool list -> num -> bool list
+CONST	bitstring	rev_count_list	0	:num -> num list
+CONST	bitstring	replicate	0	:bool list -> num -> bool list
+CONST	bitstring	n2v	0	:num -> bool list
+CONST	bitstring	modify	0	:(num -> bool -> bool) -> bool list -> bool list
+CONST	bitstring	fixwidth	0	:num -> bool list -> bool list
+CONST	bitstring	field_insert	0	:num -> num -> bool list -> bool list -> bool list
+CONST	bitstring	field	0	:num -> num -> bool list -> bool list
+CONST	bitstring	extend	0	:bool -> num -> bool list -> bool list
+CONST	bitstring	bxor	0	:bool list -> bool list -> bool list
+CONST	bitstring	bxnor	0	:bool list -> bool list -> bool list
+CONST	bitstring	bor	0	:bool list -> bool list -> bool list
+CONST	bitstring	boolify	0	:bool list -> num list -> bool list
+CONST	bitstring	bnot	0	:bool list -> bool list
+CONST	bitstring	bnor	0	:bool list -> bool list -> bool list
+CONST	bitstring	bnand	0	:bool list -> bool list -> bool list
+CONST	bitstring	bitwise	0	:(bool -> bool -> bool) -> bool list -> bool list -> bool list
+CONST	bitstring	bitify	0	:num list -> bool list -> num list
+CONST	bitstring	band	0	:bool list -> bool list -> bool list
+CONST	bitstring	add	0	:bool list -> bool list -> bool list
+CONST	blast	bsum	0	:bool -> bool -> bool -> bool
+CONST	blast	bcarry	0	:bool -> bool -> bool -> bool
+CONST	blast	BSUM	0	:num -> (num -> bool) -> (num -> bool) -> bool -> bool
+CONST	blast	BCARRY	0	:num -> (num -> bool) -> (num -> bool) -> bool -> bool
+CONST	byte	words_of_bytes	1	:bool -> word8 list -> α word list
+CONST	byte	word_to_bytes_le	1	:α word -> word8 list
+CONST	byte	word_to_bytes_be	1	:α word -> word8 list
+CONST	byte	word_to_bytes_aux	1	:num -> α word -> bool -> word8 list
+CONST	byte	word_to_bytes	1	:α word -> bool -> word8 list
+CONST	byte	word_slice_alt	1	:num -> num -> α word -> α word
+CONST	byte	word_of_bytes_le	1	:word8 list -> α word
+CONST	byte	word_of_bytes_be	1	:word8 list -> α word
+CONST	byte	word_of_bytes	1	:bool -> α word -> word8 list -> α word
+CONST	byte	set_byte	1	:α word -> word8 -> α word -> bool -> α word
+CONST	byte	num_of_bytes	0	:word8 list -> num
+CONST	byte	get_byte	1	:α word -> α word -> bool -> word8
+CONST	byte	first_byte_at	1	:num -> num -> α word -> word8 list -> word8
+CONST	byte	bytes_to_word	1	:num -> α word -> word8 list -> α word -> bool -> α word
+CONST	byte	bytes_of_num	0	:num -> num -> word8 list
+CONST	byte	bytes_in_word	1	:α word
+CONST	byte	byte_index	1	:α word -> bool -> num
+CONST	byte	be_bytes	0	:num -> word8 list -> word8 list -> word8 list
+CONST	toto	zer	0	:num_dt
+CONST	toto	toto_of_LinearOrder	1	:(α -> α -> bool) -> α toto
+CONST	toto	toto_inv	1	:α toto -> α toto
+CONST	toto	stringto	0	:string toto
+CONST	toto	qk_numto	0	:num toto
+CONST	toto	qk_numOrd	0	:num -> num -> ordering
+CONST	toto	numto	0	:num toto
+CONST	toto	num_to_dt	0	:num -> num_dt
+CONST	toto	num_dt_size	0	:num_dt -> num
+CONST	toto	num_dt_CONS	0	:unit + num_dt + num_dt -> num_dt
+CONST	toto	num_dt_CASE	1	:num_dt -> α -> (num_dt -> α) -> (num_dt -> α) -> α
+CONST	toto	num_dtOrd	0	:num_dt -> num_dt -> ordering
+CONST	toto	numOrd	0	:num -> num -> ordering
+CONST	toto	listoto	1	:α toto -> α list toto
+CONST	toto	listorder	1	:(α -> α -> bool) -> α list -> α list -> bool
+CONST	toto	lextoto	2	:α toto -> β toto -> (α # β) toto
+CONST	toto	lexTO	2	:(α -> α -> ordering) -> (β -> β -> ordering) -> α # β -> α # β -> ordering
+CONST	toto	imageOrd	2	:(α -> γ) -> (γ -> γ -> ordering) -> α -> α -> ordering
+CONST	toto	charto	0	:char toto
+CONST	toto	charOrd	0	:char -> char -> ordering
+CONST	toto	bit2	0	:num_dt -> num_dt
+CONST	toto	bit1	0	:num_dt -> num_dt
+CONST	toto	apto	1	:α toto -> α -> α -> ordering
+CONST	toto	WeakLinearOrder_of_TO	1	:(α -> α -> ordering) -> α -> α -> bool
+CONST	toto	TotOrd	1	:(α -> α -> ordering) -> bool
+CONST	toto	TO_of_LinearOrder	1	:(α -> α -> bool) -> α -> α -> ordering
+CONST	toto	TO_inv	1	:(α -> α -> ordering) -> α -> α -> ordering
+CONST	toto	TO	1	:(α -> α -> ordering) -> α toto
+CONST	toto	StrongLinearOrder_of_TO	1	:(α -> α -> ordering) -> α -> α -> bool
+CONST	toto	ListOrd	1	:α toto -> α list -> α list -> ordering
+CONST	comparison	resp_equiv2	2	:(α -> α -> ordering) -> (β -> β -> ordering) -> (α -> β) -> bool
+CONST	comparison	resp_equiv	3	:(α -> α -> ordering) -> (α -> β -> γ) -> bool
+CONST	comparison	option_cmp2	2	:(α -> β -> ordering) -> α option -> β option -> ordering
+CONST	comparison	good_cmp	1	:(α -> α -> ordering) -> bool
+CONST	comparison	equiv_inj	2	:(α -> α -> ordering) -> (β -> β -> ordering) -> (α -> β) -> bool
+CONST	bag	mlt1	1	:(α -> α -> bool) -> (α -> num) -> (α -> num) -> bool
+CONST	bag	dominates	2	:(α -> β -> bool) -> (α -> bool) -> (β -> bool) -> bool
+CONST	bag	bag_size	1	:(α -> num) -> (α -> num) -> num
+CONST	bag	SUB_BAG	1	:(α -> num) -> (α -> num) -> bool
+CONST	bag	SING_BAG	1	:(α -> num) -> bool
+CONST	bag	SET_OF_BAG	1	:(α -> num) -> α -> bool
+CONST	bag	PSUB_BAG	1	:(α -> num) -> (α -> num) -> bool
+CONST	bag	ITBAG_tupled	2	:(α -> β -> β) -> (α -> num) # β -> β
+CONST	bag	ITBAG	2	:(α -> β -> β) -> (α -> num) -> β -> β
+CONST	bag	FINITE_BAG	1	:(α -> num) -> bool
+CONST	bag	EMPTY_BAG	1	:α -> num
+CONST	bag	EL_BAG	1	:α -> α -> num
+CONST	bag	BIG_BAG_UNION	1	:((α -> num) -> bool) -> α -> num
+CONST	bag	BAG_UNION	1	:(α -> num) -> (α -> num) -> α -> num
+CONST	bag	BAG_REST	1	:(α -> num) -> α -> num
+CONST	bag	BAG_OF_SET	1	:(α -> bool) -> α -> num
+CONST	bag	BAG_MERGE	1	:(α -> num) -> (α -> num) -> α -> num
+CONST	bag	BAG_INTER	1	:(α -> num) -> (α -> num) -> α -> num
+CONST	bag	BAG_INSERT	1	:α -> (α -> num) -> α -> num
+CONST	bag	BAG_INN	1	:α -> num -> (α -> num) -> bool
+CONST	bag	BAG_IN	1	:α -> (α -> num) -> bool
+CONST	bag	BAG_IMAGE	2	:(β -> α) -> (β -> num) -> α -> num
+CONST	bag	BAG_GEN_SUM	0	:(num -> num) -> num -> num
+CONST	bag	BAG_GEN_PROD	0	:(num -> num) -> num -> num
+CONST	bag	BAG_FILTER	1	:(α -> bool) -> (α -> num) -> α -> num
+CONST	bag	BAG_EVERY	1	:(α -> bool) -> (α -> num) -> bool
+CONST	bag	BAG_DISJOINT	1	:(α -> num) -> (α -> num) -> bool
+CONST	bag	BAG_DIFF	1	:(α -> num) -> (α -> num) -> α -> num
+CONST	bag	BAG_DELETE	1	:(α -> num) -> α -> (α -> num) -> bool
+CONST	bag	BAG_CHOICE	1	:(α -> num) -> α
+CONST	bag	BAG_CARD_RELn	1	:(α -> num) -> num -> bool
+CONST	bag	BAG_CARD	1	:(α -> num) -> num
+CONST	bag	BAG_ALL_DISTINCT	1	:(α -> num) -> bool
+CONST	container	mlt_list	1	:(α -> α -> bool) -> α list -> α list -> bool
+CONST	container	LIST_TO_BAG	1	:α list -> α -> num
+CONST	container	BAG_TO_LIST	1	:(α -> num) -> α list
+CONST	container	BAG_OF_FMAP	3	:(β -> γ -> α) -> (β |-> γ) -> α -> num
+CONST	integer_word	word_smod	1	:α word -> α word -> α word
+CONST	integer_word	word_sdiv	1	:α word -> α word -> α word
+CONST	integer_word	w2i	1	:α word -> int
+CONST	integer_word	toString	0	:int -> string
+CONST	integer_word	signed_saturate_sub	1	:α word -> α word -> α word
+CONST	integer_word	signed_saturate_add	1	:α word -> α word -> α word
+CONST	integer_word	saturate_w2sw	2	:α word -> β word
+CONST	integer_word	saturate_sw2w	2	:α word -> β word
+CONST	integer_word	saturate_sw2sw	2	:α word -> β word
+CONST	integer_word	saturate_i2w	1	:int -> α word
+CONST	integer_word	saturate_i2sw	1	:int -> α word
+CONST	integer_word	i2w	1	:int -> α word
+CONST	integer_word	fromString	0	:string -> int
+CONST	integer_word	UINT_MAX	1	:α itself -> int
+CONST	integer_word	INT_MIN	1	:α itself -> int
+CONST	integer_word	INT_MAX	1	:α itself -> int
+CONST	numeral_bit	iSUC	0	:num -> num
+CONST	numeral_bit	iMOD_2EXP	0	:num -> num -> num
+CONST	numeral_bit	iLOG2	0	:num -> num
+CONST	numeral_bit	iDIV2	0	:num -> num
+CONST	numeral_bit	iBITWISE	0	:num -> (bool -> bool -> bool) -> num -> num -> num
+CONST	numeral_bit	SFUNPOW	0	:(num -> num) -> num -> num -> num
+CONST	numeral_bit	FDUB	0	:(num -> num) -> num -> num
+CONST	numeral_bit	BIT_REV	0	:num -> num -> num -> num
+CONST	numeral_bit	BIT_MODF	0	:num -> (num -> bool -> bool) -> num -> num -> num -> num -> num
+CONST	iterate	support	2	:(β -> β -> β) -> (α -> β) -> (α -> bool) -> α -> bool
+CONST	iterate	numseg	0	:num -> num -> num -> bool
+CONST	iterate	nsum	1	:(α -> bool) -> (α -> num) -> num
+CONST	iterate	nproduct	1	:(α -> bool) -> (α -> num) -> num
+CONST	iterate	neutral	1	:(α -> α -> α) -> α
+CONST	iterate	monoidal	1	:(α -> α -> α) -> bool
+CONST	iterate	lifted	3	:(β -> γ -> α) -> β option -> γ option -> α option
+CONST	iterate	iterate	2	:(β -> β -> β) -> (α -> bool) -> (α -> β) -> β
+CONST	iterate	FINREC	2	:(α -> β -> β) -> β -> (α -> bool) -> β -> num -> bool
+CONST	fcp	mk_finite_image	1	:α -> α finite_image
+CONST	fcp	mk_cart	2	:(β finite_image -> α) -> α[β]
+CONST	fcp	finite_index	1	:num -> α
+CONST	fcp	fcp_index	2	:α[β] -> num -> α
+CONST	fcp	fcp_CASE	3	:α[β] -> ((β finite_image -> α) -> γ) -> γ
+CONST	fcp	dimindex	1	:α itself -> num
+CONST	fcp	dest_finite_image	1	:α finite_image -> α
+CONST	fcp	dest_cart	2	:α[β] -> β finite_image -> α
+CONST	fcp	bit1_size	1	:(α -> num) -> α bit1 -> num
+CONST	fcp	bit1_REP	1	:'b1 bit1 -> 'b1 + 'b1 + unit
+CONST	fcp	bit1_CONS	1	:'b1 + 'b1 + unit -> 'b1 bit1
+CONST	fcp	bit1_CASE	2	:α bit1 -> (α -> β) -> (α -> β) -> β -> β
+CONST	fcp	bit1_ABS	1	:'b1 + 'b1 + unit -> 'b1 bit1
+CONST	fcp	bit1SET	1	:α bit1 -> α -> bool
+CONST	fcp	bit1REL	2	:(α -> β -> bool) -> α bit1 -> β bit1 -> bool
+CONST	fcp	bit1MAP	2	:(α -> β) -> α bit1 -> β bit1
+CONST	fcp	bit0_size	1	:(α -> num) -> α bit0 -> num
+CONST	fcp	bit0_REP	1	:'b1 bit0 -> 'b1 + 'b1
+CONST	fcp	bit0_CONS	1	:'b1 + 'b1 -> 'b1 bit0
+CONST	fcp	bit0_CASE	2	:α bit0 -> (α -> β) -> (α -> β) -> β
+CONST	fcp	bit0_ABS	1	:'b1 + 'b1 -> 'b1 bit0
+CONST	fcp	bit0SET	1	:α bit0 -> α -> bool
+CONST	fcp	bit0REL	2	:(α -> β -> bool) -> α bit0 -> β bit0 -> bool
+CONST	fcp	bit0MAP	2	:(α -> β) -> α bit0 -> β bit0
+CONST	fcp	V2L	2	:α[β] -> α list
+CONST	fcp	L2V	2	:α list -> α[β]
+CONST	fcp	FCP_ZIP	3	:α[β] -> γ[β] -> (α # γ)[β]
+CONST	fcp	FCP_TL	3	:α[γ] -> α[β]
+CONST	fcp	FCP_SND	3	:α[β + γ] -> α[γ]
+CONST	fcp	FCP_MAP	3	:(α -> β) -> α[γ] -> β[γ]
+CONST	fcp	FCP_HD	2	:α[β] -> α
+CONST	fcp	FCP_FST	3	:α[β + γ] -> α[β]
+CONST	fcp	FCP_FOLD	3	:(β -> α -> β) -> β -> α[γ] -> β
+CONST	fcp	FCP_EXISTS	2	:(β -> bool) -> β[α] -> bool
+CONST	fcp	FCP_EVERY	2	:(β -> bool) -> β[α] -> bool
+CONST	fcp	FCP_CONS	3	:α -> α[β] -> α[γ]
+CONST	fcp	FCP_CONCAT	3	:α[β] -> α[γ] -> α[β + γ]
+CONST	fcp	FCP	2	:(num -> α) -> α[β]
+CONST	fcp	BIT1C	1	:α bit1
+CONST	fcp	BIT1B	1	:α -> α bit1
+CONST	fcp	BIT1A	1	:α -> α bit1
+CONST	fcp	BIT0B	1	:α -> α bit0
+CONST	fcp	BIT0A	1	:α -> α bit0
+CONST	fcp	:+	2	:num -> α -> α[β] -> α[β]
+CONST	sum_num	SUM	0	:num -> (num -> num) -> num
+CONST	sum_num	GSUM	0	:num # num -> (num -> num) -> num
+CONST	bit	TIMES_2EXP	0	:num -> num -> num
+CONST	bit	SLICE	0	:num -> num -> num -> num
+CONST	bit	SIGN_EXTEND	0	:num -> num -> num -> num
+CONST	bit	SBIT	0	:bool -> num -> num
+CONST	bit	MOD_2EXP_MAX	0	:num -> num -> bool
+CONST	bit	MOD_2EXP_EQ	0	:num -> num -> num -> bool
+CONST	bit	MOD_2EXP	0	:num -> num -> num
+CONST	bit	LOWEST_SET_BIT	0	:num -> num
+CONST	bit	LOG2	0	:num -> num
+CONST	bit	DIV_2EXP	0	:num -> num -> num
+CONST	bit	DIVMOD_2EXP	0	:num -> num -> num # num
+CONST	bit	BIT_REVERSE	0	:num -> num -> num
+CONST	bit	BIT_MODIFY	0	:num -> (num -> bool -> bool) -> num -> num
+CONST	bit	BITWISE	0	:num -> (bool -> bool -> bool) -> num -> num -> num
+CONST	bit	BITV	0	:num -> num -> num
+CONST	bit	BITS	0	:num -> num -> num -> num
+CONST	bit	BIT	0	:num -> num -> bool
+CONST	numposrep	num_to_oct_list	0	:num -> num list
+CONST	numposrep	num_to_hex_list	0	:num -> num list
+CONST	numposrep	num_to_dec_list	0	:num -> num list
+CONST	numposrep	num_to_bin_list	0	:num -> num list
+CONST	numposrep	num_from_oct_list	0	:num list -> num
+CONST	numposrep	num_from_hex_list	0	:num list -> num
+CONST	numposrep	num_from_dec_list	0	:num list -> num
+CONST	numposrep	num_from_bin_list	0	:num list -> num
+CONST	numposrep	n2lA	1	:α list -> (num -> α) -> num -> num -> α list
+CONST	numposrep	n2l	0	:num -> num -> num list
+CONST	numposrep	l2n2	0	:num list -> num
+CONST	numposrep	l2n	0	:num -> num list -> num
+CONST	numposrep	BOOLIFY	0	:num -> num -> bool list -> bool list
+CONST	ternaryComparisons	pair_compare	4	:(α -> β -> ordering) -> (γ -> δ -> ordering) -> α # γ -> β # δ -> ordering
+CONST	ternaryComparisons	ordering_size	0	:ordering -> num
+CONST	ternaryComparisons	ordering_CASE	1	:ordering -> α -> α -> α -> α
+CONST	ternaryComparisons	ordering2num	0	:ordering -> num
+CONST	ternaryComparisons	option_compare	2	:(α -> β -> ordering) -> α option -> β option -> ordering
+CONST	ternaryComparisons	num_compare	0	:num -> num -> ordering
+CONST	ternaryComparisons	num2ordering	0	:num -> ordering
+CONST	ternaryComparisons	list_merge	1	:(α -> α -> bool) -> α list -> α list -> α list
+CONST	ternaryComparisons	list_compare	2	:(α -> β -> ordering) -> α list -> β list -> ordering
+CONST	ternaryComparisons	invert_comparison	0	:ordering -> ordering
+CONST	ternaryComparisons	bool_compare	0	:bool -> bool -> ordering
+CONST	ternaryComparisons	LESS	0	:ordering
+CONST	ternaryComparisons	GREATER	0	:ordering
+CONST	ternaryComparisons	EQUAL	0	:ordering
+CONST	string	toUpper	0	:char -> char
+CONST	string	toLower	0	:char -> char
+CONST	string	string_lt	0	:string -> string -> bool
+CONST	string	string_le	0	:string -> string -> bool
+CONST	string	string_gt	0	:string -> string -> bool
+CONST	string	string_ge	0	:string -> string -> bool
+CONST	string	string_elim__magic	0	:string -> string
+CONST	string	string_compare	0	:string -> string -> ordering
+CONST	string	isUpper	0	:char -> bool
+CONST	string	isSpace	0	:char -> bool
+CONST	string	isPunct	0	:char -> bool
+CONST	string	isPrint	0	:char -> bool
+CONST	string	isLower	0	:char -> bool
+CONST	string	isHexDigit	0	:char -> bool
+CONST	string	isGraph	0	:char -> bool
+CONST	string	isDigit	0	:char -> bool
+CONST	string	isCntrl	0	:char -> bool
+CONST	string	isAscii	0	:char -> bool
+CONST	string	isAlphaNum	0	:char -> bool
+CONST	string	isAlpha	0	:char -> bool
+CONST	string	char_size	0	:char -> num
+CONST	string	char_lt	0	:char -> char -> bool
+CONST	string	char_le	0	:char -> char -> bool
+CONST	string	char_gt	0	:char -> char -> bool
+CONST	string	char_ge	0	:char -> char -> bool
+CONST	string	char_compare	0	:char -> char -> ordering
+CONST	string	TRANSLATE	0	:(char -> string) -> string -> string
+CONST	string	TOKENS	0	:(char -> bool) -> string -> string list
+CONST	string	TOCHAR	0	:string -> char
+CONST	string	SUBSTRING	0	:string # num # num -> string
+CONST	string	SUB	0	:string # num -> char
+CONST	string	STR	0	:char -> string
+CONST	string	ORD	0	:char -> num
+CONST	string	IMPLODE	0	:string -> string
+CONST	string	FIELDS	0	:(char -> bool) -> string -> string list
+CONST	string	EXTRACT	0	:string # num # num option -> string
+CONST	string	EXPLODE	0	:string -> string
+CONST	string	DEST_STRING	0	:string -> (char # string) option
+CONST	string	CHR	0	:num -> char
+CONST	ASCIInumbers	s2n	0	:num -> (char -> num) -> string -> num
+CONST	ASCIInumbers	num_to_oct_string	0	:num -> string
+CONST	ASCIInumbers	num_to_hex_string	0	:num -> string
+CONST	ASCIInumbers	num_to_dec_string	0	:num -> string
+CONST	ASCIInumbers	num_to_bin_string	0	:num -> string
+CONST	ASCIInumbers	num_from_oct_string	0	:string -> num
+CONST	ASCIInumbers	num_from_hex_string	0	:string -> num
+CONST	ASCIInumbers	num_from_dec_string	0	:string -> num
+CONST	ASCIInumbers	num_from_bin_string	0	:string -> num
+CONST	ASCIInumbers	n2s	0	:num -> (num -> char) -> num -> string
+CONST	ASCIInumbers	fromHexString	0	:string -> num option
+CONST	ASCIInumbers	fromDecString	0	:string -> num option
+CONST	ASCIInumbers	fromBinString	0	:string -> num option
+CONST	ASCIInumbers	UNHEX	0	:char -> num
+CONST	ASCIInumbers	HEX	0	:num -> char
+CONST	words	word_xor	1	:α word -> α word -> α word
+CONST	words	word_xnor	1	:α word -> α word -> α word
+CONST	words	word_to_oct_string	1	:α word -> string
+CONST	words	word_to_oct_list	1	:α word -> num list
+CONST	words	word_to_hex_string	1	:α word -> string
+CONST	words	word_to_hex_list	1	:α word -> num list
+CONST	words	word_to_dec_string	1	:α word -> string
+CONST	words	word_to_dec_list	1	:α word -> num list
+CONST	words	word_to_bin_string	1	:α word -> string
+CONST	words	word_to_bin_list	1	:α word -> num list
+CONST	words	word_sub	1	:α word -> α word -> α word
+CONST	words	word_smin	1	:α word -> α word -> α word
+CONST	words	word_smax	1	:α word -> α word -> α word
+CONST	words	word_slice	1	:num -> num -> α word -> α word
+CONST	words	word_signed_bits	1	:num -> num -> α word -> α word
+CONST	words	word_sign_extend	1	:num -> α word -> α word
+CONST	words	word_rrx	1	:bool # α word -> bool # α word
+CONST	words	word_ror_bv	1	:α word -> α word -> α word
+CONST	words	word_ror	1	:α word -> num -> α word
+CONST	words	word_rol_bv	1	:α word -> α word -> α word
+CONST	words	word_rol	1	:α word -> num -> α word
+CONST	words	word_reverse	1	:α word -> α word
+CONST	words	word_replicate	2	:num -> α word -> β word
+CONST	words	word_rem	1	:α word -> α word -> α word
+CONST	words	word_reduce	1	:(bool -> bool -> bool) -> α word -> word1
+CONST	words	word_quot	1	:α word -> α word -> α word
+CONST	words	word_or	1	:α word -> α word -> α word
+CONST	words	word_nor	1	:α word -> α word -> α word
+CONST	words	word_nand	1	:α word -> α word -> α word
+CONST	words	word_mul	1	:α word -> α word -> α word
+CONST	words	word_msb	1	:α word -> bool
+CONST	words	word_modify	1	:(num -> bool -> bool) -> α word -> α word
+CONST	words	word_mod	1	:α word -> α word -> α word
+CONST	words	word_min	1	:α word -> α word -> α word
+CONST	words	word_max	1	:α word -> α word -> α word
+CONST	words	word_lt	1	:α word -> α word -> bool
+CONST	words	word_lsr_bv	1	:α word -> α word -> α word
+CONST	words	word_lsr	1	:α word -> num -> α word
+CONST	words	word_lsl_bv	1	:α word -> α word -> α word
+CONST	words	word_lsl	1	:α word -> num -> α word
+CONST	words	word_lsb	1	:α word -> bool
+CONST	words	word_ls	1	:α word -> α word -> bool
+CONST	words	word_log2	1	:α word -> α word
+CONST	words	word_lo	1	:α word -> α word -> bool
+CONST	words	word_len	1	:α word -> num
+CONST	words	word_le	1	:α word -> α word -> bool
+CONST	words	word_join	2	:α word -> β word -> (α + β) word
+CONST	words	word_hs	1	:α word -> α word -> bool
+CONST	words	word_hi	1	:α word -> α word -> bool
+CONST	words	word_gt	1	:α word -> α word -> bool
+CONST	words	word_ge	1	:α word -> α word -> bool
+CONST	words	word_from_oct_string	1	:string -> α word
+CONST	words	word_from_oct_list	1	:num list -> α word
+CONST	words	word_from_hex_string	1	:string -> α word
+CONST	words	word_from_hex_list	1	:num list -> α word
+CONST	words	word_from_dec_string	1	:string -> α word
+CONST	words	word_from_dec_list	1	:num list -> α word
+CONST	words	word_from_bin_string	1	:string -> α word
+CONST	words	word_from_bin_list	1	:num list -> α word
+CONST	words	word_extract	2	:num -> num -> α word -> β word
+CONST	words	word_exp_tailrec	1	:α word -> α word -> α word -> α word
+CONST	words	word_exp	1	:α word -> α word -> α word
+CONST	words	word_div	1	:α word -> α word -> α word
+CONST	words	word_concat	3	:α word -> β word -> γ word
+CONST	words	word_compare	1	:α word -> α word -> word1
+CONST	words	word_bits	1	:num -> num -> α word -> α word
+CONST	words	word_bit	1	:num -> α word -> bool
+CONST	words	word_asr_bv	1	:α word -> α word -> α word
+CONST	words	word_asr	1	:α word -> num -> α word
+CONST	words	word_and	1	:α word -> α word -> α word
+CONST	words	word_add	1	:α word -> α word -> α word
+CONST	words	word_abs	1	:α word -> α word
+CONST	words	word_T	1	:α word
+CONST	words	word_L2	1	:α word
+CONST	words	word_L	1	:α word
+CONST	words	word_H	1	:α word
+CONST	words	word_2comp	1	:α word -> α word
+CONST	words	word_1comp	1	:α word -> α word
+CONST	words	w2w	2	:α word -> β word
+CONST	words	w2s	1	:num -> (num -> char) -> α word -> string
+CONST	words	w2n	1	:α word -> num
+CONST	words	w2l	1	:num -> α word -> num list
+CONST	words	sw2sw	2	:α word -> β word
+CONST	words	saturate_w2w	2	:α word -> β word
+CONST	words	saturate_sub	1	:α word -> α word -> α word
+CONST	words	saturate_n2w	1	:num -> α word
+CONST	words	saturate_mul	1	:α word -> α word -> α word
+CONST	words	saturate_add	1	:α word -> α word -> α word
+CONST	words	s2w	1	:num -> (char -> num) -> string -> α word
+CONST	words	reduce_xor	1	:α word -> word1
+CONST	words	reduce_xnor	1	:α word -> word1
+CONST	words	reduce_or	1	:α word -> word1
+CONST	words	reduce_nor	1	:α word -> word1
+CONST	words	reduce_nand	1	:α word -> word1
+CONST	words	reduce_and	1	:α word -> word1
+CONST	words	nzcv	1	:α word -> α word -> bool # bool # bool # bool
+CONST	words	n2w_itself	1	:num # α itself -> α word
+CONST	words	n2w	1	:num -> α word
+CONST	words	l2w	1	:num -> num list -> α word
+CONST	words	dimword	1	:α itself -> num
+CONST	words	concat_word_list	2	:α word list -> β word
+CONST	words	bit_field_insert	2	:num -> num -> β word -> α word -> α word
+CONST	words	bit_count_upto	1	:num -> α word -> num
+CONST	words	bit_count	1	:α word -> num
+CONST	words	add_with_carry	1	:α word # α word # bool -> α word # bool # bool
+CONST	words	UINT_MAX	1	:α itself -> num
+CONST	words	INT_MIN	1	:α itself -> num
+CONST	words	INT_MAX	1	:α itself -> num
+CONST	words	BIT_SET	0	:num -> num -> num -> bool
+CONST	gcd	lcm	0	:num -> num -> num
+CONST	gcd	is_gcd	0	:num -> num -> num -> bool
+CONST	gcd	gcd	0	:num -> num -> num
+CONST	int_arith	bmarker	0	:bool -> bool
+CONST	integer	tint_of_num	0	:num -> num # num
+CONST	integer	tint_neg	0	:num # num -> num # num
+CONST	integer	tint_mul	0	:num # num -> num # num -> num # num
+CONST	integer	tint_lt	0	:num # num -> num # num -> bool
+CONST	integer	tint_eq	0	:num # num -> num # num -> bool
+CONST	integer	tint_add	0	:num # num -> num # num -> num # num
+CONST	integer	tint_1	0	:num # num
+CONST	integer	tint_0	0	:num # num
+CONST	integer	int_sub	0	:int -> int -> int
+CONST	integer	int_rem	0	:int -> int -> int
+CONST	integer	int_quot	0	:int -> int -> int
+CONST	integer	int_of_num	0	:num -> int
+CONST	integer	int_neg	0	:int -> int
+CONST	integer	int_mul	0	:int -> int -> int
+CONST	integer	int_mod	0	:int -> int -> int
+CONST	integer	int_min	0	:int -> int -> int
+CONST	integer	int_max	0	:int -> int -> int
+CONST	integer	int_lt	0	:int -> int -> bool
+CONST	integer	int_le	0	:int -> int -> bool
+CONST	integer	int_gt	0	:int -> int -> bool
+CONST	integer	int_ge	0	:int -> int -> bool
+CONST	integer	int_exp	0	:int -> num -> int
+CONST	integer	int_divides	0	:int -> int -> bool
+CONST	integer	int_div	0	:int -> int -> int
+CONST	integer	int_add	0	:int -> int -> int
+CONST	integer	int_REP_CLASS	0	:int -> num # num -> bool
+CONST	integer	int_REP	0	:int -> num # num
+CONST	integer	int_ABS_CLASS	0	:(num # num -> bool) -> int
+CONST	integer	int_ABS	0	:num # num -> int
+CONST	integer	int_1	0	:int
+CONST	integer	int_0	0	:int
+CONST	integer	emod	0	:int -> int -> int
+CONST	integer	ediv	0	:int -> int -> int
+CONST	integer	Num	0	:int -> num
+CONST	integer	LEAST_INT	0	:(int -> bool) -> int
+CONST	integer	ABS	0	:int -> int
+CONST	Omega	sumc	0	:int list -> int list -> int
+CONST	Omega	rshadow_row	0	:num # int -> (num # int) list -> bool
+CONST	Omega	real_shadow	0	:(num # int) list -> (num # int) list -> bool
+CONST	Omega	nightmare	0	:int -> num -> (num # int) list -> (num # int) list -> (num # int) list -> bool
+CONST	Omega	modhat	0	:int -> int -> int
+CONST	Omega	fst_nzero	1	:num # α -> bool
+CONST	Omega	fst1	1	:num # α -> bool
+CONST	Omega	evalupper	0	:int -> (num # int) list -> bool
+CONST	Omega	evallower	0	:int -> (num # int) list -> bool
+CONST	Omega	dark_shadow_row	0	:num -> int -> (num # int) list -> bool
+CONST	Omega	dark_shadow_condition	0	:(num # int) list -> (num # int) list -> bool
+CONST	Omega	dark_shadow_cond_row	0	:num # int -> (num # int) list -> bool
+CONST	Omega	dark_shadow	0	:(num # int) list -> (num # int) list -> bool
+CONST	Omega	calc_nightmare	0	:int -> num -> (num # int) list -> bool
+CONST	Omega	MAP2	2	:β -> (β -> β -> α) -> β list -> β list -> α list
+CONST	intreal	real_of_int	0	:int -> real
+CONST	intreal	is_int	0	:real -> bool
+CONST	intreal	frac	0	:real -> real
+CONST	intreal	INT_FLOOR	0	:real -> int
+CONST	intreal	INT_CEILING	0	:real -> int
+CONST	hrat	trat_sucint	0	:num -> num # num
+CONST	hrat	trat_mul	0	:num # num -> num # num -> num # num
+CONST	hrat	trat_inv	0	:num # num -> num # num
+CONST	hrat	trat_eq	0	:num # num -> num # num -> bool
+CONST	hrat	trat_add	0	:num # num -> num # num -> num # num
+CONST	hrat	trat_1	0	:num # num
+CONST	hrat	hrat_sucint	0	:num -> hrat
+CONST	hrat	hrat_mul	0	:hrat -> hrat -> hrat
+CONST	hrat	hrat_inv	0	:hrat -> hrat
+CONST	hrat	hrat_add	0	:hrat -> hrat -> hrat
+CONST	hrat	hrat_REP_CLASS	0	:hrat -> num # num -> bool
+CONST	hrat	hrat_REP	0	:hrat -> num # num
+CONST	hrat	hrat_ABS_CLASS	0	:(num # num -> bool) -> hrat
+CONST	hrat	hrat_ABS	0	:num # num -> hrat
+CONST	hrat	hrat_1	0	:hrat
+CONST	hreal	treal_of_hreal	0	:hreal -> hreal # hreal
+CONST	hreal	treal_neg	0	:hreal # hreal -> hreal # hreal
+CONST	hreal	treal_mul	0	:hreal # hreal -> hreal # hreal -> hreal # hreal
+CONST	hreal	treal_lt	0	:hreal # hreal -> hreal # hreal -> bool
+CONST	hreal	treal_inv	0	:hreal # hreal -> hreal # hreal
+CONST	hreal	treal_eq	0	:hreal # hreal -> hreal # hreal -> bool
+CONST	hreal	treal_add	0	:hreal # hreal -> hreal # hreal -> hreal # hreal
+CONST	hreal	treal_1	0	:hreal # hreal
+CONST	hreal	treal_0	0	:hreal # hreal
+CONST	hreal	isacut	0	:(hrat -> bool) -> bool
+CONST	hreal	hreal_sup	0	:(hreal -> bool) -> hreal
+CONST	hreal	hreal_sub	0	:hreal -> hreal -> hreal
+CONST	hreal	hreal_of_treal	0	:hreal # hreal -> hreal
+CONST	hreal	hreal_mul	0	:hreal -> hreal -> hreal
+CONST	hreal	hreal_lt	0	:hreal -> hreal -> bool
+CONST	hreal	hreal_inv	0	:hreal -> hreal
+CONST	hreal	hreal_add	0	:hreal -> hreal -> hreal
+CONST	hreal	hreal_1	0	:hreal
+CONST	hreal	hreal	0	:(hrat -> bool) -> hreal
+CONST	hreal	hrat_lt	0	:hrat -> hrat -> bool
+CONST	hreal	cut_of_hrat	0	:hrat -> hrat -> bool
+CONST	hreal	cut	0	:hreal -> hrat -> bool
+CONST	realax	real_sub	0	:real -> real -> real
+CONST	realax	real_of_num	0	:num -> real
+CONST	realax	real_of_hreal	0	:hreal -> real
+CONST	realax	real_neg	0	:real -> real
+CONST	realax	real_mul	0	:real -> real -> real
+CONST	realax	real_lte	0	:real -> real -> bool
+CONST	realax	real_lt	0	:real -> real -> bool
+CONST	realax	real_gt	0	:real -> real -> bool
+CONST	realax	real_ge	0	:real -> real -> bool
+CONST	realax	real_add	0	:real -> real -> real
+CONST	realax	real_REP_CLASS	0	:real -> hreal # hreal -> bool
+CONST	realax	real_REP	0	:real -> hreal # hreal
+CONST	realax	real_ABS_CLASS	0	:(hreal # hreal -> bool) -> real
+CONST	realax	real_ABS	0	:hreal # hreal -> real
+CONST	realax	real_1	0	:real
+CONST	realax	real_0	0	:real
+CONST	realax	pow	0	:real -> num -> real
+CONST	realax	min	0	:real -> real -> real
+CONST	realax	max	0	:real -> real -> real
+CONST	realax	inv	0	:real -> real
+CONST	realax	hreal_of_real	0	:real -> hreal
+CONST	realax	abs	0	:real -> real
+CONST	realax	NUM_FLOOR	0	:real -> num
+CONST	realax	NUM_CEILING	0	:real -> num
+CONST	realax	/	0	:real -> real -> real
+CONST	real	sup	0	:(real -> bool) -> real
+CONST	real	sum	0	:num # num -> (num -> real) -> real
+CONST	real	sqrt	0	:real -> real
+CONST	real	real_sgn	0	:real -> real
+CONST	real	pos	0	:real -> real
+CONST	real	nonzerop	0	:real -> real
+CONST	real	inf	0	:(real -> bool) -> real
+CONST	binary_ieee	ulp	2	:(τ # χ) itself -> real
+CONST	binary_ieee	threshold	2	:(τ # χ) itself -> real
+CONST	binary_ieee	rounding_size	0	:rounding -> num
+CONST	binary_ieee	rounding_CASE	1	:rounding -> α -> α -> α -> α -> α
+CONST	binary_ieee	rounding2num	0	:rounding -> num
+CONST	binary_ieee	roundTowardZero	0	:rounding
+CONST	binary_ieee	roundTowardPositive	0	:rounding
+CONST	binary_ieee	roundTowardNegative	0	:rounding
+CONST	binary_ieee	roundTiesToEven	0	:rounding
+CONST	binary_ieee	round	2	:rounding -> real -> (τ, χ) float
+CONST	binary_ieee	recordtype.float.seldef.Significand_fupd	3	:(τ word -> υ word) -> (τ, χ) float -> (υ, χ) float
+CONST	binary_ieee	recordtype.float.seldef.Significand	2	:(τ, χ) float -> τ word
+CONST	binary_ieee	recordtype.float.seldef.Sign_fupd	2	:(word1 -> word1) -> (τ, χ) float -> (τ, χ) float
+CONST	binary_ieee	recordtype.float.seldef.Sign	2	:(τ, χ) float -> word1
+CONST	binary_ieee	recordtype.float.seldef.Exponent_fupd	3	:(χ word -> ψ word) -> (τ, χ) float -> (τ, ψ) float
+CONST	binary_ieee	recordtype.float.seldef.Exponent	2	:(τ, χ) float -> χ word
+CONST	binary_ieee	recordtype.float	2	:word1 -> χ word -> τ word -> (τ, χ) float
+CONST	binary_ieee	recordtype.flags.seldef.Underflow_BeforeRounding_fupd	0	:(bool -> bool) -> flags -> flags
+CONST	binary_ieee	recordtype.flags.seldef.Underflow_BeforeRounding	0	:flags -> bool
+CONST	binary_ieee	recordtype.flags.seldef.Underflow_AfterRounding_fupd	0	:(bool -> bool) -> flags -> flags
+CONST	binary_ieee	recordtype.flags.seldef.Underflow_AfterRounding	0	:flags -> bool
+CONST	binary_ieee	recordtype.flags.seldef.Precision_fupd	0	:(bool -> bool) -> flags -> flags
+CONST	binary_ieee	recordtype.flags.seldef.Precision	0	:flags -> bool
+CONST	binary_ieee	recordtype.flags.seldef.Overflow_fupd	0	:(bool -> bool) -> flags -> flags
+CONST	binary_ieee	recordtype.flags.seldef.Overflow	0	:flags -> bool
+CONST	binary_ieee	recordtype.flags.seldef.InvalidOp_fupd	0	:(bool -> bool) -> flags -> flags
+CONST	binary_ieee	recordtype.flags.seldef.InvalidOp	0	:flags -> bool
+CONST	binary_ieee	recordtype.flags.seldef.DivideByZero_fupd	0	:(bool -> bool) -> flags -> flags
+CONST	binary_ieee	recordtype.flags.seldef.DivideByZero	0	:flags -> bool
+CONST	binary_ieee	recordtype.flags	0	:bool -> bool -> bool -> bool -> bool -> bool -> flags
+CONST	binary_ieee	real_to_float_with_flags	2	:rounding -> real -> flags # (α, β) float
+CONST	binary_ieee	real_to_float	2	:rounding -> real -> (α, β) float
+CONST	binary_ieee	num2rounding	0	:num -> rounding
+CONST	binary_ieee	num2float_compare	0	:num -> float_compare
+CONST	binary_ieee	next_lo	2	:(τ, χ) float -> (τ, χ) float
+CONST	binary_ieee	next_hi	2	:(τ, χ) float -> (τ, χ) float
+CONST	binary_ieee	largest	2	:(τ # χ) itself -> real
+CONST	binary_ieee	is_integral	0	:real -> bool
+CONST	binary_ieee	is_closest	2	:((α, β) float -> bool) -> real -> (α, β) float -> bool
+CONST	binary_ieee	invalidop_flags	0	:flags
+CONST	binary_ieee	integral_round	2	:rounding -> real -> (τ, χ) float
+CONST	binary_ieee	fp_op_size	2	:(τ -> num) -> (χ -> num) -> (τ, χ) fp_op -> num
+CONST	binary_ieee	fp_op_REP	2	:('b1, 'b2) fp_op -> rounding # ('b1, 'b2) float + rounding # ('b1, 'b2) float # ('b1, 'b2) float + rounding # ('b1, 'b2) float # ('b1, 'b2) float + rounding # ('b1, 'b2) float # ('b1, 'b2) float + rounding # ('b1, 'b2) float # ('b1, 'b2) float + rounding # ('b1, 'b2) float # ('b1, 'b2) float # ('b1, 'b2) float + rounding # ('b1, 'b2) float # ('b1, 'b2) float # ('b1, 'b2) float
+CONST	binary_ieee	fp_op_CONS	2	:rounding # ('b1, 'b2) float + rounding # ('b1, 'b2) float # ('b1, 'b2) float + rounding # ('b1, 'b2) float # ('b1, 'b2) float + rounding # ('b1, 'b2) float # ('b1, 'b2) float + rounding # ('b1, 'b2) float # ('b1, 'b2) float + rounding # ('b1, 'b2) float # ('b1, 'b2) float # ('b1, 'b2) float + rounding # ('b1, 'b2) float # ('b1, 'b2) float # ('b1, 'b2) float -> ('b1, 'b2) fp_op
+CONST	binary_ieee	fp_op_CASE	3	:(τ, χ) fp_op -> (rounding -> (τ, χ) float -> α) -> (rounding -> (τ, χ) float -> (τ, χ) float -> α) -> (rounding -> (τ, χ) float -> (τ, χ) float -> α) -> (rounding -> (τ, χ) float -> (τ, χ) float -> α) -> (rounding -> (τ, χ) float -> (τ, χ) float -> α) -> (rounding -> (τ, χ) float -> (τ, χ) float -> (τ, χ) float -> α) -> (rounding -> (τ, χ) float -> (τ, χ) float -> (τ, χ) float -> α) -> α
+CONST	binary_ieee	fp_op_ABS	2	:rounding # ('b1, 'b2) float + rounding # ('b1, 'b2) float # ('b1, 'b2) float + rounding # ('b1, 'b2) float # ('b1, 'b2) float + rounding # ('b1, 'b2) float # ('b1, 'b2) float + rounding # ('b1, 'b2) float # ('b1, 'b2) float + rounding # ('b1, 'b2) float # ('b1, 'b2) float # ('b1, 'b2) float + rounding # ('b1, 'b2) float # ('b1, 'b2) float # ('b1, 'b2) float -> ('b1, 'b2) fp_op
+CONST	binary_ieee	float_value_size	0	:float_value -> num
+CONST	binary_ieee	float_value_REP	0	:float_value -> real + unit + unit
+CONST	binary_ieee	float_value_CONS	0	:real + unit + unit -> float_value
+CONST	binary_ieee	float_value_CASE	1	:float_value -> (real -> α) -> α -> α -> α
+CONST	binary_ieee	float_value_ABS	0	:real + unit + unit -> float_value
+CONST	binary_ieee	float_value	2	:(τ, χ) float -> float_value
+CONST	binary_ieee	float_unordered	2	:(τ, χ) float -> (τ, χ) float -> bool
+CONST	binary_ieee	float_ulp	2	:(α, β) float -> real
+CONST	binary_ieee	float_top	2	:(τ # χ) itself -> (τ, χ) float
+CONST	binary_ieee	float_to_real	2	:(τ, χ) float -> real
+CONST	binary_ieee	float_to_int	2	:rounding -> (τ, χ) float -> int option
+CONST	binary_ieee	float_sub	2	:rounding -> (τ, χ) float -> (τ, χ) float -> flags # (τ, χ) float
+CONST	binary_ieee	float_sqrt	2	:rounding -> (τ, χ) float -> flags # (τ, χ) float
+CONST	binary_ieee	float_some_qnan	2	:(τ, χ) fp_op -> (τ, χ) float
+CONST	binary_ieee	float_size	2	:(τ -> num) -> (χ -> num) -> (τ, χ) float -> num
+CONST	binary_ieee	float_round_with_flags	2	:rounding -> bool -> real -> flags # (τ, χ) float
+CONST	binary_ieee	float_round_to_integral	2	:rounding -> (τ, χ) float -> (τ, χ) float
+CONST	binary_ieee	float_round	2	:rounding -> bool -> real -> (τ, χ) float
+CONST	binary_ieee	float_plus_zero	2	:(τ # χ) itself -> (τ, χ) float
+CONST	binary_ieee	float_plus_min	2	:(τ # χ) itself -> (τ, χ) float
+CONST	binary_ieee	float_plus_infinity	2	:(τ # χ) itself -> (τ, χ) float
+CONST	binary_ieee	float_negate	2	:(τ, χ) float -> (τ, χ) float
+CONST	binary_ieee	float_mul_sub	2	:rounding -> (τ, χ) float -> (τ, χ) float -> (τ, χ) float -> flags # (τ, χ) float
+CONST	binary_ieee	float_mul_add	2	:rounding -> (τ, χ) float -> (τ, χ) float -> (τ, χ) float -> flags # (τ, χ) float
+CONST	binary_ieee	float_mul	2	:rounding -> (τ, χ) float -> (τ, χ) float -> flags # (τ, χ) float
+CONST	binary_ieee	float_minus_zero	2	:(τ # χ) itself -> (τ, χ) float
+CONST	binary_ieee	float_minus_min	2	:(τ # χ) itself -> (τ, χ) float
+CONST	binary_ieee	float_minus_infinity	2	:(τ # χ) itself -> (τ, χ) float
+CONST	binary_ieee	float_less_than	2	:(τ, χ) float -> (τ, χ) float -> bool
+CONST	binary_ieee	float_less_equal	2	:(τ, χ) float -> (τ, χ) float -> bool
+CONST	binary_ieee	float_is_zero	2	:(τ, χ) float -> bool
+CONST	binary_ieee	float_is_subnormal	2	:(τ, χ) float -> bool
+CONST	binary_ieee	float_is_signalling	2	:(τ, χ) float -> bool
+CONST	binary_ieee	float_is_normal	2	:(τ, χ) float -> bool
+CONST	binary_ieee	float_is_nan	2	:(τ, χ) float -> bool
+CONST	binary_ieee	float_is_integral	2	:(τ, χ) float -> bool
+CONST	binary_ieee	float_is_infinite	2	:(τ, χ) float -> bool
+CONST	binary_ieee	float_is_finite	2	:(τ, χ) float -> bool
+CONST	binary_ieee	float_greater_than	2	:(τ, χ) float -> (τ, χ) float -> bool
+CONST	binary_ieee	float_greater_equal	2	:(τ, χ) float -> (τ, χ) float -> bool
+CONST	binary_ieee	float_equal	2	:(τ, χ) float -> (τ, χ) float -> bool
+CONST	binary_ieee	float_div	2	:rounding -> (τ, χ) float -> (τ, χ) float -> flags # (τ, χ) float
+CONST	binary_ieee	float_compare_size	0	:float_compare -> num
+CONST	binary_ieee	float_compare_CASE	1	:float_compare -> α -> α -> α -> α -> α
+CONST	binary_ieee	float_compare2num	0	:float_compare -> num
+CONST	binary_ieee	float_compare	2	:(τ, χ) float -> (τ, χ) float -> float_compare
+CONST	binary_ieee	float_bottom	2	:(τ # χ) itself -> (τ, χ) float
+CONST	binary_ieee	float_add	2	:rounding -> (τ, χ) float -> (τ, χ) float -> flags # (τ, χ) float
+CONST	binary_ieee	float_abs	2	:(τ, χ) float -> (τ, χ) float
+CONST	binary_ieee	float_REP	2	:('b1, 'b2) float -> word1 # 'b2 word # 'b1 word
+CONST	binary_ieee	float_CONS	2	:word1 # 'b2 word # 'b1 word -> ('b1, 'b2) float
+CONST	binary_ieee	float_CASE	3	:(τ, χ) float -> (word1 -> χ word -> τ word -> α) -> α
+CONST	binary_ieee	float_ABS	2	:word1 # 'b2 word # 'b1 word -> ('b1, 'b2) float
+CONST	binary_ieee	flags_size	0	:flags -> num
+CONST	binary_ieee	flags_REP	0	:flags -> bool # bool # bool # bool # bool # bool
+CONST	binary_ieee	flags_CONS	0	:bool # bool # bool # bool # bool # bool -> flags
+CONST	binary_ieee	flags_CASE	1	:flags -> (bool -> bool -> bool -> bool -> bool -> bool -> α) -> α
+CONST	binary_ieee	flags_ABS	0	:bool # bool # bool # bool # bool # bool -> flags
+CONST	binary_ieee	exponent_boundary	2	:(τ, χ) float -> (τ, χ) float -> bool
+CONST	binary_ieee	dividezero_flags	0	:flags
+CONST	binary_ieee	closest_such	2	:((α, β) float -> bool) -> ((α, β) float -> bool) -> real -> (α, β) float
+CONST	binary_ieee	closest	2	:((α, β) float -> bool) -> real -> (α, β) float
+CONST	binary_ieee	clear_flags	0	:flags
+CONST	binary_ieee	check_for_signalling	2	:(α, β) float list -> flags
+CONST	binary_ieee	UN	0	:float_compare
+CONST	binary_ieee	ULP	2	:χ word # τ itself -> real
+CONST	binary_ieee	NaN	0	:float_value
+CONST	binary_ieee	LT	0	:float_compare
+CONST	binary_ieee	Infinity	0	:float_value
+CONST	binary_ieee	GT	0	:float_compare
+CONST	binary_ieee	Float	0	:real -> float_value
+CONST	binary_ieee	FP_Sub	2	:rounding -> (τ, χ) float -> (τ, χ) float -> (τ, χ) fp_op
+CONST	binary_ieee	FP_Sqrt	2	:rounding -> (τ, χ) float -> (τ, χ) fp_op
+CONST	binary_ieee	FP_MulSub	2	:rounding -> (τ, χ) float -> (τ, χ) float -> (τ, χ) float -> (τ, χ) fp_op
+CONST	binary_ieee	FP_MulAdd	2	:rounding -> (τ, χ) float -> (τ, χ) float -> (τ, χ) float -> (τ, χ) fp_op
+CONST	binary_ieee	FP_Mul	2	:rounding -> (τ, χ) float -> (τ, χ) float -> (τ, χ) fp_op
+CONST	binary_ieee	FP_Div	2	:rounding -> (τ, χ) float -> (τ, χ) float -> (τ, χ) fp_op
+CONST	binary_ieee	FP_Add	2	:rounding -> (τ, χ) float -> (τ, χ) float -> (τ, χ) fp_op
+CONST	binary_ieee	EQ	0	:float_compare
+CONST	machine_ieee	real_to_fp64_with_flags	0	:rounding -> real -> flags # word64
+CONST	machine_ieee	real_to_fp64	0	:rounding -> real -> word64
+CONST	machine_ieee	real_to_fp32_with_flags	0	:rounding -> real -> flags # word32
+CONST	machine_ieee	real_to_fp32	0	:rounding -> real -> word32
+CONST	machine_ieee	real_to_fp16_with_flags	0	:rounding -> real -> flags # word16
+CONST	machine_ieee	real_to_fp16	0	:rounding -> real -> word16
+CONST	machine_ieee	int_to_fp64	0	:rounding -> int -> word64
+CONST	machine_ieee	int_to_fp32	0	:rounding -> int -> word32
+CONST	machine_ieee	int_to_fp16	0	:rounding -> int -> word16
+CONST	machine_ieee	fp64_top	0	:word64
+CONST	machine_ieee	fp64_to_value	0	:word64 -> float_value
+CONST	machine_ieee	fp64_to_real	0	:word64 -> real
+CONST	machine_ieee	fp64_to_int	0	:rounding -> word64 -> int option
+CONST	machine_ieee	fp64_to_fp32_with_flags	0	:rounding -> word64 -> flags # word32
+CONST	machine_ieee	fp64_to_fp32	0	:rounding -> word64 -> word32
+CONST	machine_ieee	fp64_to_fp16_with_flags	0	:rounding -> word64 -> flags # word16
+CONST	machine_ieee	fp64_to_fp16	0	:rounding -> word64 -> word16
+CONST	machine_ieee	fp64_to_float	0	:word64 -> (52, 11) float
+CONST	machine_ieee	fp64_sub_with_flags	0	:rounding -> word64 -> word64 -> flags # word64
+CONST	machine_ieee	fp64_sub	0	:rounding -> word64 -> word64 -> word64
+CONST	machine_ieee	fp64_sqrt_with_flags	0	:rounding -> word64 -> flags # word64
+CONST	machine_ieee	fp64_sqrt	0	:rounding -> word64 -> word64
+CONST	machine_ieee	fp64_roundToIntegral	0	:rounding -> word64 -> word64
+CONST	machine_ieee	fp64_posZero	0	:word64
+CONST	machine_ieee	fp64_posMin	0	:word64
+CONST	machine_ieee	fp64_posInf	0	:word64
+CONST	machine_ieee	fp64_negate	0	:word64 -> word64
+CONST	machine_ieee	fp64_negZero	0	:word64
+CONST	machine_ieee	fp64_negMin	0	:word64
+CONST	machine_ieee	fp64_negInf	0	:word64
+CONST	machine_ieee	fp64_mul_with_flags	0	:rounding -> word64 -> word64 -> flags # word64
+CONST	machine_ieee	fp64_mul_sub_with_flags	0	:rounding -> word64 -> word64 -> word64 -> flags # word64
+CONST	machine_ieee	fp64_mul_sub	0	:rounding -> word64 -> word64 -> word64 -> word64
+CONST	machine_ieee	fp64_mul_add_with_flags	0	:rounding -> word64 -> word64 -> word64 -> flags # word64
+CONST	machine_ieee	fp64_mul_add	0	:rounding -> word64 -> word64 -> word64 -> word64
+CONST	machine_ieee	fp64_mul	0	:rounding -> word64 -> word64 -> word64
+CONST	machine_ieee	fp64_lessThan	0	:word64 -> word64 -> bool
+CONST	machine_ieee	fp64_lessEqual	0	:word64 -> word64 -> bool
+CONST	machine_ieee	fp64_isZero	0	:word64 -> bool
+CONST	machine_ieee	fp64_isSubnormal	0	:word64 -> bool
+CONST	machine_ieee	fp64_isSignallingNan	0	:word64 -> bool
+CONST	machine_ieee	fp64_isNormal	0	:word64 -> bool
+CONST	machine_ieee	fp64_isNan	0	:word64 -> bool
+CONST	machine_ieee	fp64_isIntegral	0	:word64 -> bool
+CONST	machine_ieee	fp64_isInfinite	0	:word64 -> bool
+CONST	machine_ieee	fp64_isFinite	0	:word64 -> bool
+CONST	machine_ieee	fp64_greaterThan	0	:word64 -> word64 -> bool
+CONST	machine_ieee	fp64_greaterEqual	0	:word64 -> word64 -> bool
+CONST	machine_ieee	fp64_equal	0	:word64 -> word64 -> bool
+CONST	machine_ieee	fp64_div_with_flags	0	:rounding -> word64 -> word64 -> flags # word64
+CONST	machine_ieee	fp64_div	0	:rounding -> word64 -> word64 -> word64
+CONST	machine_ieee	fp64_compare	0	:word64 -> word64 -> float_compare
+CONST	machine_ieee	fp64_bottom	0	:word64
+CONST	machine_ieee	fp64_add_with_flags	0	:rounding -> word64 -> word64 -> flags # word64
+CONST	machine_ieee	fp64_add	0	:rounding -> word64 -> word64 -> word64
+CONST	machine_ieee	fp64_abs	0	:word64 -> word64
+CONST	machine_ieee	fp32_top	0	:word32
+CONST	machine_ieee	fp32_to_value	0	:word32 -> float_value
+CONST	machine_ieee	fp32_to_real	0	:word32 -> real
+CONST	machine_ieee	fp32_to_int	0	:rounding -> word32 -> int option
+CONST	machine_ieee	fp32_to_fp64_with_flags	0	:word32 -> flags # word64
+CONST	machine_ieee	fp32_to_fp64	0	:word32 -> word64
+CONST	machine_ieee	fp32_to_fp16_with_flags	0	:rounding -> word32 -> flags # word16
+CONST	machine_ieee	fp32_to_fp16	0	:rounding -> word32 -> word16
+CONST	machine_ieee	fp32_to_float	0	:word32 -> (23, 8) float
+CONST	machine_ieee	fp32_sub_with_flags	0	:rounding -> word32 -> word32 -> flags # word32
+CONST	machine_ieee	fp32_sub	0	:rounding -> word32 -> word32 -> word32
+CONST	machine_ieee	fp32_sqrt_with_flags	0	:rounding -> word32 -> flags # word32
+CONST	machine_ieee	fp32_sqrt	0	:rounding -> word32 -> word32
+CONST	machine_ieee	fp32_roundToIntegral	0	:rounding -> word32 -> word32
+CONST	machine_ieee	fp32_posZero	0	:word32
+CONST	machine_ieee	fp32_posMin	0	:word32
+CONST	machine_ieee	fp32_posInf	0	:word32
+CONST	machine_ieee	fp32_negate	0	:word32 -> word32
+CONST	machine_ieee	fp32_negZero	0	:word32
+CONST	machine_ieee	fp32_negMin	0	:word32
+CONST	machine_ieee	fp32_negInf	0	:word32
+CONST	machine_ieee	fp32_mul_with_flags	0	:rounding -> word32 -> word32 -> flags # word32
+CONST	machine_ieee	fp32_mul_sub_with_flags	0	:rounding -> word32 -> word32 -> word32 -> flags # word32
+CONST	machine_ieee	fp32_mul_sub	0	:rounding -> word32 -> word32 -> word32 -> word32
+CONST	machine_ieee	fp32_mul_add_with_flags	0	:rounding -> word32 -> word32 -> word32 -> flags # word32
+CONST	machine_ieee	fp32_mul_add	0	:rounding -> word32 -> word32 -> word32 -> word32
+CONST	machine_ieee	fp32_mul	0	:rounding -> word32 -> word32 -> word32
+CONST	machine_ieee	fp32_lessThan	0	:word32 -> word32 -> bool
+CONST	machine_ieee	fp32_lessEqual	0	:word32 -> word32 -> bool
+CONST	machine_ieee	fp32_isZero	0	:word32 -> bool
+CONST	machine_ieee	fp32_isSubnormal	0	:word32 -> bool
+CONST	machine_ieee	fp32_isSignallingNan	0	:word32 -> bool
+CONST	machine_ieee	fp32_isNormal	0	:word32 -> bool
+CONST	machine_ieee	fp32_isNan	0	:word32 -> bool
+CONST	machine_ieee	fp32_isIntegral	0	:word32 -> bool
+CONST	machine_ieee	fp32_isInfinite	0	:word32 -> bool
+CONST	machine_ieee	fp32_isFinite	0	:word32 -> bool
+CONST	machine_ieee	fp32_greaterThan	0	:word32 -> word32 -> bool
+CONST	machine_ieee	fp32_greaterEqual	0	:word32 -> word32 -> bool
+CONST	machine_ieee	fp32_equal	0	:word32 -> word32 -> bool
+CONST	machine_ieee	fp32_div_with_flags	0	:rounding -> word32 -> word32 -> flags # word32
+CONST	machine_ieee	fp32_div	0	:rounding -> word32 -> word32 -> word32
+CONST	machine_ieee	fp32_compare	0	:word32 -> word32 -> float_compare
+CONST	machine_ieee	fp32_bottom	0	:word32
+CONST	machine_ieee	fp32_add_with_flags	0	:rounding -> word32 -> word32 -> flags # word32
+CONST	machine_ieee	fp32_add	0	:rounding -> word32 -> word32 -> word32
+CONST	machine_ieee	fp32_abs	0	:word32 -> word32
+CONST	machine_ieee	fp16_top	0	:word16
+CONST	machine_ieee	fp16_to_value	0	:word16 -> float_value
+CONST	machine_ieee	fp16_to_real	0	:word16 -> real
+CONST	machine_ieee	fp16_to_int	0	:rounding -> word16 -> int option
+CONST	machine_ieee	fp16_to_fp64_with_flags	0	:word16 -> flags # word64
+CONST	machine_ieee	fp16_to_fp64	0	:word16 -> word64
+CONST	machine_ieee	fp16_to_fp32_with_flags	0	:word16 -> flags # word32
+CONST	machine_ieee	fp16_to_fp32	0	:word16 -> word32
+CONST	machine_ieee	fp16_to_float	0	:word16 -> (10, 5) float
+CONST	machine_ieee	fp16_sub_with_flags	0	:rounding -> word16 -> word16 -> flags # word16
+CONST	machine_ieee	fp16_sub	0	:rounding -> word16 -> word16 -> word16
+CONST	machine_ieee	fp16_sqrt_with_flags	0	:rounding -> word16 -> flags # word16
+CONST	machine_ieee	fp16_sqrt	0	:rounding -> word16 -> word16
+CONST	machine_ieee	fp16_roundToIntegral	0	:rounding -> word16 -> word16
+CONST	machine_ieee	fp16_posZero	0	:word16
+CONST	machine_ieee	fp16_posMin	0	:word16
+CONST	machine_ieee	fp16_posInf	0	:word16
+CONST	machine_ieee	fp16_negate	0	:word16 -> word16
+CONST	machine_ieee	fp16_negZero	0	:word16
+CONST	machine_ieee	fp16_negMin	0	:word16
+CONST	machine_ieee	fp16_negInf	0	:word16
+CONST	machine_ieee	fp16_mul_with_flags	0	:rounding -> word16 -> word16 -> flags # word16
+CONST	machine_ieee	fp16_mul_sub_with_flags	0	:rounding -> word16 -> word16 -> word16 -> flags # word16
+CONST	machine_ieee	fp16_mul_sub	0	:rounding -> word16 -> word16 -> word16 -> word16
+CONST	machine_ieee	fp16_mul_add_with_flags	0	:rounding -> word16 -> word16 -> word16 -> flags # word16
+CONST	machine_ieee	fp16_mul_add	0	:rounding -> word16 -> word16 -> word16 -> word16
+CONST	machine_ieee	fp16_mul	0	:rounding -> word16 -> word16 -> word16
+CONST	machine_ieee	fp16_lessThan	0	:word16 -> word16 -> bool
+CONST	machine_ieee	fp16_lessEqual	0	:word16 -> word16 -> bool
+CONST	machine_ieee	fp16_isZero	0	:word16 -> bool
+CONST	machine_ieee	fp16_isSubnormal	0	:word16 -> bool
+CONST	machine_ieee	fp16_isSignallingNan	0	:word16 -> bool
+CONST	machine_ieee	fp16_isNormal	0	:word16 -> bool
+CONST	machine_ieee	fp16_isNan	0	:word16 -> bool
+CONST	machine_ieee	fp16_isIntegral	0	:word16 -> bool
+CONST	machine_ieee	fp16_isInfinite	0	:word16 -> bool
+CONST	machine_ieee	fp16_isFinite	0	:word16 -> bool
+CONST	machine_ieee	fp16_greaterThan	0	:word16 -> word16 -> bool
+CONST	machine_ieee	fp16_greaterEqual	0	:word16 -> word16 -> bool
+CONST	machine_ieee	fp16_equal	0	:word16 -> word16 -> bool
+CONST	machine_ieee	fp16_div_with_flags	0	:rounding -> word16 -> word16 -> flags # word16
+CONST	machine_ieee	fp16_div	0	:rounding -> word16 -> word16 -> word16
+CONST	machine_ieee	fp16_compare	0	:word16 -> word16 -> float_compare
+CONST	machine_ieee	fp16_bottom	0	:word16
+CONST	machine_ieee	fp16_add_with_flags	0	:rounding -> word16 -> word16 -> flags # word16
+CONST	machine_ieee	fp16_add	0	:rounding -> word16 -> word16 -> word16
+CONST	machine_ieee	fp16_abs	0	:word16 -> word16
+CONST	machine_ieee	float_to_fp64	0	:(52, 11) float -> word64
+CONST	machine_ieee	float_to_fp32	0	:(23, 8) float -> word32
+CONST	machine_ieee	float_to_fp16	0	:(10, 5) float -> word16
+CONST	machine_ieee	convert	6	:(α word -> (β, γ) float) -> ((δ, ε) float -> ζ word) -> (rounding -> real -> flags # ζ word) -> rounding -> α word -> flags # ζ word
+CONST	poset	up_continuous	1	:α poset -> (α -> α) -> bool
+CONST	poset	top	1	:α poset -> α -> bool
+CONST	poset	relation	1	:α poset -> α -> α -> bool
+CONST	poset	poset	1	:α poset -> bool
+CONST	poset	pointwise_lift	2	:(α -> bool) -> β poset -> (α -> β) poset
+CONST	poset	monotonic	1	:α poset -> (α -> α) -> bool
+CONST	poset	lub	1	:α poset -> (α -> bool) -> α -> bool
+CONST	poset	lfp	1	:α poset -> (α -> α) -> α -> bool
+CONST	poset	glb	1	:α poset -> (α -> bool) -> α -> bool
+CONST	poset	gfp	1	:α poset -> (α -> α) -> α -> bool
+CONST	poset	function	2	:(α -> bool) -> (β -> bool) -> (α -> β) -> bool
+CONST	poset	down_continuous	1	:α poset -> (α -> α) -> bool
+CONST	poset	continuous	1	:α poset -> (α -> α) -> bool
+CONST	poset	complete	1	:α poset -> bool
+CONST	poset	chain	1	:α poset -> (α -> bool) -> bool
+CONST	poset	carrier	1	:α poset -> α -> bool
+CONST	poset	bottom	1	:α poset -> α -> bool
+CONST	fixedPoint	monotone	2	:((α -> bool) -> β -> bool) -> bool
+CONST	fixedPoint	lfp	1	:((α -> bool) -> α -> bool) -> α -> bool
+CONST	fixedPoint	gfp	1	:((α -> bool) -> α -> bool) -> α -> bool
+CONST	fixedPoint	fnsum	2	:(β -> α -> bool) -> (β -> α -> bool) -> β -> α -> bool
+CONST	fixedPoint	empty	2	:α -> β -> bool
+CONST	fixedPoint	dense	1	:((α -> bool) -> α -> bool) -> (α -> bool) -> bool
+CONST	fixedPoint	closed	1	:((α -> bool) -> α -> bool) -> (α -> bool) -> bool
+CONST	path	unfold	3	:(γ -> α) -> (γ -> (γ # β) option) -> γ -> (α, β) path
+CONST	path	trace_machine	1	:(α list -> bool) -> α list -> α -> α list -> bool
+CONST	path	toPath	2	:α # (β # α) llist -> (α, β) path
+CONST	path	take	2	:num -> (α, β) path -> (α, β) path
+CONST	path	tail	2	:(α, β) path -> (α, β) path
+CONST	path	stopped_at	2	:α -> (α, β) path
+CONST	path	seg	2	:num -> num -> (α, β) path -> (α, β) path
+CONST	path	pmap	4	:(α -> γ) -> (β -> δ) -> (α, β) path -> (γ, δ) path
+CONST	path	plink	2	:(α, β) path -> (α, β) path -> (α, β) path
+CONST	path	pgenerate	2	:(num -> α) -> (num -> β) -> (α, β) path
+CONST	path	pcons	2	:α -> β -> (α, β) path -> (α, β) path
+CONST	path	pconcat	2	:(α, β) path -> β -> (α, β) path -> (α, β) path
+CONST	path	parallel_comp	5	:(α -> β -> γ -> bool) -> (δ -> β -> ε -> bool) -> α # δ -> β -> γ # ε -> bool
+CONST	path	okpath_f	2	:(α -> β -> α -> bool) -> ((α, β) path -> bool) -> (α, β) path -> bool
+CONST	path	okpath	2	:(α -> β -> α -> bool) -> (α, β) path -> bool
+CONST	path	nth_label	2	:num -> (β, α) path -> α
+CONST	path	mem	2	:α -> (α, β) path -> bool
+CONST	path	length	2	:(α, β) path -> num option
+CONST	path	last	2	:(α, β) path -> α
+CONST	path	labels	2	:(α, β) path -> β llist
+CONST	path	is_stopped	2	:(α, β) path -> bool
+CONST	path	fromPath	2	:(α, β) path -> α # (β # α) llist
+CONST	path	first_label	2	:(α, β) path -> β
+CONST	path	firstP_at	2	:(α -> bool) -> (α, β) path -> num -> bool
+CONST	path	first	2	:(α, β) path -> α
+CONST	path	finite	2	:(α, β) path -> bool
+CONST	path	filter	2	:(α -> bool) -> (α, β) path -> (α, β) path
+CONST	path	exists	2	:(α -> bool) -> (α, β) path -> bool
+CONST	path	every	2	:(α -> bool) -> (α, β) path -> bool
+CONST	path	el	2	:num -> (α, β) path -> α
+CONST	path	drop	2	:num -> (α, β) path -> (α, β) path
+CONST	path	SN	2	:(α -> β -> α -> bool) -> bool
+CONST	path	PL	2	:(α, β) path -> num -> bool
+CONST	logroot	iSQRT3	0	:num -> num # num
+CONST	logroot	iSQRT2	0	:num -> num # num
+CONST	logroot	iSQRT1	0	:num -> num # num
+CONST	logroot	iSQRT0	0	:num -> num # num
+CONST	logroot	SQRTd	0	:num -> num # num
+CONST	logroot	ROOT	0	:num -> num -> num
+CONST	logroot	LOG	0	:num -> num -> num
+CONST	sptree	wf	1	:α sptree$num_map -> bool
+CONST	sptree	union	1	:α sptree$num_map -> α sptree$num_map -> α sptree$num_map
+CONST	sptree	toSortedAList	1	:α sptree$num_map -> (num # α) list
+CONST	sptree	toListA	1	:α list -> α sptree$num_map -> α list
+CONST	sptree	toList	1	:α sptree$num_map -> α list
+CONST	sptree	toAList	1	:α sptree$num_map -> (num # α) list
+CONST	sptree	subspt	1	:α sptree$num_map -> α sptree$num_map -> bool
+CONST	sptree	spts_to_alist_aux	1	:num -> (num # α sptree$num_map) list -> (num # α) list -> (num # α sptree$num_map) list -> (num # α sptree$num_map) list -> bool -> num # (num # α sptree$num_map) list # (num # α) list # bool
+CONST	sptree	spts_to_alist_add_pause	1	:num -> (num # α sptree$num_map) list -> (num # α sptree$num_map) list
+CONST	sptree	spts_to_alist	1	:num -> (num # α sptree$num_map) list -> (num # α) list -> (num # α) list
+CONST	sptree	spt_size	1	:(α -> num) -> α sptree$num_map -> num
+CONST	sptree	spt_right	1	:α sptree$num_map -> α sptree$num_map
+CONST	sptree	spt_left	1	:α sptree$num_map -> α sptree$num_map
+CONST	sptree	spt_fold	2	:(β -> α -> α) -> α -> β sptree$num_map -> α
+CONST	sptree	spt_center	1	:α sptree$num_map -> α option
+CONST	sptree	spt_acc	0	:num -> num -> num
+CONST	sptree	spt_CONS	1	:unit + 'b1 + 'b1 sptree$num_map # 'b1 sptree$num_map + 'b1 sptree$num_map # 'b1 # 'b1 sptree$num_map -> 'b1 sptree$num_map
+CONST	sptree	spt_CASE	2	:α sptree$num_map -> β -> (α -> β) -> (α sptree$num_map -> α sptree$num_map -> β) -> (α sptree$num_map -> α -> α sptree$num_map -> β) -> β
+CONST	sptree	sptSET	1	:α sptree$num_map -> α -> bool
+CONST	sptree	sptREL	2	:(α -> β -> bool) -> α sptree$num_map -> β sptree$num_map -> bool
+CONST	sptree	sptMAP	2	:(α -> β) -> α sptree$num_map -> β sptree$num_map
+CONST	sptree	size	1	:α sptree$num_map -> num
+CONST	sptree	mk_wf	1	:α sptree$num_map -> α sptree$num_map
+CONST	sptree	mk_BS	1	:α sptree$num_map -> α -> α sptree$num_map -> α sptree$num_map
+CONST	sptree	mk_BN	1	:α sptree$num_map -> α sptree$num_map -> α sptree$num_map
+CONST	sptree	mapi0	2	:(num -> β -> α) -> num -> β sptree$num_map -> α sptree$num_map
+CONST	sptree	mapi	2	:(num -> β -> α) -> β sptree$num_map -> α sptree$num_map
+CONST	sptree	map	2	:(β -> α) -> β sptree$num_map -> α sptree$num_map
+CONST	sptree	lrnext	0	:num -> num
+CONST	sptree	lookup	1	:num -> α sptree$num_map -> α option
+CONST	sptree	list_to_num_set	0	:num list -> sptree$num_set
+CONST	sptree	list_insert	0	:num list -> sptree$num_set -> sptree$num_set
+CONST	sptree	inter_eq	1	:α sptree$num_map -> α sptree$num_map -> α sptree$num_map
+CONST	sptree	inter	2	:α sptree$num_map -> β sptree$num_map -> α sptree$num_map
+CONST	sptree	insert	1	:num -> α -> α sptree$num_map -> α sptree$num_map
+CONST	sptree	gather_inclist_offsets	1	:(num # α) list -> (num # α) list
+CONST	sptree	fromList	1	:α list -> α sptree$num_map
+CONST	sptree	fromAList	1	:(num # α) list -> α sptree$num_map
+CONST	sptree	foldi	2	:(num -> β -> α -> α) -> num -> α -> β sptree$num_map -> α
+CONST	sptree	filter_v	1	:(α -> bool) -> α sptree$num_map -> α sptree$num_map
+CONST	sptree	domain	1	:α sptree$num_map -> num -> bool
+CONST	sptree	difference	2	:α sptree$num_map -> β sptree$num_map -> α sptree$num_map
+CONST	sptree	delete	1	:num -> α sptree$num_map -> α sptree$num_map
+CONST	sptree	alist_insert	1	:num list -> α list -> α sptree$num_map -> α sptree$num_map
+CONST	sptree	LS	1	:α -> α sptree$num_map
+CONST	sptree	LN	1	:α sptree$num_map
+CONST	sptree	BS	1	:α sptree$num_map -> α -> α sptree$num_map -> α sptree$num_map
+CONST	sptree	BN	1	:α sptree$num_map -> α sptree$num_map -> α sptree$num_map
+CONST	llist	until	1	:(α llist -> bool) -> (α llist -> bool) -> α llist -> bool
+CONST	llist	toList	1	:α llist -> α list option
+CONST	llist	lrep_ok	1	:(num -> α option) -> bool
+CONST	llist	llist_upto	1	:(α llist -> α llist -> bool) -> α llist -> α llist -> bool
+CONST	llist	llist_rep	1	:α llist -> num -> α option
+CONST	llist	llist_rel	2	:(α -> β -> bool) -> α llist -> β llist -> bool
+CONST	llist	llist_abs	1	:(num -> α option) -> α llist
+CONST	llist	llist_CASE	2	:β llist -> α -> (β -> β llist -> α) -> α
+CONST	llist	llength_rel	1	:α llist -> num -> bool
+CONST	llist	linear_order_to_list_f	1	:(α # α -> bool) -> ((α # α -> bool) # α) option
+CONST	llist	lbind	2	:β llist -> (β -> α llist) -> α llist
+CONST	llist	fromSeq	1	:(num -> α) -> α llist
+CONST	llist	fromList	1	:α list -> α llist
+CONST	llist	exists	1	:(α -> bool) -> α llist -> bool
+CONST	llist	every	1	:(α -> bool) -> α llist -> bool
+CONST	llist	eventually	1	:(α llist -> bool) -> α llist -> bool
+CONST	llist	always	1	:(α llist -> bool) -> α llist -> bool
+CONST	llist	LZIP	2	:α llist # β llist -> (α # β) llist
+CONST	llist	LUNZIP	2	:(α # β) llist -> α llist # β llist
+CONST	llist	LUNFOLD	2	:(β -> (β # α) option) -> β -> α llist
+CONST	llist	LTL_HD	1	:α llist -> (α llist # α) option
+CONST	llist	LTL	1	:α llist -> α llist option
+CONST	llist	LTAKE_WHILE	1	:(α -> bool) -> α llist -> α llist
+CONST	llist	LTAKE	1	:num -> α llist -> α list option
+CONST	llist	LSUFFIX	1	:α llist -> α llist -> bool
+CONST	llist	LSET	1	:α llist -> α -> bool
+CONST	llist	LREPEAT	1	:α list -> α llist
+CONST	llist	LPREFIX	1	:α llist -> α llist -> bool
+CONST	llist	LNTH	1	:num -> α llist -> α option
+CONST	llist	LNIL	1	:α llist
+CONST	llist	LMAP	2	:(α -> β) -> α llist -> β llist
+CONST	llist	LLENGTH	1	:α llist -> num option
+CONST	llist	LHD	1	:α llist -> α option
+CONST	llist	LGENLIST	1	:(num -> α) -> num option -> α llist
+CONST	llist	LFLATTEN	1	:α llist llist -> α llist
+CONST	llist	LFINITE	1	:α llist -> bool
+CONST	llist	LFILTER	1	:(α -> bool) -> α llist -> α llist
+CONST	llist	LDROP_WHILE	1	:(α -> bool) -> α llist -> α llist
+CONST	llist	LDROP	1	:num -> α llist -> α llist option
+CONST	llist	LCONS	1	:α -> α llist -> α llist
+CONST	llist	LAPPEND	1	:α llist -> α llist -> α llist
+CONST	lprefix_lub	lprefix_lub	1	:(α llist -> bool) -> α llist -> bool
+CONST	misc	tlookup	0	:num sptree$num_map -> num -> num
+CONST	misc	the	1	:α -> α option -> α
+CONST	misc	range	1	:α sptree$num_map -> α -> bool
+CONST	misc	max3	0	:num -> num -> num -> num
+CONST	misc	lookup_vars	1	:num list -> α list -> α list option
+CONST	misc	find_index	1	:α -> α list -> num -> num option
+CONST	misc	enumerate	1	:num -> α list -> (num # α) list
+CONST	misc	between	0	:num -> num -> num -> bool
+CONST	misc	append_aux	1	:α app_list -> α list -> α list
+CONST	misc	append	1	:α app_list -> α list
+CONST	misc	app_list_size	1	:(α -> num) -> α app_list -> num
+CONST	misc	app_list_CONS	1	:'b1 list + 'b1 app_list # 'b1 app_list + unit -> 'b1 app_list
+CONST	misc	app_list_CASE	2	:α app_list -> (α list -> β) -> (α app_list -> α app_list -> β) -> β -> β
+CONST	misc	app_listSET	1	:α app_list -> α -> bool
+CONST	misc	app_listREL	2	:(α -> β -> bool) -> α app_list -> β app_list -> bool
+CONST	misc	app_listMAP	2	:(α -> β) -> α app_list -> β app_list
+CONST	misc	UPDATE_LIST	2	:(α -> β) -> (α # β) list -> α -> β
+CONST	misc	Nil	1	:α app_list
+CONST	misc	MAP3	4	:(β -> γ -> δ -> α) -> β list -> γ list -> δ list -> α list
+CONST	misc	List	1	:α list -> α app_list
+CONST	misc	Append	1	:α app_list -> α app_list -> α app_list
+CONST	mllist	sort	1	:(α -> α -> bool) -> α list -> α list
+CONST	mllist	nth	1	:α list -> num -> α
+CONST	mllist	collate	2	:(α -> β -> ordering) -> α list -> β list -> ordering
+CONST	mlstring	word8_to_char	0	:word8 -> char
+CONST	mlstring	tokens_aux	0	:(char -> bool) -> mlstring -> string -> num -> num -> mlstring list
+CONST	mlstring	tokens	0	:(char -> bool) -> mlstring -> mlstring list
+CONST	mlstring	strsub	0	:mlstring -> num -> char
+CONST	mlstring	strlit	0	:string -> mlstring
+CONST	mlstring	strlen	0	:mlstring -> num
+CONST	mlstring	strcat	0	:mlstring -> mlstring -> mlstring
+CONST	mlstring	str	0	:char -> mlstring
+CONST	mlstring	mlstring_size	0	:mlstring -> num
+CONST	mlstring	mlstring_lt	0	:mlstring -> mlstring -> bool
+CONST	mlstring	mlstring_le	0	:mlstring -> mlstring -> bool
+CONST	mlstring	mlstring_gt	0	:mlstring -> mlstring -> bool
+CONST	mlstring	mlstring_ge	0	:mlstring -> mlstring -> bool
+CONST	mlstring	mlstring_REP	0	:mlstring -> string
+CONST	mlstring	mlstring_CONS	0	:string -> mlstring
+CONST	mlstring	mlstring_CASE	1	:mlstring -> (string -> α) -> α
+CONST	mlstring	mlstring_ABS	0	:string -> mlstring
+CONST	mlstring	isSubstring_aux	0	:mlstring -> mlstring -> num -> num -> num -> bool
+CONST	mlstring	isSubstring	0	:mlstring -> mlstring -> bool
+CONST	mlstring	isStringThere_aux	0	:mlstring -> mlstring -> num -> num -> num -> bool
+CONST	mlstring	implode	0	:string -> mlstring
+CONST	mlstring	explode_aux	0	:mlstring -> num -> num -> string
+CONST	mlstring	explode	0	:mlstring -> string
+CONST	mlstring	empty_ffi	0	:mlstring -> unit
+CONST	mlstring	concat	0	:mlstring list -> mlstring
+CONST	mlstring	compare_aux	0	:mlstring -> mlstring -> ordering -> num -> num -> ordering
+CONST	mlstring	compare	0	:mlstring -> mlstring -> ordering
+CONST	mlstring	collate_aux	0	:(char -> char -> ordering) -> mlstring -> mlstring -> ordering -> num -> num -> ordering
+CONST	mlstring	collate	0	:(char -> char -> ordering) -> mlstring -> mlstring -> ordering
+CONST	mlstring	char_to_word8	0	:char -> word8
+CONST	mlstring	app_list_ann_size	1	:(α -> num) -> α app_list_ann -> num
+CONST	mlstring	app_list_ann_CONS	1	:'b1 list + 'b1 app_list_ann # 'b1 app_list_ann + 'b1 app_list -> 'b1 app_list_ann
+CONST	mlstring	app_list_ann_CASE	2	:α app_list_ann -> (α list -> β) -> (α app_list_ann -> α app_list_ann -> β) -> (α app_list -> β) -> β
+CONST	mlstring	app_list_annSET	1	:α app_list_ann -> α -> bool
+CONST	mlstring	app_list_annREL	2	:(α -> β -> bool) -> α app_list_ann -> β app_list_ann -> bool
+CONST	mlstring	app_list_annMAP	2	:(α -> β) -> α app_list_ann -> β app_list_ann
+CONST	mlstring	Small	1	:α app_list -> α app_list_ann
+CONST	mlstring	BigList	1	:α list -> α app_list_ann
+CONST	mlstring	BigAppend	1	:α app_list_ann -> α app_list_ann -> α app_list_ann
+CONST	ConseqConv	ASM_MARKER	0	:bool -> bool -> bool
+CONST	quantHeuristics	SIMPLE_GUESS_FORALL	1	:α -> α -> bool -> bool
+CONST	quantHeuristics	SIMPLE_GUESS_EXISTS	1	:α -> α -> bool -> bool
+CONST	quantHeuristics	IS_REMOVABLE_QUANT_FUN	2	:(α -> β) -> bool
+CONST	quantHeuristics	GUESS_FORALL_POINT	2	:(α -> β) -> (β -> bool) -> bool
+CONST	quantHeuristics	GUESS_FORALL_GAP	2	:(α -> β) -> (β -> bool) -> bool
+CONST	quantHeuristics	GUESS_FORALL	2	:(α -> β) -> (β -> bool) -> bool
+CONST	quantHeuristics	GUESS_EXISTS_POINT	2	:(α -> β) -> (β -> bool) -> bool
+CONST	quantHeuristics	GUESS_EXISTS_GAP	2	:(α -> β) -> (β -> bool) -> bool
+CONST	quantHeuristics	GUESS_EXISTS	2	:(α -> β) -> (β -> bool) -> bool
+CONST	patternMatches	STRONGEST_REDUNDANT_ROWS_INFO_AUX	2	:α -> (α -> β option) list -> bool -> bool list -> bool # bool list
+CONST	patternMatches	STRONGEST_REDUNDANT_ROWS_INFO	2	:α -> (α -> β option) list -> bool list
+CONST	patternMatches	REDUNDANT_ROWS_INFOS_DISJ	0	:bool list -> bool list -> bool list
+CONST	patternMatches	REDUNDANT_ROWS_INFOS_CONJ	0	:bool list -> bool list -> bool list
+CONST	patternMatches	PMATCH_magic_1	2	:α -> (α -> β option) list -> β
+CONST	patternMatches	PMATCH_ROW_magic_4	2	:α # bool # β -> α -> β option
+CONST	patternMatches	PMATCH_ROW_magic_3	2	:α -> β -> α # bool # β
+CONST	patternMatches	PMATCH_ROW_magic_2	2	:α -> bool -> β -> α # bool # β
+CONST	patternMatches	PMATCH_ROW_magic_1	3	:(α -> β # bool # γ) -> β -> γ option
+CONST	patternMatches	PMATCH_ROW_magic_0	2	:α # bool # β -> α -> β option
+CONST	patternMatches	PMATCH_ROW_REDUNDANT	2	:α -> (α -> β option) list -> num -> bool
+CONST	patternMatches	PMATCH_ROW_LIFT	3	:(γ -> β) -> (α -> γ option) -> α -> β option
+CONST	patternMatches	PMATCH_ROW_COND_NOT_EX_OR_EQ	2	:α -> (α -> β option) -> (α -> β option) list -> bool
+CONST	patternMatches	PMATCH_ROW_COND_EX	2	:α -> (β -> α) -> (β -> bool) -> bool
+CONST	patternMatches	PMATCH_ROW_COND	2	:(α -> β) -> (α -> bool) -> β -> α -> bool
+CONST	patternMatches	PMATCH_ROW	3	:(β -> γ) -> (β -> bool) -> (β -> α) -> γ -> α option
+CONST	patternMatches	PMATCH_IS_EXHAUSTIVE	2	:α -> (α -> β option) list -> bool
+CONST	patternMatches	PMATCH_INCOMPLETE	1	:α
+CONST	patternMatches	PMATCH_FLATTEN_FUN	3	:(β -> γ) -> (β -> bool) -> (β -> β -> α option) -> γ -> α option
+CONST	patternMatches	PMATCH_EXPAND_PRED	2	:(α -> bool) -> β -> (β -> α option) list -> (β -> α option) list -> bool
+CONST	patternMatches	PMATCH_EQUIV_ROWS	2	:α -> (α -> β option) list -> (α -> β option) list -> bool
+CONST	patternMatches	PMATCH	2	:β -> (β -> α option) list -> α
+CONST	patternMatches	IS_REDUNDANT_ROWS_INFO	2	:α -> (α -> β option) list -> bool -> bool list -> bool
+CONST	patternMatches	APPLY_REDUNDANT_ROWS_INFO	1	:bool list -> α list -> α list
+CONST	ordinalBasic	sup	1	:(α ordinal -> bool) -> α ordinal
+CONST	ordinalBasic	preds	1	:α ordinal -> α ordinal -> bool
+CONST	ordinalBasic	ordlt	1	:α ordinal -> α ordinal -> bool
+CONST	ordinalBasic	ordinal_REP_CLASS	1	:α ordinal -> (num + α) wellorder -> bool
+CONST	ordinalBasic	ordinal_REP	1	:α ordinal -> (num + α) wellorder
+CONST	ordinalBasic	ordinal_ABS_CLASS	1	:((num + α) wellorder -> bool) -> α ordinal
+CONST	ordinalBasic	ordinal_ABS	1	:(num + α) wellorder -> α ordinal
+CONST	ordinalBasic	ordSUC	1	:α ordinal -> α ordinal
+CONST	ordinalBasic	ordADD	1	:α ordinal -> α ordinal -> α ordinal
+CONST	ordinalBasic	omega	1	:α ordinal
+CONST	ordinalBasic	omax	1	:(α ordinal -> bool) -> α ordinal option
+CONST	ordinalBasic	oleast	1	:(α ordinal -> bool) -> α ordinal
+CONST	ordinalBasic	fromNat	1	:num -> α ordinal
+CONST	ordinalBasic	downward_closed	1	:(α ordinal -> bool) -> bool
+CONST	ordinalBasic	dclose	1	:(α ordinal -> bool) -> α ordinal -> bool
+CONST	ordinalBasic	csuc	1	:α ordinal -> (α + num -> bool) ordinal
+CONST	ordinalBasic	cardSUC	1	:(α -> bool) -> (α + num -> bool) ordinal -> bool
+CONST	ordinalBasic	allOrds	1	:α ordinal wellorder
+CONST	bnfInitial	bnfSUBALG	2	:(α -> β -> bool) -> (β -> bool) # (α -> β) -> (β -> bool) # (α -> β) -> bool
+CONST	bnfInitial	bnfNatural	4	:((α -> β) -> ζ -> η) -> (ζ -> α -> bool) -> (η -> β -> bool) -> bool
+CONST	bnfInitial	bnfNCONS	6	:((ξ -> π) -> 'fn -> 'fp) -> ('fp -> β) -> (ξ -> π) -> (β -> α) -> 'fn -> α
+CONST	bnfInitial	bnfMapId	2	:((α -> α) -> ζ -> ζ) -> bool
+CONST	bnfInitial	bnfMapCong	4	:((α -> β) -> ζ -> η) -> (ζ -> α -> bool) -> bool
+CONST	bnfInitial	bnfMapComp	6	:((α -> β) -> ζ -> η) -> ((β -> γ) -> η -> θ) -> ((α -> γ) -> ζ -> θ) -> bool
+CONST	bnfInitial	bnfMKALG	2	:(ζ -> α -> bool) -> (α -> bool) # (ζ -> α) -> (α -> bool) # (ζ -> α)
+CONST	bnfInitial	bnfMINSET	2	:(ζ -> α -> bool) -> (ζ -> α) -> α -> bool
+CONST	bnfInitial	bnfKK	3	:(β -> γ -> bool) -> (β -> γ) -> α ordinal -> γ -> bool
+CONST	bnfInitial	bnfICONS	3	:((((α -> bool) # (ζ -> α) -> α) -> α) -> 'fp -> ζ) -> (ζ -> α -> bool) -> 'fp -> (α -> bool) # (ζ -> α) -> α
+CONST	bnfInitial	bnfIALG	3	:('fp -> ((α -> bool) # (ζ -> α) -> α) -> bool) -> ((((α -> bool) # (ζ -> α) -> α) -> α) -> 'fp -> ζ) -> (ζ -> α -> bool) -> ((α -> bool) # (ζ -> α) -> α) -> bool
+CONST	bnfInitial	bnfHOM	4	:((α -> β) -> ζ -> η) -> (ζ -> α -> bool) -> (η -> β -> bool) -> (α -> β) -> (α -> bool) # (ζ -> α) -> (β -> bool) # (η -> β) -> bool
+CONST	bnfInitial	bnfFIN	2	:(ζ -> α -> bool) -> (α -> bool) -> ζ -> bool
+CONST	bnfInitial	bnfBIGPROD	3	:((((α -> bool) # (ζ -> α) -> α) -> α) -> 'fp -> ζ) -> (ζ -> α -> bool) -> (((α -> bool) # (ζ -> α) -> α) -> bool) # ('fp -> (α -> bool) # (ζ -> α) -> α)
+CONST	bnfInitial	bnfARBIFY	2	:(β -> bool) -> (β -> α) -> β -> α
+CONST	bnfInitial	bnfALG	2	:(ζ -> α -> bool) -> (α -> bool) # (ζ -> α) -> bool
+CONST	permutes	swapseq	1	:num -> (α -> α) -> bool
+CONST	permutes	swap	1	:α # α -> α -> α
+CONST	permutes	permutes	1	:(α -> α) -> (α -> bool) -> bool
+CONST	permutes	permutation	1	:(α -> α) -> bool
+CONST	permutes	inverse	2	:(α -> β) -> β -> α
+CONST	permutes	evenperm	1	:(α -> α) -> bool
+CONST	divides	prime	0	:num -> bool
+CONST	divides	divides	0	:num -> num -> bool
+CONST	divides	PRIMES	0	:num -> num
+CONST	While	WHILE	1	:(α -> bool) -> (α -> α) -> α -> α
+CONST	While	TAILREC	2	:(α -> α + β) -> α -> β
+CONST	While	TAILCALL	3	:(β -> γ + α) -> (γ -> α) -> β -> α
+CONST	While	OWHILE	1	:(α -> bool) -> (α -> α) -> α -> α option
+CONST	While	OLEAST	0	:(num -> bool) -> num option
+CONST	While	LEAST	0	:(num -> bool) -> num
+CONST	While	HOARE_SPEC	2	:(α -> bool) -> (α -> β) -> (β -> bool) -> bool
+CONST	cv	isnseq	0	:cv -> bool
+CONST	cv	cv_sub	0	:cv -> cv -> cv
+CONST	cv	cv_snd	0	:cv -> cv
+CONST	cv	cv_size	0	:cv -> num
+CONST	cv	cv_mul	0	:cv -> cv -> cv
+CONST	cv	cv_mod	0	:cv -> cv -> cv
+CONST	cv	cv_lt	0	:cv -> cv -> cv
+CONST	cv	cv_ispair	0	:cv -> cv
+CONST	cv	cv_if	0	:cv -> cv -> cv -> cv
+CONST	cv	cv_fst	0	:cv -> cv
+CONST	cv	cv_exp	0	:cv -> cv -> cv
+CONST	cv	cv_eq	0	:cv -> cv -> cv
+CONST	cv	cv_div	0	:cv -> cv -> cv
+CONST	cv	cv_add	0	:cv -> cv -> cv
+CONST	cv	cv_CASE	1	:cv -> (num -> α) -> (cv -> cv -> α) -> α
+CONST	cv	c2n	0	:cv -> num
+CONST	cv	c2b	0	:cv -> bool
+CONST	cv	b2c	0	:bool -> cv
+CONST	cv	Pair	0	:cv -> cv -> cv
+CONST	cv	Num	0	:num -> cv
+CONST	one	one_CASE	1	:unit -> α -> α
+CONST	one	one	0	:unit
+CONST	sum	sum_case	3	:(α -> γ) -> (β -> γ) -> α + β -> γ
+CONST	sum	sum_CASE	3	:α + β -> (α -> γ) -> (β -> γ) -> γ
+CONST	sum	setR	2	:β + α -> α -> bool
+CONST	sum	setL	2	:α + β -> α -> bool
+CONST	sum	SUM_REL	4	:(α -> γ -> bool) -> (β -> δ -> bool) -> α + β -> γ + δ -> bool
+CONST	sum	SUM_MAP	4	:(α -> γ) -> (β -> δ) -> α + β -> γ + δ
+CONST	sum	SUM_FIN	2	:(α -> bool) -> (β -> bool) -> α + β -> bool
+CONST	sum	SUM_ALL	2	:(α -> bool) -> (β -> bool) -> α + β -> bool
+CONST	sum	REP_sum	2	:α + β -> bool -> α -> β -> bool
+CONST	sum	OUTR	2	:α + β -> β
+CONST	sum	OUTL	2	:α + β -> α
+CONST	sum	IS_SUM_REP	2	:(bool -> α -> β -> bool) -> bool
+CONST	sum	ISR	2	:α + β -> bool
+CONST	sum	ISL	2	:α + β -> bool
+CONST	sum	INR	2	:β -> α + β
+CONST	sum	INL	2	:α -> α + β
+CONST	sum	ABS_sum	2	:(bool -> α -> β -> bool) -> α + β
+CONST	option	some	1	:(α -> bool) -> α option
+CONST	option	option_REP	1	:α option -> α + unit
+CONST	option	option_CASE	2	:α option -> β -> (α -> β) -> β
+CONST	option	option_ABS	1	:α + unit -> α option
+CONST	option	THE	1	:α option -> α
+CONST	option	SOME	1	:α -> α option
+CONST	option	OPTREL	2	:(α -> β -> bool) -> α option -> β option -> bool
+CONST	option	OPTION_MCOMP	3	:(β -> α option) -> (γ -> β option) -> γ -> α option
+CONST	option	OPTION_MAP2	3	:(β -> γ -> α) -> β option -> γ option -> α option
+CONST	option	OPTION_MAP	2	:(α -> β) -> α option -> β option
+CONST	option	OPTION_JOIN	1	:α option option -> α option
+CONST	option	OPTION_IGNORE_BIND	2	:β option -> α option -> α option
+CONST	option	OPTION_GUARD	0	:bool -> unit option
+CONST	option	OPTION_CHOICE	1	:α option -> α option -> α option
+CONST	option	OPTION_BIND	2	:β option -> (β -> α option) -> α option
+CONST	option	OPTION_APPLY	2	:(β -> α) option -> β option -> α option
+CONST	option	OPTION_ALL	1	:(α -> bool) -> α option -> bool
+CONST	option	NONE	1	:α option
+CONST	option	IS_SOME	1	:α option -> bool
+CONST	option	IS_NONE	1	:α option -> bool
+CONST	quotient	respects	2	:(α -> α -> β) -> α -> β
+CONST	quotient	RES_EXISTS_EQUIV	1	:(α -> α -> bool) -> (α -> bool) -> bool
+CONST	quotient	QUOTIENT	2	:(α -> α -> bool) -> (α -> β) -> (β -> α) -> bool
+CONST	quotient	PARTIAL_EQUIV	1	:(α -> α -> bool) -> bool
+CONST	quotient	EQUIV	1	:(α -> α -> bool) -> bool
+CONST	quotient	?!!	1	:(α -> bool) -> bool
+CONST	quotient	===>	4	:(α -> β -> bool) -> (γ -> δ -> bool) -> (α -> γ) -> (β -> δ) -> bool
+CONST	quotient	-->	4	:(α -> γ) -> (β -> δ) -> (γ -> β) -> α -> δ
+CONST	pair	setSND	2	:β # α -> α -> bool
+CONST	pair	setFST	2	:α # β -> α -> bool
+CONST	pair	pair_CASE	3	:α # β -> (α -> β -> γ) -> γ
+CONST	pair	UNCURRY	3	:(α -> β -> γ) -> α # β -> γ
+CONST	pair	SWAP	2	:β # α -> α # β
+CONST	pair	SND	2	:α # β -> β
+CONST	pair	RPROD	4	:(α -> β -> bool) -> (γ -> δ -> bool) -> α # γ -> β # δ -> bool
+CONST	pair	REP_prod	2	:α # β -> α -> β -> bool
+CONST	pair	PROD_ALL	2	:(α -> bool) -> (β -> bool) -> α # β -> bool
+CONST	pair	LEX	2	:(α -> α -> bool) -> (β -> β -> bool) -> α # β -> α # β -> bool
+CONST	pair	FST	2	:α # β -> α
+CONST	pair	CURRY	3	:(α # β -> γ) -> α -> β -> γ
+CONST	pair	ABS_prod	2	:(α -> β -> bool) -> α # β
+CONST	pair	,	2	:α -> β -> α # β
+CONST	pair	##	4	:(α -> γ) -> (β -> δ) -> α # β -> γ # δ
+CONST	combin	o	3	:(γ -> β) -> (α -> γ) -> α -> β
+CONST	combin	W	2	:(α -> α -> β) -> α -> β
+CONST	combin	UPDATE	2	:α -> β -> (α -> β) -> α -> β
+CONST	combin	S	3	:(α -> β -> γ) -> (α -> β) -> α -> γ
+CONST	combin	RIGHT_ID	2	:(α -> β -> α) -> β -> bool
+CONST	combin	RESTRICTION	2	:(α -> bool) -> (α -> β) -> α -> β
+CONST	combin	MONOID	1	:(α -> α -> α) -> α -> bool
+CONST	combin	LEFT_ID	2	:(α -> β -> β) -> α -> bool
+CONST	combin	K	2	:α -> β -> α
+CONST	combin	I	1	:α -> α
+CONST	combin	FCOMM	3	:(α -> β -> α) -> (γ -> α -> α) -> bool
+CONST	combin	FAIL	2	:α -> β -> α
+CONST	combin	EXTENSIONAL	2	:(α -> bool) -> (α -> β) -> bool
+CONST	combin	COMM	2	:(α -> α -> β) -> bool
+CONST	combin	C	3	:(α -> β -> γ) -> β -> α -> γ
+CONST	combin	ASSOC	1	:(α -> α -> α) -> bool
+CONST	combin	:>	2	:β -> (β -> α) -> α
+CONST	normalForms	UNIV_POINT	1	:(α -> bool) -> α
+CONST	normalForms	EXT_POINT	2	:(α -> β) -> (α -> β) -> α
+CONST	relation	trichotomous	1	:(α -> α -> bool) -> bool
+CONST	relation	transitive	1	:(α -> α -> bool) -> bool
+CONST	relation	total	1	:(α -> α -> bool) -> bool
+CONST	relation	the_fun	2	:(α -> α -> bool) -> ((α -> β) -> α -> β) -> α -> α -> β
+CONST	relation	symmetric	1	:(α -> α -> bool) -> bool
+CONST	relation	rpreserves	1	:((α -> α -> bool) -> bool) -> ((α -> α -> bool) -> α -> α -> bool) -> bool
+CONST	relation	rmonotone	1	:((α -> α -> bool) -> α -> α -> bool) -> bool
+CONST	relation	reflexive	1	:(α -> α -> bool) -> bool
+CONST	relation	rcdiamond	1	:(α -> α -> bool) -> bool
+CONST	relation	nf	2	:(α -> β -> bool) -> α -> bool
+CONST	relation	is_closure_op	2	:((α -> β -> bool) -> bool) -> ((α -> β -> bool) -> α -> β -> bool) -> bool
+CONST	relation	irreflexive	1	:(α -> α -> bool) -> bool
+CONST	relation	inv_image	2	:(β -> β -> bool) -> (α -> β) -> α -> α -> bool
+CONST	relation	inv	2	:(α -> β -> bool) -> β -> α -> bool
+CONST	relation	equivalence	1	:(α -> α -> bool) -> bool
+CONST	relation	diamond	1	:(α -> α -> bool) -> bool
+CONST	relation	diag	1	:(α -> bool) -> α -> α -> bool
+CONST	relation	approx	2	:(α -> α -> bool) -> ((α -> β) -> α -> β) -> α -> (α -> β) -> bool
+CONST	relation	antisymmetric	1	:(α -> α -> bool) -> bool
+CONST	relation	WeakOrder	1	:(η -> η -> bool) -> bool
+CONST	relation	WeakLinearOrder	1	:(α -> α -> bool) -> bool
+CONST	relation	WFREC	2	:(α -> α -> bool) -> ((α -> β) -> α -> β) -> α -> β
+CONST	relation	WFP	1	:(α -> α -> bool) -> α -> bool
+CONST	relation	WF	1	:(α -> α -> bool) -> bool
+CONST	relation	WCR	1	:(α -> α -> bool) -> bool
+CONST	relation	TC	1	:(α -> α -> bool) -> α -> α -> bool
+CONST	relation	StrongOrder	1	:(η -> η -> bool) -> bool
+CONST	relation	StrongLinearOrder	1	:(α -> α -> bool) -> bool
+CONST	relation	STRORD	1	:(α -> α -> bool) -> α -> α -> bool
+CONST	relation	SN	1	:(α -> α -> bool) -> bool
+CONST	relation	SC	1	:(α -> α -> bool) -> α -> α -> bool
+CONST	relation	RUNIV	2	:α -> β -> bool
+CONST	relation	RUNION	2	:(α -> β -> bool) -> (α -> β -> bool) -> α -> β -> bool
+CONST	relation	RTC	1	:(α -> α -> bool) -> α -> α -> bool
+CONST	relation	RSUBSET	2	:(α -> β -> bool) -> (α -> β -> bool) -> bool
+CONST	relation	RRESTRICT	2	:(α -> β -> bool) -> (α -> bool) -> α -> β -> bool
+CONST	relation	RRANGE	2	:(α -> β -> bool) -> β -> bool
+CONST	relation	RINTER	2	:(α -> β -> bool) -> (α -> β -> bool) -> α -> β -> bool
+CONST	relation	RINSERT	2	:(α -> β -> bool) -> α -> β -> α -> β -> bool
+CONST	relation	RESTRICT	2	:(α -> β) -> (α -> α -> bool) -> α -> α -> β
+CONST	relation	RDOM_DELETE	2	:(α -> β -> bool) -> α -> α -> β -> bool
+CONST	relation	RDOM	2	:(α -> β -> bool) -> α -> bool
+CONST	relation	RCOMPL	2	:(α -> β -> bool) -> α -> β -> bool
+CONST	relation	RC	1	:(α -> α -> bool) -> α -> α -> bool
+CONST	relation	PreOrder	1	:(α -> α -> bool) -> bool
+CONST	relation	Order	1	:(η -> η -> bool) -> bool
+CONST	relation	O	3	:(θ -> 'k -> bool) -> (η -> θ -> bool) -> η -> 'k -> bool
+CONST	relation	LinearOrder	1	:(α -> α -> bool) -> bool
+CONST	relation	INVOL	1	:('z -> 'z) -> bool
+CONST	relation	INDUCTIVE_INVARIANT_ON	2	:(α -> α -> bool) -> (α -> bool) -> (α -> β -> bool) -> ((α -> β) -> α -> β) -> bool
+CONST	relation	INDUCTIVE_INVARIANT	2	:(α -> α -> bool) -> (α -> β -> bool) -> ((α -> β) -> α -> β) -> bool
+CONST	relation	IDEM	1	:('z -> 'z) -> bool
+CONST	relation	EQC	1	:(α -> α -> bool) -> α -> α -> bool
+CONST	relation	EMPTY_REL	1	:α -> α -> bool
+CONST	relation	CR	1	:(α -> α -> bool) -> bool
+CONST	marker	usingThm	0	:bool -> bool
+CONST	marker	using	0	:ind -> bool
+CONST	marker	unint	1	:α -> α
+CONST	marker	suspendlabel	0	:ind -> bool -> bool
+CONST	marker	suspendimp	0	:bool -> bool -> bool
+CONST	marker	stmarker	1	:α -> α
+CONST	marker	resconj	0	:bool -> bool -> bool
+CONST	marker	hide	0	:bool -> bool -> bool
+CONST	marker	ReqD	0	:bool
+CONST	marker	Req0	0	:bool
+CONST	marker	NoAsms	0	:bool
+CONST	marker	IgnAsm	1	:α -> bool
+CONST	marker	IfCases	0	:bool
+CONST	marker	FRAG	1	:α -> bool
+CONST	marker	ExcludeFrag	1	:α -> bool
+CONST	marker	Exclude	1	:α -> bool
+CONST	marker	Cong	0	:bool -> bool
+CONST	marker	Case	1	:α -> bool
+CONST	marker	Abbrev	0	:bool -> bool
+CONST	marker	AC	0	:bool -> bool -> bool
+CONST	marker	:-	0	:ind -> bool -> bool
+CONST	num	ZERO_REP	0	:ind
+CONST	num	SUC_REP	0	:ind -> ind
+CONST	num	SUC	0	:num -> num
+CONST	num	REP_num	0	:num -> ind
+CONST	num	IS_NUM_REP	0	:ind -> bool
+CONST	num	ABS_num	0	:ind -> num
+CONST	num	0	0	:num
+CONST	prim_rec	wellfounded	1	:(α -> α -> bool) -> bool
+CONST	prim_rec	num_CASE	1	:num -> α -> (num -> α) -> α
+CONST	prim_rec	measure	1	:(α -> num) -> α -> α -> bool
+CONST	prim_rec	SIMP_REC_REL	1	:(num -> α) -> α -> (α -> α) -> num -> bool
+CONST	prim_rec	SIMP_REC	1	:α -> (α -> α) -> num -> α
+CONST	prim_rec	PRIM_REC_FUN	1	:α -> (α -> num -> α) -> num -> num -> α
+CONST	prim_rec	PRIM_REC	1	:α -> (α -> num -> α) -> num -> α
+CONST	prim_rec	PRE	0	:num -> num
+CONST	prim_rec	<	0	:num -> num -> bool
+CONST	arithmetic	nat_elim__magic	0	:num -> num
+CONST	arithmetic	findq	0	:num # num # num -> num
+CONST	arithmetic	bool_to_bit	0	:bool -> num
+CONST	arithmetic	ZERO	0	:num
+CONST	arithmetic	OT_MOD	0	:num -> num -> num
+CONST	arithmetic	OT_DIV	0	:num -> num -> num
+CONST	arithmetic	ODD	0	:num -> bool
+CONST	arithmetic	NUMERAL	0	:num -> num
+CONST	arithmetic	NRC	1	:(α -> α -> bool) -> num -> α -> α -> bool
+CONST	arithmetic	MODEQ	0	:num -> num -> num -> bool
+CONST	arithmetic	MOD	0	:num -> num -> num
+CONST	arithmetic	MIN	0	:num -> num -> num
+CONST	arithmetic	MAX	0	:num -> num -> num
+CONST	arithmetic	FUNPOW	1	:(α -> α) -> num -> α -> α
+CONST	arithmetic	FACT	0	:num -> num
+CONST	arithmetic	EXP	0	:num -> num -> num
+CONST	arithmetic	EVEN	0	:num -> bool
+CONST	arithmetic	DIVMOD	0	:num # num # num -> num # num
+CONST	arithmetic	DIV2	0	:num -> num
+CONST	arithmetic	DIV	0	:num -> num -> num
+CONST	arithmetic	CEILING_MOD	0	:num -> num -> num
+CONST	arithmetic	CEILING_DIV	0	:num -> num -> num
+CONST	arithmetic	BIT2	0	:num -> num
+CONST	arithmetic	BIT1	0	:num -> num
+CONST	arithmetic	ABS_DIFF	0	:num -> num -> num
+CONST	arithmetic	>=	0	:num -> num -> bool
+CONST	arithmetic	>	0	:num -> num -> bool
+CONST	arithmetic	<=	0	:num -> num -> bool
+CONST	arithmetic	-	0	:num -> num -> num
+CONST	arithmetic	+	0	:num -> num -> num
+CONST	arithmetic	*	0	:num -> num -> num
+CONST	numeral	texp_help	0	:num -> num -> num
+CONST	numeral	onecount	0	:num -> num -> num
+CONST	numeral	internal_mult	0	:num -> num -> num
+CONST	numeral	iiSUC	0	:num -> num
+CONST	numeral	iZ	0	:num -> num
+CONST	numeral	iSUB	0	:bool -> num -> num -> num
+CONST	numeral	iSQR	0	:num -> num
+CONST	numeral	iDUB	0	:num -> num
+CONST	numeral	iBIT_cases	1	:num -> α -> (num -> α) -> (num -> α) -> α
+CONST	numeral	exactlog	0	:num -> num
+CONST	basicSize	sum_size	2	:(α -> num) -> (β -> num) -> α + β -> num
+CONST	basicSize	pair_size	2	:(α -> num) -> (β -> num) -> α # β -> num
+CONST	basicSize	option_size	1	:(α -> num) -> α option -> num
+CONST	basicSize	one_size	0	:unit -> num
+CONST	basicSize	min_pair_size	2	:(α -> num) -> (β -> num) -> α # β -> num
+CONST	basicSize	itself_size	1	:α itself -> num
+CONST	basicSize	full_sum_size	2	:(α -> num) -> (β -> num) -> α + β -> num
+CONST	basicSize	bool_size	0	:bool -> num
+CONST	numpair	tri	0	:num -> num
+CONST	numpair	nsnd	0	:num -> num
+CONST	numpair	npair	0	:num -> num -> num
+CONST	numpair	nfst	0	:num -> num
+CONST	numpair	invtri0	0	:num -> num -> num # num
+CONST	numpair	invtri	0	:num -> num
+CONST	pred_set	schroeder_close	1	:(α -> α) -> (α -> bool) -> α -> bool
+CONST	pred_set	refines	1	:((α -> bool) -> bool) -> ((α -> bool) -> bool) -> bool
+CONST	pred_set	partitions	1	:((α -> bool) -> bool) -> (α -> bool) -> bool
+CONST	pred_set	partition	1	:(α -> α -> bool) -> (α -> bool) -> (α -> bool) -> bool
+CONST	pred_set	part	1	:((α -> bool) -> bool) -> α -> α -> bool
+CONST	pred_set	pairwise	1	:(α -> α -> bool) -> (α -> bool) -> bool
+CONST	pred_set	pair_to_num	0	:num # num -> num
+CONST	pred_set	num_to_pair	0	:num -> num # num
+CONST	pred_set	is_measure_maximal	1	:(α -> num) -> (α -> bool) -> α -> bool
+CONST	pred_set	from	0	:num -> num -> bool
+CONST	pred_set	equiv_on	1	:(α -> α -> bool) -> (α -> bool) -> bool
+CONST	pred_set	enumerate	1	:(α -> bool) -> num -> α
+CONST	pred_set	disjoint	1	:((α -> bool) -> bool) -> bool
+CONST	pred_set	disjUNION	2	:(α -> bool) -> (β -> bool) -> α + β -> bool
+CONST	pred_set	countable	1	:(α -> bool) -> bool
+CONST	pred_set	count	0	:num -> num -> bool
+CONST	pred_set	closure_comm_assoc_fun	1	:(α -> α -> α) -> (α -> bool) -> bool
+CONST	pred_set	chooser	1	:(α -> bool) -> num -> α
+CONST	pred_set	UNIV	1	:α -> bool
+CONST	pred_set	UNION	1	:(α -> bool) -> (α -> bool) -> α -> bool
+CONST	pred_set	SURJ	2	:(α -> β) -> (α -> bool) -> (β -> bool) -> bool
+CONST	pred_set	SUM_SET	0	:(num -> bool) -> num
+CONST	pred_set	SUM_IMAGE	1	:(α -> num) -> (α -> bool) -> num
+CONST	pred_set	SUBSET	1	:(α -> bool) -> (α -> bool) -> bool
+CONST	pred_set	SING	1	:(α -> bool) -> bool
+CONST	pred_set	RINV	2	:(α -> β) -> (α -> bool) -> β -> α
+CONST	pred_set	REST	1	:(α -> bool) -> α -> bool
+CONST	pred_set	REL_RESTRICT	1	:(α -> α -> bool) -> (α -> bool) -> α -> α -> bool
+CONST	pred_set	PSUBSET	1	:(α -> bool) -> (α -> bool) -> bool
+CONST	pred_set	PROD_SET	0	:(num -> bool) -> num
+CONST	pred_set	PROD_IMAGE	1	:(α -> num) -> (α -> bool) -> num
+CONST	pred_set	PREIMAGE	2	:(α -> β) -> (β -> bool) -> α -> bool
+CONST	pred_set	POW	1	:(α -> bool) -> (α -> bool) -> bool
+CONST	pred_set	MIN_SET	0	:(num -> bool) -> num
+CONST	pred_set	MAX_SET	0	:(num -> bool) -> num
+CONST	pred_set	LINV_OPT	2	:(α -> β) -> (α -> bool) -> β -> α option
+CONST	pred_set	LINV	2	:(α -> β) -> (α -> bool) -> β -> α
+CONST	pred_set	ITSET	2	:(α -> β -> β) -> (α -> bool) -> β -> β
+CONST	pred_set	INTER	1	:(α -> bool) -> (α -> bool) -> α -> bool
+CONST	pred_set	INSERT	1	:α -> (α -> bool) -> α -> bool
+CONST	pred_set	INJ	2	:(α -> β) -> (α -> bool) -> (β -> bool) -> bool
+CONST	pred_set	IMAGE	2	:(α -> β) -> (α -> bool) -> β -> bool
+CONST	pred_set	HAS_SIZE	1	:(α -> bool) -> num -> bool
+CONST	pred_set	GSPEC	2	:(β -> α # bool) -> α -> bool
+CONST	pred_set	FUNSET	2	:(α -> bool) -> (β -> bool) -> (α -> β) -> bool
+CONST	pred_set	FINITE	1	:(α -> bool) -> bool
+CONST	pred_set	EMPTY	1	:α -> bool
+CONST	pred_set	DISJOINT	1	:(α -> bool) -> (α -> bool) -> bool
+CONST	pred_set	DIFF	1	:(α -> bool) -> (α -> bool) -> α -> bool
+CONST	pred_set	DFUNSET	2	:(α -> bool) -> (α -> β -> bool) -> (α -> β) -> bool
+CONST	pred_set	DELETE	1	:(α -> bool) -> α -> α -> bool
+CONST	pred_set	CROSS	2	:(α -> bool) -> (β -> bool) -> α # β -> bool
+CONST	pred_set	COMPL	1	:(α -> bool) -> α -> bool
+CONST	pred_set	CHOICE	1	:(α -> bool) -> α
+CONST	pred_set	CARD	1	:(α -> bool) -> num
+CONST	pred_set	BIJ	2	:(α -> β) -> (α -> bool) -> (β -> bool) -> bool
+CONST	pred_set	BIGUNION	1	:((α -> bool) -> bool) -> α -> bool
+CONST	pred_set	BIGINTER	1	:((α -> bool) -> bool) -> α -> bool
+CONST	set_relation	upper_bounds	2	:(β -> bool) -> (β # α -> bool) -> α -> bool
+CONST	set_relation	univ_reln	1	:(α -> bool) -> α # α -> bool
+CONST	set_relation	transitive_closure	1	:(α # α -> bool) -> α # α -> bool
+CONST	set_relation	transitive	1	:(α # α -> bool) -> bool
+CONST	set_relation	symmetric_closure	1	:(α # α -> bool) -> α # α -> bool
+CONST	set_relation	symmetric	1	:(α # α -> bool) -> (α -> bool) -> bool
+CONST	set_relation	strict_linear_order	1	:(α # α -> bool) -> (α -> bool) -> bool
+CONST	set_relation	strict	1	:(α # α -> bool) -> α # α -> bool
+CONST	set_relation	rrestrict	1	:(α # α -> bool) -> (α -> bool) -> α # α -> bool
+CONST	set_relation	reln_to_rel	2	:(α # β -> bool) -> α -> β -> bool
+CONST	set_relation	rel_to_reln	2	:(α -> β -> bool) -> α # β -> bool
+CONST	set_relation	reflexive	1	:(α # α -> bool) -> (α -> bool) -> bool
+CONST	set_relation	rcomp	3	:(α # γ -> bool) -> (γ # β -> bool) -> α # β -> bool
+CONST	set_relation	range	2	:(β # α -> bool) -> α -> bool
+CONST	set_relation	per_restrict	1	:((α -> bool) -> bool) -> (α -> bool) -> (α -> bool) -> bool
+CONST	set_relation	per	1	:(α -> bool) -> ((α -> bool) -> bool) -> bool
+CONST	set_relation	partial_order	1	:(α # α -> bool) -> (α -> bool) -> bool
+CONST	set_relation	num_order	1	:(α -> num) -> (α -> bool) -> α # α -> bool
+CONST	set_relation	nth_min	1	:(α # α -> bool) -> (α -> bool) # (α # α -> bool) -> num -> α option
+CONST	set_relation	minimal_elements	1	:(α -> bool) -> (α # α -> bool) -> α -> bool
+CONST	set_relation	maximal_elements	1	:(α -> bool) -> (α # α -> bool) -> α -> bool
+CONST	set_relation	linear_order	1	:(α # α -> bool) -> (α -> bool) -> bool
+CONST	set_relation	irreflexive	1	:(α # α -> bool) -> (α -> bool) -> bool
+CONST	set_relation	get_min	1	:(α # α -> bool) -> (α -> bool) # (α # α -> bool) -> α option
+CONST	set_relation	finite_prefixes	2	:(α # β -> bool) -> (β -> bool) -> bool
+CONST	set_relation	fchains	1	:(α # α -> bool) -> (α -> bool) -> bool
+CONST	set_relation	domain	2	:(α # β -> bool) -> α -> bool
+CONST	set_relation	chain	1	:(α -> bool) -> (α # α -> bool) -> bool
+CONST	set_relation	antisym	1	:(α # α -> bool) -> bool
+CONST	set_relation	all_choices	1	:((α -> bool) -> bool) -> (α -> bool) -> bool
+CONST	set_relation	acyclic	1	:(α # α -> bool) -> bool
+CONST	set_relation	RRUNIV	1	:(α -> bool) -> α -> α -> bool
+CONST	set_relation	RREFL_EXP	1	:(α -> α -> bool) -> (α -> bool) -> α -> α -> bool
+CONST	wellorder	wobound	1	:α -> α wellorder -> α wellorder
+CONST	wellorder	wo2wo	2	:α wellorder -> β wellorder -> α -> β option
+CONST	wellorder	wleast	1	:α wellorder -> (α -> bool) -> α option
+CONST	wellorder	wellorder	1	:(α # α -> bool) -> bool
+CONST	wellorder	wellfounded	1	:(α # α -> bool) -> bool
+CONST	wellorder	wZERO	1	:α wellorder
+CONST	wellorder	remove	1	:α -> α wellorder -> α wellorder
+CONST	wellorder	orderlt	2	:α wellorder -> β wellorder -> bool
+CONST	wellorder	orderiso	2	:α wellorder -> β wellorder -> bool
+CONST	wellorder	mkWO	1	:(α # α -> bool) -> α wellorder
+CONST	wellorder	iseg	1	:α wellorder -> α -> α -> bool
+CONST	wellorder	fromNatWO	1	:num -> (num + α) wellorder
+CONST	wellorder	finite	1	:α wellorder -> bool
+CONST	wellorder	elsOf	1	:α wellorder -> α -> bool
+CONST	wellorder	destWO	1	:α wellorder -> α # α -> bool
+CONST	wellorder	ADD1	1	:α -> α wellorder -> α wellorder
+CONST	cardinalityCore	set_exp	2	:(β -> bool) -> (α -> bool) -> (α -> β) -> bool
+CONST	cardinalityCore	fnOfSet	2	:(β # α -> bool) -> β -> α option
+CONST	cardinalityCore	cardleq	2	:(α -> bool) -> (β -> bool) -> bool
+CONST	cardinalityCore	cardgt	2	:(α -> bool) -> (β -> bool) -> bool
+CONST	cardinalityCore	cardgeq	2	:(α -> bool) -> (β -> bool) -> bool
+CONST	cardinalityCore	cardeq	2	:(α -> bool) -> (β -> bool) -> bool
+CONST	cardinalityCore	bijns	1	:(α -> bool) -> (α -> α) -> bool
+CONST	cardinalityCore	BIGPRODi	2	:(ι -> (α -> bool) option) -> (ι -> α option) -> bool
+CONST	cardinalityCore	BIGPROD	1	:((α -> bool) -> bool) -> ((α -> bool) -> α option) -> bool
+CONST	bnfPrelims	optSET	1	:α option -> α -> bool
+CONST	bnfFixBNF	bnfNaturalP	6	:((ξ -> ν) -> 'fn -> 'fm) -> ('fn -> α -> bool) -> ('fm -> β -> bool) -> (α -> β) -> bool
+CONST	bnfFixBNF	bnfMapCongP	6	:((ξ -> ν) -> 'fn -> 'fm) -> ((ξ -> ν) -> 'fn -> 'fm) -> ('fn -> ξ -> bool) -> ('fn -> α -> bool) -> (α -> β) -> (α -> β) -> bool
+CONST	bnfFixBNF	bnfFIXSET	3	:('fn -> ξ) -> ('fn -> ξ -> bool) -> ('fn -> α -> bool) -> (ξ -> α -> bool) -> bool
+CONST	bnfFixBNF	bnfFIXMAP	4	:('fn -> ξ) -> ('fm -> ν) -> ((ξ -> ν) -> 'fn -> 'fm) -> (ξ -> ν) -> bool
+CONST	bnfFixBNF	bnfFIXIND	2	:('fn -> ξ) -> ('fn -> ξ -> bool) -> bool
+CONST	bnfMutual	bnfSREC	4	:(ζ -> ξ) -> ((ξ -> γ) -> ζ -> η) -> bool
+CONST	bnfMutual	bnfSMAP	5	:('fn2 -> 'n2) -> (α -> β) -> (γ -> 'fn2 -> α) -> (γ -> 'n2 -> β) -> bool
+CONST	bnfMutual	bnfNESTSET	3	:('fn1 -> 'n1 -> bool) -> ('fn1 -> 'n1 -> bool) -> ('fn1 -> α -> bool) -> (α -> 'n1 -> bool) -> bool
+CONST	bnfMutual	bnfMapId2	3	:((α -> α) -> (β -> β) -> ζ -> ζ) -> bool
+CONST	bnfMutual	bnfMapComp2	9	:(('a1 -> 'b1) -> ('a2 -> 'b2) -> ζ -> η) -> (('b1 -> 'c1) -> ('b2 -> 'c2) -> η -> θ) -> (('a1 -> 'c1) -> ('a2 -> 'c2) -> ζ -> θ) -> bool
+CONST	bnfMutual	bnfMUTSPLIT	7	:(('n1 -> 'c1) -> ('n2 -> 'c2) -> 'fn2 -> 'fc2) -> (('n1 -> 'c1) -> α -> 'fc2) -> (('n2 -> 'c2) -> 'fn2 -> α) -> bool
+CONST	bnfMutual	bnfMUTREC	8	:('fn1 -> 'n1) -> ('fn2 -> 'n2) -> (('n1 -> α) -> ('n2 -> β) -> 'fn1 -> γ) -> (('n1 -> α) -> ('n2 -> β) -> 'fn2 -> δ) -> (γ -> α) -> (δ -> β) -> ('n1 -> α) -> ('n2 -> β) -> bool
+CONST	bnfMutual	bnfMUTMAP	8	:(('n1 -> 'c1) -> 'fn1 -> 'fg1) -> ((α -> β) -> 'fg1 -> γ) -> (('n1 -> 'c1) -> (δ -> β) -> 'fn1 -> γ) -> (('n1 -> 'c1) -> δ -> α) -> bool
+CONST	bnfMutual	bnfMUTITER	8	:('fn1 -> 'n1) -> ('fn2 -> 'n2) -> (('n1 -> α) -> ('n2 -> β) -> 'fn1 -> γ) -> (('n1 -> α) -> ('n2 -> β) -> 'fn2 -> δ) -> bool
+CONST	list	splitAtPki	2	:(num -> β -> bool) -> (β list -> β list -> α) -> β list -> α
+CONST	list	oHD	1	:α list -> α option
+CONST	list	oEL	1	:num -> α list -> α option
+CONST	list	nub	1	:α list -> α list
+CONST	list	mapPartial	2	:(β -> α option) -> β list -> α list
+CONST	list	list_size	1	:(α -> num) -> α list -> num
+CONST	list	list_CONS	1	:unit + 'b1 # 'b1 list -> 'b1 list
+CONST	list	list_CASE	2	:α list -> β -> (α -> α list -> β) -> β
+CONST	list	isPREFIX	1	:α list -> α list -> bool
+CONST	list	dropWhile	1	:(α -> bool) -> α list -> α list
+CONST	list	adjacent	1	:α list -> α -> α -> bool
+CONST	list	ZIP	2	:α list # β list -> (α # β) list
+CONST	list	UNZIP	2	:(α # β) list -> α list # β list
+CONST	list	UNIQUE	1	:α -> α list -> bool
+CONST	list	TL	1	:α list -> α list
+CONST	list	TAKE	1	:num -> α list -> α list
+CONST	list	SUM_ACC	0	:num list -> num -> num
+CONST	list	SUM	0	:num list -> num
+CONST	list	SNOC	1	:α -> α list -> α list
+CONST	list	SHORTLEX	1	:(α -> α -> bool) -> α list -> α list -> bool
+CONST	list	SET_TO_LIST	1	:(α -> bool) -> α list
+CONST	list	SET_REL	2	:(α -> β -> bool) -> (α -> bool) -> (β -> bool) -> bool
+CONST	list	REVERSE	1	:α list -> α list
+CONST	list	REV	1	:α list -> α list -> α list
+CONST	list	PAD_RIGHT	1	:α -> num -> α list -> α list
+CONST	list	PAD_LEFT	1	:α -> num -> α list -> α list
+CONST	list	OPT_MMAP	2	:(β -> α option) -> β list -> α list option
+CONST	list	NULL	1	:α list -> bool
+CONST	list	NIL	1	:α list
+CONST	list	MAP3	4	:(β -> γ -> δ -> α) -> β list -> γ list -> δ list -> α list
+CONST	list	MAP2	3	:(β -> γ -> α) -> β list -> γ list -> α list
+CONST	list	MAP	2	:(α -> β) -> α list -> β list
+CONST	list	LUPDATE	1	:α -> num -> α list -> α list
+CONST	list	LRC	1	:(α -> α -> bool) -> α list -> α -> α -> bool
+CONST	list	LLEX	1	:(α -> α -> bool) -> α list -> α list -> bool
+CONST	list	LIST_TO_SET	1	:α list -> α -> bool
+CONST	list	LIST_REL	2	:(α -> β -> bool) -> α list -> β list -> bool
+CONST	list	LIST_LIFT2	3	:(β -> γ -> α) -> β list -> γ list -> α list
+CONST	list	LIST_IGNORE_BIND	2	:β list -> α list -> α list
+CONST	list	LIST_GUARD	0	:bool -> unit list
+CONST	list	LIST_BIND	2	:β list -> (β -> α list) -> α list
+CONST	list	LIST_APPLY	2	:(β -> α) list -> β list -> α list
+CONST	list	LENGTH	1	:α list -> num
+CONST	list	LEN	1	:α list -> num -> num
+CONST	list	LAST	1	:α list -> α
+CONST	list	INDEX_OF	1	:α -> α list -> num option
+CONST	list	INDEX_FIND	1	:num -> (α -> bool) -> α list -> (num # α) option
+CONST	list	HD	1	:α list -> α
+CONST	list	GENLIST_AUX	1	:(num -> α) -> num -> α list -> α list
+CONST	list	GENLIST	1	:(num -> α) -> num -> α list
+CONST	list	FRONT	1	:α list -> α list
+CONST	list	FOLDR	2	:(α -> β -> β) -> β -> α list -> β
+CONST	list	FOLDL2	3	:(α -> β -> γ -> α) -> α -> β list -> γ list -> α
+CONST	list	FOLDL	2	:(β -> α -> β) -> β -> α list -> β
+CONST	list	FLAT	1	:α list list -> α list
+CONST	list	FIND	1	:(α -> bool) -> α list -> α option
+CONST	list	FILTER	1	:(α -> bool) -> α list -> α list
+CONST	list	EXISTS	1	:(α -> bool) -> α list -> bool
+CONST	list	EVERYi	1	:(num -> α -> bool) -> α list -> bool
+CONST	list	EVERY	1	:(α -> bool) -> α list -> bool
+CONST	list	EL	1	:num -> α list -> α
+CONST	list	DROP	1	:num -> α list -> α list
+CONST	list	CONS	1	:α -> α list -> α list
+CONST	list	APPEND	1	:α list -> α list -> α list
+CONST	list	ALL_DISTINCT	1	:α list -> bool
+CONST	rich_list	sublist	1	:α list -> α list -> bool
+CONST	rich_list	longest_prefix	1	:(α list -> bool) -> α list
+CONST	rich_list	lcp2	1	:α list -> α list -> α list
+CONST	rich_list	lcp	1	:α list list -> α list
+CONST	rich_list	common_prefixes	1	:(α list -> bool) -> α list -> bool
+CONST	rich_list	chunks_tr_aux	1	:num -> α list -> α list list -> α list list
+CONST	rich_list	chunks_tr	1	:num -> α list -> α list list
+CONST	rich_list	chunks	1	:num -> α list -> α list list
+CONST	rich_list	UNZIP_SND	2	:(β # α) list -> α list
+CONST	rich_list	UNZIP_FST	2	:(α # β) list -> α list
+CONST	rich_list	SUFFIX	1	:(α -> bool) -> α list -> α list
+CONST	rich_list	SPLITR	1	:(α -> bool) -> α list -> α list # α list
+CONST	rich_list	SPLITP_TAILREC	1	:α list -> (α -> bool) -> α list -> α list # α list
+CONST	rich_list	SPLITP	1	:(α -> bool) -> α list -> α list # α list
+CONST	rich_list	SPLITL	1	:(α -> bool) -> α list -> α list # α list
+CONST	rich_list	SEG	1	:num -> num -> α list -> α list
+CONST	rich_list	SCANR	2	:(α -> β -> β) -> β -> α list -> β list
+CONST	rich_list	SCANL	2	:(β -> α -> β) -> β -> α list -> β list
+CONST	rich_list	REPLICATE	1	:num -> α -> α list
+CONST	rich_list	PREFIX	1	:(α -> bool) -> α list -> α list
+CONST	rich_list	OR_EL	0	:bool list -> bool
+CONST	rich_list	MIN_LIST	0	:num list -> num
+CONST	rich_list	MAX_LIST	0	:num list -> num
+CONST	rich_list	LIST_ELEM_COUNT	1	:α -> α list -> num
+CONST	rich_list	LASTN	1	:num -> α list -> α list
+CONST	rich_list	IS_SUFFIX	1	:α list -> α list -> bool
+CONST	rich_list	IS_SUBLIST	1	:α list -> α list -> bool
+CONST	rich_list	ELL	1	:num -> α list -> α
+CONST	rich_list	DELETE_ELEMENT	1	:α -> α list -> α list
+CONST	rich_list	COUNT_LIST_AUX	0	:num -> num list -> num list
+CONST	rich_list	COUNT_LIST	0	:num -> num list
+CONST	rich_list	BUTLASTN	1	:num -> α list -> α list
+CONST	rich_list	AND_EL	0	:bool list -> bool
+CONST	indexedLists	fupdLast	1	:(α -> α) -> α list -> α list
+CONST	indexedLists	findi	1	:α -> α list -> num
+CONST	indexedLists	delN	1	:num -> α list -> α list
+CONST	indexedLists	MAPi_ACC	2	:(num -> β -> α) -> num -> α list -> β list -> α list
+CONST	indexedLists	MAPi	2	:(num -> β -> α) -> β list -> α list
+CONST	indexedLists	MAP2ia	3	:(num -> β -> γ -> α) -> num -> β list -> γ list -> α list
+CONST	indexedLists	MAP2i	3	:(num -> β -> γ -> α) -> β list -> γ list -> α list
+CONST	indexedLists	LIST_RELi	2	:(num -> α -> β -> bool) -> α list -> β list -> bool
+CONST	indexedLists	FOLDRi	2	:(num -> β -> α -> α) -> α -> β list -> α
+CONST	sorting	STABLE	1	:((α -> α -> bool) -> α list -> α list) -> (α -> α -> bool) -> bool
+CONST	sorting	SORTS	1	:((α -> α -> bool) -> α list -> α list) -> (α -> α -> bool) -> bool
+CONST	sorting	SORTED	1	:(α -> α -> bool) -> α list -> bool
+CONST	sorting	QSORT3	1	:(α -> α -> bool) -> α list -> α list
+CONST	sorting	QSORT	1	:(α -> α -> bool) -> α list -> α list
+CONST	sorting	PERM_SINGLE_SWAP	1	:α list -> α list -> bool
+CONST	sorting	PERM	1	:α list -> α list -> bool
+CONST	sorting	PARTITION	1	:(α -> bool) -> α list -> α list # α list
+CONST	sorting	PART3	1	:(α -> α -> bool) -> α -> α list -> α list # α list # α list
+CONST	sorting	PART	1	:(α -> bool) -> α list -> α list -> α list -> α list # α list
+CONST	finite_map	o_f	3	:(β -> γ) -> (α |-> β) -> (α |-> γ)
+CONST	finite_map	lbound	1	:α -> (α -> α -> bool) -> α -> α -> bool
+CONST	finite_map	is_fmap	2	:(α -> β + unit) -> bool
+CONST	finite_map	fp_soluble	3	:(α -> α -> bool) -> α -> (β |-> γ) -> (β -> γ -> α -> α) -> bool
+CONST	finite_map	fmlfpR	3	:(β -> γ -> α -> α) -> (β |-> γ) -> α -> (β |-> γ) -> α -> α -> bool
+CONST	finite_map	fmap_size	2	:(α -> num) -> (β -> num) -> (α |-> β) -> num
+CONST	finite_map	fmap_rel	3	:(α -> β -> bool) -> (γ |-> α) -> (γ |-> β) -> bool
+CONST	finite_map	fmap_inverse	2	:(α |-> β) -> (β |-> α) -> bool
+CONST	finite_map	fmap_REP	2	:(α |-> β) -> α -> β + unit
+CONST	finite_map	fmap_EQ_UPTO	2	:(α |-> β) -> (α |-> β) -> (α -> bool) -> bool
+CONST	finite_map	fmap_ABS	2	:(α -> β + unit) -> (α |-> β)
+CONST	finite_map	fdomsub	2	:(α |-> β) -> α -> (α |-> β)
+CONST	finite_map	f_o_f	3	:(β |-> γ) -> (α |-> β) -> (α |-> γ)
+CONST	finite_map	f_o	3	:(β |-> γ) -> (α -> β) -> (α |-> γ)
+CONST	finite_map	SUBMAP	2	:(α |-> β) -> (α |-> β) -> bool
+CONST	finite_map	RRESTRICT	2	:(α |-> β) -> (β -> bool) -> (α |-> β)
+CONST	finite_map	MAP_KEYS	3	:(α -> β) -> (α |-> γ) -> (β |-> γ)
+CONST	finite_map	ITFMAPR	3	:(β -> γ -> α -> α) -> (β |-> γ) -> α -> α -> bool
+CONST	finite_map	ITFMAP	3	:(β -> γ -> α -> α) -> (β |-> γ) -> α -> α
+CONST	finite_map	FUPDATE_LIST	2	:(α |-> β) -> (α # β) list -> (α |-> β)
+CONST	finite_map	FUPDATE	2	:(α |-> β) -> α # β -> (α |-> β)
+CONST	finite_map	FUN_FMAP	2	:(α -> β) -> (α -> bool) -> (α |-> β)
+CONST	finite_map	FUNION	2	:(α |-> β) -> (α |-> β) -> (α |-> β)
+CONST	finite_map	FRANGE	2	:(α |-> β) -> β -> bool
+CONST	finite_map	FMINUS	3	:(α |-> β) -> (α |-> γ) -> (α |-> β)
+CONST	finite_map	FMERGE_WITH_KEY	2	:(α -> β -> β -> β) -> (α |-> β) -> (α |-> β) -> (α |-> β)
+CONST	finite_map	FMERGE	2	:(α -> α -> α) -> (β |-> α) -> (β |-> α) -> (β |-> α)
+CONST	finite_map	FMAP_MAP2	3	:(α # γ -> β) -> (α |-> γ) -> (α |-> β)
+CONST	finite_map	FLOOKUP	2	:(α |-> β) -> α -> β option
+CONST	finite_map	FINTER	3	:(α |-> β) -> (α |-> γ) -> (α |-> β)
+CONST	finite_map	FEVERY	2	:(α # β -> bool) -> (α |-> β) -> bool
+CONST	finite_map	FEMPTY	2	:α |-> β
+CONST	finite_map	FDOM	2	:(α |-> β) -> α -> bool
+CONST	finite_map	FDIFF	2	:(α |-> β) -> (α -> bool) -> (α |-> β)
+CONST	finite_map	FCARD	2	:(α |-> β) -> num
+CONST	finite_map	FAPPLY	2	:(α |-> β) -> α -> β
+CONST	finite_map	DRESTRICT	2	:(α |-> β) -> (α -> bool) -> (α |-> β)
+CONST	alist	fmap_to_alist	2	:(α |-> β) -> (α # β) list
+CONST	alist	alist_to_fmap	2	:(α # β) list -> (α |-> β)
+CONST	alist	alist_range	2	:(β # α) list -> α -> bool
+CONST	alist	ALOOKUP	2	:(β # α) list -> β -> α option
+CONST	alist	AFUPDKEY	2	:α -> (β -> β) -> (α # β) list -> (α # β) list
+CONST	alist	ADELKEY	2	:α -> (α # β) list -> (α # β) list
+CONST	namespace	nsSub	4	:((α, β) id -> γ -> δ -> bool) -> (α, β, γ) namespace -> (α, β, δ) namespace -> bool
+CONST	namespace	nsSing	3	:β -> γ -> (α, β, γ) namespace
+CONST	namespace	nsOptBind	3	:β option -> γ -> (α, β, γ) namespace -> (α, β, γ) namespace
+CONST	namespace	nsMap	4	:(φ -> χ) -> (ν, ξ, φ) namespace -> (ν, ξ, χ) namespace
+CONST	namespace	nsLookupMod	3	:(ν, ξ, φ) namespace -> ν list -> (ν, ξ, φ) namespace option
+CONST	namespace	nsLookup	3	:(ν, ξ, φ) namespace -> (ν, ξ) id -> φ option
+CONST	namespace	nsLift	3	:α -> (α, β, γ) namespace -> (α, β, γ) namespace
+CONST	namespace	nsEmpty	3	:(α, β, γ) namespace
+CONST	namespace	nsDom	3	:(ν, ξ, φ) namespace -> (ν, ξ) id -> bool
+CONST	namespace	nsBindList	3	:(β # γ) list -> (α, β, γ) namespace -> (α, β, γ) namespace
+CONST	namespace	nsBind	3	:β -> γ -> (α, β, γ) namespace -> (α, β, γ) namespace
+CONST	namespace	nsAppend	3	:(α, β, γ) namespace -> (α, β, γ) namespace -> (α, β, γ) namespace
+CONST	namespace	nsAll2	4	:((α, β) id -> γ -> δ -> bool) -> (α, β, γ) namespace -> (α, β, δ) namespace -> bool
+CONST	namespace	nsAll	3	:((α, β) id -> γ -> bool) -> (α, β, γ) namespace -> bool
+CONST	namespace	namespace_size	3	:(ν -> num) -> (ξ -> num) -> (φ -> num) -> (ν, ξ, φ) namespace -> num
+CONST	namespace	namespace_CONS	3	:('b2 # 'b3) list # ('b1 # ('b1, 'b2, 'b3) namespace) list -> ('b1, 'b2, 'b3) namespace
+CONST	namespace	namespace_CASE	4	:(ν, ξ, φ) namespace -> ((ξ # φ) list -> (ν # (ν, ξ, φ) namespace) list -> α) -> α
+CONST	namespace	namespaceSET3	3	:(ν, ξ, φ) namespace -> φ -> bool
+CONST	namespace	namespaceSET2	3	:(ν, ξ, φ) namespace -> ξ -> bool
+CONST	namespace	namespaceSET1	3	:(ν, ξ, φ) namespace -> ν -> bool
+CONST	namespace	namespaceREL	6	:(ν -> α -> bool) -> (ξ -> β -> bool) -> (φ -> γ -> bool) -> (ν, ξ, φ) namespace -> (α, β, γ) namespace -> bool
+CONST	namespace	namespaceMAP	6	:(ν -> α) -> (ξ -> β) -> (φ -> γ) -> (ν, ξ, φ) namespace -> (α, β, γ) namespace
+CONST	namespace	mk_id	2	:α list -> β -> (α, β) id
+CONST	namespace	id_to_n	2	:(β, α) id -> α
+CONST	namespace	id_to_mods	2	:(α, β) id -> α list
+CONST	namespace	id_size	2	:(ν -> num) -> (ξ -> num) -> (ν, ξ) id -> num
+CONST	namespace	id_CONS	2	:'b2 + 'b1 # ('b1, 'b2) id -> ('b1, 'b2) id
+CONST	namespace	id_CASE	3	:(ν, ξ) id -> (ξ -> α) -> (ν -> (ν, ξ) id -> α) -> α
+CONST	namespace	idSET2	2	:(ν, ξ) id -> ξ -> bool
+CONST	namespace	idSET1	2	:(ν, ξ) id -> ν -> bool
+CONST	namespace	idREL	4	:(ν -> α -> bool) -> (ξ -> β -> bool) -> (ν, ξ) id -> (α, β) id -> bool
+CONST	namespace	idMAP	4	:(ν -> α) -> (ξ -> β) -> (ν, ξ) id -> (α, β) id
+CONST	namespace	alist_to_ns	3	:(β # γ) list -> (α, β, γ) namespace
+CONST	namespace	Short	2	:ξ -> (ν, ξ) id
+CONST	namespace	Long	2	:ν -> (ν, ξ) id -> (ν, ξ) id
+CONST	namespace	Bind	3	:(ξ # φ) list -> (ν # (ν, ξ, φ) namespace) list -> (ν, ξ, φ) namespace
+CONST	ast	word_size_size	0	:word_size -> num
+CONST	ast	word_size_CASE	1	:word_size -> α -> α -> α
+CONST	ast	word_size2num	0	:word_size -> num
+CONST	ast	thunk_op_size	0	:thunk_op -> num
+CONST	ast	thunk_op_REP	0	:thunk_op -> thunk_mode + thunk_mode + unit
+CONST	ast	thunk_op_CONS	0	:thunk_mode + thunk_mode + unit -> thunk_op
+CONST	ast	thunk_op_CASE	1	:thunk_op -> (thunk_mode -> α) -> (thunk_mode -> α) -> α -> α
+CONST	ast	thunk_op_ABS	0	:thunk_mode + thunk_mode + unit -> thunk_op
+CONST	ast	thunk_mode_size	0	:thunk_mode -> num
+CONST	ast	thunk_mode_CASE	1	:thunk_mode -> α -> α -> α
+CONST	ast	thunk_mode2num	0	:thunk_mode -> num
+CONST	ast	test_size	0	:test -> num
+CONST	ast	test_REP	0	:test -> unit + opb + opb
+CONST	ast	test_CONS	0	:unit + opb + opb -> test
+CONST	ast	test_CASE	1	:test -> α -> (opb -> α) -> (opb -> α) -> α
+CONST	ast	test_ABS	0	:unit + opb + opb -> test
+CONST	ast	shift_size	0	:shift -> num
+CONST	ast	shift_CASE	1	:shift -> α -> α -> α -> α -> α
+CONST	ast	shift2num	0	:shift -> num
+CONST	ast	prim_type_size	0	:prim_type -> num
+CONST	ast	prim_type_REP	0	:prim_type -> unit + unit + unit + unit + word_size + unit
+CONST	ast	prim_type_CONS	0	:unit + unit + unit + unit + word_size + unit -> prim_type
+CONST	ast	prim_type_CASE	1	:prim_type -> α -> α -> α -> α -> (word_size -> α) -> α -> α
+CONST	ast	prim_type_ABS	0	:unit + unit + unit + unit + word_size + unit -> prim_type
+CONST	ast	pats_bindings	0	:pat list -> mlstring list -> mlstring list
+CONST	ast	pat_size	0	:pat -> num
+CONST	ast	pat_bindings	0	:pat -> mlstring list -> mlstring list
+CONST	ast	pat_CONS	0	:unit + mlstring + lit + (mlstring, mlstring) id option # pat list + pat + pat # mlstring + pat # ast_t -> pat
+CONST	ast	pat_CASE	1	:pat -> α -> (mlstring -> α) -> (lit -> α) -> ((mlstring, mlstring) id option -> pat list -> α) -> (pat -> α) -> (pat -> mlstring -> α) -> (pat -> ast_t -> α) -> α
+CONST	ast	opb_size	0	:opb -> num
+CONST	ast	opb_CASE	1	:opb -> α -> α -> α -> α -> α
+CONST	ast	opb2num	0	:opb -> num
+CONST	ast	op_size	0	:op -> num
+CONST	ast	op_class_size	0	:op_class -> num
+CONST	ast	op_class_CASE	1	:op_class -> α -> α -> α -> α -> α
+CONST	ast	op_class2num	0	:op_class -> num
+CONST	ast	op_REP	0	:op -> arith # prim_type + prim_type # prim_type + word_size # shift # num + unit + test # prim_type + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + thunk_op + unit + unit + mlstring + unit + unit
+CONST	ast	op_CONS	0	:arith # prim_type + prim_type # prim_type + word_size # shift # num + unit + test # prim_type + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + thunk_op + unit + unit + mlstring + unit + unit -> op
+CONST	ast	op_CASE	1	:op -> (arith -> prim_type -> α) -> (prim_type -> prim_type -> α) -> (word_size -> shift -> num -> α) -> α -> (test -> prim_type -> α) -> α -> α -> α -> α -> α -> α -> α -> α -> α -> α -> α -> α -> α -> α -> α -> α -> α -> α -> α -> α -> α -> α -> α -> α -> α -> α -> α -> α -> α -> α -> α -> α -> (thunk_op -> α) -> α -> α -> (mlstring -> α) -> α -> α -> α
+CONST	ast	op_ABS	0	:arith # prim_type + prim_type # prim_type + word_size # shift # num + unit + test # prim_type + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + unit + thunk_op + unit + unit + mlstring + unit + unit -> op
+CONST	ast	num2word_size	0	:num -> word_size
+CONST	ast	num2thunk_mode	0	:num -> thunk_mode
+CONST	ast	num2shift	0	:num -> shift
+CONST	ast	num2opb	0	:num -> opb
+CONST	ast	num2op_class	0	:num -> op_class
+CONST	ast	num2lop	0	:num -> lop
+CONST	ast	num2arith	0	:num -> arith
+CONST	ast	lop_size	0	:lop -> num
+CONST	ast	lop_CASE	1	:lop -> α -> α -> α
+CONST	ast	lop2num	0	:lop -> num
+CONST	ast	lit_size	0	:lit -> num
+CONST	ast	lit_REP	0	:lit -> int + char + mlstring + word8 + word64 + word64
+CONST	ast	lit_CONS	0	:int + char + mlstring + word8 + word64 + word64 -> lit
+CONST	ast	lit_CASE	1	:lit -> (int -> α) -> (char -> α) -> (mlstring -> α) -> (word8 -> α) -> (word64 -> α) -> (word64 -> α) -> α
+CONST	ast	lit_ABS	0	:int + char + mlstring + word8 + word64 + word64 -> lit
+CONST	ast	getOpClass	0	:op -> op_class
+CONST	ast	exp_size	0	:exp -> num
+CONST	ast	exp_CONS	0	:exp + exp # (pat # exp) list + lit + (mlstring, mlstring) id option # exp list + (mlstring, mlstring) id + mlstring # exp + op # exp list + lop # exp # exp + exp # exp # exp + exp # (pat # exp) list + mlstring option # exp # exp + (mlstring # mlstring # exp) list # exp + exp # ast_t + exp # locs -> exp
+CONST	ast	exp_CASE	1	:exp -> (exp -> α) -> (exp -> (pat # exp) list -> α) -> (lit -> α) -> ((mlstring, mlstring) id option -> exp list -> α) -> ((mlstring, mlstring) id -> α) -> (mlstring -> exp -> α) -> (op -> exp list -> α) -> (lop -> exp -> exp -> α) -> (exp -> exp -> exp -> α) -> (exp -> (pat # exp) list -> α) -> (mlstring option -> exp -> exp -> α) -> ((mlstring # mlstring # exp) list -> exp -> α) -> (exp -> ast_t -> α) -> (exp -> locs -> α) -> α
+CONST	ast	every_exp	0	:(exp -> bool) -> exp -> bool
+CONST	ast	dec_size	0	:dec -> num
+CONST	ast	dec_CONS	0	:locs # pat # exp + locs # (mlstring # mlstring # exp) list + locs # (mlstring list # mlstring # (mlstring # ast_t list) list) list + locs # mlstring list # mlstring # ast_t + locs # mlstring # ast_t list + mlstring # dec list + dec list # dec list + mlstring -> dec
+CONST	ast	dec_CASE	1	:dec -> (locs -> pat -> exp -> α) -> (locs -> (mlstring # mlstring # exp) list -> α) -> (locs -> (mlstring list # mlstring # (mlstring # ast_t list) list) list -> α) -> (locs -> mlstring list -> mlstring -> ast_t -> α) -> (locs -> mlstring -> ast_t list -> α) -> (mlstring -> dec list -> α) -> (dec list -> dec list -> α) -> (mlstring -> α) -> α
+CONST	ast	ast_t_size	0	:ast_t -> num
+CONST	ast	ast_t_CONS	0	:mlstring + ast_t # ast_t + ast_t list + ast_t list # (mlstring, mlstring) id -> ast_t
+CONST	ast	ast_t_CASE	1	:ast_t -> (mlstring -> α) -> (ast_t -> ast_t -> α) -> (ast_t list -> α) -> (ast_t list -> (mlstring, mlstring) id -> α) -> α
+CONST	ast	arith_size	0	:arith -> num
+CONST	ast	arith_CASE	1	:arith -> α -> α -> α -> α -> α -> α -> α -> α -> α -> α -> α -> α -> α -> α
+CONST	ast	arith2num	0	:arith -> num
+CONST	ast	XorAw8Str_unsafe	0	:op
+CONST	ast	Xor	0	:arith
+CONST	ast	WordT	0	:word_size -> prim_type
+CONST	ast	Word8	0	:word8 -> lit
+CONST	ast	Word64	0	:word64 -> lit
+CONST	ast	W8	0	:word_size
+CONST	ast	W64	0	:word_size
+CONST	ast	Vsub_unsafe	0	:op
+CONST	ast	Vsub	0	:op
+CONST	ast	Vlength	0	:op
+CONST	ast	VfromList	0	:op
+CONST	ast	Var	0	:(mlstring, mlstring) id -> exp
+CONST	ast	UpdateThunk	0	:thunk_mode -> thunk_op
+CONST	ast	ThunkOp	0	:thunk_op -> op
+CONST	ast	Test	0	:test -> prim_type -> op
+CONST	ast	Tannot	0	:exp -> ast_t -> exp
+CONST	ast	Sub	0	:arith
+CONST	ast	Strsub	0	:op
+CONST	ast	Strlen	0	:op
+CONST	ast	Strcat	0	:op
+CONST	ast	StrT	0	:prim_type
+CONST	ast	StrLit	0	:mlstring -> lit
+CONST	ast	Sqrt	0	:arith
+CONST	ast	Simple	0	:op_class
+CONST	ast	Shift	0	:word_size -> shift -> num -> op
+CONST	ast	Ror	0	:shift
+CONST	ast	Raise	0	:exp -> exp
+CONST	ast	Pvar	0	:mlstring -> pat
+CONST	ast	Ptannot	0	:pat -> ast_t -> pat
+CONST	ast	Pref	0	:pat -> pat
+CONST	ast	Plit	0	:lit -> pat
+CONST	ast	Pcon	0	:(mlstring, mlstring) id option -> pat list -> pat
+CONST	ast	Pas	0	:pat -> mlstring -> pat
+CONST	ast	Pany	0	:pat
+CONST	ast	Orelse	0	:lop
+CONST	ast	Or	0	:arith
+CONST	ast	Opref	0	:op
+CONST	ast	Opderef	0	:op
+CONST	ast	Opassign	0	:op
+CONST	ast	Opapp	0	:op
+CONST	ast	NotEvaluated	0	:thunk_mode
+CONST	ast	Not	0	:arith
+CONST	ast	Neg	0	:arith
+CONST	ast	Mul	0	:arith
+CONST	ast	Mod	0	:arith
+CONST	ast	Mat	0	:exp -> (pat # exp) list -> exp
+CONST	ast	Lt	0	:opb
+CONST	ast	Lsr	0	:shift
+CONST	ast	Lsl	0	:shift
+CONST	ast	Log	0	:lop -> exp -> exp -> exp
+CONST	ast	Lit	0	:lit -> exp
+CONST	ast	ListAppend	0	:op
+CONST	ast	Letrec	0	:(mlstring # mlstring # exp) list -> exp -> exp
+CONST	ast	Let	0	:mlstring option -> exp -> exp -> exp
+CONST	ast	Leq	0	:opb
+CONST	ast	Lannot	0	:exp -> locs -> exp
+CONST	ast	IntT	0	:prim_type
+CONST	ast	IntLit	0	:int -> lit
+CONST	ast	Implode	0	:op
+CONST	ast	If	0	:exp -> exp -> exp -> exp
+CONST	ast	Handle	0	:exp -> (pat # exp) list -> exp
+CONST	ast	Gt	0	:opb
+CONST	ast	Geq	0	:opb
+CONST	ast	FunApp	0	:op_class
+CONST	ast	Fun	0	:mlstring -> exp -> exp
+CONST	ast	FromTo	0	:prim_type -> prim_type -> op
+CONST	ast	ForceThunk	0	:thunk_op
+CONST	ast	Force	0	:op_class
+CONST	ast	Float64T	0	:prim_type
+CONST	ast	Float64	0	:word64 -> lit
+CONST	ast	FMA	0	:arith
+CONST	ast	FFI	0	:mlstring -> op
+CONST	ast	Explode	0	:op
+CONST	ast	Evaluated	0	:thunk_mode
+CONST	ast	EvalOp	0	:op_class
+CONST	ast	Eval	0	:op
+CONST	ast	Equality	0	:op
+CONST	ast	Equal	0	:test
+CONST	ast	Env_id	0	:op
+CONST	ast	Dtype	0	:locs -> (mlstring list # mlstring # (mlstring # ast_t list) list) list -> dec
+CONST	ast	Dtabbrev	0	:locs -> mlstring list -> mlstring -> ast_t -> dec
+CONST	ast	Dmod	0	:mlstring -> dec list -> dec
+CONST	ast	Dlocal	0	:dec list -> dec list -> dec
+CONST	ast	Dletrec	0	:locs -> (mlstring # mlstring # exp) list -> dec
+CONST	ast	Dlet	0	:locs -> pat -> exp -> dec
+CONST	ast	Div	0	:arith
+CONST	ast	Dexn	0	:locs -> mlstring -> ast_t list -> dec
+CONST	ast	Denv	0	:mlstring -> dec
+CONST	ast	CopyStrStr	0	:op
+CONST	ast	CopyStrAw8	0	:op
+CONST	ast	CopyAw8Str	0	:op
+CONST	ast	CopyAw8Aw8	0	:op
+CONST	ast	ConfigGC	0	:op
+CONST	ast	Con	0	:(mlstring, mlstring) id option -> exp list -> exp
+CONST	ast	Compare	0	:opb -> test
+CONST	ast	CharT	0	:prim_type
+CONST	ast	Char	0	:char -> lit
+CONST	ast	BoolT	0	:prim_type
+CONST	ast	Aw8update_unsafe	0	:op
+CONST	ast	Aw8update	0	:op
+CONST	ast	Aw8sub_unsafe	0	:op
+CONST	ast	Aw8sub	0	:op
+CONST	ast	Aw8length	0	:op
+CONST	ast	Aw8alloc	0	:op
+CONST	ast	Aupdate_unsafe	0	:op
+CONST	ast	Aupdate	0	:op
+CONST	ast	Atvar	0	:mlstring -> ast_t
+CONST	ast	Attup	0	:ast_t list -> ast_t
+CONST	ast	Atfun	0	:ast_t -> ast_t -> ast_t
+CONST	ast	Atapp	0	:ast_t list -> (mlstring, mlstring) id -> ast_t
+CONST	ast	Asub_unsafe	0	:op
+CONST	ast	Asub	0	:op
+CONST	ast	Asr	0	:shift
+CONST	ast	Arith	0	:arith -> prim_type -> op
+CONST	ast	App	0	:op -> exp list -> exp
+CONST	ast	Andalso	0	:lop
+CONST	ast	And	0	:arith
+CONST	ast	AltCompare	0	:opb -> test
+CONST	ast	AllocThunk	0	:thunk_mode -> thunk_op
+CONST	ast	Alength	0	:op
+CONST	ast	Add	0	:arith
+CONST	ast	Abs	0	:arith
+CONST	ast	AallocFixed	0	:op
+CONST	ast	AallocEmpty	0	:op
+CONST	ast	Aalloc	0	:op
+CONST	fpSem	num2fp_uop	0	:num -> fp_uop
+CONST	fpSem	num2fp_top	0	:num -> fp_top
+CONST	fpSem	num2fp_cmp	0	:num -> fp_cmp
+CONST	fpSem	num2fp_bop	0	:num -> fp_bop
+CONST	fpSem	fp_uop_size	0	:fp_uop -> num
+CONST	fpSem	fp_uop_CASE	1	:fp_uop -> α -> α -> α -> α
+CONST	fpSem	fp_uop2num	0	:fp_uop -> num
+CONST	fpSem	fp_top_size	0	:fp_top -> num
+CONST	fpSem	fp_top_CASE	1	:fp_top -> α -> α
+CONST	fpSem	fp_top2num	0	:fp_top -> num
+CONST	fpSem	fp_cmp_size	0	:fp_cmp -> num
+CONST	fpSem	fp_cmp_CASE	1	:fp_cmp -> α -> α -> α -> α -> α -> α
+CONST	fpSem	fp_cmp2num	0	:fp_cmp -> num
+CONST	fpSem	fp_cmp	0	:opb -> word64 -> word64 -> bool
+CONST	fpSem	fp_bop_size	0	:fp_bop -> num
+CONST	fpSem	fp_bop_CASE	1	:fp_bop -> α -> α -> α -> α -> α
+CONST	fpSem	fp_bop2num	0	:fp_bop -> num
+CONST	fpSem	FP_Sub	0	:fp_bop
+CONST	fpSem	FP_Sqrt	0	:fp_uop
+CONST	fpSem	FP_Neg	0	:fp_uop
+CONST	fpSem	FP_Mul	0	:fp_bop
+CONST	fpSem	FP_LessEqual	0	:fp_cmp
+CONST	fpSem	FP_Less	0	:fp_cmp
+CONST	fpSem	FP_GreaterEqual	0	:fp_cmp
+CONST	fpSem	FP_Greater	0	:fp_cmp
+CONST	fpSem	FP_Fma	0	:fp_top
+CONST	fpSem	FP_Equal	0	:fp_cmp
+CONST	fpSem	FP_Div	0	:fp_bop
+CONST	fpSem	FP_Add	0	:fp_bop
+CONST	fpSem	FP_Abs	0	:fp_uop
+CONST	semanticPrimitives	xor_bytes	0	:word8 list -> word8 list -> word8 list option
+CONST	semanticPrimitives	ws_to_chars	0	:word8 list -> string
+CONST	semanticPrimitives	vs_to_string	0	:v list -> mlstring option
+CONST	semanticPrimitives	v_to_word8_list	0	:v -> word8 list option
+CONST	semanticPrimitives	v_to_word8	0	:v -> word8 option
+CONST	semanticPrimitives	v_to_word64_list	0	:v -> word64 list option
+CONST	semanticPrimitives	v_to_word64	0	:v -> word64 option
+CONST	semanticPrimitives	v_to_list	0	:v -> v list option
+CONST	semanticPrimitives	v_to_char_list	0	:v -> string option
+CONST	semanticPrimitives	v_size	0	:v -> num
+CONST	semanticPrimitives	v_CONS	0	:lit + stamp option # v list + v sem_env # mlstring # exp + v sem_env # (mlstring # mlstring # exp) list # mlstring + bool # num + v list + v sem_env # num # num -> v
+CONST	semanticPrimitives	v_CASE	1	:v -> (lit -> α) -> (stamp option -> v list -> α) -> (v sem_env -> mlstring -> exp -> α) -> (v sem_env -> (mlstring # mlstring # exp) list -> mlstring -> α) -> (bool -> num -> α) -> (v list -> α) -> (v sem_env -> num # num -> α) -> α
+CONST	semanticPrimitives	update_thunk	0	:v list -> v store_v list -> v list -> v store_v list option
+CONST	semanticPrimitives	thunk_op	2	:v store_v list # 'ffi ffi_state -> thunk_op -> v list -> ((v store_v list # 'ffi ffi_state) # (v, α) result) option
+CONST	semanticPrimitives	the_Litv_Word8	0	:v -> word8
+CONST	semanticPrimitives	the_Litv_Word64	0	:v -> word64
+CONST	semanticPrimitives	the_Litv_IntLit	0	:v -> int
+CONST	semanticPrimitives	the_Litv_Float64	0	:v -> word64
+CONST	semanticPrimitives	the_Litv_Char	0	:v -> char
+CONST	semanticPrimitives	the_Boolv	0	:v -> bool
+CONST	semanticPrimitives	subscript_stamp	0	:stamp
+CONST	semanticPrimitives	sub_exn_v	0	:v
+CONST	semanticPrimitives	store_v_size	1	:(α -> num) -> α store_v -> num
+CONST	semanticPrimitives	store_v_same_type	1	:α store_v -> α store_v -> bool
+CONST	semanticPrimitives	store_v_REP	1	:'b1 store_v -> 'b1 + word8 list + 'b1 list + thunk_mode # 'b1
+CONST	semanticPrimitives	store_v_CONS	1	:'b1 + word8 list + 'b1 list + thunk_mode # 'b1 -> 'b1 store_v
+CONST	semanticPrimitives	store_v_CASE	2	:α store_v -> (α -> β) -> (word8 list -> β) -> (α list -> β) -> (thunk_mode -> α -> β) -> β
+CONST	semanticPrimitives	store_v_ABS	1	:'b1 + word8 list + 'b1 list + thunk_mode # 'b1 -> 'b1 store_v
+CONST	semanticPrimitives	store_vSET	1	:α store_v -> α -> bool
+CONST	semanticPrimitives	store_vREL	2	:(α -> β -> bool) -> α store_v -> β store_v -> bool
+CONST	semanticPrimitives	store_vMAP	2	:(α -> β) -> α store_v -> β store_v
+CONST	semanticPrimitives	store_lookup	1	:num -> α store_v list -> α store_v option
+CONST	semanticPrimitives	store_assign	1	:num -> α store_v -> α store_v list -> α store_v list option
+CONST	semanticPrimitives	store_alloc	1	:α store_v -> α store_v list -> α store_v list # num
+CONST	semanticPrimitives	state_size	1	:('ffi -> num) -> 'ffi state -> num
+CONST	semanticPrimitives	state_REP	1	:'b1 state -> num # v store_v list # 'b1 ffi_state # num # num # eval_state option
+CONST	semanticPrimitives	state_CONS	1	:num # v store_v list # 'b1 ffi_state # num # num # eval_state option -> 'b1 state
+CONST	semanticPrimitives	state_CASE	2	:'ffi state -> (num ->  v store_v list -> 'ffi ffi_state -> num -> num -> eval_state option -> α) -> α
+CONST	semanticPrimitives	state_ABS	1	:num # v store_v list # 'b1 ffi_state # num # num # eval_state option -> 'b1 state
+CONST	semanticPrimitives	stamp_size	0	:stamp -> num
+CONST	semanticPrimitives	stamp_REP	0	:stamp -> mlstring # num + num
+CONST	semanticPrimitives	stamp_CONS	0	:mlstring # num + num -> stamp
+CONST	semanticPrimitives	stamp_CASE	1	:stamp -> (mlstring -> num -> α) -> (num -> α) -> α
+CONST	semanticPrimitives	stamp_ABS	0	:mlstring # num + num -> stamp
+CONST	semanticPrimitives	shift8_lookup	0	:shift -> word8 -> num -> word8
+CONST	semanticPrimitives	shift64_lookup	0	:shift -> word64 -> num -> word64
+CONST	semanticPrimitives	sem_env_size	1	:(φ -> num) -> φ sem_env -> num
+CONST	semanticPrimitives	sem_env_REP	1	:'b1 sem_env -> (mlstring, mlstring, 'b1) namespace # (mlstring, mlstring, num # stamp) namespace
+CONST	semanticPrimitives	sem_env_CONS	1	:(mlstring, mlstring, 'b1) namespace # (mlstring, mlstring, num # stamp) namespace -> 'b1 sem_env
+CONST	semanticPrimitives	sem_env_CASE	2	:φ sem_env -> ((mlstring, mlstring, φ) namespace ->  (mlstring, mlstring, num # stamp) namespace -> α) -> α
+CONST	semanticPrimitives	sem_env_ABS	1	:(mlstring, mlstring, 'b1) namespace # (mlstring, mlstring, num # stamp) namespace -> 'b1 sem_env
+CONST	semanticPrimitives	sem_envSET	1	:φ sem_env -> φ -> bool
+CONST	semanticPrimitives	sem_envREL	2	:(φ -> α -> bool) -> φ sem_env -> α sem_env -> bool
+CONST	semanticPrimitives	sem_envMAP	2	:(φ -> α) -> φ sem_env -> α sem_env
+CONST	semanticPrimitives	same_type	0	:stamp -> stamp -> bool
+CONST	semanticPrimitives	same_ctor	0	:stamp -> stamp -> bool
+CONST	semanticPrimitives	result_size	2	:(α -> num) -> (β -> num) -> (α, β) result -> num
+CONST	semanticPrimitives	result_REP	2	:('b1, 'b2) result -> 'b1 + 'b2 error_result
+CONST	semanticPrimitives	result_CONS	2	:'b1 + 'b2 error_result -> ('b1, 'b2) result
+CONST	semanticPrimitives	result_CASE	3	:(α, β) result -> (α -> γ) -> (β error_result -> γ) -> γ
+CONST	semanticPrimitives	result_ABS	2	:'b1 + 'b2 error_result -> ('b1, 'b2) result
+CONST	semanticPrimitives	resultSET2	2	:(α, β) result -> β -> bool
+CONST	semanticPrimitives	resultSET1	2	:(α, β) result -> α -> bool
+CONST	semanticPrimitives	resultREL	4	:(α -> γ -> bool) -> (β -> δ -> bool) -> (α, β) result -> (γ, δ) result -> bool
+CONST	semanticPrimitives	resultMAP	4	:(α -> γ) -> (β -> δ) -> (α, β) result -> (γ, δ) result
+CONST	semanticPrimitives	reset_env_generation	0	:eval_state option -> eval_state option -> eval_state option
+CONST	semanticPrimitives	recordtype.state.seldef.refs_fupd	1	:(v store_v list -> v store_v list) -> 'ffi state -> 'ffi state
+CONST	semanticPrimitives	recordtype.state.seldef.refs	1	:'ffi state -> v store_v list
+CONST	semanticPrimitives	recordtype.state.seldef.next_type_stamp_fupd	1	:(num -> num) -> 'ffi state -> 'ffi state
+CONST	semanticPrimitives	recordtype.state.seldef.next_type_stamp	1	:'ffi state -> num
+CONST	semanticPrimitives	recordtype.state.seldef.next_exn_stamp_fupd	1	:(num -> num) -> 'ffi state -> 'ffi state
+CONST	semanticPrimitives	recordtype.state.seldef.next_exn_stamp	1	:'ffi state -> num
+CONST	semanticPrimitives	recordtype.state.seldef.ffi_fupd	2	:('ffi ffi_state -> 'ffi0 ffi_state) -> 'ffi state -> 'ffi0 state
+CONST	semanticPrimitives	recordtype.state.seldef.ffi	1	:'ffi state -> 'ffi ffi_state
+CONST	semanticPrimitives	recordtype.state.seldef.eval_state_fupd	1	:(eval_state option -> eval_state option) -> 'ffi state -> 'ffi state
+CONST	semanticPrimitives	recordtype.state.seldef.eval_state	1	:'ffi state -> eval_state option
+CONST	semanticPrimitives	recordtype.state.seldef.clock_fupd	1	:(num -> num) -> 'ffi state -> 'ffi state
+CONST	semanticPrimitives	recordtype.state.seldef.clock	1	:'ffi state -> num
+CONST	semanticPrimitives	recordtype.state	1	:num -> v store_v list -> 'ffi ffi_state -> num -> num -> eval_state option -> 'ffi state
+CONST	semanticPrimitives	recordtype.sem_env.seldef.v_fupd	2	:((mlstring, mlstring, φ) namespace -> (mlstring, mlstring, χ) namespace) -> φ sem_env -> χ sem_env
+CONST	semanticPrimitives	recordtype.sem_env.seldef.v	1	:φ sem_env -> (mlstring, mlstring, φ) namespace
+CONST	semanticPrimitives	recordtype.sem_env.seldef.c_fupd	1	:((mlstring, mlstring, num # stamp) namespace ->  (mlstring, mlstring, num # stamp) namespace) -> φ sem_env -> φ sem_env
+CONST	semanticPrimitives	recordtype.sem_env.seldef.c	1	:φ sem_env -> (mlstring, mlstring, num # stamp) namespace
+CONST	semanticPrimitives	recordtype.sem_env	1	:(mlstring, mlstring, φ) namespace -> (mlstring, mlstring, num # stamp) namespace -> φ sem_env
+CONST	semanticPrimitives	recordtype.eval_oracle_state.seldef.oracle_fupd	0	:((num -> (num # num) # v # dec list) -> num -> (num # num) # v # dec list) -> eval_oracle_state -> eval_oracle_state
+CONST	semanticPrimitives	recordtype.eval_oracle_state.seldef.oracle	0	:eval_oracle_state -> num -> (num # num) # v # dec list
+CONST	semanticPrimitives	recordtype.eval_oracle_state.seldef.generation_fupd	0	:(num -> num) -> eval_oracle_state -> eval_oracle_state
+CONST	semanticPrimitives	recordtype.eval_oracle_state.seldef.generation	0	:eval_oracle_state -> num
+CONST	semanticPrimitives	recordtype.eval_oracle_state.seldef.envs_fupd	0	:(v sem_env list list -> v sem_env list list) -> eval_oracle_state -> eval_oracle_state
+CONST	semanticPrimitives	recordtype.eval_oracle_state.seldef.envs	0	:eval_oracle_state -> v sem_env list list
+CONST	semanticPrimitives	recordtype.eval_oracle_state.seldef.custom_do_eval_fupd	0	:((v list ->   (num -> (num # num) # v # dec list) ->   ((num # num) # (num -> (num # num) # v # dec list) # dec list) option) ->  v list ->  (num -> (num # num) # v # dec list) ->  ((num # num) # (num -> (num # num) # v # dec list) # dec list) option) -> eval_oracle_state -> eval_oracle_state
+CONST	semanticPrimitives	recordtype.eval_oracle_state.seldef.custom_do_eval	0	:eval_oracle_state -> v list -> (num -> (num # num) # v # dec list) -> ((num # num) # (num -> (num # num) # v # dec list) # dec list) option
+CONST	semanticPrimitives	recordtype.eval_oracle_state	0	:(num -> (num # num) # v # dec list) -> (v list ->  (num -> (num # num) # v # dec list) ->  ((num # num) # (num -> (num # num) # v # dec list) # dec list) option) -> v sem_env list list -> num -> eval_oracle_state
+CONST	semanticPrimitives	recordtype.eval_decs_state.seldef.env_id_counter_fupd	0	:(num # num # num -> num # num # num) -> eval_decs_state -> eval_decs_state
+CONST	semanticPrimitives	recordtype.eval_decs_state.seldef.env_id_counter	0	:eval_decs_state -> num # num # num
+CONST	semanticPrimitives	recordtype.eval_decs_state.seldef.decode_decs_fupd	0	:((v -> dec list option) -> v -> dec list option) -> eval_decs_state -> eval_decs_state
+CONST	semanticPrimitives	recordtype.eval_decs_state.seldef.decode_decs	0	:eval_decs_state -> v -> dec list option
+CONST	semanticPrimitives	recordtype.eval_decs_state.seldef.compiler_state_fupd	0	:(v -> v) -> eval_decs_state -> eval_decs_state
+CONST	semanticPrimitives	recordtype.eval_decs_state.seldef.compiler_state	0	:eval_decs_state -> v
+CONST	semanticPrimitives	recordtype.eval_decs_state.seldef.compiler_fupd	0	:(((num # num) # v # dec list -> (v # word8 list # word64 list) option) ->  (num # num) # v # dec list -> (v # word8 list # word64 list) option) -> eval_decs_state -> eval_decs_state
+CONST	semanticPrimitives	recordtype.eval_decs_state.seldef.compiler	0	:eval_decs_state -> (num # num) # v # dec list -> (v # word8 list # word64 list) option
+CONST	semanticPrimitives	recordtype.eval_decs_state	0	:((num # num) # v # dec list -> (v # word8 list # word64 list) option) -> v -> num # num # num -> (v -> dec list option) -> eval_decs_state
+CONST	semanticPrimitives	pmatch_list	0	:(mlstring, mlstring, num # stamp) namespace -> v store_v list -> pat list -> v list -> (mlstring # v) list -> (mlstring # v) list match_result
+CONST	semanticPrimitives	pmatch	0	:(mlstring, mlstring, num # stamp) namespace -> v store_v list -> pat -> v -> (mlstring # v) list -> (mlstring # v) list match_result
+CONST	semanticPrimitives	one_con_check	0	:(mlstring, mlstring, num # stamp) namespace -> exp -> bool
+CONST	semanticPrimitives	num_cmp	0	:opb -> num -> num -> bool
+CONST	semanticPrimitives	nat_to_v	0	:num -> v
+CONST	semanticPrimitives	maybe_all_list	1	:α option list -> α list option
+CONST	semanticPrimitives	match_result_size	1	:(α -> num) -> α match_result -> num
+CONST	semanticPrimitives	match_result_REP	1	:'b1 match_result -> unit + unit + 'b1
+CONST	semanticPrimitives	match_result_CONS	1	:unit + unit + 'b1 -> 'b1 match_result
+CONST	semanticPrimitives	match_result_CASE	2	:α match_result -> β -> β -> (α -> β) -> β
+CONST	semanticPrimitives	match_result_ABS	1	:unit + unit + 'b1 -> 'b1 match_result
+CONST	semanticPrimitives	match_resultSET	1	:α match_result -> α -> bool
+CONST	semanticPrimitives	match_resultREL	2	:(α -> β -> bool) -> α match_result -> β match_result -> bool
+CONST	semanticPrimitives	match_resultMAP	2	:(α -> β) -> α match_result -> β match_result
+CONST	semanticPrimitives	lookup_env	0	:eval_oracle_state -> num # num -> v sem_env option
+CONST	semanticPrimitives	lit_same_type	0	:lit -> lit -> bool
+CONST	semanticPrimitives	list_type_num	0	:num
+CONST	semanticPrimitives	list_to_v	0	:v list -> v
+CONST	semanticPrimitives	int_cmp	0	:opb -> int -> int -> bool
+CONST	semanticPrimitives	find_recfun	2	:mlstring -> (mlstring # α # β) list -> (α # β) option
+CONST	semanticPrimitives	extend_dec_env	0	:v sem_env -> v sem_env -> v sem_env
+CONST	semanticPrimitives	exp_or_val_size	0	:exp_or_val -> num
+CONST	semanticPrimitives	exp_or_val_REP	0	:exp_or_val -> exp + v
+CONST	semanticPrimitives	exp_or_val_CONS	0	:exp + v -> exp_or_val
+CONST	semanticPrimitives	exp_or_val_CASE	1	:exp_or_val -> (exp -> α) -> (v -> α) -> α
+CONST	semanticPrimitives	exp_or_val_ABS	0	:exp + v -> exp_or_val
+CONST	semanticPrimitives	eval_state_size	0	:eval_state -> num
+CONST	semanticPrimitives	eval_state_REP	0	:eval_state -> eval_decs_state + eval_oracle_state
+CONST	semanticPrimitives	eval_state_CONS	0	:eval_decs_state + eval_oracle_state -> eval_state
+CONST	semanticPrimitives	eval_state_CASE	1	:eval_state -> (eval_decs_state -> α) -> (eval_oracle_state -> α) -> α
+CONST	semanticPrimitives	eval_state_ABS	0	:eval_decs_state + eval_oracle_state -> eval_state
+CONST	semanticPrimitives	eval_oracle_state_size	0	:eval_oracle_state -> num
+CONST	semanticPrimitives	eval_oracle_state_REP	0	:eval_oracle_state -> (num -> (num # num) # v # dec list) # (v list ->  (num -> (num # num) # v # dec list) ->  ((num # num) # (num -> (num # num) # v # dec list) # dec list) option) # v sem_env list list # num
+CONST	semanticPrimitives	eval_oracle_state_CONS	0	:(num -> (num # num) # v # dec list) # (v list ->  (num -> (num # num) # v # dec list) ->  ((num # num) # (num -> (num # num) # v # dec list) # dec list) option) # v sem_env list list # num -> eval_oracle_state
+CONST	semanticPrimitives	eval_oracle_state_CASE	1	:eval_oracle_state -> ((num -> (num # num) # v # dec list) ->  (v list ->   (num -> (num # num) # v # dec list) ->   ((num # num) # (num -> (num # num) # v # dec list) # dec list) option) ->  v sem_env list list -> num -> α) -> α
+CONST	semanticPrimitives	eval_oracle_state_ABS	0	:(num -> (num # num) # v # dec list) # (v list ->  (num -> (num # num) # v # dec list) ->  ((num # num) # (num -> (num # num) # v # dec list) # dec list) option) # v sem_env list list # num -> eval_oracle_state
+CONST	semanticPrimitives	eval_decs_state_size	0	:eval_decs_state -> num
+CONST	semanticPrimitives	eval_decs_state_REP	0	:eval_decs_state -> ((num # num) # v # dec list -> (v # word8 list # word64 list) option) # v # (num # num # num) # (v -> dec list option)
+CONST	semanticPrimitives	eval_decs_state_CONS	0	:((num # num) # v # dec list -> (v # word8 list # word64 list) option) # v # (num # num # num) # (v -> dec list option) -> eval_decs_state
+CONST	semanticPrimitives	eval_decs_state_CASE	1	:eval_decs_state -> (((num # num) # v # dec list -> (v # word8 list # word64 list) option) ->  v -> num # num # num -> (v -> dec list option) -> α) -> α
+CONST	semanticPrimitives	eval_decs_state_ABS	0	:((num # num) # v # dec list -> (v # word8 list # word64 list) option) # v # (num # num # num) # (v -> dec list option) -> eval_decs_state
+CONST	semanticPrimitives	error_result_size	1	:(α -> num) -> α error_result -> num
+CONST	semanticPrimitives	error_result_REP	1	:'b1 error_result -> 'b1 + abort
+CONST	semanticPrimitives	error_result_CONS	1	:'b1 + abort -> 'b1 error_result
+CONST	semanticPrimitives	error_result_CASE	2	:α error_result -> (α -> β) -> (abort -> β) -> β
+CONST	semanticPrimitives	error_result_ABS	1	:'b1 + abort -> 'b1 error_result
+CONST	semanticPrimitives	error_resultSET	1	:α error_result -> α -> bool
+CONST	semanticPrimitives	error_resultREL	2	:(α -> β -> bool) -> α error_result -> β error_result -> bool
+CONST	semanticPrimitives	error_resultMAP	2	:(α -> β) -> α error_result -> β error_result
+CONST	semanticPrimitives	eq_result_size	0	:eq_result -> num
+CONST	semanticPrimitives	eq_result_REP	0	:eq_result -> bool + unit
+CONST	semanticPrimitives	eq_result_CONS	0	:bool + unit -> eq_result
+CONST	semanticPrimitives	eq_result_CASE	1	:eq_result -> (bool -> α) -> α -> α
+CONST	semanticPrimitives	eq_result_ABS	0	:bool + unit -> eq_result
+CONST	semanticPrimitives	do_test	0	:test -> prim_type -> v -> v -> eq_result
+CONST	semanticPrimitives	do_opapp	0	:v list -> (v sem_env # exp) option
+CONST	semanticPrimitives	do_log	0	:lop -> v -> exp -> exp_or_val option
+CONST	semanticPrimitives	do_if	1	:v -> α -> α -> α option
+CONST	semanticPrimitives	do_eval	0	:v list -> eval_state option -> (v sem_env # dec list # eval_state option) option
+CONST	semanticPrimitives	do_eq_list	0	:v list -> v list -> eq_result
+CONST	semanticPrimitives	do_eq	0	:v -> v -> eq_result
+CONST	semanticPrimitives	do_conversion	0	:v -> prim_type -> prim_type -> (v + v) option
+CONST	semanticPrimitives	do_con_check	0	:(mlstring, mlstring, num # stamp) namespace -> (mlstring, mlstring) id option -> num -> bool
+CONST	semanticPrimitives	do_arith	0	:arith -> prim_type -> v list -> (v + v) option
+CONST	semanticPrimitives	do_app	1	:v store_v list # 'ffi ffi_state -> op -> v list -> ((v store_v list # 'ffi ffi_state) # (v, v) result) option
+CONST	semanticPrimitives	div_stamp	0	:stamp
+CONST	semanticPrimitives	div_exn_v	0	:v
+CONST	semanticPrimitives	dest_thunk_ret_size	0	:dest_thunk_ret -> num
+CONST	semanticPrimitives	dest_thunk_ret_REP	0	:dest_thunk_ret -> unit + unit + thunk_mode # v
+CONST	semanticPrimitives	dest_thunk_ret_CONS	0	:unit + unit + thunk_mode # v -> dest_thunk_ret
+CONST	semanticPrimitives	dest_thunk_ret_CASE	1	:dest_thunk_ret -> α -> α -> (thunk_mode -> v -> α) -> α
+CONST	semanticPrimitives	dest_thunk_ret_ABS	0	:unit + unit + thunk_mode # v -> dest_thunk_ret
+CONST	semanticPrimitives	dest_thunk	0	:v list -> v store_v list -> dest_thunk_ret
+CONST	semanticPrimitives	dest_Litv	0	:v -> lit option
+CONST	semanticPrimitives	declare_env	0	:eval_state option -> v sem_env -> (v # eval_state option) option
+CONST	semanticPrimitives	ctor_same_type	0	:stamp option -> stamp option -> bool
+CONST	semanticPrimitives	copy_array	1	:α list # int -> int -> (α list # int) option -> α list option
+CONST	semanticPrimitives	concrete_v_list	0	:v list -> bool
+CONST	semanticPrimitives	concrete_v	0	:v -> bool
+CONST	semanticPrimitives	compiler_agrees	0	:((num # num) # v # dec list -> (v # word8 list # word64 list) option) -> (num # num) # v # dec list -> v # v # v -> bool
+CONST	semanticPrimitives	combine_dec_result	1	:v sem_env -> (v sem_env, α) result -> (v sem_env, α) result
+CONST	semanticPrimitives	chr_stamp	0	:stamp
+CONST	semanticPrimitives	chr_exn_v	0	:v
+CONST	semanticPrimitives	check_type	0	:prim_type -> v -> bool
+CONST	semanticPrimitives	check_dup_ctors	0	:mlstring list # mlstring # (mlstring # ast_t list) list -> bool
+CONST	semanticPrimitives	chars_to_ws	0	:string -> word8 list
+CONST	semanticPrimitives	can_pmatch_all	0	:(mlstring, mlstring, num # stamp) namespace -> v store_v list -> pat list -> v -> bool
+CONST	semanticPrimitives	build_tdefs	0	:num -> (mlstring list # mlstring # (mlstring # ast_t list) list) list -> (mlstring, mlstring, num # stamp) namespace
+CONST	semanticPrimitives	build_rec_env	0	:(mlstring # mlstring # exp) list -> v sem_env -> (mlstring, mlstring, v) namespace -> (mlstring, mlstring, v) namespace
+CONST	semanticPrimitives	build_conv	0	:(mlstring, mlstring, num # stamp) namespace -> (mlstring, mlstring) id option -> v list -> v option
+CONST	semanticPrimitives	build_constrs	1	:num -> (mlstring # α list) list -> (mlstring # num # stamp) list
+CONST	semanticPrimitives	bool_type_num	0	:num
+CONST	semanticPrimitives	bind_stamp	0	:stamp
+CONST	semanticPrimitives	bind_exn_v	0	:v
+CONST	semanticPrimitives	add_env_generation	0	:eval_oracle_state -> eval_oracle_state
+CONST	semanticPrimitives	add_decs_generation	0	:eval_decs_state -> eval_decs_state
+CONST	semanticPrimitives	abort_size	0	:abort -> num
+CONST	semanticPrimitives	abort_REP	0	:abort -> unit + unit + final_event
+CONST	semanticPrimitives	abort_CONS	0	:unit + unit + final_event -> abort
+CONST	semanticPrimitives	abort_CASE	1	:abort -> α -> α -> (final_event -> α) -> α
+CONST	semanticPrimitives	abort_ABS	0	:unit + unit + final_event -> abort
+CONST	semanticPrimitives	W8array	1	:word8 list -> α store_v
+CONST	semanticPrimitives	Vectorv	0	:v list -> v
+CONST	semanticPrimitives	Varray	1	:α list -> α store_v
+CONST	semanticPrimitives	Val	0	:v -> exp_or_val
+CONST	semanticPrimitives	TypeStamp	0	:mlstring -> num -> stamp
+CONST	semanticPrimitives	Thunk	1	:thunk_mode -> α -> α store_v
+CONST	semanticPrimitives	Rval	2	:α -> (α, β) result
+CONST	semanticPrimitives	Rtype_error	0	:abort
+CONST	semanticPrimitives	Rtimeout_error	0	:abort
+CONST	semanticPrimitives	Rraise	1	:α -> α error_result
+CONST	semanticPrimitives	Rffi_error	0	:final_event -> abort
+CONST	semanticPrimitives	Rerr	2	:β error_result -> (α, β) result
+CONST	semanticPrimitives	Refv	1	:α -> α store_v
+CONST	semanticPrimitives	Recclosure	0	:v sem_env -> (mlstring # mlstring # exp) list -> mlstring -> v
+CONST	semanticPrimitives	Rabort	1	:abort -> α error_result
+CONST	semanticPrimitives	NotThunk	0	:dest_thunk_ret
+CONST	semanticPrimitives	No_match	1	:α match_result
+CONST	semanticPrimitives	Match_type_error	1	:α match_result
+CONST	semanticPrimitives	Match	1	:α -> α match_result
+CONST	semanticPrimitives	Loc	0	:bool -> num -> v
+CONST	semanticPrimitives	Litv	0	:lit -> v
+CONST	semanticPrimitives	IsThunk	0	:thunk_mode -> v -> dest_thunk_ret
+CONST	semanticPrimitives	Exp	0	:exp -> exp_or_val
+CONST	semanticPrimitives	ExnStamp	0	:num -> stamp
+CONST	semanticPrimitives	EvalOracle	0	:eval_oracle_state -> eval_state
+CONST	semanticPrimitives	EvalDecs	0	:eval_decs_state -> eval_state
+CONST	semanticPrimitives	Eq_val	0	:bool -> eq_result
+CONST	semanticPrimitives	Eq_type_error	0	:eq_result
+CONST	semanticPrimitives	Env	0	:v sem_env -> num # num -> v
+CONST	semanticPrimitives	Conv	0	:stamp option -> v list -> v
+CONST	semanticPrimitives	Closure	0	:v sem_env -> mlstring -> exp -> v
+CONST	semanticPrimitives	Boolv	0	:bool -> v
+CONST	semanticPrimitives	BadRef	0	:dest_thunk_ret
+CONST	typeSystem	weak_tenv	0	:type_env -> type_env -> bool
+CONST	typeSystem	type_subst	0	:(mlstring |-> t) -> t -> t
+CONST	typeSystem	type_ps	0	:num -> type_env -> pat list -> t list -> (mlstring # t) list -> bool
+CONST	typeSystem	type_pe_determ	0	:type_env -> tenv_val_exp -> pat -> exp -> bool
+CONST	typeSystem	type_p	0	:num -> type_env -> pat -> t -> (mlstring # t) list -> bool
+CONST	typeSystem	type_op	0	:op -> t list -> t -> bool
+CONST	typeSystem	type_name_subst	0	:(mlstring, mlstring, mlstring list # t) namespace -> ast_t -> t
+CONST	typeSystem	type_funs	0	:type_env -> tenv_val_exp -> (mlstring # mlstring # exp) list -> (mlstring # t) list -> bool
+CONST	typeSystem	type_es	0	:type_env -> tenv_val_exp -> exp list -> t list -> bool
+CONST	typeSystem	type_env_size	0	:type_env -> num
+CONST	typeSystem	type_env_REP	0	:type_env -> (mlstring, mlstring, num # t) namespace # (mlstring, mlstring, mlstring list # t list # num) namespace # (mlstring, mlstring, mlstring list # t) namespace
+CONST	typeSystem	type_env_CONS	0	:(mlstring, mlstring, num # t) namespace # (mlstring, mlstring, mlstring list # t list # num) namespace # (mlstring, mlstring, mlstring list # t) namespace -> type_env
+CONST	typeSystem	type_env_CASE	1	:type_env -> ((mlstring, mlstring, num # t) namespace ->  (mlstring, mlstring, mlstring list # t list # num) namespace ->  (mlstring, mlstring, mlstring list # t) namespace -> α) -> α
+CONST	typeSystem	type_env_ABS	0	:(mlstring, mlstring, num # t) namespace # (mlstring, mlstring, mlstring list # t list # num) namespace # (mlstring, mlstring, mlstring list # t) namespace -> type_env
+CONST	typeSystem	type_e	0	:type_env -> tenv_val_exp -> exp -> t -> bool
+CONST	typeSystem	type_ds	0	:bool -> type_env -> dec list -> (num -> bool) -> type_env -> bool
+CONST	typeSystem	type_d	0	:bool -> type_env -> dec -> (num -> bool) -> type_env -> bool
+CONST	typeSystem	tveLookup	0	:mlstring -> num -> tenv_val_exp -> (num # t) option
+CONST	typeSystem	tscheme_inst2	1	:α -> num # t -> num # t -> bool
+CONST	typeSystem	tscheme_inst	0	:num # t -> num # t -> bool
+CONST	typeSystem	tenv_val_exp_size	0	:tenv_val_exp -> num
+CONST	typeSystem	tenv_val_exp_CONS	0	:unit + num # tenv_val_exp + mlstring # num # t # tenv_val_exp -> tenv_val_exp
+CONST	typeSystem	tenv_val_exp_CASE	1	:tenv_val_exp -> α -> (num -> tenv_val_exp -> α) -> (mlstring -> num -> t -> tenv_val_exp -> α) -> α
+CONST	typeSystem	tenv_add_tvs	0	:num -> (mlstring # t) list -> (mlstring # num # t) list
+CONST	typeSystem	tenvLift	0	:mlstring -> type_env -> type_env
+CONST	typeSystem	t_size	0	:t -> num
+CONST	typeSystem	t_of	0	:prim_type -> t
+CONST	typeSystem	t_CONS	0	:mlstring + num + t list # num -> t
+CONST	typeSystem	t_CASE	1	:t -> (mlstring -> α) -> (num -> α) -> (t list -> num -> α) -> α
+CONST	typeSystem	supported_test	0	:test -> prim_type -> bool
+CONST	typeSystem	supported_conversion	0	:prim_type -> prim_type -> bool
+CONST	typeSystem	supported_arith	0	:arith -> prim_type -> num option
+CONST	typeSystem	recordtype.type_env.seldef.v_fupd	0	:((mlstring, mlstring, num # t) namespace ->  (mlstring, mlstring, num # t) namespace) -> type_env -> type_env
+CONST	typeSystem	recordtype.type_env.seldef.v	0	:type_env -> (mlstring, mlstring, num # t) namespace
+CONST	typeSystem	recordtype.type_env.seldef.t_fupd	0	:((mlstring, mlstring, mlstring list # t) namespace ->  (mlstring, mlstring, mlstring list # t) namespace) -> type_env -> type_env
+CONST	typeSystem	recordtype.type_env.seldef.t	0	:type_env -> (mlstring, mlstring, mlstring list # t) namespace
+CONST	typeSystem	recordtype.type_env.seldef.c_fupd	0	:((mlstring, mlstring, mlstring list # t list # num) namespace ->  (mlstring, mlstring, mlstring list # t list # num) namespace) -> type_env -> type_env
+CONST	typeSystem	recordtype.type_env.seldef.c	0	:type_env -> (mlstring, mlstring, mlstring list # t list # num) namespace
+CONST	typeSystem	recordtype.type_env	0	:(mlstring, mlstring, num # t) namespace -> (mlstring, mlstring, mlstring list # t list # num) namespace -> (mlstring, mlstring, mlstring list # t) namespace -> type_env
+CONST	typeSystem	prim_type_nums	0	:num list
+CONST	typeSystem	opt_bind_name	0	:mlstring option -> num -> t -> tenv_val_exp -> tenv_val_exp
+CONST	typeSystem	num_tvs	0	:tenv_val_exp -> num
+CONST	typeSystem	lookup_varE	0	:(mlstring, mlstring) id -> tenv_val_exp -> (num # t) option
+CONST	typeSystem	lookup_var	0	:(mlstring, mlstring) id -> tenv_val_exp -> type_env -> (num # t) option
+CONST	typeSystem	is_value	0	:exp -> bool
+CONST	typeSystem	extend_dec_tenv	0	:type_env -> type_env -> type_env
+CONST	typeSystem	deBruijn_subst	0	:num -> t list -> t -> t
+CONST	typeSystem	deBruijn_inc	0	:num -> num -> t -> t
+CONST	typeSystem	check_type_names	0	:(mlstring, mlstring, mlstring list # t) namespace -> ast_t -> bool
+CONST	typeSystem	check_freevars_ast	0	:mlstring list -> ast_t -> bool
+CONST	typeSystem	check_freevars	0	:num -> mlstring list -> t -> bool
+CONST	typeSystem	check_ctor_tenv	0	:(mlstring, mlstring, mlstring list # t) namespace -> (mlstring list # mlstring # (mlstring # ast_t list) list) list -> bool
+CONST	typeSystem	build_ctor_tenv	5	:(mlstring, mlstring, mlstring list # t) namespace -> (γ # ε # (β # ast_t list) list) list -> δ list -> (α, β, γ # t list # δ) namespace
+CONST	typeSystem	bind_var_list	0	:num -> (mlstring # t) list -> tenv_val_exp -> tenv_val_exp
+CONST	typeSystem	bind_tvar	0	:num -> tenv_val_exp -> tenv_val_exp
+CONST	typeSystem	Tword8array_num	0	:num
+CONST	typeSystem	Tword8array	0	:t
+CONST	typeSystem	Tword8_num	0	:num
+CONST	typeSystem	Tword8	0	:t
+CONST	typeSystem	Tword64_num	0	:num
+CONST	typeSystem	Tword64	0	:t
+CONST	typeSystem	Tvector_num	0	:num
+CONST	typeSystem	Tvector	0	:t -> t
+CONST	typeSystem	Tvar_db	0	:num -> t
+CONST	typeSystem	Tvar	0	:mlstring -> t
+CONST	typeSystem	Ttup_num	0	:num
+CONST	typeSystem	Ttup	0	:t list -> t
+CONST	typeSystem	Tstring_num	0	:num
+CONST	typeSystem	Tstring	0	:t
+CONST	typeSystem	Tref_num	0	:num
+CONST	typeSystem	Tref	0	:t -> t
+CONST	typeSystem	Tlist_num	0	:num
+CONST	typeSystem	Tlist	0	:t -> t
+CONST	typeSystem	Tint_num	0	:num
+CONST	typeSystem	Tint	0	:t
+CONST	typeSystem	Tfn_num	0	:num
+CONST	typeSystem	Tfn	0	:t -> t -> t
+CONST	typeSystem	Texn_num	0	:num
+CONST	typeSystem	Texn	0	:t
+CONST	typeSystem	Tdouble_num	0	:num
+CONST	typeSystem	Tdouble	0	:t
+CONST	typeSystem	Tchar_num	0	:num
+CONST	typeSystem	Tchar	0	:t
+CONST	typeSystem	Tbool_num	0	:num
+CONST	typeSystem	Tbool	0	:t
+CONST	typeSystem	Tarray_num	0	:num
+CONST	typeSystem	Tarray	0	:t -> t
+CONST	typeSystem	Tapp	0	:t list -> num -> t
+CONST	typeSystem	Empty	0	:tenv_val_exp
+CONST	typeSystem	Bind_tvar	0	:num -> tenv_val_exp -> tenv_val_exp
+CONST	typeSystem	Bind_name	0	:mlstring -> num -> t -> tenv_val_exp -> tenv_val_exp
+CONST	typeSoundInvariants	type_v	0	:num -> (stamp |-> mlstring list # t list # num) -> (num |-> store_t) -> v -> t -> bool
+CONST	typeSoundInvariants	type_sv	0	:(stamp |-> mlstring list # t list # num) -> (num |-> store_t) -> v store_v -> store_t -> bool
+CONST	typeSoundInvariants	type_sound_invariant	1	:α state -> v sem_env -> (stamp |-> mlstring list # t list # num) -> (num |-> store_t) -> (num -> bool) -> type_env -> bool
+CONST	typeSoundInvariants	type_s	0	:(stamp |-> mlstring list # t list # num) -> v store_v list -> (num |-> store_t) -> bool
+CONST	typeSoundInvariants	type_ctor	5	:(α |-> β # γ list # δ) -> ε -> num # α -> β # γ list # δ -> bool
+CONST	typeSoundInvariants	type_all_env	0	:(stamp |-> mlstring list # t list # num) -> (num |-> store_t) -> v sem_env -> type_env -> bool
+CONST	typeSoundInvariants	tenv_val_ok	2	:(α, β, num # t) namespace -> bool
+CONST	typeSoundInvariants	tenv_val_exp_ok	0	:tenv_val_exp -> bool
+CONST	typeSoundInvariants	tenv_ok	0	:type_env -> bool
+CONST	typeSoundInvariants	tenv_ctor_ok	3	:(α, β, mlstring list # t list # γ) namespace -> bool
+CONST	typeSoundInvariants	tenv_abbrev_ok	2	:(α, β, mlstring list # t) namespace -> bool
+CONST	typeSoundInvariants	store_t_size	0	:store_t -> num
+CONST	typeSoundInvariants	store_t_REP	0	:store_t -> t + unit + t
+CONST	typeSoundInvariants	store_t_CONS	0	:t + unit + t -> store_t
+CONST	typeSoundInvariants	store_t_CASE	1	:store_t -> (t -> α) -> α -> (t -> α) -> α
+CONST	typeSoundInvariants	store_t_ABS	0	:t + unit + t -> store_t
+CONST	typeSoundInvariants	good_ctMap	0	:(stamp |-> mlstring list # t list # num) -> bool
+CONST	typeSoundInvariants	ctMap_ok	0	:(stamp |-> mlstring list # t list # num) -> bool
+CONST	typeSoundInvariants	ctMap_has_lists	0	:(stamp |-> mlstring list # t list # num) -> bool
+CONST	typeSoundInvariants	ctMap_has_exns	2	:(stamp |-> α list # β list # num) -> bool
+CONST	typeSoundInvariants	ctMap_has_bools	2	:(stamp |-> α list # β list # num) -> bool
+CONST	typeSoundInvariants	consistent_ctMap	4	:α state -> (β -> bool) -> (stamp |-> γ # δ # β) -> bool
+CONST	typeSoundInvariants	add_tenvE	1	:tenv_val_exp -> (α, mlstring, num # t) namespace -> (α, mlstring, num # t) namespace
+CONST	typeSoundInvariants	W8array_t	0	:store_t
+CONST	typeSoundInvariants	Varray_t	0	:t -> store_t
+CONST	typeSoundInvariants	Ref_t	0	:t -> store_t
+CONST	typeSysProps	type_pes	0	:num -> num -> type_env -> tenv_val_exp -> (pat # exp) list -> t -> t -> bool
+CONST	typeSysProps	type_def_to_ctMap	3	:(mlstring, mlstring, mlstring list # t) namespace -> num -> (α # γ # (mlstring # ast_t list) list) list -> β list -> (stamp # α # t list # β) list
+CONST	typeSysProps	deBruijn_subst_tenvE	0	:t list -> tenv_val_exp -> tenv_val_exp
+CONST	typeSysProps	db_merge	0	:tenv_val_exp -> tenv_val_exp -> tenv_val_exp
+CONST	weakening	weak_tenvE	0	:tenv_val_exp -> tenv_val_exp -> bool
+CONST	weakening	weakS	2	:(α |-> β) -> (α |-> β) -> bool
+CONST	weakening	weakCT	2	:(α |-> β) -> (α |-> β) -> bool
+CONST	weakening	weak	0	:type_env -> type_env -> bool
+CONST	typeSound	store_type_extension	2	:(α |-> β) -> (α |-> β) -> bool

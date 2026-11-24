@@ -1,0 +1,10 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "In holSyntaxLibScript.sml:88-90, RESULT_def is introduced via Prim_rec.new_recursive_definition (new_specification), saving only RESULT (Result t) = t and leaving RESULT (Clash t) unspecified. In HolSyntaxLib.lean:34, RESULT_pkg is declared with private def instead of private opaque (unlike CLASH_pkg and CONVENTIONS.md section 5). Because private def remains kernel-transparent, Lean proves RESULT (Clash t) = t by rfl, violating conservativity."
+  }
+ ]
+}

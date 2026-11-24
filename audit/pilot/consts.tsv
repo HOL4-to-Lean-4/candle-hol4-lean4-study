@@ -1,0 +1,241 @@
+CONST	misc	tlookup	0	:num sptree$num_map -> num -> num
+CONST	misc	the	1	:α -> α option -> α
+CONST	misc	steps_rel	2	:(α -> β -> α -> bool) -> α -> (β # α) list -> bool
+CONST	misc	steps	2	:(β -> α -> β) -> β -> α list -> (α # β) list
+CONST	misc	splitlines	0	:string -> string list
+CONST	misc	read_bytearray	2	:β word -> num -> (β word -> α option) -> α list option
+CONST	misc	max3	0	:num -> num -> num -> num
+CONST	misc	make_even	0	:num -> num
+CONST	misc	is_subseq	1	:α list -> α list -> bool
+CONST	misc	insert_atI	1	:α list -> num -> α list -> α list
+CONST	misc	good_dimindex	1	:α itself -> bool
+CONST	misc	fromList2	1	:α list -> α sptree$num_map
+CONST	misc	fmap_update	2	:(α |-> β) -> α -> β -> (α |-> β)
+CONST	misc	find_index	1	:α -> α list -> num -> num option
+CONST	misc	eq_shape	2	:α sptree$num_map -> β sptree$num_map -> bool
+CONST	misc	enumerate	1	:num -> α list -> (num # α) list
+CONST	misc	copy_shape	2	:α sptree$num_map -> β sptree$num_map -> α sptree$num_map
+CONST	misc	append_aux	1	:α app_list -> α list -> α list
+CONST	misc	append	1	:α app_list -> α list
+CONST	misc	app_list_size	1	:(α -> num) -> α app_list -> num
+CONST	misc	app_list_CONS	1	:'b1 list + 'b1 app_list # 'b1 app_list + unit -> 'b1 app_list
+CONST	misc	app_list_CASE	2	:α app_list -> (α list -> β) -> (α app_list -> α app_list -> β) -> β -> β
+CONST	misc	app_listSET	1	:α app_list -> α -> bool
+CONST	misc	app_listREL	2	:(α -> β -> bool) -> α app_list -> β app_list -> bool
+CONST	misc	app_listMAP	2	:(α -> β) -> α app_list -> β app_list
+CONST	misc	all_words	1	:α word -> num -> α word -> bool
+CONST	misc	UPDATE_LIST	2	:(α -> β) -> (α # β) list -> α -> β
+CONST	misc	SmartAppend	1	:α app_list -> α app_list -> α app_list
+CONST	misc	Nil	1	:α app_list
+CONST	misc	List	1	:α list -> α app_list
+CONST	misc	Append	1	:α app_list -> α app_list -> α app_list
+CONST	mllist	sort	1	:(α -> α -> bool) -> α list -> α list
+CONST	mllist	partition_aux	1	:(α -> bool) -> α list -> α list -> α list -> α list # α list
+CONST	mllist	partition	1	:(α -> bool) -> α list -> α list # α list
+CONST	mllist	mapi	2	:(num -> β -> α) -> num -> β list -> α list
+CONST	mllist	map_rev'	2	:(β -> α) -> β list -> α list -> α list
+CONST	mllist	foldli_aux	2	:(num -> β -> α -> α) -> α -> num -> β list -> α
+CONST	mllist	foldl	2	:(β -> α -> α) -> α -> β list -> α
+CONST	mllist	flat_rev'	1	:α list list -> α list -> α list
+CONST	mllist	filter_rev'	1	:(α -> bool) -> α list -> α list -> α list
+CONST	mllist	collate	2	:(α -> β -> ordering) -> α list -> β list -> ordering
+CONST	mllist	LENGTH_AUX	1	:α list -> num -> num
+CONST	mlstring	word8_to_char	0	:word8 -> char
+CONST	mlstring	translate_aux	1	:(char -> α) -> mlstring -> num -> num -> α list
+CONST	mlstring	tokens_aux	0	:(char -> bool) -> mlstring -> string -> num -> num -> mlstring list
+CONST	mlstring	tokens_alt_aux	0	:(char -> bool) -> mlstring -> num -> num -> num -> mlstring list
+CONST	mlstring	tokens	0	:(char -> bool) -> mlstring -> mlstring list
+CONST	mlstring	sum_sizes	0	:mlstring list -> num -> num
+CONST	mlstring	substring	0	:mlstring -> num -> num -> mlstring
+CONST	mlstring	strsub	0	:mlstring -> num -> char
+CONST	mlstring	strlen	0	:mlstring -> num
+CONST	mlstring	strcat	0	:mlstring -> mlstring -> mlstring
+CONST	mlstring	str_app_list_opt	0	:mlstring app_list -> mlstring app_list
+CONST	mlstring	splitl_aux	0	:(char -> bool) -> mlstring -> num -> mlstring # mlstring
+CONST	mlstring	shrink	0	:mlstring app_list_ann -> mlstring app_list
+CONST	mlstring	mlstring_size	0	:mlstring -> num
+CONST	mlstring	mlstring_lt	0	:mlstring -> mlstring -> bool
+CONST	mlstring	mlstring_REP	0	:mlstring -> string
+CONST	mlstring	mlstring_CONS	0	:string -> mlstring
+CONST	mlstring	mlstring_CASE	1	:mlstring -> (string -> α) -> α
+CONST	mlstring	mlstring_ABS	0	:string -> mlstring
+CONST	mlstring	make_app_list_ann	0	:mlstring app_list -> mlstring app_list_ann # num
+CONST	mlstring	isStringThere_aux	0	:mlstring -> mlstring -> num -> num -> num -> bool
+CONST	mlstring	implode	0	:string -> mlstring
+CONST	mlstring	fields_aux	0	:(char -> bool) -> mlstring -> string -> num -> num -> mlstring list
+CONST	mlstring	fields_alt_aux	0	:(char -> bool) -> mlstring -> num -> num -> num -> mlstring list
+CONST	mlstring	fields	0	:(char -> bool) -> mlstring -> mlstring list
+CONST	mlstring	extract	0	:mlstring -> num -> num option -> mlstring
+CONST	mlstring	explode_aux	0	:mlstring -> num -> num -> string
+CONST	mlstring	explode	0	:mlstring -> string
+CONST	mlstring	concat	0	:mlstring list -> mlstring
+CONST	mlstring	compare_aux	0	:mlstring -> mlstring -> ordering -> num -> num -> ordering
+CONST	mlstring	compare	0	:mlstring -> mlstring -> ordering
+CONST	mlstring	collate_aux	0	:(char -> char -> ordering) -> mlstring -> mlstring -> ordering -> num -> num -> ordering
+CONST	mlstring	collate	0	:(char -> char -> ordering) -> mlstring -> mlstring -> ordering
+CONST	mlstring	chr_to_str	0	:char -> mlstring
+CONST	mlstring	char_to_word8	0	:char -> word8
+CONST	mlstring	app_list_ann_size	1	:(α -> num) -> α app_list_ann -> num
+CONST	mlstring	app_list_ann_CONS	1	:'b1 list + 'b1 app_list_ann # 'b1 app_list_ann + 'b1 app_list -> 'b1 app_list_ann
+CONST	mlstring	app_list_ann_CASE	2	:α app_list_ann -> (α list -> β) -> (α app_list_ann -> α app_list_ann -> β) -> (α app_list -> β) -> β
+CONST	mlstring	app_list_annSET	1	:α app_list_ann -> α -> bool
+CONST	mlstring	app_list_annREL	2	:(α -> β -> bool) -> α app_list_ann -> β app_list_ann -> bool
+CONST	mlstring	app_list_annMAP	2	:(α -> β) -> α app_list_ann -> β app_list_ann
+CONST	mlstring	Small	1	:α app_list -> α app_list_ann
+CONST	mlstring	BigList	1	:α list -> α app_list_ann
+CONST	mlstring	BigAppend	1	:α app_list_ann -> α app_list_ann -> α app_list_ann
+CONST	setSpec	upair	1	:('U -> 'U -> bool) -> 'U -> 'U -> 'U
+CONST	setSpec	unit	1	:('U -> 'U -> bool) -> 'U -> 'U
+CONST	setSpec	union	1	:('U -> 'U -> bool) -> 'U -> 'U
+CONST	setSpec	two	1	:('U -> 'U -> bool) -> 'U
+CONST	setSpec	true	1	:('U -> 'U -> bool) -> 'U
+CONST	setSpec	sub	1	:('U -> 'U -> bool) -> 'U -> ('U -> bool) -> 'U
+CONST	setSpec	relspace	1	:('U -> 'U -> bool) -> 'U -> 'U -> 'U
+CONST	setSpec	product	1	:('U -> 'U -> bool) -> 'U -> 'U -> 'U
+CONST	setSpec	power	1	:('U -> 'U -> bool) -> 'U -> 'U
+CONST	setSpec	pair	1	:('U -> 'U -> bool) -> 'U -> 'U -> 'U
+CONST	setSpec	one	1	:('U -> 'U -> bool) -> 'U
+CONST	setSpec	is_upair	1	:('U -> 'U -> bool) -> ('U -> 'U -> 'U) -> bool
+CONST	setSpec	is_union	1	:('U -> 'U -> bool) -> ('U -> 'U) -> bool
+CONST	setSpec	is_set_theory	1	:('U -> 'U -> bool) -> bool
+CONST	setSpec	is_separation	1	:('U -> 'U -> bool) -> ('U -> ('U -> bool) -> 'U) -> bool
+CONST	setSpec	is_power	1	:('U -> 'U -> bool) -> ('U -> 'U) -> bool
+CONST	setSpec	funspace	1	:('U -> 'U -> bool) -> 'U -> 'U -> 'U
+CONST	setSpec	false	1	:('U -> 'U -> bool) -> 'U
+CONST	setSpec	extensional	1	:('U -> 'U -> bool) -> bool
+CONST	setSpec	empty	1	:('U -> 'U -> bool) -> 'U
+CONST	setSpec	boolean	1	:('U -> 'U -> bool) -> bool -> 'U
+CONST	setSpec	binary_union	1	:('U -> 'U -> bool) -> 'U -> 'U -> 'U
+CONST	setSpec	apply	1	:('U -> 'U -> bool) -> 'U -> 'U -> 'U
+CONST	setSpec	abstract	1	:('U -> 'U -> bool) -> 'U -> 'U -> ('U -> 'U) -> 'U
+CONST	holSyntaxLib	result_size	1	:(α -> num) -> α result -> num
+CONST	holSyntaxLib	result_REP	1	:'b1 result -> 'b1 + 'b1
+CONST	holSyntaxLib	result_CONS	1	:'b1 + 'b1 -> 'b1 result
+CONST	holSyntaxLib	result_CASE	2	:α result -> (α -> β) -> (α -> β) -> β
+CONST	holSyntaxLib	result_ABS	1	:'b1 + 'b1 -> 'b1 result
+CONST	holSyntaxLib	resultSET	1	:α result -> α -> bool
+CONST	holSyntaxLib	resultREL	2	:(α -> β -> bool) -> α result -> β result -> bool
+CONST	holSyntaxLib	resultMAP	2	:(α -> β) -> α result -> β result
+CONST	holSyntaxLib	STRING_SORT	0	:string list -> string list
+CONST	holSyntaxLib	Result	1	:α -> α result
+CONST	holSyntaxLib	REV_ASSOCD	2	:β -> (α # β) list -> α -> α
+CONST	holSyntaxLib	RESULT	1	:α result -> α
+CONST	holSyntaxLib	LIST_UNION	1	:α list -> α list -> α list
+CONST	holSyntaxLib	LIST_INSERT	1	:α -> α list -> α list
+CONST	holSyntaxLib	IS_RESULT	1	:α result -> bool
+CONST	holSyntaxLib	IS_CLASH	1	:α result -> bool
+CONST	holSyntaxLib	INORDER_INSERT	0	:string -> string list -> string list
+CONST	holSyntaxLib	Clash	1	:α -> α result
+CONST	holSyntaxLib	CLASH	1	:α result -> α
+CONST	holSyntaxLib	ALPHAVARS	1	:(α # α) list -> α # α -> bool
+CONST	holSyntax	|-	0	:(((mlstring |-> num) # (mlstring |-> type)) # (term -> bool)) # term list -> term -> bool
+CONST	holSyntax	welltyped	0	:term -> bool
+CONST	holSyntax	updates	0	:update -> update list -> bool
+CONST	holSyntax	update_size	0	:update -> num
+CONST	holSyntax	update_REP	0	:update -> (mlstring # term) list # term + mlstring # term # mlstring # mlstring + mlstring # num + mlstring # type + term
+CONST	holSyntax	update_CONS	0	:(mlstring # term) list # term + mlstring # term # mlstring # mlstring + mlstring # num + mlstring # type + term -> update
+CONST	holSyntax	update_CASE	1	:update -> ((mlstring # term) list -> term -> α) -> (mlstring -> term -> mlstring -> mlstring -> α) -> (mlstring -> num -> α) -> (mlstring -> type -> α) -> (term -> α) -> α
+CONST	holSyntax	update_ABS	0	:(mlstring # term) list # term + mlstring # term # mlstring # mlstring + mlstring # num + mlstring # type + term -> update
+CONST	holSyntax	tyvars	0	:type -> mlstring list
+CONST	holSyntax	types_of_upd	0	:update -> (mlstring # num) list
+CONST	holSyntax	typeof	0	:term -> type
+CONST	holSyntax	type_size	0	:type -> num
+CONST	holSyntax	type_ok	0	:(mlstring |-> num) -> type -> bool
+CONST	holSyntax	type_lt	0	:type -> type -> bool
+CONST	holSyntax	type_cmp	0	:type -> type -> ordering
+CONST	holSyntax	type_CONS	0	:mlstring + mlstring # type list -> type
+CONST	holSyntax	type_CASE	1	:type -> (mlstring -> α) -> (mlstring -> type list -> α) -> α
+CONST	holSyntax	tvars	0	:term -> mlstring list
+CONST	holSyntax	theory_ok	0	:((mlstring |-> num) # (mlstring |-> type)) # (term -> bool) -> bool
+CONST	holSyntax	term_union	0	:term list -> term list -> term list
+CONST	holSyntax	term_size	0	:term -> num
+CONST	holSyntax	term_remove	0	:term -> term list -> term list
+CONST	holSyntax	term_ok	0	:(mlstring |-> num) # (mlstring |-> type) -> term -> bool
+CONST	holSyntax	term_lt	0	:term -> term -> bool
+CONST	holSyntax	term_image	0	:(term -> term) -> term list -> term list
+CONST	holSyntax	term_cmp	0	:term -> term -> ordering
+CONST	holSyntax	term_CONS	0	:mlstring # type + mlstring # type + term # term + term # term -> term
+CONST	holSyntax	term_CASE	1	:term -> (mlstring -> type -> α) -> (mlstring -> type -> α) -> (term -> term -> α) -> (term -> term -> α) -> α
+CONST	holSyntax	sizeof	0	:term -> num
+CONST	holSyntax	ordav	0	:(term # term) list -> term -> term -> ordering
+CONST	holSyntax	orda	0	:(term # term) list -> term -> term -> ordering
+CONST	holSyntax	is_std_sig	0	:(mlstring |-> num) # (mlstring |-> type) -> bool
+CONST	holSyntax	hypset_ok	0	:term list -> bool
+CONST	holSyntax	has_type	0	:term -> type -> bool
+CONST	holSyntax	domain	0	:type -> type
+CONST	holSyntax	dest_var	0	:term -> mlstring # type
+CONST	holSyntax	consts_of_upd	0	:update -> (mlstring # type) list
+CONST	holSyntax	conexts_of_upd	0	:update -> term list
+CONST	holSyntax	codomain	0	:type -> type
+CONST	holSyntax	axexts_of_upd	0	:update -> term list
+CONST	holSyntax	alpha_lt	0	:term -> term -> bool
+CONST	holSyntax	Var	0	:mlstring -> type -> term
+CONST	holSyntax	VSUBST	0	:(term # term) list -> term -> term
+CONST	holSyntax	VFREE_IN	0	:term -> term -> bool
+CONST	holSyntax	VARIANT_PRIMES	0	:term -> string -> type -> num
+CONST	holSyntax	VARIANT	0	:term -> string -> type -> mlstring
+CONST	holSyntax	Tyvar	0	:mlstring -> type
+CONST	holSyntax	TypeDefn	0	:mlstring -> term -> mlstring -> mlstring -> update
+CONST	holSyntax	Tyapp	0	:mlstring -> type list -> type
+CONST	holSyntax	TYPE_SUBST	0	:(type # type) list -> type -> type
+CONST	holSyntax	RACONV	0	:(term # term) list -> term # term -> bool
+CONST	holSyntax	NewType	0	:mlstring -> num -> update
+CONST	holSyntax	NewConst	0	:mlstring -> type -> update
+CONST	holSyntax	NewAxiom	0	:term -> update
+CONST	holSyntax	INST_CORE	0	:(term # term) list -> (type # type) list -> term -> term result
+CONST	holSyntax	INST	0	:(type # type) list -> term -> term
+CONST	holSyntax	ConstSpec	0	:(mlstring # term) list -> term -> update
+CONST	holSyntax	Const	0	:mlstring -> type -> term
+CONST	holSyntax	Comb	0	:term -> term -> term
+CONST	holSyntax	CLOSED	0	:term -> bool
+CONST	holSyntax	Abs	0	:term -> term -> term
+CONST	holSyntax	ACONV	0	:term -> term -> bool
+CONST	holSyntax	===	0	:term -> term -> term
+CONST	holSyntaxExtra	vfree_in	0	:term -> term -> bool
+CONST	holSyntaxExtra	variant	0	:term list -> term -> term
+CONST	holSyntaxExtra	union	1	:α list -> α list -> α list
+CONST	holSyntaxExtra	types_in	0	:term -> type -> bool
+CONST	holSyntaxExtra	subtype1	0	:type -> type -> bool
+CONST	holSyntaxExtra	subtract	1	:α list -> α list -> α list
+CONST	holSyntaxExtra	subterm1	0	:term -> term -> bool
+CONST	holSyntaxExtra	simple_subst	0	:(term # term) list -> term -> term
+CONST	holSyntaxExtra	simple_inst	0	:(type # type) list -> term -> term
+CONST	holSyntaxExtra	rename_bvars	0	:mlstring list -> (mlstring # mlstring # type) list -> term -> mlstring list # term
+CONST	holSyntaxExtra	itlist	2	:(β -> α -> α) -> β list -> α -> α
+CONST	holSyntaxExtra	insert	1	:α -> α list -> α list
+CONST	holSyntaxExtra	fresh_term	0	:(mlstring -> bool) -> term -> term
+CONST	holSyntaxExtra	fresh	0	:(string -> bool) -> string
+CONST	holSyntaxExtra	frees	0	:term -> term list
+CONST	holSyntaxExtra	dbterm_size	0	:dbterm -> num
+CONST	holSyntaxExtra	dbterm_CONS	0	:mlstring # type + num + mlstring # type + dbterm # dbterm + type # dbterm -> dbterm
+CONST	holSyntaxExtra	dbterm_CASE	1	:dbterm -> (mlstring -> type -> α) -> (num -> α) -> (mlstring -> type -> α) -> (dbterm -> dbterm -> α) -> (type -> dbterm -> α) -> α
+CONST	holSyntaxExtra	dbterm	0	:(mlstring # type) list -> term -> dbterm
+CONST	holSyntaxExtra	dbVar	0	:mlstring -> type -> dbterm
+CONST	holSyntaxExtra	dbVSUBST	0	:(dbterm # dbterm) list -> dbterm -> dbterm
+CONST	holSyntaxExtra	dbVFREE_IN	0	:dbterm -> dbterm -> bool
+CONST	holSyntaxExtra	dbINST	0	:(type # type) list -> dbterm -> dbterm
+CONST	holSyntaxExtra	dbConst	0	:mlstring -> type -> dbterm
+CONST	holSyntaxExtra	dbComb	0	:dbterm -> dbterm -> dbterm
+CONST	holSyntaxExtra	dbBound	0	:num -> dbterm
+CONST	holSyntaxExtra	dbAbs	0	:type -> dbterm -> dbterm
+CONST	holSyntaxExtra	db	0	:term -> dbterm
+CONST	holSyntaxExtra	bv_names	0	:term -> mlstring list
+CONST	holSyntaxExtra	bind_list_aux	0	:num -> (mlstring # type) list -> dbterm -> dbterm
+CONST	holSyntaxExtra	bind	0	:mlstring # type -> num -> dbterm -> dbterm
+CONST	holSyntaxExtra	arities_match	0	:type list -> type list -> bool
+CONST	holSemantics	typesem	1	:(mlstring -> 'U list -> 'U) -> (mlstring -> 'U) -> type -> 'U
+CONST	holSemantics	termsem0	1	:('U -> 'U -> bool) -> (mlstring |-> type) -> (mlstring -> 'U list -> 'U) # (mlstring -> 'U list -> 'U) -> (mlstring -> 'U) # (mlstring # type -> 'U) -> term -> 'U
+CONST	holSemantics	satisfies0	1	:('U -> 'U -> bool) -> (mlstring -> 'U list -> 'U) # (mlstring -> 'U list -> 'U) -> ((mlstring |-> num) # (mlstring |-> type)) # term list # term -> bool
+CONST	holSemantics	models0	1	:('U -> 'U -> bool) -> (mlstring -> 'U list -> 'U) # (mlstring -> 'U list -> 'U) -> ((mlstring |-> num) # (mlstring |-> type)) # (term -> bool) -> bool
+CONST	holSemantics	is_valuation0	1	:('U -> 'U -> bool) -> (mlstring |-> num) -> (mlstring -> 'U list -> 'U) -> (mlstring -> 'U) # (mlstring # type -> 'U) -> bool
+CONST	holSemantics	is_type_valuation0	1	:('U -> 'U -> bool) -> (mlstring -> 'U) -> bool
+CONST	holSemantics	is_type_assignment0	1	:('U -> 'U -> bool) -> (mlstring |-> num) -> (mlstring -> 'U list -> 'U) -> bool
+CONST	holSemantics	is_term_valuation0	1	:('U -> 'U -> bool) -> (mlstring |-> num) -> (mlstring -> 'U list -> 'U) -> (mlstring -> 'U) -> (mlstring # type -> 'U) -> bool
+CONST	holSemantics	is_term_assignment0	1	:('U -> 'U -> bool) -> (mlstring |-> type) -> (mlstring -> 'U list -> 'U) -> (mlstring -> 'U list -> 'U) -> bool
+CONST	holSemantics	is_structure0	1	:('U -> 'U -> bool) -> (mlstring |-> num) # (mlstring |-> type) -> (mlstring -> 'U list -> 'U) # (mlstring -> 'U list -> 'U) -> (mlstring -> 'U) # (mlstring # type -> 'U) -> bool
+CONST	holSemantics	is_std_type_assignment0	1	:('U -> 'U -> bool) -> (mlstring -> 'U list -> 'U) -> bool
+CONST	holSemantics	is_std_interpretation0	1	:('U -> 'U -> bool) -> (mlstring -> 'U list -> 'U) # (mlstring -> 'U list -> 'U) -> bool
+CONST	holSemantics	is_interpretation0	1	:('U -> 'U -> bool) -> (mlstring |-> num) # (mlstring |-> type) -> (mlstring -> 'U list -> 'U) # (mlstring -> 'U list -> 'U) -> bool
+CONST	holSemantics	interprets0	3	:('U -> 'U -> bool) -> (α -> 'U list -> β) -> α -> mlstring list -> ('U list -> β) -> bool
+CONST	holSemantics	instance	1	:(mlstring |-> type) -> (mlstring -> 'U list -> 'U) # (mlstring -> 'U list -> 'U) -> mlstring -> type -> (mlstring -> 'U) -> 'U
+CONST	holSemantics	entails0	1	:('U -> 'U -> bool) -> (((mlstring |-> num) # (mlstring |-> type)) # (term -> bool)) # term list -> term -> bool

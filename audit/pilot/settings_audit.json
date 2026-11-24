@@ -1,0 +1,1 @@
+{"permissions":{"allow":["Read(./**)","Glob","Grep"],"deny":["Read(//e/NUS/**)","Read(//e/ts_ws/**)","Read(~/**)","Bash","WebFetch","WebSearch","Task","Agent"]}}

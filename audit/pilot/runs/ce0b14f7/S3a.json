@@ -1,0 +1,18 @@
+{
+ "module": "CandleLean.Prelude.List",
+ "checked": 38,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "HOL.sort3_tail",
+   "lean": "lean/CandleLean/Prelude/List.lean:188",
+   "hol4": "hol4/HOL4-src/src/sort/mergesortScript.sml:114",
+   "class": "V-P",
+   "explanation": "The two results of the inner test `R x z <> neg` are swapped. When `R x y <> neg` and not `R y z <> neg`, HOL4 returns [x;z;y] if `R x z <> neg` and [z;x;y] otherwise. Lean returns [z,x,y] if `R x z ≠ neg` and [x,z,y] otherwise. Example: neg = F, R a b = (a = 0), x,y,z = 0,1,2 gives [0;2;1] in HOL4 and [2,0,1] in Lean. Consequently mergesortN_tail, mergesort_tail and Candle.sort give wrong, unsorted results on inputs such as [1,3,2] with ≤ (Lean gives [2,1,3]).",
+   "repair": "    else if R x z ≠ neg then [x, z, y] else [z, x, y]",
+   "confidence": 0.99,
+   "lean_check": "import CandleLean.Prelude.List\n\nexample : HOL.sort3_tail False (fun (a _ : Nat) => a = 0) 0 1 2 = [2, 0, 1] := by\n  have h1 : ((0:Nat) = 0) ≠ False := fun h => Eq.mp h rfl\n  have h2 : ¬ (((1:Nat) = 0) ≠ False) := fun h => h (eq_false (by decide))\n  first\n    | (simp [HOL.sort3_tail]; done)\n    | (unfold HOL.sort3_tail; rw [if_pos h1, if_neg h2, if_pos h1])\n",
+   "hol4_check": "sort3_tail F (\\a (b:num). a = 0n) 0 1 2 = [0;2;1]"
+  }
+ ]
+}

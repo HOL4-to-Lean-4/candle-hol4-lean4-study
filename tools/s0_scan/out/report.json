@@ -1,0 +1,2807 @@
+{
+ "summary": {
+  "statements": 278,
+  "flagged": 2,
+  "by_class": {
+   "binder-types": 2
+  },
+  "lean_theorems_not_in_hol4_export": 192,
+  "map_status": {
+   "convention": 224,
+   "lean-core": 31,
+   "fitted": 9
+  }
+ },
+ "results": [
+  {
+   "thy": "mllist",
+   "hol4": "merge_tail_MEM",
+   "lean": "Candle.merge_tail_MEM",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A6[T0,min$bool,(T0->(T0->min$bool)),list$list<T0>,list$list<T0>,list$list<T0>]{((LMEM v0 (mergesort$merge_tail v1 v2 v3 v4 v5))=OR[(LMEM v0 v3);(LMEM v0 v4);(LMEM v0 v5)])}",
+   "lean_form": "A6[T0,min$bool,(T0->(T0->min$bool)),list$list<T0>,list$list<T0>,list$list<T0>]{((LMEM v0 (mergesort$merge_tail v1 v2 v3 v4 v5))=OR[(LMEM v0 v3);(LMEM v0 v4);(LMEM v0 v5)])}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "mllist",
+   "hol4": "mergesortN_tail_MEM",
+   "lean": "Candle.mergesortN_tail_MEM",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A5[T0,min$bool,(T0->(T0->min$bool)),num$num,list$list<T0>]{((LMEM v0 (mergesort$mergesortN_tail v1 v2 v3 v4))=(LMEM v0 (list$TAKE v3 v4)))}",
+   "lean_form": "A5[T0,min$bool,(T0->(T0->min$bool)),num$num,list$list<T0>]{((LMEM v0 (mergesort$mergesortN_tail v1 v2 v3 v4))=(LMEM v0 (list$TAKE v3 v4)))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "mllist",
+   "hol4": "mergesort_tail_MEM",
+   "lean": "Candle.mergesort_tail_MEM",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A3[T0,(T0->(T0->min$bool)),list$list<T0>]{((LMEM v0 (mergesort$mergesort_tail v1 v2))=(LMEM v0 v2))}",
+   "lean_form": "A3[T0,(T0->(T0->min$bool)),list$list<T0>]{((LMEM v0 (mergesort$mergesort_tail v1 v2))=(LMEM v0 v2))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "mllist",
+   "hol4": "merge_tail_PERM",
+   "lean": "Candle.merge_tail_PERM",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A5[list$list<T0>,list$list<T0>,list$list<T0>,min$bool,(T0->(T0->min$bool))]{(sorting$PERM (list$APPEND (list$APPEND v0 v1) v2) (mergesort$merge_tail v3 v4 v0 v1 v2))}",
+   "lean_form": "A5[list$list<T0>,list$list<T0>,list$list<T0>,min$bool,(T0->(T0->min$bool))]{(sorting$PERM (list$APPEND (list$APPEND v0 v1) v2) (mergesort$merge_tail v3 v4 v0 v1 v2))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "mllist",
+   "hol4": "sort2_tail_PERM",
+   "lean": "Candle.sort2_tail_PERM",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A4[T0,T0,min$bool,(T0->(T0->min$bool))]{(sorting$PERM (list$CONS v0 (list$CONS v1 list$NIL)) (mergesort$sort2_tail v2 v3 v0 v1))}",
+   "lean_form": "A4[T0,T0,min$bool,(T0->(T0->min$bool))]{(sorting$PERM (list$CONS v0 (list$CONS v1 list$NIL)) (mergesort$sort2_tail v2 v3 v0 v1))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "mllist",
+   "hol4": "sort3_tail_PERM",
+   "lean": "Candle.sort3_tail_PERM",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A5[T0,T0,T0,min$bool,(T0->(T0->min$bool))]{(sorting$PERM (list$CONS v0 (list$CONS v1 (list$CONS v2 list$NIL))) (mergesort$sort3_tail v3 v4 v0 v1 v2))}",
+   "lean_form": "A5[T0,T0,T0,min$bool,(T0->(T0->min$bool))]{(sorting$PERM (list$CONS v0 (list$CONS v1 (list$CONS v2 list$NIL))) (mergesort$sort3_tail v3 v4 v0 v1 v2))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "mllist",
+   "hol4": "mergesortN_tail_PERM",
+   "lean": "Candle.mergesortN_tail_PERM",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A4[num$num,list$list<T0>,min$bool,(T0->(T0->min$bool))]{(sorting$PERM (list$TAKE v0 v1) (mergesort$mergesortN_tail v2 v3 v0 v1))}",
+   "lean_form": "A4[num$num,list$list<T0>,min$bool,(T0->(T0->min$bool))]{(sorting$PERM (list$TAKE v0 v1) (mergesort$mergesortN_tail v2 v3 v0 v1))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "mllist",
+   "hol4": "sort_MEM",
+   "lean": "Candle.sort_MEM",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A3[T0,(T0->(T0->min$bool)),list$list<T0>]{((LMEM v0 (mllist$sort v1 v2))=(LMEM v0 v2))}",
+   "lean_form": "A3[T0,(T0->(T0->min$bool)),list$list<T0>]{((LMEM v0 (mllist$sort v1 v2))=(LMEM v0 v2))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "mllist",
+   "hol4": "sort_PERM",
+   "lean": "Candle.sort_PERM",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[list$list<T0>,(T0->(T0->min$bool))]{(sorting$PERM v0 (mllist$sort v1 v0))}",
+   "lean_form": "A2[list$list<T0>,(T0->(T0->min$bool))]{(sorting$PERM v0 (mllist$sort v1 v0))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "mllist",
+   "hol4": "sort_LENGTH",
+   "lean": "Candle.sort_LENGTH",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[(T0->(T0->min$bool)),list$list<T0>]{((list$LENGTH (mllist$sort v0 v1))=(list$LENGTH v1))}",
+   "lean_form": "A2[(T0->(T0->min$bool)),list$list<T0>]{((list$LENGTH (mllist$sort v0 v1))=(list$LENGTH v1))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "mllist",
+   "hol4": "sort_set",
+   "lean": "Candle.sort_set",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[(T0->(T0->min$bool)),list$list<T0>]{((list$LIST_TO_SET (mllist$sort v0 v1))=(list$LIST_TO_SET v1))}",
+   "lean_form": "A2[(T0->(T0->min$bool)),list$list<T0>]{((list$LIST_TO_SET (mllist$sort v0 v1))=(list$LIST_TO_SET v1))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "mlstring",
+   "hol4": "concat_nil",
+   "lean": "Candle.concat_nil",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "((mlstring$concat list$NIL)=(mlstring$implode \"\"))",
+   "lean_form": "((mlstring$concat list$NIL)=(mlstring$implode \"\"))",
+   "proof_sorry": true
+  },
+  {
+   "thy": "mlstring",
+   "hol4": "explode_aux_thm",
+   "lean": "Candle.explode_aux_thm",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A3[num$num,num$num,list$list<string$char>]{IMP[((arithmetic$+ v0 v1)=(list$LENGTH v2))]=>((mlstring$explode_aux (mlstring$implode v2) v0 v1)=(list$DROP v0 v2))}",
+   "lean_form": "A3[num$num,num$num,list$list<string$char>]{IMP[((arithmetic$+ v0 v1)=(list$LENGTH v2))]=>((mlstring$explode_aux (mlstring$implode v2) v0 v1)=(list$DROP v0 v2))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "mlstring",
+   "hol4": "explode_thm",
+   "lean": "Candle.explode_thm",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[list$list<string$char>]{((mlstring$explode (mlstring$implode v0))=v0)}",
+   "lean_form": "A1[list$list<string$char>]{((mlstring$explode (mlstring$implode v0))=v0)}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "mlstring",
+   "hol4": "explode_implode",
+   "lean": "Candle.explode_implode",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[list$list<string$char>]{((mlstring$explode (mlstring$implode v0))=v0)}",
+   "lean_form": "A1[list$list<string$char>]{((mlstring$explode (mlstring$implode v0))=v0)}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "mlstring",
+   "hol4": "implode_explode",
+   "lean": "Candle.implode_explode",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[mlstring$mlstring]{((mlstring$implode (mlstring$explode v0))=v0)}",
+   "lean_form": "A1[mlstring$mlstring]{((mlstring$implode (mlstring$explode v0))=v0)}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "mlstring",
+   "hol4": "explode_11",
+   "lean": "Candle.explode_11",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[mlstring$mlstring,mlstring$mlstring]{(((mlstring$explode v0)=(mlstring$explode v1))=(v0=v1))}",
+   "lean_form": "A2[mlstring$mlstring,mlstring$mlstring]{(((mlstring$explode v0)=(mlstring$explode v1))=(v0=v1))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "mlstring",
+   "hol4": "explode_BIJ",
+   "lean": "Candle.explode_BIJ",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "(pred_set$BIJ mlstring$explode pred_set$UNIV pred_set$UNIV)",
+   "lean_form": "(pred_set$BIJ mlstring$explode pred_set$UNIV pred_set$UNIV)",
+   "proof_sorry": true
+  },
+  {
+   "thy": "mlstring",
+   "hol4": "LENGTH_explode",
+   "lean": "Candle.LENGTH_explode",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[mlstring$mlstring]{((list$LENGTH (mlstring$explode v0))=(mlstring$strlen v0))}",
+   "lean_form": "A1[mlstring$mlstring]{((list$LENGTH (mlstring$explode v0))=(mlstring$strlen v0))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "mlstring",
+   "hol4": "strlen_implode",
+   "lean": "Candle.strlen_implode",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[list$list<string$char>]{((mlstring$strlen (mlstring$implode v0))=(list$LENGTH v0))}",
+   "lean_form": "A1[list$list<string$char>]{((mlstring$strlen (mlstring$implode v0))=(list$LENGTH v0))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "mlstring",
+   "hol4": "substring_full",
+   "lean": "Candle.substring_full",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[mlstring$mlstring]{((mlstring$substring v0 0 (mlstring$strlen v0))=v0)}",
+   "lean_form": "A1[mlstring$mlstring]{((mlstring$substring v0 0 (mlstring$strlen v0))=v0)}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "mlstring",
+   "hol4": "strcat_thm",
+   "lean": "Candle.strcat_thm",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[mlstring$mlstring,mlstring$mlstring]{((mlstring$strcat v0 v1)=(mlstring$implode (list$APPEND (mlstring$explode v0) (mlstring$explode v1))))}",
+   "lean_form": "A2[mlstring$mlstring,mlstring$mlstring]{((mlstring$strcat v0 v1)=(mlstring$implode (list$APPEND (mlstring$explode v0) (mlstring$explode v1))))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "mlstring",
+   "hol4": "strcat_assoc",
+   "lean": "Candle.strcat_assoc",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A3[mlstring$mlstring,mlstring$mlstring,mlstring$mlstring]{((mlstring$strcat v0 (mlstring$strcat v1 v2))=(mlstring$strcat (mlstring$strcat v0 v1) v2))}",
+   "lean_form": "A3[mlstring$mlstring,mlstring$mlstring,mlstring$mlstring]{((mlstring$strcat v0 (mlstring$strcat v1 v2))=(mlstring$strcat (mlstring$strcat v0 v1) v2))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "mlstring",
+   "hol4": "strcat_nil",
+   "lean": "Candle.strcat_nil",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[mlstring$mlstring]{AND[((mlstring$strcat (mlstring$implode \"\") v0)=v0);((mlstring$strcat v0 (mlstring$implode \"\"))=v0)]}",
+   "lean_form": "A1[mlstring$mlstring]{AND[((mlstring$strcat (mlstring$implode \"\") v0)=v0);((mlstring$strcat v0 (mlstring$implode \"\"))=v0)]}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "mlstring",
+   "hol4": "mlstring_common_prefix",
+   "lean": "Candle.mlstring_common_prefix",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A3[mlstring$mlstring,mlstring$mlstring,mlstring$mlstring]{(((mlstring$strcat v0 v1)=(mlstring$strcat v0 v2))=(v1=v2))}",
+   "lean_form": "A3[mlstring$mlstring,mlstring$mlstring,mlstring$mlstring]{(((mlstring$strcat v0 v1)=(mlstring$strcat v0 v2))=(v1=v2))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "mlstring",
+   "hol4": "mlstring_common_char_prefix",
+   "lean": "Candle.mlstring_common_char_prefix",
+   "flag": true,
+   "reasons": [
+    {
+     "class": "binder-types",
+     "detail": "HOL4 ...>,mlstring$mlstring,T0]{(((mlstring$strcat (mlstring$implode (lis | Lean ...>,mlstring$mlstring,mlstring$mlstring]{(((mlstring$strcat (mlstri"
+    }
+   ],
+   "hol4_form": "A7[string$char,list$list<string$char>,mlstring$mlstring,string$char,list$list<string$char>,mlstring$mlstring,T0]{(((mlstring$strcat (mlstring$implode (list$CONS v0 v1)) v2)=(mlstring$strcat (mlstring$implode (list$CONS v3 v4)) v5))=AND[(v0=v3);((mlstring$strcat (mlstring$implode v1) v2)=(mlstring$strcat (mlstring$implode v4) v5))])}",
+   "lean_form": "A7[string$char,list$list<string$char>,mlstring$mlstring,string$char,list$list<string$char>,mlstring$mlstring,mlstring$mlstring]{(((mlstring$strcat (mlstring$implode (list$CONS v0 v1)) v2)=(mlstring$strcat (mlstring$implode (list$CONS v3 v4)) v5))=AND[(v0=v3);((mlstring$strcat (mlstring$implode v1) v2)=(mlstring$strcat (mlstring$implode v4) v5))])}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "mlstring",
+   "hol4": "mlstring_common_suffix",
+   "lean": "Candle.mlstring_common_suffix",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A3[mlstring$mlstring,mlstring$mlstring,mlstring$mlstring]{(((mlstring$strcat v0 v1)=(mlstring$strcat v2 v1))=(v0=v2))}",
+   "lean_form": "A3[mlstring$mlstring,mlstring$mlstring,mlstring$mlstring]{(((mlstring$strcat v0 v1)=(mlstring$strcat v2 v1))=(v0=v2))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "mlstring",
+   "hol4": "explode_strcat",
+   "lean": "Candle.explode_strcat",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[mlstring$mlstring,mlstring$mlstring]{((mlstring$explode (mlstring$strcat v0 v1))=(list$APPEND (mlstring$explode v0) (mlstring$explode v1)))}",
+   "lean_form": "A2[mlstring$mlstring,mlstring$mlstring]{((mlstring$explode (mlstring$strcat v0 v1))=(list$APPEND (mlstring$explode v0) (mlstring$explode v1)))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "mlstring",
+   "hol4": "strlen_strcat",
+   "lean": "Candle.strlen_strcat",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[mlstring$mlstring,mlstring$mlstring]{((mlstring$strlen (mlstring$strcat v0 v1))=(arithmetic$+ (mlstring$strlen v0) (mlstring$strlen v1)))}",
+   "lean_form": "A2[mlstring$mlstring,mlstring$mlstring]{((mlstring$strlen (mlstring$strcat v0 v1))=(arithmetic$+ (mlstring$strlen v0) (mlstring$strlen v1)))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "mlstring",
+   "hol4": "explode_toString",
+   "lean": "Candle.explode_toString",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[string$char]{((mlstring$explode (mlstring$chr_to_str v0))=(list$CONS v0 \"\"))}",
+   "lean_form": "A1[string$char]{((mlstring$explode (mlstring$chr_to_str v0))=(list$CONS v0 \"\"))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "mlstring",
+   "hol4": "strlen_toString",
+   "lean": "Candle.strlen_toString",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[string$char]{((mlstring$strlen (mlstring$chr_to_str v0))=1)}",
+   "lean_form": "A1[string$char]{((mlstring$strlen (mlstring$chr_to_str v0))=1)}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "mlstring",
+   "hol4": "substring_0",
+   "lean": "Candle.substring_0",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[mlstring$mlstring,num$num]{((mlstring$substring v0 v1 0)=(mlstring$implode \"\"))}",
+   "lean_form": "A2[mlstring$mlstring,num$num]{((mlstring$substring v0 v1 0)=(mlstring$implode \"\"))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "mlstring",
+   "hol4": "mlstring_lt_inv_image",
+   "lean": "Candle.mlstring_lt_inv_image",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "(mlstring$mlstring_lt=(relation$inv_image string$string_lt mlstring$explode))",
+   "lean_form": "(mlstring$mlstring_lt=(relation$inv_image string$string_lt mlstring$explode))",
+   "proof_sorry": true
+  },
+  {
+   "thy": "mlstring",
+   "hol4": "StrongLinearOrder_mlstring_lt",
+   "lean": "Candle.StrongLinearOrder_mlstring_lt",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "(relation$StrongLinearOrder mlstring$mlstring_lt)",
+   "lean_form": "(relation$StrongLinearOrder mlstring$mlstring_lt)",
+   "proof_sorry": true
+  },
+  {
+   "thy": "mlstring",
+   "hol4": "ALL_DISTINCT_MAP_implode",
+   "lean": "Candle.ALL_DISTINCT_MAP_implode",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[list$list<list$list<string$char>>]{IMP[(list$ALL_DISTINCT v0)]=>(list$ALL_DISTINCT (list$MAP mlstring$implode v0))}",
+   "lean_form": "A1[list$list<list$list<string$char>>]{IMP[(list$ALL_DISTINCT v0)]=>(list$ALL_DISTINCT (list$MAP mlstring$implode v0))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "mlstring",
+   "hol4": "ALL_DISTINCT_MAP_explode",
+   "lean": "Candle.ALL_DISTINCT_MAP_explode",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[list$list<mlstring$mlstring>]{((list$ALL_DISTINCT (list$MAP mlstring$explode v0))=(list$ALL_DISTINCT v0))}",
+   "lean_form": "A1[list$list<mlstring$mlstring>]{((list$ALL_DISTINCT (list$MAP mlstring$explode v0))=(list$ALL_DISTINCT v0))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "mlstring",
+   "hol4": "concat_sing",
+   "lean": "Candle.concat_sing",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[mlstring$mlstring]{((mlstring$concat (list$CONS v0 list$NIL))=v0)}",
+   "lean_form": "A1[mlstring$mlstring]{((mlstring$concat (list$CONS v0 list$NIL))=v0)}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "setSpec",
+   "hol4": "is_extensional",
+   "lean": "Candle.is_extensional",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>(setSpec$extensional v0)}",
+   "lean_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>(setSpec$extensional v0)}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "setSpec",
+   "hol4": "is_separation_sub",
+   "lean": "Candle.is_separation_sub",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>(setSpec$is_separation v0 (setSpec$sub v0))}",
+   "lean_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>(setSpec$is_separation v0 (setSpec$sub v0))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "setSpec",
+   "hol4": "is_power_power",
+   "lean": "Candle.is_power_power",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>(setSpec$is_power v0 (setSpec$power v0))}",
+   "lean_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>(setSpec$is_power v0 (setSpec$power v0))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "setSpec",
+   "hol4": "is_union_union",
+   "lean": "Candle.is_union_union",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>(setSpec$is_union v0 (setSpec$union v0))}",
+   "lean_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>(setSpec$is_union v0 (setSpec$union v0))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "setSpec",
+   "hol4": "is_upair_upair",
+   "lean": "Candle.is_upair_upair",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>(setSpec$is_upair v0 (setSpec$upair v0))}",
+   "lean_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>(setSpec$is_upair v0 (setSpec$upair v0))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "setSpec",
+   "hol4": "mem_sub",
+   "lean": "Candle.mem_sub",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A3[T0,T0,(T0->min$bool)]{((v0 v1 (setSpec$sub v0 v2 v3))=AND[(v0 v1 v2);(v3 v1)])}}",
+   "lean_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A3[T0,T0,(T0->min$bool)]{((v0 v1 (setSpec$sub v0 v2 v3))=AND[(v0 v1 v2);(v3 v1)])}}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "setSpec",
+   "hol4": "mem_power",
+   "lean": "Candle.mem_power",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A2[T0,T0]{((v0 v1 (setSpec$power v0 v2))=A1[T0]{IMP[(v0 v3 v1)]=>(v0 v3 v2)})}}",
+   "lean_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A2[T0,T0]{((v0 v1 (setSpec$power v0 v2))=A1[T0]{IMP[(v0 v3 v1)]=>(v0 v3 v2)})}}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "setSpec",
+   "hol4": "mem_union",
+   "lean": "Candle.mem_union",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A2[T0,T0]{((v0 v1 (setSpec$union v0 v2))=E1[T0]{AND[(v0 v1 v3);(v0 v3 v2)]})}}",
+   "lean_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A2[T0,T0]{((v0 v1 (setSpec$union v0 v2))=E1[T0]{AND[(v0 v1 v3);(v0 v3 v2)]})}}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "setSpec",
+   "hol4": "mem_upair",
+   "lean": "Candle.mem_upair",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A3[T0,T0,T0]{((v0 v1 (setSpec$upair v0 v2 v3))=OR[(v1=v2);(v1=v3)])}}",
+   "lean_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A3[T0,T0,T0]{((v0 v1 (setSpec$upair v0 v2 v3))=OR[(v1=v2);(v1=v3)])}}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "setSpec",
+   "hol4": "mem_empty",
+   "lean": "Candle.mem_empty",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A1[T0]{~(v0 v1 (setSpec$empty v0))}}",
+   "lean_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A1[T0]{~(v0 v1 (setSpec$empty v0))}}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "setSpec",
+   "hol4": "mem_unit",
+   "lean": "Candle.mem_unit",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A2[T0,T0]{((v0 v1 (setSpec$unit v0 v2))=(v1=v2))}}",
+   "lean_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A2[T0,T0]{((v0 v1 (setSpec$unit v0 v2))=(v1=v2))}}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "setSpec",
+   "hol4": "unit_inj",
+   "lean": "Candle.unit_inj",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A2[T0,T0]{(((setSpec$unit v0 v1)=(setSpec$unit v0 v2))=(v1=v2))}}",
+   "lean_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A2[T0,T0]{(((setSpec$unit v0 v1)=(setSpec$unit v0 v2))=(v1=v2))}}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "setSpec",
+   "hol4": "mem_one",
+   "lean": "Candle.mem_one",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A1[T0]{((v0 v1 (setSpec$one v0))=(v1=(setSpec$empty v0)))}}",
+   "lean_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A1[T0]{((v0 v1 (setSpec$one v0))=(v1=(setSpec$empty v0)))}}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "setSpec",
+   "hol4": "mem_two",
+   "lean": "Candle.mem_two",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A1[T0]{((v0 v1 (setSpec$two v0))=OR[(v1=(setSpec$empty v0));(v1=(setSpec$one v0))])}}",
+   "lean_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A1[T0]{((v0 v1 (setSpec$two v0))=OR[(v1=(setSpec$empty v0));(v1=(setSpec$one v0))])}}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "setSpec",
+   "hol4": "upair_inj",
+   "lean": "Candle.upair_inj",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A4[T0,T0,T0,T0]{(((setSpec$upair v0 v1 v2)=(setSpec$upair v0 v3 v4))=OR[AND[(v1=v3);(v2=v4)];AND[(v1=v4);(v2=v3)]])}}",
+   "lean_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A4[T0,T0,T0,T0]{(((setSpec$upair v0 v1 v2)=(setSpec$upair v0 v3 v4))=OR[AND[(v1=v3);(v2=v4)];AND[(v1=v4);(v2=v3)]])}}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "setSpec",
+   "hol4": "unit_eq_upair",
+   "lean": "Candle.unit_eq_upair",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A3[T0,T0,T0]{(((setSpec$unit v0 v1)=(setSpec$upair v0 v2 v3))=AND[(v1=v2);(v2=v3)])}}",
+   "lean_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A3[T0,T0,T0]{(((setSpec$unit v0 v1)=(setSpec$upair v0 v2 v3))=AND[(v1=v2);(v2=v3)])}}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "setSpec",
+   "hol4": "pair_inj",
+   "lean": "Candle.pair_inj",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A4[T0,T0,T0,T0]{(((setSpec$pair v0 v1 v2)=(setSpec$pair v0 v3 v4))=AND[(v1=v3);(v2=v4)])}}",
+   "lean_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A4[T0,T0,T0,T0]{(((setSpec$pair v0 v1 v2)=(setSpec$pair v0 v3 v4))=AND[(v1=v3);(v2=v4)])}}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "setSpec",
+   "hol4": "mem_binary_union",
+   "lean": "Candle.mem_binary_union",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A3[T0,T0,T0]{((v0 v1 (setSpec$binary_union v0 v2 v3))=OR[(v0 v1 v2);(v0 v1 v3)])}}",
+   "lean_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A3[T0,T0,T0]{((v0 v1 (setSpec$binary_union v0 v2 v3))=OR[(v0 v1 v2);(v0 v1 v3)])}}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "setSpec",
+   "hol4": "mem_product",
+   "lean": "Candle.mem_product",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A3[T0,T0,T0]{((v0 v1 (setSpec$product v0 v2 v3))=E2[T0,T0]{AND[(v1=(setSpec$pair v0 v4 v5));(v0 v4 v2);(v0 v5 v3)]})}}",
+   "lean_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A3[T0,T0,T0]{((v0 v1 (setSpec$product v0 v2 v3))=E2[T0,T0]{AND[(v1=(setSpec$pair v0 v4 v5));(v0 v4 v2);(v0 v5 v3)]})}}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "setSpec",
+   "hol4": "true_neq_false",
+   "lean": "Candle.true_neq_false",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>~((setSpec$true v0)=(setSpec$false v0))}",
+   "lean_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>~((setSpec$true v0)=(setSpec$false v0))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "setSpec",
+   "hol4": "mem_boolset",
+   "lean": "Candle.mem_boolset",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A1[T0]{((v0 v1 (setSpec$two v0))=OR[(v1=(setSpec$true v0));(v1=(setSpec$false v0))])}}",
+   "lean_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A1[T0]{((v0 v1 (setSpec$two v0))=OR[(v1=(setSpec$true v0));(v1=(setSpec$false v0))])}}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "setSpec",
+   "hol4": "boolean_in_boolset",
+   "lean": "Candle.boolean_in_boolset",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A1[min$bool]{(v0 (setSpec$boolean v0 v1) (setSpec$two v0))}}",
+   "lean_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A1[min$bool]{(v0 (setSpec$boolean v0 v1) (setSpec$two v0))}}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "setSpec",
+   "hol4": "boolean_eq_true",
+   "lean": "Candle.boolean_eq_true",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A1[min$bool]{(((setSpec$boolean v0 v1)=(setSpec$true v0))=v1)}}",
+   "lean_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A1[min$bool]{(((setSpec$boolean v0 v1)=(setSpec$true v0))=v1)}}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "setSpec",
+   "hol4": "apply_abstract",
+   "lean": "Candle.apply_abstract",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A4[T0,T0,(T0->T0),T0]{IMP[(v0 v1 v2);(v0 (v3 v1) v4)]=>((setSpec$apply v0 (setSpec$abstract v0 v2 v4 v3) v1)=(v3 v1))}}",
+   "lean_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A4[T0,T0,(T0->T0),T0]{IMP[(v0 v1 v2);(v0 (v3 v1) v4)]=>((setSpec$apply v0 (setSpec$abstract v0 v2 v4 v3) v1)=(v3 v1))}}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "setSpec",
+   "hol4": "apply_in_rng",
+   "lean": "Candle.apply_in_rng",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A4[T0,T0,T0,T0]{IMP[(v0 v1 v2);(v0 v3 (setSpec$funspace v0 v2 v4))]=>(v0 (setSpec$apply v0 v3 v1) v4)}}",
+   "lean_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A4[T0,T0,T0,T0]{IMP[(v0 v1 v2);(v0 v3 (setSpec$funspace v0 v2 v4))]=>(v0 (setSpec$apply v0 v3 v1) v4)}}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "setSpec",
+   "hol4": "abstract_in_funspace",
+   "lean": "Candle.abstract_in_funspace",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A3[T0,(T0->T0),T0]{IMP[A1[T0]{IMP[(v0 v4 v1)]=>(v0 (v2 v4) v3)}]=>(v0 (setSpec$abstract v0 v1 v3 v2) (setSpec$funspace v0 v1 v3))}}",
+   "lean_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A3[T0,(T0->T0),T0]{IMP[A1[T0]{IMP[(v0 v4 v1)]=>(v0 (v2 v4) v3)}]=>(v0 (setSpec$abstract v0 v1 v3 v2) (setSpec$funspace v0 v1 v3))}}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "setSpec",
+   "hol4": "abstract_eq",
+   "lean": "Candle.abstract_eq",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A5[T0,(T0->T0),T0,(T0->T0),T0]{IMP[A1[T0]{IMP[(v0 v6 v1)]=>AND[(v0 (v2 v6) v3);(v0 (v4 v6) v5);((v2 v6)=(v4 v6))]}]=>((setSpec$abstract v0 v1 v3 v2)=(setSpec$abstract v0 v1 v5 v4))}}",
+   "lean_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A5[T0,(T0->T0),T0,(T0->T0),T0]{IMP[A1[T0]{IMP[(v0 v6 v1)]=>AND[(v0 (v2 v6) v3);(v0 (v4 v6) v5);((v2 v6)=(v4 v6))]}]=>((setSpec$abstract v0 v1 v3 v2)=(setSpec$abstract v0 v1 v5 v4))}}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSemanticsExtra",
+   "hol4": "is_std_interpretation_is_type",
+   "lean": "Candle.is_std_interpretation_is_type",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[(T0->(T0->min$bool)),pair$prod<(mlstring$mlstring->(list$list<T0>->T0)),(mlstring$mlstring->(list$list<T0>->T0))>]{IMP[(holSemantics$is_std_interpretation0 v0 v1)]=>(holSemantics$is_std_type_assignment0 v0 (pair$FST v1))}",
+   "lean_form": "A2[(T0->(T0->min$bool)),pair$prod<(mlstring$mlstring->(list$list<T0>->T0)),(mlstring$mlstring->(list$list<T0>->T0))>]{IMP[(holSemantics$is_std_interpretation0 v0 v1)]=>(holSemantics$is_std_type_assignment0 v0 (pair$FST v1))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSemanticsExtra",
+   "hol4": "typesem_inhabited",
+   "lean": "Candle.typesem_inhabited",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A4[(mlstring$mlstring->T0),finite_map$fmap<mlstring$mlstring,num$num>,(mlstring$mlstring->(list$list<T0>->T0)),holSyntax$type]{IMP[(holSemantics$is_type_valuation0 v0 v1);(holSemantics$is_type_assignment0 v0 v2 v3);(holSyntax$type_ok v2 v4)]=>E1[T0]{(v0 v5 (holSemantics$typesem v3 v1 v4))}}}",
+   "lean_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A4[(mlstring$mlstring->T0),finite_map$fmap<mlstring$mlstring,num$num>,(mlstring$mlstring->(list$list<T0>->T0)),holSyntax$type]{IMP[(holSemantics$is_type_valuation0 v0 v1);(holSemantics$is_type_assignment0 v0 v2 v3);(holSyntax$type_ok v2 v4)]=>E1[T0]{(v0 v5 (holSemantics$typesem v3 v1 v4))}}}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSemanticsExtra",
+   "hol4": "typesem_Fun",
+   "lean": "Candle.typesem_Fun",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A5[(T0->(T0->min$bool)),(mlstring$mlstring->(list$list<T0>->T0)),(mlstring$mlstring->T0),holSyntax$type,holSyntax$type]{IMP[(holSemantics$is_std_type_assignment0 v0 v1)]=>((holSemantics$typesem v1 v2 (holSyntax$Tyapp (mlstring$implode \"fun\") (list$CONS v3 (list$CONS v4 list$NIL))))=(setSpec$funspace v0 (holSemantics$typesem v1 v2 v3) (holSemantics$typesem v1 v2 v4)))}",
+   "lean_form": "A5[(T0->(T0->min$bool)),(mlstring$mlstring->(list$list<T0>->T0)),(mlstring$mlstring->T0),holSyntax$type,holSyntax$type]{IMP[(holSemantics$is_std_type_assignment0 v0 v1)]=>((holSemantics$typesem v1 v2 (holSyntax$Tyapp (mlstring$implode \"fun\") (list$CONS v3 (list$CONS v4 list$NIL))))=(setSpec$funspace v0 (holSemantics$typesem v1 v2 v3) (holSemantics$typesem v1 v2 v4)))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSemanticsExtra",
+   "hol4": "typesem_Bool",
+   "lean": "Candle.typesem_Bool",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A3[(T0->(T0->min$bool)),(mlstring$mlstring->(list$list<T0>->T0)),(mlstring$mlstring->T0)]{IMP[(holSemantics$is_std_type_assignment0 v0 v1)]=>((holSemantics$typesem v1 v2 (holSyntax$Tyapp (mlstring$implode \"bool\") list$NIL))=(setSpec$two v0))}",
+   "lean_form": "A3[(T0->(T0->min$bool)),(mlstring$mlstring->(list$list<T0>->T0)),(mlstring$mlstring->T0)]{IMP[(holSemantics$is_std_type_assignment0 v0 v1)]=>((holSemantics$typesem v1 v2 (holSyntax$Tyapp (mlstring$implode \"bool\") list$NIL))=(setSpec$two v0))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSemanticsExtra",
+   "hol4": "typesem_TYPE_SUBST",
+   "lean": "Candle.typesem_TYPE_SUBST",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A4[(mlstring$mlstring->(list$list<T0>->T0)),(mlstring$mlstring->T0),list$list<pair$prod<holSyntax$type,holSyntax$type>>,holSyntax$type]{((holSemantics$typesem v0 v1 (holSyntax$TYPE_SUBST v2 v3))=(holSemantics$typesem v0 (lam.(holSemantics$typesem v0 v1 (holSyntax$TYPE_SUBST v2 (holSyntax$Tyvar v4)))) v3))}",
+   "lean_form": "A4[(mlstring$mlstring->(list$list<T0>->T0)),(mlstring$mlstring->T0),list$list<pair$prod<holSyntax$type,holSyntax$type>>,holSyntax$type]{((holSemantics$typesem v0 v1 (holSyntax$TYPE_SUBST v2 v3))=(holSemantics$typesem v0 (lam.(holSemantics$typesem v0 v1 (holSyntax$TYPE_SUBST v2 (holSyntax$Tyvar v4)))) v3))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSemanticsExtra",
+   "hol4": "typesem_tyvars",
+   "lean": "Candle.typesem_tyvars",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A4[holSyntax$type,(mlstring$mlstring->T0),(mlstring$mlstring->T0),(mlstring$mlstring->(list$list<T0>->T0))]{IMP[A1[mlstring$mlstring]{IMP[(LMEM v4 (holSyntax$tyvars v0))]=>((v1 v4)=(v2 v4))}]=>((holSemantics$typesem v3 v1 v0)=(holSemantics$typesem v3 v2 v0))}",
+   "lean_form": "A4[holSyntax$type,(mlstring$mlstring->T0),(mlstring$mlstring->T0),(mlstring$mlstring->(list$list<T0>->T0))]{IMP[A1[mlstring$mlstring]{IMP[(LMEM v4 (holSyntax$tyvars v0))]=>((v1 v4)=(v2 v4))}]=>((holSemantics$typesem v3 v1 v0)=(holSemantics$typesem v3 v2 v0))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSemanticsExtra",
+   "hol4": "termsem_typesem",
+   "lean": "Candle.termsem_typesem",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A7[(mlstring$mlstring->(list$list<T0>->T0)),pair$prod<(mlstring$mlstring->(list$list<T0>->T0)),(mlstring$mlstring->(list$list<T0>->T0))>,(mlstring$mlstring->T0),pair$prod<(mlstring$mlstring->T0),(pair$prod<mlstring$mlstring,holSyntax$type>->T0)>,pair$prod<finite_map$fmap<mlstring$mlstring,num$num>,finite_map$fmap<mlstring$mlstring,holSyntax$type>>,holSyntax$term,finite_map$fmap<mlstring$mlstring,holSyntax$type>]{IMP[(v1=(pair$FST v2));(v3=(pair$FST v4));(holSemantics$is_valuation0 v0 (pair$FST v5) v1 v4);(holSemantics$is_interpretation0 v0 v5 v2);(holSemantics$is_std_type_assignment0 v0 v1);(holSyntax$term_ok v5 v6);(v7=(pair$SND v5))]=>(v0 (holSemantics$termsem0 v0 v7 v2 v4 v6) (holSemantics$typesem v1 v3 (holSyntax$typeof v6)))}}",
+   "lean_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A7[(mlstring$mlstring->(list$list<T0>->T0)),pair$prod<(mlstring$mlstring->(list$list<T0>->T0)),(mlstring$mlstring->(list$list<T0>->T0))>,(mlstring$mlstring->T0),pair$prod<(mlstring$mlstring->T0),(pair$prod<mlstring$mlstring,holSyntax$type>->T0)>,pair$prod<finite_map$fmap<mlstring$mlstring,num$num>,finite_map$fmap<mlstring$mlstring,holSyntax$type>>,holSyntax$term,finite_map$fmap<mlstring$mlstring,holSyntax$type>]{IMP[(v1=(pair$FST v2));(v3=(pair$FST v4));(holSemantics$is_valuation0 v0 (pair$FST v5) v1 v4);(holSemantics$is_interpretation0 v0 v5 v2);(holSemantics$is_std_type_assignment0 v0 v1);(holSyntax$term_ok v5 v6);(v7=(pair$SND v5))]=>(v0 (holSemantics$termsem0 v0 v7 v2 v4 v6) (holSemantics$typesem v1 v3 (holSyntax$typeof v6)))}}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSemanticsExtra",
+   "hol4": "termsem_Equal",
+   "lean": "Candle.termsem_Equal",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A4[pair$prod<finite_map$fmap<mlstring$mlstring,num$num>,finite_map$fmap<mlstring$mlstring,holSyntax$type>>,pair$prod<(mlstring$mlstring->(list$list<T0>->T0)),(mlstring$mlstring->(list$list<T0>->T0))>,pair$prod<(mlstring$mlstring->T0),(pair$prod<mlstring$mlstring,holSyntax$type>->T0)>,holSyntax$type]{IMP[(holSemantics$is_structure0 v0 v1 v2 v3);(holSyntax$type_ok (pair$FST v1) v4)]=>((holSemantics$termsem0 v0 (pair$SND v1) v2 v3 (holSyntax$Const (mlstring$implode \"=\") (holSyntax$Tyapp (mlstring$implode \"fun\") (list$CONS v4 (list$CONS (holSyntax$Tyapp (mlstring$implode \"fun\") (list$CONS v4 (list$CONS (holSyntax$Tyapp (mlstring$implode \"bool\") list$NIL) list$NIL))) list$NIL)))))=(setSpec$abstract v0 (list$HD (list$CONS (holSemantics$typesem (pair$FST v2) (pair$FST v3) v4) list$NIL)) (setSpec$funspace v0 (list$HD (list$CONS (holSemantics$typesem (pair$FST v2) (pair$FST v3) v4) list$NIL)) (setSpec$two v0)) (lam.(setSpec$abstract v0 (list$HD (list$CONS (holSemantics$typesem (pair$FST v2) (pair$FST v3) v4) list$NIL)) (setSpec$two v0) (lam.(setSpec$boolean v0 (v5=v6)))))))}}",
+   "lean_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A4[pair$prod<finite_map$fmap<mlstring$mlstring,num$num>,finite_map$fmap<mlstring$mlstring,holSyntax$type>>,pair$prod<(mlstring$mlstring->(list$list<T0>->T0)),(mlstring$mlstring->(list$list<T0>->T0))>,pair$prod<(mlstring$mlstring->T0),(pair$prod<mlstring$mlstring,holSyntax$type>->T0)>,holSyntax$type]{IMP[(holSemantics$is_structure0 v0 v1 v2 v3);(holSyntax$type_ok (pair$FST v1) v4)]=>((holSemantics$termsem0 v0 (pair$SND v1) v2 v3 (holSyntax$Const (mlstring$implode \"=\") (holSyntax$Tyapp (mlstring$implode \"fun\") (list$CONS v4 (list$CONS (holSyntax$Tyapp (mlstring$implode \"fun\") (list$CONS v4 (list$CONS (holSyntax$Tyapp (mlstring$implode \"bool\") list$NIL) list$NIL))) list$NIL)))))=(setSpec$abstract v0 (list$HD (list$CONS (holSemantics$typesem (pair$FST v2) (pair$FST v3) v4) list$NIL)) (setSpec$funspace v0 (list$HD (list$CONS (holSemantics$typesem (pair$FST v2) (pair$FST v3) v4) list$NIL)) (setSpec$two v0)) (lam.(setSpec$abstract v0 (list$HD (list$CONS (holSemantics$typesem (pair$FST v2) (pair$FST v3) v4) list$NIL)) (setSpec$two v0) (lam.(setSpec$boolean v0 (v5=v6)))))))}}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSemanticsExtra",
+   "hol4": "termsem_equation",
+   "lean": "Candle.termsem_equation",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A6[pair$prod<finite_map$fmap<mlstring$mlstring,num$num>,finite_map$fmap<mlstring$mlstring,holSyntax$type>>,pair$prod<(mlstring$mlstring->(list$list<T0>->T0)),(mlstring$mlstring->(list$list<T0>->T0))>,pair$prod<(mlstring$mlstring->T0),(pair$prod<mlstring$mlstring,holSyntax$type>->T0)>,holSyntax$term,holSyntax$term,finite_map$fmap<mlstring$mlstring,holSyntax$type>]{IMP[(holSemantics$is_structure0 v0 v1 v2 v3);(holSyntax$term_ok v1 (holSyntax$=== v4 v5));(v6=(pair$SND v1))]=>((holSemantics$termsem0 v0 v6 v2 v3 (holSyntax$=== v4 v5))=(setSpec$boolean v0 ((holSemantics$termsem0 v0 v6 v2 v3 v4)=(holSemantics$termsem0 v0 v6 v2 v3 v5))))}}",
+   "lean_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A6[pair$prod<finite_map$fmap<mlstring$mlstring,num$num>,finite_map$fmap<mlstring$mlstring,holSyntax$type>>,pair$prod<(mlstring$mlstring->(list$list<T0>->T0)),(mlstring$mlstring->(list$list<T0>->T0))>,pair$prod<(mlstring$mlstring->T0),(pair$prod<mlstring$mlstring,holSyntax$type>->T0)>,holSyntax$term,holSyntax$term,finite_map$fmap<mlstring$mlstring,holSyntax$type>]{IMP[(holSemantics$is_structure0 v0 v1 v2 v3);(holSyntax$term_ok v1 (holSyntax$=== v4 v5));(v6=(pair$SND v1))]=>((holSemantics$termsem0 v0 v6 v2 v3 (holSyntax$=== v4 v5))=(setSpec$boolean v0 ((holSemantics$termsem0 v0 v6 v2 v3 v4)=(holSemantics$termsem0 v0 v6 v2 v3 v5))))}}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSemanticsExtra",
+   "hol4": "termsem_raconv",
+   "lean": "Candle.termsem_raconv",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A3[list$list<pair$prod<holSyntax$term,holSyntax$term>>,pair$prod<holSyntax$term,holSyntax$term>,(T0->(T0->min$bool))]{IMP[(holSyntax$RACONV v0 v1)]=>A4[pair$prod<(mlstring$mlstring->T0),(pair$prod<mlstring$mlstring,holSyntax$type>->T0)>,pair$prod<(mlstring$mlstring->T0),(pair$prod<mlstring$mlstring,holSyntax$type>->T0)>,finite_map$fmap<mlstring$mlstring,holSyntax$type>,pair$prod<(mlstring$mlstring->(list$list<T0>->T0)),(mlstring$mlstring->(list$list<T0>->T0))>]{IMP[((pair$FST v3)=(pair$FST v4));A4[mlstring$mlstring,holSyntax$type,mlstring$mlstring,holSyntax$type]{IMP[(holSyntaxLib$ALPHAVARS v0 (pair$, (holSyntax$Var v7 v8) (holSyntax$Var v9 v10)))]=>((holSemantics$termsem0 v2 v5 v6 v3 (holSyntax$Var v7 v8))=(holSemantics$termsem0 v2 v5 v6 v4 (holSyntax$Var v9 v10)))};(list$EVERY (lam.AND[(holSyntax$welltyped (pair$FST v7));(holSyntax$welltyped (pair$SND v7));((holSyntax$typeof (pair$FST v7))=(holSyntax$typeof (pair$SND v7)))]) v0);(holSyntax$welltyped (pair$FST v1));(holSyntax$welltyped (pair$SND v1))]=>((holSemantics$termsem0 v2 v5 v6 v3 (pair$FST v1))=(holSemantics$termsem0 v2 v5 v6 v4 (pair$SND v1)))}}",
+   "lean_form": "A3[list$list<pair$prod<holSyntax$term,holSyntax$term>>,pair$prod<holSyntax$term,holSyntax$term>,(T0->(T0->min$bool))]{IMP[(holSyntax$RACONV v0 v1)]=>A4[pair$prod<(mlstring$mlstring->T0),(pair$prod<mlstring$mlstring,holSyntax$type>->T0)>,pair$prod<(mlstring$mlstring->T0),(pair$prod<mlstring$mlstring,holSyntax$type>->T0)>,finite_map$fmap<mlstring$mlstring,holSyntax$type>,pair$prod<(mlstring$mlstring->(list$list<T0>->T0)),(mlstring$mlstring->(list$list<T0>->T0))>]{IMP[((pair$FST v3)=(pair$FST v4));A4[mlstring$mlstring,holSyntax$type,mlstring$mlstring,holSyntax$type]{IMP[(holSyntaxLib$ALPHAVARS v0 (pair$, (holSyntax$Var v7 v8) (holSyntax$Var v9 v10)))]=>((holSemantics$termsem0 v2 v5 v6 v3 (holSyntax$Var v7 v8))=(holSemantics$termsem0 v2 v5 v6 v4 (holSyntax$Var v9 v10)))};(list$EVERY (lam.AND[(holSyntax$welltyped (pair$FST v7));(holSyntax$welltyped (pair$SND v7));((holSyntax$typeof (pair$FST v7))=(holSyntax$typeof (pair$SND v7)))]) v0);(holSyntax$welltyped (pair$FST v1));(holSyntax$welltyped (pair$SND v1))]=>((holSemantics$termsem0 v2 v5 v6 v3 (pair$FST v1))=(holSemantics$termsem0 v2 v5 v6 v4 (pair$SND v1)))}}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSemanticsExtra",
+   "hol4": "termsem_aconv",
+   "lean": "Candle.termsem_aconv",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A6[holSyntax$term,holSyntax$term,(T0->(T0->min$bool)),finite_map$fmap<mlstring$mlstring,holSyntax$type>,pair$prod<(mlstring$mlstring->(list$list<T0>->T0)),(mlstring$mlstring->(list$list<T0>->T0))>,pair$prod<(mlstring$mlstring->T0),(pair$prod<mlstring$mlstring,holSyntax$type>->T0)>]{IMP[(holSyntax$ACONV v0 v1);(holSyntax$welltyped v0);(holSyntax$welltyped v1)]=>((holSemantics$termsem0 v2 v3 v4 v5 v0)=(holSemantics$termsem0 v2 v3 v4 v5 v1))}",
+   "lean_form": "A6[holSyntax$term,holSyntax$term,(T0->(T0->min$bool)),finite_map$fmap<mlstring$mlstring,holSyntax$type>,pair$prod<(mlstring$mlstring->(list$list<T0>->T0)),(mlstring$mlstring->(list$list<T0>->T0))>,pair$prod<(mlstring$mlstring->T0),(pair$prod<mlstring$mlstring,holSyntax$type>->T0)>]{IMP[(holSyntax$ACONV v0 v1);(holSyntax$welltyped v0);(holSyntax$welltyped v1)]=>((holSemantics$termsem0 v2 v3 v4 v5 v0)=(holSemantics$termsem0 v2 v3 v4 v5 v1))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSemanticsExtra",
+   "hol4": "termsem_frees",
+   "lean": "Candle.termsem_frees",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A6[holSyntax$term,pair$prod<(mlstring$mlstring->T0),(pair$prod<mlstring$mlstring,holSyntax$type>->T0)>,pair$prod<(mlstring$mlstring->T0),(pair$prod<mlstring$mlstring,holSyntax$type>->T0)>,(T0->(T0->min$bool)),finite_map$fmap<mlstring$mlstring,holSyntax$type>,pair$prod<(mlstring$mlstring->(list$list<T0>->T0)),(mlstring$mlstring->(list$list<T0>->T0))>]{IMP[(holSyntax$welltyped v0);((pair$FST v1)=(pair$FST v2));A2[mlstring$mlstring,holSyntax$type]{IMP[(holSyntax$VFREE_IN (holSyntax$Var v6 v7) v0)]=>((pair$SND v1 (pair$, v6 v7))=(pair$SND v2 (pair$, v6 v7)))}]=>((holSemantics$termsem0 v3 v4 v5 v1 v0)=(holSemantics$termsem0 v3 v4 v5 v2 v0))}",
+   "lean_form": "A6[holSyntax$term,pair$prod<(mlstring$mlstring->T0),(pair$prod<mlstring$mlstring,holSyntax$type>->T0)>,pair$prod<(mlstring$mlstring->T0),(pair$prod<mlstring$mlstring,holSyntax$type>->T0)>,(T0->(T0->min$bool)),finite_map$fmap<mlstring$mlstring,holSyntax$type>,pair$prod<(mlstring$mlstring->(list$list<T0>->T0)),(mlstring$mlstring->(list$list<T0>->T0))>]{IMP[(holSyntax$welltyped v0);((pair$FST v1)=(pair$FST v2));A2[mlstring$mlstring,holSyntax$type]{IMP[(holSyntax$VFREE_IN (holSyntax$Var v6 v7) v0)]=>((pair$SND v1 (pair$, v6 v7))=(pair$SND v2 (pair$, v6 v7)))}]=>((holSemantics$termsem0 v3 v4 v5 v1 v0)=(holSemantics$termsem0 v3 v4 v5 v2 v0))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSemanticsExtra",
+   "hol4": "termsem_simple_subst",
+   "lean": "Candle.termsem_simple_subst",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A3[holSyntax$term,list$list<pair$prod<holSyntax$term,holSyntax$term>>,(T0->(T0->min$bool))]{IMP[(holSyntax$welltyped v0);(pred_set$DISJOINT (list$LIST_TO_SET (holSyntaxExtra$bv_names v0)) (pred_set$GSPEC (lam.(pair$, v3 E2[holSyntax$type,holSyntax$term]{AND[(holSyntax$VFREE_IN (holSyntax$Var v3 v4) v5);(LMEM v5 (list$MAP pair$FST v1))]}))));A2[holSyntax$term,holSyntax$term]{IMP[(LMEM (pair$, v3 v4) v1)]=>E2[mlstring$mlstring,holSyntax$type]{AND[(v4=(holSyntax$Var v5 v6));(holSyntax$has_type v3 v6)]}}]=>A3[finite_map$fmap<mlstring$mlstring,holSyntax$type>,pair$prod<(mlstring$mlstring->(list$list<T0>->T0)),(mlstring$mlstring->(list$list<T0>->T0))>,pair$prod<(mlstring$mlstring->T0),(pair$prod<mlstring$mlstring,holSyntax$type>->T0)>]{((holSemantics$termsem0 v2 v3 v4 v5 (holSyntaxExtra$simple_subst v1 v0))=(holSemantics$termsem0 v2 v3 v4 (pair$, (pair$FST v5) (misc$UPDATE_LIST (pair$SND v5) (list$MAP (combin$o (pair$## holSyntax$dest_var (holSemantics$termsem0 v2 v3 v4 v5)) (lam.(pair$, (pair$SND v6) (pair$FST v6)))) (list$REVERSE v1)))) v0))}}",
+   "lean_form": "A3[holSyntax$term,list$list<pair$prod<holSyntax$term,holSyntax$term>>,(T0->(T0->min$bool))]{IMP[(holSyntax$welltyped v0);(pred_set$DISJOINT (list$LIST_TO_SET (holSyntaxExtra$bv_names v0)) (pred_set$GSPEC (lam.(pair$, v3 E2[holSyntax$type,holSyntax$term]{AND[(holSyntax$VFREE_IN (holSyntax$Var v3 v4) v5);(LMEM v5 (list$MAP pair$FST v1))]}))));A2[holSyntax$term,holSyntax$term]{IMP[(LMEM (pair$, v3 v4) v1)]=>E2[mlstring$mlstring,holSyntax$type]{AND[(v4=(holSyntax$Var v5 v6));(holSyntax$has_type v3 v6)]}}]=>A3[finite_map$fmap<mlstring$mlstring,holSyntax$type>,pair$prod<(mlstring$mlstring->(list$list<T0>->T0)),(mlstring$mlstring->(list$list<T0>->T0))>,pair$prod<(mlstring$mlstring->T0),(pair$prod<mlstring$mlstring,holSyntax$type>->T0)>]{((holSemantics$termsem0 v2 v3 v4 v5 (holSyntaxExtra$simple_subst v1 v0))=(holSemantics$termsem0 v2 v3 v4 (pair$, (pair$FST v5) (misc$UPDATE_LIST (pair$SND v5) (list$MAP (combin$o (pair$## holSyntax$dest_var (holSemantics$termsem0 v2 v3 v4 v5)) (lam.(pair$, (pair$SND v6) (pair$FST v6)))) (list$REVERSE v1)))) v0))}}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSemanticsExtra",
+   "hol4": "termsem_VSUBST",
+   "lean": "Candle.termsem_VSUBST",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A3[holSyntax$term,list$list<pair$prod<holSyntax$term,holSyntax$term>>,(T0->(T0->min$bool))]{IMP[(holSyntax$welltyped v0);A2[holSyntax$term,holSyntax$term]{IMP[(LMEM (pair$, v3 v4) v1)]=>E2[mlstring$mlstring,holSyntax$type]{AND[(v4=(holSyntax$Var v5 v6));(holSyntax$has_type v3 v6)]}}]=>A3[finite_map$fmap<mlstring$mlstring,holSyntax$type>,pair$prod<(mlstring$mlstring->(list$list<T0>->T0)),(mlstring$mlstring->(list$list<T0>->T0))>,pair$prod<(mlstring$mlstring->T0),(pair$prod<mlstring$mlstring,holSyntax$type>->T0)>]{((holSemantics$termsem0 v2 v3 v4 v5 (holSyntax$VSUBST v1 v0))=(holSemantics$termsem0 v2 v3 v4 (pair$, (pair$FST v5) (misc$UPDATE_LIST (pair$SND v5) (list$MAP (combin$o (pair$## holSyntax$dest_var (holSemantics$termsem0 v2 v3 v4 v5)) (lam.(pair$, (pair$SND v6) (pair$FST v6)))) (list$REVERSE v1)))) v0))}}",
+   "lean_form": "A3[holSyntax$term,list$list<pair$prod<holSyntax$term,holSyntax$term>>,(T0->(T0->min$bool))]{IMP[(holSyntax$welltyped v0);A2[holSyntax$term,holSyntax$term]{IMP[(LMEM (pair$, v3 v4) v1)]=>E2[mlstring$mlstring,holSyntax$type]{AND[(v4=(holSyntax$Var v5 v6));(holSyntax$has_type v3 v6)]}}]=>A3[finite_map$fmap<mlstring$mlstring,holSyntax$type>,pair$prod<(mlstring$mlstring->(list$list<T0>->T0)),(mlstring$mlstring->(list$list<T0>->T0))>,pair$prod<(mlstring$mlstring->T0),(pair$prod<mlstring$mlstring,holSyntax$type>->T0)>]{((holSemantics$termsem0 v2 v3 v4 v5 (holSyntax$VSUBST v1 v0))=(holSemantics$termsem0 v2 v3 v4 (pair$, (pair$FST v5) (misc$UPDATE_LIST (pair$SND v5) (list$MAP (combin$o (pair$## holSyntax$dest_var (holSemantics$termsem0 v2 v3 v4 v5)) (lam.(pair$, (pair$SND v6) (pair$FST v6)))) (list$REVERSE v1)))) v0))}}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSemanticsExtra",
+   "hol4": "termsem_simple_inst",
+   "lean": "Candle.termsem_simple_inst",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A5[holSyntax$term,pair$prod<finite_map$fmap<mlstring$mlstring,num$num>,finite_map$fmap<mlstring$mlstring,holSyntax$type>>,finite_map$fmap<mlstring$mlstring,holSyntax$type>,(T0->(T0->min$bool)),list$list<pair$prod<holSyntax$type,holSyntax$type>>]{IMP[(holSyntax$welltyped v0);(holSyntax$term_ok v1 v0);(list$ALL_DISTINCT (holSyntaxExtra$bv_names v0));(pred_set$DISJOINT (list$LIST_TO_SET (holSyntaxExtra$bv_names v0)) (pred_set$GSPEC (lam.(pair$, v5 E1[holSyntax$type]{(holSyntax$VFREE_IN (holSyntax$Var v5 v6) v0)}))));(v2=(pair$SND v1))]=>A2[pair$prod<(mlstring$mlstring->(list$list<T0>->T0)),(mlstring$mlstring->(list$list<T0>->T0))>,pair$prod<(mlstring$mlstring->T0),(pair$prod<mlstring$mlstring,holSyntax$type>->T0)>]{((holSemantics$termsem0 v3 v2 v5 v6 (holSyntaxExtra$simple_inst v4 v0))=(holSemantics$termsem0 v3 v2 v5 (pair$, (lam.(holSemantics$typesem (pair$FST v5) (pair$FST v6) (holSyntax$TYPE_SUBST v4 (holSyntax$Tyvar v7)))) (lam.(pair$SND v6 (pair$, (pair$FST v7) (holSyntax$TYPE_SUBST v4 (pair$SND v7)))))) v0))}}",
+   "lean_form": "A5[holSyntax$term,pair$prod<finite_map$fmap<mlstring$mlstring,num$num>,finite_map$fmap<mlstring$mlstring,holSyntax$type>>,finite_map$fmap<mlstring$mlstring,holSyntax$type>,(T0->(T0->min$bool)),list$list<pair$prod<holSyntax$type,holSyntax$type>>]{IMP[(holSyntax$welltyped v0);(holSyntax$term_ok v1 v0);(list$ALL_DISTINCT (holSyntaxExtra$bv_names v0));(pred_set$DISJOINT (list$LIST_TO_SET (holSyntaxExtra$bv_names v0)) (pred_set$GSPEC (lam.(pair$, v5 E1[holSyntax$type]{(holSyntax$VFREE_IN (holSyntax$Var v5 v6) v0)}))));(v2=(pair$SND v1))]=>A2[pair$prod<(mlstring$mlstring->(list$list<T0>->T0)),(mlstring$mlstring->(list$list<T0>->T0))>,pair$prod<(mlstring$mlstring->T0),(pair$prod<mlstring$mlstring,holSyntax$type>->T0)>]{((holSemantics$termsem0 v3 v2 v5 v6 (holSyntaxExtra$simple_inst v4 v0))=(holSemantics$termsem0 v3 v2 v5 (pair$, (lam.(holSemantics$typesem (pair$FST v5) (pair$FST v6) (holSyntax$TYPE_SUBST v4 (holSyntax$Tyvar v7)))) (lam.(pair$SND v6 (pair$, (pair$FST v7) (holSyntax$TYPE_SUBST v4 (pair$SND v7)))))) v0))}}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSemanticsExtra",
+   "hol4": "termsem_INST",
+   "lean": "Candle.termsem_INST",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A5[pair$prod<finite_map$fmap<mlstring$mlstring,num$num>,finite_map$fmap<mlstring$mlstring,holSyntax$type>>,holSyntax$term,finite_map$fmap<mlstring$mlstring,holSyntax$type>,(T0->(T0->min$bool)),list$list<pair$prod<holSyntax$type,holSyntax$type>>]{IMP[(holSyntax$term_ok v0 v1);(v2=(pair$SND v0))]=>A2[pair$prod<(mlstring$mlstring->(list$list<T0>->T0)),(mlstring$mlstring->(list$list<T0>->T0))>,pair$prod<(mlstring$mlstring->T0),(pair$prod<mlstring$mlstring,holSyntax$type>->T0)>]{((holSemantics$termsem0 v3 v2 v5 v6 (holSyntax$INST v4 v1))=(holSemantics$termsem0 v3 v2 v5 (pair$, (lam.(holSemantics$typesem (pair$FST v5) (pair$FST v6) (holSyntax$TYPE_SUBST v4 (holSyntax$Tyvar v7)))) (lam.(pair$SND v6 (pair$, (pair$FST v7) (holSyntax$TYPE_SUBST v4 (pair$SND v7)))))) v1))}}",
+   "lean_form": "A5[pair$prod<finite_map$fmap<mlstring$mlstring,num$num>,finite_map$fmap<mlstring$mlstring,holSyntax$type>>,holSyntax$term,finite_map$fmap<mlstring$mlstring,holSyntax$type>,(T0->(T0->min$bool)),list$list<pair$prod<holSyntax$type,holSyntax$type>>]{IMP[(holSyntax$term_ok v0 v1);(v2=(pair$SND v0))]=>A2[pair$prod<(mlstring$mlstring->(list$list<T0>->T0)),(mlstring$mlstring->(list$list<T0>->T0))>,pair$prod<(mlstring$mlstring->T0),(pair$prod<mlstring$mlstring,holSyntax$type>->T0)>]{((holSemantics$termsem0 v3 v2 v5 v6 (holSyntax$INST v4 v1))=(holSemantics$termsem0 v3 v2 v5 (pair$, (lam.(holSemantics$typesem (pair$FST v5) (pair$FST v6) (holSyntax$TYPE_SUBST v4 (holSyntax$Tyvar v7)))) (lam.(pair$SND v6 (pair$, (pair$FST v7) (holSyntax$TYPE_SUBST v4 (pair$SND v7)))))) v1))}}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSoundness",
+   "hol4": "binary_inference_rule",
+   "lean": "Candle.binary_inference_rule",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A6[holSyntax$term,pair$prod<pair$prod<finite_map$fmap<mlstring$mlstring,num$num>,finite_map$fmap<mlstring$mlstring,holSyntax$type>>,(holSyntax$term->min$bool)>,holSyntax$term,holSyntax$term,list$list<holSyntax$term>,list$list<holSyntax$term>]{IMP[(holSyntax$has_type v1 (holSyntax$Tyapp (mlstring$implode \"bool\") list$NIL));(holSyntax$term_ok (pair$FST v2) v1);A2[pair$prod<(mlstring$mlstring->(list$list<T0>->T0)),(mlstring$mlstring->(list$list<T0>->T0))>,pair$prod<(mlstring$mlstring->T0),(pair$prod<mlstring$mlstring,holSyntax$type>->T0)>]{IMP[(holSemantics$is_structure0 v0 (pair$FST v2) v7 v8);((holSemantics$termsem0 v0 (pair$SND (pair$FST v2)) v7 v8 v3)=(setSpec$true v0));((holSemantics$termsem0 v0 (pair$SND (pair$FST v2)) v7 v8 v4)=(setSpec$true v0))]=>((holSemantics$termsem0 v0 (pair$SND (pair$FST v2)) v7 v8 v1)=(setSpec$true v0))};(holSemantics$entails0 v0 (pair$, v2 v5) v3);(holSemantics$entails0 v0 (pair$, v2 v6) v4)]=>(holSemantics$entails0 v0 (pair$, v2 (holSyntax$term_union v5 v6)) v1)}}",
+   "lean_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A6[holSyntax$term,pair$prod<pair$prod<finite_map$fmap<mlstring$mlstring,num$num>,finite_map$fmap<mlstring$mlstring,holSyntax$type>>,(holSyntax$term->min$bool)>,holSyntax$term,holSyntax$term,list$list<holSyntax$term>,list$list<holSyntax$term>]{IMP[(holSyntax$has_type v1 (holSyntax$Tyapp (mlstring$implode \"bool\") list$NIL));(holSyntax$term_ok (pair$FST v2) v1);A2[pair$prod<(mlstring$mlstring->(list$list<T0>->T0)),(mlstring$mlstring->(list$list<T0>->T0))>,pair$prod<(mlstring$mlstring->T0),(pair$prod<mlstring$mlstring,holSyntax$type>->T0)>]{IMP[(holSemantics$is_structure0 v0 (pair$FST v2) v7 v8);((holSemantics$termsem0 v0 (pair$SND (pair$FST v2)) v7 v8 v3)=(setSpec$true v0));((holSemantics$termsem0 v0 (pair$SND (pair$FST v2)) v7 v8 v4)=(setSpec$true v0))]=>((holSemantics$termsem0 v0 (pair$SND (pair$FST v2)) v7 v8 v1)=(setSpec$true v0))};(holSemantics$entails0 v0 (pair$, v2 v5) v3);(holSemantics$entails0 v0 (pair$, v2 v6) v4)]=>(holSemantics$entails0 v0 (pair$, v2 (holSyntax$term_union v5 v6)) v1)}}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSoundness",
+   "hol4": "ABS_correct",
+   "lean": "Candle.ABS_correct",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A6[mlstring$mlstring,holSyntax$type,list$list<holSyntax$term>,pair$prod<pair$prod<finite_map$fmap<mlstring$mlstring,num$num>,finite_map$fmap<mlstring$mlstring,holSyntax$type>>,(holSyntax$term->min$bool)>,holSyntax$term,holSyntax$term]{IMP[~(list$EXISTS (holSyntax$VFREE_IN (holSyntax$Var v1 v2)) v3);(holSyntax$type_ok (pair$FST (pair$FST v4)) v2);(holSemantics$entails0 v0 (pair$, v4 v3) (holSyntax$=== v5 v6))]=>(holSemantics$entails0 v0 (pair$, v4 v3) (holSyntax$=== (holSyntax$Abs (holSyntax$Var v1 v2) v5) (holSyntax$Abs (holSyntax$Var v1 v2) v6)))}}",
+   "lean_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A6[mlstring$mlstring,holSyntax$type,list$list<holSyntax$term>,pair$prod<pair$prod<finite_map$fmap<mlstring$mlstring,num$num>,finite_map$fmap<mlstring$mlstring,holSyntax$type>>,(holSyntax$term->min$bool)>,holSyntax$term,holSyntax$term]{IMP[~(list$EXISTS (holSyntax$VFREE_IN (holSyntax$Var v1 v2)) v3);(holSyntax$type_ok (pair$FST (pair$FST v4)) v2);(holSemantics$entails0 v0 (pair$, v4 v3) (holSyntax$=== v5 v6))]=>(holSemantics$entails0 v0 (pair$, v4 v3) (holSyntax$=== (holSyntax$Abs (holSyntax$Var v1 v2) v5) (holSyntax$Abs (holSyntax$Var v1 v2) v6)))}}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSoundness",
+   "hol4": "ASSUME_correct",
+   "lean": "Candle.ASSUME_correct",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A3[pair$prod<pair$prod<finite_map$fmap<mlstring$mlstring,num$num>,finite_map$fmap<mlstring$mlstring,holSyntax$type>>,(holSyntax$term->min$bool)>,holSyntax$term,(T0->(T0->min$bool))]{IMP[(holSyntax$theory_ok v0);(holSyntax$has_type v1 (holSyntax$Tyapp (mlstring$implode \"bool\") list$NIL));(holSyntax$term_ok (pair$FST v0) v1)]=>(holSemantics$entails0 v2 (pair$, v0 (list$CONS v1 list$NIL)) v1)}",
+   "lean_form": "A3[pair$prod<pair$prod<finite_map$fmap<mlstring$mlstring,num$num>,finite_map$fmap<mlstring$mlstring,holSyntax$type>>,(holSyntax$term->min$bool)>,holSyntax$term,(T0->(T0->min$bool))]{IMP[(holSyntax$theory_ok v0);(holSyntax$has_type v1 (holSyntax$Tyapp (mlstring$implode \"bool\") list$NIL));(holSyntax$term_ok (pair$FST v0) v1)]=>(holSemantics$entails0 v2 (pair$, v0 (list$CONS v1 list$NIL)) v1)}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSoundness",
+   "hol4": "BETA_correct",
+   "lean": "Candle.BETA_correct",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A4[pair$prod<pair$prod<finite_map$fmap<mlstring$mlstring,num$num>,finite_map$fmap<mlstring$mlstring,holSyntax$type>>,(holSyntax$term->min$bool)>,holSyntax$type,holSyntax$term,mlstring$mlstring]{IMP[(holSyntax$theory_ok v1);(holSyntax$type_ok (pair$FST (pair$FST v1)) v2);(holSyntax$term_ok (pair$FST v1) v3)]=>(holSemantics$entails0 v0 (pair$, v1 list$NIL) (holSyntax$=== (holSyntax$Comb (holSyntax$Abs (holSyntax$Var v4 v2) v3) (holSyntax$Var v4 v2)) v3))}}",
+   "lean_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A4[pair$prod<pair$prod<finite_map$fmap<mlstring$mlstring,num$num>,finite_map$fmap<mlstring$mlstring,holSyntax$type>>,(holSyntax$term->min$bool)>,holSyntax$type,holSyntax$term,mlstring$mlstring]{IMP[(holSyntax$theory_ok v1);(holSyntax$type_ok (pair$FST (pair$FST v1)) v2);(holSyntax$term_ok (pair$FST v1) v3)]=>(holSemantics$entails0 v0 (pair$, v1 list$NIL) (holSyntax$=== (holSyntax$Comb (holSyntax$Abs (holSyntax$Var v4 v2) v3) (holSyntax$Var v4 v2)) v3))}}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSoundness",
+   "hol4": "DEDUCT_ANTISYM_correct",
+   "lean": "Candle.DEDUCT_ANTISYM_correct",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A5[pair$prod<pair$prod<finite_map$fmap<mlstring$mlstring,num$num>,finite_map$fmap<mlstring$mlstring,holSyntax$type>>,(holSyntax$term->min$bool)>,list$list<holSyntax$term>,holSyntax$term,list$list<holSyntax$term>,holSyntax$term]{IMP[(holSemantics$entails0 v0 (pair$, v1 v2) v3);(holSemantics$entails0 v0 (pair$, v1 v4) v5)]=>(holSemantics$entails0 v0 (pair$, v1 (holSyntax$term_union (holSyntax$term_remove v5 v2) (holSyntax$term_remove v3 v4))) (holSyntax$=== v3 v5))}}",
+   "lean_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A5[pair$prod<pair$prod<finite_map$fmap<mlstring$mlstring,num$num>,finite_map$fmap<mlstring$mlstring,holSyntax$type>>,(holSyntax$term->min$bool)>,list$list<holSyntax$term>,holSyntax$term,list$list<holSyntax$term>,holSyntax$term]{IMP[(holSemantics$entails0 v0 (pair$, v1 v2) v3);(holSemantics$entails0 v0 (pair$, v1 v4) v5)]=>(holSemantics$entails0 v0 (pair$, v1 (holSyntax$term_union (holSyntax$term_remove v5 v2) (holSyntax$term_remove v3 v4))) (holSyntax$=== v3 v5))}}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSoundness",
+   "hol4": "EQ_MP_correct",
+   "lean": "Candle.EQ_MP_correct",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A6[pair$prod<pair$prod<finite_map$fmap<mlstring$mlstring,num$num>,finite_map$fmap<mlstring$mlstring,holSyntax$type>>,(holSyntax$term->min$bool)>,list$list<holSyntax$term>,holSyntax$term,holSyntax$term,list$list<holSyntax$term>,holSyntax$term]{IMP[(holSemantics$entails0 v0 (pair$, v1 v2) (holSyntax$=== v3 v4));(holSemantics$entails0 v0 (pair$, v1 v5) v6);(holSyntax$ACONV v3 v6)]=>(holSemantics$entails0 v0 (pair$, v1 (holSyntax$term_union v2 v5)) v4)}}",
+   "lean_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A6[pair$prod<pair$prod<finite_map$fmap<mlstring$mlstring,num$num>,finite_map$fmap<mlstring$mlstring,holSyntax$type>>,(holSyntax$term->min$bool)>,list$list<holSyntax$term>,holSyntax$term,holSyntax$term,list$list<holSyntax$term>,holSyntax$term]{IMP[(holSemantics$entails0 v0 (pair$, v1 v2) (holSyntax$=== v3 v4));(holSemantics$entails0 v0 (pair$, v1 v5) v6);(holSyntax$ACONV v3 v6)]=>(holSemantics$entails0 v0 (pair$, v1 (holSyntax$term_union v2 v5)) v4)}}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSoundness",
+   "hol4": "INST_correct",
+   "lean": "Candle.INST_correct",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[(T0->(T0->min$bool)),list$list<pair$prod<holSyntax$term,holSyntax$term>>]{IMP[(setSpec$is_set_theory v0)]=>A3[pair$prod<pair$prod<finite_map$fmap<mlstring$mlstring,num$num>,finite_map$fmap<mlstring$mlstring,holSyntax$type>>,(holSyntax$term->min$bool)>,list$list<holSyntax$term>,holSyntax$term]{IMP[A2[holSyntax$term,holSyntax$term]{IMP[(LMEM (pair$, v5 v6) v1)]=>E2[mlstring$mlstring,holSyntax$type]{AND[(v6=(holSyntax$Var v7 v8));(holSyntax$has_type v5 v8);(holSyntax$term_ok (pair$FST v2) v5)]}};(holSemantics$entails0 v0 (pair$, v2 v3) v4)]=>(holSemantics$entails0 v0 (pair$, v2 (holSyntax$term_image (holSyntax$VSUBST v1) v3)) (holSyntax$VSUBST v1 v4))}}",
+   "lean_form": "A2[(T0->(T0->min$bool)),list$list<pair$prod<holSyntax$term,holSyntax$term>>]{IMP[(setSpec$is_set_theory v0)]=>A3[pair$prod<pair$prod<finite_map$fmap<mlstring$mlstring,num$num>,finite_map$fmap<mlstring$mlstring,holSyntax$type>>,(holSyntax$term->min$bool)>,list$list<holSyntax$term>,holSyntax$term]{IMP[A2[holSyntax$term,holSyntax$term]{IMP[(LMEM (pair$, v5 v6) v1)]=>E2[mlstring$mlstring,holSyntax$type]{AND[(v6=(holSyntax$Var v7 v8));(holSyntax$has_type v5 v8);(holSyntax$term_ok (pair$FST v2) v5)]}};(holSemantics$entails0 v0 (pair$, v2 v3) v4)]=>(holSemantics$entails0 v0 (pair$, v2 (holSyntax$term_image (holSyntax$VSUBST v1) v3)) (holSyntax$VSUBST v1 v4))}}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSoundness",
+   "hol4": "INST_TYPE_correct",
+   "lean": "Candle.INST_TYPE_correct",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[(T0->(T0->min$bool)),list$list<pair$prod<holSyntax$type,holSyntax$type>>]{IMP[(setSpec$is_set_theory v0)]=>A3[pair$prod<pair$prod<finite_map$fmap<mlstring$mlstring,num$num>,finite_map$fmap<mlstring$mlstring,holSyntax$type>>,(holSyntax$term->min$bool)>,list$list<holSyntax$term>,holSyntax$term]{IMP[(list$EVERY (holSyntax$type_ok (pair$FST (pair$FST v2))) (list$MAP pair$FST v1));(holSemantics$entails0 v0 (pair$, v2 v3) v4)]=>(holSemantics$entails0 v0 (pair$, v2 (holSyntax$term_image (holSyntax$INST v1) v3)) (holSyntax$INST v1 v4))}}",
+   "lean_form": "A2[(T0->(T0->min$bool)),list$list<pair$prod<holSyntax$type,holSyntax$type>>]{IMP[(setSpec$is_set_theory v0)]=>A3[pair$prod<pair$prod<finite_map$fmap<mlstring$mlstring,num$num>,finite_map$fmap<mlstring$mlstring,holSyntax$type>>,(holSyntax$term->min$bool)>,list$list<holSyntax$term>,holSyntax$term]{IMP[(list$EVERY (holSyntax$type_ok (pair$FST (pair$FST v2))) (list$MAP pair$FST v1));(holSemantics$entails0 v0 (pair$, v2 v3) v4)]=>(holSemantics$entails0 v0 (pair$, v2 (holSyntax$term_image (holSyntax$INST v1) v3)) (holSyntax$INST v1 v4))}}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSoundness",
+   "hol4": "MK_COMB_correct",
+   "lean": "Candle.MK_COMB_correct",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A7[pair$prod<pair$prod<finite_map$fmap<mlstring$mlstring,num$num>,finite_map$fmap<mlstring$mlstring,holSyntax$type>>,(holSyntax$term->min$bool)>,list$list<holSyntax$term>,holSyntax$term,holSyntax$term,list$list<holSyntax$term>,holSyntax$term,holSyntax$term]{IMP[(holSemantics$entails0 v0 (pair$, v1 v2) (holSyntax$=== v3 v4));(holSemantics$entails0 v0 (pair$, v1 v5) (holSyntax$=== v6 v7));(holSyntax$welltyped (holSyntax$Comb v3 v6))]=>(holSemantics$entails0 v0 (pair$, v1 (holSyntax$term_union v2 v5)) (holSyntax$=== (holSyntax$Comb v3 v6) (holSyntax$Comb v4 v7)))}}",
+   "lean_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A7[pair$prod<pair$prod<finite_map$fmap<mlstring$mlstring,num$num>,finite_map$fmap<mlstring$mlstring,holSyntax$type>>,(holSyntax$term->min$bool)>,list$list<holSyntax$term>,holSyntax$term,holSyntax$term,list$list<holSyntax$term>,holSyntax$term,holSyntax$term]{IMP[(holSemantics$entails0 v0 (pair$, v1 v2) (holSyntax$=== v3 v4));(holSemantics$entails0 v0 (pair$, v1 v5) (holSyntax$=== v6 v7));(holSyntax$welltyped (holSyntax$Comb v3 v6))]=>(holSemantics$entails0 v0 (pair$, v1 (holSyntax$term_union v2 v5)) (holSyntax$=== (holSyntax$Comb v3 v6) (holSyntax$Comb v4 v7)))}}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSoundness",
+   "hol4": "REFL_correct",
+   "lean": "Candle.REFL_correct",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A2[pair$prod<pair$prod<finite_map$fmap<mlstring$mlstring,num$num>,finite_map$fmap<mlstring$mlstring,holSyntax$type>>,(holSyntax$term->min$bool)>,holSyntax$term]{IMP[(holSyntax$theory_ok v1);(holSyntax$term_ok (pair$FST v1) v2)]=>(holSemantics$entails0 v0 (pair$, v1 list$NIL) (holSyntax$=== v2 v2))}}",
+   "lean_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A2[pair$prod<pair$prod<finite_map$fmap<mlstring$mlstring,num$num>,finite_map$fmap<mlstring$mlstring,holSyntax$type>>,(holSyntax$term->min$bool)>,holSyntax$term]{IMP[(holSyntax$theory_ok v1);(holSyntax$term_ok (pair$FST v1) v2)]=>(holSemantics$entails0 v0 (pair$, v1 list$NIL) (holSyntax$=== v2 v2))}}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSoundness",
+   "hol4": "proves_sound",
+   "lean": "Candle.proves_sound",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A2[pair$prod<pair$prod<pair$prod<finite_map$fmap<mlstring$mlstring,num$num>,finite_map$fmap<mlstring$mlstring,holSyntax$type>>,(holSyntax$term->min$bool)>,list$list<holSyntax$term>>,holSyntax$term]{IMP[(holSyntax$|- v1 v2)]=>(holSemantics$entails0 v0 v1 v2)}}",
+   "lean_form": "A1[(T0->(T0->min$bool))]{IMP[(setSpec$is_set_theory v0)]=>A2[pair$prod<pair$prod<pair$prod<finite_map$fmap<mlstring$mlstring,num$num>,finite_map$fmap<mlstring$mlstring,holSyntax$type>>,(holSyntax$term->min$bool)>,list$list<holSyntax$term>>,holSyntax$term]{IMP[(holSyntax$|- v1 v2)]=>(holSemantics$entails0 v0 v1 v2)}}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "ALOOKUP_MAP_dest_var",
+   "lean": "Candle.ALOOKUP_MAP_dest_var",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A4[list$list<pair$prod<holSyntax$term,T0>>,(T0->T1),mlstring$mlstring,holSyntax$type]{IMP[(list$EVERY (lam.E2[mlstring$mlstring,holSyntax$type]{(v4=(holSyntax$Var v5 v6))}) (list$MAP pair$FST v0))]=>((alist$ALOOKUP (list$MAP (pair$## holSyntax$dest_var v1) v0) (pair$, v2 v3))=(option$OPTION_MAP v1 (alist$ALOOKUP v0 (holSyntax$Var v2 v3))))}",
+   "lean_form": "A4[list$list<pair$prod<holSyntax$term,T0>>,(T0->T1),mlstring$mlstring,holSyntax$type]{IMP[(list$EVERY (lam.E2[mlstring$mlstring,holSyntax$type]{(v4=(holSyntax$Var v5 v6))}) (list$MAP pair$FST v0))]=>((alist$ALOOKUP (list$MAP (pair$## holSyntax$dest_var v1) v0) (pair$, v2 v3))=(option$OPTION_MAP v1 (alist$ALOOKUP v0 (holSyntax$Var v2 v3))))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "TYPE_SUBST_NIL",
+   "lean": "Candle.TYPE_SUBST_NIL",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[holSyntax$type]{((holSyntax$TYPE_SUBST list$NIL v0)=v0)}",
+   "lean_form": "A1[holSyntax$type]{((holSyntax$TYPE_SUBST list$NIL v0)=v0)}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "TYPE_SUBST_Bool",
+   "lean": "Candle.TYPE_SUBST_Bool",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[list$list<pair$prod<holSyntax$type,holSyntax$type>>]{((holSyntax$TYPE_SUBST v0 (holSyntax$Tyapp (mlstring$implode \"bool\") list$NIL))=(holSyntax$Tyapp (mlstring$implode \"bool\") list$NIL))}",
+   "lean_form": "A1[list$list<pair$prod<holSyntax$type,holSyntax$type>>]{((holSyntax$TYPE_SUBST v0 (holSyntax$Tyapp (mlstring$implode \"bool\") list$NIL))=(holSyntax$Tyapp (mlstring$implode \"bool\") list$NIL))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "is_instance_refl",
+   "lean": "Candle.is_instance_refl",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[holSyntax$type]{E1[list$list<pair$prod<holSyntax$type,holSyntax$type>>]{(v0=(holSyntax$TYPE_SUBST v1 v0))}}",
+   "lean_form": "A1[holSyntax$type]{E1[list$list<pair$prod<holSyntax$type,holSyntax$type>>]{(v0=(holSyntax$TYPE_SUBST v1 v0))}}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "swap_ff",
+   "lean": "Candle.swap_ff",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[(T0->T1),(T2->T3)]{((combin$o (lam.(pair$, (pair$SND v2) (pair$FST v2))) (pair$## v0 v1))=(combin$o (pair$## v1 v0) (lam.(pair$, (pair$SND v2) (pair$FST v2)))))}",
+   "lean_form": "A2[(T0->T1),(T2->T3)]{((combin$o (lam.(pair$, (pair$SND v2) (pair$FST v2))) (pair$## v0 v1))=(combin$o (pair$## v1 v0) (lam.(pair$, (pair$SND v2) (pair$FST v2)))))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "ff_def",
+   "lean": "Candle.ff_def",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[(T0->T1),(T2->T3)]{((pair$## v0 v1)=(lam.(pair$, (v0 (pair$FST v2)) (v1 (pair$SND v2)))))}",
+   "lean_form": "A2[(T0->T1),(T2->T3)]{((pair$## v0 v1)=(lam.(pair$, (v0 (pair$FST v2)) (v1 (pair$SND v2)))))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "TYPE_SUBST_compose",
+   "lean": "Candle.TYPE_SUBST_compose",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A3[list$list<pair$prod<holSyntax$type,holSyntax$type>>,list$list<pair$prod<holSyntax$type,holSyntax$type>>,holSyntax$type]{((holSyntax$TYPE_SUBST v0 (holSyntax$TYPE_SUBST v1 v2))=(holSyntax$TYPE_SUBST (list$APPEND (list$MAP (pair$## (holSyntax$TYPE_SUBST v0) combin$I) v1) v0) v2))}",
+   "lean_form": "A3[list$list<pair$prod<holSyntax$type,holSyntax$type>>,list$list<pair$prod<holSyntax$type,holSyntax$type>>,holSyntax$type]{((holSyntax$TYPE_SUBST v0 (holSyntax$TYPE_SUBST v1 v2))=(holSyntax$TYPE_SUBST (list$APPEND (list$MAP (pair$## (holSyntax$TYPE_SUBST v0) combin$I) v1) v0) v2))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "TYPE_SUBST_tyvars",
+   "lean": "Candle.TYPE_SUBST_tyvars",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A3[list$list<pair$prod<holSyntax$type,holSyntax$type>>,holSyntax$type,list$list<pair$prod<holSyntax$type,holSyntax$type>>]{(((holSyntax$TYPE_SUBST v0 v1)=(holSyntax$TYPE_SUBST v2 v1))=A1[mlstring$mlstring]{IMP[(LMEM v3 (holSyntax$tyvars v1))]=>((holSyntaxLib$REV_ASSOCD (holSyntax$Tyvar v3) v2 (holSyntax$Tyvar v3))=(holSyntaxLib$REV_ASSOCD (holSyntax$Tyvar v3) v0 (holSyntax$Tyvar v3)))})}",
+   "lean_form": "A3[list$list<pair$prod<holSyntax$type,holSyntax$type>>,holSyntax$type,list$list<pair$prod<holSyntax$type,holSyntax$type>>]{(((holSyntax$TYPE_SUBST v0 v1)=(holSyntax$TYPE_SUBST v2 v1))=A1[mlstring$mlstring]{IMP[(LMEM v3 (holSyntax$tyvars v1))]=>((holSyntaxLib$REV_ASSOCD (holSyntax$Tyvar v3) v2 (holSyntax$Tyvar v3))=(holSyntaxLib$REV_ASSOCD (holSyntax$Tyvar v3) v0 (holSyntax$Tyvar v3)))})}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "WELLTYPED_LEMMA",
+   "lean": "Candle.WELLTYPED_LEMMA",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[holSyntax$term,holSyntax$type]{IMP[(holSyntax$has_type v0 v1)]=>((holSyntax$typeof v0)=v1)}",
+   "lean_form": "A2[holSyntax$term,holSyntax$type]{IMP[(holSyntax$has_type v0 v1)]=>((holSyntax$typeof v0)=v1)}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "WELLTYPED",
+   "lean": "Candle.WELLTYPED",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[holSyntax$term]{((holSyntax$welltyped v0)=(holSyntax$has_type v0 (holSyntax$typeof v0)))}",
+   "lean_form": "A1[holSyntax$term]{((holSyntax$welltyped v0)=(holSyntax$has_type v0 (holSyntax$typeof v0)))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "WELLTYPED_CLAUSES",
+   "lean": "Candle.WELLTYPED_CLAUSES",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "AND[A2[mlstring$mlstring,holSyntax$type]{(holSyntax$welltyped (holSyntax$Var v0 v1))};A2[mlstring$mlstring,holSyntax$type]{(holSyntax$welltyped (holSyntax$Const v0 v1))};A2[holSyntax$term,holSyntax$term]{((holSyntax$welltyped (holSyntax$Comb v0 v1))=AND[(holSyntax$welltyped v0);(holSyntax$welltyped v1);E1[holSyntax$type]{((holSyntax$typeof v0)=(holSyntax$Tyapp (mlstring$implode \"fun\") (list$CONS (holSyntax$typeof v1) (list$CONS v2 list$NIL))))}])};A2[holSyntax$term,holSyntax$term]{((holSyntax$welltyped (holSyntax$Abs v0 v1))=E2[mlstring$mlstring,holSyntax$type]{AND[(v0=(holSyntax$Var v2 v3));(holSyntax$welltyped v1)]})}]",
+   "lean_form": "AND[A2[mlstring$mlstring,holSyntax$type]{(holSyntax$welltyped (holSyntax$Var v0 v1))};A2[mlstring$mlstring,holSyntax$type]{(holSyntax$welltyped (holSyntax$Const v0 v1))};A2[holSyntax$term,holSyntax$term]{((holSyntax$welltyped (holSyntax$Comb v0 v1))=AND[(holSyntax$welltyped v0);(holSyntax$welltyped v1);E1[holSyntax$type]{((holSyntax$typeof v0)=(holSyntax$Tyapp (mlstring$implode \"fun\") (list$CONS (holSyntax$typeof v1) (list$CONS v2 list$NIL))))}])};A2[holSyntax$term,holSyntax$term]{((holSyntax$welltyped (holSyntax$Abs v0 v1))=E2[mlstring$mlstring,holSyntax$type]{AND[(v0=(holSyntax$Var v2 v3));(holSyntax$welltyped v1)]})}]",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "RACONV",
+   "lean": "Candle.RACONV_thm",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A13[list$list<pair$prod<holSyntax$term,holSyntax$term>>,mlstring$mlstring,holSyntax$type,mlstring$mlstring,holSyntax$type,holSyntax$term,holSyntax$term,holSyntax$term,holSyntax$term,holSyntax$term,holSyntax$term,holSyntax$term,holSyntax$term]{AND[((holSyntax$RACONV v0 (pair$, (holSyntax$Var v1 v2) (holSyntax$Var v3 v4)))=(holSyntaxLib$ALPHAVARS v0 (pair$, (holSyntax$Var v1 v2) (holSyntax$Var v3 v4))));((holSyntax$RACONV v0 (pair$, (holSyntax$Var v1 v2) (holSyntax$Const v3 v4)))=false);((holSyntax$RACONV v0 (pair$, (holSyntax$Var v1 v2) (holSyntax$Comb v5 v6)))=false);((holSyntax$RACONV v0 (pair$, (holSyntax$Var v1 v2) (holSyntax$Abs v7 v8)))=false);((holSyntax$RACONV v0 (pair$, (holSyntax$Const v1 v2) (holSyntax$Var v3 v4)))=false);((holSyntax$RACONV v0 (pair$, (holSyntax$Const v1 v2) (holSyntax$Const v3 v4)))=AND[(v1=v3);(v2=v4)]);((holSyntax$RACONV v0 (pair$, (holSyntax$Const v1 v2) (holSyntax$Comb v5 v6)))=false);((holSyntax$RACONV v0 (pair$, (holSyntax$Const v1 v2) (holSyntax$Abs v7 v8)))=false);((holSyntax$RACONV v0 (pair$, (holSyntax$Comb v9 v10) (holSyntax$Var v3 v4)))=false);((holSyntax$RACONV v0 (pair$, (holSyntax$Comb v9 v10) (holSyntax$Const v3 v4)))=false);((holSyntax$RACONV v0 (pair$, (holSyntax$Comb v9 v10) (holSyntax$Comb v5 v6)))=AND[(holSyntax$RACONV v0 (pair$, v9 v5));(holSyntax$RACONV v0 (pair$, v10 v6))]);((holSyntax$RACONV v0 (pair$, (holSyntax$Comb v9 v10) (holSyntax$Abs v7 v8)))=false);((holSyntax$RACONV v0 (pair$, (holSyntax$Abs v11 v12) (holSyntax$Var v3 v4)))=false);((holSyntax$RACONV v0 (pair$, (holSyntax$Abs v11 v12) (holSyntax$Const v3 v4)))=false);((holSyntax$RACONV v0 (pair$, (holSyntax$Abs v11 v12) (holSyntax$Comb v5 v6)))=false);((holSyntax$RACONV v0 (pair$, (holSyntax$Abs v11 v12) (holSyntax$Abs v7 v8)))=AND[((holSyntax$typeof v11)=(holSyntax$typeof v7));(holSyntax$RACONV (list$CONS (pair$, v11 v7) v0) (pair$, v12 v8))])]}",
+   "lean_form": "A13[list$list<pair$prod<holSyntax$term,holSyntax$term>>,mlstring$mlstring,holSyntax$type,mlstring$mlstring,holSyntax$type,holSyntax$term,holSyntax$term,holSyntax$term,holSyntax$term,holSyntax$term,holSyntax$term,holSyntax$term,holSyntax$term]{AND[((holSyntax$RACONV v0 (pair$, (holSyntax$Var v1 v2) (holSyntax$Var v3 v4)))=(holSyntaxLib$ALPHAVARS v0 (pair$, (holSyntax$Var v1 v2) (holSyntax$Var v3 v4))));((holSyntax$RACONV v0 (pair$, (holSyntax$Var v1 v2) (holSyntax$Const v3 v4)))=false);((holSyntax$RACONV v0 (pair$, (holSyntax$Var v1 v2) (holSyntax$Comb v5 v6)))=false);((holSyntax$RACONV v0 (pair$, (holSyntax$Var v1 v2) (holSyntax$Abs v7 v8)))=false);((holSyntax$RACONV v0 (pair$, (holSyntax$Const v1 v2) (holSyntax$Var v3 v4)))=false);((holSyntax$RACONV v0 (pair$, (holSyntax$Const v1 v2) (holSyntax$Const v3 v4)))=AND[(v1=v3);(v2=v4)]);((holSyntax$RACONV v0 (pair$, (holSyntax$Const v1 v2) (holSyntax$Comb v5 v6)))=false);((holSyntax$RACONV v0 (pair$, (holSyntax$Const v1 v2) (holSyntax$Abs v7 v8)))=false);((holSyntax$RACONV v0 (pair$, (holSyntax$Comb v9 v10) (holSyntax$Var v3 v4)))=false);((holSyntax$RACONV v0 (pair$, (holSyntax$Comb v9 v10) (holSyntax$Const v3 v4)))=false);((holSyntax$RACONV v0 (pair$, (holSyntax$Comb v9 v10) (holSyntax$Comb v5 v6)))=AND[(holSyntax$RACONV v0 (pair$, v9 v5));(holSyntax$RACONV v0 (pair$, v10 v6))]);((holSyntax$RACONV v0 (pair$, (holSyntax$Comb v9 v10) (holSyntax$Abs v7 v8)))=false);((holSyntax$RACONV v0 (pair$, (holSyntax$Abs v11 v12) (holSyntax$Var v3 v4)))=false);((holSyntax$RACONV v0 (pair$, (holSyntax$Abs v11 v12) (holSyntax$Const v3 v4)))=false);((holSyntax$RACONV v0 (pair$, (holSyntax$Abs v11 v12) (holSyntax$Comb v5 v6)))=false);((holSyntax$RACONV v0 (pair$, (holSyntax$Abs v11 v12) (holSyntax$Abs v7 v8)))=AND[((holSyntax$typeof v11)=(holSyntax$typeof v7));(holSyntax$RACONV (list$CONS (pair$, v11 v7) v0) (pair$, v12 v8))])]}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "RACONV_REFL",
+   "lean": "Candle.RACONV_REFL",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[list$list<pair$prod<holSyntax$term,holSyntax$term>>,holSyntax$term]{IMP[(list$EVERY (lam.((pair$FST v2)=(pair$SND v2))) v0)]=>(holSyntax$RACONV v0 (pair$, v1 v1))}",
+   "lean_form": "A2[list$list<pair$prod<holSyntax$term,holSyntax$term>>,holSyntax$term]{IMP[(list$EVERY (lam.((pair$FST v2)=(pair$SND v2))) v0)]=>(holSyntax$RACONV v0 (pair$, v1 v1))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "ACONV_REFL",
+   "lean": "Candle.ACONV_REFL",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[holSyntax$term]{(holSyntax$ACONV v0 v0)}",
+   "lean_form": "A1[holSyntax$term]{(holSyntax$ACONV v0 v0)}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "RACONV_TRANS",
+   "lean": "Candle.RACONV_TRANS",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[list$list<pair$prod<holSyntax$term,holSyntax$term>>,pair$prod<holSyntax$term,holSyntax$term>]{IMP[(holSyntax$RACONV v0 v1)]=>A2[list$list<holSyntax$term>,holSyntax$term]{IMP[((list$LENGTH v2)=(list$LENGTH v0));(holSyntax$RACONV (list$ZIP (pair$, (list$MAP pair$SND v0) v2)) (pair$, (pair$SND v1) v3))]=>(holSyntax$RACONV (list$ZIP (pair$, (list$MAP pair$FST v0) v2)) (pair$, (pair$FST v1) v3))}}",
+   "lean_form": "A2[list$list<pair$prod<holSyntax$term,holSyntax$term>>,pair$prod<holSyntax$term,holSyntax$term>]{IMP[(holSyntax$RACONV v0 v1)]=>A2[list$list<holSyntax$term>,holSyntax$term]{IMP[((list$LENGTH v2)=(list$LENGTH v0));(holSyntax$RACONV (list$ZIP (pair$, (list$MAP pair$SND v0) v2)) (pair$, (pair$SND v1) v3))]=>(holSyntax$RACONV (list$ZIP (pair$, (list$MAP pair$FST v0) v2)) (pair$, (pair$FST v1) v3))}}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "ACONV_TRANS",
+   "lean": "Candle.ACONV_TRANS",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A3[holSyntax$term,holSyntax$term,holSyntax$term]{IMP[(holSyntax$ACONV v0 v1);(holSyntax$ACONV v1 v2)]=>(holSyntax$ACONV v0 v2)}",
+   "lean_form": "A3[holSyntax$term,holSyntax$term,holSyntax$term]{IMP[(holSyntax$ACONV v0 v1);(holSyntax$ACONV v1 v2)]=>(holSyntax$ACONV v0 v2)}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "RACONV_SYM",
+   "lean": "Candle.RACONV_SYM",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[list$list<pair$prod<holSyntax$term,holSyntax$term>>,pair$prod<holSyntax$term,holSyntax$term>]{IMP[(holSyntax$RACONV v0 v1)]=>(holSyntax$RACONV (list$MAP (lam.(pair$, (pair$SND v2) (pair$FST v2))) v0) (pair$, (pair$SND v1) (pair$FST v1)))}",
+   "lean_form": "A2[list$list<pair$prod<holSyntax$term,holSyntax$term>>,pair$prod<holSyntax$term,holSyntax$term>]{IMP[(holSyntax$RACONV v0 v1)]=>(holSyntax$RACONV (list$MAP (lam.(pair$, (pair$SND v2) (pair$FST v2))) v0) (pair$, (pair$SND v1) (pair$FST v1)))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "ACONV_SYM",
+   "lean": "Candle.ACONV_SYM",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[holSyntax$term,holSyntax$term]{IMP[(holSyntax$ACONV v0 v1)]=>(holSyntax$ACONV v1 v0)}",
+   "lean_form": "A2[holSyntax$term,holSyntax$term]{IMP[(holSyntax$ACONV v0 v1)]=>(holSyntax$ACONV v1 v0)}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "ALPHAVARS_TYPE",
+   "lean": "Candle.ALPHAVARS_TYPE",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A3[list$list<pair$prod<holSyntax$term,holSyntax$term>>,holSyntax$term,holSyntax$term]{IMP[(holSyntaxLib$ALPHAVARS v0 (pair$, v1 v2));(list$EVERY (lam.AND[(holSyntax$welltyped (pair$FST v3));(holSyntax$welltyped (pair$SND v3));((holSyntax$typeof (pair$FST v3))=(holSyntax$typeof (pair$SND v3)))]) v0);(holSyntax$welltyped v1);(holSyntax$welltyped v2)]=>((holSyntax$typeof v1)=(holSyntax$typeof v2))}",
+   "lean_form": "A3[list$list<pair$prod<holSyntax$term,holSyntax$term>>,holSyntax$term,holSyntax$term]{IMP[(holSyntaxLib$ALPHAVARS v0 (pair$, v1 v2));(list$EVERY (lam.AND[(holSyntax$welltyped (pair$FST v3));(holSyntax$welltyped (pair$SND v3));((holSyntax$typeof (pair$FST v3))=(holSyntax$typeof (pair$SND v3)))]) v0);(holSyntax$welltyped v1);(holSyntax$welltyped v2)]=>((holSyntax$typeof v1)=(holSyntax$typeof v2))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "RACONV_TYPE",
+   "lean": "Candle.RACONV_TYPE",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[list$list<pair$prod<holSyntax$term,holSyntax$term>>,pair$prod<holSyntax$term,holSyntax$term>]{IMP[(holSyntax$RACONV v0 v1);(list$EVERY (lam.AND[(holSyntax$welltyped (pair$FST v2));(holSyntax$welltyped (pair$SND v2));((holSyntax$typeof (pair$FST v2))=(holSyntax$typeof (pair$SND v2)))]) v0);(holSyntax$welltyped (pair$FST v1));(holSyntax$welltyped (pair$SND v1))]=>((holSyntax$typeof (pair$FST v1))=(holSyntax$typeof (pair$SND v1)))}",
+   "lean_form": "A2[list$list<pair$prod<holSyntax$term,holSyntax$term>>,pair$prod<holSyntax$term,holSyntax$term>]{IMP[(holSyntax$RACONV v0 v1);(list$EVERY (lam.AND[(holSyntax$welltyped (pair$FST v2));(holSyntax$welltyped (pair$SND v2));((holSyntax$typeof (pair$FST v2))=(holSyntax$typeof (pair$SND v2)))]) v0);(holSyntax$welltyped (pair$FST v1));(holSyntax$welltyped (pair$SND v1))]=>((holSyntax$typeof (pair$FST v1))=(holSyntax$typeof (pair$SND v1)))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "ACONV_TYPE",
+   "lean": "Candle.ACONV_TYPE",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[holSyntax$term,holSyntax$term]{IMP[(holSyntax$ACONV v0 v1);(holSyntax$welltyped v0);(holSyntax$welltyped v1)]=>((holSyntax$typeof v0)=(holSyntax$typeof v1))}",
+   "lean_form": "A2[holSyntax$term,holSyntax$term]{IMP[(holSyntax$ACONV v0 v1);(holSyntax$welltyped v0);(holSyntax$welltyped v1)]=>((holSyntax$typeof v0)=(holSyntax$typeof v1))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "subtype_Tyvar",
+   "lean": "Candle.subtype_Tyvar",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[holSyntax$type,mlstring$mlstring]{((relation$RTC holSyntaxExtra$subtype1 v0 (holSyntax$Tyvar v1))=(v0=(holSyntax$Tyvar v1)))}",
+   "lean_form": "A2[holSyntax$type,mlstring$mlstring]{((relation$RTC holSyntaxExtra$subtype1 v0 (holSyntax$Tyvar v1))=(v0=(holSyntax$Tyvar v1)))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "subterm_Var",
+   "lean": "Candle.subterm_Var",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A3[holSyntax$term,mlstring$mlstring,holSyntax$type]{((relation$RTC holSyntaxExtra$subterm1 v0 (holSyntax$Var v1 v2))=(v0=(holSyntax$Var v1 v2)))}",
+   "lean_form": "A3[holSyntax$term,mlstring$mlstring,holSyntax$type]{((relation$RTC holSyntaxExtra$subterm1 v0 (holSyntax$Var v1 v2))=(v0=(holSyntax$Var v1 v2)))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "subterm_Const",
+   "lean": "Candle.subterm_Const",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A3[holSyntax$term,mlstring$mlstring,holSyntax$type]{((relation$RTC holSyntaxExtra$subterm1 v0 (holSyntax$Const v1 v2))=(v0=(holSyntax$Const v1 v2)))}",
+   "lean_form": "A3[holSyntax$term,mlstring$mlstring,holSyntax$type]{((relation$RTC holSyntaxExtra$subterm1 v0 (holSyntax$Const v1 v2))=(v0=(holSyntax$Const v1 v2)))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "type_lt_thm",
+   "lean": "Candle.type_lt_thm",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "AND[A2[mlstring$mlstring,mlstring$mlstring]{((holSyntax$type_lt (holSyntax$Tyvar v0) (holSyntax$Tyvar v1))=(mlstring$mlstring_lt v0 v1))};A3[mlstring$mlstring,mlstring$mlstring,list$list<holSyntax$type>]{((holSyntax$type_lt (holSyntax$Tyvar v0) (holSyntax$Tyapp v1 v2))=true)};A3[mlstring$mlstring,list$list<holSyntax$type>,mlstring$mlstring]{((holSyntax$type_lt (holSyntax$Tyapp v0 v1) (holSyntax$Tyvar v2))=false)};A4[mlstring$mlstring,list$list<holSyntax$type>,mlstring$mlstring,list$list<holSyntax$type>]{((holSyntax$type_lt (holSyntax$Tyapp v0 v1) (holSyntax$Tyapp v2 v3))=(pair$LEX mlstring$mlstring_lt (list$LLEX holSyntax$type_lt) (pair$, v0 v1) (pair$, v2 v3)))}]",
+   "lean_form": "AND[A2[mlstring$mlstring,mlstring$mlstring]{((holSyntax$type_lt (holSyntax$Tyvar v0) (holSyntax$Tyvar v1))=(mlstring$mlstring_lt v0 v1))};A3[mlstring$mlstring,mlstring$mlstring,list$list<holSyntax$type>]{((holSyntax$type_lt (holSyntax$Tyvar v0) (holSyntax$Tyapp v1 v2))=true)};A3[mlstring$mlstring,list$list<holSyntax$type>,mlstring$mlstring]{((holSyntax$type_lt (holSyntax$Tyapp v0 v1) (holSyntax$Tyvar v2))=false)};A4[mlstring$mlstring,list$list<holSyntax$type>,mlstring$mlstring,list$list<holSyntax$type>]{((holSyntax$type_lt (holSyntax$Tyapp v0 v1) (holSyntax$Tyapp v2 v3))=(pair$LEX mlstring$mlstring_lt (list$LLEX holSyntax$type_lt) (pair$, v0 v1) (pair$, v2 v3)))}]",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "term_lt_thm",
+   "lean": "Candle.term_lt_thm",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "AND[A4[mlstring$mlstring,holSyntax$type,mlstring$mlstring,holSyntax$type]{((holSyntax$term_lt (holSyntax$Var v0 v1) (holSyntax$Var v2 v3))=(pair$LEX mlstring$mlstring_lt holSyntax$type_lt (pair$, v0 v1) (pair$, v2 v3)))};A4[mlstring$mlstring,holSyntax$type,mlstring$mlstring,holSyntax$type]{((holSyntax$term_lt (holSyntax$Var v0 v1) (holSyntax$Const v2 v3))=true)};A4[mlstring$mlstring,holSyntax$type,holSyntax$term,holSyntax$term]{((holSyntax$term_lt (holSyntax$Var v0 v1) (holSyntax$Comb v2 v3))=true)};A4[mlstring$mlstring,holSyntax$type,holSyntax$term,holSyntax$term]{((holSyntax$term_lt (holSyntax$Var v0 v1) (holSyntax$Abs v2 v3))=true)};A4[mlstring$mlstring,holSyntax$type,mlstring$mlstring,holSyntax$type]{((holSyntax$term_lt (holSyntax$Const v0 v1) (holSyntax$Var v2 v3))=false)};A4[mlstring$mlstring,holSyntax$type,mlstring$mlstring,holSyntax$type]{((holSyntax$term_lt (holSyntax$Const v0 v1) (holSyntax$Const v2 v3))=(pair$LEX mlstring$mlstring_lt holSyntax$type_lt (pair$, v0 v1) (pair$, v2 v3)))};A4[mlstring$mlstring,holSyntax$type,holSyntax$term,holSyntax$term]{((holSyntax$term_lt (holSyntax$Const v0 v1) (holSyntax$Comb v2 v3))=true)};A4[mlstring$mlstring,holSyntax$type,holSyntax$term,holSyntax$term]{((holSyntax$term_lt (holSyntax$Const v0 v1) (holSyntax$Abs v2 v3))=true)};A4[holSyntax$term,holSyntax$term,mlstring$mlstring,holSyntax$type]{((holSyntax$term_lt (holSyntax$Comb v0 v1) (holSyntax$Var v2 v3))=false)};A4[holSyntax$term,holSyntax$term,mlstring$mlstring,holSyntax$type]{((holSyntax$term_lt (holSyntax$Comb v0 v1) (holSyntax$Const v2 v3))=false)};A4[holSyntax$term,holSyntax$term,holSyntax$term,holSyntax$term]{((holSyntax$term_lt (holSyntax$Comb v0 v1) (holSyntax$Comb v2 v3))=(pair$LEX holSyntax$term_lt holSyntax$term_lt (pair$, v0 v1) (pair$, v2 v3)))};A4[holSyntax$term,holSyntax$term,holSyntax$term,holSyntax$term]{((holSyntax$term_lt (holSyntax$Comb v0 v1) (holSyntax$Abs v2 v3))=true)};A4[holSyntax$term,holSyntax$term,mlstring$mlstring,holSyntax$type]{((holSyntax$term_lt (holSyntax$Abs v0 v1) (holSyntax$Var v2 v3))=false)};A4[holSyntax$term,holSyntax$term,mlstring$mlstring,holSyntax$type]{((holSyntax$term_lt (holSyntax$Abs v0 v1) (holSyntax$Const v2 v3))=false)};A4[holSyntax$term,holSyntax$term,holSyntax$term,holSyntax$term]{((holSyntax$term_lt (holSyntax$Abs v0 v1) (holSyntax$Comb v2 v3))=false)};A4[holSyntax$term,holSyntax$term,holSyntax$term,holSyntax$term]{((holSyntax$term_lt (holSyntax$Abs v0 v1) (holSyntax$Abs v2 v3))=(pair$LEX holSyntax$term_lt holSyntax$term_lt (pair$, v0 v1) (pair$, v2 v3)))}]",
+   "lean_form": "AND[A4[mlstring$mlstring,holSyntax$type,mlstring$mlstring,holSyntax$type]{((holSyntax$term_lt (holSyntax$Var v0 v1) (holSyntax$Var v2 v3))=(pair$LEX mlstring$mlstring_lt holSyntax$type_lt (pair$, v0 v1) (pair$, v2 v3)))};A4[mlstring$mlstring,holSyntax$type,mlstring$mlstring,holSyntax$type]{((holSyntax$term_lt (holSyntax$Var v0 v1) (holSyntax$Const v2 v3))=true)};A4[mlstring$mlstring,holSyntax$type,holSyntax$term,holSyntax$term]{((holSyntax$term_lt (holSyntax$Var v0 v1) (holSyntax$Comb v2 v3))=true)};A4[mlstring$mlstring,holSyntax$type,holSyntax$term,holSyntax$term]{((holSyntax$term_lt (holSyntax$Var v0 v1) (holSyntax$Abs v2 v3))=true)};A4[mlstring$mlstring,holSyntax$type,mlstring$mlstring,holSyntax$type]{((holSyntax$term_lt (holSyntax$Const v0 v1) (holSyntax$Var v2 v3))=false)};A4[mlstring$mlstring,holSyntax$type,mlstring$mlstring,holSyntax$type]{((holSyntax$term_lt (holSyntax$Const v0 v1) (holSyntax$Const v2 v3))=(pair$LEX mlstring$mlstring_lt holSyntax$type_lt (pair$, v0 v1) (pair$, v2 v3)))};A4[mlstring$mlstring,holSyntax$type,holSyntax$term,holSyntax$term]{((holSyntax$term_lt (holSyntax$Const v0 v1) (holSyntax$Comb v2 v3))=true)};A4[mlstring$mlstring,holSyntax$type,holSyntax$term,holSyntax$term]{((holSyntax$term_lt (holSyntax$Const v0 v1) (holSyntax$Abs v2 v3))=true)};A4[holSyntax$term,holSyntax$term,mlstring$mlstring,holSyntax$type]{((holSyntax$term_lt (holSyntax$Comb v0 v1) (holSyntax$Var v2 v3))=false)};A4[holSyntax$term,holSyntax$term,mlstring$mlstring,holSyntax$type]{((holSyntax$term_lt (holSyntax$Comb v0 v1) (holSyntax$Const v2 v3))=false)};A4[holSyntax$term,holSyntax$term,holSyntax$term,holSyntax$term]{((holSyntax$term_lt (holSyntax$Comb v0 v1) (holSyntax$Comb v2 v3))=(pair$LEX holSyntax$term_lt holSyntax$term_lt (pair$, v0 v1) (pair$, v2 v3)))};A4[holSyntax$term,holSyntax$term,holSyntax$term,holSyntax$term]{((holSyntax$term_lt (holSyntax$Comb v0 v1) (holSyntax$Abs v2 v3))=true)};A4[holSyntax$term,holSyntax$term,mlstring$mlstring,holSyntax$type]{((holSyntax$term_lt (holSyntax$Abs v0 v1) (holSyntax$Var v2 v3))=false)};A4[holSyntax$term,holSyntax$term,mlstring$mlstring,holSyntax$type]{((holSyntax$term_lt (holSyntax$Abs v0 v1) (holSyntax$Const v2 v3))=false)};A4[holSyntax$term,holSyntax$term,holSyntax$term,holSyntax$term]{((holSyntax$term_lt (holSyntax$Abs v0 v1) (holSyntax$Comb v2 v3))=false)};A4[holSyntax$term,holSyntax$term,holSyntax$term,holSyntax$term]{((holSyntax$term_lt (holSyntax$Abs v0 v1) (holSyntax$Abs v2 v3))=(pair$LEX holSyntax$term_lt holSyntax$term_lt (pair$, v0 v1) (pair$, v2 v3)))}]",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "type_cmp_refl",
+   "lean": "Candle.type_cmp_refl",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[holSyntax$type]{((holSyntax$type_cmp v0 v0)=ternaryComparisons$EQUAL)}",
+   "lean_form": "A1[holSyntax$type]{((holSyntax$type_cmp v0 v0)=ternaryComparisons$EQUAL)}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "term_cmp_refl",
+   "lean": "Candle.term_cmp_refl",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[holSyntax$term]{((holSyntax$term_cmp v0 v0)=ternaryComparisons$EQUAL)}",
+   "lean_form": "A1[holSyntax$term]{((holSyntax$term_cmp v0 v0)=ternaryComparisons$EQUAL)}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "StrongLinearOrder_type_lt",
+   "lean": "Candle.StrongLinearOrder_type_lt",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "(relation$StrongLinearOrder holSyntax$type_lt)",
+   "lean_form": "(relation$StrongLinearOrder holSyntax$type_lt)",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "TotOrd_type_cmp",
+   "lean": "Candle.TotOrd_type_cmp",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "(toto$TotOrd holSyntax$type_cmp)",
+   "lean_form": "(toto$TotOrd holSyntax$type_cmp)",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "StrongLinearOrder_term_lt",
+   "lean": "Candle.StrongLinearOrder_term_lt",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "(relation$StrongLinearOrder holSyntax$term_lt)",
+   "lean_form": "(relation$StrongLinearOrder holSyntax$term_lt)",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "TotOrd_term_cmp",
+   "lean": "Candle.TotOrd_term_cmp",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "(toto$TotOrd holSyntax$term_cmp)",
+   "lean_form": "(toto$TotOrd holSyntax$term_cmp)",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "ALPHAVARS_eq_ordav",
+   "lean": "Candle.ALPHAVARS_eq_ordav",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A3[list$list<pair$prod<holSyntax$term,holSyntax$term>>,holSyntax$term,holSyntax$term]{((holSyntaxLib$ALPHAVARS v0 (pair$, v1 v2))=((holSyntax$ordav v0 v1 v2)=ternaryComparisons$EQUAL))}",
+   "lean_form": "A3[list$list<pair$prod<holSyntax$term,holSyntax$term>>,holSyntax$term,holSyntax$term]{((holSyntaxLib$ALPHAVARS v0 (pair$, v1 v2))=((holSyntax$ordav v0 v1 v2)=ternaryComparisons$EQUAL))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "RACONV_eq_orda",
+   "lean": "Candle.RACONV_eq_orda",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A3[list$list<pair$prod<holSyntax$term,holSyntax$term>>,holSyntax$term,holSyntax$term]{((holSyntax$RACONV v0 (pair$, v1 v2))=((holSyntax$orda v0 v1 v2)=ternaryComparisons$EQUAL))}",
+   "lean_form": "A3[list$list<pair$prod<holSyntax$term,holSyntax$term>>,holSyntax$term,holSyntax$term]{((holSyntax$RACONV v0 (pair$, v1 v2))=((holSyntax$orda v0 v1 v2)=ternaryComparisons$EQUAL))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "ACONV_eq_orda",
+   "lean": "Candle.ACONV_eq_orda",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[holSyntax$term,holSyntax$term]{((holSyntax$ACONV v0 v1)=((holSyntax$orda list$NIL v0 v1)=ternaryComparisons$EQUAL))}",
+   "lean_form": "A2[holSyntax$term,holSyntax$term]{((holSyntax$ACONV v0 v1)=((holSyntax$orda list$NIL v0 v1)=ternaryComparisons$EQUAL))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "ordav_sym",
+   "lean": "Candle.ordav_sym",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A3[list$list<pair$prod<holSyntax$term,holSyntax$term>>,holSyntax$term,holSyntax$term]{((ternaryComparisons$invert_comparison (holSyntax$ordav v0 v1 v2))=(holSyntax$ordav (list$MAP (lam.(pair$, (pair$SND v3) (pair$FST v3))) v0) v2 v1))}",
+   "lean_form": "A3[list$list<pair$prod<holSyntax$term,holSyntax$term>>,holSyntax$term,holSyntax$term]{((ternaryComparisons$invert_comparison (holSyntax$ordav v0 v1 v2))=(holSyntax$ordav (list$MAP (lam.(pair$, (pair$SND v3) (pair$FST v3))) v0) v2 v1))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "orda_sym",
+   "lean": "Candle.orda_sym",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A3[list$list<pair$prod<holSyntax$term,holSyntax$term>>,holSyntax$term,holSyntax$term]{((ternaryComparisons$invert_comparison (holSyntax$orda v0 v1 v2))=(holSyntax$orda (list$MAP (lam.(pair$, (pair$SND v3) (pair$FST v3))) v0) v2 v1))}",
+   "lean_form": "A3[list$list<pair$prod<holSyntax$term,holSyntax$term>>,holSyntax$term,holSyntax$term]{((ternaryComparisons$invert_comparison (holSyntax$orda v0 v1 v2))=(holSyntax$orda (list$MAP (lam.(pair$, (pair$SND v3) (pair$FST v3))) v0) v2 v1))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "transitive_alpha_lt",
+   "lean": "Candle.transitive_alpha_lt",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "(relation$transitive holSyntax$alpha_lt)",
+   "lean_form": "(relation$transitive holSyntax$alpha_lt)",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "alpha_lt_not_refl",
+   "lean": "Candle.alpha_lt_not_refl",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[holSyntax$term]{~(holSyntax$alpha_lt v0 v0)}",
+   "lean_form": "A1[holSyntax$term]{~(holSyntax$alpha_lt v0 v0)}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "VFREE_IN_RACONV",
+   "lean": "Candle.VFREE_IN_RACONV",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[list$list<pair$prod<holSyntax$term,holSyntax$term>>,pair$prod<holSyntax$term,holSyntax$term>]{IMP[(holSyntax$RACONV v0 v1)]=>A2[mlstring$mlstring,holSyntax$type]{(AND[(holSyntax$VFREE_IN (holSyntax$Var v2 v3) (pair$FST v1));~E1[holSyntax$term]{(LMEM (pair$, (holSyntax$Var v2 v3) v4) v0)}]=AND[(holSyntax$VFREE_IN (holSyntax$Var v2 v3) (pair$SND v1));~E1[holSyntax$term]{(LMEM (pair$, v4 (holSyntax$Var v2 v3)) v0)}])}}",
+   "lean_form": "A2[list$list<pair$prod<holSyntax$term,holSyntax$term>>,pair$prod<holSyntax$term,holSyntax$term>]{IMP[(holSyntax$RACONV v0 v1)]=>A2[mlstring$mlstring,holSyntax$type]{(AND[(holSyntax$VFREE_IN (holSyntax$Var v2 v3) (pair$FST v1));~E1[holSyntax$term]{(LMEM (pair$, (holSyntax$Var v2 v3) v4) v0)}]=AND[(holSyntax$VFREE_IN (holSyntax$Var v2 v3) (pair$SND v1));~E1[holSyntax$term]{(LMEM (pair$, v4 (holSyntax$Var v2 v3)) v0)}])}}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "VFREE_IN_ACONV",
+   "lean": "Candle.VFREE_IN_ACONV",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A4[holSyntax$term,holSyntax$term,mlstring$mlstring,holSyntax$type]{IMP[(holSyntax$ACONV v0 v1)]=>((holSyntax$VFREE_IN (holSyntax$Var v2 v3) v0)=(holSyntax$VFREE_IN (holSyntax$Var v2 v3) v1))}",
+   "lean_form": "A4[holSyntax$term,holSyntax$term,mlstring$mlstring,holSyntax$type]{IMP[(holSyntax$ACONV v0 v1)]=>((holSyntax$VFREE_IN (holSyntax$Var v2 v3) v0)=(holSyntax$VFREE_IN (holSyntax$Var v2 v3) v1))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "hypset_ok_nil",
+   "lean": "Candle.hypset_ok_nil",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "(holSyntax$hypset_ok list$NIL)",
+   "lean_form": "(holSyntax$hypset_ok list$NIL)",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "hypset_ok_sing",
+   "lean": "Candle.hypset_ok_sing",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[holSyntax$term]{(holSyntax$hypset_ok (list$CONS v0 list$NIL))}",
+   "lean_form": "A1[holSyntax$term]{(holSyntax$hypset_ok (list$CONS v0 list$NIL))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "hypset_ok_cons",
+   "lean": "Candle.hypset_ok_cons",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[holSyntax$term,list$list<holSyntax$term>]{((holSyntax$hypset_ok (list$CONS v0 v1))=AND[(list$EVERY (holSyntax$alpha_lt v0) v1);(holSyntax$hypset_ok v1)])}",
+   "lean_form": "A2[holSyntax$term,list$list<holSyntax$term>]{((holSyntax$hypset_ok (list$CONS v0 v1))=AND[(list$EVERY (holSyntax$alpha_lt v0) v1);(holSyntax$hypset_ok v1)])}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "term_union_idem",
+   "lean": "Candle.term_union_idem",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[list$list<holSyntax$term>]{((holSyntax$term_union v0 v0)=v0)}",
+   "lean_form": "A1[list$list<holSyntax$term>]{((holSyntax$term_union v0 v0)=v0)}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "term_union_thm",
+   "lean": "Candle.term_union_thm",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "AND[A1[list$list<holSyntax$term>]{((holSyntax$term_union list$NIL v0)=v0)};A1[list$list<holSyntax$term>]{((holSyntax$term_union v0 list$NIL)=v0)};A4[holSyntax$term,list$list<holSyntax$term>,holSyntax$term,list$list<holSyntax$term>]{((holSyntax$term_union (list$CONS v0 v1) (list$CONS v2 v3))=CASE[(holSyntax$orda list$NIL v0 v2)]{(list$CONS v0 (holSyntax$term_union v1 (list$CONS v2 v3)));(list$CONS v0 (holSyntax$term_union v1 v3));(list$CONS v2 (holSyntax$term_union (list$CONS v0 v1) v3))})}]",
+   "lean_form": "AND[A1[list$list<holSyntax$term>]{((holSyntax$term_union list$NIL v0)=v0)};A1[list$list<holSyntax$term>]{((holSyntax$term_union v0 list$NIL)=v0)};A4[holSyntax$term,list$list<holSyntax$term>,holSyntax$term,list$list<holSyntax$term>]{((holSyntax$term_union (list$CONS v0 v1) (list$CONS v2 v3))=CASE[(holSyntax$orda list$NIL v0 v2)]{(list$CONS v0 (holSyntax$term_union v1 (list$CONS v2 v3)));(list$CONS v0 (holSyntax$term_union v1 v3));(list$CONS v2 (holSyntax$term_union (list$CONS v0 v1) v3))})}]",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "MEM_term_union_imp",
+   "lean": "Candle.MEM_term_union_imp",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A3[holSyntax$term,list$list<holSyntax$term>,list$list<holSyntax$term>]{IMP[(LMEM v0 (holSyntax$term_union v1 v2))]=>OR[(LMEM v0 v1);(LMEM v0 v2)]}",
+   "lean_form": "A3[holSyntax$term,list$list<holSyntax$term>,list$list<holSyntax$term>]{IMP[(LMEM v0 (holSyntax$term_union v1 v2))]=>OR[(LMEM v0 v1);(LMEM v0 v2)]}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "hypset_ok_term_union",
+   "lean": "Candle.hypset_ok_term_union",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[list$list<holSyntax$term>,list$list<holSyntax$term>]{IMP[(holSyntax$hypset_ok v0);(holSyntax$hypset_ok v1)]=>(holSyntax$hypset_ok (holSyntax$term_union v0 v1))}",
+   "lean_form": "A2[list$list<holSyntax$term>,list$list<holSyntax$term>]{IMP[(holSyntax$hypset_ok v0);(holSyntax$hypset_ok v1)]=>(holSyntax$hypset_ok (holSyntax$term_union v0 v1))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "EVERY_term_union",
+   "lean": "Candle.EVERY_term_union",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A3[(holSyntax$term->min$bool),list$list<holSyntax$term>,list$list<holSyntax$term>]{IMP[(list$EVERY v0 v1);(list$EVERY v0 v2)]=>(list$EVERY v0 (holSyntax$term_union v1 v2))}",
+   "lean_form": "A3[(holSyntax$term->min$bool),list$list<holSyntax$term>,list$list<holSyntax$term>]{IMP[(list$EVERY v0 v1);(list$EVERY v0 v2)]=>(list$EVERY v0 (holSyntax$term_union v1 v2))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "MEM_term_union",
+   "lean": "Candle.MEM_term_union",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A3[list$list<holSyntax$term>,list$list<holSyntax$term>,holSyntax$term]{IMP[(holSyntax$hypset_ok v0);(holSyntax$hypset_ok v1);OR[(LMEM v2 v0);(LMEM v2 v1)]]=>E1[holSyntax$term]{AND[(LMEM v3 (holSyntax$term_union v0 v1));(holSyntax$ACONV v2 v3)]}}",
+   "lean_form": "A3[list$list<holSyntax$term>,list$list<holSyntax$term>,holSyntax$term]{IMP[(holSyntax$hypset_ok v0);(holSyntax$hypset_ok v1);OR[(LMEM v2 v0);(LMEM v2 v1)]]=>E1[holSyntax$term]{AND[(LMEM v3 (holSyntax$term_union v0 v1));(holSyntax$ACONV v2 v3)]}}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "term_remove_nil",
+   "lean": "Candle.term_remove_nil",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[holSyntax$term]{((holSyntax$term_remove v0 list$NIL)=list$NIL)}",
+   "lean_form": "A1[holSyntax$term]{((holSyntax$term_remove v0 list$NIL)=list$NIL)}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "MEM_term_remove_imp",
+   "lean": "Candle.MEM_term_remove_imp",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A3[holSyntax$term,holSyntax$term,list$list<holSyntax$term>]{IMP[(LMEM v0 (holSyntax$term_remove v1 v2))]=>AND[(LMEM v0 v2);IMP[(holSyntax$hypset_ok v2)]=>~(holSyntax$ACONV v1 v0)]}",
+   "lean_form": "A3[holSyntax$term,holSyntax$term,list$list<holSyntax$term>]{IMP[(LMEM v0 (holSyntax$term_remove v1 v2))]=>AND[(LMEM v0 v2);IMP[(holSyntax$hypset_ok v2)]=>~(holSyntax$ACONV v1 v0)]}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "hypset_ok_term_remove",
+   "lean": "Candle.hypset_ok_term_remove",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[list$list<holSyntax$term>]{IMP[(holSyntax$hypset_ok v0)]=>A1[holSyntax$term]{(holSyntax$hypset_ok (holSyntax$term_remove v1 v0))}}",
+   "lean_form": "A1[list$list<holSyntax$term>]{IMP[(holSyntax$hypset_ok v0)]=>A1[holSyntax$term]{(holSyntax$hypset_ok (holSyntax$term_remove v1 v0))}}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "EVERY_term_remove",
+   "lean": "Candle.EVERY_term_remove",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A3[(holSyntax$term->min$bool),list$list<holSyntax$term>,holSyntax$term]{IMP[(list$EVERY v0 v1)]=>(list$EVERY v0 (holSyntax$term_remove v2 v1))}",
+   "lean_form": "A3[(holSyntax$term->min$bool),list$list<holSyntax$term>,holSyntax$term]{IMP[(list$EVERY v0 v1)]=>(list$EVERY v0 (holSyntax$term_remove v2 v1))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "MEM_term_remove",
+   "lean": "Candle.MEM_term_remove",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A3[holSyntax$term,list$list<holSyntax$term>,holSyntax$term]{IMP[(LMEM v0 v1);~(holSyntax$ACONV v2 v0);(holSyntax$hypset_ok v1)]=>(LMEM v0 (holSyntax$term_remove v2 v1))}",
+   "lean_form": "A3[holSyntax$term,list$list<holSyntax$term>,holSyntax$term]{IMP[(LMEM v0 v1);~(holSyntax$ACONV v2 v0);(holSyntax$hypset_ok v1)]=>(LMEM v0 (holSyntax$term_remove v2 v1))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "term_image_nil",
+   "lean": "Candle.term_image_nil",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[(holSyntax$term->holSyntax$term)]{((holSyntax$term_image v0 list$NIL)=list$NIL)}",
+   "lean_form": "A1[(holSyntax$term->holSyntax$term)]{((holSyntax$term_image v0 list$NIL)=list$NIL)}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "MEM_term_image_imp",
+   "lean": "Candle.MEM_term_image_imp",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A3[holSyntax$term,(holSyntax$term->holSyntax$term),list$list<holSyntax$term>]{IMP[(LMEM v0 (holSyntax$term_image v1 v2))]=>E1[holSyntax$term]{AND[(LMEM v3 v2);(v0=(v1 v3))]}}",
+   "lean_form": "A3[holSyntax$term,(holSyntax$term->holSyntax$term),list$list<holSyntax$term>]{IMP[(LMEM v0 (holSyntax$term_image v1 v2))]=>E1[holSyntax$term]{AND[(LMEM v3 v2);(v0=(v1 v3))]}}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "hypset_ok_term_image",
+   "lean": "Candle.hypset_ok_term_image",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[list$list<holSyntax$term>,(holSyntax$term->holSyntax$term)]{IMP[(holSyntax$hypset_ok v0)]=>(holSyntax$hypset_ok (holSyntax$term_image v1 v0))}",
+   "lean_form": "A2[list$list<holSyntax$term>,(holSyntax$term->holSyntax$term)]{IMP[(holSyntax$hypset_ok v0)]=>(holSyntax$hypset_ok (holSyntax$term_image v1 v0))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "MEM_term_image",
+   "lean": "Candle.MEM_term_image",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A3[holSyntax$term,list$list<holSyntax$term>,(holSyntax$term->holSyntax$term)]{IMP[(LMEM v0 v1);(holSyntax$hypset_ok v1)]=>E1[holSyntax$term]{AND[(LMEM v3 (holSyntax$term_image v2 v1));(holSyntax$ACONV (v2 v0) v3)]}}",
+   "lean_form": "A3[holSyntax$term,list$list<holSyntax$term>,(holSyntax$term->holSyntax$term)]{IMP[(LMEM v0 v1);(holSyntax$hypset_ok v1)]=>E1[holSyntax$term]{AND[(LMEM v3 (holSyntax$term_image v2 v1));(holSyntax$ACONV (v2 v0) v3)]}}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "VSUBST_HAS_TYPE",
+   "lean": "Candle.VSUBST_HAS_TYPE",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A3[holSyntax$term,holSyntax$type,list$list<pair$prod<holSyntax$term,holSyntax$term>>]{IMP[(holSyntax$has_type v0 v1);A2[holSyntax$term,holSyntax$term]{IMP[(LMEM (pair$, v3 v4) v2)]=>E2[mlstring$mlstring,holSyntax$type]{AND[(v4=(holSyntax$Var v5 v6));(holSyntax$has_type v3 v6)]}}]=>(holSyntax$has_type (holSyntax$VSUBST v2 v0) v1)}",
+   "lean_form": "A3[holSyntax$term,holSyntax$type,list$list<pair$prod<holSyntax$term,holSyntax$term>>]{IMP[(holSyntax$has_type v0 v1);A2[holSyntax$term,holSyntax$term]{IMP[(LMEM (pair$, v3 v4) v2)]=>E2[mlstring$mlstring,holSyntax$type]{AND[(v4=(holSyntax$Var v5 v6));(holSyntax$has_type v3 v6)]}}]=>(holSyntax$has_type (holSyntax$VSUBST v2 v0) v1)}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "VSUBST_WELLTYPED",
+   "lean": "Candle.VSUBST_WELLTYPED",
+   "flag": true,
+   "reasons": [
+    {
+     "class": "binder-types",
+     "detail": "HOL4 ...rm,holSyntax$term>>,T0]{IMP[(holSyntax$welltyped v0);A2[holSyntax | Lean ...rm,holSyntax$term>>,holSyntax$type]{IMP[(holSyntax$welltyped v0);"
+    }
+   ],
+   "hol4_form": "A3[holSyntax$term,list$list<pair$prod<holSyntax$term,holSyntax$term>>,T0]{IMP[(holSyntax$welltyped v0);A2[holSyntax$term,holSyntax$term]{IMP[(LMEM (pair$, v3 v4) v1)]=>E2[mlstring$mlstring,holSyntax$type]{AND[(v4=(holSyntax$Var v5 v6));(holSyntax$has_type v3 v6)]}}]=>(holSyntax$welltyped (holSyntax$VSUBST v1 v0))}",
+   "lean_form": "A3[holSyntax$term,list$list<pair$prod<holSyntax$term,holSyntax$term>>,holSyntax$type]{IMP[(holSyntax$welltyped v0);A2[holSyntax$term,holSyntax$term]{IMP[(LMEM (pair$, v3 v4) v1)]=>E2[mlstring$mlstring,holSyntax$type]{AND[(v4=(holSyntax$Var v5 v6));(holSyntax$has_type v3 v6)]}}]=>(holSyntax$welltyped (holSyntax$VSUBST v1 v0))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "VFREE_IN_VSUBST",
+   "lean": "Candle.VFREE_IN_VSUBST",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A4[holSyntax$term,mlstring$mlstring,holSyntax$type,list$list<pair$prod<holSyntax$term,holSyntax$term>>]{IMP[(holSyntax$welltyped v0)]=>((holSyntax$VFREE_IN (holSyntax$Var v1 v2) (holSyntax$VSUBST v3 v0))=E2[mlstring$mlstring,holSyntax$type]{AND[(holSyntax$VFREE_IN (holSyntax$Var v4 v5) v0);(holSyntax$VFREE_IN (holSyntax$Var v1 v2) (holSyntaxLib$REV_ASSOCD (holSyntax$Var v4 v5) v3 (holSyntax$Var v4 v5)))]})}",
+   "lean_form": "A4[holSyntax$term,mlstring$mlstring,holSyntax$type,list$list<pair$prod<holSyntax$term,holSyntax$term>>]{IMP[(holSyntax$welltyped v0)]=>((holSyntax$VFREE_IN (holSyntax$Var v1 v2) (holSyntax$VSUBST v3 v0))=E2[mlstring$mlstring,holSyntax$type]{AND[(holSyntax$VFREE_IN (holSyntax$Var v4 v5) v0);(holSyntax$VFREE_IN (holSyntax$Var v1 v2) (holSyntaxLib$REV_ASSOCD (holSyntax$Var v4 v5) v3 (holSyntax$Var v4 v5)))]})}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "VSUBST_NIL",
+   "lean": "Candle.VSUBST_NIL",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[holSyntax$term]{((holSyntax$VSUBST list$NIL v0)=v0)}",
+   "lean_form": "A1[holSyntax$term]{((holSyntax$VSUBST list$NIL v0)=v0)}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "INST_CORE_HAS_TYPE",
+   "lean": "Candle.INST_CORE_HAS_TYPE",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A4[holSyntax$term,num$num,list$list<pair$prod<holSyntax$term,holSyntax$term>>,list$list<pair$prod<holSyntax$type,holSyntax$type>>]{IMP[(holSyntax$welltyped v0);((holSyntax$sizeof v0)=v1);A2[holSyntax$term,holSyntax$term]{IMP[(LMEM (pair$, v4 v5) v2)]=>E2[mlstring$mlstring,holSyntax$type]{AND[(v4=(holSyntax$Var v6 v7));(v5=(holSyntax$Var v6 (holSyntax$TYPE_SUBST v3 v7)))]}}]=>OR[E2[mlstring$mlstring,holSyntax$type]{AND[((holSyntax$INST_CORE v2 v3 v0)=(holSyntaxLib$Clash (holSyntax$Var v4 (holSyntax$TYPE_SUBST v3 v5))));(holSyntax$VFREE_IN (holSyntax$Var v4 v5) v0);~((holSyntaxLib$REV_ASSOCD (holSyntax$Var v4 (holSyntax$TYPE_SUBST v3 v5)) v2 (holSyntax$Var v4 v5))=(holSyntax$Var v4 v5))]};AND[A2[mlstring$mlstring,holSyntax$type]{IMP[(holSyntax$VFREE_IN (holSyntax$Var v4 v5) v0)]=>((holSyntaxLib$REV_ASSOCD (holSyntax$Var v4 (holSyntax$TYPE_SUBST v3 v5)) v2 (holSyntax$Var v4 v5))=(holSyntax$Var v4 v5))};E1[holSyntax$term]{AND[((holSyntax$INST_CORE v2 v3 v0)=(holSyntaxLib$Result v4));(holSyntax$has_type v4 (holSyntax$TYPE_SUBST v3 (holSyntax$typeof v0)));A2[mlstring$mlstring,holSyntax$type]{((holSyntax$VFREE_IN (holSyntax$Var v5 v6) v4)=E1[holSyntax$type]{AND[(holSyntax$VFREE_IN (holSyntax$Var v5 v7) v0);(v6=(holSyntax$TYPE_SUBST v3 v7))]})}]}]]}",
+   "lean_form": "A4[holSyntax$term,num$num,list$list<pair$prod<holSyntax$term,holSyntax$term>>,list$list<pair$prod<holSyntax$type,holSyntax$type>>]{IMP[(holSyntax$welltyped v0);((holSyntax$sizeof v0)=v1);A2[holSyntax$term,holSyntax$term]{IMP[(LMEM (pair$, v4 v5) v2)]=>E2[mlstring$mlstring,holSyntax$type]{AND[(v4=(holSyntax$Var v6 v7));(v5=(holSyntax$Var v6 (holSyntax$TYPE_SUBST v3 v7)))]}}]=>OR[E2[mlstring$mlstring,holSyntax$type]{AND[((holSyntax$INST_CORE v2 v3 v0)=(holSyntaxLib$Clash (holSyntax$Var v4 (holSyntax$TYPE_SUBST v3 v5))));(holSyntax$VFREE_IN (holSyntax$Var v4 v5) v0);~((holSyntaxLib$REV_ASSOCD (holSyntax$Var v4 (holSyntax$TYPE_SUBST v3 v5)) v2 (holSyntax$Var v4 v5))=(holSyntax$Var v4 v5))]};AND[A2[mlstring$mlstring,holSyntax$type]{IMP[(holSyntax$VFREE_IN (holSyntax$Var v4 v5) v0)]=>((holSyntaxLib$REV_ASSOCD (holSyntax$Var v4 (holSyntax$TYPE_SUBST v3 v5)) v2 (holSyntax$Var v4 v5))=(holSyntax$Var v4 v5))};E1[holSyntax$term]{AND[((holSyntax$INST_CORE v2 v3 v0)=(holSyntaxLib$Result v4));(holSyntax$has_type v4 (holSyntax$TYPE_SUBST v3 (holSyntax$typeof v0)));A2[mlstring$mlstring,holSyntax$type]{((holSyntax$VFREE_IN (holSyntax$Var v5 v6) v4)=E1[holSyntax$type]{AND[(holSyntax$VFREE_IN (holSyntax$Var v5 v7) v0);(v6=(holSyntax$TYPE_SUBST v3 v7))]})}]}]]}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "INST_CORE_NIL_IS_RESULT",
+   "lean": "Candle.INST_CORE_NIL_IS_RESULT",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[holSyntax$term,list$list<pair$prod<holSyntax$type,holSyntax$type>>]{IMP[(holSyntax$welltyped v0)]=>(holSyntaxLib$IS_RESULT (holSyntax$INST_CORE list$NIL v1 v0))}",
+   "lean_form": "A2[holSyntax$term,list$list<pair$prod<holSyntax$type,holSyntax$type>>]{IMP[(holSyntax$welltyped v0)]=>(holSyntaxLib$IS_RESULT (holSyntax$INST_CORE list$NIL v1 v0))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "INST_HAS_TYPE",
+   "lean": "Candle.INST_HAS_TYPE",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A4[holSyntax$term,holSyntax$type,holSyntax$type,list$list<pair$prod<holSyntax$type,holSyntax$type>>]{IMP[(holSyntax$has_type v0 v1);(v2=(holSyntax$TYPE_SUBST v3 v1))]=>(holSyntax$has_type (holSyntax$INST v3 v0) v2)}",
+   "lean_form": "A4[holSyntax$term,holSyntax$type,holSyntax$type,list$list<pair$prod<holSyntax$type,holSyntax$type>>]{IMP[(holSyntax$has_type v0 v1);(v2=(holSyntax$TYPE_SUBST v3 v1))]=>(holSyntax$has_type (holSyntax$INST v3 v0) v2)}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "INST_WELLTYPED",
+   "lean": "Candle.INST_WELLTYPED",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[holSyntax$term,list$list<pair$prod<holSyntax$type,holSyntax$type>>]{IMP[(holSyntax$welltyped v0)]=>(holSyntax$welltyped (holSyntax$INST v1 v0))}",
+   "lean_form": "A2[holSyntax$term,list$list<pair$prod<holSyntax$type,holSyntax$type>>]{IMP[(holSyntax$welltyped v0)]=>(holSyntax$welltyped (holSyntax$INST v1 v0))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "tyvars_ALL_DISTINCT",
+   "lean": "Candle.tyvars_ALL_DISTINCT",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[holSyntax$type]{(list$ALL_DISTINCT (holSyntax$tyvars v0))}",
+   "lean_form": "A1[holSyntax$type]{(list$ALL_DISTINCT (holSyntax$tyvars v0))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "tvars_ALL_DISTINCT",
+   "lean": "Candle.tvars_ALL_DISTINCT",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[holSyntax$term]{(list$ALL_DISTINCT (holSyntax$tvars v0))}",
+   "lean_form": "A1[holSyntax$term]{(list$ALL_DISTINCT (holSyntax$tvars v0))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "EQUATION_HAS_TYPE_BOOL",
+   "lean": "Candle.EQUATION_HAS_TYPE_BOOL",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[holSyntax$term,holSyntax$term]{((holSyntax$has_type (holSyntax$=== v0 v1) (holSyntax$Tyapp (mlstring$implode \"bool\") list$NIL))=AND[(holSyntax$welltyped v0);(holSyntax$welltyped v1);((holSyntax$typeof v0)=(holSyntax$typeof v1))])}",
+   "lean_form": "A2[holSyntax$term,holSyntax$term]{((holSyntax$has_type (holSyntax$=== v0 v1) (holSyntax$Tyapp (mlstring$implode \"bool\") list$NIL))=AND[(holSyntax$welltyped v0);(holSyntax$welltyped v1);((holSyntax$typeof v0)=(holSyntax$typeof v1))])}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "type_ok_TYPE_SUBST",
+   "lean": "Candle.type_ok_TYPE_SUBST",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A3[finite_map$fmap<mlstring$mlstring,num$num>,holSyntax$type,list$list<pair$prod<holSyntax$type,holSyntax$type>>]{IMP[(holSyntax$type_ok v0 v1);(list$EVERY (holSyntax$type_ok v0) (list$MAP pair$FST v2))]=>(holSyntax$type_ok v0 (holSyntax$TYPE_SUBST v2 v1))}",
+   "lean_form": "A3[finite_map$fmap<mlstring$mlstring,num$num>,holSyntax$type,list$list<pair$prod<holSyntax$type,holSyntax$type>>]{IMP[(holSyntax$type_ok v0 v1);(list$EVERY (holSyntax$type_ok v0) (list$MAP pair$FST v2))]=>(holSyntax$type_ok v0 (holSyntax$TYPE_SUBST v2 v1))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "type_ok_TYPE_SUBST_imp",
+   "lean": "Candle.type_ok_TYPE_SUBST_imp",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A3[finite_map$fmap<mlstring$mlstring,num$num>,list$list<pair$prod<holSyntax$type,holSyntax$type>>,holSyntax$type]{IMP[(holSyntax$type_ok v0 (holSyntax$TYPE_SUBST v1 v2))]=>A1[mlstring$mlstring]{IMP[(LMEM v3 (holSyntax$tyvars v2))]=>(holSyntax$type_ok v0 (holSyntax$TYPE_SUBST v1 (holSyntax$Tyvar v3)))}}",
+   "lean_form": "A3[finite_map$fmap<mlstring$mlstring,num$num>,list$list<pair$prod<holSyntax$type,holSyntax$type>>,holSyntax$type]{IMP[(holSyntax$type_ok v0 (holSyntax$TYPE_SUBST v1 v2))]=>A1[mlstring$mlstring]{IMP[(LMEM v3 (holSyntax$tyvars v2))]=>(holSyntax$type_ok v0 (holSyntax$TYPE_SUBST v1 (holSyntax$Tyvar v3)))}}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "term_ok_welltyped",
+   "lean": "Candle.term_ok_welltyped",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[pair$prod<finite_map$fmap<mlstring$mlstring,num$num>,finite_map$fmap<mlstring$mlstring,holSyntax$type>>,holSyntax$term]{IMP[(holSyntax$term_ok v0 v1)]=>(holSyntax$welltyped v1)}",
+   "lean_form": "A2[pair$prod<finite_map$fmap<mlstring$mlstring,num$num>,finite_map$fmap<mlstring$mlstring,holSyntax$type>>,holSyntax$term]{IMP[(holSyntax$term_ok v0 v1)]=>(holSyntax$welltyped v1)}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "term_ok_type_ok",
+   "lean": "Candle.term_ok_type_ok",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[pair$prod<finite_map$fmap<mlstring$mlstring,num$num>,finite_map$fmap<mlstring$mlstring,holSyntax$type>>,holSyntax$term]{IMP[(holSyntax$is_std_sig v0);(holSyntax$term_ok v0 v1)]=>(holSyntax$type_ok (pair$FST v0) (holSyntax$typeof v1))}",
+   "lean_form": "A2[pair$prod<finite_map$fmap<mlstring$mlstring,num$num>,finite_map$fmap<mlstring$mlstring,holSyntax$type>>,holSyntax$term]{IMP[(holSyntax$is_std_sig v0);(holSyntax$term_ok v0 v1)]=>(holSyntax$type_ok (pair$FST v0) (holSyntax$typeof v1))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "term_ok_equation",
+   "lean": "Candle.term_ok_equation",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A3[pair$prod<finite_map$fmap<mlstring$mlstring,num$num>,finite_map$fmap<mlstring$mlstring,holSyntax$type>>,holSyntax$term,holSyntax$term]{IMP[(holSyntax$is_std_sig v0)]=>((holSyntax$term_ok v0 (holSyntax$=== v1 v2))=AND[(holSyntax$term_ok v0 v1);(holSyntax$term_ok v0 v2);((holSyntax$typeof v2)=(holSyntax$typeof v1))])}",
+   "lean_form": "A3[pair$prod<finite_map$fmap<mlstring$mlstring,num$num>,finite_map$fmap<mlstring$mlstring,holSyntax$type>>,holSyntax$term,holSyntax$term]{IMP[(holSyntax$is_std_sig v0)]=>((holSyntax$term_ok v0 (holSyntax$=== v1 v2))=AND[(holSyntax$term_ok v0 v1);(holSyntax$term_ok v0 v2);((holSyntax$typeof v2)=(holSyntax$typeof v1))])}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "term_ok_VSUBST",
+   "lean": "Candle.term_ok_VSUBST",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A3[pair$prod<finite_map$fmap<mlstring$mlstring,num$num>,finite_map$fmap<mlstring$mlstring,holSyntax$type>>,holSyntax$term,list$list<pair$prod<holSyntax$term,holSyntax$term>>]{IMP[(holSyntax$term_ok v0 v1);A2[holSyntax$term,holSyntax$term]{IMP[(LMEM (pair$, v3 v4) v2)]=>E2[mlstring$mlstring,holSyntax$type]{AND[(v4=(holSyntax$Var v5 v6));(holSyntax$has_type v3 v6);(holSyntax$term_ok v0 v3)]}}]=>(holSyntax$term_ok v0 (holSyntax$VSUBST v2 v1))}",
+   "lean_form": "A3[pair$prod<finite_map$fmap<mlstring$mlstring,num$num>,finite_map$fmap<mlstring$mlstring,holSyntax$type>>,holSyntax$term,list$list<pair$prod<holSyntax$term,holSyntax$term>>]{IMP[(holSyntax$term_ok v0 v1);A2[holSyntax$term,holSyntax$term]{IMP[(LMEM (pair$, v3 v4) v2)]=>E2[mlstring$mlstring,holSyntax$type]{AND[(v4=(holSyntax$Var v5 v6));(holSyntax$has_type v3 v6);(holSyntax$term_ok v0 v3)]}}]=>(holSyntax$term_ok v0 (holSyntax$VSUBST v2 v1))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "term_ok_INST_CORE",
+   "lean": "Candle.term_ok_INST_CORE",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A4[pair$prod<finite_map$fmap<mlstring$mlstring,num$num>,finite_map$fmap<mlstring$mlstring,holSyntax$type>>,holSyntax$term,list$list<pair$prod<holSyntax$type,holSyntax$type>>,list$list<pair$prod<holSyntax$term,holSyntax$term>>]{IMP[(holSyntax$term_ok v0 v1);(list$EVERY (holSyntax$type_ok (pair$FST v0)) (list$MAP pair$FST v2));A2[holSyntax$term,holSyntax$term]{IMP[(LMEM (pair$, v4 v5) v3)]=>E2[mlstring$mlstring,holSyntax$type]{AND[(v4=(holSyntax$Var v6 v7));(v5=(holSyntax$Var v6 (holSyntax$TYPE_SUBST v2 v7)))]}};(holSyntaxLib$IS_RESULT (holSyntax$INST_CORE v3 v2 v1))]=>(holSyntax$term_ok v0 (holSyntaxLib$RESULT (holSyntax$INST_CORE v3 v2 v1)))}",
+   "lean_form": "A4[pair$prod<finite_map$fmap<mlstring$mlstring,num$num>,finite_map$fmap<mlstring$mlstring,holSyntax$type>>,holSyntax$term,list$list<pair$prod<holSyntax$type,holSyntax$type>>,list$list<pair$prod<holSyntax$term,holSyntax$term>>]{IMP[(holSyntax$term_ok v0 v1);(list$EVERY (holSyntax$type_ok (pair$FST v0)) (list$MAP pair$FST v2));A2[holSyntax$term,holSyntax$term]{IMP[(LMEM (pair$, v4 v5) v3)]=>E2[mlstring$mlstring,holSyntax$type]{AND[(v4=(holSyntax$Var v6 v7));(v5=(holSyntax$Var v6 (holSyntax$TYPE_SUBST v2 v7)))]}};(holSyntaxLib$IS_RESULT (holSyntax$INST_CORE v3 v2 v1))]=>(holSyntax$term_ok v0 (holSyntaxLib$RESULT (holSyntax$INST_CORE v3 v2 v1)))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "term_ok_INST",
+   "lean": "Candle.term_ok_INST",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A3[pair$prod<finite_map$fmap<mlstring$mlstring,num$num>,finite_map$fmap<mlstring$mlstring,holSyntax$type>>,holSyntax$term,list$list<pair$prod<holSyntax$type,holSyntax$type>>]{IMP[(holSyntax$term_ok v0 v1);(list$EVERY (holSyntax$type_ok (pair$FST v0)) (list$MAP pair$FST v2))]=>(holSyntax$term_ok v0 (holSyntax$INST v2 v1))}",
+   "lean_form": "A3[pair$prod<finite_map$fmap<mlstring$mlstring,num$num>,finite_map$fmap<mlstring$mlstring,holSyntax$type>>,holSyntax$term,list$list<pair$prod<holSyntax$type,holSyntax$type>>]{IMP[(holSyntax$term_ok v0 v1);(list$EVERY (holSyntax$type_ok (pair$FST v0)) (list$MAP pair$FST v2))]=>(holSyntax$term_ok v0 (holSyntax$INST v2 v1))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "term_ok_raconv",
+   "lean": "Candle.term_ok_raconv",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[list$list<pair$prod<holSyntax$term,holSyntax$term>>,pair$prod<holSyntax$term,holSyntax$term>]{IMP[(holSyntax$RACONV v0 v1)]=>A1[pair$prod<finite_map$fmap<mlstring$mlstring,num$num>,finite_map$fmap<mlstring$mlstring,holSyntax$type>>]{IMP[(list$EVERY (lam.AND[(holSyntax$welltyped (pair$FST v3));(holSyntax$welltyped (pair$SND v3));((holSyntax$typeof (pair$FST v3))=(holSyntax$typeof (pair$SND v3)));(holSyntax$type_ok (pair$FST v2) (holSyntax$typeof (pair$FST v3)))]) v0);(holSyntax$term_ok v2 (pair$FST v1));(holSyntax$welltyped (pair$SND v1))]=>(holSyntax$term_ok v2 (pair$SND v1))}}",
+   "lean_form": "A2[list$list<pair$prod<holSyntax$term,holSyntax$term>>,pair$prod<holSyntax$term,holSyntax$term>]{IMP[(holSyntax$RACONV v0 v1)]=>A1[pair$prod<finite_map$fmap<mlstring$mlstring,num$num>,finite_map$fmap<mlstring$mlstring,holSyntax$type>>]{IMP[(list$EVERY (lam.AND[(holSyntax$welltyped (pair$FST v3));(holSyntax$welltyped (pair$SND v3));((holSyntax$typeof (pair$FST v3))=(holSyntax$typeof (pair$SND v3)));(holSyntax$type_ok (pair$FST v2) (holSyntax$typeof (pair$FST v3)))]) v0);(holSyntax$term_ok v2 (pair$FST v1));(holSyntax$welltyped (pair$SND v1))]=>(holSyntax$term_ok v2 (pair$SND v1))}}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "term_ok_aconv",
+   "lean": "Candle.term_ok_aconv",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A3[holSyntax$term,holSyntax$term,pair$prod<finite_map$fmap<mlstring$mlstring,num$num>,finite_map$fmap<mlstring$mlstring,holSyntax$type>>]{IMP[(holSyntax$ACONV v0 v1);(holSyntax$term_ok v2 v0);(holSyntax$welltyped v1)]=>(holSyntax$term_ok v2 v1)}",
+   "lean_form": "A3[holSyntax$term,holSyntax$term,pair$prod<finite_map$fmap<mlstring$mlstring,num$num>,finite_map$fmap<mlstring$mlstring,holSyntax$type>>]{IMP[(holSyntax$ACONV v0 v1);(holSyntax$term_ok v2 v0);(holSyntax$welltyped v1)]=>(holSyntax$term_ok v2 v1)}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "bind_not_free",
+   "lean": "Candle.bind_not_free",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A3[pair$prod<mlstring$mlstring,holSyntax$type>,holSyntaxExtra$dbterm,num$num]{IMP[~(holSyntaxExtra$dbVFREE_IN (holSyntaxExtra$dbVar (pair$FST v0) (pair$SND v0)) v1)]=>((holSyntaxExtra$bind v0 v2 v1)=v1)}",
+   "lean_form": "A3[pair$prod<mlstring$mlstring,holSyntax$type>,holSyntaxExtra$dbterm,num$num]{IMP[~(holSyntaxExtra$dbVFREE_IN (holSyntaxExtra$dbVar (pair$FST v0) (pair$SND v0)) v1)]=>((holSyntaxExtra$bind v0 v2 v1)=v1)}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "bind_dbVSUBST",
+   "lean": "Candle.bind_dbVSUBST",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A4[pair$prod<mlstring$mlstring,holSyntax$type>,list$list<pair$prod<holSyntaxExtra$dbterm,holSyntaxExtra$dbterm>>,holSyntaxExtra$dbterm,num$num]{IMP[~(LMEM (holSyntaxExtra$dbVar (pair$FST v0) (pair$SND v0)) (list$MAP pair$SND v1));A1[holSyntaxExtra$dbterm]{IMP[(holSyntaxExtra$dbVFREE_IN v4 v2);(LMEM v4 (list$MAP pair$SND v1))]=>~(holSyntaxExtra$dbVFREE_IN (holSyntaxExtra$dbVar (pair$FST v0) (pair$SND v0)) (holSyntaxLib$REV_ASSOCD v4 v1 v4))}]=>((holSyntaxExtra$bind v0 v3 (holSyntaxExtra$dbVSUBST v1 v2))=(holSyntaxExtra$dbVSUBST v1 (holSyntaxExtra$bind v0 v3 v2)))}",
+   "lean_form": "A4[pair$prod<mlstring$mlstring,holSyntax$type>,list$list<pair$prod<holSyntaxExtra$dbterm,holSyntaxExtra$dbterm>>,holSyntaxExtra$dbterm,num$num]{IMP[~(LMEM (holSyntaxExtra$dbVar (pair$FST v0) (pair$SND v0)) (list$MAP pair$SND v1));A1[holSyntaxExtra$dbterm]{IMP[(holSyntaxExtra$dbVFREE_IN v4 v2);(LMEM v4 (list$MAP pair$SND v1))]=>~(holSyntaxExtra$dbVFREE_IN (holSyntaxExtra$dbVar (pair$FST v0) (pair$SND v0)) (holSyntaxLib$REV_ASSOCD v4 v1 v4))}]=>((holSyntaxExtra$bind v0 v3 (holSyntaxExtra$dbVSUBST v1 v2))=(holSyntaxExtra$dbVSUBST v1 (holSyntaxExtra$bind v0 v3 v2)))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "bind_dbVSUBST_cons",
+   "lean": "Candle.bind_dbVSUBST_cons",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A5[pair$prod<mlstring$mlstring,holSyntax$type>,list$list<pair$prod<holSyntaxExtra$dbterm,holSyntaxExtra$dbterm>>,pair$prod<mlstring$mlstring,holSyntax$type>,num$num,holSyntaxExtra$dbterm]{IMP[~(holSyntaxExtra$dbVFREE_IN (holSyntaxExtra$dbVar (pair$FST v0) (pair$SND v0)) (holSyntaxExtra$dbVSUBST v1 (holSyntaxExtra$bind v2 v3 v4)))]=>((holSyntaxExtra$bind v0 v3 (holSyntaxExtra$dbVSUBST (list$CONS (pair$, (holSyntaxExtra$dbVar (pair$FST v0) (pair$SND v0)) (holSyntaxExtra$dbVar (pair$FST v2) (pair$SND v2))) v1) v4))=(holSyntaxExtra$dbVSUBST v1 (holSyntaxExtra$bind v2 v3 v4)))}",
+   "lean_form": "A5[pair$prod<mlstring$mlstring,holSyntax$type>,list$list<pair$prod<holSyntaxExtra$dbterm,holSyntaxExtra$dbterm>>,pair$prod<mlstring$mlstring,holSyntax$type>,num$num,holSyntaxExtra$dbterm]{IMP[~(holSyntaxExtra$dbVFREE_IN (holSyntaxExtra$dbVar (pair$FST v0) (pair$SND v0)) (holSyntaxExtra$dbVSUBST v1 (holSyntaxExtra$bind v2 v3 v4)))]=>((holSyntaxExtra$bind v0 v3 (holSyntaxExtra$dbVSUBST (list$CONS (pair$, (holSyntaxExtra$dbVar (pair$FST v0) (pair$SND v0)) (holSyntaxExtra$dbVar (pair$FST v2) (pair$SND v2))) v1) v4))=(holSyntaxExtra$dbVSUBST v1 (holSyntaxExtra$bind v2 v3 v4)))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "dbVSUBST_frees",
+   "lean": "Candle.dbVSUBST_frees",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A3[holSyntaxExtra$dbterm,list$list<pair$prod<holSyntaxExtra$dbterm,holSyntaxExtra$dbterm>>,list$list<pair$prod<holSyntaxExtra$dbterm,holSyntaxExtra$dbterm>>]{IMP[A1[holSyntaxExtra$dbterm]{IMP[(holSyntaxExtra$dbVFREE_IN v3 v0)]=>((holSyntaxLib$REV_ASSOCD v3 v1 v3)=(holSyntaxLib$REV_ASSOCD v3 v2 v3))}]=>((holSyntaxExtra$dbVSUBST v1 v0)=(holSyntaxExtra$dbVSUBST v2 v0))}",
+   "lean_form": "A3[holSyntaxExtra$dbterm,list$list<pair$prod<holSyntaxExtra$dbterm,holSyntaxExtra$dbterm>>,list$list<pair$prod<holSyntaxExtra$dbterm,holSyntaxExtra$dbterm>>]{IMP[A1[holSyntaxExtra$dbterm]{IMP[(holSyntaxExtra$dbVFREE_IN v3 v0)]=>((holSyntaxLib$REV_ASSOCD v3 v1 v3)=(holSyntaxLib$REV_ASSOCD v3 v2 v3))}]=>((holSyntaxExtra$dbVSUBST v1 v0)=(holSyntaxExtra$dbVSUBST v2 v0))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "dbVFREE_IN_bind",
+   "lean": "Candle.dbVFREE_IN_bind",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A5[holSyntaxExtra$dbterm,pair$prod<mlstring$mlstring,holSyntax$type>,num$num,holSyntaxExtra$dbterm,T0]{((holSyntaxExtra$dbVFREE_IN v0 (holSyntaxExtra$bind v1 v2 v3))=AND[~(v0=(holSyntaxExtra$dbVar (pair$FST v1) (pair$SND v1)));(holSyntaxExtra$dbVFREE_IN v0 v3)])}",
+   "lean_form": "A5[holSyntaxExtra$dbterm,pair$prod<mlstring$mlstring,holSyntax$type>,num$num,holSyntaxExtra$dbterm,T0]{((holSyntaxExtra$dbVFREE_IN v0 (holSyntaxExtra$bind v1 v2 v3))=AND[~(v0=(holSyntaxExtra$dbVar (pair$FST v1) (pair$SND v1)));(holSyntaxExtra$dbVFREE_IN v0 v3)])}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "dbVFREE_IN_VFREE_IN",
+   "lean": "Candle.dbVFREE_IN_VFREE_IN",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[holSyntax$term,holSyntax$term]{IMP[(holSyntax$welltyped v0)]=>((holSyntaxExtra$dbVFREE_IN (holSyntaxExtra$db v1) (holSyntaxExtra$db v0))=(holSyntax$VFREE_IN v1 v0))}",
+   "lean_form": "A2[holSyntax$term,holSyntax$term]{IMP[(holSyntax$welltyped v0)]=>((holSyntaxExtra$dbVFREE_IN (holSyntaxExtra$db v1) (holSyntaxExtra$db v0))=(holSyntax$VFREE_IN v1 v0))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "MAP_db_FILTER_neq",
+   "lean": "Candle.MAP_db_FILTER_neq",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A3[mlstring$mlstring,holSyntax$type,list$list<pair$prod<holSyntax$term,holSyntax$term>>]{((list$MAP (lam.(pair$, (holSyntaxExtra$db (pair$FST v3)) (holSyntaxExtra$db (pair$SND v3)))) (list$FILTER (lam.~((pair$SND v3)=(holSyntax$Var v0 v1))) v2))=(list$FILTER (lam.~((pair$SND v3)=(holSyntaxExtra$dbVar v0 v1))) (list$MAP (lam.(pair$, (holSyntaxExtra$db (pair$FST v3)) (holSyntaxExtra$db (pair$SND v3)))) v2)))}",
+   "lean_form": "A3[mlstring$mlstring,holSyntax$type,list$list<pair$prod<holSyntax$term,holSyntax$term>>]{((list$MAP (lam.(pair$, (holSyntaxExtra$db (pair$FST v3)) (holSyntaxExtra$db (pair$SND v3)))) (list$FILTER (lam.~((pair$SND v3)=(holSyntax$Var v0 v1))) v2))=(list$FILTER (lam.~((pair$SND v3)=(holSyntaxExtra$dbVar v0 v1))) (list$MAP (lam.(pair$, (holSyntaxExtra$db (pair$FST v3)) (holSyntaxExtra$db (pair$SND v3)))) v2)))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "REV_ASSOCD_MAP_db",
+   "lean": "Candle.REV_ASSOCD_MAP_db",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A3[list$list<pair$prod<holSyntax$term,holSyntax$term>>,mlstring$mlstring,holSyntax$type]{IMP[A2[holSyntax$term,holSyntax$term]{IMP[(LMEM (pair$, v3 v4) v0)]=>E2[mlstring$mlstring,holSyntax$type]{(v4=(holSyntax$Var v5 v6))}}]=>((holSyntaxLib$REV_ASSOCD (holSyntaxExtra$dbVar v1 v2) (list$MAP (lam.(pair$, (holSyntaxExtra$db (pair$FST v3)) (holSyntaxExtra$db (pair$SND v3)))) v0) (holSyntaxExtra$dbVar v1 v2))=(holSyntaxExtra$db (holSyntaxLib$REV_ASSOCD (holSyntax$Var v1 v2) v0 (holSyntax$Var v1 v2))))}",
+   "lean_form": "A3[list$list<pair$prod<holSyntax$term,holSyntax$term>>,mlstring$mlstring,holSyntax$type]{IMP[A2[holSyntax$term,holSyntax$term]{IMP[(LMEM (pair$, v3 v4) v0)]=>E2[mlstring$mlstring,holSyntax$type]{(v4=(holSyntax$Var v5 v6))}}]=>((holSyntaxLib$REV_ASSOCD (holSyntaxExtra$dbVar v1 v2) (list$MAP (lam.(pair$, (holSyntaxExtra$db (pair$FST v3)) (holSyntaxExtra$db (pair$SND v3)))) v0) (holSyntaxExtra$dbVar v1 v2))=(holSyntaxExtra$db (holSyntaxLib$REV_ASSOCD (holSyntax$Var v1 v2) v0 (holSyntax$Var v1 v2))))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "dbVFREE_IN_dbVSUBST",
+   "lean": "Candle.dbVFREE_IN_dbVSUBST",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A4[mlstring$mlstring,holSyntax$type,list$list<pair$prod<holSyntaxExtra$dbterm,holSyntaxExtra$dbterm>>,holSyntaxExtra$dbterm]{((holSyntaxExtra$dbVFREE_IN (holSyntaxExtra$dbVar v0 v1) (holSyntaxExtra$dbVSUBST v2 v3))=E2[mlstring$mlstring,holSyntax$type]{AND[(holSyntaxExtra$dbVFREE_IN (holSyntaxExtra$dbVar v4 v5) v3);(holSyntaxExtra$dbVFREE_IN (holSyntaxExtra$dbVar v0 v1) (holSyntaxLib$REV_ASSOCD (holSyntaxExtra$dbVar v4 v5) v2 (holSyntaxExtra$dbVar v4 v5)))]})}",
+   "lean_form": "A4[mlstring$mlstring,holSyntax$type,list$list<pair$prod<holSyntaxExtra$dbterm,holSyntaxExtra$dbterm>>,holSyntaxExtra$dbterm]{((holSyntaxExtra$dbVFREE_IN (holSyntaxExtra$dbVar v0 v1) (holSyntaxExtra$dbVSUBST v2 v3))=E2[mlstring$mlstring,holSyntax$type]{AND[(holSyntaxExtra$dbVFREE_IN (holSyntaxExtra$dbVar v4 v5) v3);(holSyntaxExtra$dbVFREE_IN (holSyntaxExtra$dbVar v0 v1) (holSyntaxLib$REV_ASSOCD (holSyntaxExtra$dbVar v4 v5) v2 (holSyntaxExtra$dbVar v4 v5)))]})}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "VSUBST_dbVSUBST",
+   "lean": "Candle.VSUBST_dbVSUBST",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[holSyntax$term,list$list<pair$prod<holSyntax$term,holSyntax$term>>]{IMP[(holSyntax$welltyped v0);A2[holSyntax$term,holSyntax$term]{IMP[(LMEM (pair$, v2 v3) v1)]=>AND[(holSyntax$welltyped v2);E2[mlstring$mlstring,holSyntax$type]{(v3=(holSyntax$Var v4 v5))}]}]=>((holSyntaxExtra$db (holSyntax$VSUBST v1 v0))=(holSyntaxExtra$dbVSUBST (list$MAP (lam.(pair$, (holSyntaxExtra$db (pair$FST v2)) (holSyntaxExtra$db (pair$SND v2)))) v1) (holSyntaxExtra$db v0)))}",
+   "lean_form": "A2[holSyntax$term,list$list<pair$prod<holSyntax$term,holSyntax$term>>]{IMP[(holSyntax$welltyped v0);A2[holSyntax$term,holSyntax$term]{IMP[(LMEM (pair$, v2 v3) v1)]=>AND[(holSyntax$welltyped v2);E2[mlstring$mlstring,holSyntax$type]{(v3=(holSyntax$Var v4 v5))}]}]=>((holSyntaxExtra$db (holSyntax$VSUBST v1 v0))=(holSyntaxExtra$dbVSUBST (list$MAP (lam.(pair$, (holSyntaxExtra$db (pair$FST v2)) (holSyntaxExtra$db (pair$SND v2)))) v1) (holSyntaxExtra$db v0)))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "dbINST_bind",
+   "lean": "Candle.dbINST_bind",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A4[pair$prod<mlstring$mlstring,holSyntax$type>,holSyntaxExtra$dbterm,list$list<pair$prod<holSyntax$type,holSyntax$type>>,num$num]{IMP[A1[holSyntax$type]{IMP[(holSyntaxExtra$dbVFREE_IN (holSyntaxExtra$dbVar (pair$FST v0) v4) v1);((holSyntax$TYPE_SUBST v2 v4)=(holSyntax$TYPE_SUBST v2 (pair$SND v0)))]=>(v4=(pair$SND v0))}]=>((holSyntaxExtra$dbINST v2 (holSyntaxExtra$bind v0 v3 v1))=(holSyntaxExtra$bind (pair$, (pair$FST v0) (holSyntax$TYPE_SUBST v2 (pair$SND v0))) v3 (holSyntaxExtra$dbINST v2 v1)))}",
+   "lean_form": "A4[pair$prod<mlstring$mlstring,holSyntax$type>,holSyntaxExtra$dbterm,list$list<pair$prod<holSyntax$type,holSyntax$type>>,num$num]{IMP[A1[holSyntax$type]{IMP[(holSyntaxExtra$dbVFREE_IN (holSyntaxExtra$dbVar (pair$FST v0) v4) v1);((holSyntax$TYPE_SUBST v2 v4)=(holSyntax$TYPE_SUBST v2 (pair$SND v0)))]=>(v4=(pair$SND v0))}]=>((holSyntaxExtra$dbINST v2 (holSyntaxExtra$bind v0 v3 v1))=(holSyntaxExtra$bind (pair$, (pair$FST v0) (holSyntax$TYPE_SUBST v2 (pair$SND v0))) v3 (holSyntaxExtra$dbINST v2 v1)))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "dbVSUBST_nil",
+   "lean": "Candle.dbVSUBST_nil",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[holSyntaxExtra$dbterm]{((holSyntaxExtra$dbVSUBST list$NIL v0)=v0)}",
+   "lean_form": "A1[holSyntaxExtra$dbterm]{((holSyntaxExtra$dbVSUBST list$NIL v0)=v0)}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "INST_CORE_dbINST",
+   "lean": "Candle.INST_CORE_dbINST",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A4[holSyntax$term,list$list<pair$prod<holSyntax$term,holSyntax$term>>,list$list<pair$prod<holSyntax$type,holSyntax$type>>,holSyntax$term]{IMP[(holSyntax$welltyped v0);A2[holSyntax$term,holSyntax$term]{IMP[(LMEM (pair$, v4 v5) v1)]=>E2[mlstring$mlstring,holSyntax$type]{AND[(v4=(holSyntax$Var v6 v7));(v5=(holSyntax$Var v6 (holSyntax$TYPE_SUBST v2 v7)))]}};((holSyntax$INST_CORE v1 v2 v0)=(holSyntaxLib$Result v3))]=>((holSyntaxExtra$db v3)=(holSyntaxExtra$dbINST v2 (holSyntaxExtra$db v0)))}",
+   "lean_form": "A4[holSyntax$term,list$list<pair$prod<holSyntax$term,holSyntax$term>>,list$list<pair$prod<holSyntax$type,holSyntax$type>>,holSyntax$term]{IMP[(holSyntax$welltyped v0);A2[holSyntax$term,holSyntax$term]{IMP[(LMEM (pair$, v4 v5) v1)]=>E2[mlstring$mlstring,holSyntax$type]{AND[(v4=(holSyntax$Var v6 v7));(v5=(holSyntax$Var v6 (holSyntax$TYPE_SUBST v2 v7)))]}};((holSyntax$INST_CORE v1 v2 v0)=(holSyntaxLib$Result v3))]=>((holSyntaxExtra$db v3)=(holSyntaxExtra$dbINST v2 (holSyntaxExtra$db v0)))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "INST_dbINST",
+   "lean": "Candle.INST_dbINST",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[holSyntax$term,list$list<pair$prod<holSyntax$type,holSyntax$type>>]{IMP[(holSyntax$welltyped v0)]=>((holSyntaxExtra$db (holSyntax$INST v1 v0))=(holSyntaxExtra$dbINST v1 (holSyntaxExtra$db v0)))}",
+   "lean_form": "A2[holSyntax$term,list$list<pair$prod<holSyntax$type,holSyntax$type>>]{IMP[(holSyntax$welltyped v0)]=>((holSyntaxExtra$db (holSyntax$INST v1 v0))=(holSyntaxExtra$dbINST v1 (holSyntaxExtra$db v0)))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "bind_list_aux_clauses",
+   "lean": "Candle.bind_list_aux_clauses",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A3[num$num,mlstring$mlstring,holSyntax$type]{AND[A2[num$num,list$list<pair$prod<mlstring$mlstring,holSyntax$type>>]{((holSyntaxExtra$bind_list_aux v3 v4 (holSyntaxExtra$dbBound v0))=(holSyntaxExtra$dbBound v0))};A2[num$num,list$list<pair$prod<mlstring$mlstring,holSyntax$type>>]{((holSyntaxExtra$bind_list_aux v3 v4 (holSyntaxExtra$dbConst v1 v2))=(holSyntaxExtra$dbConst v1 v2))};A4[num$num,list$list<pair$prod<mlstring$mlstring,holSyntax$type>>,holSyntaxExtra$dbterm,holSyntaxExtra$dbterm]{((holSyntaxExtra$bind_list_aux v3 v4 (holSyntaxExtra$dbComb v5 v6))=(holSyntaxExtra$dbComb (holSyntaxExtra$bind_list_aux v3 v4 v5) (holSyntaxExtra$bind_list_aux v3 v4 v6)))};A4[num$num,list$list<pair$prod<mlstring$mlstring,holSyntax$type>>,holSyntax$type,holSyntaxExtra$dbterm]{((holSyntaxExtra$bind_list_aux v3 v4 (holSyntaxExtra$dbAbs v5 v6))=(holSyntaxExtra$dbAbs v5 (holSyntaxExtra$bind_list_aux (arithmetic$+ v3 1) v4 v6)))}]}",
+   "lean_form": "A3[num$num,mlstring$mlstring,holSyntax$type]{AND[A2[num$num,list$list<pair$prod<mlstring$mlstring,holSyntax$type>>]{((holSyntaxExtra$bind_list_aux v3 v4 (holSyntaxExtra$dbBound v0))=(holSyntaxExtra$dbBound v0))};A2[num$num,list$list<pair$prod<mlstring$mlstring,holSyntax$type>>]{((holSyntaxExtra$bind_list_aux v3 v4 (holSyntaxExtra$dbConst v1 v2))=(holSyntaxExtra$dbConst v1 v2))};A4[num$num,list$list<pair$prod<mlstring$mlstring,holSyntax$type>>,holSyntaxExtra$dbterm,holSyntaxExtra$dbterm]{((holSyntaxExtra$bind_list_aux v3 v4 (holSyntaxExtra$dbComb v5 v6))=(holSyntaxExtra$dbComb (holSyntaxExtra$bind_list_aux v3 v4 v5) (holSyntaxExtra$bind_list_aux v3 v4 v6)))};A4[num$num,list$list<pair$prod<mlstring$mlstring,holSyntax$type>>,holSyntax$type,holSyntaxExtra$dbterm]{((holSyntaxExtra$bind_list_aux v3 v4 (holSyntaxExtra$dbAbs v5 v6))=(holSyntaxExtra$dbAbs v5 (holSyntaxExtra$bind_list_aux (arithmetic$+ v3 1) v4 v6)))}]}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "dbterm_bind",
+   "lean": "Candle.dbterm_bind",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[list$list<pair$prod<mlstring$mlstring,holSyntax$type>>,holSyntax$term]{((holSyntaxExtra$dbterm v0 v1)=(holSyntaxExtra$bind_list_aux 0 v0 (holSyntaxExtra$db v1)))}",
+   "lean_form": "A2[list$list<pair$prod<mlstring$mlstring,holSyntax$type>>,holSyntax$term]{((holSyntaxExtra$dbterm v0 v1)=(holSyntaxExtra$bind_list_aux 0 v0 (holSyntaxExtra$db v1)))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "dbterm_db",
+   "lean": "Candle.dbterm_db",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[holSyntax$term]{((holSyntaxExtra$dbterm list$NIL v0)=(holSyntaxExtra$db v0))}",
+   "lean_form": "A1[holSyntax$term]{((holSyntaxExtra$dbterm list$NIL v0)=(holSyntaxExtra$db v0))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "dbterm_RACONV",
+   "lean": "Candle.dbterm_RACONV",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A4[holSyntax$term,holSyntax$term,list$list<pair$prod<mlstring$mlstring,holSyntax$type>>,list$list<pair$prod<mlstring$mlstring,holSyntax$type>>]{IMP[(holSyntax$welltyped v0);(holSyntax$welltyped v1);((holSyntaxExtra$dbterm v2 v0)=(holSyntaxExtra$dbterm v3 v1));((list$LENGTH v2)=(list$LENGTH v3))]=>(holSyntax$RACONV (list$ZIP (pair$, (list$MAP (lam.(holSyntax$Var (pair$FST v4) (pair$SND v4))) v2) (list$MAP (lam.(holSyntax$Var (pair$FST v4) (pair$SND v4))) v3))) (pair$, v0 v1))}",
+   "lean_form": "A4[holSyntax$term,holSyntax$term,list$list<pair$prod<mlstring$mlstring,holSyntax$type>>,list$list<pair$prod<mlstring$mlstring,holSyntax$type>>]{IMP[(holSyntax$welltyped v0);(holSyntax$welltyped v1);((holSyntaxExtra$dbterm v2 v0)=(holSyntaxExtra$dbterm v3 v1));((list$LENGTH v2)=(list$LENGTH v3))]=>(holSyntax$RACONV (list$ZIP (pair$, (list$MAP (lam.(holSyntax$Var (pair$FST v4) (pair$SND v4))) v2) (list$MAP (lam.(holSyntax$Var (pair$FST v4) (pair$SND v4))) v3))) (pair$, v0 v1))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "RACONV_dbterm",
+   "lean": "Candle.RACONV_dbterm",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[list$list<pair$prod<holSyntax$term,holSyntax$term>>,pair$prod<holSyntax$term,holSyntax$term>]{IMP[(holSyntax$RACONV v0 v1);(holSyntax$welltyped (pair$FST v1));(holSyntax$welltyped (pair$SND v1));A1[pair$prod<holSyntax$term,holSyntax$term>]{IMP[(LMEM v2 v0)]=>AND[E2[mlstring$mlstring,holSyntax$type]{((pair$FST v2)=(holSyntax$Var v3 v4))};E2[mlstring$mlstring,holSyntax$type]{((pair$SND v2)=(holSyntax$Var v3 v4))}]}]=>((holSyntaxExtra$dbterm (list$MAP (combin$o holSyntax$dest_var pair$FST) v0) (pair$FST v1))=(holSyntaxExtra$dbterm (list$MAP (combin$o holSyntax$dest_var pair$SND) v0) (pair$SND v1)))}",
+   "lean_form": "A2[list$list<pair$prod<holSyntax$term,holSyntax$term>>,pair$prod<holSyntax$term,holSyntax$term>]{IMP[(holSyntax$RACONV v0 v1);(holSyntax$welltyped (pair$FST v1));(holSyntax$welltyped (pair$SND v1));A1[pair$prod<holSyntax$term,holSyntax$term>]{IMP[(LMEM v2 v0)]=>AND[E2[mlstring$mlstring,holSyntax$type]{((pair$FST v2)=(holSyntax$Var v3 v4))};E2[mlstring$mlstring,holSyntax$type]{((pair$SND v2)=(holSyntax$Var v3 v4))}]}]=>((holSyntaxExtra$dbterm (list$MAP (combin$o holSyntax$dest_var pair$FST) v0) (pair$FST v1))=(holSyntaxExtra$dbterm (list$MAP (combin$o holSyntax$dest_var pair$SND) v0) (pair$SND v1)))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "dbterm_ACONV",
+   "lean": "Candle.dbterm_ACONV",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[holSyntax$term,holSyntax$term]{IMP[(holSyntax$welltyped v0);(holSyntax$welltyped v1)]=>((holSyntax$ACONV v0 v1)=((holSyntaxExtra$dbterm list$NIL v0)=(holSyntaxExtra$dbterm list$NIL v1)))}",
+   "lean_form": "A2[holSyntax$term,holSyntax$term]{IMP[(holSyntax$welltyped v0);(holSyntax$welltyped v1)]=>((holSyntax$ACONV v0 v1)=((holSyntaxExtra$dbterm list$NIL v0)=(holSyntaxExtra$dbterm list$NIL v1)))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "ACONV_db",
+   "lean": "Candle.ACONV_db",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[holSyntax$term,holSyntax$term]{IMP[(holSyntax$welltyped v0);(holSyntax$welltyped v1)]=>((holSyntax$ACONV v0 v1)=((holSyntaxExtra$db v0)=(holSyntaxExtra$db v1)))}",
+   "lean_form": "A2[holSyntax$term,holSyntax$term]{IMP[(holSyntax$welltyped v0);(holSyntax$welltyped v1)]=>((holSyntax$ACONV v0 v1)=((holSyntaxExtra$db v0)=(holSyntaxExtra$db v1)))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "ACONV_VSUBST",
+   "lean": "Candle.ACONV_VSUBST",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A3[holSyntax$term,holSyntax$term,list$list<pair$prod<holSyntax$term,holSyntax$term>>]{IMP[(holSyntax$welltyped v0);(holSyntax$welltyped v1);A2[holSyntax$term,holSyntax$term]{IMP[(LMEM (pair$, v3 v4) v2)]=>E2[mlstring$mlstring,holSyntax$type]{AND[(v4=(holSyntax$Var v5 v6));(holSyntax$has_type v3 v6)]}};(holSyntax$ACONV v0 v1)]=>(holSyntax$ACONV (holSyntax$VSUBST v2 v0) (holSyntax$VSUBST v2 v1))}",
+   "lean_form": "A3[holSyntax$term,holSyntax$term,list$list<pair$prod<holSyntax$term,holSyntax$term>>]{IMP[(holSyntax$welltyped v0);(holSyntax$welltyped v1);A2[holSyntax$term,holSyntax$term]{IMP[(LMEM (pair$, v3 v4) v2)]=>E2[mlstring$mlstring,holSyntax$type]{AND[(v4=(holSyntax$Var v5 v6));(holSyntax$has_type v3 v6)]}};(holSyntax$ACONV v0 v1)]=>(holSyntax$ACONV (holSyntax$VSUBST v2 v0) (holSyntax$VSUBST v2 v1))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "ACONV_INST",
+   "lean": "Candle.ACONV_INST",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A3[holSyntax$term,holSyntax$term,list$list<pair$prod<holSyntax$type,holSyntax$type>>]{IMP[(holSyntax$welltyped v0);(holSyntax$welltyped v1);(holSyntax$ACONV v0 v1)]=>(holSyntax$ACONV (holSyntax$INST v2 v0) (holSyntax$INST v2 v1))}",
+   "lean_form": "A3[holSyntax$term,holSyntax$term,list$list<pair$prod<holSyntax$type,holSyntax$type>>]{IMP[(holSyntax$welltyped v0);(holSyntax$welltyped v1);(holSyntax$ACONV v0 v1)]=>(holSyntax$ACONV (holSyntax$INST v2 v0) (holSyntax$INST v2 v1))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "VSUBST_simple_subst",
+   "lean": "Candle.VSUBST_simple_subst",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[holSyntax$term,list$list<pair$prod<holSyntax$term,holSyntax$term>>]{IMP[(pred_set$DISJOINT (list$LIST_TO_SET (holSyntaxExtra$bv_names v0)) (pred_set$GSPEC (lam.(pair$, v2 E2[holSyntax$type,holSyntax$term]{AND[(holSyntax$VFREE_IN (holSyntax$Var v2 v3) v4);(LMEM v4 (list$MAP pair$FST v1))]}))));A2[holSyntax$term,holSyntax$term]{IMP[(LMEM (pair$, v2 v3) v1)]=>E2[mlstring$mlstring,holSyntax$type]{(v3=(holSyntax$Var v4 v5))}};(holSyntax$welltyped v0)]=>((holSyntax$VSUBST v1 v0)=(holSyntaxExtra$simple_subst v1 v0))}",
+   "lean_form": "A2[holSyntax$term,list$list<pair$prod<holSyntax$term,holSyntax$term>>]{IMP[(pred_set$DISJOINT (list$LIST_TO_SET (holSyntaxExtra$bv_names v0)) (pred_set$GSPEC (lam.(pair$, v2 E2[holSyntax$type,holSyntax$term]{AND[(holSyntax$VFREE_IN (holSyntax$Var v2 v3) v4);(LMEM v4 (list$MAP pair$FST v1))]}))));A2[holSyntax$term,holSyntax$term]{IMP[(LMEM (pair$, v2 v3) v1)]=>E2[mlstring$mlstring,holSyntax$type]{(v3=(holSyntax$Var v4 v5))}};(holSyntax$welltyped v0)]=>((holSyntax$VSUBST v1 v0)=(holSyntaxExtra$simple_subst v1 v0))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "INST_CORE_simple_inst",
+   "lean": "Candle.INST_CORE_simple_inst",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A3[holSyntax$term,list$list<pair$prod<holSyntax$term,holSyntax$term>>,list$list<pair$prod<holSyntax$type,holSyntax$type>>]{IMP[(list$ALL_DISTINCT (list$APPEND (holSyntaxExtra$bv_names v0) (list$MAP (combin$o pair$FST (combin$o holSyntax$dest_var pair$SND)) v1)));(pred_set$DISJOINT (list$LIST_TO_SET (holSyntaxExtra$bv_names v0)) (pred_set$GSPEC (lam.(pair$, v3 E1[holSyntax$type]{(holSyntax$VFREE_IN (holSyntax$Var v3 v4) v0)}))));A2[holSyntax$term,holSyntax$term]{IMP[(LMEM (pair$, v3 v4) v1)]=>E2[mlstring$mlstring,holSyntax$type]{AND[(v3=(holSyntax$Var v5 v6));(v4=(holSyntax$Var v5 (holSyntax$TYPE_SUBST v2 v6)))]}};A3[mlstring$mlstring,holSyntax$type,holSyntax$type]{IMP[(holSyntax$VFREE_IN (holSyntax$Var v3 v4) v0);(LMEM (holSyntax$Var v3 v5) (list$MAP pair$FST v1))]=>(v5=v4)};(holSyntax$welltyped v0)]=>((holSyntax$INST_CORE v1 v2 v0)=(holSyntaxLib$Result (holSyntaxExtra$simple_inst v2 v0)))}",
+   "lean_form": "A3[holSyntax$term,list$list<pair$prod<holSyntax$term,holSyntax$term>>,list$list<pair$prod<holSyntax$type,holSyntax$type>>]{IMP[(list$ALL_DISTINCT (list$APPEND (holSyntaxExtra$bv_names v0) (list$MAP (combin$o pair$FST (combin$o holSyntax$dest_var pair$SND)) v1)));(pred_set$DISJOINT (list$LIST_TO_SET (holSyntaxExtra$bv_names v0)) (pred_set$GSPEC (lam.(pair$, v3 E1[holSyntax$type]{(holSyntax$VFREE_IN (holSyntax$Var v3 v4) v0)}))));A2[holSyntax$term,holSyntax$term]{IMP[(LMEM (pair$, v3 v4) v1)]=>E2[mlstring$mlstring,holSyntax$type]{AND[(v3=(holSyntax$Var v5 v6));(v4=(holSyntax$Var v5 (holSyntax$TYPE_SUBST v2 v6)))]}};A3[mlstring$mlstring,holSyntax$type,holSyntax$type]{IMP[(holSyntax$VFREE_IN (holSyntax$Var v3 v4) v0);(LMEM (holSyntax$Var v3 v5) (list$MAP pair$FST v1))]=>(v5=v4)};(holSyntax$welltyped v0)]=>((holSyntax$INST_CORE v1 v2 v0)=(holSyntaxLib$Result (holSyntaxExtra$simple_inst v2 v0)))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "INST_simple_inst",
+   "lean": "Candle.INST_simple_inst",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[holSyntax$term,list$list<pair$prod<holSyntax$type,holSyntax$type>>]{IMP[(list$ALL_DISTINCT (holSyntaxExtra$bv_names v0));(pred_set$DISJOINT (list$LIST_TO_SET (holSyntaxExtra$bv_names v0)) (pred_set$GSPEC (lam.(pair$, v2 E1[holSyntax$type]{(holSyntax$VFREE_IN (holSyntax$Var v2 v3) v0)}))));(holSyntax$welltyped v0)]=>((holSyntax$INST v1 v0)=(holSyntaxExtra$simple_inst v1 v0))}",
+   "lean_form": "A2[holSyntax$term,list$list<pair$prod<holSyntax$type,holSyntax$type>>]{IMP[(list$ALL_DISTINCT (holSyntaxExtra$bv_names v0));(pred_set$DISJOINT (list$LIST_TO_SET (holSyntaxExtra$bv_names v0)) (pred_set$GSPEC (lam.(pair$, v2 E1[holSyntax$type]{(holSyntax$VFREE_IN (holSyntax$Var v2 v3) v0)}))));(holSyntax$welltyped v0)]=>((holSyntax$INST v1 v0)=(holSyntaxExtra$simple_inst v1 v0))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "simple_subst_has_type",
+   "lean": "Candle.simple_subst_has_type",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[holSyntax$term,holSyntax$type]{IMP[(holSyntax$has_type v0 v1)]=>A1[list$list<pair$prod<holSyntax$term,holSyntax$term>>]{IMP[(list$EVERY (lam.(holSyntax$has_type (pair$FST v3) (holSyntax$typeof (pair$SND v3)))) v2)]=>(holSyntax$has_type (holSyntaxExtra$simple_subst v2 v0) v1)}}",
+   "lean_form": "A2[holSyntax$term,holSyntax$type]{IMP[(holSyntax$has_type v0 v1)]=>A1[list$list<pair$prod<holSyntax$term,holSyntax$term>>]{IMP[(list$EVERY (lam.(holSyntax$has_type (pair$FST v3) (holSyntax$typeof (pair$SND v3)))) v2)]=>(holSyntax$has_type (holSyntaxExtra$simple_subst v2 v0) v1)}}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "simple_inst_has_type",
+   "lean": "Candle.simple_inst_has_type",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[holSyntax$term,list$list<pair$prod<holSyntax$type,holSyntax$type>>]{IMP[(holSyntax$welltyped v0)]=>(holSyntax$has_type (holSyntaxExtra$simple_inst v1 v0) (holSyntax$TYPE_SUBST v1 (holSyntax$typeof v0)))}",
+   "lean_form": "A2[holSyntax$term,list$list<pair$prod<holSyntax$type,holSyntax$type>>]{IMP[(holSyntax$welltyped v0)]=>(holSyntax$has_type (holSyntaxExtra$simple_inst v1 v0) (holSyntax$TYPE_SUBST v1 (holSyntax$typeof v0)))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "FST_rename_bvars",
+   "lean": "Candle.FST_rename_bvars",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A3[holSyntax$term,list$list<mlstring$mlstring>,list$list<pair$prod<mlstring$mlstring,pair$prod<mlstring$mlstring,holSyntax$type>>>]{IMP[(arithmetic$<= (list$LENGTH (holSyntaxExtra$bv_names v0)) (list$LENGTH v1))]=>((pair$FST (holSyntaxExtra$rename_bvars v1 v2 v0))=(list$DROP (list$LENGTH (holSyntaxExtra$bv_names v0)) v1))}",
+   "lean_form": "A3[holSyntax$term,list$list<mlstring$mlstring>,list$list<pair$prod<mlstring$mlstring,pair$prod<mlstring$mlstring,holSyntax$type>>>]{IMP[(arithmetic$<= (list$LENGTH (holSyntaxExtra$bv_names v0)) (list$LENGTH v1))]=>((pair$FST (holSyntaxExtra$rename_bvars v1 v2 v0))=(list$DROP (list$LENGTH (holSyntaxExtra$bv_names v0)) v1))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "rename_bvars_RACONV",
+   "lean": "Candle.rename_bvars_RACONV",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A3[holSyntax$term,list$list<mlstring$mlstring>,list$list<pair$prod<mlstring$mlstring,pair$prod<mlstring$mlstring,holSyntax$type>>>]{IMP[(arithmetic$<= (list$LENGTH (holSyntaxExtra$bv_names v0)) (list$LENGTH v1));(pred_set$DISJOINT (list$LIST_TO_SET (list$APPEND (list$MAP pair$FST v2) v1)) (list$LIST_TO_SET (list$APPEND (list$MAP (combin$o pair$FST pair$SND) v2) (holSyntaxExtra$bv_names v0))));(pred_set$DISJOINT (list$LIST_TO_SET (list$APPEND (list$MAP pair$FST v2) v1)) (pred_set$GSPEC (lam.(pair$, v3 E1[holSyntax$type]{(holSyntax$VFREE_IN (holSyntax$Var v3 v4) v0)}))));(list$ALL_DISTINCT (list$APPEND (list$MAP pair$FST v2) v1));(holSyntax$welltyped v0)]=>(holSyntax$RACONV (list$MAP (lam.(pair$, (holSyntax$Var (pair$FST (pair$SND v3)) (pair$SND (pair$SND v3))) (holSyntax$Var (pair$FST v3) (pair$SND (pair$SND v3))))) v2) (pair$, v0 (pair$SND (holSyntaxExtra$rename_bvars v1 v2 v0))))}",
+   "lean_form": "A3[holSyntax$term,list$list<mlstring$mlstring>,list$list<pair$prod<mlstring$mlstring,pair$prod<mlstring$mlstring,holSyntax$type>>>]{IMP[(arithmetic$<= (list$LENGTH (holSyntaxExtra$bv_names v0)) (list$LENGTH v1));(pred_set$DISJOINT (list$LIST_TO_SET (list$APPEND (list$MAP pair$FST v2) v1)) (list$LIST_TO_SET (list$APPEND (list$MAP (combin$o pair$FST pair$SND) v2) (holSyntaxExtra$bv_names v0))));(pred_set$DISJOINT (list$LIST_TO_SET (list$APPEND (list$MAP pair$FST v2) v1)) (pred_set$GSPEC (lam.(pair$, v3 E1[holSyntax$type]{(holSyntax$VFREE_IN (holSyntax$Var v3 v4) v0)}))));(list$ALL_DISTINCT (list$APPEND (list$MAP pair$FST v2) v1));(holSyntax$welltyped v0)]=>(holSyntax$RACONV (list$MAP (lam.(pair$, (holSyntax$Var (pair$FST (pair$SND v3)) (pair$SND (pair$SND v3))) (holSyntax$Var (pair$FST v3) (pair$SND (pair$SND v3))))) v2) (pair$, v0 (pair$SND (holSyntaxExtra$rename_bvars v1 v2 v0))))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "rename_bvars_ACONV",
+   "lean": "Candle.rename_bvars_ACONV",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[holSyntax$term,list$list<mlstring$mlstring>]{IMP[(arithmetic$<= (list$LENGTH (holSyntaxExtra$bv_names v0)) (list$LENGTH v1));(list$ALL_DISTINCT v1);(pred_set$DISJOINT (list$LIST_TO_SET v1) (pred_set$GSPEC (lam.(pair$, v2 OR[(LMEM v2 (holSyntaxExtra$bv_names v0));E1[holSyntax$type]{(holSyntax$VFREE_IN (holSyntax$Var v2 v3) v0)}]))));(holSyntax$welltyped v0)]=>(holSyntax$ACONV v0 (pair$SND (holSyntaxExtra$rename_bvars v1 list$NIL v0)))}",
+   "lean_form": "A2[holSyntax$term,list$list<mlstring$mlstring>]{IMP[(arithmetic$<= (list$LENGTH (holSyntaxExtra$bv_names v0)) (list$LENGTH v1));(list$ALL_DISTINCT v1);(pred_set$DISJOINT (list$LIST_TO_SET v1) (pred_set$GSPEC (lam.(pair$, v2 OR[(LMEM v2 (holSyntaxExtra$bv_names v0));E1[holSyntax$type]{(holSyntax$VFREE_IN (holSyntax$Var v2 v3) v0)}]))));(holSyntax$welltyped v0)]=>(holSyntax$ACONV v0 (pair$SND (holSyntaxExtra$rename_bvars v1 list$NIL v0)))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "rename_bvars_has_type",
+   "lean": "Candle.rename_bvars_has_type",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A4[holSyntax$term,holSyntax$type,list$list<mlstring$mlstring>,list$list<pair$prod<mlstring$mlstring,pair$prod<mlstring$mlstring,holSyntax$type>>>]{IMP[(holSyntax$has_type v0 v1)]=>(holSyntax$has_type (pair$SND (holSyntaxExtra$rename_bvars v2 v3 v0)) v1)}",
+   "lean_form": "A4[holSyntax$term,holSyntax$type,list$list<mlstring$mlstring>,list$list<pair$prod<mlstring$mlstring,pair$prod<mlstring$mlstring,holSyntax$type>>>]{IMP[(holSyntax$has_type v0 v1)]=>(holSyntax$has_type (pair$SND (holSyntaxExtra$rename_bvars v2 v3 v0)) v1)}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "rename_bvars_welltyped",
+   "lean": "Candle.rename_bvars_welltyped",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A3[holSyntax$term,list$list<mlstring$mlstring>,list$list<pair$prod<mlstring$mlstring,pair$prod<mlstring$mlstring,holSyntax$type>>>]{IMP[(holSyntax$welltyped v0)]=>(holSyntax$welltyped (pair$SND (holSyntaxExtra$rename_bvars v1 v2 v0)))}",
+   "lean_form": "A3[holSyntax$term,list$list<mlstring$mlstring>,list$list<pair$prod<mlstring$mlstring,pair$prod<mlstring$mlstring,holSyntax$type>>>]{IMP[(holSyntax$welltyped v0)]=>(holSyntax$welltyped (pair$SND (holSyntaxExtra$rename_bvars v1 v2 v0)))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "fresh_union",
+   "lean": "Candle.fresh_union",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[(list$list<string$char>->min$bool),(list$list<string$char>->min$bool)]{IMP[(pred_set$FINITE v0);(pred_set$FINITE v1)]=>AND[~(bool$IN (holSyntaxExtra$fresh (pred_set$UNION v0 v1)) v0);~(bool$IN (holSyntaxExtra$fresh (pred_set$UNION v0 v1)) v1)]}",
+   "lean_form": "A2[(list$list<string$char>->min$bool),(list$list<string$char>->min$bool)]{IMP[(pred_set$FINITE v0);(pred_set$FINITE v1)]=>AND[~(bool$IN (holSyntaxExtra$fresh (pred_set$UNION v0 v1)) v0);~(bool$IN (holSyntaxExtra$fresh (pred_set$UNION v0 v1)) v1)]}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "fresh_names_exist",
+   "lean": "Candle.fresh_names_exist",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[(list$list<string$char>->min$bool),num$num]{IMP[(pred_set$FINITE v0)]=>E1[list$list<list$list<string$char>>]{AND[((list$LENGTH v2)=v1);(list$ALL_DISTINCT v2);(pred_set$DISJOINT (list$LIST_TO_SET v2) v0)]}}",
+   "lean_form": "A2[(list$list<string$char>->min$bool),num$num]{IMP[(pred_set$FINITE v0)]=>E1[list$list<list$list<string$char>>]{AND[((list$LENGTH v2)=v1);(list$ALL_DISTINCT v2);(pred_set$DISJOINT (list$LIST_TO_SET v2) v0)]}}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "bv_names_rename_bvars",
+   "lean": "Candle.bv_names_rename_bvars",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A3[holSyntax$term,list$list<mlstring$mlstring>,list$list<pair$prod<mlstring$mlstring,pair$prod<mlstring$mlstring,holSyntax$type>>>]{IMP[(arithmetic$<= (list$LENGTH (holSyntaxExtra$bv_names v0)) (list$LENGTH v1))]=>((holSyntaxExtra$bv_names (pair$SND (holSyntaxExtra$rename_bvars v1 v2 v0)))=(list$TAKE (list$LENGTH (holSyntaxExtra$bv_names v0)) v1))}",
+   "lean_form": "A3[holSyntax$term,list$list<mlstring$mlstring>,list$list<pair$prod<mlstring$mlstring,pair$prod<mlstring$mlstring,holSyntax$type>>>]{IMP[(arithmetic$<= (list$LENGTH (holSyntaxExtra$bv_names v0)) (list$LENGTH v1))]=>((holSyntaxExtra$bv_names (pair$SND (holSyntaxExtra$rename_bvars v1 v2 v0)))=(list$TAKE (list$LENGTH (holSyntaxExtra$bv_names v0)) v1))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "FINITE_VFREE_IN",
+   "lean": "Candle.FINITE_VFREE_IN",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[holSyntax$term]{(pred_set$FINITE (pred_set$GSPEC (lam.(pair$, v1 E1[holSyntax$type]{(holSyntax$VFREE_IN (holSyntax$Var v1 v2) v0)}))))}",
+   "lean_form": "A1[holSyntax$term]{(pred_set$FINITE (pred_set$GSPEC (lam.(pair$, v1 E1[holSyntax$type]{(holSyntax$VFREE_IN (holSyntax$Var v1 v2) v0)}))))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "FINITE_VFREE_IN_2",
+   "lean": "Candle.FINITE_VFREE_IN_2",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[holSyntax$term]{(pred_set$FINITE (pred_set$GSPEC (lam.(pair$, (pair$, (pair$FST v1) (pair$SND v1)) (holSyntax$VFREE_IN (holSyntax$Var (pair$FST v1) (pair$SND v1)) v0)))))}",
+   "lean_form": "A1[holSyntax$term]{(pred_set$FINITE (pred_set$GSPEC (lam.(pair$, (pair$, (pair$FST v1) (pair$SND v1)) (holSyntax$VFREE_IN (holSyntax$Var (pair$FST v1) (pair$SND v1)) v0)))))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "FINITE_VFREE_IN_list",
+   "lean": "Candle.FINITE_VFREE_IN_list",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[list$list<holSyntax$term>]{(pred_set$FINITE (pred_set$GSPEC (lam.(pair$, v1 E2[holSyntax$type,holSyntax$term]{AND[(holSyntax$VFREE_IN (holSyntax$Var v1 v2) v3);(LMEM v3 v0)]}))))}",
+   "lean_form": "A1[list$list<holSyntax$term>]{(pred_set$FINITE (pred_set$GSPEC (lam.(pair$, v1 E2[holSyntax$type,holSyntax$term]{AND[(holSyntax$VFREE_IN (holSyntax$Var v1 v2) v3);(LMEM v3 v0)]}))))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "FINITE_MEM_Var",
+   "lean": "Candle.FINITE_MEM_Var",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[list$list<holSyntax$term>]{(pred_set$FINITE (pred_set$GSPEC (lam.(pair$, (pair$, (pair$FST v1) (pair$SND v1)) (LMEM (holSyntax$Var (pair$FST v1) (pair$SND v1)) v0)))))}",
+   "lean_form": "A1[list$list<holSyntax$term>]{(pred_set$FINITE (pred_set$GSPEC (lam.(pair$, (pair$, (pair$FST v1) (pair$SND v1)) (LMEM (holSyntax$Var (pair$FST v1) (pair$SND v1)) v0)))))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "theory_ok_sig",
+   "lean": "Candle.theory_ok_sig",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[pair$prod<pair$prod<finite_map$fmap<mlstring$mlstring,num$num>,finite_map$fmap<mlstring$mlstring,holSyntax$type>>,(holSyntax$term->min$bool)>]{IMP[(holSyntax$theory_ok v0)]=>(holSyntax$is_std_sig (pair$FST v0))}",
+   "lean_form": "A1[pair$prod<pair$prod<finite_map$fmap<mlstring$mlstring,num$num>,finite_map$fmap<mlstring$mlstring,holSyntax$type>>,(holSyntax$term->min$bool)>]{IMP[(holSyntax$theory_ok v0)]=>(holSyntax$is_std_sig (pair$FST v0))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "arities_match_nil",
+   "lean": "Candle.arities_match_nil",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[list$list<holSyntax$type>]{AND[((holSyntaxExtra$arities_match list$NIL v0)=(v0=list$NIL));((holSyntaxExtra$arities_match v0 list$NIL)=(v0=list$NIL))]}",
+   "lean_form": "A1[list$list<holSyntax$type>]{AND[((holSyntaxExtra$arities_match list$NIL v0)=(v0=list$NIL));((holSyntaxExtra$arities_match v0 list$NIL)=(v0=list$NIL))]}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxExtra",
+   "hol4": "arities_match_Tyvar",
+   "lean": "Candle.arities_match_Tyvar",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A4[mlstring$mlstring,list$list<holSyntax$type>,holSyntax$type,list$list<holSyntax$type>]{((holSyntaxExtra$arities_match (list$CONS (holSyntax$Tyvar v0) v1) (list$CONS v2 v3))=(holSyntaxExtra$arities_match v1 v3))}",
+   "lean_form": "A4[mlstring$mlstring,list$list<holSyntax$type>,holSyntax$type,list$list<holSyntax$type>]{((holSyntaxExtra$arities_match (list$CONS (holSyntax$Tyvar v0) v1) (list$CONS v2 v3))=(holSyntaxExtra$arities_match v1 v3))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntax",
+   "hol4": "domain_def",
+   "lean": "Candle.domain_def",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[holSyntax$type,holSyntax$type]{((holSyntax$domain (holSyntax$Tyapp (mlstring$implode \"fun\") (list$CONS v0 (list$CONS v1 list$NIL))))=v0)}",
+   "lean_form": "A2[holSyntax$type,holSyntax$type]{((holSyntax$domain (holSyntax$Tyapp (mlstring$implode \"fun\") (list$CONS v0 (list$CONS v1 list$NIL))))=v0)}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntax",
+   "hol4": "codomain_def",
+   "lean": "Candle.codomain_def",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[holSyntax$type,holSyntax$type]{((holSyntax$codomain (holSyntax$Tyapp (mlstring$implode \"fun\") (list$CONS v0 (list$CONS v1 list$NIL))))=v1)}",
+   "lean_form": "A2[holSyntax$type,holSyntax$type]{((holSyntax$codomain (holSyntax$Tyapp (mlstring$implode \"fun\") (list$CONS v0 (list$CONS v1 list$NIL))))=v1)}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntax",
+   "hol4": "VFREE_IN_FINITE",
+   "lean": "Candle.VFREE_IN_FINITE",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[holSyntax$term]{(pred_set$FINITE (pred_set$GSPEC (lam.(pair$, v1 (holSyntax$VFREE_IN v1 v0)))))}",
+   "lean_form": "A1[holSyntax$term]{(pred_set$FINITE (pred_set$GSPEC (lam.(pair$, v1 (holSyntax$VFREE_IN v1 v0)))))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntax",
+   "hol4": "VFREE_IN_FINITE_ALT",
+   "lean": "Candle.VFREE_IN_FINITE_ALT",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[holSyntax$type,holSyntax$term]{(pred_set$FINITE (pred_set$GSPEC (lam.(pair$, v2 (holSyntax$VFREE_IN (holSyntax$Var (mlstring$implode v2) v0) v1)))))}",
+   "lean_form": "A2[holSyntax$type,holSyntax$term]{(pred_set$FINITE (pred_set$GSPEC (lam.(pair$, v2 (holSyntax$VFREE_IN (holSyntax$Var (mlstring$implode v2) v0) v1)))))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntax",
+   "hol4": "PRIMED_NAME_EXISTS",
+   "lean": "Candle.PRIMED_NAME_EXISTS",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A3[list$list<string$char>,holSyntax$type,holSyntax$term]{E1[num$num]{~(holSyntax$VFREE_IN (holSyntax$Var (mlstring$implode (list$APPEND v0 (list$GENLIST (combin$K #39) v3))) v1) v2)}}",
+   "lean_form": "A3[list$list<string$char>,holSyntax$type,holSyntax$term]{E1[num$num]{~(holSyntax$VFREE_IN (holSyntax$Var (mlstring$implode (list$APPEND v0 (list$GENLIST (combin$K #39) v3))) v1) v2)}}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntax",
+   "hol4": "VARIANT_THM",
+   "lean": "Candle.VARIANT_THM",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A3[holSyntax$term,list$list<string$char>,holSyntax$type]{~(holSyntax$VFREE_IN (holSyntax$Var (holSyntax$VARIANT v0 v1 v2) v2) v0)}",
+   "lean_form": "A3[holSyntax$term,list$list<string$char>,holSyntax$type]{~(holSyntax$VFREE_IN (holSyntax$Var (holSyntax$VARIANT v0 v1 v2) v2) v0)}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntax",
+   "hol4": "SIZEOF_VSUBST",
+   "lean": "Candle.SIZEOF_VSUBST",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[list$list<pair$prod<holSyntax$term,holSyntax$term>>,holSyntax$term]{IMP[A2[holSyntax$term,holSyntax$term]{IMP[(LMEM (pair$, v2 v3) v0)]=>E2[mlstring$mlstring,holSyntax$type]{(v2=(holSyntax$Var v4 v5))}}]=>((holSyntax$sizeof (holSyntax$VSUBST v0 v1))=(holSyntax$sizeof v1))}",
+   "lean_form": "A2[list$list<pair$prod<holSyntax$term,holSyntax$term>>,holSyntax$term]{IMP[A2[holSyntax$term,holSyntax$term]{IMP[(LMEM (pair$, v2 v3) v0)]=>E2[mlstring$mlstring,holSyntax$type]{(v2=(holSyntax$Var v4 v5))}}]=>((holSyntax$sizeof (holSyntax$VSUBST v0 v1))=(holSyntax$sizeof v1))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxLib",
+   "hol4": "ALPHAVARS_REFL",
+   "lean": "Candle.ALPHAVARS_REFL",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[list$list<pair$prod<T0,T0>>,T0]{IMP[(list$EVERY (lam.((pair$FST v2)=(pair$SND v2))) v0)]=>(holSyntaxLib$ALPHAVARS v0 (pair$, v1 v1))}",
+   "lean_form": "A2[list$list<pair$prod<T0,T0>>,T0]{IMP[(list$EVERY (lam.((pair$FST v2)=(pair$SND v2))) v0)]=>(holSyntaxLib$ALPHAVARS v0 (pair$, v1 v1))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxLib",
+   "hol4": "ALPHAVARS_MEM",
+   "lean": "Candle.ALPHAVARS_MEM",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[list$list<pair$prod<T0,T0>>,pair$prod<T0,T0>]{IMP[(holSyntaxLib$ALPHAVARS v0 v1)]=>OR[(LMEM v1 v0);((pair$FST v1)=(pair$SND v1))]}",
+   "lean_form": "A2[list$list<pair$prod<T0,T0>>,pair$prod<T0,T0>]{IMP[(holSyntaxLib$ALPHAVARS v0 v1)]=>OR[(LMEM v1 v0);((pair$FST v1)=(pair$SND v1))]}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxLib",
+   "hol4": "REV_ASSOCD",
+   "lean": "Candle.REV_ASSOCD_thm",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "AND[A2[T0,T1]{((holSyntaxLib$REV_ASSOCD v0 list$NIL v1)=v1)};A5[T0,T1,T0,list$list<pair$prod<T1,T0>>,T1]{((holSyntaxLib$REV_ASSOCD v0 (list$CONS (pair$, v1 v2) v3) v4)=ITE((v2=v0),v1,(holSyntaxLib$REV_ASSOCD v0 v3 v4)))}]",
+   "lean_form": "AND[A2[T0,T1]{((holSyntaxLib$REV_ASSOCD v0 list$NIL v1)=v1)};A5[T0,T1,T0,list$list<pair$prod<T1,T0>>,T1]{((holSyntaxLib$REV_ASSOCD v0 (list$CONS (pair$, v1 v2) v3) v4)=ITE((v2=v0),v1,(holSyntaxLib$REV_ASSOCD v0 v3 v4)))}]",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxLib",
+   "hol4": "REV_ASSOCD_ALOOKUP",
+   "lean": "Candle.REV_ASSOCD_ALOOKUP",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A3[T0,list$list<pair$prod<T1,T0>>,T1]{((holSyntaxLib$REV_ASSOCD v0 v1 v2)=CASE[(alist$ALOOKUP (list$MAP (lam.(pair$, (pair$SND v3) (pair$FST v3))) v1) v0)]{v2;(lam.v3)})}",
+   "lean_form": "A3[T0,list$list<pair$prod<T1,T0>>,T1]{((holSyntaxLib$REV_ASSOCD v0 v1 v2)=CASE[(alist$ALOOKUP (list$MAP (lam.(pair$, (pair$SND v3) (pair$FST v3))) v1) v0)]{v2;(lam.v3)})}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxLib",
+   "hol4": "PRIMED_INFINITE",
+   "lean": "Candle.PRIMED_INFINITE",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[list$list<string$char>]{~(pred_set$FINITE (pred_set$IMAGE (lam.(list$APPEND v0 (list$GENLIST (combin$K #39) v1))) pred_set$UNIV))}",
+   "lean_form": "A1[list$list<string$char>]{~(pred_set$FINITE (pred_set$IMAGE (lam.(list$APPEND v0 (list$GENLIST (combin$K #39) v1))) pred_set$UNIV))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxLib",
+   "hol4": "REV_ASSOCD_FILTER",
+   "lean": "Candle.REV_ASSOCD_FILTER",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A5[T0,(T0->min$bool),list$list<pair$prod<T1,T0>>,T1,T2]{((holSyntaxLib$REV_ASSOCD v0 (list$FILTER (lam.(v1 (pair$SND v5))) v2) v3)=ITE((v1 v0),(holSyntaxLib$REV_ASSOCD v0 v2 v3),v3))}",
+   "lean_form": "A5[T0,(T0->min$bool),list$list<pair$prod<T1,T0>>,T1,T2]{((holSyntaxLib$REV_ASSOCD v0 (list$FILTER (lam.(v1 (pair$SND v5))) v2) v3)=ITE((v1 v0),(holSyntaxLib$REV_ASSOCD v0 v2 v3),v3))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxLib",
+   "hol4": "REV_ASSOCD_MEM",
+   "lean": "Candle.REV_ASSOCD_MEM",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A3[T0,list$list<pair$prod<T1,T0>>,T1]{OR[(LMEM (pair$, (holSyntaxLib$REV_ASSOCD v0 v1 v2) v0) v1);((holSyntaxLib$REV_ASSOCD v0 v1 v2)=v2)]}",
+   "lean_form": "A3[T0,list$list<pair$prod<T1,T0>>,T1]{OR[(LMEM (pair$, (holSyntaxLib$REV_ASSOCD v0 v1 v2) v0) v1);((holSyntaxLib$REV_ASSOCD v0 v1 v2)=v2)]}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxLib",
+   "hol4": "MEM_LIST_INSERT",
+   "lean": "Candle.MEM_LIST_INSERT",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[T0,list$list<T0>]{((list$LIST_TO_SET (holSyntaxLib$LIST_INSERT v0 v1))=(pred_set$INSERT v0 (list$LIST_TO_SET v1)))}",
+   "lean_form": "A2[T0,list$list<T0>]{((list$LIST_TO_SET (holSyntaxLib$LIST_INSERT v0 v1))=(pred_set$INSERT v0 (list$LIST_TO_SET v1)))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxLib",
+   "hol4": "MEM_LIST_UNION",
+   "lean": "Candle.MEM_LIST_UNION",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[list$list<T0>,list$list<T0>]{((list$LIST_TO_SET (holSyntaxLib$LIST_UNION v0 v1))=(pred_set$UNION (list$LIST_TO_SET v0) (list$LIST_TO_SET v1)))}",
+   "lean_form": "A2[list$list<T0>,list$list<T0>]{((list$LIST_TO_SET (holSyntaxLib$LIST_UNION v0 v1))=(pred_set$UNION (list$LIST_TO_SET v0) (list$LIST_TO_SET v1)))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxLib",
+   "hol4": "MEM_FOLDR_LIST_UNION",
+   "lean": "Candle.MEM_FOLDR_LIST_UNION",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A4[T0,(T1->list$list<T0>),list$list<T0>,list$list<T1>]{((LMEM v0 (list$FOLDR (lam.(holSyntaxLib$LIST_UNION (v1 v4))) v2 v3))=OR[(LMEM v0 v2);E1[T1]{AND[(LMEM v4 v3);(LMEM v0 (v1 v4))]}])}",
+   "lean_form": "A4[T0,(T1->list$list<T0>),list$list<T0>,list$list<T1>]{((LMEM v0 (list$FOLDR (lam.(holSyntaxLib$LIST_UNION (v1 v4))) v2 v3))=OR[(LMEM v0 v2);E1[T1]{AND[(LMEM v4 v3);(LMEM v0 (v1 v4))]}])}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxLib",
+   "hol4": "LIST_UNION_NIL",
+   "lean": "Candle.LIST_UNION_NIL",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[list$list<T0>]{((holSyntaxLib$LIST_UNION list$NIL v0)=v0)}",
+   "lean_form": "A1[list$list<T0>]{((holSyntaxLib$LIST_UNION list$NIL v0)=v0)}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxLib",
+   "hol4": "set_LIST_UNION",
+   "lean": "Candle.set_LIST_UNION",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[list$list<T0>,list$list<T0>]{((list$LIST_TO_SET (holSyntaxLib$LIST_UNION v0 v1))=(pred_set$UNION (list$LIST_TO_SET v0) (list$LIST_TO_SET v1)))}",
+   "lean_form": "A2[list$list<T0>,list$list<T0>]{((list$LIST_TO_SET (holSyntaxLib$LIST_UNION v0 v1))=(pred_set$UNION (list$LIST_TO_SET v0) (list$LIST_TO_SET v1)))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxLib",
+   "hol4": "MEM_FOLDR_INORDER_INSERT",
+   "lean": "Candle.MEM_FOLDR_INORDER_INSERT",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[list$list<string$char>,list$list<list$list<string$char>>]{((LMEM v0 (list$FOLDR holSyntaxLib$INORDER_INSERT list$NIL v1))=(LMEM v0 v1))}",
+   "lean_form": "A2[list$list<string$char>,list$list<list$list<string$char>>]{((LMEM v0 (list$FOLDR holSyntaxLib$INORDER_INSERT list$NIL v1))=(LMEM v0 v1))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxLib",
+   "hol4": "PERM_STRING_SORT",
+   "lean": "Candle.PERM_STRING_SORT",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[list$list<list$list<string$char>>]{IMP[(list$ALL_DISTINCT v0)]=>(sorting$PERM v0 (holSyntaxLib$STRING_SORT v0))}",
+   "lean_form": "A1[list$list<list$list<string$char>>]{IMP[(list$ALL_DISTINCT v0)]=>(sorting$PERM v0 (holSyntaxLib$STRING_SORT v0))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxLib",
+   "hol4": "LENGTH_STRING_SORT",
+   "lean": "Candle.LENGTH_STRING_SORT",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[list$list<list$list<string$char>>]{IMP[(list$ALL_DISTINCT v0)]=>((list$LENGTH (holSyntaxLib$STRING_SORT v0))=(list$LENGTH v0))}",
+   "lean_form": "A1[list$list<list$list<string$char>>]{IMP[(list$ALL_DISTINCT v0)]=>((list$LENGTH (holSyntaxLib$STRING_SORT v0))=(list$LENGTH v0))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxLib",
+   "hol4": "MEM_STRING_SORT",
+   "lean": "Candle.MEM_STRING_SORT",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[list$list<list$list<string$char>>]{((list$LIST_TO_SET (holSyntaxLib$STRING_SORT v0))=(list$LIST_TO_SET v0))}",
+   "lean_form": "A1[list$list<list$list<string$char>>]{((list$LIST_TO_SET (holSyntaxLib$STRING_SORT v0))=(list$LIST_TO_SET v0))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxLib",
+   "hol4": "ALL_DISTINCT_STRING_SORT",
+   "lean": "Candle.ALL_DISTINCT_STRING_SORT",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[list$list<list$list<string$char>>]{(list$ALL_DISTINCT (holSyntaxLib$STRING_SORT v0))}",
+   "lean_form": "A1[list$list<list$list<string$char>>]{(list$ALL_DISTINCT (holSyntaxLib$STRING_SORT v0))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "holSyntaxLib",
+   "hol4": "ALL_DISTINCT_LIST_UNION",
+   "lean": "Candle.ALL_DISTINCT_LIST_UNION",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[list$list<T0>,list$list<T0>]{IMP[(list$ALL_DISTINCT v0)]=>(list$ALL_DISTINCT (holSyntaxLib$LIST_UNION v1 v0))}",
+   "lean_form": "A2[list$list<T0>,list$list<T0>]{IMP[(list$ALL_DISTINCT v0)]=>(list$ALL_DISTINCT (holSyntaxLib$LIST_UNION v1 v0))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "misc",
+   "hol4": "append_aux_thm",
+   "lean": "Candle.append_aux_thm",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[misc$app_list<T0>,list$list<T0>]{((misc$append_aux v0 v1)=(list$APPEND (misc$append_aux v0 list$NIL) v1))}",
+   "lean_form": "A2[misc$app_list<T0>,list$list<T0>]{((misc$append_aux v0 v1)=(list$APPEND (misc$append_aux v0 list$NIL) v1))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "misc",
+   "hol4": "append_thm",
+   "lean": "Candle.append_thm",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A3[misc$app_list<T0>,misc$app_list<T0>,list$list<T1>]{AND[((misc$append (misc$Append v0 v1))=(list$APPEND (misc$append v0) (misc$append v1)));((misc$append (misc$List v2))=v2);((misc$append misc$Nil)=list$NIL)]}",
+   "lean_form": "A3[misc$app_list<T0>,misc$app_list<T0>,list$list<T1>]{AND[((misc$append (misc$Append v0 v1))=(list$APPEND (misc$append v0) (misc$append v1)));((misc$append (misc$List v2))=v2);((misc$append misc$Nil)=list$NIL)]}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "misc",
+   "hol4": "SmartAppend_thm",
+   "lean": "Candle.SmartAppend_thm",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[misc$app_list<T0>,misc$app_list<T0>]{((misc$SmartAppend v0 v1)=ITE((v0=misc$Nil),v1,ITE((v1=misc$Nil),v0,(misc$Append v0 v1))))}",
+   "lean_form": "A2[misc$app_list<T0>,misc$app_list<T0>]{((misc$SmartAppend v0 v1)=ITE((v0=misc$Nil),v1,ITE((v1=misc$Nil),v0,(misc$Append v0 v1))))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "misc",
+   "hol4": "append_SmartAppend",
+   "lean": "Candle.append_SmartAppend",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[misc$app_list<T0>,misc$app_list<T0>]{((misc$append (misc$SmartAppend v0 v1))=(list$APPEND (misc$append v0) (misc$append v1)))}",
+   "lean_form": "A2[misc$app_list<T0>,misc$app_list<T0>]{((misc$append (misc$SmartAppend v0 v1))=(list$APPEND (misc$append v0) (misc$append v1)))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "misc",
+   "hol4": "MAP_FST_I_PAIR_MAP",
+   "lean": "Candle.MAP_FST_I_PAIR_MAP",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[(T0->T1),list$list<pair$prod<T2,T0>>]{((list$MAP pair$FST (list$MAP (pair$## combin$I v0) v1))=(list$MAP pair$FST v1))}",
+   "lean_form": "A2[(T0->T1),list$list<pair$prod<T2,T0>>]{((list$MAP pair$FST (list$MAP (pair$## combin$I v0) v1))=(list$MAP pair$FST v1))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "misc",
+   "hol4": "MAX_LIST_APPEND",
+   "lean": "Candle.MAX_LIST_APPEND",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[list$list<num$num>,list$list<num$num>]{((rich_list$MAX_LIST (list$APPEND v0 v1))=(arithmetic$MAX (rich_list$MAX_LIST v0) (rich_list$MAX_LIST v1)))}",
+   "lean_form": "A2[list$list<num$num>,list$list<num$num>]{((rich_list$MAX_LIST (list$APPEND v0 v1))=(arithmetic$MAX (rich_list$MAX_LIST v0) (rich_list$MAX_LIST v1)))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "misc",
+   "hol4": "MAX_LIST_SNOC",
+   "lean": "Candle.MAX_LIST_SNOC",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[num$num,list$list<num$num>]{((rich_list$MAX_LIST (list$SNOC v0 v1))=(arithmetic$MAX (rich_list$MAX_LIST v1) v0))}",
+   "lean_form": "A2[num$num,list$list<num$num>]{((rich_list$MAX_LIST (list$SNOC v0 v1))=(arithmetic$MAX (rich_list$MAX_LIST v1) v0))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "misc",
+   "hol4": "domain_nat_set_from_list",
+   "lean": "Candle.domain_nat_set_from_list",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[sptree$spt<one$one>,list$list<num$num>]{((sptree$domain (list$FOLDL (lam.(lam.(sptree$insert v3 one$one v2))) v0 v1))=(pred_set$UNION (sptree$domain v0) (list$LIST_TO_SET v1)))}",
+   "lean_form": "A2[sptree$spt<one$one>,list$list<num$num>]{((sptree$domain (list$FOLDL (lam.(lam.(sptree$insert v3 one$one v2))) v0 v1))=(pred_set$UNION (sptree$domain v0) (list$LIST_TO_SET v1)))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "misc",
+   "hol4": "UPDATE_LIST_THM",
+   "lean": "Candle.UPDATE_LIST_THM",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[(T0->T1)]{AND[((misc$UPDATE_LIST v0 list$NIL)=v0);A2[pair$prod<T0,T1>,list$list<pair$prod<T0,T1>>]{((misc$UPDATE_LIST v0 (list$CONS v1 v2))=(misc$UPDATE_LIST (combin$UPDATE (pair$FST v1) (pair$SND v1) v0) v2))}]}",
+   "lean_form": "A1[(T0->T1)]{AND[((misc$UPDATE_LIST v0 list$NIL)=v0);A2[pair$prod<T0,T1>,list$list<pair$prod<T0,T1>>]{((misc$UPDATE_LIST v0 (list$CONS v1 v2))=(misc$UPDATE_LIST (combin$UPDATE (pair$FST v1) (pair$SND v1) v0) v2))}]}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "misc",
+   "hol4": "APPLY_UPDATE_LIST_ALOOKUP",
+   "lean": "Candle.APPLY_UPDATE_LIST_ALOOKUP",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A3[(T0->T1),list$list<pair$prod<T0,T1>>,T0]{((misc$UPDATE_LIST v0 v1 v2)=CASE[(alist$ALOOKUP (list$REVERSE v1) v2)]{(v0 v2);(lam.v3)})}",
+   "lean_form": "A3[(T0->T1),list$list<pair$prod<T0,T1>>,T0]{((misc$UPDATE_LIST v0 v1 v2)=CASE[(alist$ALOOKUP (list$REVERSE v1) v2)]{(v0 v2);(lam.v3)})}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "misc",
+   "hol4": "find_index_ALL_DISTINCT_EL",
+   "lean": "Candle.find_index_ALL_DISTINCT_EL",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A3[list$list<T0>,num$num,num$num]{IMP[(list$ALL_DISTINCT v0);(prim_rec$< v1 (list$LENGTH v0))]=>((misc$find_index (list$EL v1 v0) v0 v2)=(option$SOME (arithmetic$+ v2 v1)))}",
+   "lean_form": "A3[list$list<T0>,num$num,num$num]{IMP[(list$ALL_DISTINCT v0);(prim_rec$< v1 (list$LENGTH v0))]=>((misc$find_index (list$EL v1 v0) v0 v2)=(option$SOME (arithmetic$+ v2 v1)))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "misc",
+   "hol4": "find_index_shift_0",
+   "lean": "Candle.find_index_shift_0",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A3[T0,list$list<T0>,num$num]{((misc$find_index v0 v1 v2)=(option$OPTION_MAP (lam.(arithmetic$+ v3 v2)) (misc$find_index v0 v1 0)))}",
+   "lean_form": "A3[T0,list$list<T0>,num$num]{((misc$find_index v0 v1 v2)=(option$OPTION_MAP (lam.(arithmetic$+ v3 v2)) (misc$find_index v0 v1 0)))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "misc",
+   "hol4": "EVERY2_RC_same",
+   "lean": "Candle.EVERY2_RC_same",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[(T0->(T0->min$bool)),list$list<T0>]{(list$LIST_REL (relation$RC v0) v1 v1)}",
+   "lean_form": "A2[(T0->(T0->min$bool)),list$list<T0>]{(list$LIST_REL (relation$RC v0) v1 v1)}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "misc",
+   "hol4": "I_PERMUTES",
+   "lean": "Candle.I_PERMUTES",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[(T0->min$bool)]{(pred_set$BIJ combin$I v0 v0)}",
+   "lean_form": "A1[(T0->min$bool)]{(pred_set$BIJ combin$I v0 v0)}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "misc",
+   "hol4": "MAP_EQ_ID",
+   "lean": "Candle.MAP_EQ_ID",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[(T0->T0),list$list<T0>]{(((list$MAP v0 v1)=v1)=A1[T0]{IMP[(LMEM v2 v1)]=>((v0 v2)=v2)})}",
+   "lean_form": "A2[(T0->T0),list$list<T0>]{(((list$MAP v0 v1)=v1)=A1[T0]{IMP[(LMEM v2 v1)]=>((v0 v2)=v2)})}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "misc",
+   "hol4": "FUN_FMAP_FAPPLY_FEMPTY_FAPPLY",
+   "lean": "Candle.FUN_FMAP_FAPPLY_FEMPTY_FAPPLY",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[(T0->min$bool),T0]{IMP[(pred_set$FINITE v0)]=>((finite_map$FAPPLY (finite_map$FUN_FMAP (finite_map$FAPPLY finite_map$FEMPTY) v0) v1)=(finite_map$FAPPLY finite_map$FEMPTY v1))}",
+   "lean_form": "A2[(T0->min$bool),T0]{IMP[(pred_set$FINITE v0)]=>((finite_map$FAPPLY (finite_map$FUN_FMAP (finite_map$FAPPLY finite_map$FEMPTY) v0) v1)=(finite_map$FAPPLY finite_map$FEMPTY v1))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "misc",
+   "hol4": "LESS_1",
+   "lean": "Candle.LESS_1",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[num$num]{((prim_rec$< v0 1)=(v0=0))}",
+   "lean_form": "A1[num$num]{((prim_rec$< v0 1)=(v0=0))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "misc",
+   "hol4": "num_from_hex_string_num_to_hex_string",
+   "lean": "Candle.num_from_hex_string_num_to_hex_string",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[num$num]{((ASCIInumbers$num_from_hex_string (ASCIInumbers$num_to_hex_string v0))=v0)}",
+   "lean_form": "A1[num$num]{((ASCIInumbers$num_from_hex_string (ASCIInumbers$num_to_hex_string v0))=v0)}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "misc",
+   "hol4": "MAPi_ID",
+   "lean": "Candle.MAPi_ID",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "((indexedLists$MAPi (lam.(lam.v1)))=combin$I)",
+   "lean_form": "((indexedLists$MAPi (lam.(lam.v1)))=combin$I)",
+   "proof_sorry": true
+  },
+  {
+   "thy": "misc",
+   "hol4": "OPT_MMAP_SOME",
+   "lean": "Candle.OPT_MMAP_SOME",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[list$list<T0>]{((list$OPT_MMAP option$SOME v0)=(option$SOME v0))}",
+   "lean_form": "A1[list$list<T0>]{((list$OPT_MMAP option$SOME v0)=(option$SOME v0))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "misc",
+   "hol4": "w2n_lt_256",
+   "lean": "Candle.w2n_lt_256",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[words$word<8>]{(prim_rec$< (words$w2n v0) 256)}",
+   "lean_form": "A1[words$word<8>]{(prim_rec$< (words$w2n v0) 256)}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "misc",
+   "hol4": "CHR_w2n_n2w_ORD",
+   "lean": "Candle.CHR_w2n_n2w_ORD",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "((combin$o string$CHR (combin$o words$w2n (combin$o words$n2w string$ORD)))=combin$I)",
+   "lean_form": "((combin$o string$CHR (combin$o words$w2n (combin$o words$n2w string$ORD)))=combin$I)",
+   "proof_sorry": true
+  },
+  {
+   "thy": "misc",
+   "hol4": "n2w_ORD_CHR_w2n",
+   "lean": "Candle.n2w_ORD_CHR_w2n",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "((combin$o words$n2w (combin$o string$ORD (combin$o string$CHR words$w2n)))=combin$I)",
+   "lean_form": "((combin$o words$n2w (combin$o string$ORD (combin$o string$CHR words$w2n)))=combin$I)",
+   "proof_sorry": true
+  },
+  {
+   "thy": "misc",
+   "hol4": "CHR_w2n_n2w_ORD_simp",
+   "lean": "Candle.CHR_w2n_n2w_ORD_simp",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[string$char]{((string$CHR (words$w2n (words$n2w (string$ORD v0))))=v0)}",
+   "lean_form": "A1[string$char]{((string$CHR (words$w2n (words$n2w (string$ORD v0))))=v0)}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "misc",
+   "hol4": "n2w_ORD_CHR_w2n_simp",
+   "lean": "Candle.n2w_ORD_CHR_w2n_simp",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[words$word<8>]{((words$n2w (string$ORD (string$CHR (words$w2n v0))))=v0)}",
+   "lean_form": "A1[words$word<8>]{((words$n2w (string$ORD (string$CHR (words$w2n v0))))=v0)}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "misc",
+   "hol4": "LENGTH_FIELDS",
+   "lean": "Candle.LENGTH_FIELDS",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[(string$char->min$bool),list$list<string$char>]{((list$LENGTH (string$FIELDS v0 v1))=(arithmetic$+ (list$LENGTH (list$FILTER v0 v1)) 1))}",
+   "lean_form": "A2[(string$char->min$bool),list$list<string$char>]{((list$LENGTH (string$FIELDS v0 v1))=(arithmetic$+ (list$LENGTH (list$FILTER v0 v1)) 1))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "misc",
+   "hol4": "FIELDS_NEQ_NIL",
+   "lean": "Candle.FIELDS_NEQ_NIL",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[(string$char->min$bool),list$list<string$char>]{~((string$FIELDS v0 v1)=list$NIL)}",
+   "lean_form": "A2[(string$char->min$bool),list$list<string$char>]{~((string$FIELDS v0 v1)=list$NIL)}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "misc",
+   "hol4": "FIELDS_next",
+   "lean": "Candle.FIELDS_next",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A4[(string$char->min$bool),list$list<string$char>,list$list<string$char>,list$list<list$list<string$char>>]{IMP[((string$FIELDS v0 v1)=(list$CONS v2 v3));(prim_rec$< (list$LENGTH v2) (list$LENGTH v1))]=>AND[((string$FIELDS v0 (list$DROP (arithmetic$+ (list$LENGTH v2) 1) v1))=v3);E1[string$char]{AND[(list$isPREFIX (list$APPEND v2 (list$CONS v4 \"\")) v1);(v0 v4)]}]}",
+   "lean_form": "A4[(string$char->min$bool),list$list<string$char>,list$list<string$char>,list$list<list$list<string$char>>]{IMP[((string$FIELDS v0 v1)=(list$CONS v2 v3));(prim_rec$< (list$LENGTH v2) (list$LENGTH v1))]=>AND[((string$FIELDS v0 (list$DROP (arithmetic$+ (list$LENGTH v2) 1) v1))=v3);E1[string$char]{AND[(list$isPREFIX (list$APPEND v2 (list$CONS v4 \"\")) v1);(v0 v4)]}]}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "misc",
+   "hol4": "splitlines_nil",
+   "lean": "Candle.splitlines_nil",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "((misc$splitlines \"\")=list$NIL)",
+   "lean_form": "((misc$splitlines \"\")=list$NIL)",
+   "proof_sorry": true
+  },
+  {
+   "thy": "misc",
+   "hol4": "splitlines_eq_nil",
+   "lean": "Candle.splitlines_eq_nil",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[list$list<string$char>]{(((misc$splitlines v0)=list$NIL)=(v0=\"\"))}",
+   "lean_form": "A1[list$list<string$char>]{(((misc$splitlines v0)=list$NIL)=(v0=\"\"))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "misc",
+   "hol4": "irreflexive_inv_image",
+   "lean": "Candle.irreflexive_inv_image",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[(T0->(T0->min$bool)),(T1->T0)]{IMP[(relation$irreflexive v0)]=>(relation$irreflexive (relation$inv_image v0 v1))}",
+   "lean_form": "A2[(T0->(T0->min$bool)),(T1->T0)]{IMP[(relation$irreflexive v0)]=>(relation$irreflexive (relation$inv_image v0 v1))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "misc",
+   "hol4": "trichotomous_inv_image",
+   "lean": "Candle.trichotomous_inv_image",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A2[(T0->(T0->min$bool)),(T1->T0)]{IMP[(relation$trichotomous v0);(pred_set$INJ v1 pred_set$UNIV pred_set$UNIV)]=>(relation$trichotomous (relation$inv_image v0 v1))}",
+   "lean_form": "A2[(T0->(T0->min$bool)),(T1->T0)]{IMP[(relation$trichotomous v0);(pred_set$INJ v1 pred_set$UNIV pred_set$UNIV)]=>(relation$trichotomous (relation$inv_image v0 v1))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "misc",
+   "hol4": "plus_0_I",
+   "lean": "Candle.plus_0_I",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "((arithmetic$+ 0)=combin$I)",
+   "lean_form": "((arithmetic$+ 0)=combin$I)",
+   "proof_sorry": true
+  },
+  {
+   "thy": "misc",
+   "hol4": "OPTION_MAP_I",
+   "lean": "Candle.OPTION_MAP_I",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[option$option<T0>]{((option$OPTION_MAP combin$I v0)=v0)}",
+   "lean_form": "A1[option$option<T0>]{((option$OPTION_MAP combin$I v0)=v0)}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "misc",
+   "hol4": "is_subseq_refl",
+   "lean": "Candle.is_subseq_refl",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[list$list<T0>]{(misc$is_subseq v0 v0)}",
+   "lean_form": "A1[list$list<T0>]{(misc$is_subseq v0 v0)}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "misc",
+   "hol4": "is_subseq_nil",
+   "lean": "Candle.is_subseq_nil",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[list$list<T0>]{((misc$is_subseq list$NIL v0)=(v0=list$NIL))}",
+   "lean_form": "A1[list$list<T0>]{((misc$is_subseq list$NIL v0)=(v0=list$NIL))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "misc",
+   "hol4": "EVEN_make_even",
+   "lean": "Candle.EVEN_make_even",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "A1[num$num]{(arithmetic$EVEN (misc$make_even v0))}",
+   "lean_form": "A1[num$num]{(arithmetic$EVEN (misc$make_even v0))}",
+   "proof_sorry": true
+  },
+  {
+   "thy": "misc",
+   "hol4": "v2w_32_F",
+   "lean": "Candle.v2w_32_F",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "((bitstring$v2w (list$CONS false list$NIL))=(words$n2w 0))",
+   "lean_form": "((bitstring$v2w (list$CONS false list$NIL))=(words$n2w 0))",
+   "proof_sorry": true
+  },
+  {
+   "thy": "misc",
+   "hol4": "v2w_32_T",
+   "lean": "Candle.v2w_32_T",
+   "flag": false,
+   "reasons": [],
+   "hol4_form": "((bitstring$v2w (list$CONS true list$NIL))=(words$n2w 1))",
+   "lean_form": "((bitstring$v2w (list$CONS true list$NIL))=(words$n2w 1))",
+   "proof_sorry": true
+  }
+ ]
+}

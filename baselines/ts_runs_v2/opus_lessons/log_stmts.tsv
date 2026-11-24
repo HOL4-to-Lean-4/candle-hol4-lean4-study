@@ -1,0 +1,267 @@
+misc.CARD_IMAGE_ID_BIJ	Misc.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+misc.tlookup_bij_suff	Misc.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+misc.tlookup_bij_iff	Misc.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+misc.find_index_LESS_LENGTH	Misc.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+misc.ALOOKUP_find_index_SOME	Misc.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+misc.IS_PREFIX_THM	Misc.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+misc.FST_pair	Misc.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+misc.LESS_1	Misc.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+misc.map_some_eq	Misc.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+misc.map_some_eq_append	Misc.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+misc.MAP_EQ_MAP_IMP	Misc.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+misc.FDOM_FLOOKUP	Misc.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+misc.DROP_EMPTY	Misc.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+misc.plus_0_I	Misc.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+mlstring.explode_aux_thm	Mlstring.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+mlstring.explode_thm	Mlstring.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+mlstring.explode_implode	Mlstring.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+mlstring.implode_explode	Mlstring.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+mlstring.explode_11	Mlstring.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+mlstring.TOKENS_eq_tokens_aux	Mlstring.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+mlstring.TOKENS_eq_tokens	Mlstring.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+namespaceProps.mk_id_surj	NamespaceProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+namespaceProps.mk_id_thm	NamespaceProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+namespaceProps.nsSub_mono	NamespaceProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+namespaceProps.nsAll2_mono	NamespaceProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+namespaceProps.nsLookup_nsEmpty	NamespaceProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+namespaceProps.nsLookupMod_nsEmpty	NamespaceProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+namespaceProps.nsAppend_nsEmpty	NamespaceProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+namespaceProps.alist_to_ns_nil	NamespaceProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+namespaceProps.nsSub_nsEmpty	NamespaceProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+namespaceProps.nsAll_nsEmpty	NamespaceProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+namespaceProps.nsAll2_nsEmpty	NamespaceProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+namespaceProps.alist_to_ns_cons	NamespaceProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+namespaceProps.nsAppend_nsBind	NamespaceProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+namespaceProps.nsAppend_assoc	NamespaceProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+namespaceProps.nsLookup_nsBind	NamespaceProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+namespaceProps.nsAppend_nsSing	NamespaceProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+namespaceProps.nsLookup_nsSing	NamespaceProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+namespaceProps.nsAll_nsSing	NamespaceProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+namespaceProps.nsAll2_nsSing	NamespaceProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+namespaceProps.nsBind_11	NamespaceProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+namespaceProps.alist_to_ns_11	NamespaceProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+namespaceProps.nsLookup_nsLift	NamespaceProps.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+namespaceProps.nsLookupMod_nsLift	NamespaceProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+namespaceProps.nsLookup_nsAppend_some	NamespaceProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+namespaceProps.nsAppend_to_nsBindList	NamespaceProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+namespaceProps.nsLookupMod_nsAppend_none	NamespaceProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+namespaceProps.eALL_T	NamespaceProps.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+namespaceProps.nsLookup_nsAll	NamespaceProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+namespaceProps.nsAll_nsAppend	NamespaceProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+namespaceProps.nsAll_alist_to_ns	NamespaceProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+namespaceProps.nsAll_nsLift	NamespaceProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+namespaceProps.nsAll_nsAppend_left	NamespaceProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+namespaceProps.nsSub_conj	NamespaceProps.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+namespaceProps.nsSub_refl	NamespaceProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+namespaceProps.nsSub_nsBind	NamespaceProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+namespaceProps.nsSub_nsAppend2	NamespaceProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+namespaceProps.alist_rel_restr_thm	NamespaceProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+namespaceProps.alistSub_cong	NamespaceProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+namespaceProps.nsLookup_FOLDR_nsLift	NamespaceProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+namespaceProps.nsLookup_FOLDR_nsLift_some	NamespaceProps.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+namespaceProps.nsLookupMod_FOLDR_nsLift_none	NamespaceProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+namespaceProps.nsAll2_conj	NamespaceProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+namespaceProps.nsAll2_nsLookup2	NamespaceProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+namespaceProps.nsAll2_nsLookup_none	NamespaceProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+namespaceProps.nsAll2_nsBind	NamespaceProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+namespaceProps.nsAll2_nsBindList	NamespaceProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+namespaceProps.nsAll2_nsAppend	NamespaceProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+namespaceProps.nsAll2_alist_to_ns	NamespaceProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+namespaceProps.nsAll2_nsLift	NamespaceProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+semanticPrimitivesProps.with_same_v	SemanticPrimitivesProps.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+semanticPrimitivesProps.unchanged_env	SemanticPrimitivesProps.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+semanticPrimitivesProps.with_same_clock	SemanticPrimitivesProps.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+semanticPrimitivesProps.Boolv_11	SemanticPrimitivesProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+semanticPrimitivesProps.extend_dec_env_assoc	SemanticPrimitivesProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+semanticPrimitivesProps.pat_bindings_accum	SemanticPrimitivesProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+semanticPrimitivesProps.do_app_cases	SemanticPrimitivesProps.lean	unsure	restructured disjunction (HOL4 nested case form vs Lean per-clause form); all 41 op constructors appear in both, binders and clause bodies sampled (Arith, FromTo, Shift, Aw8alloc, Aw8sub agree) but clause-by-clause equivalence not proved
+semanticPrimitivesProps.build_rec_env_merge	SemanticPrimitivesProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+semanticPrimitivesProps.do_con_check_build_conv	SemanticPrimitivesProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+semanticPrimitivesProps.FV_pes_MAP	SemanticPrimitivesProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+semanticPrimitivesProps.FV_defs_MAP	SemanticPrimitivesProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+semanticPrimitivesProps.concrete_v_list	SemanticPrimitivesProps.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax); lean name: concrete_v_list_thm
+semanticPrimitivesProps.prim_type_cases	SemanticPrimitivesProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+evaluate.evaluate_clock	Evaluate.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+evaluate.fix_clock_do_eval_res	Evaluate.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+evaluate.fix_clock_evaluate	Evaluate.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+evaluateProps.io_events_mono_trans	EvaluateProps.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+evaluateProps.call_FFI_rel_io_events_mono	EvaluateProps.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+evaluateProps.io_events_mono_refl	EvaluateProps.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+evaluateProps.do_app_call_FFI_rel	EvaluateProps.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+evaluateProps.do_app_io_events_mono	EvaluateProps.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+evaluateProps.is_clock_io_mono_cong	EvaluateProps.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+evaluateProps.is_clock_io_mono_return	EvaluateProps.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+evaluateProps.is_clock_io_mono_err	EvaluateProps.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+evaluateProps.pair_CASE_eq_forall	EvaluateProps.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+evaluateProps.is_clock_io_mono_bind	EvaluateProps.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+evaluateProps.is_clock_io_mono_check	EvaluateProps.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+evaluateProps.dec_inc_clock	EvaluateProps.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+evaluateProps.do_app_refs_length	EvaluateProps.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+evaluateProps.is_clock_io_mono_do_app_simple	EvaluateProps.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+evaluateProps.is_clock_io_mono_evaluate	EvaluateProps.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+evaluateProps.is_clock_io_mono_evaluate_decs	EvaluateProps.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+evaluateProps.is_clock_io_mono_extra	EvaluateProps.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+evaluateProps.list_result_eq_Rval	EvaluateProps.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+evaluateProps.evaluate_length	EvaluateProps.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+evaluateProps.is_clock_io_mono_set_clock	EvaluateProps.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+evaluateProps.is_clock_io_mono_minimal	EvaluateProps.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+evaluateProps.can_pmatch_all_EVERY	EvaluateProps.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+weakening.weak_tenv_refl	Weakening.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+weakening.weakS_refl	Weakening.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+weakening.weak_tenvE_freevars	Weakening.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+weakening.weak_tenvE_bind	Weakening.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+weakening.weak_tenvE_opt_bind	Weakening.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+weakening.weak_tenvE_bind_tvar	Weakening.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+weakening.weak_tenvE_bind_tvar2	Weakening.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+weakening.weak_tenvE_bind_var_list	Weakening.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+weakening.eLookupC_weak	Weakening.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+weakening.eLookupV_weak	Weakening.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+weakening.type_p_weakening	Weakening.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+weakening.type_e_weakening_lem	Weakening.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+weakening.type_e_weakening	Weakening.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+weakening.gt_0	Weakening.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+weakening.weak_ctMap_lookup	Weakening.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+weakening.weakCT_refl	Weakening.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+weakening.weakCT_trans	Weakening.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+weakening.disjoint_env_weakCT	Weakening.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+weakening.type_tenv_ctor_weakening	Weakening.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+weakening.type_tenv_val_weakening_lemma	Weakening.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+weakening.type_v_weakening	Weakening.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+weakening.type_all_env_weakening	Weakening.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+weakening.type_sv_weakening	Weakening.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+weakening.type_s_weakening	Weakening.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+weakening.weak_tenv_extend_dec_tenv	Weakening.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.unchanged_tenv	TypeSysProps.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+typeSysProps.extend_dec_tenv_assoc	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.tenv_val_ok_nsEmpty	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.tenv_ctor_ok_nsEmpty	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.tenv_abbrev_ok_nsEmpty	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.tenv_ok_empty	TypeSysProps.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+typeSysProps.check_freevars_add	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.check_freevars_subst_single	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.deBruijn_inc0	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.deBruijn_inc_deBruijn_inc	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.deBuijn_inc_lem1	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.type_subst_deBruijn_inc_single	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.type_subst_deBruijn_inc_list	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.check_freevars_deBruijn_inc	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.nil_deBruijn_inc	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.deBruijn_subst_check_freevars	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.deBruijn_subst_check_freevars2	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.check_freevars_subst_inc	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.check_freevars_subst	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.type_subst_deBruijn_subst_single	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.type_subst_deBruijn_subst_list	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.check_freevars_lem	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.nil_deBruijn_subst	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.deBruijn_subst2	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.type_e_subst_lem3	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.type_e_subst_lem5	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.subst_inc_cancel	TypeSysProps.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+typeSysProps.type_e_subst_lem7	TypeSysProps.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+typeSysProps.deBruijn_subst_id	TypeSysProps.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+typeSysProps.deBruijn_subst_freevars	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.tenv_abbrev_ok_lookup	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.check_freevars_type_name_subst	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.tenv_ctor_ok_merge	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.tenv_ctor_ok_lookup	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.bind_tvar_rewrites	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.bind_tvar0	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.tveLookup_subst_none	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.tveLookup_db_merge_none	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.tveLookup_inc_none	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.tveLookup_freevars	TypeSysProps.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax); lean name: tveLookup_freevars and tveLookup_freevars_2 (HOL4 has two, the second is local)
+typeSysProps.bind_var_list_append	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.num_tvs_bind_var_list	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.tenv_val_exp_ok_bvl	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.tveLookup_subst_some	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.num_tvs_db_merge	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.num_tvs_deBruijn_subst_tenvE	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.tveLookup_inc_some	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.tveLookup_freevars_subst	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.tenv_val_exp_ok_db_merge	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.tveLookup_freevars	TypeSysProps.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax); lean name: tveLookup_freevars and tveLookup_freevars_2 (HOL4 has two, the second is local)
+typeSysProps.tveLookup_no_tvs	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.deBruijn_subst_E_bvl	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.db_merge_bvl	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.tveLookup_db_merge_some	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.type_op_cases	TypeSysProps.lean	unsure	restructured disjunction; diff shows reshaped clauses; equivalence not checked clause by clause
+typeSysProps.type_ps_length	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.type_p_freevars	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.type_p_subst	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.type_p_bvl	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.type_p_tenvV_indep	TypeSysProps.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+typeSysProps.type_es_list_rel	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.type_es_length	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.tenv_val_exp_ok_bvl_funs	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.type_e_freevars	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.type_e_subst	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.type_funs_Tfn	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.type_funs_lookup	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.type_funs_find_recfun	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.type_recfun_lookup	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.type_funs_distinct	TypeSysProps.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+typeSysProps.type_e_subst_lem	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.mem_type_def_to_ctMap	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.ctMap_ok_merge_imp	TypeSysProps.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+typeSysProps.ctMap_ok_lookup	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.type_def_to_ctMap_mem	TypeSysProps.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+typeSysProps.fupdate2_union	TypeSysProps.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+typeSysProps.ctMap_ok_type_defs	TypeSysProps.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+typeSysProps.nsLookup_add_tenvE1	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.nsLookup_add_tenvE2	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.nsLookup_add_tenvE3	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.add_tenvE_bvl	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.type_v_freevars	TypeSysProps.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+typeSysProps.type_subst	TypeSysProps.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax); lean name: type_subst_thm in TypeSysProps.lean (renamed, comment says so)
+typeSysProps.check_ctor_tenv_ok	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.type_d_check_uniq	TypeSysProps.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+typeSysProps.extend_dec_tenv_ok	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.type_d_tenv_ok_helper	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.type_d_tenv_ok	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSysProps.type_ds_empty	TypeSysProps.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+typeSysProps.type_ds_sing	TypeSysProps.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSound.fst_triple	TypeSound.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+typeSound.sing_list	TypeSound.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+typeSound.EVERY_LIST_REL	TypeSound.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax); lean name: EVERY_LIST_REL_2 (second HOL4 theorem of that name, line 1297) and EVERY_LIST_REL (local, line 50)
+typeSound.v_unchanged	TypeSound.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+typeSound.check_dup_ctors_thm	TypeSound.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+typeSound.prim_canonical_values_thm	TypeSound.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+typeSound.has_lists_v_to_list	TypeSound.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+typeSound.ctor_canonical_values_thm	TypeSound.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+typeSound.same_type_refl	TypeSound.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+typeSound.eq_same_type	TypeSound.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+typeSound.type_env_conv_thm	TypeSound.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+typeSound.type_funs_fst	TypeSound.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+typeSound.type_recfun_env_help	TypeSound.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+typeSound.type_recfun_env	TypeSound.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+typeSound.type_v_exn	TypeSound.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+typeSound.type_v_Boolv	TypeSound.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSound.remove_lambda_prod	TypeSound.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSound.opapp_type_sound	TypeSound.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSound.store_type_extension_weakS	TypeSound.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSound.store_type_extension_refl	TypeSound.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSound.store_type_extension_trans	TypeSound.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSound.store_assign_type_sound	TypeSound.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSound.store_alloc_type_sound	TypeSound.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSound.type_v_list_to_v	TypeSound.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSound.type_v_list_to_v_APPEND	TypeSound.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSound.do_eq_Boolv	TypeSound.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+typeSound.prim_canonical_Boolv_thm	TypeSound.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSound.prim_canonical_Boolv_cases	TypeSound.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSound.op_type_sound	TypeSound.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+typeSound.build_conv_type_sound	TypeSound.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+typeSound.same_ctor_and_same_tid	TypeSound.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSound.pat_type_sound	TypeSound.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSound.lookup_var_sound	TypeSound.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSound.EVERY_REPLICATE	TypeSound.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSound.EVERY_LIST_REL	TypeSound.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax); lean name: EVERY_LIST_REL_2 (second HOL4 theorem of that name, line 1297) and EVERY_LIST_REL (local, line 50)
+typeSound.exp_type_sound	TypeSound.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+typeSound.build_tdefs_build_tenv	TypeSound.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+typeSound.type_sound_invariant_union	TypeSound.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSound.check_ctor_tenv_dups	TypeSound.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSound.type_all_env_extend	TypeSound.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSound.type_e_con_check	TypeSound.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSound.decs_type_sound_no_check	TypeSound.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line
+typeSound.decs_type_sound	TypeSound.lean	ok	read side by side with statements_pretty.txt: same hypotheses, quantifiers and conclusion (modulo types/binder syntax)
+typeSound.semantics_type_sound	TypeSound.lean	ok	token-sequence diff of constants and connectives against statements_pretty.txt shows only syntax/binder/type-annotation differences; not read line by line

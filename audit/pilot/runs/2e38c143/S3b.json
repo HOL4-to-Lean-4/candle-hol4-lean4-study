@@ -1,0 +1,18 @@
+{
+ "module": "CandleLean.HolSemantics",
+ "checked": 30,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "Candle.is_term_valuation0",
+   "lean": "lean/CandleLean/HolSemantics.lean:45",
+   "hol4": "hol4/package/candle/standard/semantics/holSemanticsScript.sml:87",
+   "class": "V-P",
+   "explanation": "HOL4 requires that for ALL v ty, type_ok tysig ty implies σ(v,ty) <: typesem δ τ ty. Lean only requires that SOME v, ty satisfy this implication. Any ty with type_ok false is a witness, so for every tysig that rejects some type (always, since tysig is finite) the Lean predicate is trivially true. Example: mem = (λx y. F), tysig = FEMPTY, any δ τ σ: the HOL4 predicate is false (take ty = Tyvar s), the Lean one is true (take ty = Tyapp s []). is_valuation0 and is_structure0 become too weak, and satisfies0 (hence models0 and entails0) quantifies over ill-typed term valuations.",
+   "repair": "def is_term_valuation0 (mem : U → U → Prop) (tysig : tysig) (δ : tyass U) (τ : tyval U)\n    (σ : tmval U) : Prop :=\n  ∀ v ty, type_ok tysig ty → mem (σ (v, ty)) (typesem δ τ ty)",
+   "confidence": 0.99,
+   "lean_check": "import CandleLean.HolSemantics\n\nnamespace Candle\n\nopen HOL Classical\n\ntheorem chk_F1 :\n    is_term_valuation0 (U := Nat) (fun _ _ => False) FEMPTY (fun _ _ => 0) (fun _ => 0) (fun _ => 0) ∧\n    ¬ (∀ (_v : mlstring) (ty : type), type_ok FEMPTY ty → False) := by\n  constructor\n  · refine ⟨default, Tyapp default [], ?_⟩\n    intro h\n    rw [type_ok] at h\n    have e : FLOOKUP (FEMPTY : fmap mlstring Nat) default = none := by\n      unfold FLOOKUP\n      exact if_neg (fun hx => hx rfl)\n    cases (h.1.symm.trans e)\n  · intro H\n    exact H default (Tyvar default) (by simp [type_ok])\n\nend Candle\n",
+   "hol4_check": "¬is_term_valuation0 (λ(x:num) (y:num). F) FEMPTY (λ(n:mlstring) (l:num list). 0n) (λ(s:mlstring). 0n) (λ(p:mlstring # type). 0n)"
+  }
+ ]
+}

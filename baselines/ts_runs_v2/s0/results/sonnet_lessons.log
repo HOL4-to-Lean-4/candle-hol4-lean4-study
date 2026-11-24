@@ -1,0 +1,12 @@
+[s0] dumping Lean statements from /e/ts_ws/runs/sonnet_lessons_v2/merged (root CmlTS)
+[s0] scanning
+statements 267 flagged 23
+  binder-types       16
+  binders            7
+  structure          7
+  connectives        6
+  constants          3
+  literals           1
+  unmapped           1
+  instances          1
+[s0] wrote /e/ts_ws/s0/results/sonnet_lessons/report.json and /e/ts_ws/s0/results/sonnet_lessons/summary.txt

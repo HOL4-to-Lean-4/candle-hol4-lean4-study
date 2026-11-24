@@ -1,0 +1,18 @@
+{
+ "module": "CandleLean.Prelude.List",
+ "checked": 46,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "HOL.sort3_tail",
+   "lean": "lean/CandleLean/Prelude/List.lean:188",
+   "hol4": "hol4/HOL4-src/src/sort/mergesortScript.sml:114",
+   "class": "V-P",
+   "explanation": "Lean swaps the two results of the comparison `R x z ≠ neg`. With `neg = False`, `R = (<)` on natural numbers, and `(x, y, z) = (1, 3, 2)`, Lean returns `[2, 1, 3]`. HOL4 returns `[1, 2, 3]`.",
+   "repair": "    else if R x z ≠ neg then [x, z, y] else [z, x, y]",
+   "confidence": 1,
+   "lean_check": "import CandleLean.Prelude.List\n\nexample : HOL.sort3_tail False (fun a b : Nat => a < b) 1 3 2 = [2, 1, 3] := by\n  have h13 : (1 : Nat) < 3 := by decide\n  have h32 : ¬ (3 : Nat) < 2 := by decide\n  have h12 : (1 : Nat) < 2 := by decide\n  simp [HOL.sort3_tail, h13, h32, h12]",
+   "hol4_check": "mergesort$sort3_tail F ($< : num -> num -> bool) 1 3 2 = [1;2;3]"
+  }
+ ]
+}

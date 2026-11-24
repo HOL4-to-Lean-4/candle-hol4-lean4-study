@@ -1,0 +1,18 @@
+{
+ "module": "CandleLean.HolSemantics",
+ "checked": 30,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "Candle.interprets0",
+   "lean": "lean/CandleLean/HolSemantics.lean:168",
+   "hol4": "hol4/package/candle/standard/semantics/holSemanticsScript.sml:192",
+   "class": "V-P",
+   "explanation": "In HOL4, γ, name and f have no type annotations, and only τ is fixed (to mlstring -> 'U, through is_type_valuation). The constant therefore has the polymorphic type ('U->'U->bool) -> ('a -> 'U list -> 'b) -> 'a -> mlstring list -> ('U list -> 'b) -> bool. Lean fixes 'a := mlstring and 'b := U (γ : tmass U, f : List U → U), so it is a proper special case. For example, the HOL4 instance with name : num and Boolean results has no Lean counterpart. The conventions do not record this specialisation. At the instance 'a = mlstring, 'b = 'U (the only one used in is_std_interpretation) the two bodies agree, so the loss is of type generality only.",
+   "repair": "universe v w\n\ndef interprets0 {α : Type v} {β : Type w} (mem : U → U → Prop) (γ : α → List U → β) (name : α)\n    (vs : List mlstring) (f : List U → β) : Prop :=\n  ∀ τ : tyval U, is_type_valuation0 mem τ → γ name (vs.map τ) = f (vs.map τ)",
+   "confidence": 0.4,
+   "lean_check": "import CandleLean.HolSemantics\n\nopen Candle HOL\n\ntheorem interprets0_monomorphic (U : Type) :\n    ∃ f : (U → U → Prop) → (mlstring → List U → U) → mlstring → List mlstring → (List U → U) → Prop,\n      f = @Candle.interprets0 U := ⟨_, rfl⟩\n",
+   "hol4_check": "interprets0 (m:'U -> 'U -> bool) (\\(n:num) (l:'U list). T) 0 ([]:mlstring list) (\\(l:'U list). T)"
+  }
+ ]
+}

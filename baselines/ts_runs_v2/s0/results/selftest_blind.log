@@ -1,0 +1,12 @@
+[s0] dumping Lean statements from /e/ts_ws/s0/scratch/opus_lessons_blind (root CmlTS)
+[s0] scanning
+statements 267 flagged 10
+  binders            7
+  structure          7
+  connectives        6
+  constants          3
+  binder-types       2
+  literals           1
+  unmapped           1
+  instances          1
+[s0] wrote /e/ts_ws/s0/results/selftest_blind/report.json and /e/ts_ws/s0/results/selftest_blind/summary.txt

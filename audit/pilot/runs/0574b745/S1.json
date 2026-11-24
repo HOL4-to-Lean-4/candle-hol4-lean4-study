@@ -1,0 +1,18 @@
+{
+ "module": "CandleLean.HolSyntax",
+ "checked": 92,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "Candle.RACONV.Comb",
+   "lean": "lean/CandleLean/HolSyntax.lean:74",
+   "hol4": "hol4/package/candle/standard/syntax/holSyntaxScript.sml:96",
+   "class": "V-P",
+   "explanation": "The Lean application rule omits the premise `RACONV env (s1, s2)` for the function heads. With `v = Var x ty` and `c = Const x ty`, Lean therefore relates `Comb v c` to `Comb c c` because the arguments are the same constant. HOL4 rejects this pair because a variable and a constant cannot be related by `RACONV`.",
+   "repair": "  | Comb {env : List (term × term)} {s1 s2 t1 t2 : term} :\n      RACONV env (s1, s2) → RACONV env (t1, t2) →\n      RACONV env (Comb s1 t1, Comb s2 t2)",
+   "confidence": 1,
+   "lean_check": "import CandleLean.HolSyntax\n\nnamespace Candle\n\nexample (x : mlstring) (ty : type) :\n    RACONV [] (Comb (Var x ty) (Const x ty), Comb (Const x ty) (Const x ty)) :=\n  RACONV.Comb RACONV.Const\n\nend Candle",
+   "hol4_check": "∀x ty. ¬RACONV [] (Comb (Var x ty) (Const x ty), Comb (Const x ty) (Const x ty))"
+  }
+ ]
+}

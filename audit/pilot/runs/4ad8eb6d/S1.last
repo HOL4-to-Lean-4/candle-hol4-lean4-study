@@ -1,0 +1,18 @@
+{
+  "module": "CandleLean.HolSyntaxLib",
+  "checked": 37,
+  "findings": [
+    {
+      "id": "F1",
+      "declaration": "Candle.REV_ASSOCD_ALOOKUP",
+      "lean": "lean/CandleLean/HolSyntaxLib.lean:119",
+      "hol4": "hol4/package/candle/syntax-lib/holSyntaxLibScript.sml:43",
+      "class": "V-P",
+      "explanation": "HOL4 swaps each pair and keeps the list order, so ALOOKUP selects the first pair whose original second component matches the key. Lean reverses the swapped list and selects the last match. For ls = [(1, 0), (2, 0)], key 0, and default 3, REV_ASSOCD returns 1 and the Lean right-hand side returns 2. The translated theorem therefore asserts 1 = 2.",
+      "repair": "        match ALOOKUP (ls.map (fun (x, y) => (y, x))) x with",
+      "confidence": 1.0,
+      "lean_check": "import CandleLean.HolSyntaxLib\n\nopen Candle HOL\n\nexample : False := by\n  have h := REV_ASSOCD_ALOOKUP ([(1, 0), (2, 0)] : List (Nat × Nat)) 0 3\n  change REV_ASSOCD 0 [(1, 0), (2, 0)] 3 = (match ALOOKUP ([(0, 2), (0, 1)] : List (Nat × Nat)) 0 with | none => 3 | some y => y) at h\n  simp [REV_ASSOCD, ALOOKUP] at h",
+      "hol4_check": "REV_ASSOCD 0 [(1,0); (2,0)] 3 = 1 ∧ ALOOKUP [(0,1); (0,2)] 0 = SOME 1 ∧ ALOOKUP [(0,2); (0,1)] 0 = SOME 2"
+    }
+  ]
+}

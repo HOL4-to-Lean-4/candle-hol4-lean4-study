@@ -1,0 +1,69 @@
+S1 0574b745 48 s 1
+Traceback (most recent call last):
+  File "E:\NUS\mcomp\Dissertation\candle_study\audit\pilot\run.py", line 78, in <module>
+    d = parse(final)
+  File "E:\NUS\mcomp\Dissertation\candle_study\audit\pilot\run.py", line 23, in parse
+    return json.loads(t[i:j + 1]) if i >= 0 else None
+  File "D:\Anaconda3\lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+  File "D:\Anaconda3\lib\json\decoder.py", line 340, in decode
+    raise JSONDecodeError("Extra data", s, end)
+json.decoder.JSONDecodeError: Extra data: line 2 column 1 (char 1387)
+S1 35db6c2b 34 s 0
+S1 9a48a4cb 62 s 0
+S1 6de33664 48 s 1
+Traceback (most recent call last):
+  File "E:\NUS\mcomp\Dissertation\candle_study\audit\pilot\run.py", line 78, in <module>
+    d = parse(final)
+  File "E:\NUS\mcomp\Dissertation\candle_study\audit\pilot\run.py", line 23, in parse
+    return json.loads(t[i:j + 1]) if i >= 0 else None
+  File "D:\Anaconda3\lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+  File "D:\Anaconda3\lib\json\decoder.py", line 340, in decode
+    raise JSONDecodeError("Extra data", s, end)
+json.decoder.JSONDecodeError: Extra data: line 2 column 1 (char 1387)
+S1 353ede0d 55 s 0
+S1 ce0b14f7 74 s 1
+Traceback (most recent call last):
+  File "E:\NUS\mcomp\Dissertation\candle_study\audit\pilot\run.py", line 78, in <module>
+    d = parse(final)
+  File "E:\NUS\mcomp\Dissertation\candle_study\audit\pilot\run.py", line 23, in parse
+    return json.loads(t[i:j + 1]) if i >= 0 else None
+  File "D:\Anaconda3\lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+  File "D:\Anaconda3\lib\json\decoder.py", line 340, in decode
+    raise JSONDecodeError("Extra data", s, end)
+json.decoder.JSONDecodeError: Extra data: line 2 column 1 (char 1387)
+S1 4ad8eb6d 43 s 1
+Traceback (most recent call last):
+  File "E:\NUS\mcomp\Dissertation\candle_study\audit\pilot\run.py", line 78, in <module>
+    d = parse(final)
+  File "E:\NUS\mcomp\Dissertation\candle_study\audit\pilot\run.py", line 23, in parse
+    return json.loads(t[i:j + 1]) if i >= 0 else None
+  File "D:\Anaconda3\lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+  File "D:\Anaconda3\lib\json\decoder.py", line 340, in decode
+    raise JSONDecodeError("Extra data", s, end)
+json.decoder.JSONDecodeError: Extra data: line 2 column 1 (char 1387)
+S1 3e3bc1df 37 s 1
+Traceback (most recent call last):
+  File "E:\NUS\mcomp\Dissertation\candle_study\audit\pilot\run.py", line 78, in <module>
+    d = parse(final)
+  File "E:\NUS\mcomp\Dissertation\candle_study\audit\pilot\run.py", line 23, in parse
+    return json.loads(t[i:j + 1]) if i >= 0 else None
+  File "D:\Anaconda3\lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+  File "D:\Anaconda3\lib\json\decoder.py", line 340, in decode
+    raise JSONDecodeError("Extra data", s, end)
+json.decoder.JSONDecodeError: Extra data: line 2 column 1 (char 1387)
+S1 2e38c143 46 s 1
+Traceback (most recent call last):
+  File "E:\NUS\mcomp\Dissertation\candle_study\audit\pilot\run.py", line 78, in <module>
+    d = parse(final)
+  File "E:\NUS\mcomp\Dissertation\candle_study\audit\pilot\run.py", line 23, in parse
+    return json.loads(t[i:j + 1]) if i >= 0 else None
+  File "D:\Anaconda3\lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+  File "D:\Anaconda3\lib\json\decoder.py", line 340, in decode
+    raise JSONDecodeError("Extra data", s, end)
+json.decoder.JSONDecodeError: Extra data: line 2 column 1 (char 1387)

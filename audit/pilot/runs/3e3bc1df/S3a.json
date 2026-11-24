@@ -1,0 +1,18 @@
+{
+ "module": "CandleLean.HolSyntaxLib",
+ "checked": 31,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "Candle.RESULT",
+   "lean": "lean/CandleLean/HolSyntaxLib.lean:34",
+   "hol4": "hol4/package/candle/syntax-lib/holSyntaxLibScript.sml:88",
+   "class": "V-C",
+   "explanation": "HOL4 specifies RESULT only by `RESULT (Result t) = t`; the value on `Clash t` is left open. In Lean, RESULT_pkg is a transparent `private def`, not `opaque` (unlike CLASH_pkg, and contrary to CONVENTIONS §5). RESULT therefore unfolds to the witness, and Lean proves `RESULT (Clash t) = t` by `rfl`. `private` only hides the name; it does not prevent unfolding, including from other modules.",
+   "repair": "private opaque RESULT_pkg {α : Type u} : {f : result α → α // ∀ t, f (Result t) = t} :=\n  ⟨fun r => match r with | Result t => t | Clash t => t, fun _ => rfl⟩",
+   "confidence": 0.98,
+   "lean_check": "import CandleLean.HolSyntaxLib\n\nuniverse u\n\nexample {α : Type u} (t : α) : Candle.RESULT (Candle.result.Clash t) = t := rfl\n",
+   "hol4_check": "?f : num result -> num. (!t. f (Result t) = t) /\\ f (Clash 0) <> 0"
+  }
+ ]
+}

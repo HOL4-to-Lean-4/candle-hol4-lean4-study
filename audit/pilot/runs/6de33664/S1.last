@@ -1,0 +1,18 @@
+{
+  "module": "CandleLean.HolSoundness",
+  "checked": 11,
+  "findings": [
+    {
+      "id": "F1",
+      "declaration": "Candle.binary_inference_rule",
+      "lean": "lean/CandleLean/HolSoundness.lean:16",
+      "hol4": "hol4/package/candle/standard/semantics/holSoundnessScript.sml:18",
+      "class": "V-P",
+      "explanation": "Lean drops the entire antecedent of the inference rule. HOL4 requires q to be Boolean and term_ok, requires truth of p1 and p2 to imply truth of q in every structure, and requires each hypothesis list to entail its respective premise. With both lists empty and q = Var x (Tyvar x), Lean therefore concludes that the empty list entails q under any set theory. HOL4 entailment requires its conclusion to have type Bool, while this variable has type Tyvar x.",
+      "repair": "theorem binary_inference_rule [Nonempty U] (mem : U → U → Prop) :\n    is_set_theory mem →\n      ∀ (thy : thy) (h1 h2 : List term) (p1 p2 q : term),\n        has_type q BoolTy ∧ term_ok (sigof thy) q ∧\n        (∀ i v, is_structure0 mem (sigof thy) i v ∧\n          termsem0 mem (thy_tmsof thy) i v p1 = true_ mem ∧\n          termsem0 mem (thy_tmsof thy) i v p2 = true_ mem →\n          termsem0 mem (thy_tmsof thy) i v q = true_ mem) ∧\n        entails0 mem (thy, h1) p1 ∧ entails0 mem (thy, h2) p2 →\n        entails0 mem (thy, term_union h1 h2) q := by sorry",
+      "confidence": 1,
+      "lean_check": "import CandleLean.HolSoundness\n\nnamespace Candle\nuniverse u\nexample {U : Type u} [Nonempty U] (mem : U → U → Prop)\n    (hs : is_set_theory mem) (t : thy) (x : mlstring) :\n    entails0 mem (t, term_union [] []) (Var x (Tyvar x)) :=\n  binary_inference_rule mem hs t [] [] (Var x (Tyvar x)) (Var x (Tyvar x)) (Var x (Tyvar x))\nend Candle",
+      "hol4_check": "∀thy h x. ¬((thy,h) |= Var x (Tyvar x))"
+    }
+  ]
+}

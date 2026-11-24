@@ -1,0 +1,1205 @@
+=== mllist.merge_tail_MEM
+⊢ ∀(negate :bool) (R :α -> α -> bool) (xs :α list) (ys :α list) (acc :α list).
+    MEM (x :α) (merge_tail negate R xs ys acc) ⇔ MEM x xs ∨ MEM x ys ∨ MEM x acc
+
+=== mllist.mergesortN_tail_MEM
+⊢ ∀(negate :bool) (R :α -> α -> bool) (length :num) (lst :α list).
+    MEM (x :α) (mergesortN_tail negate R length lst) ⇔ MEM x (TAKE length lst)
+
+=== mllist.mergesort_tail_MEM
+⊢ ∀(R :α -> α -> bool) (l :α list). MEM (x :α) (mergesort_tail R l) ⇔ MEM x l
+
+=== mllist.merge_tail_PERM
+⊢ ∀(negate :bool) (R :α -> α -> bool) (xs :α list) (ys :α list) (acc :α list).
+    PERM (xs ++ ys ++ acc) (merge_tail negate R xs ys acc)
+
+=== mllist.sort2_tail_PERM
+⊢ ∀(neg :bool) (R :α -> α -> bool) (x :α) (y :α). PERM [x; y] (sort2_tail neg R x y)
+
+=== mllist.sort3_tail_PERM
+⊢ ∀(neg :bool) (R :α -> α -> bool) (x :α) (y :α) (z :α). PERM [x; y; z] (sort3_tail neg R x y z)
+
+=== mllist.mergesortN_tail_PERM
+⊢ ∀(neg :bool) (R :α -> α -> bool) (len :num) (l :α list). PERM (TAKE len l) (mergesortN_tail neg R len l)
+
+=== mllist.sort_MEM
+⊢ ∀(R :α -> α -> bool) (L :α list). MEM (x :α) (sort R L) ⇔ MEM x L
+
+=== mllist.sort_PERM
+⊢ ∀(R :α -> α -> bool) (L :α list). PERM L (sort R L)
+
+=== mllist.sort_LENGTH
+⊢ ∀(R :α -> α -> bool) (l :α list). LENGTH (sort R l) = LENGTH l
+
+=== mllist.sort_set
+⊢ set (sort (R :α -> α -> bool) (ls :α list)) = set ls
+
+=== mlstring.concat_nil
+⊢ concat ([] :mlstring list) = «»
+
+=== mlstring.explode_aux_thm
+⊢ ∀(max :num) (n :num) (ls :string). n + max = STRLEN ls ⇒ explode_aux (implode ls) n max = DROP n ls
+
+=== mlstring.explode_thm
+⊢ explode (implode (ls :string)) = ls
+
+=== mlstring.explode_implode
+⊢ ∀(x :string). explode (implode x) = x
+
+=== mlstring.implode_explode
+⊢ ∀(x :mlstring). implode (explode x) = x
+
+=== mlstring.explode_11
+⊢ ∀(s1 :mlstring) (s2 :mlstring). explode s1 = explode s2 ⇔ s1 = s2
+
+=== mlstring.explode_BIJ
+⊢ BIJ explode 𝕌(:mlstring) 𝕌(:string)
+
+=== mlstring.LENGTH_explode
+⊢ STRLEN (explode (s :mlstring)) = strlen s
+
+=== mlstring.strlen_implode
+⊢ strlen (implode (s :string)) = STRLEN s
+
+=== mlstring.substring_full
+⊢ substring (s :mlstring) (0 :num) (strlen s) = s
+
+=== mlstring.strcat_thm
+⊢ (s1 :mlstring) ^ (s2 :mlstring) = implode (STRCAT (explode s1) (explode s2))
+
+=== mlstring.strcat_assoc
+⊢ ∀(s1 :mlstring) (s2 :mlstring) (s3 :mlstring). s1 ^ (s2 ^ s3) = s1 ^ s2 ^ s3
+
+=== mlstring.strcat_nil
+⊢ «» ^ (s :mlstring) = s ∧ s ^ «» = s
+
+=== mlstring.mlstring_common_prefix
+⊢ ∀(s :mlstring) (t1 :mlstring) (t2 :mlstring). s ^ t1 = s ^ t2 ⇔ t1 = t2
+
+=== mlstring.mlstring_common_char_prefix
+⊢ ∀(c1 :char) (s1 :string) (s2 :string) (t2 :α) (t2 :mlstring).
+    implode (STRING c1 s1) ^ (t1 :mlstring) = implode (STRING (c2 :char) s2) ^ t2 ⇔
+    c1 = c2 ∧ implode s1 ^ t1 = implode s2 ^ t2
+
+=== mlstring.mlstring_common_suffix
+⊢ ∀(s :mlstring) (t1 :mlstring) (t2 :mlstring). t1 ^ s = t2 ^ s ⇔ t1 = t2
+
+=== mlstring.explode_strcat
+⊢ explode ((s1 :mlstring) ^ (s2 :mlstring)) = STRCAT (explode s1) (explode s2)
+
+=== mlstring.strlen_strcat
+⊢ strlen ((s1 :mlstring) ^ (s2 :mlstring)) = strlen s1 + strlen s2
+
+=== mlstring.explode_toString
+⊢ explode (toString (c :char) :mlstring) = STRING c ("" :string)
+
+=== mlstring.strlen_toString
+⊢ strlen (toString (c :char) :mlstring) = (1 :num)
+
+=== mlstring.substring_0
+⊢ substring (s :mlstring) (i :num) (0 :num) = «»
+
+=== mlstring.mlstring_lt_inv_image
+⊢ mlstring_lt = inv_image string_lt explode
+
+=== mlstring.StrongLinearOrder_mlstring_lt
+⊢ StrongLinearOrder mlstring_lt
+
+=== mlstring.ALL_DISTINCT_MAP_implode
+⊢ ALL_DISTINCT (ls :string list) ⇒ ALL_DISTINCT (MAP implode ls)
+
+=== mlstring.ALL_DISTINCT_MAP_explode
+⊢ ∀(ls :mlstring list). ALL_DISTINCT (MAP explode ls) ⇔ ALL_DISTINCT ls
+
+=== mlstring.concat_sing
+⊢ concat [(x :mlstring)] = x
+
+=== setSpec.is_extensional
+⊢ is_set_theory (mem :'U -> 'U -> bool) ⇒ extensional mem
+
+=== setSpec.is_separation_sub
+⊢ is_set_theory (mem :'U -> 'U -> bool) ⇒ is_separation mem $suchthat
+
+=== setSpec.is_power_power
+⊢ is_set_theory (mem :'U -> 'U -> bool) ⇒ is_power mem Pow
+
+=== setSpec.is_union_union
+⊢ is_set_theory (mem :'U -> 'U -> bool) ⇒ is_union mem (union mem :'U -> 'U)
+
+=== setSpec.is_upair_upair
+⊢ is_set_theory (mem :'U -> 'U -> bool) ⇒ is_upair mem $+
+
+=== setSpec.mem_sub
+⊢ is_set_theory (mem :'U -> 'U -> bool) ⇒ ∀(x :'U) (s :'U) (P :'U -> bool). x ⋲ (s suchthat P) ⇔ x ⋲ s ∧ P x
+
+=== setSpec.mem_power
+⊢ is_set_theory (mem :'U -> 'U -> bool) ⇒ ∀(x :'U) (y :'U). x ⋲ Pow y ⇔ ∀(b :'U). b ⋲ x ⇒ b ⋲ y
+
+=== setSpec.mem_union
+⊢ is_set_theory (mem :'U -> 'U -> bool) ⇒ ∀(x :'U) (s :'U). x ⋲ union mem s ⇔ ∃(a :'U). x ⋲ a ∧ a ⋲ s
+
+=== setSpec.mem_upair
+⊢ is_set_theory (mem :'U -> 'U -> bool) ⇒ ∀(a :'U) (x :'U) (y :'U). a ⋲ x + y ⇔ a = x ∨ a = y
+
+=== setSpec.mem_empty
+⊢ is_set_theory (mem :'U -> 'U -> bool) ⇒ ∀(x :'U). ¬(x ⋲ ∅)
+
+=== setSpec.mem_unit
+⊢ is_set_theory (mem :'U -> 'U -> bool) ⇒ ∀(x :'U) (y :'U). x ⋲ Unit y ⇔ x = y
+
+=== setSpec.unit_inj
+⊢ is_set_theory (mem :'U -> 'U -> bool) ⇒ ∀(x :'U) (y :'U). Unit x = Unit y ⇔ x = y
+
+=== setSpec.mem_one
+⊢ is_set_theory (mem :'U -> 'U -> bool) ⇒ ∀(x :'U). x ⋲ One ⇔ x = ∅
+
+=== setSpec.mem_two
+⊢ is_set_theory (mem :'U -> 'U -> bool) ⇒ ∀(x :'U). x ⋲ boolset ⇔ x = ∅ ∨ x = One
+
+=== setSpec.upair_inj
+⊢ is_set_theory (mem :'U -> 'U -> bool) ⇒
+  ∀(a :'U) (b :'U) (c :'U) (d :'U). a + b = c + d ⇔ a = c ∧ b = d ∨ a = d ∧ b = c
+
+=== setSpec.unit_eq_upair
+⊢ is_set_theory (mem :'U -> 'U -> bool) ⇒ ∀(x :'U) (y :'U) (z :'U). Unit x = y + z ⇔ x = y ∧ y = z
+
+=== setSpec.pair_inj
+⊢ is_set_theory (mem :'U -> 'U -> bool) ⇒ ∀(a :'U) (b :'U) (c :'U) (d :'U). ((a,b) :'U) = ((c,d) :'U) ⇔ a = c ∧ b = d
+
+=== setSpec.mem_binary_union
+⊢ is_set_theory (mem :'U -> 'U -> bool) ⇒ ∀(a :'U) (x :'U) (y :'U). a ⋲ x ∪ y ⇔ a ⋲ x ∨ a ⋲ y
+
+=== setSpec.mem_product
+⊢ is_set_theory (mem :'U -> 'U -> bool) ⇒
+  ∀(a :'U) (x :'U) (y :'U). a ⋲ ((x × y) :'U) ⇔ ∃(b :'U) (c :'U). a = ((b,c) :'U) ∧ b ⋲ x ∧ c ⋲ y
+
+=== setSpec.true_neq_false
+⊢ is_set_theory (mem :'U -> 'U -> bool) ⇒ True ≠ False
+
+=== setSpec.mem_boolset
+⊢ is_set_theory (mem :'U -> 'U -> bool) ⇒ ∀(x :'U). x ⋲ boolset ⇔ x = True ∨ x = False
+
+=== setSpec.boolean_in_boolset
+⊢ is_set_theory (mem :'U -> 'U -> bool) ⇒ ∀(b :bool). (Boolean b :'U) ⋲ boolset
+
+=== setSpec.boolean_eq_true
+⊢ is_set_theory (mem :'U -> 'U -> bool) ⇒ ∀(b :bool). (Boolean b :'U) = True ⇔ b
+
+=== setSpec.apply_abstract
+⊢ is_set_theory (mem :'U -> 'U -> bool) ⇒
+  ∀(f :'U -> 'U) (x :'U) (s :'U) (t :'U). x ⋲ s ∧ f x ⋲ t ⇒ ((Abstract s t f ' x) :'U) = f x
+
+=== setSpec.apply_in_rng
+⊢ is_set_theory (mem :'U -> 'U -> bool) ⇒ ∀(f :'U) (x :'U) (s :'U) (t :'U). x ⋲ s ∧ f ⋲ Funspace s t ⇒ ((f ' x) :'U) ⋲ t
+
+=== setSpec.abstract_in_funspace
+⊢ is_set_theory (mem :'U -> 'U -> bool) ⇒
+  ∀(f :'U -> 'U) (s :'U) (t :'U). (∀(x :'U). x ⋲ s ⇒ f x ⋲ t) ⇒ Abstract s t f ⋲ Funspace s t
+
+=== setSpec.abstract_eq
+⊢ is_set_theory (mem :'U -> 'U -> bool) ⇒
+  ∀(s :'U) (t1 :'U) (t2 :'U) (f :'U -> 'U) (g :'U -> 'U).
+    (∀(x :'U). x ⋲ s ⇒ f x ⋲ t1 ∧ g x ⋲ t2 ∧ f x = g x) ⇒ Abstract s t1 f = Abstract s t2 g
+
+=== holSemanticsExtra.is_std_interpretation_is_type
+⊢ is_std_interpretation (i :(mlstring -> 'U list -> 'U) # (mlstring -> 'U list -> 'U)) ⇒
+  is_std_type_assignment (tyaof i)
+
+=== holSemanticsExtra.typesem_inhabited
+⊢ is_set_theory (mem :'U -> 'U -> bool) ⇒
+  ∀(tyenv :mlstring |-> num) (δ :mlstring -> 'U list -> 'U) (τ :mlstring -> 'U) (ty :type).
+    is_type_valuation τ ∧ is_type_assignment tyenv δ ∧ type_ok tyenv ty ⇒ inhabited (typesem δ τ ty)
+
+=== holSemanticsExtra.typesem_Fun
+⊢ ∀(δ :mlstring -> 'U list -> 'U) (τ :mlstring -> 'U) (dom :type) (rng :type).
+    is_std_type_assignment δ ⇒ typesem δ τ (Fun dom rng) = Funspace (typesem δ τ dom) (typesem δ τ rng)
+
+=== holSemanticsExtra.typesem_Bool
+⊢ ∀(δ :mlstring -> 'U list -> 'U) (τ :mlstring -> 'U). is_std_type_assignment δ ⇒ typesem δ τ Bool = boolset
+
+=== holSemanticsExtra.typesem_TYPE_SUBST
+⊢ ∀(tyin :(type # type) list) (ty :type) (δ :mlstring -> α list -> α) (τ :mlstring -> α).
+    typesem δ τ (TYPE_SUBST tyin ty) = typesem δ (λ(x :mlstring). typesem δ τ (TYPE_SUBST tyin (Tyvar x))) ty
+
+=== holSemanticsExtra.typesem_tyvars
+⊢ ∀(δ :mlstring -> α list -> α) (τ :mlstring -> α) (ty :type) (τ' :mlstring -> α).
+    (∀(x :mlstring). MEM x (tyvars ty) ⇒ τ' x = τ x) ⇒ typesem δ τ' ty = typesem δ τ ty
+
+=== holSemanticsExtra.termsem_typesem
+⊢ is_set_theory (mem :'U -> 'U -> bool) ⇒
+  ∀(sig :(mlstring |-> num) # (mlstring |-> type)) (i :(mlstring -> 'U list -> 'U) # (mlstring -> 'U list -> 'U))
+      (tm :term) (v :(mlstring -> 'U) # (mlstring # type -> 'U)) (δ :mlstring -> 'U list -> 'U) (τ :mlstring -> 'U)
+      (tmenv :mlstring |-> type).
+    δ = tyaof i ∧ τ = tyvof v ∧ is_valuation (tysof sig) δ v ∧ is_interpretation sig i ∧ is_std_type_assignment δ ∧
+    term_ok sig tm ∧ tmenv = tmsof sig ⇒
+    termsem tmenv i v tm ⋲ typesem δ τ (typeof tm)
+
+=== holSemanticsExtra.termsem_Equal
+⊢ is_set_theory (mem :'U -> 'U -> bool) ⇒
+  ∀(Γ :(mlstring |-> num) # (mlstring |-> type)) (i :(mlstring -> 'U list -> 'U) # (mlstring -> 'U list -> 'U))
+      (v :(mlstring -> 'U) # (mlstring # type -> 'U)) (ty :type).
+    is_structure Γ i v ∧ type_ok (tysof Γ) ty ⇒
+    termsem (tmsof Γ) i v (Equal ty :term) =
+    (λ(l :'U list).
+       Abstract (HD l) (Funspace (HD l) boolset) (λ(x :'U). Abstract (HD l) boolset (λ(y :'U). (Boolean (x = y) :'U))))
+      [typesem (tyaof i) (tyvof v) ty]
+
+=== holSemanticsExtra.termsem_equation
+⊢ is_set_theory (mem :'U -> 'U -> bool) ⇒
+  ∀(sig :(mlstring |-> num) # (mlstring |-> type)) (i :(mlstring -> 'U list -> 'U) # (mlstring -> 'U list -> 'U))
+      (v :(mlstring -> 'U) # (mlstring # type -> 'U)) (s :term) (t :term) (tmenv :mlstring |-> type).
+    is_structure sig i v ∧ term_ok sig (s === t) ∧ tmenv = tmsof sig ⇒
+    termsem tmenv i v (s === t) = (Boolean (termsem tmenv i v s = termsem tmenv i v t) :'U)
+
+=== holSemanticsExtra.termsem_raconv
+⊢ ∀(env :(term # term) list) (tp :term # term).
+    RACONV env tp ⇒
+    ∀(Γ :mlstring |-> type) (i :(mlstring -> 'U list -> 'U) # (mlstring -> 'U list -> 'U))
+        (v1 :(mlstring -> 'U) # (mlstring # type -> 'U)) (v2 :(mlstring -> 'U) # (mlstring # type -> 'U)).
+      tyvof v1 = tyvof v2 ∧
+      (∀(x1 :mlstring) (ty1 :type) (x2 :mlstring) (ty2 :type).
+         ALPHAVARS env ((Var x1 ty1,Var x2 ty2) :term # term) ⇒
+         termsem Γ i v1 (Var x1 ty1) = termsem Γ i v2 (Var x2 ty2)) ∧
+      EVERY (λ(((x :term),(y :term)) :term # term). welltyped x ∧ welltyped y ∧ typeof x = typeof y) env ∧
+      welltyped (FST tp) ∧ welltyped (SND tp) ⇒
+      termsem Γ i v1 (FST tp) = termsem Γ i v2 (SND tp)
+
+=== holSemanticsExtra.termsem_aconv
+⊢ ∀(Γ :mlstring |-> type) (i :(mlstring -> 'U list -> 'U) # (mlstring -> 'U list -> 'U))
+      (v :(mlstring -> 'U) # (mlstring # type -> 'U)) (t1 :term) (t2 :term).
+    ACONV t1 t2 ∧ welltyped t1 ∧ welltyped t2 ⇒ termsem Γ i v t1 = termsem Γ i v t2
+
+=== holSemanticsExtra.termsem_frees
+⊢ ∀(Γ :mlstring |-> type) (i :(mlstring -> 'U list -> 'U) # (mlstring -> 'U list -> 'U)) (t :term)
+      (v1 :(mlstring -> 'U) # (mlstring # type -> 'U)) (v2 :(mlstring -> 'U) # (mlstring # type -> 'U)).
+    welltyped t ∧ tyvof v1 = tyvof v2 ∧
+    (∀(x :mlstring) (ty :type).
+       VFREE_IN (Var x ty) t ⇒ tmvof v1 ((x,ty) :mlstring # type) = tmvof v2 ((x,ty) :mlstring # type)) ⇒
+    termsem Γ i v1 t = termsem Γ i v2 t
+
+=== holSemanticsExtra.termsem_simple_subst
+⊢ ∀(tm :term) (ilist :(term # term) list).
+    welltyped tm ∧
+    DISJOINT (set (bv_names tm))
+      {y | (∃(ty :type) (u :term). VFREE_IN (Var y ty) u ∧ MEM u (MAP (FST :term # term -> term) ilist))} ∧
+    (∀(s :term) (s' :term). MEM ((s',s) :term # term) ilist ⇒ ∃(x :mlstring) (ty :type). s = Var x ty ∧ s' has_type ty) ⇒
+    ∀(Γ :mlstring |-> type) (i :(mlstring -> 'U list -> 'U) # (mlstring -> 'U list -> 'U))
+        (v :(mlstring -> 'U) # (mlstring # type -> 'U)).
+      termsem Γ i v (simple_subst ilist tm) =
+      termsem Γ i
+        ((tyvof v,
+          tmvof v =++
+          MAP ((dest_var ## termsem Γ i v) ∘ (λ(((s' :term),(s :term)) :term # term). ((s,s') :term # term)))
+            (REVERSE ilist))
+           :(mlstring -> 'U) # (mlstring # type -> 'U)) tm
+
+=== holSemanticsExtra.termsem_VSUBST
+⊢ ∀(tm :term) (ilist :(term # term) list).
+    welltyped tm ∧
+    (∀(s :term) (s' :term). MEM ((s',s) :term # term) ilist ⇒ ∃(x :mlstring) (ty :type). s = Var x ty ∧ s' has_type ty) ⇒
+    ∀(Γ :mlstring |-> type) (i :(mlstring -> 'U list -> 'U) # (mlstring -> 'U list -> 'U))
+        (v :(mlstring -> 'U) # (mlstring # type -> 'U)).
+      termsem Γ i v (VSUBST ilist tm) =
+      termsem Γ i
+        ((tyvof v,
+          tmvof v =++
+          MAP ((dest_var ## termsem Γ i v) ∘ (λ(((s' :term),(s :term)) :term # term). ((s,s') :term # term)))
+            (REVERSE ilist))
+           :(mlstring -> 'U) # (mlstring # type -> 'U)) tm
+
+=== holSemanticsExtra.termsem_simple_inst
+⊢ ∀(Γ :(mlstring |-> num) # (mlstring |-> type)) (tm :term) (tyin :(type # type) list) (tmenv :mlstring |-> type).
+    welltyped tm ∧ term_ok Γ tm ∧ ALL_DISTINCT (bv_names tm) ∧
+    DISJOINT (set (bv_names tm)) {x | (∃(ty :type). VFREE_IN (Var x ty) tm)} ∧ tmenv = tmsof Γ ⇒
+    ∀(i :(mlstring -> 'U list -> 'U) # (mlstring -> 'U list -> 'U)) (v :(mlstring -> 'U) # (mlstring # type -> 'U)).
+      termsem tmenv i v (simple_inst tyin tm) =
+      termsem tmenv i
+        (((λ(x :mlstring). typesem (tyaof i) (tyvof v) (TYPE_SUBST tyin (Tyvar x))),
+          (λ(((x :mlstring),(ty :type)) :mlstring # type). tmvof v ((x,TYPE_SUBST tyin ty) :mlstring # type)))
+           :(mlstring -> 'U) # (mlstring # type -> 'U)) tm
+
+=== holSemanticsExtra.termsem_INST
+⊢ ∀(Γ :(mlstring |-> num) # (mlstring |-> type)) (tm :term) (tyin :(type # type) list) (tmenv :mlstring |-> type).
+    term_ok Γ tm ∧ tmenv = tmsof Γ ⇒
+    ∀(i :(mlstring -> 'U list -> 'U) # (mlstring -> 'U list -> 'U)) (v :(mlstring -> 'U) # (mlstring # type -> 'U)).
+      termsem tmenv i v (INST tyin tm) =
+      termsem tmenv i
+        (((λ(x :mlstring). typesem (tyaof i) (tyvof v) (TYPE_SUBST tyin (Tyvar x))),
+          (λ(((x :mlstring),(ty :type)) :mlstring # type). tmvof v ((x,TYPE_SUBST tyin ty) :mlstring # type)))
+           :(mlstring -> 'U) # (mlstring # type -> 'U)) tm
+
+=== holSoundness.binary_inference_rule
+⊢ is_set_theory (mem :'U -> 'U -> bool) ⇒
+  ∀(thy :((mlstring |-> num) # (mlstring |-> type)) # (term -> bool)) (h1 :term list) (h2 :term list) (p1 :term)
+      (p2 :term) (q :term).
+    q has_type Bool ∧ term_ok (sigof thy) q ∧
+    (∀(i :(mlstring -> 'U list -> 'U) # (mlstring -> 'U list -> 'U)) (v :(mlstring -> 'U) # (mlstring # type -> 'U)).
+       is_structure (sigof thy) i v ∧ termsem (tmsof thy) i v p1 = True ∧ termsem (tmsof thy) i v p2 = True ⇒
+       termsem (tmsof thy) i v q = True) ∧
+    ((thy,h1) :(((mlstring |-> num) # (mlstring |-> type)) # (term -> bool)) # term list) |= p1 ∧
+    ((thy,h2) :(((mlstring |-> num) # (mlstring |-> type)) # (term -> bool)) # term list) |= p2 ⇒
+    ((thy,term_union h1 h2) :(((mlstring |-> num) # (mlstring |-> type)) # (term -> bool)) # term list) |= q
+
+=== holSoundness.ABS_correct
+⊢ is_set_theory (mem :'U -> 'U -> bool) ⇒
+  ∀(thy :((mlstring |-> num) # (mlstring |-> type)) # (term -> bool)) (x :mlstring) (ty :type) (h :term list) (l :term)
+      (r :term).
+    ¬EXISTS (VFREE_IN (Var x ty)) h ∧ type_ok (tysof thy) ty ∧
+    ((thy,h) :(((mlstring |-> num) # (mlstring |-> type)) # (term -> bool)) # term list) |= l === r ⇒
+    ((thy,h) :(((mlstring |-> num) # (mlstring |-> type)) # (term -> bool)) # term list) |=
+    Abs (Var x ty) l === Abs (Var x ty) r
+
+=== holSoundness.ASSUME_correct
+⊢ ∀(thy :((mlstring |-> num) # (mlstring |-> type)) # (term -> bool)) (p :term).
+    theory_ok thy ∧ p has_type Bool ∧ term_ok (sigof thy) p ⇒
+    ((thy,[p]) :(((mlstring |-> num) # (mlstring |-> type)) # (term -> bool)) # term list) |= p
+
+=== holSoundness.BETA_correct
+⊢ is_set_theory (mem :'U -> 'U -> bool) ⇒
+  ∀(thy :((mlstring |-> num) # (mlstring |-> type)) # (term -> bool)) (x :mlstring) (ty :type) (t :term).
+    theory_ok thy ∧ type_ok (tysof thy) ty ∧ term_ok (sigof thy) t ⇒
+    ((thy,([] :term list)) :(((mlstring |-> num) # (mlstring |-> type)) # (term -> bool)) # term list) |=
+    Comb (Abs (Var x ty) t) (Var x ty) === t
+
+=== holSoundness.DEDUCT_ANTISYM_correct
+⊢ is_set_theory (mem :'U -> 'U -> bool) ⇒
+  ∀(thy :((mlstring |-> num) # (mlstring |-> type)) # (term -> bool)) (h1 :term list) (p1 :term) (h2 :term list)
+      (p2 :term).
+    ((thy,h1) :(((mlstring |-> num) # (mlstring |-> type)) # (term -> bool)) # term list) |= p1 ∧
+    ((thy,h2) :(((mlstring |-> num) # (mlstring |-> type)) # (term -> bool)) # term list) |= p2 ⇒
+    ((thy,term_union (term_remove p2 h1) (term_remove p1 h2))
+       :(((mlstring |-> num) # (mlstring |-> type)) # (term -> bool)) # term list) |= p1 === p2
+
+=== holSoundness.EQ_MP_correct
+⊢ is_set_theory (mem :'U -> 'U -> bool) ⇒
+  ∀(thy :((mlstring |-> num) # (mlstring |-> type)) # (term -> bool)) (h1 :term list) (h2 :term list) (p :term)
+      (q :term) (p' :term).
+    ((thy,h1) :(((mlstring |-> num) # (mlstring |-> type)) # (term -> bool)) # term list) |= p === q ∧
+    ((thy,h2) :(((mlstring |-> num) # (mlstring |-> type)) # (term -> bool)) # term list) |= p' ∧ ACONV p p' ⇒
+    ((thy,term_union h1 h2) :(((mlstring |-> num) # (mlstring |-> type)) # (term -> bool)) # term list) |= q
+
+=== holSoundness.INST_correct
+⊢ is_set_theory (mem :'U -> 'U -> bool) ⇒
+  ∀(thy :((mlstring |-> num) # (mlstring |-> type)) # (term -> bool)) (h :term list) (c :term).
+    (∀(s :term) (s' :term).
+       MEM ((s',s) :term # term) (ilist :(term # term) list) ⇒
+       ∃(x :mlstring) (ty :type). s = Var x ty ∧ s' has_type ty ∧ term_ok (sigof thy) s') ∧
+    ((thy,h) :(((mlstring |-> num) # (mlstring |-> type)) # (term -> bool)) # term list) |= c ⇒
+    ((thy,term_image (VSUBST ilist) h) :(((mlstring |-> num) # (mlstring |-> type)) # (term -> bool)) # term list) |=
+    VSUBST ilist c
+
+=== holSoundness.INST_TYPE_correct
+⊢ is_set_theory (mem :'U -> 'U -> bool) ⇒
+  ∀(thy :((mlstring |-> num) # (mlstring |-> type)) # (term -> bool)) (h :term list) (c :term).
+    EVERY (type_ok (tysof thy)) (MAP (FST :type # type -> type) (tyin :(type # type) list)) ∧
+    ((thy,h) :(((mlstring |-> num) # (mlstring |-> type)) # (term -> bool)) # term list) |= c ⇒
+    ((thy,term_image (INST tyin) h) :(((mlstring |-> num) # (mlstring |-> type)) # (term -> bool)) # term list) |=
+    INST tyin c
+
+=== holSoundness.MK_COMB_correct
+⊢ is_set_theory (mem :'U -> 'U -> bool) ⇒
+  ∀(thy :((mlstring |-> num) # (mlstring |-> type)) # (term -> bool)) (h1 :term list) (h2 :term list) (l1 :term)
+      (r1 :term) (l2 :term) (r2 :term).
+    ((thy,h1) :(((mlstring |-> num) # (mlstring |-> type)) # (term -> bool)) # term list) |= l1 === r1 ∧
+    ((thy,h2) :(((mlstring |-> num) # (mlstring |-> type)) # (term -> bool)) # term list) |= l2 === r2 ∧
+    welltyped (Comb l1 l2) ⇒
+    ((thy,term_union h1 h2) :(((mlstring |-> num) # (mlstring |-> type)) # (term -> bool)) # term list) |=
+    Comb l1 l2 === Comb r1 r2
+
+=== holSoundness.REFL_correct
+⊢ is_set_theory (mem :'U -> 'U -> bool) ⇒
+  ∀(thy :((mlstring |-> num) # (mlstring |-> type)) # (term -> bool)) (t :term).
+    theory_ok thy ∧ term_ok (sigof thy) t ⇒
+    ((thy,([] :term list)) :(((mlstring |-> num) # (mlstring |-> type)) # (term -> bool)) # term list) |= t === t
+
+=== holSoundness.proves_sound
+⊢ is_set_theory (mem :'U -> 'U -> bool) ⇒
+  ∀(thyh :(((mlstring |-> num) # (mlstring |-> type)) # (term -> bool)) # term list) (c :term). thyh |- c ⇒ thyh |= c
+
+=== holSyntaxExtra.ALOOKUP_MAP_dest_var
+⊢ ∀(ls :(term # α) list) (f :α -> β) (x :mlstring) (ty :type).
+    EVERY (λ(s :term). ∃(x :mlstring) (ty :type). s = Var x ty) (MAP (FST :term # α -> term) ls) ⇒
+    ALOOKUP (MAP (dest_var ## f) ls) ((x,ty) :mlstring # type) = OPTION_MAP f (ALOOKUP ls (Var x ty))
+
+=== holSyntaxExtra.TYPE_SUBST_NIL
+⊢ ∀(ty :type). TYPE_SUBST ([] :(type # type) list) ty = ty
+
+=== holSyntaxExtra.TYPE_SUBST_Bool
+⊢ ∀(tyin :(type # type) list). TYPE_SUBST tyin Bool = Bool
+
+=== holSyntaxExtra.is_instance_refl
+⊢ ∀(ty :type). is_instance ty ty
+
+=== holSyntaxExtra.swap_ff
+⊢ ∀(f :α -> β) (g :γ -> δ).
+    (λ(((x :β),(y :δ)) :β # δ). ((y,x) :δ # β)) ∘ (f ## g) = (g ## f) ∘ (λ(((x :α),(y :γ)) :α # γ). ((y,x) :γ # α))
+
+=== holSyntaxExtra.ff_def
+⊢ ∀(f :α -> β) (g :γ -> δ). f ## g = (λ(((x :α),(y :γ)) :α # γ). ((f x,g y) :β # δ))
+
+=== holSyntaxExtra.TYPE_SUBST_compose
+⊢ ∀(tyin1 :(type # type) list) (ty :type) (tyin2 :(type # type) list).
+    TYPE_SUBST tyin2 (TYPE_SUBST tyin1 ty) = TYPE_SUBST (MAP (TYPE_SUBST tyin2 ## (I :type -> type)) tyin1 ++ tyin2) ty
+
+=== holSyntaxExtra.TYPE_SUBST_tyvars
+⊢ ∀(ty :type) (tyin :(type # type) list) (tyin' :(type # type) list).
+    TYPE_SUBST tyin ty = TYPE_SUBST tyin' ty ⇔
+    ∀(x :mlstring). MEM x (tyvars ty) ⇒ REV_ASSOCD (Tyvar x) tyin' (Tyvar x) = REV_ASSOCD (Tyvar x) tyin (Tyvar x)
+
+=== holSyntaxExtra.WELLTYPED_LEMMA
+⊢ ∀(tm :term) (ty :type). tm has_type ty ⇒ typeof tm = ty
+
+=== holSyntaxExtra.WELLTYPED
+⊢ ∀(tm :term). welltyped tm ⇔ tm has_type typeof tm
+
+=== holSyntaxExtra.WELLTYPED_CLAUSES
+⊢ (∀(n :mlstring) (ty :type). welltyped (Var n ty)) ∧ (∀(n :mlstring) (ty :type). welltyped (Const n ty)) ∧
+  (∀(s :term) (t :term). welltyped (Comb s t) ⇔ welltyped s ∧ welltyped t ∧ ∃(rty :type). typeof s = Fun (typeof t) rty) ∧
+  ∀(v :term) (t :term). welltyped (Abs v t) ⇔ ∃(n :mlstring) (ty :type). v = Var n ty ∧ welltyped t
+
+=== holSyntaxExtra.RACONV
+⊢ (RACONV (env :(term # term) list) ((Var (x1 :mlstring) (ty1 :type),Var (x2 :mlstring) (ty2 :type)) :term # term) ⇔
+   ALPHAVARS env ((Var x1 ty1,Var x2 ty2) :term # term)) ∧ (RACONV env ((Var x1 ty1,Const x2 ty2) :term # term) ⇔ F) ∧
+  (RACONV env ((Var x1 ty1,Comb (l2 :term) (r2 :term)) :term # term) ⇔ F) ∧
+  (RACONV env ((Var x1 ty1,Abs (v2 :term) (t2 :term)) :term # term) ⇔ F) ∧
+  (RACONV env ((Const x1 ty1,Var x2 ty2) :term # term) ⇔ F) ∧
+  (RACONV env ((Const x1 ty1,Const x2 ty2) :term # term) ⇔ x1 = x2 ∧ ty1 = ty2) ∧
+  (RACONV env ((Const x1 ty1,Comb l2 r2) :term # term) ⇔ F) ∧ (RACONV env ((Const x1 ty1,Abs v2 t2) :term # term) ⇔ F) ∧
+  (RACONV env ((Comb (l1 :term) (r1 :term),Var x2 ty2) :term # term) ⇔ F) ∧
+  (RACONV env ((Comb l1 r1,Const x2 ty2) :term # term) ⇔ F) ∧
+  (RACONV env ((Comb l1 r1,Comb l2 r2) :term # term) ⇔
+   RACONV env ((l1,l2) :term # term) ∧ RACONV env ((r1,r2) :term # term)) ∧
+  (RACONV env ((Comb l1 r1,Abs v2 t2) :term # term) ⇔ F) ∧
+  (RACONV env ((Abs (v1 :term) (t1 :term),Var x2 ty2) :term # term) ⇔ F) ∧
+  (RACONV env ((Abs v1 t1,Const x2 ty2) :term # term) ⇔ F) ∧ (RACONV env ((Abs v1 t1,Comb l2 r2) :term # term) ⇔ F) ∧
+  (RACONV env ((Abs v1 t1,Abs v2 t2) :term # term) ⇔
+   typeof v1 = typeof v2 ∧ RACONV (((v1,v2) :term # term)::env) ((t1,t2) :term # term))
+
+=== holSyntaxExtra.RACONV_REFL
+⊢ ∀(t :term) (env :(term # term) list). EVERY (UNCURRY ($= :term -> term -> bool)) env ⇒ RACONV env ((t,t) :term # term)
+
+=== holSyntaxExtra.ACONV_REFL
+⊢ ∀(t :term). ACONV t t
+
+=== holSyntaxExtra.RACONV_TRANS
+⊢ ∀(env :(term # term) list) (tp :term # term).
+    RACONV env tp ⇒
+    ∀(vs :term list) (t :term).
+      LENGTH vs = LENGTH env ∧
+      RACONV (ZIP ((MAP (SND :term # term -> term) env,vs) :term list # term list)) ((SND tp,t) :term # term) ⇒
+      RACONV (ZIP ((MAP (FST :term # term -> term) env,vs) :term list # term list)) ((FST tp,t) :term # term)
+
+=== holSyntaxExtra.ACONV_TRANS
+⊢ ∀(t1 :term) (t2 :term) (t3 :term). ACONV t1 t2 ∧ ACONV t2 t3 ⇒ ACONV t1 t3
+
+=== holSyntaxExtra.RACONV_SYM
+⊢ ∀(env :(term # term) list) (tp :term # term).
+    RACONV env tp ⇒
+    RACONV (MAP (λ(((x :term),(y :term)) :term # term). ((y,x) :term # term)) env) ((SND tp,FST tp) :term # term)
+
+=== holSyntaxExtra.ACONV_SYM
+⊢ ∀(t1 :term) (t2 :term). ACONV t1 t2 ⇒ ACONV t2 t1
+
+=== holSyntaxExtra.ALPHAVARS_TYPE
+⊢ ∀(env :(term # term) list) (s :term) (t :term).
+    ALPHAVARS env ((s,t) :term # term) ∧
+    EVERY (λ(((x :term),(y :term)) :term # term). welltyped x ∧ welltyped y ∧ typeof x = typeof y) env ∧ welltyped s ∧
+    welltyped t ⇒
+    typeof s = typeof t
+
+=== holSyntaxExtra.RACONV_TYPE
+⊢ ∀(env :(term # term) list) (p :term # term).
+    RACONV env p ⇒
+    EVERY (λ(((x :term),(y :term)) :term # term). welltyped x ∧ welltyped y ∧ typeof x = typeof y) env ∧
+    welltyped (FST p) ∧ welltyped (SND p) ⇒
+    typeof (FST p) = typeof (SND p)
+
+=== holSyntaxExtra.ACONV_TYPE
+⊢ ∀(s :term) (t :term). ACONV s t ⇒ welltyped s ∧ welltyped t ⇒ typeof s = typeof t
+
+=== holSyntaxExtra.subtype_Tyvar
+⊢ (ty :type) subtype Tyvar (x :mlstring) ⇔ ty = Tyvar x
+
+=== holSyntaxExtra.subterm_Var
+⊢ (tm :term) subterm Var (x :mlstring) (ty :type) ⇔ tm = Var x ty
+
+=== holSyntaxExtra.subterm_Const
+⊢ (tm :term) subterm Const (x :mlstring) (ty :type) ⇔ tm = Const x ty
+
+=== holSyntaxExtra.type_lt_thm
+⊢ (∀(x2 :mlstring) (x1 :mlstring). type_lt (Tyvar x1) (Tyvar x2) ⇔ x1 < x2) ∧
+  (∀(_2 :type list) (_1 :mlstring) (_0 :mlstring). type_lt (Tyvar _0) (Tyapp _1 _2) ⇔ T) ∧
+  (∀(_5 :mlstring) (_4 :type list) (_3 :mlstring). type_lt (Tyapp _3 _4) (Tyvar _5) ⇔ F) ∧
+  ∀(x2 :mlstring) (x1 :mlstring) (args2 :type list) (args1 :type list).
+    type_lt (Tyapp x1 args1) (Tyapp x2 args2) ⇔
+    (mlstring_lt LEX LLEX type_lt) ((x1,args1) :mlstring # type list) ((x2,args2) :mlstring # type list)
+
+=== holSyntaxExtra.term_lt_thm
+⊢ (∀(x2 :mlstring) (x1 :mlstring) (ty2 :type) (ty1 :type).
+     term_lt (Var x1 ty1) (Var x2 ty2) ⇔
+     (mlstring_lt LEX type_lt) ((x1,ty1) :mlstring # type) ((x2,ty2) :mlstring # type)) ∧
+  (∀(_3 :type) (_2 :mlstring) (_1 :type) (_0 :mlstring). term_lt (Var _0 _1) (Const _2 _3) ⇔ T) ∧
+  (∀(_7 :term) (_6 :term) (_5 :type) (_4 :mlstring). term_lt (Var _4 _5) (Comb _6 _7) ⇔ T) ∧
+  (∀(_9 :type) (_8 :mlstring) (_11 :term) (_10 :term). term_lt (Var _8 _9) (Abs _10 _11) ⇔ T) ∧
+  (∀(_15 :type) (_14 :mlstring) (_13 :type) (_12 :mlstring). term_lt (Const _12 _13) (Var _14 _15) ⇔ F) ∧
+  (∀(x2 :mlstring) (x1 :mlstring) (ty2 :type) (ty1 :type).
+     term_lt (Const x1 ty1) (Const x2 ty2) ⇔
+     (mlstring_lt LEX type_lt) ((x1,ty1) :mlstring # type) ((x2,ty2) :mlstring # type)) ∧
+  (∀(_19 :term) (_18 :term) (_17 :type) (_16 :mlstring). term_lt (Const _16 _17) (Comb _18 _19) ⇔ T) ∧
+  (∀(_23 :term) (_22 :term) (_21 :type) (_20 :mlstring). term_lt (Const _20 _21) (Abs _22 _23) ⇔ T) ∧
+  (∀(_27 :type) (_26 :mlstring) (_25 :term) (_24 :term). term_lt (Comb _24 _25) (Var _26 _27) ⇔ F) ∧
+  (∀(_31 :type) (_30 :mlstring) (_29 :term) (_28 :term). term_lt (Comb _28 _29) (Const _30 _31) ⇔ F) ∧
+  (∀(t2 :term) (t1 :term) (s2 :term) (s1 :term).
+     term_lt (Comb s1 s2) (Comb t1 t2) ⇔ (term_lt LEX term_lt) ((s1,s2) :term # term) ((t1,t2) :term # term)) ∧
+  (∀(_35 :term) (_34 :term) (_33 :term) (_32 :term). term_lt (Comb _32 _33) (Abs _34 _35) ⇔ T) ∧
+  (∀(_39 :type) (_38 :mlstring) (_37 :term) (_36 :term). term_lt (Abs _36 _37) (Var _38 _39) ⇔ F) ∧
+  (∀(_43 :type) (_42 :mlstring) (_41 :term) (_40 :term). term_lt (Abs _40 _41) (Const _42 _43) ⇔ F) ∧
+  (∀(_47 :term) (_46 :term) (_45 :term) (_44 :term). term_lt (Abs _44 _45) (Comb _46 _47) ⇔ F) ∧
+  ∀(t2 :term) (t1 :term) (s2 :term) (s1 :term).
+    term_lt (Abs s1 s2) (Abs t1 t2) ⇔ (term_lt LEX term_lt) ((s1,s2) :term # term) ((t1,t2) :term # term)
+
+=== holSyntaxExtra.type_cmp_refl
+⊢ type_cmp (t :type) t = Equal
+
+=== holSyntaxExtra.term_cmp_refl
+⊢ term_cmp (t :term) t = Equal
+
+=== holSyntaxExtra.StrongLinearOrder_type_lt
+⊢ StrongLinearOrder type_lt
+
+=== holSyntaxExtra.TotOrd_type_cmp
+⊢ TotOrd type_cmp
+
+=== holSyntaxExtra.StrongLinearOrder_term_lt
+⊢ StrongLinearOrder term_lt
+
+=== holSyntaxExtra.TotOrd_term_cmp
+⊢ TotOrd term_cmp
+
+=== holSyntaxExtra.ALPHAVARS_eq_ordav
+⊢ ∀(env :(term # term) list) (t1 :term) (t2 :term). ALPHAVARS env ((t1,t2) :term # term) ⇔ ordav env t1 t2 = Equal
+
+=== holSyntaxExtra.RACONV_eq_orda
+⊢ ∀(env :(term # term) list) (t1 :term) (t2 :term). RACONV env ((t1,t2) :term # term) ⇔ orda env t1 t2 = Equal
+
+=== holSyntaxExtra.ACONV_eq_orda
+⊢ ∀(t1 :term) (t2 :term). ACONV t1 t2 ⇔ orda ([] :(term # term) list) t1 t2 = Equal
+
+=== holSyntaxExtra.ordav_sym
+⊢ ∀(env :(term # term) list) (v1 :term) (v2 :term).
+    flip_ord (ordav env v1 v2) = ordav (MAP (λ(((x :term),(y :term)) :term # term). ((y,x) :term # term)) env) v2 v1
+
+=== holSyntaxExtra.orda_sym
+⊢ ∀(env :(term # term) list) (t1 :term) (t2 :term).
+    flip_ord (orda env t1 t2) = orda (MAP (λ(((x :term),(y :term)) :term # term). ((y,x) :term # term)) env) t2 t1
+
+=== holSyntaxExtra.transitive_alpha_lt
+⊢ transitive alpha_lt
+
+=== holSyntaxExtra.alpha_lt_not_refl
+⊢ ∀(x :term). ¬alpha_lt x x
+
+=== holSyntaxExtra.VFREE_IN_RACONV
+⊢ ∀(env :(term # term) list) (p :term # term).
+    RACONV env p ⇒
+    ∀(x :mlstring) (ty :type).
+      VFREE_IN (Var x ty) (FST p) ∧ ¬(∃(y :term). MEM ((Var x ty,y) :term # term) env) ⇔
+      VFREE_IN (Var x ty) (SND p) ∧ ¬∃(y :term). MEM ((y,Var x ty) :term # term) env
+
+=== holSyntaxExtra.VFREE_IN_ACONV
+⊢ ∀(s :term) (t :term) (x :mlstring) (ty :type). ACONV s t ⇒ (VFREE_IN (Var x ty) s ⇔ VFREE_IN (Var x ty) t)
+
+=== holSyntaxExtra.hypset_ok_nil
+⊢ hypset_ok ([] :term list)
+
+=== holSyntaxExtra.hypset_ok_sing
+⊢ ∀(p :term). hypset_ok [p]
+
+=== holSyntaxExtra.hypset_ok_cons
+⊢ hypset_ok ((h :term)::(hs :term list)) ⇔ EVERY (alpha_lt h) hs ∧ hypset_ok hs
+
+=== holSyntaxExtra.term_union_idem
+⊢ ∀(ls :term list). term_union ls ls = ls
+
+=== holSyntaxExtra.term_union_thm
+⊢ (∀(l2 :term list). term_union ([] :term list) l2 = l2) ∧ (∀(l1 :term list). term_union l1 ([] :term list) = l1) ∧
+  ∀(h1 :term) (t1 :term list) (h2 :term) (t2 :term list).
+    term_union (h1::t1) (h2::t2) =
+    case orda ([] :(term # term) list) h1 h2 of
+      Less => h1::term_union t1 (h2::t2)
+    | Equal => h1::term_union t1 t2
+    | Greater => h2::term_union (h1::t1) t2
+
+=== holSyntaxExtra.MEM_term_union_imp
+⊢ ∀(l1 :term list) (l2 :term list) (x :term). MEM x (term_union l1 l2) ⇒ MEM x l1 ∨ MEM x l2
+
+=== holSyntaxExtra.hypset_ok_term_union
+⊢ ∀(l1 :term list) (l2 :term list). hypset_ok l1 ∧ hypset_ok l2 ⇒ hypset_ok (term_union l1 l2)
+
+=== holSyntaxExtra.EVERY_term_union
+⊢ EVERY (P :term -> bool) (l1 :term list) ∧ EVERY P (l2 :term list) ⇒ EVERY P (term_union l1 l2)
+
+=== holSyntaxExtra.MEM_term_union
+⊢ ∀(h1 :term list) (h2 :term list) (t :term).
+    hypset_ok h1 ∧ hypset_ok h2 ∧ (MEM t h1 ∨ MEM t h2) ⇒ ∃(y :term). MEM y (term_union h1 h2) ∧ ACONV t y
+
+=== holSyntaxExtra.term_remove_nil
+⊢ ∀(a :term). term_remove a ([] :term list) = ([] :term list)
+
+=== holSyntaxExtra.MEM_term_remove_imp
+⊢ ∀(ls :term list) (x :term) (t :term). MEM t (term_remove x ls) ⇒ MEM t ls ∧ (hypset_ok ls ⇒ ¬ACONV x t)
+
+=== holSyntaxExtra.hypset_ok_term_remove
+⊢ ∀(ls :term list). hypset_ok ls ⇒ ∀(t :term). hypset_ok (term_remove t ls)
+
+=== holSyntaxExtra.EVERY_term_remove
+⊢ EVERY (P :term -> bool) (ls :term list) ⇒ EVERY P (term_remove (t :term) ls)
+
+=== holSyntaxExtra.MEM_term_remove
+⊢ ∀(h :term list) (x :term) (t :term). MEM t h ∧ ¬ACONV x t ∧ hypset_ok h ⇒ MEM t (term_remove x h)
+
+=== holSyntaxExtra.term_image_nil
+⊢ term_image (f :term -> term) ([] :term list) = ([] :term list)
+
+=== holSyntaxExtra.MEM_term_image_imp
+⊢ ∀(ls :term list) (f :term -> term) (t :term). MEM t (term_image f ls) ⇒ ∃(x :term). MEM x ls ∧ t = f x
+
+=== holSyntaxExtra.hypset_ok_term_image
+⊢ ∀(ls :term list) (f :term -> term). hypset_ok ls ⇒ hypset_ok (term_image f ls)
+
+=== holSyntaxExtra.MEM_term_image
+⊢ ∀(ls :term list) (f :term -> term) (t :term).
+    MEM t ls ∧ hypset_ok ls ⇒ ∃(y :term). MEM y (term_image f ls) ∧ ACONV (f t) y
+
+=== holSyntaxExtra.VSUBST_HAS_TYPE
+⊢ ∀(tm :term) (ty :type) (ilist :(term # term) list).
+    tm has_type ty ∧
+    (∀(s :term) (s' :term). MEM ((s',s) :term # term) ilist ⇒ ∃(x :mlstring) (ty :type). s = Var x ty ∧ s' has_type ty) ⇒
+    VSUBST ilist tm has_type ty
+
+=== holSyntaxExtra.VSUBST_WELLTYPED
+⊢ ∀(tm :term) (ty :α) (ilist :(term # term) list).
+    welltyped tm ∧
+    (∀(s :term) (s' :term). MEM ((s',s) :term # term) ilist ⇒ ∃(x :mlstring) (ty :type). s = Var x ty ∧ s' has_type ty) ⇒
+    welltyped (VSUBST ilist tm)
+
+=== holSyntaxExtra.VFREE_IN_VSUBST
+⊢ ∀(tm :term) (u :mlstring) (uty :type) (ilist :(term # term) list).
+    welltyped tm ⇒
+    (VFREE_IN (Var u uty) (VSUBST ilist tm) ⇔
+     ∃(y :mlstring) (ty :type). VFREE_IN (Var y ty) tm ∧ VFREE_IN (Var u uty) (REV_ASSOCD (Var y ty) ilist (Var y ty)))
+
+=== holSyntaxExtra.VSUBST_NIL
+⊢ ∀(tm :term). VSUBST ([] :(term # term) list) tm = tm
+
+=== holSyntaxExtra.INST_CORE_HAS_TYPE
+⊢ ∀(n :num) (tm :term) (env :(term # term) list) (tyin :(type # type) list).
+    welltyped tm ∧ sizeof tm = n ∧
+    (∀(s :term) (s' :term).
+       MEM ((s,s') :term # term) env ⇒ ∃(x :mlstring) (ty :type). s = Var x ty ∧ s' = Var x (TYPE_SUBST tyin ty)) ⇒
+    (∃(x :mlstring) (ty :type).
+       INST_CORE env tyin tm = Clash (Var x (TYPE_SUBST tyin ty)) ∧ VFREE_IN (Var x ty) tm ∧
+       REV_ASSOCD (Var x (TYPE_SUBST tyin ty)) env (Var x ty) ≠ Var x ty) ∨
+    (∀(x :mlstring) (ty :type).
+       VFREE_IN (Var x ty) tm ⇒ REV_ASSOCD (Var x (TYPE_SUBST tyin ty)) env (Var x ty) = Var x ty) ∧
+    ∃(tm' :term).
+      INST_CORE env tyin tm = Result tm' ∧ tm' has_type TYPE_SUBST tyin (typeof tm) ∧
+      ∀(u :mlstring) (uty :type).
+        VFREE_IN (Var u uty) tm' ⇔ ∃(oty :type). VFREE_IN (Var u oty) tm ∧ uty = TYPE_SUBST tyin oty
+
+=== holSyntaxExtra.INST_CORE_NIL_IS_RESULT
+⊢ ∀(tyin :(type # type) list) (tm :term). welltyped tm ⇒ IS_RESULT (INST_CORE ([] :(term # term) list) tyin tm)
+
+=== holSyntaxExtra.INST_HAS_TYPE
+⊢ ∀(tm :term) (ty :type) (tyin :(type # type) list) (ty' :type).
+    tm has_type ty ∧ ty' = TYPE_SUBST tyin ty ⇒ INST tyin tm has_type ty'
+
+=== holSyntaxExtra.INST_WELLTYPED
+⊢ ∀(tm :term) (tyin :(type # type) list). welltyped tm ⇒ welltyped (INST tyin tm)
+
+=== holSyntaxExtra.tyvars_ALL_DISTINCT
+⊢ ∀(ty :type). ALL_DISTINCT (tyvars ty)
+
+=== holSyntaxExtra.tvars_ALL_DISTINCT
+⊢ ∀(tm :term). ALL_DISTINCT (tvars tm)
+
+=== holSyntaxExtra.EQUATION_HAS_TYPE_BOOL
+⊢ ∀(s :term) (t :term). s === t has_type Bool ⇔ welltyped s ∧ welltyped t ∧ typeof s = typeof t
+
+=== holSyntaxExtra.type_ok_TYPE_SUBST
+⊢ ∀(s :mlstring |-> num) (tyin :(type # type) list) (ty :type).
+    type_ok s ty ∧ EVERY (type_ok s) (MAP (FST :type # type -> type) tyin) ⇒ type_ok s (TYPE_SUBST tyin ty)
+
+=== holSyntaxExtra.type_ok_TYPE_SUBST_imp
+⊢ ∀(s :mlstring |-> num) (tyin :(type # type) list) (ty :type).
+    type_ok s (TYPE_SUBST tyin ty) ⇒ ∀(x :mlstring). MEM x (tyvars ty) ⇒ type_ok s (TYPE_SUBST tyin (Tyvar x))
+
+=== holSyntaxExtra.term_ok_welltyped
+⊢ ∀(sig :(mlstring |-> num) # (mlstring |-> type)) (t :term). term_ok sig t ⇒ welltyped t
+
+=== holSyntaxExtra.term_ok_type_ok
+⊢ ∀(sig :(mlstring |-> num) # (mlstring |-> type)) (t :term).
+    is_std_sig sig ∧ term_ok sig t ⇒ type_ok (tysof sig) (typeof t)
+
+=== holSyntaxExtra.term_ok_equation
+⊢ is_std_sig (sig :(mlstring |-> num) # (mlstring |-> type)) ⇒
+  (term_ok sig ((s :term) === (t :term)) ⇔ term_ok sig s ∧ term_ok sig t ∧ typeof t = typeof s)
+
+=== holSyntaxExtra.term_ok_VSUBST
+⊢ ∀(sig :(mlstring |-> num) # (mlstring |-> type)) (tm :term) (ilist :(term # term) list).
+    term_ok sig tm ∧
+    (∀(s :term) (s' :term).
+       MEM ((s',s) :term # term) ilist ⇒ ∃(x :mlstring) (ty :type). s = Var x ty ∧ s' has_type ty ∧ term_ok sig s') ⇒
+    term_ok sig (VSUBST ilist tm)
+
+=== holSyntaxExtra.term_ok_INST_CORE
+⊢ ∀(sig :(mlstring |-> num) # (mlstring |-> type)) (env :(term # term) list) (tyin :(type # type) list) (tm :term).
+    term_ok sig tm ∧ EVERY (type_ok (tysof sig)) (MAP (FST :type # type -> type) tyin) ∧
+    (∀(s :term) (s' :term).
+       MEM ((s,s') :term # term) env ⇒ ∃(x :mlstring) (ty :type). s = Var x ty ∧ s' = Var x (TYPE_SUBST tyin ty)) ∧
+    IS_RESULT (INST_CORE env tyin tm) ⇒
+    term_ok sig (RESULT (INST_CORE env tyin tm))
+
+=== holSyntaxExtra.term_ok_INST
+⊢ ∀(sig :(mlstring |-> num) # (mlstring |-> type)) (tyin :(type # type) list) (tm :term).
+    term_ok sig tm ∧ EVERY (type_ok (tysof sig)) (MAP (FST :type # type -> type) tyin) ⇒ term_ok sig (INST tyin tm)
+
+=== holSyntaxExtra.term_ok_raconv
+⊢ ∀(env :(term # term) list) (tp :term # term).
+    RACONV env tp ⇒
+    ∀(sig :(mlstring |-> num) # (mlstring |-> type)).
+      EVERY
+        (λ(((s :term),(s' :term)) :term # term).
+           welltyped s ∧ welltyped s' ∧ typeof s = typeof s' ∧ type_ok (tysof sig) (typeof s)) env ⇒
+      term_ok sig (FST tp) ∧ welltyped (SND tp) ⇒
+      term_ok sig (SND tp)
+
+=== holSyntaxExtra.term_ok_aconv
+⊢ ∀(sig :(mlstring |-> num) # (mlstring |-> type)) (t1 :term) (t2 :term).
+    ACONV t1 t2 ∧ term_ok sig t1 ∧ welltyped t2 ⇒ term_ok sig t2
+
+=== holSyntaxExtra.bind_not_free
+⊢ ∀(t :dbterm) (n :num) (v :mlstring # type). ¬dbVFREE_IN (UNCURRY dbVar v) t ⇒ bind v n t = t
+
+=== holSyntaxExtra.bind_dbVSUBST
+⊢ ∀(tm :dbterm) (v :mlstring # type) (n :num) (ls :(dbterm # dbterm) list).
+    ¬MEM (UNCURRY dbVar v) (MAP (SND :dbterm # dbterm -> dbterm) ls) ∧
+    (∀(k :dbterm).
+       dbVFREE_IN k tm ∧ MEM k (MAP (SND :dbterm # dbterm -> dbterm) ls) ⇒
+       ¬dbVFREE_IN (UNCURRY dbVar v) (REV_ASSOCD k ls k)) ⇒
+    bind v n (dbVSUBST ls tm) = dbVSUBST ls (bind v n tm)
+
+=== holSyntaxExtra.bind_dbVSUBST_cons
+⊢ ∀(tm :dbterm) (z :mlstring # type) (x :mlstring # type) (n :num) (ls :(dbterm # dbterm) list).
+    ¬dbVFREE_IN (UNCURRY dbVar z) (dbVSUBST ls (bind x n tm)) ⇒
+    bind z n (dbVSUBST (((UNCURRY dbVar z,UNCURRY dbVar x) :dbterm # dbterm)::ls) tm) = dbVSUBST ls (bind x n tm)
+
+=== holSyntaxExtra.dbVSUBST_frees
+⊢ ∀(tm :dbterm) (ls :(dbterm # dbterm) list) (ls' :(dbterm # dbterm) list).
+    (∀(k :dbterm). dbVFREE_IN k tm ⇒ REV_ASSOCD k ls k = REV_ASSOCD k ls' k) ⇒ dbVSUBST ls tm = dbVSUBST ls' tm
+
+=== holSyntaxExtra.dbVFREE_IN_bind
+⊢ ∀(tm :dbterm) (x :dbterm) (v :mlstring # type) (n :num) (b :α).
+    dbVFREE_IN x (bind v n tm) ⇔ x ≠ UNCURRY dbVar v ∧ dbVFREE_IN x tm
+
+=== holSyntaxExtra.dbVFREE_IN_VFREE_IN
+⊢ ∀(tm :term) (x :term). welltyped tm ⇒ (dbVFREE_IN (db x) (db tm) ⇔ VFREE_IN x tm)
+
+=== holSyntaxExtra.MAP_db_FILTER_neq
+⊢ ∀(ls :(term # term) list) (z :mlstring) (ty :type).
+    MAP (λ(((x :term),(y :term)) :term # term). ((db x,db y) :dbterm # dbterm))
+      (FILTER (λ(((x :term),(y :term)) :term # term). y ≠ Var z ty) ls) =
+    FILTER (λ(((x :dbterm),(y :dbterm)) :dbterm # dbterm). y ≠ dbVar z ty)
+      (MAP (λ(((x :term),(y :term)) :term # term). ((db x,db y) :dbterm # dbterm)) ls)
+
+=== holSyntaxExtra.REV_ASSOCD_MAP_db
+⊢ ∀(ls :(term # term) list) (k :mlstring) (ky :type).
+    (∀(k :term) (v :term). MEM ((v,k) :term # term) ls ⇒ ∃(x :mlstring) (ty :type). k = Var x ty) ⇒
+    REV_ASSOCD (dbVar k ky) (MAP (λ(((x :term),(y :term)) :term # term). ((db x,db y) :dbterm # dbterm)) ls)
+      (dbVar k ky) = db (REV_ASSOCD (Var k ky) ls (Var k ky))
+
+=== holSyntaxExtra.dbVFREE_IN_dbVSUBST
+⊢ ∀(tm :dbterm) (u :mlstring) (uty :type) (ilist :(dbterm # dbterm) list).
+    dbVFREE_IN (dbVar u uty) (dbVSUBST ilist tm) ⇔
+    ∃(y :mlstring) (ty :type).
+      dbVFREE_IN (dbVar y ty) tm ∧ dbVFREE_IN (dbVar u uty) (REV_ASSOCD (dbVar y ty) ilist (dbVar y ty))
+
+=== holSyntaxExtra.VSUBST_dbVSUBST
+⊢ ∀(tm :term) (ilist :(term # term) list).
+    welltyped tm ∧
+    (∀(k :term) (v :term). MEM ((v,k) :term # term) ilist ⇒ welltyped v ∧ ∃(x :mlstring) (ty :type). k = Var x ty) ⇒
+    db (VSUBST ilist tm) =
+    dbVSUBST (MAP (λ(((x :term),(y :term)) :term # term). ((db x,db y) :dbterm # dbterm)) ilist) (db tm)
+
+=== holSyntaxExtra.dbINST_bind
+⊢ ∀(tm :dbterm) (v :mlstring # type) (n :num) (ls :(type # type) list).
+    (∀(ty :type). dbVFREE_IN (dbVar (FST v) ty) tm ∧ TYPE_SUBST ls ty = TYPE_SUBST ls (SND v) ⇒ ty = SND v) ⇒
+    dbINST ls (bind v n tm) = bind ((FST v,TYPE_SUBST ls (SND v)) :mlstring # type) n (dbINST ls tm)
+
+=== holSyntaxExtra.dbVSUBST_nil
+⊢ ∀(tm :dbterm). dbVSUBST ([] :(dbterm # dbterm) list) tm = tm
+
+=== holSyntaxExtra.INST_CORE_dbINST
+⊢ ∀(tm :term) (tyin :(type # type) list) (env :(term # term) list) (tmi :term).
+    welltyped tm ∧
+    (∀(s :term) (s' :term).
+       MEM ((s,s') :term # term) env ⇒ ∃(x :mlstring) (ty :type). s = Var x ty ∧ s' = Var x (TYPE_SUBST tyin ty)) ∧
+    INST_CORE env tyin tm = Result tmi ⇒
+    db tmi = dbINST tyin (db tm)
+
+=== holSyntaxExtra.INST_dbINST
+⊢ ∀(tm :term) (tyin :(type # type) list). welltyped tm ⇒ db (INST tyin tm) = dbINST tyin (db tm)
+
+=== holSyntaxExtra.bind_list_aux_clauses
+⊢ (∀(env :(mlstring # type) list) (m :num). bind_list_aux m env (dbBound (n :num)) = dbBound n) ∧
+  (∀(env :(mlstring # type) list) (m :num). bind_list_aux m env (dbConst (x :mlstring) (ty :type)) = dbConst x ty) ∧
+  (∀(env :(mlstring # type) list) (m :num) (t1 :dbterm) (t2 :dbterm).
+     bind_list_aux m env (dbComb t1 t2) = dbComb (bind_list_aux m env t1) (bind_list_aux m env t2)) ∧
+  ∀(env :(mlstring # type) list) (m :num) (ty :type) (tm :dbterm).
+    bind_list_aux m env (dbAbs ty tm) = dbAbs ty (bind_list_aux (m + (1 :num)) env tm)
+
+=== holSyntaxExtra.dbterm_bind
+⊢ ∀(tm :term) (env :(mlstring # type) list). dbterm env tm = bind_list_aux (0 :num) env (db tm)
+
+=== holSyntaxExtra.dbterm_db
+⊢ ∀(tm :term). dbterm ([] :(mlstring # type) list) tm = db tm
+
+=== holSyntaxExtra.dbterm_RACONV
+⊢ ∀(t1 :term) (env1 :(mlstring # type) list) (t2 :term) (env2 :(mlstring # type) list).
+    welltyped t1 ∧ welltyped t2 ∧ dbterm env1 t1 = dbterm env2 t2 ∧ LENGTH env1 = LENGTH env2 ⇒
+    RACONV (ZIP ((MAP (UNCURRY Var) env1,MAP (UNCURRY Var) env2) :term list # term list)) ((t1,t2) :term # term)
+
+=== holSyntaxExtra.RACONV_dbterm
+⊢ ∀(env :(term # term) list) (tp :term # term).
+    RACONV env tp ⇒
+    welltyped (FST tp) ∧ welltyped (SND tp) ∧
+    (∀(vp :term # term).
+       MEM vp env ⇒ (∃(x :mlstring) (ty :type). FST vp = Var x ty) ∧ ∃(x :mlstring) (ty :type). SND vp = Var x ty) ⇒
+    dbterm (MAP (dest_var ∘ (FST :term # term -> term)) env) (FST tp) =
+    dbterm (MAP (dest_var ∘ (SND :term # term -> term)) env) (SND tp)
+
+=== holSyntaxExtra.dbterm_ACONV
+⊢ ∀(t1 :term) (t2 :term).
+    welltyped t1 ∧ welltyped t2 ⇒
+    (ACONV t1 t2 ⇔ dbterm ([] :(mlstring # type) list) t1 = dbterm ([] :(mlstring # type) list) t2)
+
+=== holSyntaxExtra.ACONV_db
+⊢ ∀(t1 :term) (t2 :term). welltyped t1 ∧ welltyped t2 ⇒ (ACONV t1 t2 ⇔ db t1 = db t2)
+
+=== holSyntaxExtra.ACONV_VSUBST
+⊢ ∀(t1 :term) (t2 :term) (ilist :(term # term) list).
+    welltyped t1 ∧ welltyped t2 ∧
+    (∀(k :term) (v :term). MEM ((v,k) :term # term) ilist ⇒ ∃(x :mlstring) (ty :type). k = Var x ty ∧ v has_type ty) ∧
+    ACONV t1 t2 ⇒
+    ACONV (VSUBST ilist t1) (VSUBST ilist t2)
+
+=== holSyntaxExtra.ACONV_INST
+⊢ ∀(t1 :term) (t2 :term) (tyin :(type # type) list).
+    welltyped t1 ∧ welltyped t2 ∧ ACONV t1 t2 ⇒ ACONV (INST tyin t1) (INST tyin t2)
+
+=== holSyntaxExtra.VSUBST_simple_subst
+⊢ ∀(tm :term) (ilist :(term # term) list).
+    DISJOINT (set (bv_names tm))
+      {y | (∃(ty :type) (u :term). VFREE_IN (Var y ty) u ∧ MEM u (MAP (FST :term # term -> term) ilist))} ∧
+    (∀(s :term) (s' :term). MEM ((s',s) :term # term) ilist ⇒ ∃(x :mlstring) (ty :type). s = Var x ty) ∧ welltyped tm ⇒
+    VSUBST ilist tm = simple_subst ilist tm
+
+=== holSyntaxExtra.INST_CORE_simple_inst
+⊢ ∀(env :(term # term) list) (tyin :(type # type) list) (tm :term).
+    ALL_DISTINCT (bv_names tm ++ MAP ((FST :mlstring # type -> mlstring) ∘ dest_var ∘ (SND :term # term -> term)) env) ∧
+    DISJOINT (set (bv_names tm)) {x | (∃(ty :type). VFREE_IN (Var x ty) tm)} ∧
+    (∀(s :term) (s' :term).
+       MEM ((s,s') :term # term) env ⇒ ∃(x :mlstring) (ty :type). s = Var x ty ∧ s' = Var x (TYPE_SUBST tyin ty)) ∧
+    (∀(x :mlstring) (ty :type) (ty' :type).
+       VFREE_IN (Var x ty) tm ∧ MEM (Var x ty') (MAP (FST :term # term -> term) env) ⇒ ty' = ty) ∧ welltyped tm ⇒
+    INST_CORE env tyin tm = Result (simple_inst tyin tm)
+
+=== holSyntaxExtra.INST_simple_inst
+⊢ ∀(tyin :(type # type) list) (tm :term).
+    ALL_DISTINCT (bv_names tm) ∧ DISJOINT (set (bv_names tm)) {x | (∃(ty :type). VFREE_IN (Var x ty) tm)} ∧ welltyped tm ⇒
+    INST tyin tm = simple_inst tyin tm
+
+=== holSyntaxExtra.simple_subst_has_type
+⊢ ∀(tm :term) (ty :type).
+    tm has_type ty ⇒
+    ∀(subst :(term # term) list).
+      EVERY (λ(((s' :term),(s :term)) :term # term). s' has_type typeof s) subst ⇒ simple_subst subst tm has_type ty
+
+=== holSyntaxExtra.simple_inst_has_type
+⊢ ∀(tm :term) (tyin :(type # type) list). welltyped tm ⇒ simple_inst tyin tm has_type TYPE_SUBST tyin (typeof tm)
+
+=== holSyntaxExtra.FST_rename_bvars
+⊢ ∀(names :mlstring list) (env :(mlstring # mlstring # type) list) (tm :term).
+    ((LENGTH (bv_names tm) ≤ LENGTH names) :bool) ⇒ FST (rename_bvars names env tm) = DROP (LENGTH (bv_names tm)) names
+
+=== holSyntaxExtra.rename_bvars_RACONV
+⊢ ∀(names :mlstring list) (env :(mlstring # mlstring # type) list) (tm :term).
+    ((LENGTH (bv_names tm) ≤ LENGTH names) :bool) ∧
+    DISJOINT (set (MAP (FST :mlstring # mlstring # type -> mlstring) env ++ names))
+      (set
+         (MAP ((FST :mlstring # type -> mlstring) ∘ (SND :mlstring # mlstring # type -> mlstring # type)) env ++
+          bv_names tm)) ∧
+    DISJOINT (set (MAP (FST :mlstring # mlstring # type -> mlstring) env ++ names))
+      {x | (∃(ty :type). VFREE_IN (Var x ty) tm)} ∧
+    ALL_DISTINCT (MAP (FST :mlstring # mlstring # type -> mlstring) env ++ names) ∧ welltyped tm ⇒
+    RACONV
+      (MAP
+         (λ(((s' :mlstring),(((s :mlstring),(ty :type)) :mlstring # type)) :mlstring # mlstring # type).
+            ((Var s ty,Var s' ty) :term # term)) env) ((tm,SND (rename_bvars names env tm)) :term # term)
+
+=== holSyntaxExtra.rename_bvars_ACONV
+⊢ ∀(names :mlstring list) (tm :term).
+    ((LENGTH (bv_names tm) ≤ LENGTH names) :bool) ∧ ALL_DISTINCT names ∧
+    DISJOINT (set names) {x | MEM x (bv_names tm) ∨ ∃(ty :type). VFREE_IN (Var x ty) tm} ∧ welltyped tm ⇒
+    ACONV tm (SND (rename_bvars names ([] :(mlstring # mlstring # type) list) tm))
+
+=== holSyntaxExtra.rename_bvars_has_type
+⊢ ∀(names :mlstring list) (env :(mlstring # mlstring # type) list) (tm :term) (ty :type).
+    tm has_type ty ⇒ SND (rename_bvars names env tm) has_type ty
+
+=== holSyntaxExtra.rename_bvars_welltyped
+⊢ ∀(names :mlstring list) (env :(mlstring # mlstring # type) list) (tm :term).
+    welltyped tm ⇒ welltyped (SND (rename_bvars names env tm))
+
+=== holSyntaxExtra.fresh_union
+⊢ FINITE (s :string -> bool) ∧ FINITE (t :string -> bool) ⇒ fresh (s ∪ t) ∉ s ∧ fresh (s ∪ t) ∉ t
+
+=== holSyntaxExtra.fresh_names_exist
+⊢ ∀(s :string -> bool) (n :num).
+    FINITE s ⇒ ∃(names :string list). LENGTH names = n ∧ ALL_DISTINCT names ∧ DISJOINT (set names) s
+
+=== holSyntaxExtra.bv_names_rename_bvars
+⊢ ∀(names :mlstring list) (env :(mlstring # mlstring # type) list) (tm :term).
+    ((LENGTH (bv_names tm) ≤ LENGTH names) :bool) ⇒
+    bv_names (SND (rename_bvars names env tm)) = TAKE (LENGTH (bv_names tm)) names
+
+=== holSyntaxExtra.FINITE_VFREE_IN
+⊢ ∀(tm :term). FINITE {x | (∃(ty :type). VFREE_IN (Var x ty) tm)}
+
+=== holSyntaxExtra.FINITE_VFREE_IN_2
+⊢ ∀(tm :term). FINITE {((x,ty) :mlstring # type) | VFREE_IN (Var x ty) tm}
+
+=== holSyntaxExtra.FINITE_VFREE_IN_list
+⊢ ∀(ls :term list). FINITE {x | (∃(ty :type) (u :term). VFREE_IN (Var x ty) u ∧ MEM u ls)}
+
+=== holSyntaxExtra.FINITE_MEM_Var
+⊢ ∀(ls :term list). FINITE {((x,ty) :mlstring # type) | MEM (Var x ty) ls}
+
+=== holSyntaxExtra.theory_ok_sig
+⊢ ∀(thy :((mlstring |-> num) # (mlstring |-> type)) # (term -> bool)). theory_ok thy ⇒ is_std_sig (sigof thy)
+
+=== holSyntaxExtra.arities_match_nil
+⊢ (arities_match ([] :type list) (ls :type list) ⇔ ls = ([] :type list)) ∧
+  (arities_match ls ([] :type list) ⇔ ls = ([] :type list))
+
+=== holSyntaxExtra.arities_match_Tyvar
+⊢ arities_match (Tyvar (v :mlstring)::(ps :type list)) ((ty :type)::(obs :type list)) ⇔ arities_match ps obs
+
+=== holSyntax.domain_def
+⊢ ∀(t :type) (s :type). (domain (Fun s t) :type) = s
+
+=== holSyntax.codomain_def
+⊢ ∀(t :type) (s :type). codomain (Fun s t) = t
+
+=== holSyntax.VFREE_IN_FINITE
+⊢ ∀(t :term). FINITE {x | VFREE_IN x t}
+
+=== holSyntax.VFREE_IN_FINITE_ALT
+⊢ ∀(t :term) (ty :type). FINITE {x | VFREE_IN (Var (implode x) ty) t}
+
+=== holSyntax.PRIMED_NAME_EXISTS
+⊢ ∃(n :num). ¬VFREE_IN (Var (implode (STRCAT (x :string) (GENLIST (K #"'" :num -> char) n))) (ty :type)) (t :term)
+
+=== holSyntax.VARIANT_THM
+⊢ ∀(t :term) (x :string) (ty :type). ¬VFREE_IN (Var (VARIANT t x ty) ty) t
+
+=== holSyntax.SIZEOF_VSUBST
+⊢ ∀(t :term) (ilist :(term # term) list).
+    (∀(s' :term) (s :term). MEM ((s',s) :term # term) ilist ⇒ ∃(x :mlstring) (ty :type). s' = Var x ty) ⇒
+    sizeof (VSUBST ilist t) = sizeof t
+
+=== holSyntaxLib.ALPHAVARS_REFL
+⊢ ∀(env :(α # α) list) (t :α). EVERY (UNCURRY ($= :α -> α -> bool)) env ⇒ ALPHAVARS env ((t,t) :α # α)
+
+=== holSyntaxLib.ALPHAVARS_MEM
+⊢ ∀(env :(α # α) list) (tp :α # α). ALPHAVARS env tp ⇒ MEM tp env ∨ FST tp = SND tp
+
+=== holSyntaxLib.REV_ASSOCD
+⊢ (∀(a :α) (d :β). REV_ASSOCD a ([] :(β # α) list) d = d) ∧
+  ∀(a :γ) (x :δ) (y :γ) (t :(δ # γ) list) (d :δ).
+    REV_ASSOCD a (((x,y) :δ # γ)::t) d = if y = a then x else REV_ASSOCD a t d
+
+=== holSyntaxLib.REV_ASSOCD_ALOOKUP
+⊢ ∀(ls :(α # β) list) (x :β) (d :α).
+    REV_ASSOCD x ls d =
+    case ALOOKUP (MAP (λ(((x :α),(y :β)) :α # β). ((y,x) :β # α)) ls) x of (NONE :α option) => d | SOME y => y
+
+=== holSyntaxLib.PRIMED_INFINITE
+⊢ INFINITE (IMAGE (λ(n :num). STRCAT (x :string) (GENLIST (K #"'" :num -> char) n)) 𝕌(:num))
+
+=== holSyntaxLib.REV_ASSOCD_FILTER
+⊢ ∀(l :(α # β) list) (a :β) (b :α) (d :γ).
+    REV_ASSOCD a (FILTER (λ(((y :α),(x :β)) :α # β). (P :β -> bool) x) l) b = if P a then REV_ASSOCD a l b else b
+
+=== holSyntaxLib.REV_ASSOCD_MEM
+⊢ ∀(l :(α # β) list) (x :β) (d :α). MEM ((REV_ASSOCD x l d,x) :α # β) l ∨ REV_ASSOCD x l d = d
+
+=== holSyntaxLib.MEM_LIST_INSERT
+⊢ ∀(l :α list) (x :α). set (LIST_INSERT x l) = x INSERT set l
+
+=== holSyntaxLib.MEM_LIST_UNION
+⊢ ∀(l1 :α list) (l2 :α list). set (LIST_UNION l1 l2) = set l1 ∪ set l2
+
+=== holSyntaxLib.MEM_FOLDR_LIST_UNION
+⊢ ∀(ls :α list) (x :β) (f :α -> β list) (b :β list).
+    MEM x (FOLDR (λ(x :α) (y :β list). LIST_UNION (f x) y) b ls) ⇔ MEM x b ∨ ∃(y :α). MEM y ls ∧ MEM x (f y)
+
+=== holSyntaxLib.LIST_UNION_NIL
+⊢ ∀(l2 :α list). LIST_UNION ([] :α list) l2 = l2
+
+=== holSyntaxLib.set_LIST_UNION
+⊢ ∀(l1 :α list) (l2 :α list). set (LIST_UNION l1 l2) = set l1 ∪ set l2
+
+=== holSyntaxLib.MEM_FOLDR_INORDER_INSERT
+⊢ ∀(xs :string list) (x :string). MEM x (FOLDR INORDER_INSERT ([] :string list) xs) ⇔ MEM x xs
+
+=== holSyntaxLib.PERM_STRING_SORT
+⊢ ∀(ls :string list). ALL_DISTINCT ls ⇒ PERM ls (STRING_SORT ls)
+
+=== holSyntaxLib.LENGTH_STRING_SORT
+⊢ ∀(ls :string list). ALL_DISTINCT ls ⇒ LENGTH (STRING_SORT ls) = LENGTH ls
+
+=== holSyntaxLib.MEM_STRING_SORT
+⊢ ∀(ls :string list). set (STRING_SORT ls) = set ls
+
+=== holSyntaxLib.ALL_DISTINCT_STRING_SORT
+⊢ ∀(xs :string list). ALL_DISTINCT (STRING_SORT xs)
+
+=== holSyntaxLib.ALL_DISTINCT_LIST_UNION
+⊢ ∀(l1 :α list) (l2 :α list). ALL_DISTINCT l2 ⇒ ALL_DISTINCT (LIST_UNION l1 l2)
+
+=== misc.append_aux_thm
+⊢ ∀(l :α app_list) (xs :α list). append_aux l xs = append_aux l ([] :α list) ++ xs
+
+=== misc.append_thm
+⊢ append (Append (l1 :α app_list) (l2 :α app_list)) = append l1 ++ append l2 ∧ append (List (xs :β list)) = xs ∧
+  append (Nil :γ app_list) = ([] :γ list)
+
+=== misc.SmartAppend_thm
+⊢ ∀(l1 :α app_list) (l2 :α app_list).
+    SmartAppend l1 l2 = if l1 = (Nil :α app_list) then l2 else if l2 = (Nil :α app_list) then l1 else Append l1 l2
+
+=== misc.append_SmartAppend
+⊢ append (SmartAppend (l1 :α app_list) (l2 :α app_list)) = append l1 ++ append l2
+
+=== misc.MAP_FST_I_PAIR_MAP
+⊢ ∀(xs :(α # β) list). MAP (FST :α # γ -> α) (MAP ((I :α -> α) ## (f :β -> γ)) xs) = MAP (FST :α # β -> α) xs
+
+=== misc.MAX_LIST_APPEND
+⊢ MAX_LIST ((xs :num list) ++ (ys :num list)) = MAX (MAX_LIST xs) (MAX_LIST ys)
+
+=== misc.MAX_LIST_SNOC
+⊢ MAX_LIST (SNOC (x :num) (xs :num list)) = MAX (MAX_LIST xs) x
+
+=== misc.domain_nat_set_from_list
+⊢ ∀(ls :num list) (ns :sptree$num_set).
+    (domain (FOLDL (λ(s :sptree$num_set) (n :num). (insert n () s :sptree$num_set)) ns ls) :num -> bool) =
+    (domain ns :num -> bool) ∪ set ls
+
+=== misc.UPDATE_LIST_THM
+⊢ ∀(f :α -> β). f =++ ([] :(α # β) list) = f ∧ ∀(h :α # β) (t :(α # β) list). f =++ (h::t) = f⦇FST h ↦ SND h⦈ =++ t
+
+=== misc.APPLY_UPDATE_LIST_ALOOKUP
+⊢ ∀(ls :(α # β) list) (f :α -> β) (x :α).
+    (f =++ ls) x = case ALOOKUP (REVERSE ls) x of (NONE :β option) => f x | SOME y => y
+
+=== misc.find_index_ALL_DISTINCT_EL
+⊢ ∀(ls :α list) (n :num) (m :num). ALL_DISTINCT ls ∧ n < LENGTH ls ⇒ find_index ls❲n❳ ls m = SOME (m + n)
+
+=== misc.find_index_shift_0
+⊢ ∀(ls :α list) (x :α) (k :num). find_index x ls k = OPTION_MAP (λ(x :num). x + k) (find_index x ls (0 :num))
+
+=== misc.EVERY2_RC_same
+⊢ LIST_REL (RC (R :α -> α -> bool)) (l :α list) l
+
+=== misc.I_PERMUTES
+⊢ (I :α -> α) PERMUTES (s :α -> bool)
+
+=== misc.MAP_EQ_ID
+⊢ ∀(f :α -> α) (ls :α list). MAP f ls = ls ⇔ ∀(x :α). MEM x ls ⇒ f x = x
+
+=== misc.FUN_FMAP_FAPPLY_FEMPTY_FAPPLY
+⊢ FINITE (s :α -> bool) ⇒ (FUN_FMAP (FAPPLY (FEMPTY :α |-> β)) s)⟨(x :α)⟩ = (FEMPTY :α |-> β)⟨x⟩
+
+=== misc.LESS_1
+⊢ (x :num) < (1 :num) ⇔ x = (0 :num)
+
+=== misc.num_from_hex_string_num_to_hex_string
+⊢ num_from_hex_string (num_to_hex_string (n :num)) = n
+
+=== misc.MAPi_ID
+⊢ MAPi (λ(x :num) (y :α). y) = (I :α list -> α list)
+
+=== misc.OPT_MMAP_SOME
+⊢ OPT_MMAP (SOME :α -> α option) (ls :α list) = SOME ls
+
+=== misc.w2n_lt_256
+⊢ ∀(w :word8). w2n w < (256 :num)
+
+=== misc.CHR_w2n_n2w_ORD
+⊢ CHR ∘ (w2n :word8 -> num) ∘ (n2w :num -> word8) ∘ ORD = (I :char -> char)
+
+=== misc.n2w_ORD_CHR_w2n
+⊢ (n2w :num -> word8) ∘ ORD ∘ CHR ∘ (w2n :word8 -> num) = (I :word8 -> word8)
+
+=== misc.CHR_w2n_n2w_ORD_simp
+⊢ ∀(c :char). CHR (w2n (n2w (ORD c) :word8)) = c
+
+=== misc.n2w_ORD_CHR_w2n_simp
+⊢ ∀(w :word8). (n2w (ORD (CHR (w2n w))) :word8) = w
+
+=== misc.LENGTH_FIELDS
+⊢ ∀(ls :string). LENGTH (FIELDS (P :char -> bool) ls) = STRLEN (FILTER P ls) + (1 :num)
+
+=== misc.FIELDS_NEQ_NIL
+⊢ FIELDS (P :char -> bool) (ls :string) ≠ ([] :string list)
+
+=== misc.FIELDS_next
+⊢ ∀(ls :string) (l1 :string) (l2 :string list).
+    FIELDS (P :char -> bool) ls = l1::l2 ⇒
+    STRLEN l1 < STRLEN ls ⇒
+    FIELDS P (DROP (SUC (STRLEN l1)) ls) = l2 ∧ ∃(c :char). STRCAT l1 (STRING c ("" :string)) ≼ ls ∧ P c
+
+=== misc.splitlines_nil
+⊢ splitlines ("" :string) = ([] :string list)
+
+=== misc.splitlines_eq_nil
+⊢ splitlines (ls :string) = ([] :string list) ⇔ ls = ("" :string)
+
+=== misc.irreflexive_inv_image
+⊢ ∀(R :α -> α -> bool) (f :β -> α). (irreflexive R :bool) ⇒ (irreflexive (inv_image R f) :bool)
+
+=== misc.trichotomous_inv_image
+⊢ ∀(R :α -> α -> bool) (f :β -> α). trichotomous R ∧ INJ f 𝕌(:β) 𝕌(:α) ⇒ trichotomous (inv_image R f)
+
+=== misc.plus_0_I
+⊢ $+ (0 :num) = (I :num -> num)
+
+=== misc.OPTION_MAP_I
+⊢ OPTION_MAP (I :α -> α) (x :α option) = x
+
+=== misc.is_subseq_refl
+⊢ ∀(ls :α list). is_subseq ls ls
+
+=== misc.is_subseq_nil
+⊢ is_subseq ([] :α list) (ls :α list) ⇔ ls = ([] :α list)
+
+=== misc.EVEN_make_even
+⊢ EVEN (make_even (x :num))
+
+=== misc.v2w_32_F
+⊢ (v2w [F] :word32) = (0w :word32)
+
+=== misc.v2w_32_T
+⊢ (v2w [T] :word32) = (1w :word32)
+

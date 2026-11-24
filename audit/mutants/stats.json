@@ -1,0 +1,364 @@
+{
+ "seed": 20261124,
+ "pool_target": 180,
+ "scope_quota": {
+  "definition": 108,
+  "prelude": 45,
+  "statement": 27
+ },
+ "ops": {
+  "N1": {
+   "family": "numbers",
+   "eligible_decls": 602,
+   "sites_reached": 42,
+   "unreached": 560,
+   "candidates": 164,
+   "attempted": 50,
+   "compiled": 42,
+   "sampled": 18
+  },
+  "N2": {
+   "family": "numbers",
+   "eligible_decls": 602,
+   "sites_reached": 20,
+   "unreached": 582,
+   "candidates": 31,
+   "attempted": 8,
+   "compiled": 8,
+   "sampled": 2
+  },
+  "N3": {
+   "family": "numbers",
+   "eligible_decls": 602,
+   "sites_reached": 31,
+   "unreached": 571,
+   "candidates": 58,
+   "attempted": 10,
+   "compiled": 6,
+   "sampled": 2
+  },
+  "N4": {
+   "family": "numbers",
+   "eligible_decls": 307,
+   "sites_reached": 8,
+   "unreached": 299,
+   "candidates": 9,
+   "attempted": 2,
+   "compiled": 2,
+   "sampled": 1
+  },
+  "C1": {
+   "family": "characters and strings",
+   "eligible_decls": 602,
+   "sites_reached": 9,
+   "unreached": 593,
+   "candidates": 31,
+   "attempted": 16,
+   "compiled": 16,
+   "sampled": 6
+  },
+  "C2": {
+   "family": "characters and strings",
+   "eligible_decls": 602,
+   "sites_reached": 10,
+   "unreached": 592,
+   "candidates": 18,
+   "attempted": 8,
+   "compiled": 5,
+   "sampled": 2
+  },
+  "C3": {
+   "family": "characters and strings",
+   "eligible_decls": 602,
+   "sites_reached": 21,
+   "unreached": 581,
+   "candidates": 27,
+   "attempted": 12,
+   "compiled": 0,
+   "sampled": 0
+  },
+  "O1": {
+   "family": "overloads",
+   "eligible_decls": 602,
+   "sites_reached": 100,
+   "unreached": 502,
+   "candidates": 228,
+   "attempted": 51,
+   "compiled": 16,
+   "sampled": 10
+  },
+  "H1": {
+   "family": "hypotheses and quantifiers",
+   "eligible_decls": 375,
+   "sites_reached": 168,
+   "unreached": 207,
+   "candidates": 293,
+   "attempted": 67,
+   "compiled": 61,
+   "sampled": 15
+  },
+  "H2": {
+   "family": "hypotheses and quantifiers",
+   "eligible_decls": 375,
+   "sites_reached": 253,
+   "unreached": 122,
+   "candidates": 395,
+   "attempted": 77,
+   "compiled": 76,
+   "sampled": 14
+  },
+  "H3": {
+   "family": "hypotheses and quantifiers",
+   "eligible_decls": 375,
+   "sites_reached": 31,
+   "unreached": 344,
+   "candidates": 65,
+   "attempted": 14,
+   "compiled": 12,
+   "sampled": 1
+  },
+  "D1": {
+   "family": "definitions",
+   "eligible_decls": 307,
+   "sites_reached": 149,
+   "unreached": 158,
+   "candidates": 602,
+   "attempted": 135,
+   "compiled": 30,
+   "sampled": 19
+  },
+  "D2": {
+   "family": "definitions",
+   "eligible_decls": 307,
+   "sites_reached": 100,
+   "unreached": 210,
+   "candidates": 216,
+   "attempted": 56,
+   "compiled": 20,
+   "sampled": 13
+  },
+  "D3": {
+   "family": "definitions",
+   "eligible_decls": 307,
+   "sites_reached": 53,
+   "unreached": 254,
+   "candidates": 472,
+   "attempted": 110,
+   "compiled": 6,
+   "sampled": 5
+  },
+  "D4": {
+   "family": "definitions",
+   "eligible_decls": 307,
+   "sites_reached": 8,
+   "unreached": 299,
+   "candidates": 21,
+   "attempted": 6,
+   "compiled": 2,
+   "sampled": 1
+  },
+  "T1": {
+   "family": "type signatures",
+   "eligible_decls": 602,
+   "sites_reached": 233,
+   "unreached": 369,
+   "candidates": 891,
+   "attempted": 394,
+   "compiled": 6,
+   "sampled": 6
+  },
+  "U1": {
+   "family": "unspecified values",
+   "eligible_decls": 19,
+   "sites_reached": 7,
+   "unreached": 12,
+   "candidates": 10,
+   "attempted": 10,
+   "compiled": 10,
+   "sampled": 6
+  },
+  "W1": {
+   "family": "weakenings",
+   "eligible_decls": 375,
+   "sites_reached": 138,
+   "unreached": 237,
+   "candidates": 476,
+   "attempted": 90,
+   "compiled": 87,
+   "sampled": 19
+  },
+  "W2": {
+   "family": "weakenings",
+   "eligible_decls": 375,
+   "sites_reached": 220,
+   "unreached": 155,
+   "candidates": 422,
+   "attempted": 86,
+   "compiled": 53,
+   "sampled": 5
+  },
+  "W3": {
+   "family": "weakenings",
+   "eligible_decls": 375,
+   "sites_reached": 138,
+   "unreached": 237,
+   "candidates": 300,
+   "attempted": 54,
+   "compiled": 54,
+   "sampled": 14
+  },
+  "W4": {
+   "family": "weakenings",
+   "eligible_decls": 375,
+   "sites_reached": 60,
+   "unreached": 315,
+   "candidates": 97,
+   "attempted": 12,
+   "compiled": 12,
+   "sampled": 1
+  },
+  "X1": {
+   "family": "held-out X1",
+   "eligible_decls": 602,
+   "sites_reached": 24,
+   "unreached": 578,
+   "candidates": 62,
+   "attempted": 59,
+   "compiled": 8,
+   "sampled": 5
+  },
+  "X2": {
+   "family": "held-out X2",
+   "eligible_decls": 602,
+   "sites_reached": 43,
+   "unreached": 559,
+   "candidates": 105,
+   "attempted": 34,
+   "compiled": 33,
+   "sampled": 7
+  },
+  "X3": {
+   "family": "held-out X3",
+   "eligible_decls": 602,
+   "sites_reached": 74,
+   "unreached": 528,
+   "candidates": 121,
+   "attempted": 36,
+   "compiled": 23,
+   "sampled": 8
+  }
+ },
+ "families": {},
+ "decoys": {
+  "R1": {
+   "candidates": 205,
+   "attempted": 36,
+   "compiled": 36,
+   "sampled": 9
+  },
+  "R2": {
+   "candidates": 611,
+   "attempted": 36,
+   "compiled": 34,
+   "sampled": 21
+  },
+  "R3": {
+   "candidates": 72,
+   "attempted": 36,
+   "compiled": 36,
+   "sampled": 6
+  },
+  "R4": {
+   "candidates": 23,
+   "attempted": 23,
+   "compiled": 23,
+   "sampled": 6
+  },
+  "R5": {
+   "candidates": 202,
+   "attempted": 35,
+   "compiled": 33,
+   "sampled": 12
+  },
+  "R6": {
+   "candidates": 236,
+   "attempted": 36,
+   "compiled": 32,
+   "sampled": 6
+  }
+ },
+ "pool_size": 180,
+ "per_scope": {
+  "prelude": 45,
+  "definition": 108,
+  "statement": 27
+ },
+ "strip": {
+  "files": 20,
+  "build_rc": 1,
+  "sorry_warnings": 278,
+  "kernelcheck_identical": true,
+  "kernelcheck": [
+   "TOTAL_CANDLE\t903",
+   "SORRY_USERS\t278"
+  ]
+ },
+ "eligibility1_bias": {
+  "sample_size": 1000,
+  "enumerated": 5114,
+  "classes": {
+   "fail_self": 460,
+   "ok": 517,
+   "aux_only": 20,
+   "fail_other_decl": 2,
+   "fail_proved_lemma": 1
+  },
+  "by_scope": {
+   "statement": {
+    "fail_self": 194,
+    "ok": 297
+   },
+   "definition": {
+    "fail_self": 182,
+    "ok": 140,
+    "aux_only": 9,
+    "fail_other_decl": 1,
+    "fail_proved_lemma": 1
+   },
+   "prelude": {
+    "ok": 80,
+    "fail_self": 84,
+    "aux_only": 11,
+    "fail_other_decl": 1
+   }
+  },
+  "aux_only_share_of_sample": 0.02,
+  "aux_only_share_of_failures": 0.0414,
+  "aux_only_extrapolated": 102
+ },
+ "paren_fingerprint": {
+  "mutants_pool": 0.0,
+  "enumerated_before_filter": {
+   "mut": {
+    "seen": 5216,
+    "dropped": 28,
+    "by_op": {
+     "C3": 28
+    }
+   },
+   "dec": {
+    "seen": 1478,
+    "dropped": 61,
+    "by_op": {
+     "R5": 61
+    }
+   }
+  },
+  "decoys_pool": 0.0
+ },
+ "max_op_share": 0.12,
+ "sorry_aux": false,
+ "unmet_quotas": [],
+ "op_share_max": 0.106,
+ "seconds": 5
+}

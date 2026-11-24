@@ -1,0 +1,10 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "In List.lean:188, the branches of `if R x z ≠ neg` are swapped (`[z, x, y]` else `[x, z, y]`) compared to mergesortScript.sml:114-117 (`[x;z;y]` else `[z;x;y]`). With `neg = False`, `R = (<)`, and `(x, y, z) = (1, 3, 2)`, Lean returns `[2, 1, 3]` whereas HOL4 returns `[1, 2, 3]`, violating preservation."
+  }
+ ]
+}

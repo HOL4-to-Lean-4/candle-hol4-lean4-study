@@ -1,0 +1,267 @@
+CARD_IMAGE_ID_BIJ	CmlTS/Misc.lean	ok	ok; read side by side with statements_pretty (types, hypotheses, conclusion)
+tlookup_bij_suff	CmlTS/Misc.lean	ok	ok; read side by side with statements_pretty (types, hypotheses, conclusion)
+tlookup_bij_iff	CmlTS/Misc.lean	ok	ok; read side by side with statements_pretty (types, hypotheses, conclusion)
+find_index_LESS_LENGTH	CmlTS/Misc.lean	ok	ok; read side by side with statements_pretty (types, hypotheses, conclusion)
+ALOOKUP_find_index_SOME	CmlTS/Misc.lean	ok	ok; read side by side with statements_pretty (types, hypotheses, conclusion)
+IS_PREFIX_THM	CmlTS/Misc.lean	ok	ok; read side by side with statements_pretty (types, hypotheses, conclusion)
+FST_pair	CmlTS/Misc.lean	ok	ok; read side by side with statements_pretty (types, hypotheses, conclusion)
+LESS_1	CmlTS/Misc.lean	ok	ok; read side by side with statements_pretty (types, hypotheses, conclusion)
+map_some_eq	CmlTS/Misc.lean	ok	ok; read side by side with statements_pretty (types, hypotheses, conclusion)
+map_some_eq_append	CmlTS/Misc.lean	ok	ok; read side by side with statements_pretty (types, hypotheses, conclusion)
+MAP_EQ_MAP_IMP	CmlTS/Misc.lean	ok	ok; read side by side with statements_pretty (types, hypotheses, conclusion)
+FDOM_FLOOKUP	CmlTS/Misc.lean	ok	ok; read side by side with statements_pretty (types, hypotheses, conclusion)
+DROP_EMPTY	CmlTS/Misc.lean	ok	ok; read side by side with statements_pretty (types, hypotheses, conclusion)
+plus_0_I	CmlTS/Misc.lean	ok	ok; read side by side with statements_pretty (types, hypotheses, conclusion)
+explode_aux_thm	CmlTS/Mlstring.lean	ok	ok; read side by side with statements_pretty
+explode_thm	CmlTS/Mlstring.lean	ok	ok; read side by side with statements_pretty
+explode_implode	CmlTS/Mlstring.lean	ok	ok; read side by side with statements_pretty
+implode_explode	CmlTS/Mlstring.lean	ok	ok; read side by side with statements_pretty
+explode_11	CmlTS/Mlstring.lean	ok	ok; read side by side with statements_pretty
+TOKENS_eq_tokens_aux	CmlTS/Mlstring.lean	ok	ok; read side by side with statements_pretty
+TOKENS_eq_tokens	CmlTS/Mlstring.lean	ok	ok; read side by side with statements_pretty
+mk_id_surj	CmlTS/NamespaceProps.lean	ok	ok; read side by side with statements_pretty
+mk_id_thm	CmlTS/NamespaceProps.lean	ok	ok; read side by side with statements_pretty
+nsSub_mono	CmlTS/NamespaceProps.lean	ok	ok; read side by side with statements_pretty
+nsAll2_mono	CmlTS/NamespaceProps.lean	ok	ok; read side by side with statements_pretty
+nsLookup_nsEmpty	CmlTS/NamespaceProps.lean	ok	ok; read side by side with statements_pretty
+nsLookupMod_nsEmpty	CmlTS/NamespaceProps.lean	ok	ok; read side by side with statements_pretty
+nsAppend_nsEmpty	CmlTS/NamespaceProps.lean	ok	ok; read side by side with statements_pretty
+alist_to_ns_nil	CmlTS/NamespaceProps.lean	ok	ok; read side by side with statements_pretty
+nsSub_nsEmpty	CmlTS/NamespaceProps.lean	ok	ok; read side by side with statements_pretty
+nsAll_nsEmpty	CmlTS/NamespaceProps.lean	ok	ok; read side by side with statements_pretty
+nsAll2_nsEmpty	CmlTS/NamespaceProps.lean	ok	ok; read side by side with statements_pretty
+alist_to_ns_cons	CmlTS/NamespaceProps.lean	ok	ok; read side by side with statements_pretty
+nsAppend_nsBind	CmlTS/NamespaceProps.lean	ok	ok; read side by side with statements_pretty
+nsAppend_assoc	CmlTS/NamespaceProps.lean	ok	ok; read side by side with statements_pretty
+nsLookup_nsBind	CmlTS/NamespaceProps.lean	ok	ok; read side by side with statements_pretty
+nsAppend_nsSing	CmlTS/NamespaceProps.lean	ok	ok; read side by side with statements_pretty
+nsLookup_nsSing	CmlTS/NamespaceProps.lean	ok	ok; read side by side with statements_pretty
+nsAll_nsSing	CmlTS/NamespaceProps.lean	ok	ok; read side by side with statements_pretty
+nsAll2_nsSing	CmlTS/NamespaceProps.lean	ok	ok; read side by side with statements_pretty
+nsBind_11	CmlTS/NamespaceProps.lean	ok	ok; read side by side with statements_pretty
+alist_to_ns_11	CmlTS/NamespaceProps.lean	ok	ok; read side by side with statements_pretty
+nsLookup_nsLift	CmlTS/NamespaceProps.lean	ok	ok; read side by side with statements_pretty
+nsLookupMod_nsLift	CmlTS/NamespaceProps.lean	ok	ok; read side by side with statements_pretty
+nsLookup_nsAppend_some	CmlTS/NamespaceProps.lean	ok	ok; read side by side with statements_pretty
+nsAppend_to_nsBindList	CmlTS/NamespaceProps.lean	ok	ok; read side by side with statements_pretty
+nsLookupMod_nsAppend_none	CmlTS/NamespaceProps.lean	ok	ok; read side by side with statements_pretty
+eALL_T	CmlTS/NamespaceProps.lean	ok	ok; read side by side with statements_pretty
+nsLookup_nsAll	CmlTS/NamespaceProps.lean	ok	ok; read side by side with statements_pretty
+nsAll_nsAppend	CmlTS/NamespaceProps.lean	ok	ok; read side by side with statements_pretty
+nsAll_alist_to_ns	CmlTS/NamespaceProps.lean	ok	ok; read side by side with statements_pretty
+nsAll_nsLift	CmlTS/NamespaceProps.lean	ok	ok; read side by side with statements_pretty
+nsAll_nsAppend_left	CmlTS/NamespaceProps.lean	ok	ok; read side by side with statements_pretty
+nsSub_conj	CmlTS/NamespaceProps.lean	ok	ok; read side by side with statements_pretty
+nsSub_refl	CmlTS/NamespaceProps.lean	ok	ok; read side by side with statements_pretty
+nsSub_nsBind	CmlTS/NamespaceProps.lean	ok	ok; read side by side with statements_pretty
+nsSub_nsAppend2	CmlTS/NamespaceProps.lean	ok	ok; read side by side with statements_pretty
+alist_rel_restr_thm	CmlTS/NamespaceProps.lean	ok	ok; read side by side with statements_pretty
+alistSub_cong	CmlTS/NamespaceProps.lean	ok	ok; read side by side with statements_pretty
+nsLookup_FOLDR_nsLift	CmlTS/NamespaceProps.lean	ok	ok; read side by side with statements_pretty
+nsLookup_FOLDR_nsLift_some	CmlTS/NamespaceProps.lean	ok	ok; read side by side with statements_pretty
+nsLookupMod_FOLDR_nsLift_none	CmlTS/NamespaceProps.lean	ok	ok; read side by side with statements_pretty
+nsAll2_conj	CmlTS/NamespaceProps.lean	ok	ok; read side by side with statements_pretty
+nsAll2_nsLookup2	CmlTS/NamespaceProps.lean	ok	ok; read side by side with statements_pretty
+nsAll2_nsLookup_none	CmlTS/NamespaceProps.lean	ok	ok; read side by side with statements_pretty
+nsAll2_nsBind	CmlTS/NamespaceProps.lean	ok	ok; read side by side with statements_pretty
+nsAll2_nsBindList	CmlTS/NamespaceProps.lean	ok	ok; read side by side with statements_pretty
+nsAll2_nsAppend	CmlTS/NamespaceProps.lean	ok	ok; read side by side with statements_pretty
+nsAll2_alist_to_ns	CmlTS/NamespaceProps.lean	ok	ok; read side by side with statements_pretty
+nsAll2_nsLift	CmlTS/NamespaceProps.lean	ok	ok; read side by side with statements_pretty
+with_same_v	CmlTS/SemanticPrimitivesProps.lean	ok	ok; read side by side with statements_pretty
+unchanged_env	CmlTS/SemanticPrimitivesProps.lean	ok	ok; read side by side with statements_pretty
+with_same_clock	CmlTS/SemanticPrimitivesProps.lean	ok	ok; read side by side with statements_pretty
+Boolv_11	CmlTS/SemanticPrimitivesProps.lean	ok	ok; bool iff becomes Bool equality
+extend_dec_env_assoc	CmlTS/SemanticPrimitivesProps.lean	ok	ok; read side by side with statements_pretty
+pat_bindings_accum	CmlTS/SemanticPrimitivesProps.lean	ok	ok; read side by side with statements_pretty
+do_app_cases	CmlTS/SemanticPrimitivesProps.lean	ok	ok; Lean disjunct list read against the HOL4 machine-generated disjuncts (Arith..Env_id); shapes differ only by vs = v::l, l = [] versus vs = [v]; the Lean iff holds iff do_app matches HOL4 do_app (definitions compared ok)
+build_rec_env_merge	CmlTS/SemanticPrimitivesProps.lean	ok	ok; read side by side with statements_pretty
+do_con_check_build_conv	CmlTS/SemanticPrimitivesProps.lean	ok	ok; read side by side with statements_pretty
+FV_pes_MAP	CmlTS/SemanticPrimitivesProps.lean	ok	ok; read side by side with statements_pretty
+FV_defs_MAP	CmlTS/SemanticPrimitivesProps.lean	ok	ok; read side by side with statements_pretty
+concrete_v_list	CmlTS/SemanticPrimitivesProps.lean	ok	ok; read side by side with statements_pretty
+prim_type_cases	CmlTS/SemanticPrimitivesProps.lean	ok	ok; read side by side with statements_pretty
+evaluate_clock	CmlTS/Evaluate.lean	ok	ok; read side by side with statements_pretty
+fix_clock_do_eval_res	CmlTS/Evaluate.lean	ok	ok; read side by side with statements_pretty
+fix_clock_evaluate	CmlTS/Evaluate.lean	ok	ok; read side by side with statements_pretty
+io_events_mono_trans	CmlTS/EvaluateProps.lean	ok	ok; read side by side with statements_pretty
+call_FFI_rel_io_events_mono	CmlTS/EvaluateProps.lean	ok	ok; read side by side with statements_pretty
+io_events_mono_refl	CmlTS/EvaluateProps.lean	ok	ok; read side by side with statements_pretty
+do_app_call_FFI_rel	CmlTS/EvaluateProps.lean	ok	ok; read side by side with statements_pretty
+do_app_io_events_mono	CmlTS/EvaluateProps.lean	ok	ok; read side by side with statements_pretty
+is_clock_io_mono_cong	CmlTS/EvaluateProps.lean	ok	ok; read side by side with statements_pretty
+is_clock_io_mono_return	CmlTS/EvaluateProps.lean	ok	ok; read side by side with statements_pretty
+is_clock_io_mono_err	CmlTS/EvaluateProps.lean	ok	ok; read side by side with statements_pretty
+pair_CASE_eq_forall	CmlTS/EvaluateProps.lean	ok	ok; read side by side with statements_pretty
+is_clock_io_mono_bind	CmlTS/EvaluateProps.lean	ok	ok; read side by side with statements_pretty
+is_clock_io_mono_check	CmlTS/EvaluateProps.lean	ok	ok; read side by side with statements_pretty
+dec_inc_clock	CmlTS/EvaluateProps.lean	ok	ok; read side by side with statements_pretty
+do_app_refs_length	CmlTS/EvaluateProps.lean	ok	ok; read side by side with statements_pretty
+is_clock_io_mono_do_app_simple	CmlTS/EvaluateProps.lean	ok	ok; read side by side with statements_pretty
+is_clock_io_mono_evaluate	CmlTS/EvaluateProps.lean	ok	ok; read side by side with statements_pretty
+is_clock_io_mono_evaluate_decs	CmlTS/EvaluateProps.lean	ok	ok; read side by side with statements_pretty
+is_clock_io_mono_extra	CmlTS/EvaluateProps.lean	ok	ok; read side by side with statements_pretty
+list_result_eq_Rval	CmlTS/EvaluateProps.lean	ok	ok; read side by side with statements_pretty
+evaluate_length	CmlTS/EvaluateProps.lean	ok	ok; read side by side with statements_pretty
+is_clock_io_mono_set_clock	CmlTS/EvaluateProps.lean	ok	ok; read side by side with statements_pretty
+is_clock_io_mono_minimal	CmlTS/EvaluateProps.lean	ok	ok; read side by side with statements_pretty
+can_pmatch_all_EVERY	CmlTS/EvaluateProps.lean	ok	ok; read side by side with statements_pretty
+weak_tenv_refl	CmlTS/Weakening.lean	ok	ok; checked by script (identifier multiset and connective counts against the full Lean text) plus a read of disjoint_env_weakCT
+weakS_refl	CmlTS/Weakening.lean	ok	ok; checked by script (identifier multiset and connective counts against the full Lean text) plus a read of disjoint_env_weakCT
+weak_tenvE_freevars	CmlTS/Weakening.lean	ok	ok; checked by script (identifier multiset and connective counts against the full Lean text) plus a read of disjoint_env_weakCT
+weak_tenvE_bind	CmlTS/Weakening.lean	ok	ok; checked by script (identifier multiset and connective counts against the full Lean text) plus a read of disjoint_env_weakCT
+weak_tenvE_opt_bind	CmlTS/Weakening.lean	ok	ok; checked by script (identifier multiset and connective counts against the full Lean text) plus a read of disjoint_env_weakCT
+weak_tenvE_bind_tvar	CmlTS/Weakening.lean	ok	ok; checked by script (identifier multiset and connective counts against the full Lean text) plus a read of disjoint_env_weakCT
+weak_tenvE_bind_tvar2	CmlTS/Weakening.lean	ok	ok; checked by script (identifier multiset and connective counts against the full Lean text) plus a read of disjoint_env_weakCT
+weak_tenvE_bind_var_list	CmlTS/Weakening.lean	ok	ok; checked by script (identifier multiset and connective counts against the full Lean text) plus a read of disjoint_env_weakCT
+eLookupC_weak	CmlTS/Weakening.lean	ok	ok; checked by script (identifier multiset and connective counts against the full Lean text) plus a read of disjoint_env_weakCT
+eLookupV_weak	CmlTS/Weakening.lean	ok	ok; checked by script (identifier multiset and connective counts against the full Lean text) plus a read of disjoint_env_weakCT
+type_p_weakening	CmlTS/Weakening.lean	ok	ok; checked by script (identifier multiset and connective counts against the full Lean text) plus a read of disjoint_env_weakCT
+type_e_weakening_lem	CmlTS/Weakening.lean	ok	ok; checked by script (identifier multiset and connective counts against the full Lean text) plus a read of disjoint_env_weakCT
+type_e_weakening	CmlTS/Weakening.lean	ok	ok; checked by script (identifier multiset and connective counts against the full Lean text) plus a read of disjoint_env_weakCT
+gt_0	CmlTS/Weakening.lean	ok	ok; checked by script (identifier multiset and connective counts against the full Lean text) plus a read of disjoint_env_weakCT
+weak_ctMap_lookup	CmlTS/Weakening.lean	ok	ok; checked by script (identifier multiset and connective counts against the full Lean text) plus a read of disjoint_env_weakCT
+weakCT_refl	CmlTS/Weakening.lean	ok	ok; checked by script (identifier multiset and connective counts against the full Lean text) plus a read of disjoint_env_weakCT
+weakCT_trans	CmlTS/Weakening.lean	ok	ok; checked by script (identifier multiset and connective counts against the full Lean text) plus a read of disjoint_env_weakCT
+disjoint_env_weakCT	CmlTS/Weakening.lean	ok	ok; checked by script (identifier multiset and connective counts against the full Lean text) plus a read of disjoint_env_weakCT
+type_tenv_ctor_weakening	CmlTS/Weakening.lean	ok	ok; checked by script (identifier multiset and connective counts against the full Lean text) plus a read of disjoint_env_weakCT
+type_tenv_val_weakening_lemma	CmlTS/Weakening.lean	ok	ok; checked by script (identifier multiset and connective counts against the full Lean text) plus a read of disjoint_env_weakCT
+type_v_weakening	CmlTS/Weakening.lean	ok	ok; checked by script (identifier multiset and connective counts against the full Lean text) plus a read of disjoint_env_weakCT
+type_all_env_weakening	CmlTS/Weakening.lean	ok	ok; checked by script (identifier multiset and connective counts against the full Lean text) plus a read of disjoint_env_weakCT
+type_sv_weakening	CmlTS/Weakening.lean	ok	ok; checked by script (identifier multiset and connective counts against the full Lean text) plus a read of disjoint_env_weakCT
+type_s_weakening	CmlTS/Weakening.lean	ok	ok; checked by script (identifier multiset and connective counts against the full Lean text) plus a read of disjoint_env_weakCT
+weak_tenv_extend_dec_tenv	CmlTS/Weakening.lean	ok	ok; checked by script (identifier multiset and connective counts against the full Lean text) plus a read of disjoint_env_weakCT
+unchanged_tenv	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+extend_dec_tenv_assoc	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+tenv_val_ok_nsEmpty	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+tenv_ctor_ok_nsEmpty	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+tenv_abbrev_ok_nsEmpty	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+tenv_ok_empty	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+check_freevars_add	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+check_freevars_subst_single	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+deBruijn_inc0	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+deBruijn_inc_deBruijn_inc	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+deBuijn_inc_lem1	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+type_subst_deBruijn_inc_single	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+type_subst_deBruijn_inc_list	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+check_freevars_deBruijn_inc	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+nil_deBruijn_inc	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+deBruijn_subst_check_freevars	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+deBruijn_subst_check_freevars2	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+check_freevars_subst_inc	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+check_freevars_subst	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+type_subst_deBruijn_subst_single	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+type_subst_deBruijn_subst_list	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+check_freevars_lem	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+nil_deBruijn_subst	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+deBruijn_subst2	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+type_e_subst_lem3	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+type_e_subst_lem5	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+subst_inc_cancel	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+type_e_subst_lem7	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+deBruijn_subst_id	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+deBruijn_subst_freevars	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+tenv_abbrev_ok_lookup	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+check_freevars_type_name_subst	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+tenv_ctor_ok_merge	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+tenv_ctor_ok_lookup	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+bind_tvar_rewrites	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+bind_tvar0	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+tveLookup_subst_none	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+tveLookup_db_merge_none	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+tveLookup_inc_none	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+tveLookup_freevars	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+bind_var_list_append	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+num_tvs_bind_var_list	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+tenv_val_exp_ok_bvl	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+tveLookup_subst_some	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+num_tvs_db_merge	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+num_tvs_deBruijn_subst_tenvE	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+tveLookup_inc_some	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+tveLookup_freevars_subst	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+tenv_val_exp_ok_db_merge	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+tveLookup_freevars	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+tveLookup_no_tvs	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+deBruijn_subst_E_bvl	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+db_merge_bvl	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+tveLookup_db_merge_some	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+type_op_cases	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+type_ps_length	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+type_p_freevars	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+type_p_subst	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+type_p_bvl	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+type_p_tenvV_indep	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+type_es_list_rel	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+type_es_length	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+tenv_val_exp_ok_bvl_funs	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+type_e_freevars	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+type_e_subst	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+type_funs_Tfn	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+type_funs_lookup	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+type_funs_find_recfun	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+type_recfun_lookup	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+type_funs_distinct	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+type_e_subst_lem	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+mem_type_def_to_ctMap	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+ctMap_ok_merge_imp	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+ctMap_ok_lookup	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+type_def_to_ctMap_mem	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+fupdate2_union	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+ctMap_ok_type_defs	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+nsLookup_add_tenvE1	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+nsLookup_add_tenvE2	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+nsLookup_add_tenvE3	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+add_tenvE_bvl	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+type_v_freevars	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+type_subst	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+check_ctor_tenv_ok	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+type_d_check_uniq	CmlTS/TypeSysProps.lean	ok	ok; check : bool becomes Prop (convention)
+extend_dec_tenv_ok	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+type_d_tenv_ok_helper	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+type_d_tenv_ok	CmlTS/TypeSysProps.lean	ok	ok; first ~25 theorems read side by side; the rest checked by script (identifier multiset and counts of and/or/not/forall/exists against the full Lean text) plus a read of the ones with case splits or record updates
+type_ds_empty	CmlTS/TypeSysProps.lean	ok	ok; check : bool becomes Prop
+type_ds_sing	CmlTS/TypeSysProps.lean	ok	ok; check : bool becomes Prop
+fst_triple	CmlTS/TypeSound.lean	ok	ok
+sing_list	CmlTS/TypeSound.lean	ok	ok; read side by side with statements_pretty (Lean text taken in full from the source file where the pretty printer cut it)
+EVERY_LIST_REL	CmlTS/TypeSound.lean	ok	ok; read side by side with statements_pretty (Lean text taken in full from the source file where the pretty printer cut it)
+v_unchanged	CmlTS/TypeSound.lean	ok	ok; read side by side with statements_pretty (Lean text taken in full from the source file where the pretty printer cut it)
+check_dup_ctors_thm	CmlTS/TypeSound.lean	ok	ok; read side by side with statements_pretty (Lean text taken in full from the source file where the pretty printer cut it)
+prim_canonical_values_thm	CmlTS/TypeSound.lean	ok	ok; read side by side with statements_pretty (Lean text taken in full from the source file where the pretty printer cut it)
+has_lists_v_to_list	CmlTS/TypeSound.lean	ok	ok; read side by side with statements_pretty (Lean text taken in full from the source file where the pretty printer cut it)
+ctor_canonical_values_thm	CmlTS/TypeSound.lean	ok	ok; read side by side with statements_pretty (Lean text taken in full from the source file where the pretty printer cut it)
+same_type_refl	CmlTS/TypeSound.lean	ok	ok; read side by side with statements_pretty (Lean text taken in full from the source file where the pretty printer cut it)
+eq_same_type	CmlTS/TypeSound.lean	ok	ok; read side by side with statements_pretty (Lean text taken in full from the source file where the pretty printer cut it)
+type_env_conv_thm	CmlTS/TypeSound.lean	ok	ok; note only: unused existential binder typed by a universe variable needs [Nonempty eps] (faithful encoding)
+type_funs_fst	CmlTS/TypeSound.lean	ok	ok; read side by side with statements_pretty (Lean text taken in full from the source file where the pretty printer cut it)
+type_recfun_env_help	CmlTS/TypeSound.lean	ok	ok; read side by side with statements_pretty (Lean text taken in full from the source file where the pretty printer cut it)
+type_recfun_env	CmlTS/TypeSound.lean	ok	ok; read side by side with statements_pretty (Lean text taken in full from the source file where the pretty printer cut it)
+type_v_exn	CmlTS/TypeSound.lean	ok	ok; read side by side with statements_pretty (Lean text taken in full from the source file where the pretty printer cut it)
+type_v_Boolv	CmlTS/TypeSound.lean	ok	ok; read side by side with statements_pretty (Lean text taken in full from the source file where the pretty printer cut it)
+remove_lambda_prod	CmlTS/TypeSound.lean	ok	ok; read side by side with statements_pretty (Lean text taken in full from the source file where the pretty printer cut it)
+opapp_type_sound	CmlTS/TypeSound.lean	ok	ok; read side by side with statements_pretty (Lean text taken in full from the source file where the pretty printer cut it)
+store_type_extension_weakS	CmlTS/TypeSound.lean	ok	ok; read side by side with statements_pretty (Lean text taken in full from the source file where the pretty printer cut it)
+store_type_extension_refl	CmlTS/TypeSound.lean	ok	ok; read side by side with statements_pretty (Lean text taken in full from the source file where the pretty printer cut it)
+store_type_extension_trans	CmlTS/TypeSound.lean	ok	ok; read side by side with statements_pretty (Lean text taken in full from the source file where the pretty printer cut it)
+store_assign_type_sound	CmlTS/TypeSound.lean	ok	ok; read side by side with statements_pretty (Lean text taken in full from the source file where the pretty printer cut it)
+store_alloc_type_sound	CmlTS/TypeSound.lean	ok	ok; read side by side with statements_pretty (Lean text taken in full from the source file where the pretty printer cut it)
+type_v_list_to_v	CmlTS/TypeSound.lean	ok	ok; read side by side with statements_pretty (Lean text taken in full from the source file where the pretty printer cut it)
+type_v_list_to_v_APPEND	CmlTS/TypeSound.lean	ok	ok; read side by side with statements_pretty (Lean text taken in full from the source file where the pretty printer cut it)
+do_eq_Boolv	CmlTS/TypeSound.lean	ok	ok; Eq_val (b <=> b) becomes Eq_val (decide (b = b))
+prim_canonical_Boolv_thm	CmlTS/TypeSound.lean	ok	ok; read side by side with statements_pretty (Lean text taken in full from the source file where the pretty printer cut it)
+prim_canonical_Boolv_cases	CmlTS/TypeSound.lean	ok	ok; read side by side with statements_pretty (Lean text taken in full from the source file where the pretty printer cut it)
+op_type_sound	CmlTS/TypeSound.lean	ok	ok; read side by side with statements_pretty (Lean text taken in full from the source file where the pretty printer cut it)
+build_conv_type_sound	CmlTS/TypeSound.lean	ok	ok; read side by side with statements_pretty (Lean text taken in full from the source file where the pretty printer cut it)
+same_ctor_and_same_tid	CmlTS/TypeSound.lean	ok	ok; read side by side with statements_pretty (Lean text taken in full from the source file where the pretty printer cut it)
+pat_type_sound	CmlTS/TypeSound.lean	ok	ok; read side by side with statements_pretty (Lean text taken in full from the source file where the pretty printer cut it)
+lookup_var_sound	CmlTS/TypeSound.lean	ok	ok; read side by side with statements_pretty (Lean text taken in full from the source file where the pretty printer cut it)
+EVERY_REPLICATE	CmlTS/TypeSound.lean	ok	ok; read side by side with statements_pretty (Lean text taken in full from the source file where the pretty printer cut it)
+EVERY_LIST_REL	CmlTS/TypeSound.lean	ok	ok; read side by side with statements_pretty (Lean text taken in full from the source file where the pretty printer cut it)
+exp_type_sound	CmlTS/TypeSound.lean	ok	ok; read side by side with statements_pretty (Lean text taken in full from the source file where the pretty printer cut it)
+build_tdefs_build_tenv	CmlTS/TypeSound.lean	ok	ok; read side by side with statements_pretty (Lean text taken in full from the source file where the pretty printer cut it)
+type_sound_invariant_union	CmlTS/TypeSound.lean	ok	ok; read side by side with statements_pretty (Lean text taken in full from the source file where the pretty printer cut it)
+check_ctor_tenv_dups	CmlTS/TypeSound.lean	ok	ok; read side by side with statements_pretty (Lean text taken in full from the source file where the pretty printer cut it)
+type_all_env_extend	CmlTS/TypeSound.lean	ok	ok; read side by side with statements_pretty (Lean text taken in full from the source file where the pretty printer cut it)
+type_e_con_check	CmlTS/TypeSound.lean	ok	ok; read side by side with statements_pretty (Lean text taken in full from the source file where the pretty printer cut it)
+decs_type_sound_no_check	CmlTS/TypeSound.lean	ok	ok; F becomes False
+decs_type_sound	CmlTS/TypeSound.lean	ok	ok; extra_checks : bool becomes Prop (convention)
+semantics_type_sound	CmlTS/TypeSound.lean	ok	ok; checks : bool becomes Prop (convention)

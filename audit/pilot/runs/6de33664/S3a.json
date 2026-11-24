@@ -1,0 +1,18 @@
+{
+ "module": "CandleLean.HolSoundness",
+ "checked": 11,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "Candle.binary_inference_rule",
+   "lean": "lean/CandleLean/HolSoundness.lean:13",
+   "hol4": "hol4/package/candle/standard/semantics/holSoundnessScript.sml:15",
+   "class": "V-P",
+   "explanation": "All antecedents of the HOL4 theorem are missing: `q has_type Bool`, `term_ok (sigof thy) q`, the semantic premise over structures `i`, `v`, and `(thy,h1) |= p1`, `(thy,h2) |= p2`. Only `is_set_theory mem` remains, and `p1`, `p2` do not occur in the conclusion. Lean therefore asserts that every theory, with any hypotheses, entails every term. This is false: for q = `Abs (Const n ty) p`, `entails0` requires `has_type q BoolTy`, which is underivable (likewise any thy that is not `theory_ok`). With `is_set_theory mem` it proves False, so the statement is strictly stronger than HOL4's true conditional rule.",
+   "repair": "theorem binary_inference_rule [Nonempty U] (mem : U → U → Prop) :\n    is_set_theory mem →\n      ∀ (thy : thy) (h1 h2 : List term) (p1 p2 q : term),\n        has_type q BoolTy ∧ term_ok (sigof thy) q ∧\n        (∀ (i : interpretation U) (v : valuation U),\n          is_structure0 mem (sigof thy) i v ∧\n          termsem0 mem (thy_tmsof thy) i v p1 = true_ mem ∧\n          termsem0 mem (thy_tmsof thy) i v p2 = true_ mem →\n          termsem0 mem (thy_tmsof thy) i v q = true_ mem) ∧\n        entails0 mem (thy, h1) p1 ∧ entails0 mem (thy, h2) p2 →\n        entails0 mem (thy, term_union h1 h2) q := by sorry",
+   "confidence": 0.99,
+   "lean_check": "import CandleLean.HolSoundness\n\nnamespace Candle\n\nopen HOL Classical\n\nexample {U : Type} [Nonempty U] (mem : U → U → Prop) (hs : is_set_theory mem)\n    (P : type_of% (binary_inference_rule mem))\n    (t : thy) (n : mlstring) (ty : type) (p : term) : False := by\n  have h := P hs t [] [] p p (Abs (Const n ty) p)\n  unfold entails0 at h\n  have h1 := h.2.2.1\n  simp only [EVERY] at h1\n  have h2 : has_type (Abs (Const n ty) p) BoolTy := h1.1\n  cases h2\n\nend Candle\n",
+   "hol4_check": "¬(∀(thy:thy) h1 h2 q. entails0 (m:'U->'U->bool) (thy,term_union h1 h2) q)"
+  }
+ ]
+}

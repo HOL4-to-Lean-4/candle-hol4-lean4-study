@@ -1,0 +1,30 @@
+MUT-0006	undecided	Statement weakened (conjunct has_type tm' (TYPE_SUBST tyin (typeof tm)) dropped). Mutated statement is the sorry-backed INST_CORE_HAS_TYPE minus a conjunct; proving it or showing a strict gap needs the full INST_CORE typing induction over VSUBST/VARIANT, and INST_CORE is a concrete function so no abstract-relation version is available; not done within budget
+MUT-0012	undecided	Hypothesis on env weakened (and -> or), so the mutated statement is stronger. No counterexample found: the Result/Clash choice depends on env but the shape and typing of a Result term do not, so the mutated statement is probably true and equivalent in truth to the base, but a proof needs the whole term_ok_INST_CORE induction (sorry-backed in base); not done within budget
+MUT-0018	witness	Weakening (dropped Const-Var clause), shown in the abstract sense of SPEC: base_implies_mut proves BaseStmtR term_lt -> MutStmtR term_lt (type of term_lt_thm checked by an example), and witness gives a relation R that satisfies the 15 remaining clauses but not the dropped one. The mutated statement is not proved for the real term_lt (its clauses are sorry-backed in the base), and for the real term_lt the dropped clause is presumably true, so the weakening is only visible as a specification
+MUT-0024	witness	Equal BoolTy: mutant type Fun (Fun bool bool) bool differs from base Fun bool (Fun bool bool)
+MUT-0030	witness	ilist=[], Abs v v with v = Var x bool: EVERY [] is true so mutant renames to Abs z z with z <> v (via VARIANT_PRIMES_def), base keeps Abs v v
+MUT-0036	witness	l=[0,0]: mutant ALL_DISTINCT holds, base fails
+MUT-0042	witness	U=Nat, mem always true, vs=[], gamma=0, f=1: mutant holds vacuously (vs <> [] premise), base requires gamma name [] = f [] (false)
+MUT-0048	witness	TypeDefn n (Var p (bool->bool)) a r: second constant has type rep->abs in mutant, abs->rep in base (rep_type = bool <> abs_type = Tyapp n _)
+MUT-0054	equivalent	INJ with injectivity moved under forall x in s: provably equivalent for all f s t (MUT-0054_equiv.lean); injectivity part carries its own membership premises, and s empty makes both true
+MUT-0060	equivalent	substring boundary off+len = length: base SEG len off s equals s.drop off (proved from SEG_def, MUT-0060_equiv.lean), identical to mutant else-branch
+MUT-0066	witness	t1 = Const c, t2 = Var a: mutant needs orda [] Var Const = LESS (true), base orda [] Const Var = GREATER
+MUT-0072	witness	UNHEX (ch 5): base 5, mutant 0
+MUT-0078	witness	ls = "a<newline>": FIELDS = [[a],[]]; base NULL(LAST) true so FRONT gives [[a]], mutant NULL(HD) false so returns [[a],[]]
+MUT-0084	witness	mutated statement is false: ls=[(Var x bool,1),(Var x bool,2)], f=id gives some 2 on the reversed list vs some 1
+MUT-0090	witness	Nat model, empty type sig, one constant c:bool, delta=5, gamma=7, mem y z := y=7 and z=5: base holds, mutant (swapped assignments) needs mem 5 7, false
+MUT-0096	witness	env=[(c,c)], x1 = Var a bool, x2 = Var a (Tyvar x): mutant recurses with ordav [] x1 x1 = EQUAL, base term_cmp x1 x2 <> EQUAL
+MUT-0102	witness	r = fun _ _ => True on Nat, x=0,y=1: base LESS, mutant GREATER
+MUT-0108	witness	sig with fun, bool, = only: base is_std_sig holds, mutant needs FLOOKUP gun = some 2 which is none
+MUT-0114	witness	neg=False, R=True, x=0,y=1: base [0,1], mutant [1,0]
+MUT-0120	witness	Comb (Var a) c vs Comb (Const a) c: Mut.RACONV [] holds (function-part premise dropped), base RACONV impossible by cases
+MUT-0126	witness	n=1: base 2, mutant 3
+MUT-0132	witness	FCP_bits 1 (fun _ => False): base 0, mutant 1
+MUT-0138	witness	v = dbVar x bool, tm = dbComb (dbBound 0) (dbVar x (Tyvar a)): mutant true (compares t2 with itself), base false
+MUT-0144	witness	sig with single const n : Tyvar a: base term_ok (Const n (Tyvar a)) holds; mutant forall ty0 would force lookups Tyvar a = Tyvar b, false
+MUT-0150	equivalent	mutation changes only the type of an outer t2 binder that is shadowed by the following t2 (mlstring); the binder is unused so statements are equivalent (MUT-0150_equiv.lean)
+MUT-0156	witness	Var x bool is welltyped in base, but mutant forall-type fails (not of type Tyvar a)
+MUT-0162	witness	Equal (Fun bool bool): mutant type ty->(bool->ty) differs from base ty->(ty->bool)
+MUT-0168	witness	domain (Fun bool bool): base bool, mutant identity returns Fun bool bool
+MUT-0174	witness	mutated statement over Int is false at x=-1 (-1 < 1 but -1 <> 0)
+MUT-0180	witness	INST_CORE [] [] (Var x bool): base Result (Var ..), mutant Clash (Var ..) (condition negated)

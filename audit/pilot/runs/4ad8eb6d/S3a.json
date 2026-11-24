@@ -1,0 +1,18 @@
+{
+ "module": "CandleLean.HolSyntaxLib",
+ "checked": 31,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "Candle.REV_ASSOCD_ALOOKUP",
+   "lean": "lean/CandleLean/HolSyntaxLib.lean:116",
+   "hol4": "hol4/package/candle/syntax-lib/holSyntaxLibScript.sml:42",
+   "class": "V-P",
+   "explanation": "The Lean statement applies List.reverse to the swapped list before ALOOKUP; the HOL4 statement uses ALOOKUP (MAP (λ(x,y). (y,x)) ls) x with no REVERSE. Both REV_ASSOCD and ALOOKUP return the first match, so the Lean statement returns the last match on the right-hand side and is false when a key occurs twice with different values. Example: ls = [(1,0),(2,0)], x = 0, d = 0. The left side is 1 and the Lean right side is 2 (the HOL4 right side is 1).",
+   "repair": "theorem REV_ASSOCD_ALOOKUP {α : Type u} {β : Type v} :\n    ∀ (ls : List (α × β)) (x : β) (d : α),\n      REV_ASSOCD x ls d =\n        match ALOOKUP (ls.map (fun (x, y) => (y, x))) x with\n        | none => d\n        | some y => y := by\n  sorry",
+   "confidence": 0.99,
+   "lean_check": "import CandleLean.HolSyntaxLib\n\nexample : ¬ (type_of% @Candle.REV_ASSOCD_ALOOKUP.{0,0}) := by\n  intro h\n  have h1 := @h Nat Nat [(1, 0), (2, 0)] 0 0\n  simp [Candle.REV_ASSOCD, HOL.ALOOKUP] at h1\n",
+   "hol4_check": "(REV_ASSOCD 0n [(1n,0n);(2n,0n)] 0n = 1n) /\\ ((case ALOOKUP (MAP (\\(x,y). (y,x)) [(1n,0n);(2n,0n)]) 0n of NONE => 0n | SOME y => y) = 1n) /\\ ((case ALOOKUP (REVERSE (MAP (\\(x,y). (y,x)) [(1n,0n);(2n,0n)])) 0n of NONE => 0n | SOME y => y) = 2n)"
+  }
+ ]
+}

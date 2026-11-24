@@ -1,0 +1,357 @@
+time	theory	name	status	note
+2026-11-22T07:34:28Z	HOL library: bool/combin/pair/relation/arithmetic/ternaryComparisons/toto	ARB	done	Classical.epsilon (fun _ => False); needs [Nonempty]
+2026-11-22T07:34:28Z	HOL library: bool/combin/pair/relation/arithmetic/ternaryComparisons/toto	EXISTS_UNIQUE	done	def
+2026-11-22T07:34:28Z	HOL library: bool/combin/pair/relation/arithmetic/ternaryComparisons/toto	I	done	def
+2026-11-22T07:34:28Z	HOL library: bool/combin/pair/relation/arithmetic/ternaryComparisons/toto	K	done	def
+2026-11-22T07:34:28Z	HOL library: bool/combin/pair/relation/arithmetic/ternaryComparisons/toto	C	done	def
+2026-11-22T07:34:28Z	HOL library: bool/combin/pair/relation/arithmetic/ternaryComparisons/toto	UPDATE	done	def
+2026-11-22T07:34:28Z	HOL library: bool/combin/pair/relation/arithmetic/ternaryComparisons/toto	UNCURRY	done	def
+2026-11-22T07:34:28Z	HOL library: bool/combin/pair/relation/arithmetic/ternaryComparisons/toto	PAIR_MAP	done	def
+2026-11-22T07:34:28Z	HOL library: bool/combin/pair/relation/arithmetic/ternaryComparisons/toto	LEX	done	def
+2026-11-22T07:34:28Z	HOL library: bool/combin/pair/relation/arithmetic/ternaryComparisons/toto	EVEN	done	def
+2026-11-22T07:34:28Z	HOL library: bool/combin/pair/relation/arithmetic/ternaryComparisons/toto	ODD	done	def
+2026-11-22T07:34:28Z	HOL library: bool/combin/pair/relation/arithmetic/ternaryComparisons/toto	DIV2	done	def
+2026-11-22T07:34:28Z	HOL library: bool/combin/pair/relation/arithmetic/ternaryComparisons/toto	MAX	done	def
+2026-11-22T07:34:28Z	HOL library: bool/combin/pair/relation/arithmetic/ternaryComparisons/toto	MIN	done	def
+2026-11-22T07:34:28Z	HOL library: bool/combin/pair/relation/arithmetic/ternaryComparisons/toto	transitive	done	def
+2026-11-22T07:34:28Z	HOL library: bool/combin/pair/relation/arithmetic/ternaryComparisons/toto	reflexive	done	def
+2026-11-22T07:34:28Z	HOL library: bool/combin/pair/relation/arithmetic/ternaryComparisons/toto	irreflexive	done	def
+2026-11-22T07:34:28Z	HOL library: bool/combin/pair/relation/arithmetic/ternaryComparisons/toto	symmetric	done	def
+2026-11-22T07:34:28Z	HOL library: bool/combin/pair/relation/arithmetic/ternaryComparisons/toto	antisymmetric	done	def
+2026-11-22T07:34:28Z	HOL library: bool/combin/pair/relation/arithmetic/ternaryComparisons/toto	trichotomous	done	def
+2026-11-22T07:34:28Z	HOL library: bool/combin/pair/relation/arithmetic/ternaryComparisons/toto	StrongOrder	done	def
+2026-11-22T07:34:28Z	HOL library: bool/combin/pair/relation/arithmetic/ternaryComparisons/toto	StrongLinearOrder	done	def
+2026-11-22T07:34:28Z	HOL library: bool/combin/pair/relation/arithmetic/ternaryComparisons/toto	Order	done	def
+2026-11-22T07:34:28Z	HOL library: bool/combin/pair/relation/arithmetic/ternaryComparisons/toto	LinearOrder	done	def
+2026-11-22T07:34:28Z	HOL library: bool/combin/pair/relation/arithmetic/ternaryComparisons/toto	RC	done	def
+2026-11-22T07:34:28Z	HOL library: bool/combin/pair/relation/arithmetic/ternaryComparisons/toto	RTC	done	inductive
+2026-11-22T07:34:28Z	HOL library: bool/combin/pair/relation/arithmetic/ternaryComparisons/toto	inv_image	done	def
+2026-11-22T07:34:28Z	HOL library: bool/combin/pair/relation/arithmetic/ternaryComparisons/toto	ordering	done	inductive
+2026-11-22T07:34:28Z	HOL library: bool/combin/pair/relation/arithmetic/ternaryComparisons/toto	cpn	done	abbrev
+2026-11-22T07:34:28Z	HOL library: bool/combin/pair/relation/arithmetic/ternaryComparisons/toto	invert_comparison	done	def
+2026-11-22T07:34:28Z	HOL library: bool/combin/pair/relation/arithmetic/ternaryComparisons/toto	comp	done	abbrev
+2026-11-22T07:34:28Z	HOL library: bool/combin/pair/relation/arithmetic/ternaryComparisons/toto	TotOrd	done	def
+2026-11-22T07:34:28Z	HOL library: bool/combin/pair/relation/arithmetic/ternaryComparisons/toto	TO_of_LinearOrder	done	def
+2026-11-22T07:34:28Z	HOL library: pred_set	Set	done	Set a := a -> Prop
+2026-11-22T07:34:28Z	HOL library: pred_set	IN	done	def
+2026-11-22T07:34:28Z	HOL library: pred_set	Aux.mem_def	done	helper lemma (not HOL4)
+2026-11-22T07:34:28Z	HOL library: pred_set	setOf	done	def
+2026-11-22T07:34:28Z	HOL library: pred_set	GSPEC	done	def
+2026-11-22T07:34:28Z	HOL library: pred_set	EMPTY	done	def
+2026-11-22T07:34:28Z	HOL library: pred_set	UNIV	done	def
+2026-11-22T07:34:28Z	HOL library: pred_set	UNION	done	def
+2026-11-22T07:34:28Z	HOL library: pred_set	INTER	done	def
+2026-11-22T07:34:28Z	HOL library: pred_set	DIFF	done	def
+2026-11-22T07:34:28Z	HOL library: pred_set	INSERT	done	def
+2026-11-22T07:34:28Z	HOL library: pred_set	SUBSET	done	def
+2026-11-22T07:34:28Z	HOL library: pred_set	DISJOINT	done	def
+2026-11-22T07:34:28Z	HOL library: pred_set	FINITE	done	def
+2026-11-22T07:34:28Z	HOL library: pred_set	INFINITE	done	def
+2026-11-22T07:34:28Z	HOL library: pred_set	IMAGE	done	def
+2026-11-22T07:34:28Z	HOL library: pred_set	INJ	done	def
+2026-11-22T07:34:28Z	HOL library: pred_set	SURJ	done	def
+2026-11-22T07:34:28Z	HOL library: pred_set	BIJ	done	def
+2026-11-22T07:34:28Z	HOL library: pred_set	PERMUTES	done	def
+2026-11-22T07:34:28Z	HOL library: pred_set	Aux.FINITE_of_list_bound	done	helper lemma (not HOL4)
+2026-11-22T07:34:28Z	HOL library: pred_set	Aux.FINITE_list_bound	done	helper lemma (not HOL4)
+2026-11-22T07:34:28Z	HOL library: list/rich_list/sorting/mergesort	HD	done	HD [] = ARB
+2026-11-22T07:34:28Z	HOL library: list/rich_list/sorting/mergesort	TL	done	def
+2026-11-22T07:34:28Z	HOL library: list/rich_list/sorting/mergesort	EL	done	def
+2026-11-22T07:34:28Z	HOL library: list/rich_list/sorting/mergesort	NULL	done	def
+2026-11-22T07:34:28Z	HOL library: list/rich_list/sorting/mergesort	LAST	done	LAST [] = ARB
+2026-11-22T07:34:28Z	HOL library: list/rich_list/sorting/mergesort	FRONT	done	def
+2026-11-22T07:34:28Z	HOL library: list/rich_list/sorting/mergesort	FILTER	done	def
+2026-11-22T07:34:28Z	HOL library: list/rich_list/sorting/mergesort	EVERY	done	def
+2026-11-22T07:34:28Z	HOL library: list/rich_list/sorting/mergesort	Aux.EVERY_wfParam	done	helper lemma (not HOL4)
+2026-11-22T07:34:28Z	HOL library: list/rich_list/sorting/mergesort	Aux.EVERY_unattach	done	helper lemma (not HOL4)
+2026-11-22T07:34:28Z	HOL library: list/rich_list/sorting/mergesort	EXISTS	done	def
+2026-11-22T07:34:28Z	HOL library: list/rich_list/sorting/mergesort	LIST_TO_SET	done	def
+2026-11-22T07:34:28Z	HOL library: list/rich_list/sorting/mergesort	ALL_DISTINCT	done	def
+2026-11-22T07:34:28Z	HOL library: list/rich_list/sorting/mergesort	SNOC	done	def
+2026-11-22T07:34:28Z	HOL library: list/rich_list/sorting/mergesort	GENLIST	done	def
+2026-11-22T07:34:28Z	HOL library: list/rich_list/sorting/mergesort	REV	done	def
+2026-11-22T07:34:28Z	HOL library: list/rich_list/sorting/mergesort	ZIP	done	def
+2026-11-22T07:34:28Z	HOL library: list/rich_list/sorting/mergesort	SUM	done	def
+2026-11-22T07:34:28Z	HOL library: list/rich_list/sorting/mergesort	PAD_LEFT	done	def
+2026-11-22T07:34:28Z	HOL library: list/rich_list/sorting/mergesort	PAD_RIGHT	done	def
+2026-11-22T07:34:28Z	HOL library: list/rich_list/sorting/mergesort	LIST_REL	done	def
+2026-11-22T07:34:28Z	HOL library: list/rich_list/sorting/mergesort	EVERY2	done	def
+2026-11-22T07:34:28Z	HOL library: list/rich_list/sorting/mergesort	LLEX	done	def
+2026-11-22T07:34:28Z	HOL library: list/rich_list/sorting/mergesort	isPREFIX	done	def
+2026-11-22T07:34:28Z	HOL library: list/rich_list/sorting/mergesort	OPT_MMAP	done	def
+2026-11-22T07:34:28Z	HOL library: list/rich_list/sorting/mergesort	MAPi	done	def
+2026-11-22T07:34:28Z	HOL library: list/rich_list/sorting/mergesort	SPLITP	done	def
+2026-11-22T07:34:28Z	HOL library: list/rich_list/sorting/mergesort	Aux.SPLITP_snd_length	done	helper lemma (not HOL4)
+2026-11-22T07:34:28Z	HOL library: list/rich_list/sorting/mergesort	SEG_spec	done	def
+2026-11-22T07:34:28Z	HOL library: list/rich_list/sorting/mergesort	SEG	done	new_specification as epsilon
+2026-11-22T07:34:28Z	HOL library: list/rich_list/sorting/mergesort	SEG_def	done	spec theorem proved
+2026-11-22T07:34:28Z	HOL library: list/rich_list/sorting/mergesort	MAX_LIST	done	def
+2026-11-22T07:34:28Z	HOL library: list/rich_list/sorting/mergesort	PERM	done	def
+2026-11-22T07:34:28Z	HOL library: list/rich_list/sorting/mergesort	SORTED	done	def
+2026-11-22T07:34:28Z	HOL library: list/rich_list/sorting/mergesort	sort2_tail	done	def
+2026-11-22T07:34:28Z	HOL library: list/rich_list/sorting/mergesort	sort3_tail	done	def
+2026-11-22T07:34:28Z	HOL library: list/rich_list/sorting/mergesort	merge_tail	done	def
+2026-11-22T07:34:28Z	HOL library: list/rich_list/sorting/mergesort	mergesortN_tail	done	WF recursion on n, real proof
+2026-11-22T07:34:28Z	HOL library: list/rich_list/sorting/mergesort	mergesort_tail	done	def
+2026-11-22T07:34:28Z	HOL library: string/ASCIInumbers/numposrep	char	done	structure: ord < 256
+2026-11-22T07:34:28Z	HOL library: string/ASCIInumbers/numposrep	ORD	done	def
+2026-11-22T07:34:28Z	HOL library: string/ASCIInumbers/numposrep	CHR	done	CHR n for n >= 256 is ARB n
+2026-11-22T07:34:28Z	HOL library: string/ASCIInumbers/numposrep	ch	done	def
+2026-11-22T07:34:28Z	HOL library: string/ASCIInumbers/numposrep	string	done	abbrev
+2026-11-22T07:34:28Z	HOL library: string/ASCIInumbers/numposrep	str	done	def
+2026-11-22T07:34:28Z	HOL library: string/ASCIInumbers/numposrep	char_lt	done	def
+2026-11-22T07:34:28Z	HOL library: string/ASCIInumbers/numposrep	char_le	done	def
+2026-11-22T07:34:28Z	HOL library: string/ASCIInumbers/numposrep	string_lt	done	def
+2026-11-22T07:34:28Z	HOL library: string/ASCIInumbers/numposrep	string_le	done	def
+2026-11-22T07:34:28Z	HOL library: string/ASCIInumbers/numposrep	Aux.TL_length	done	helper lemma (not HOL4)
+2026-11-22T07:34:28Z	HOL library: string/ASCIInumbers/numposrep	FIELDS	done	def
+2026-11-22T07:34:28Z	HOL library: string/ASCIInumbers/numposrep	l2n	done	def
+2026-11-22T07:34:28Z	HOL library: string/ASCIInumbers/numposrep	n2l	done	def
+2026-11-22T07:34:28Z	HOL library: string/ASCIInumbers/numposrep	s2n	done	def
+2026-11-22T07:34:28Z	HOL library: string/ASCIInumbers/numposrep	n2s	done	def
+2026-11-22T07:34:28Z	HOL library: string/ASCIInumbers/numposrep	HEX	done	def
+2026-11-22T07:34:28Z	HOL library: string/ASCIInumbers/numposrep	UNHEX	done	def
+2026-11-22T07:34:28Z	HOL library: string/ASCIInumbers/numposrep	num_from_hex_string	done	def
+2026-11-22T07:34:28Z	HOL library: string/ASCIInumbers/numposrep	num_to_hex_string	done	def
+2026-11-22T07:34:28Z	HOL library: finite_map/alist	fmap	done	structure: rep : a -> Option b with finite support
+2026-11-22T07:34:28Z	HOL library: finite_map/alist	FEMPTY	done	def
+2026-11-22T07:34:28Z	HOL library: finite_map/alist	FUPDATE	done	def
+2026-11-22T07:34:28Z	HOL library: finite_map/alist	FAPPLY	done	outside FDOM: single ARB value
+2026-11-22T07:34:28Z	HOL library: finite_map/alist	FDOM	done	def
+2026-11-22T07:34:28Z	HOL library: finite_map/alist	FLOOKUP	done	def
+2026-11-22T07:34:28Z	HOL library: finite_map/alist	FEVERY	done	def
+2026-11-22T07:34:28Z	HOL library: finite_map/alist	FRANGE	done	def
+2026-11-22T07:34:28Z	HOL library: finite_map/alist	FUN_FMAP_spec	done	def
+2026-11-22T07:34:28Z	HOL library: finite_map/alist	FUN_FMAP	done	new_specification as epsilon
+2026-11-22T07:34:28Z	HOL library: finite_map/alist	FUN_FMAP_DEF	done	spec theorem proved
+2026-11-22T07:34:28Z	HOL library: finite_map/alist	ALOOKUP	done	def
+2026-11-22T07:34:28Z	HOL library: finite_map/alist	alist_to_fmap	done	def
+2026-11-22T07:34:28Z	HOL library: words/bitstring/fcp	word	done	abbrev
+2026-11-22T07:34:28Z	HOL library: words/bitstring/fcp	word8	done	abbrev
+2026-11-22T07:34:28Z	HOL library: words/bitstring/fcp	word32	done	abbrev
+2026-11-22T07:34:28Z	HOL library: words/bitstring/fcp	dimindex	done	def
+2026-11-22T07:34:28Z	HOL library: words/bitstring/fcp	dimword	done	def
+2026-11-22T07:34:28Z	HOL library: words/bitstring/fcp	n2w	done	def
+2026-11-22T07:34:28Z	HOL library: words/bitstring/fcp	w2n	done	def
+2026-11-22T07:34:28Z	HOL library: words/bitstring/fcp	FCP_bits	done	def
+2026-11-22T07:34:28Z	HOL library: words/bitstring/fcp	FCP	done	def
+2026-11-22T07:34:28Z	HOL library: words/bitstring/fcp	bitstring	done	abbrev
+2026-11-22T07:34:28Z	HOL library: words/bitstring/fcp	zero_extend	done	def
+2026-11-22T07:34:28Z	HOL library: words/bitstring/fcp	fixwidth	done	def
+2026-11-22T07:34:28Z	HOL library: words/bitstring/fcp	shiftr	done	def
+2026-11-22T07:34:28Z	HOL library: words/bitstring/fcp	field	done	def
+2026-11-22T07:34:28Z	HOL library: words/bitstring/fcp	testbit	done	def
+2026-11-22T07:34:28Z	HOL library: words/bitstring/fcp	v2w	done	FCP (testbit i v) into BitVec
+2026-11-22T07:34:28Z	HOL library: sptree	spt	done	inductive
+2026-11-22T07:34:28Z	HOL library: sptree	num_map	done	abbrev
+2026-11-22T07:34:28Z	HOL library: sptree	num_set	done	abbrev
+2026-11-22T07:34:28Z	HOL library: sptree	lookup	done	def
+2026-11-22T07:34:28Z	HOL library: sptree	insert	done	def
+2026-11-22T07:34:28Z	HOL library: sptree	domain	done	def
+2026-11-22T07:34:28Z	misc	app_list	done	constructors not exported (List/Nil clash)
+2026-11-22T07:34:28Z	misc	append_aux	done	def
+2026-11-22T07:34:28Z	misc	append	done	def
+2026-11-22T07:34:28Z	misc	SmartAppend	done	def
+2026-11-22T07:34:28Z	misc	max3	done	def
+2026-11-22T07:34:28Z	misc	UPDATE_LIST	done	def
+2026-11-22T07:34:28Z	misc	find_index	done	def
+2026-11-22T07:34:28Z	misc	splitlines	done	def
+2026-11-22T07:34:28Z	misc	is_subseq	done	def
+2026-11-22T07:34:28Z	misc	make_even	done	def
+2026-11-22T07:34:28Z	misc	fmap_update	done	def
+2026-11-22T07:34:28Z	mllist	sort	done	def
+2026-11-22T07:34:28Z	mlstring	mlstring	done	inductive
+2026-11-22T07:34:28Z	mlstring	strlit	done	def
+2026-11-22T07:34:28Z	mlstring	mls	done	def
+2026-11-22T07:34:28Z	mlstring	strlen	done	def
+2026-11-22T07:34:28Z	mlstring	strsub	done	def
+2026-11-22T07:34:28Z	mlstring	substring	done	def
+2026-11-22T07:34:28Z	mlstring	concat	done	def
+2026-11-22T07:34:28Z	mlstring	explode_aux	done	def
+2026-11-22T07:34:28Z	mlstring	explode	done	def
+2026-11-22T07:34:28Z	mlstring	Aux.EL_cons_drop	done	helper lemma (not HOL4)
+2026-11-22T07:34:28Z	mlstring	Aux.explode_aux_implode	done	helper lemma (not HOL4)
+2026-11-22T07:34:28Z	mlstring	Aux.implode_explode_aux	done	helper lemma (not HOL4)
+2026-11-22T07:34:28Z	mlstring	strcat	done	def
+2026-11-22T07:34:28Z	mlstring	chr_to_str	done	def
+2026-11-22T07:34:28Z	mlstring	compare_aux	done	def
+2026-11-22T07:34:28Z	mlstring	compare	done	write Candle.compare
+2026-11-22T07:34:28Z	mlstring	mlstring_lt	done	def
+2026-11-22T07:34:28Z	mlstring	flip_ord	done	def
+2026-11-22T07:34:28Z	mlstring	app_list_ann	done	inductive
+2026-11-22T07:34:28Z	mlstring	char_to_word8	done	def
+2026-11-22T07:34:28Z	mlstring	word8_to_char	done	def
+2026-11-22T07:34:28Z	setSpec	extensional	done	def
+2026-11-22T07:34:28Z	setSpec	is_separation	done	def
+2026-11-22T07:34:28Z	setSpec	is_power	done	def
+2026-11-22T07:34:28Z	setSpec	is_union	done	def
+2026-11-22T07:34:28Z	setSpec	is_upair	done	def
+2026-11-22T07:34:28Z	setSpec	is_set_theory	done	def
+2026-11-22T07:34:28Z	setSpec	sub	done	def
+2026-11-22T07:34:28Z	setSpec	power	done	def
+2026-11-22T07:34:28Z	setSpec	union	done	def
+2026-11-22T07:34:28Z	setSpec	upair	done	def
+2026-11-22T07:34:28Z	setSpec	empty	done	needs [Nonempty U]
+2026-11-22T07:34:28Z	setSpec	unit	done	def
+2026-11-22T07:34:28Z	setSpec	one	done	def
+2026-11-22T07:34:28Z	setSpec	two	done	def
+2026-11-22T07:34:28Z	setSpec	pair	done	def
+2026-11-22T07:34:28Z	setSpec	binary_union	done	def
+2026-11-22T07:34:28Z	setSpec	product	done	def
+2026-11-22T07:34:28Z	setSpec	relspace	done	def
+2026-11-22T07:34:28Z	setSpec	funspace	done	def
+2026-11-22T07:34:28Z	setSpec	apply	done	def
+2026-11-22T07:34:28Z	setSpec	boolset	done	def
+2026-11-22T07:34:28Z	setSpec	true_	done	HOL4 true (setSpec)
+2026-11-22T07:34:28Z	setSpec	false_	done	HOL4 false (setSpec)
+2026-11-22T07:34:28Z	setSpec	boolean	done	def
+2026-11-22T07:34:28Z	setSpec	abstract	done	def
+2026-11-22T07:34:28Z	holSyntaxLib	ALPHAVARS	done	def
+2026-11-22T07:34:28Z	holSyntaxLib	REV_ASSOCD	done	def
+2026-11-22T07:34:28Z	holSyntaxLib	result	done	inductive
+2026-11-22T07:34:28Z	holSyntaxLib	IS_RESULT	done	def
+2026-11-22T07:34:28Z	holSyntaxLib	IS_CLASH	done	def
+2026-11-22T07:34:28Z	holSyntaxLib	RESULT	done	def
+2026-11-22T07:34:28Z	holSyntaxLib	CLASH	done	def
+2026-11-22T07:34:28Z	holSyntaxLib	LIST_INSERT	done	def
+2026-11-22T07:34:28Z	holSyntaxLib	LIST_UNION	done	def
+2026-11-22T07:34:28Z	holSyntaxLib	INORDER_INSERT	done	def
+2026-11-22T07:34:28Z	holSyntaxLib	STRING_SORT	done	def
+2026-11-22T07:34:28Z	holSyntaxLib	Aux.mem_LIST_INSERT	done	helper lemma (not HOL4)
+2026-11-22T07:34:28Z	holSyntaxLib	Aux.mem_LIST_UNION	done	helper lemma (not HOL4)
+2026-11-22T07:34:28Z	holSyntaxLib	Aux.mem_FILTER_imp'	done	helper lemma (not HOL4)
+2026-11-22T07:34:28Z	holSyntaxLib	Aux.mem_STRING_SORT	done	helper lemma (not HOL4)
+2026-11-22T07:34:28Z	holSyntax	type	done	no DecidableEq deriving (nested); Classical used
+2026-11-22T07:34:28Z	holSyntax	Fun	done	def
+2026-11-22T07:34:28Z	holSyntax	BoolTy	done	HOL4 overload Bool; renamed
+2026-11-22T07:34:28Z	holSyntax	domain	done	def
+2026-11-22T07:34:28Z	holSyntax	codomain	done	def
+2026-11-22T07:34:28Z	holSyntax	term	done	inductive
+2026-11-22T07:34:28Z	holSyntax	Equal	done	def
+2026-11-22T07:34:28Z	holSyntax	dest_var	done	def
+2026-11-22T07:34:28Z	holSyntax	has_type	done	inductive
+2026-11-22T07:34:28Z	holSyntax	welltyped	done	def
+2026-11-22T07:34:28Z	holSyntax	typeof	done	def
+2026-11-22T07:34:28Z	holSyntax	RACONV	done	inductive
+2026-11-22T07:34:28Z	holSyntax	ACONV	done	def
+2026-11-22T07:34:28Z	holSyntax	type_lt	done	non-strictly-positive Inductive: impredicative least relation
+2026-11-22T07:34:28Z	holSyntax	term_lt	done	non-strictly-positive Inductive: impredicative least relation
+2026-11-22T07:34:28Z	holSyntax	term_cmp	done	def
+2026-11-22T07:34:28Z	holSyntax	type_cmp	done	def
+2026-11-22T07:34:28Z	holSyntax	ordav	done	def
+2026-11-22T07:34:28Z	holSyntax	orda	done	WF recursion, real termination proof
+2026-11-22T07:34:28Z	holSyntax	term_union	done	def
+2026-11-22T07:34:28Z	holSyntax	term_remove	done	def
+2026-11-22T07:34:28Z	holSyntax	term_image	done	def
+2026-11-22T07:34:28Z	holSyntax	VFREE_IN	done	def
+2026-11-22T07:34:28Z	holSyntax	CLOSED	done	def
+2026-11-22T07:34:28Z	holSyntax	VARIANT_PRIMES_P	done	def
+2026-11-22T07:34:28Z	holSyntax	VARIANT_PRIMES_spec	done	def
+2026-11-22T07:34:28Z	holSyntax	VARIANT_PRIMES	done	new_specification as epsilon
+2026-11-22T07:34:28Z	holSyntax	Aux.maxlen	done	helper lemma (not HOL4)
+2026-11-22T07:34:28Z	holSyntax	Aux.VFREE_IN_Var_len	done	helper lemma (not HOL4)
+2026-11-22T07:34:28Z	holSyntax	Aux.GENLIST_length	done	helper lemma (not HOL4)
+2026-11-22T07:34:28Z	holSyntax	Aux.least_exists	done	helper lemma (not HOL4)
+2026-11-22T07:34:28Z	holSyntax	VARIANT_PRIMES_def	done	spec theorem proved
+2026-11-22T07:34:28Z	holSyntax	VARIANT	done	def
+2026-11-22T07:34:28Z	holSyntax	TYPE_SUBST	done	def
+2026-11-22T07:34:28Z	holSyntax	is_instance	done	def
+2026-11-22T07:34:28Z	holSyntax	VSUBST	done	def
+2026-11-22T07:34:28Z	holSyntax	sizeof	done	def
+2026-11-22T07:34:28Z	holSyntax	Aux.REV_ASSOCD_cases	done	helper lemma (not HOL4)
+2026-11-22T07:34:28Z	holSyntax	Aux.mem_FILTER_imp	done	helper lemma (not HOL4)
+2026-11-22T07:34:28Z	holSyntax	Aux.sizeof_VSUBST_aux	done	helper lemma (not HOL4)
+2026-11-22T07:34:28Z	holSyntax	INST_CORE	done	WF recursion on sizeof, real termination proof
+2026-11-22T07:34:28Z	holSyntax	INST	done	def
+2026-11-22T07:34:28Z	holSyntax	tyvars	done	def
+2026-11-22T07:34:28Z	holSyntax	Aux.mem_tyvars_foldr	done	helper lemma (not HOL4)
+2026-11-22T07:34:28Z	holSyntax	Aux.TYPE_SUBST_tyvars_imp	done	helper lemma (not HOL4)
+2026-11-22T07:34:28Z	holSyntax	tvars	done	def
+2026-11-22T07:34:28Z	holSyntax	equation	done	def
+2026-11-22T07:34:28Z	holSyntax	tysig	done	abbrev
+2026-11-22T07:34:28Z	holSyntax	tmsig	done	abbrev
+2026-11-22T07:34:28Z	holSyntax	sig	done	abbrev
+2026-11-22T07:34:28Z	holSyntax	tysof	done	def
+2026-11-22T07:34:28Z	holSyntax	tmsof	done	def
+2026-11-22T07:34:28Z	holSyntax	type_ok	done	def
+2026-11-22T07:34:28Z	holSyntax	term_ok	done	def
+2026-11-22T07:34:28Z	holSyntax	alpha_lt	done	def
+2026-11-22T07:34:28Z	holSyntax	hypset_ok	done	def
+2026-11-22T07:34:28Z	holSyntax	thy	done	abbrev
+2026-11-22T07:34:28Z	holSyntax	sigof	done	def
+2026-11-22T07:34:28Z	holSyntax	axsof	done	def
+2026-11-22T07:34:28Z	holSyntax	thy_tysof	done	HOL4 overload tysof o sigof
+2026-11-22T07:34:28Z	holSyntax	thy_tmsof	done	HOL4 overload tmsof o sigof
+2026-11-22T07:34:28Z	holSyntax	is_std_sig	done	def
+2026-11-22T07:34:28Z	holSyntax	theory_ok	done	def
+2026-11-22T07:34:28Z	holSyntax	proves	done	inductive
+2026-11-22T07:34:28Z	holSyntax	update	done	inductive
+2026-11-22T07:34:28Z	holSyntax	types_of_upd	done	def
+2026-11-22T07:34:28Z	holSyntax	consts_of_upd	done	def
+2026-11-22T07:34:28Z	holSyntax	type_list	done	def
+2026-11-22T07:34:28Z	holSyntax	ctxt_tysof	done	HOL4 overload tysof on update list
+2026-11-22T07:34:28Z	holSyntax	const_list	done	def
+2026-11-22T07:34:28Z	holSyntax	ctxt_tmsof	done	HOL4 overload tmsof on update list
+2026-11-22T07:34:28Z	holSyntax	ctxt_sigof	done	HOL4 overload sigof on update list
+2026-11-22T07:34:28Z	holSyntax	axexts_of_upd	done	def
+2026-11-22T07:34:28Z	holSyntax	conexts_of_upd	done	def
+2026-11-22T07:34:28Z	holSyntax	axexts	done	def
+2026-11-22T07:34:28Z	holSyntax	conexts	done	def
+2026-11-22T07:34:28Z	holSyntax	axioms_of_upd	done	def
+2026-11-22T07:34:28Z	holSyntax	axiom_list	done	def
+2026-11-22T07:34:28Z	holSyntax	ctxt_axsof	done	HOL4 overload axsof on update list
+2026-11-22T07:34:28Z	holSyntax	thyof	done	def
+2026-11-22T07:34:28Z	holSyntax	updates	done	inductive
+2026-11-22T07:34:28Z	holSyntaxExtra	subtype1	done	inductive
+2026-11-22T07:34:28Z	holSyntaxExtra	subtype	done	def
+2026-11-22T07:34:28Z	holSyntaxExtra	subterm1	done	inductive
+2026-11-22T07:34:28Z	holSyntaxExtra	subterm	done	def
+2026-11-22T07:34:28Z	holSyntaxExtra	dbterm_t	done	HOL4 datatype dbterm (renamed; function dbterm kept)
+2026-11-22T07:34:28Z	holSyntaxExtra	bind	done	def
+2026-11-22T07:34:28Z	holSyntaxExtra	db	done	def
+2026-11-22T07:34:28Z	holSyntaxExtra	dbVSUBST	done	def
+2026-11-22T07:34:28Z	holSyntaxExtra	dbVFREE_IN	done	def
+2026-11-22T07:34:28Z	holSyntaxExtra	dbINST	done	def
+2026-11-22T07:34:28Z	holSyntaxExtra	dbterm	done	def
+2026-11-22T07:34:28Z	holSyntaxExtra	bind_list_aux	done	def
+2026-11-22T07:34:28Z	holSyntaxExtra	bv_names	done	def
+2026-11-22T07:34:28Z	holSyntaxExtra	simple_subst	done	def
+2026-11-22T07:34:28Z	holSyntaxExtra	simple_inst	done	def
+2026-11-22T07:34:28Z	holSyntaxExtra	rename_bvars	done	def
+2026-11-22T07:34:28Z	holSyntaxExtra	fresh_spec	done	def
+2026-11-22T07:34:28Z	holSyntaxExtra	fresh	done	new_specification as epsilon
+2026-11-22T07:34:28Z	holSyntaxExtra	fresh_def	done	spec theorem proved
+2026-11-22T07:34:28Z	holSyntaxExtra	types_in	done	def
+2026-11-22T07:34:28Z	holSyntaxExtra	arities_match	done	def
+2026-11-22T07:34:28Z	holSemantics	inhabited	done	def
+2026-11-22T07:34:28Z	holSemantics	tyass	done	abbrev
+2026-11-22T07:34:28Z	holSemantics	is_type_assignment0	done	def
+2026-11-22T07:34:28Z	holSemantics	tyval	done	abbrev
+2026-11-22T07:34:28Z	holSemantics	is_type_valuation0	done	def
+2026-11-22T07:34:28Z	holSemantics	typesem	done	def
+2026-11-22T07:34:28Z	holSemantics	tmass	done	abbrev
+2026-11-22T07:34:28Z	holSemantics	is_term_assignment0	done	def
+2026-11-22T07:34:28Z	holSemantics	tmval	done	abbrev
+2026-11-22T07:34:28Z	holSemantics	is_term_valuation0	done	def
+2026-11-22T07:34:28Z	holSemantics	interpretation	done	abbrev
+2026-11-22T07:34:28Z	holSemantics	tyaof	done	def
+2026-11-22T07:34:28Z	holSemantics	tmaof	done	def
+2026-11-22T07:34:28Z	holSemantics	valuation	done	abbrev
+2026-11-22T07:34:28Z	holSemantics	tyvof	done	def
+2026-11-22T07:34:28Z	holSemantics	tmvof	done	def
+2026-11-22T07:34:28Z	holSemantics	is_valuation0	done	def
+2026-11-22T07:34:28Z	holSemantics	instance_spec	done	def
+2026-11-22T07:34:28Z	holSemantics	instance_	done	HOL4 instance (keyword clash); epsilon of instance_spec
+2026-11-22T07:34:28Z	holSemantics	instance_def	done	HOL4 new_specification theorem, proved
+2026-11-22T07:34:28Z	holSemantics	termsem0	done	TFL ARB completion for Abs with non-Var binder
+2026-11-22T07:34:28Z	holSemantics	satisfies0	done	def
+2026-11-22T07:34:28Z	holSemantics	is_interpretation0	done	def
+2026-11-22T07:34:28Z	holSemantics	is_std_type_assignment0	done	def
+2026-11-22T07:34:28Z	holSemantics	interprets0	done	def
+2026-11-22T07:34:28Z	holSemantics	is_std_interpretation0	done	def
+2026-11-22T07:34:28Z	holSemantics	models0	done	def
+2026-11-22T07:34:28Z	holSemantics	entails0	done	def
+2026-11-22T07:34:28Z	holSemantics	is_structure0	done	def
+2026-11-22T07:34:28Z	holSemanticsExtra	Equalsem	done	ML value, no constant; documented in module docstring and CONVENTIONS.md section 8
+2026-11-22T07:34:28Z	holSoundness	(module)	done	no definitions needed; module imports HolSemanticsExtra
+2026-11-22T07:34:28Z	holSyntaxExtra	fresh_term vfree_in variant subtract insert itlist union frees rename ConstDef	done	not translated: not needed by target theorems
