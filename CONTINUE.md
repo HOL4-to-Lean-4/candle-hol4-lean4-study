@@ -66,9 +66,13 @@ Status: 25 November 2026. Read this file first, then `plan/v3/plan_v3.3.pdf` (dr
 
 ## Not in the repository
 
-- Raw model transcripts (`*.raw`, `*.jsonl`, `*.err`, about 165 MB): they contain account details. They are on the first PC in `audit/*/runs`, `E:\ts_ws\runs`, `E:\ts_ws\prove*`, `E:\ts_ws\prove2_ctl`. The extracted findings, verdicts and usage are here (`runs/<unit>/*.json`, `*.meta`).
-  The transcript scans (`scan.py`, `scan2.py`) and the usage extraction cannot be repeated without them. Copy these folders by disk if needed.
+- Raw model transcripts and proving workspaces (2,367 files, 211 MB, 41 MB packed): they contain account details. They are in the author's private Google Drive, folder `candle-hol4-lean4-study`, and on the first PC.
+  Findings, verdicts and usage extracted from them are here (`runs/<unit>/*.json`, `*.meta`). Restore after `setup_pc.py`, from Git Bash, with the newest date (or download the archive in a browser):
+  ```bash
+  cd /e/ts_ws && rclone copy gdrive:candle-hol4-lean4-study . --include "/candle_raw_2026-11-25.*" && sha256sum -c candle_raw_2026-11-25.tar.gz.sha256 && tar -xzf candle_raw_2026-11-25.tar.gz -C /e
+  ```
+  `rclone config` must have a Drive remote called `gdrive` for the author's account. The archive does not hold HOL4 sources or `.lake` builds. `bash scripts/backup_raw.sh` uploads a new dated archive; run it at each milestone that adds raw files.
 - Study 1's Lean project: `setup_pc.py --study1` fetches it from the public CakeML fork at `0d1173557`.
-- Mutant compile caches in `E:\ts_ws\mut_work` (rebuilt by `audit/mutants/gen.py`, slow).
-- The proving controls `E:\ts_ws\prove`, `E:\ts_ws\prove2_ctl`, `E:\prove2`: their content is archived in `proving*/`. To rerun, copy the files back to the paths named in `drive.sh`.
-- A first type-soundness run on incomplete HOL4 sources, discarded before scoring.
+- Mutant compile caches in `E:\ts_ws\mut_work`: in the Drive archive.
+- The proving controls `E:\ts_ws\prove`, `E:\ts_ws\prove2_ctl`, `E:\prove2`: in the Drive archive; the main files are also in `proving*/`. To rerun, copy the files back to the paths named in `drive.sh`.
+- A first type-soundness run on incomplete HOL4 sources, discarded before scoring: in the Drive archive, without the HOL4 sources.
