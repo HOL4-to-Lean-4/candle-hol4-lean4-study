@@ -66,13 +66,13 @@ Status: 25 November 2026. Read this file first, then `plan/v3/plan_v3.3.pdf` (dr
 
 ## Not in the repository
 
-- Raw model transcripts and proving workspaces (2,367 files, 211 MB, 41 MB packed): they contain account details. They are in the author's private Google Drive, folder `candle-hol4-lean4-study`, and on the first PC.
-  Findings, verdicts and usage extracted from them are here (`runs/<unit>/*.json`, `*.meta`). Restore after `setup_pc.py`, from Git Bash, with the newest date (or download the archive in a browser):
+- Raw model transcripts and proving workspaces (2,367 files, 211 MB, 41 MB packed): they contain account details. They are in a release of the author's private repository `Lee-Juntong/candle-hol4-lean4-raw`, and on the first PC.
+  Findings, verdicts and usage extracted from them are here (`runs/<unit>/*.json`, `*.meta`). Restore after `setup_pc.py`, from Git Bash, with the newest date (or download the files from the release page in a browser):
   ```bash
-  cd /e/ts_ws && rclone copy gdrive:candle-hol4-lean4-study . --include "/candle_raw_2026-11-25.*" && sha256sum -c candle_raw_2026-11-25.tar.gz.sha256 && tar -xzf candle_raw_2026-11-25.tar.gz -C /e
+  cd /e/ts_ws && gh release download raw-2026-11-25 -R Lee-Juntong/candle-hol4-lean4-raw && sha256sum -c candle_raw_2026-11-25.tar.gz.sha256 && tar -xzf candle_raw_2026-11-25.tar.gz -C /e
   ```
-  `rclone config` must have a Drive remote called `gdrive` for the author's account. The archive does not hold HOL4 sources or `.lake` builds. `bash scripts/backup_raw.sh` uploads a new dated archive; run it at each milestone that adds raw files.
+  `gh` must be signed in to the author's account. The archive does not hold HOL4 sources or `.lake` builds. `bash scripts/backup_raw.sh` uploads a new dated archive; run it at each milestone that adds raw files.
 - Study 1's Lean project: `setup_pc.py --study1` fetches it from the public CakeML fork at `0d1173557`.
-- Mutant compile caches in `E:\ts_ws\mut_work`: in the Drive archive.
-- The proving controls `E:\ts_ws\prove`, `E:\ts_ws\prove2_ctl`, `E:\prove2`: in the Drive archive; the main files are also in `proving*/`. To rerun, copy the files back to the paths named in `drive.sh`.
-- A first type-soundness run on incomplete HOL4 sources, discarded before scoring: in the Drive archive, without the HOL4 sources.
+- Mutant compile caches in `E:\ts_ws\mut_work`: in the raw-file archive.
+- The proving controls `E:\ts_ws\prove`, `E:\ts_ws\prove2_ctl`, `E:\prove2`: in the raw-file archive; the main files are also in `proving*/`. To rerun, copy the files back to the paths named in `drive.sh`.
+- A first type-soundness run on incomplete HOL4 sources, discarded before scoring: in the raw-file archive, without the HOL4 sources.

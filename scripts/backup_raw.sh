@@ -1,10 +1,11 @@
 #!/bin/bash
 # Pack the raw transcripts and work files that stay out of the public repository and copy them to
-# the author's private Google Drive (rclone remote "gdrive").  Git Bash:  bash scripts/backup_raw.sh
-# Check the files for secrets before running it on new data. Never share the Drive folder.
+# a release of the author's PRIVATE repository (needs gh, signed in).  Git Bash:  bash scripts/backup_raw.sh
+# Check the files for secrets before running it on new data. Never make that repository public.
 # Archives are dated and complete; to restore, only the newest one is needed (see CONTINUE.md).
 set -e -o pipefail
-N=candle_raw_$(date +%F); R=gdrive:candle-hol4-lean4-study
+N=candle_raw_$(date +%F); R=Lee-Juntong/candle-hol4-lean4-raw; T=raw-$(date +%F)
+[ "$(gh api repos/$R --jq .private)" = true ] || { echo "$R is not private; nothing uploaded"; exit 1; }
 cd /e
 {
   for d in ts_ws/runs ts_ws/runs_run0_incomplete_src ts_ws/prove ts_ws/prove_ts ts_ws/prove2_ctl ts_ws/probe ts_ws/ground prove2; do
@@ -19,5 +20,6 @@ fi
 tar -czf ts_ws/$N.tar.gz -T ts_ws/$N.files.txt
 cd ts_ws
 sha256sum $N.tar.gz > $N.tar.gz.sha256
-rclone copy . $R --include "/$N.*"
-rclone check . $R --include "/$N.*" --one-way
+gh release view $T -R $R >/dev/null 2>&1 || gh release create $T -R $R --title "Raw files, ${T#raw-}" --notes "Private: holds account details."
+gh release upload $T $N.tar.gz $N.tar.gz.sha256 $N.files.txt -R $R --clobber
+gh release view $T -R $R --json assets --jq '.assets[]|[.name,.size]|@tsv'
