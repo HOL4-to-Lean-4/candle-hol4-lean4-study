@@ -62,7 +62,7 @@ Status: 25 November 2026. Read this file first, then `plan/v3/plan_v3.3.pdf` (dr
 - No spending limit on Opus and Sonnet runs; report at each milestone. No 128k token cap.
 - Critique and delegated decisions: GPT-6.2 Astra through `codex`, Neon through `agy`. Disputes over tier 2 and conservativity were decided by Astra (`plan/v3/critique_astra_decisions_2026-11-24.md`).
 - Model runs get isolated folders, read access to their own workspace only, and no network. Never use `--dangerously-skip-permissions`.
-- Commit and push only when the author asks. The author is the only author of commits.
+- Commit and push to `main` after each milestone, and update this file (author, 25 November). Scan staged files for emails, tokens and local user paths first. The author is the only author of commits.
 
 ## Not in the repository
 
