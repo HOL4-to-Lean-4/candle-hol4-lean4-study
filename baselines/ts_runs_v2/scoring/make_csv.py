@@ -121,6 +121,12 @@ for nm in random.sample(ctl, 14):
 L = list(items.values())
 random.shuffle(L)
 th = {k.split(".")[-1]: v for k, v in pretty.items()}
+_sheet = os.path.join(HERE, "scoring_sheet.csv")
+if os.path.exists(_sheet):
+    with io.open(_sheet, encoding="utf-8-sig", newline="") as f:
+        for r in csv.DictReader(f):
+            if any((v or "").strip() for c, v in r.items() if c and (c.startswith("verdict") or c == "reason")):
+                raise SystemExit("scoring_sheet.csv has answers; copy it away first")
 with io.open(os.path.join(HERE, "scoring_sheet.csv"), "w", encoding="utf-8-sig", newline="") as f:
     w = csv.writer(f)
     w.writerow(["item", "hol4_theory.theorem", "where", "context_and_question", "hol4_original_source", "hol4_statement_with_types",

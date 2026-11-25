@@ -21,3 +21,4 @@ audit/**/runs/**/*.last
 *.jsonl.err
 run_*.jsonl
 /baselines/ts_runs_v2/scoring/key.csv
+/audit/real/check/check_key.csv

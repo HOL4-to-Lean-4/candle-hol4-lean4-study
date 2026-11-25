@@ -1,6 +1,8 @@
 # Audit on real translation errors (24 and 25 Nov 2026)
 
-Draft. 63 modules from 8 translations: 51 with 105 known errors, 12 with none known ("controls"). Each auditor saw one comment-stripped module with the HOL4 sources, read-only, same brief.
+Draft. Tables by script, with S0 (scripts alone) next to the arms, per translation, without the provisional errors, and with paired module-level tests: `TABLES.md` (`report.py`). Main result of the paper (author, 25 Nov); the author's check is `check/` (read `check/README.md`, not this file, before answering).
+
+63 modules from 8 translations: 51 with 105 known errors, 12 with none known ("controls"). Each auditor saw one comment-stripped module with the HOL4 sources, read-only, same brief.
 Errors were known before the run from the conservativity tests, the statement and type-variable scans and study 1 (`key.json`, `build_units.py`). A finding counts if it names the declaration (and the class, where a declaration has two errors); matched by script (`final.py`), not by a human scorer.
 One correction to the key after the run: the integer-division error of study 1 was keyed under `do_app`; it sits in `do_arith`, which `do_app` calls. All three auditors reported it there.
 
@@ -17,6 +19,7 @@ One correction to the key after the run: the integer-division error of study 1 w
 
 - 37 errors were found by Astra and by neither Opus run; none the other way round. Four were missed by all: `build_ctor_tenv` (ts_opus, ts_sonnet) and `interprets0` (candle_opus, candle_fable). The type-variable script finds all four.
 - Union of the two Opus runs: 64, one more than run a alone.
+- S0 alone finds 40 of 105 (all from its own flags) and no open value; S0 or S1 finds 105, S0 or the Opus union 95. Without the 15 provisional errors: S1 86, Opus union 59 of 90. Details in `TABLES.md`.
 - The 25 + 15 "type too specific" errors came from scripts, so the scripts find them by construction. The 15 statement cases are provisional until the human scoring of the CSV.
 - 47 of the 105 errors are in one translation (ts_sonnet), which weighs heavily in the totals. `final.py` prints the counts per translation.
 
@@ -33,7 +36,7 @@ One correction to the key after the run: the integer-division error of study 1 w
 
 New true errors: Candle Sonnet `PERMUTES` (demands more than HOL4; checked in Lean and HOL4), `instance_`, `termsem`, `FAPPLY`; Candle Fable `termsem0`; TS Sonnet `thunk_op'`, `tenv_val_ok_nsEmpty`, `tenv_ctor_ok_nsEmpty`,
 `tenv_abbrev_ok_nsEmpty`, `type_env_conv_thm`, `fix_clock_do_eval_res`. The five Candle ones have Lean checks in `proofs/`; the six TS ones were confirmed by comparing the HOL4 types with the Lean ones.
-Fable, for which the earlier test of named constants found no V-C, has one. The key was incomplete: 116 errors are known (105 and 11) if the 15 provisional ones stand.
+Fable, for which the earlier test of named constants found no V-C, has one. Of the 11, `type_env_conv_thm` was flagged by the statement scan and `thunk_op'` by a type-variable clash dismissed before; 5 only repeat the type of a keyed constant. So at most 5 are neither flagged nor repeats (`TABLES.md`). The key was incomplete: 116 errors are known (105 and 11) if the 15 provisional ones stand.
 
 Controls (12): Astra flagged 4, each Opus run 1. Adjudicated: one (candle_sonnet HolSemantics, `instance_`, `termsem`) has true errors, two are tier 2, one (word width 0) is disputed. No control got a plainly false finding.
 

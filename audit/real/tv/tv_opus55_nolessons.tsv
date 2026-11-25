@@ -1,0 +1,741 @@
+L	CandleLean.HolSyntax	type_cmp	0	type → type → ordering
+L	CandleLean.HolSyntaxExtra	dbterm_.below	0	{motive : dbterm_ → Sort u} → dbterm_ → Sort (max 1 u)
+L	CandleLean.HolSyntax	proves.below	0	{motive : (a : thy × List term) → (a_1 : term) → proves a a_1 → Prop} →   {a : thy × List term} → {a_1 : term} → proves a a_1 → Prop
+L	CandleLean.Prelude.Mergesort	mergesort_tail	1	{α : Type u} → (α → α → Prop) → List α → List α
+L	CandleLean.Prelude.Basic	ordering.LESS.elim	0	{motive : ordering → Sort u} → (t : ordering) → t.ctorIdx = 0 → motive LESS → motive t
+L	CandleLean.HolSyntax	updates.new_axiom	0	∀ (prop : term) (ctxt : List update), has_type prop Bool_ → term_ok (sigof ctxt) prop → updates (NewAxiom prop) ctxt
+L	CandleLean.HolSyntaxLib	instInhabitedResult	1	{a : Type u_1} → [Inhabited a] → Inhabited (result a)
+L	CandleLean.Mlstring	app_list_ann.brecOn	1	{α : Type u} →   {motive : app_list_ann α → Sort u_1} →     (t : app_list_ann α) → ((t : app_list_ann α) → app_list_ann.below t → motive t) → motive t
+L	CandleLean.Prelude.Basic	instDecidableEqOrdering_1	0	DecidableEq ordering
+L	CandleLean.HolSyntaxLib	result	1	Type u → Type u
+L	CandleLean.HolSyntax	update.NewConst.elim	0	{motive : update → Sort u} →   (t : update) → t.ctorIdx = 3 → ((a : mlstring) → (a_1 : type) → motive (NewConst a a_1)) → motive t
+L	CandleLean.Mlstring	strlit	0	string → mlstring
+L	CandleLean.HolSyntax	HasSigof.sigof	1	{α : Type} → [self : HasSigof α] → α → sig
+L	CandleLean.HolSyntax	type.Tyvar.elim	0	{motive_1 : type → Sort u} → (t : type) → t.ctorIdx = 0 → ((a : mlstring) → motive_1 (Tyvar a)) → motive_1 t
+L	CandleLean.HolSyntax	HasAxsof.ctorIdx	1	{α : Type} → HasAxsof α → Nat
+L	CandleLean.Prelude.Sptree	sptree.instInhabitedSpt.default	1	{a : Type u_1} → sptree.spt a
+L	CandleLean.HolSyntax	has_type.below.var	0	∀ {motive : (a : term) → (a_1 : type) → has_type a a_1 → Prop} (n : mlstring) (ty : type), has_type.below ⋯
+L	CandleLean.Mlstring	compare_	0	mlstring → mlstring → ordering
+L	CandleLean.Mlstring	app_list_ann.ctorElim	1	{α : Type u} →   {motive : app_list_ann α → Sort u_1} →     (ctorIdx : Nat) → (t : app_list_ann α) → ctorIdx = t.ctorIdx → app_list_ann.ctorElimType ctorIdx → motive t
+L	CandleLean.HolSyntax	instHasTmsofListUpdate	0	HasTmsof (List update)
+L	CandleLean.HolSyntax	term_remove	0	term → List term → List term
+L	CandleLean.Prelude.String	termStr!_	0	ParserDescr
+L	CandleLean.Prelude.Words	word.noConfusionType	1	Sort u → {d : Nat} → word d → {d' : Nat} → word d' → Sort u
+L	CandleLean.HolSyntax	tmsig	0	Type
+L	CandleLean.HolSyntaxLib	result.Clash.noConfusion	2	{α : Type u} → {P : Sort u_1} → {a a' : α} → Clash a = Clash a' → (a ≍ a' → P) → P
+L	CandleLean.HolSyntaxExtra	subterm	0	term → term → Prop
+L	CandleLean.HolSyntaxExtra	bv_names	0	term → List mlstring
+L	CandleLean.Prelude.Basic	DIV2	0	Nat → Nat
+L	CandleLean.Prelude.Basic	RTC.step	1	∀ {α : Sort u} {R : α → α → Prop} (x y z : α), R x y → RTC R y z → RTC R x z
+L	CandleLean.SetSpec	is_upair	1	{U : Type u} → (U → U → Prop) → (U → U → U) → Prop
+L	CandleLean.HolSemantics	entails	1	{U : Type u} → [Nonempty U] → (U → U → Prop) → thy × List term → term → Prop
+L	CandleLean.HolSyntax	RACONV.recOn	0	∀ {motive : (a : List (term × term)) → (a_1 : term × term) → RACONV a a_1 → Prop} {a : List (term × term)}   {a_1 : term × term} (t : RACONV a a_1),   (∀ (env : List (term × term)) (x1 : mlstring) (ty1 : type) (x2 : mlstring) (ty2 : type)       (a : ALPHAVARS env (Var x1 ty1, Var x2 ty2)), motive env (Var x1 ty1, Var x2 ty2) ⋯) →     (∀ (env : List (term × term)) (x : mlstring) (ty : type), motive env (Const x ty, Const x ty) ⋯) →       (∀ (env : List (term × term)) (s1 s2 t1 t2 : term) (a : RACONV env (s1, s2)) (a_2 : RACONV env (t1, t2)),           motive env (s1, s2) a → motive env (t1, t2) a_2 → motive env (s1.Comb t1, s2.Comb t2) ⋯) →         (∀ (env : List (term × term)) (v1 v2 t1 t2 : term) (a : typeof v1 = typeof v2)             (a_2 : RACONV ((v1, v2) :: env) (t1, t2)),             motive ((v1, v2) :: env) (t1, t2) a_2 → motive env (v1.Abs t1, v2.Abs t2) ⋯) →           motive a a_1 t
+L	CandleLean.Prelude.Basic	instInhabitedOrdering_1	0	Inhabited ordering
+L	CandleLean.HolSyntax	update.casesOn	0	{motive : update → Sort u} →   (t : update) →     ((a : List (mlstring × term)) → (a_1 : term) → motive (ConstSpec a a_1)) →       ((a : mlstring) → (a_1 : term) → (a_2 a_3 : mlstring) → motive (TypeDefn a a_1 a_2 a_3)) →         ((a : mlstring) → (a_1 : Nat) → motive (NewType a a_1)) →           ((a : mlstring) → (a_1 : type) → motive (NewConst a a_1)) → ((a : term) → motive (NewAxiom a)) → motive t
+L	CandleLean.HolSyntax	instInhabitedType	0	Inhabited type
+L	CandleLean.HolSyntaxExtra	simple_subst	0	List (term × term) → term → term
+L	CandleLean.HolSyntax	instHasTmsofSig	0	HasTmsof sig
+L	CandleLean.Misc	append	1	{α : Type u} → app_list α → List α
+L	CandleLean.Prelude.Basic	invert_comparison	0	ordering → ordering
+L	CandleLean.HolSyntaxLib	REV_ASSOCD	2	{α : Type u} → {β : Type v} → β → List (α × β) → α → α
+L	CandleLean.HolSemantics	tyval	1	Type u → Type u
+L	CandleLean.Prelude.List	isPREFIX	1	{α : Type u} → List α → List α → Prop
+L	CandleLean.Mlstring	app_list_ann.BigAppend	1	{α : Type u} → app_list_ann α → app_list_ann α → app_list_ann α
+L	CandleLean.Prelude.List	LIST_TO_SET.match_1	1	{α : Type u_1} →   (motive : List α → Sort u_2) →     (x : List α) → (Unit → motive []) → ((h : α) → (t : List α) → motive (h :: t)) → motive x
+L	CandleLean.HolSemanticsExtra	Equalsem	1	{U : Type u} → [Nonempty U] → (U → U → Prop) → List U → U
+L	CandleLean.Mlstring	app_list_ann.Small.noConfusion	2	{α : Type u} → {P : Sort u_1} → {a a' : app_list α} → Small a = Small a' → (a ≍ a' → P) → P
+L	CandleLean.HolSyntax	Bool_	0	type
+L	CandleLean.Prelude.FiniteMap	FEMPTY	2	{α : Type u} → {β : Type v} → fmap α β
+L	CandleLean.HolSyntax	welltyped	0	term → Prop
+L	CandleLean.Prelude.List	MAX_LIST	0	List Nat → Nat
+L	CandleLean.Prelude.Sptree	sptree.spt.LN	1	{α : Type u} → sptree.spt α
+L	CandleLean.HolSyntax	updates.recOn	0	∀ {motive : (a : update) → (a_1 : List update) → updates a a_1 → Prop} {a : update} {a_1 : List update}   (t : updates a a_1),   (∀ (prop : term) (ctxt : List update) (a : has_type prop Bool_) (a_2 : term_ok (sigof ctxt) prop),       motive (NewAxiom prop) ctxt ⋯) →     (∀ (name : mlstring) (ctxt : List update) (ty : type) (a : ¬name ∈ FDOM (tmsof ctxt))         (a_2 : type_ok (tysof ctxt) ty), motive (NewConst name ty) ctxt ⋯) →       (∀ (ctxt : List update) (eqs : List (mlstring × term)) (prop : term)           (a : proves (thyof ctxt, List.map (fun p => Var p.fst (typeof p.snd) === p.snd) eqs) prop)           (a_2 :             EVERY (fun t => CLOSED t ∧ ∀ (v : mlstring), MEM v (tvars t) → MEM v (tyvars (typeof t)))               (List.map Prod.snd eqs))           (a_3 :             ∀ (x : mlstring) (ty : type),               VFREE_IN (Var x ty) prop → MEM (x, ty) (List.map (fun p => (p.fst, typeof p.snd)) eqs))           (a_4 : ∀ (s : mlstring), MEM s (List.map Prod.fst eqs) → ¬s ∈ FDOM (tmsof ctxt))           (a_5 : ALL_DISTINCT (List.map Prod.fst eqs)), motive (ConstSpec eqs prop) ctxt ⋯) →         (∀ (name : mlstring) (ctxt : List update) (arity : Nat) (a : ¬name ∈ FDOM (tysof ctxt)),             motive (NewType name arity) ctxt ⋯) →           (∀ (ctxt : List update) (pred witness : term) (name abs rep : mlstring)               (a : proves (thyof ctxt, []) (pred.Comb witness)) (a_2 : CLOSED pred) (a_3 : ¬name ∈ FDOM (tysof ctxt))               (a_4 : ¬abs ∈ FDOM (tmsof ctxt)) (a_5 : ¬rep ∈ FDOM (tmsof ctxt)) (a_6 : abs ≠ rep),               motive (TypeDefn name pred abs rep) ctxt ⋯) →             motive a a_1 t
+L	CandleLean.SetSpec	relspace	1	{U : Type u} → [Nonempty U] → (U → U → Prop) → U → U → U
+L	CandleLean.Prelude.List	EVERY	1	{α : Type u} → (α → Prop) → List α → Prop
+L	CandleLean.Prelude.ASCIInumbers	UNHEX	0	char → Nat
+L	CandleLean.HolSyntaxLib	IS_RESULT.match_1	1	{α : Type u_1} →   (motive : result α → Sort u_2) →     (x : result α) → ((a : α) → motive (Clash a)) → ((a : α) → motive (Result a)) → motive x
+L	CandleLean.HolSyntax	orda	0	List (term × term) → term → term → ordering
+L	CandleLean.Prelude.ASCIInumbers	n2l	0	Nat → Nat → List Nat
+L	CandleLean.HolSyntaxExtra	dbterm.match_1	0	(motive : Option Nat → Sort u_1) → (x : Option Nat) → ((n : Nat) → motive (some n)) → (Unit → motive none) → motive x
+L	CandleLean.Prelude.Words	word.w2n	0	{d : Nat} → word d → Nat
+L	CandleLean.Prelude.String	string	0	Type
+L	CandleLean.Prelude.Basic	RTC.casesOn	1	∀ {α : Sort u} {R : α → α → Prop} {motive : (a a_1 : α) → RTC R a a_1 → Prop} {a a_1 : α} (t : RTC R a a_1),   (∀ (x : α), motive x x ⋯) → (∀ (x y z : α) (a : R x y) (a_2 : RTC R y z), motive x z ⋯) → motive a a_1 t
+L	CandleLean.HolSyntax	update.NewType.elim	0	{motive : update → Sort u} →   (t : update) → t.ctorIdx = 2 → ((a : mlstring) → (a_1 : Nat) → motive (NewType a a_1)) → motive t
+L	CandleLean.Prelude.List	ZIP.match_1	2	{α : Type u_1} →   {β : Type u_2} →     (motive : List α × List β → Sort u_3) →       (x : List α × List β) →         ((snd : List β) → motive ([], snd)) →           ((head : α) → (tail : List α) → motive (head :: tail, [])) →             ((x1 : α) → (l1 : List α) → (x2 : β) → (l2 : List β) → motive (x1 :: l1, x2 :: l2)) → motive x
+L	CandleLean.HolSyntax	update.NewAxiom.elim	0	{motive : update → Sort u} → (t : update) → t.ctorIdx = 4 → ((a : term) → motive (NewAxiom a)) → motive t
+L	CandleLean.Prelude.Sptree	sptree.instInhabitedSpt	1	{a : Type u_1} → Inhabited (sptree.spt a)
+L	CandleLean.Misc	append_aux.match_1	1	{α : Type u_1} →   (motive : app_list α → List α → Sort u_2) →     (x : app_list α) →       (x_1 : List α) →         ((aux : List α) → motive app_list.Nil aux) →           ((xs aux : List α) → motive (app_list.List xs) aux) →             ((l1 l2 : app_list α) → (aux : List α) → motive (l1.Append l2) aux) → motive x x_1
+L	CandleLean.Prelude.List	SPLITP	1	{α : Type u} → (α → Prop) → List α → List α × List α
+L	CandleLean.HolSyntax	has_type.var	0	∀ (n : mlstring) (ty : type), has_type (Var n ty) ty
+L	CandleLean.Misc	splitlines	0	string → List string
+L	CandleLean.Prelude.Basic	ordering.ctorIdx	0	ordering → Nat
+L	CandleLean.Mlstring	word8_to_char	0	word8 → char
+L	CandleLean.Prelude.Sptree	sptree.spt.BS	1	{α : Type u} → sptree.spt α → α → sptree.spt α → sptree.spt α
+L	CandleLean.HolSyntaxExtra	dbterm_.noConfusion	1	{P : Sort u} → {t t' : dbterm_} → t = t' → dbterm_.noConfusionType P t t'
+L	CandleLean.SetSpec	boolset	1	{U : Type u} → [Nonempty U] → (U → U → Prop) → U
+L	CandleLean.HolSyntaxExtra	subterm1.comb_left	0	∀ (t1 t2 : term), subterm1 t1 (t1.Comb t2)
+L	CandleLean.HolSemantics	tmval	1	Type u → Type (max u 0)
+L	CandleLean.HolSyntaxExtra	dbterm_.ctorIdx	0	dbterm_ → Nat
+L	CandleLean.Mlstring	compare_aux	0	mlstring → mlstring → ordering → Nat → Nat → ordering
+L	CandleLean.Prelude.List	ZIP	2	{α : Type u} → {β : Type v} → List α × List β → List (α × β)
+L	CandleLean.SetSpec	sub	1	{U : Type u} → [Nonempty U] → (U → U → Prop) → U → (U → Prop) → U
+L	CandleLean.Mlstring	shrink.match_1	0	(motive : app_list_ann mlstring → Sort u_1) →   (x : app_list_ann mlstring) →     ((t : app_list mlstring) → motive (Small t)) →       ((ls : List mlstring) → motive (BigList ls)) →         ((l1 l2 : app_list_ann mlstring) → motive (l1.BigAppend l2)) → motive x
+L	CandleLean.SetSpec	is_union	1	{U : Type u} → (U → U → Prop) → (U → U) → Prop
+L	CandleLean.HolSyntaxExtra	instInhabitedDbterm_	0	Inhabited dbterm_
+L	CandleLean.Prelude.Basic	invert_comparison.match_1	0	(motive : ordering → Sort u_1) →   (x : ordering) → (Unit → motive GREATER) → (Unit → motive LESS) → (Unit → motive EQUAL) → motive x
+L	CandleLean.HolSyntax	instHasSigofThy	0	HasSigof thy
+L	CandleLean.HolSyntax	HasTmsof.noConfusion	3	{P : Sort u} →   {α : Type} → {t : HasTmsof α} → {α' : Type} → {t' : HasTmsof α'} → α = α' → t ≍ t' → HasTmsof.noConfusionType P t t'
+L	CandleLean.Prelude.Words	zero_extend	0	Nat → List Prop → List Prop
+L	CandleLean.Mlstring	substring	0	mlstring → Nat → Nat → mlstring
+L	CandleLean.HolSyntaxLib	instInhabitedResult.default	1	{a : Type u_1} → [Inhabited a] → result a
+L	CandleLean.HolSyntax	sizeof_VSUBST_aux.match_1_1	0	∀ (motive : term → (x : List (term × term)) → (∀ (p : term × term), p ∈ x → ∃ x ty, p.fst = Var x ty) → Prop) (x : term)   (x_1 : List (term × term)) (x_2 : ∀ (p : term × term), p ∈ x_1 → ∃ x ty, p.fst = Var x ty),   (∀ (x : mlstring) (ty : type) (ilist : List (term × term))       (hl : ∀ (p : term × term), p ∈ ilist → ∃ x ty, p.fst = Var x ty), motive (Var x ty) ilist hl) →     (∀ (x : mlstring) (ty : type) (ilist : List (term × term))         (hl : ∀ (p : term × term), p ∈ ilist → ∃ x ty, p.fst = Var x ty), motive (Const x ty) ilist hl) →       (∀ (s t : term) (ilist : List (term × term)) (hl : ∀ (p : term × term), p ∈ ilist → ∃ x ty, p.fst = Var x ty),           motive (s.Comb t) ilist hl) →         (∀ (v t : term) (ilist : List (term × term)) (hl : ∀ (p : term × term), p ∈ ilist → ∃ x ty, p.fst = Var x ty),             motive (v.Abs t) ilist hl) →           motive x x_1 x_2
+L	CandleLean.SetSpec	true_	1	{U : Type u} → [Nonempty U] → (U → U → Prop) → U
+L	CandleLean.Prelude.Set	DISJOINT	1	{α : Type u} → Set α → Set α → Prop
+L	CandleLean.HolSyntaxExtra2	FINITE_VFREE_IN_2.match_1	0	(motive : mlstring × type → Sort u_1) →   (x : mlstring × type) → ((x : mlstring) → (ty : type) → motive (x, ty)) → motive x
+L	CandleLean.HolSemantics	instance_	1	{U : Type u} → [Nonempty U] → tmsig → interpretation U → mlstring → type → tyval U → U
+L	CandleLean.Prelude.Words	testbit	0	Nat → List Prop → Prop
+L	CandleLean.HolSyntaxExtra	dbterm_.brecOn.go	0	{motive : dbterm_ → Sort u} → (t : dbterm_) → ((t : dbterm_) → dbterm_.below t → motive t) → motive t ×' dbterm_.below t
+L	CandleLean.HolSyntaxExtra	subtype1.casesOn	0	∀ {a : type} {motive : (a_1 : type) → subtype1 a a_1 → Prop} {a_1 : type} (t : subtype1 a a_1),   (∀ (args : List type) (name : mlstring) (a_2 : MEM a args), motive (Tyapp name args) ⋯) → motive a_1 t
+L	CandleLean.Prelude.FiniteMap	FUN_FMAP	2	{α : Type u} → {β : Type v} → [Nonempty β] → (α → β) → Set α → fmap α β
+L	CandleLean.Prelude.ASCIInumbers	l2n.match_1	0	(motive : List Nat → Sort u_1) →   (x : List Nat) → (Unit → motive []) → ((h : Nat) → (t : List Nat) → motive (h :: t)) → motive x
+L	CandleLean.Misc	app_list.brecOn	1	{α : Type u} →   {motive : app_list α → Sort u_1} → (t : app_list α) → ((t : app_list α) → app_list.below t → motive t) → motive t
+L	CandleLean.Prelude.Set	SURJ	2	{α : Type u} → {β : Type v} → (α → β) → Set α → Set β → Prop
+L	CandleLean.HolSyntax	axioms_of_upd	0	update → List term
+L	CandleLean.Misc	app_list.noConfusion	3	{P : Sort u_1} →   {α : Type u} →     {t : app_list α} → {α' : Type u} → {t' : app_list α'} → α = α' → t ≍ t' → app_list.noConfusionType P t t'
+L	CandleLean.HolSyntaxLib	ALPHAVARS	1	{α : Type u} → List (α × α) → α × α → Prop
+L	CandleLean.Prelude.FiniteMap	FLOOKUP	2	{α : Type u} → {β : Type v} → [Nonempty β] → fmap α β → α → Option β
+L	CandleLean.HolSyntax	HasTmsof.casesOn	1	{α : Type} →   {motive : HasTmsof α → Sort u} → (t : HasTmsof α) → ((tmsof : α → tmsig) → motive { tmsof := tmsof }) → motive t
+L	CandleLean.SetSpec	false_	1	{U : Type u} → [Nonempty U] → (U → U → Prop) → U
+L	CandleLean.HolSyntax	has_type.below.casesOn	0	∀ {motive : (a : term) → (a_1 : type) → has_type a a_1 → Prop}   {motive_1 : {a : term} → {a_1 : type} → (t : has_type a a_1) → has_type.below t → Prop} {a : term} {a_1 : type}   {t : has_type a a_1} (t_1 : has_type.below t),   (∀ (n : mlstring) (ty : type), motive_1 ⋯ ⋯) →     (∀ (n : mlstring) (ty : type), motive_1 ⋯ ⋯) →       (∀ (s t : term) (dty rty : type) (a : has_type s (Fun dty rty)) (a_2 : has_type t dty) (ih : has_type.below a)           (a_ih : motive s (Fun dty rty) a) (ih_1 : has_type.below a_2) (a_ih_1 : motive t dty a_2), motive_1 ⋯ ⋯) →         (∀ (n : mlstring) (dty : type) (t : term) (rty : type) (a : has_type t rty) (ih : has_type.below a)             (a_ih : motive t rty a), motive_1 ⋯ ⋯) →           motive_1 t t_1
+L	CandleLean.HolSyntaxLib	result.ctorElim	1	{α : Type u} →   {motive : result α → Sort u_1} →     (ctorIdx : Nat) → (t : result α) → ctorIdx = t.ctorIdx → result.ctorElimType ctorIdx → motive t
+L	CandleLean.HolSyntax	HasTysof.mk.noConfusion	2	{α : Type} →   {P : Sort u} → {tysof tysof' : α → tysig} → { tysof := tysof } = { tysof := tysof' } → (tysof ≍ tysof' → P) → P
+L	CandleLean.Prelude.Basic	instReprOrdering_1.repr	0	ordering → Nat → Format
+L	CandleLean.Misc	instInhabitedApp_list	1	{a : Type u_1} → Inhabited (app_list a)
+L	CandleLean.HolSemantics	models	1	{U : Type u} → [Nonempty U] → (U → U → Prop) → interpretation U → thy → Prop
+L	CandleLean.Mlstring	app_list_ann	1	Type u → Type u
+L	CandleLean.Prelude.Basic	ordering.GREATER	0	ordering
+L	CandleLean.HolSemantics	is_std_interpretation	1	{U : Type u} → [Nonempty U] → (U → U → Prop) → interpretation U → Prop
+L	CandleLean.HolSyntax	RACONV.below.const	0	∀ {motive : (a : List (term × term)) → (a_1 : term × term) → RACONV a a_1 → Prop} (env : List (term × term))   (x : mlstring) (ty : type), RACONV.below ⋯
+L	CandleLean.HolSyntax	term.ctorElimType	0	{motive : term → Sort u} → Nat → Sort (max 1 u)
+L	CandleLean.HolSyntaxExtra	subterm1.casesOn	0	∀ {motive : (a a_1 : term) → subterm1 a a_1 → Prop} {a a_1 : term} (t : subterm1 a a_1),   (∀ (t1 t2 : term), motive t1 (t1.Comb t2) ⋯) →     (∀ (t1 t2 : term), motive t2 (t1.Comb t2) ⋯) →       (∀ (tm v : term), motive tm (v.Abs tm) ⋯) → (∀ (v tm : term), motive v (v.Abs tm) ⋯) → motive a a_1 t
+L	CandleLean.HolSyntaxExtra	dbterm_.dbComb.elim	0	{motive : dbterm_ → Sort u} → (t : dbterm_) → t.ctorIdx = 3 → ((a a_1 : dbterm_) → motive (a.dbComb a_1)) → motive t
+L	CandleLean.Prelude.ASCIInumbers	l2n	0	Nat → List Nat → Nat
+L	CandleLean.HolSyntaxExtra	simple_inst	0	List (type × type) → term → term
+L	CandleLean.HolSyntax	type.noConfusion	1	{P : Sort u} → {t t' : type} → t = t' → type.noConfusionType P t t'
+L	CandleLean.HolSyntax	type.ctorIdx	0	type → Nat
+L	CandleLean.SetSpec	union	1	{U : Type u} → [Nonempty U] → (U → U → Prop) → U → U
+L	CandleLean.Mlstring	mlstring.casesOn	0	{motive : mlstring → Sort u} → (t : mlstring) → ((a : string) → motive (implode a)) → motive t
+L	CandleLean.Mlstring	explode	0	mlstring → string
+L	CandleLean.HolSyntax	update.TypeDefn.noConfusion	1	{P : Sort u} →   {a : mlstring} →     {a_1 : term} →       {a_2 a_3 a' : mlstring} →         {a'_1 : term} →           {a'_2 a'_3 : mlstring} →             TypeDefn a a_1 a_2 a_3 = TypeDefn a' a'_1 a'_2 a'_3 →               (a = a' → a_1 = a'_1 → a_2 = a'_2 → a_3 = a'_3 → P) → P
+L	CandleLean.Prelude.Set	instInterSet	1	{α : Type u} → Inter (Set α)
+L	CandleLean.HolSyntax	equation	0	term → term → term
+L	CandleLean.HolSyntax	proves.ABS	0	∀ (x : mlstring) (ty : type) (h : List term) (thy : thy) (l r : term),   ¬EXISTS (VFREE_IN (Var x ty)) h →     type_ok (tysof thy) ty → proves (thy, h) (l === r) → proves (thy, h) ((Var x ty).Abs l === (Var x ty).Abs r)
+L	CandleLean.HolSemantics	inhabited	1	{U : Type u} → (U → U → Prop) → U → Prop
+L	CandleLean.HolSyntax	type.noConfusionType	1	Sort u → type → type → Sort u
+L	CandleLean.Prelude.String	char.casesOn	0	{motive : char → Sort u} →   (t : char) → ((ORD : Nat) → (ORD_lt : ORD < 256) → motive { ORD := ORD, ORD_lt := ORD_lt }) → motive t
+L	CandleLean.Mlstring	strsub.match_1	0	(motive : mlstring → Nat → Sort u_1) →   (x : mlstring) → (x_1 : Nat) → ((s : string) → (n : Nat) → motive (implode s) n) → motive x x_1
+L	CandleLean.Prelude.List	SNOC	1	{α : Type u} → α → List α → List α
+L	CandleLean.HolSyntax	HasTysof.casesOn	1	{α : Type} →   {motive : HasTysof α → Sort u} → (t : HasTysof α) → ((tysof : α → tysig) → motive { tysof := tysof }) → motive t
+L	CandleLean.HolSyntaxExtra	db.match_1	0	(motive : term → Sort u_1) →   (x : term) →     ((x : mlstring) → (ty : type) → motive (Var x ty)) →       ((x : mlstring) → (ty : type) → motive (Const x ty)) →         ((t1 t2 : term) → motive (t1.Comb t2)) → ((v tm : term) → motive (v.Abs tm)) → motive x
+L	CandleLean.HolSyntax	theory_ok	0	thy → Prop
+L	CandleLean.Prelude.String	instInhabitedChar	0	Inhabited char
+L	CandleLean.Prelude.Set	GSPEC	2	{α : Type u} → {β : Sort v} → (β → α × Prop) → Set α
+L	CandleLean.HolSyntaxExtra	subterm1	0	term → term → Prop
+L	CandleLean.HolSyntax	type_list	0	List update → List (mlstring × Nat)
+L	CandleLean.HolSyntaxExtra	arities_match	0	List type → List type → Prop
+L	CandleLean.HolSyntaxExtra	subtype1.intro	0	∀ (a : type) (args : List type) (name : mlstring), MEM a args → subtype1 a (Tyapp name args)
+L	CandleLean.HolSyntax	HasSigof.recOn	1	{α : Type} →   {motive : HasSigof α → Sort u} → (t : HasSigof α) → ((sigof : α → sig) → motive { sigof := sigof }) → motive t
+L	CandleLean.HolSyntax	term.Comb	0	term → term → term
+L	CandleLean.Prelude.Basic	trichotomous	1	{α : Sort u} → (α → α → Prop) → Prop
+L	CandleLean.HolSyntax	RACONV.below	0	{motive : (a : List (term × term)) → (a_1 : term × term) → RACONV a a_1 → Prop} →   {a : List (term × term)} → {a_1 : term × term} → RACONV a a_1 → Prop
+L	CandleLean.Mlstring	mlstring_lt	0	mlstring → mlstring → Prop
+L	CandleLean.Misc	SmartAppend	1	{α : Type u} → app_list α → app_list α → app_list α
+L	CandleLean.HolSyntax	HasSigof.casesOn	1	{α : Type} →   {motive : HasSigof α → Sort u} → (t : HasSigof α) → ((sigof : α → sig) → motive { sigof := sigof }) → motive t
+L	CandleLean.Prelude.Basic	TO_of_LinearOrder	1	{α : Sort u} → (α → α → Prop) → α → α → ordering
+L	CandleLean.HolSemantics	tyvof	1	{U : Type u} → valuation U → tyval U
+L	CandleLean.HolSyntaxLib	LIST_UNION	1	{α : Type u} → List α → List α → List α
+L	CandleLean.Mlstring	sum_sizes	0	List mlstring → Nat → Nat
+L	CandleLean.HolSyntax	update.ConstSpec.elim	0	{motive : update → Sort u} →   (t : update) → t.ctorIdx = 0 → ((a : List (mlstring × term)) → (a_1 : term) → motive (ConstSpec a a_1)) → motive t
+L	CandleLean.HolSyntax	is_std_sig	0	sig → Prop
+L	CandleLean.Mlstring	str_app_list_opt	0	app_list mlstring → app_list mlstring
+L	CandleLean.Misc	app_list.Nil.elim	1	{α : Type u} → {motive : app_list α → Sort u_1} → (t : app_list α) → t.ctorIdx = 2 → motive app_list.Nil → motive t
+L	CandleLean.HolSyntax	type_ok	0	tysig → type → Prop
+L	CandleLean.Prelude.Sptree	sptree.spt.BN.noConfusion	2	{α : Type u} → {P : Sort u_1} → {a a_1 a' a'_1 : sptree.spt α} → a.BN a_1 = a'.BN a'_1 → (a ≍ a' → a_1 ≍ a'_1 → P) → P
+L	CandleLean.HolSyntax	has_type.below.const	0	∀ {motive : (a : term) → (a_1 : type) → has_type a a_1 → Prop} (n : mlstring) (ty : type), has_type.below ⋯
+L	CandleLean.HolSyntax	term.Comb.elim	0	{motive : term → Sort u} → (t : term) → t.ctorIdx = 2 → ((a a_1 : term) → motive (a.Comb a_1)) → motive t
+L	CandleLean.HolSyntaxLib	result.recOn	1	{α : Type u} →   {motive : result α → Sort u_1} →     (t : result α) → ((a : α) → motive (Clash a)) → ((a : α) → motive (Result a)) → motive t
+L	CandleLean.HolSyntax	term_image	0	(term → term) → List term → List term
+L	CandleLean.HolSyntax	RACONV.below.casesOn	0	∀ {motive : (a : List (term × term)) → (a_1 : term × term) → RACONV a a_1 → Prop}   {motive_1 : {a : List (term × term)} → {a_1 : term × term} → (t : RACONV a a_1) → RACONV.below t → Prop}   {a : List (term × term)} {a_1 : term × term} {t : RACONV a a_1} (t_1 : RACONV.below t),   (∀ (env : List (term × term)) (x1 : mlstring) (ty1 : type) (x2 : mlstring) (ty2 : type)       (a : ALPHAVARS env (Var x1 ty1, Var x2 ty2)), motive_1 ⋯ ⋯) →     (∀ (env : List (term × term)) (x : mlstring) (ty : type), motive_1 ⋯ ⋯) →       (∀ (env : List (term × term)) (s1 s2 t1 t2 : term) (a : RACONV env (s1, s2)) (a_2 : RACONV env (t1, t2))           (ih : RACONV.below a) (a_ih : motive env (s1, s2) a) (ih_1 : RACONV.below a_2)           (a_ih_1 : motive env (t1, t2) a_2), motive_1 ⋯ ⋯) →         (∀ (env : List (term × term)) (v1 v2 t1 t2 : term) (a : typeof v1 = typeof v2)             (a_2 : RACONV ((v1, v2) :: env) (t1, t2)) (ih : RACONV.below a_2)             (a_ih : motive ((v1, v2) :: env) (t1, t2) a_2), motive_1 ⋯ ⋯) →           motive_1 t t_1
+L	CandleLean.HolSyntax	proves.MK_COMB	0	∀ (thy : thy) (h1 h2 : List term) (l1 r1 l2 r2 : term),   proves (thy, h1) (l1 === r1) →     proves (thy, h2) (l2 === r2) → welltyped (l1.Comb l2) → proves (thy, term_union h1 h2) (l1.Comb l2 === r1.Comb r2)
+L	CandleLean.HolSyntax	has_type	0	term → type → Prop
+L	CandleLean.Prelude.Basic	cpn	0	Type
+L	CandleLean.Prelude.FiniteMap	is_fmap.below.casesOn	2	∀ {α : Type u} {β : Type v} {motive : (a : α → β ⊕ Unit) → is_fmap a → Prop}   {motive_1 : {a : α → β ⊕ Unit} → (t : is_fmap a) → is_fmap.below t → Prop} {a : α → β ⊕ Unit} {t : is_fmap a}   (t_1 : is_fmap.below t),   motive_1 ⋯ ⋯ →     (∀ (f : α → β ⊕ Unit) (a : α) (b : β) (a_1 : is_fmap f) (ih : is_fmap.below a_1) (a_ih : motive f a_1),         motive_1 ⋯ ⋯) →       motive_1 t t_1
+L	CandleLean.HolSyntaxExtra	db	0	term → dbterm_
+L	CandleLean.HolSyntax	TYPE_SUBST.match_1	0	(motive : type → Sort u_1) →   (x : type) →     ((v : mlstring) → motive (Tyvar v)) → ((v : mlstring) → (tys : List type) → motive (Tyapp v tys)) → motive x
+L	CandleLean.HolSyntaxExtra	dbterm_.noConfusionType	1	Sort u → dbterm_ → dbterm_ → Sort u
+L	CandleLean.HolSemantics	interpretation	1	Type u → Type u
+L	CandleLean.Misc	app_list.noConfusionType	3	Sort u_1 → {α : Type u} → app_list α → {α' : Type u} → app_list α' → Sort u_1
+L	CandleLean.HolSyntax	Equal	0	type → term
+L	CandleLean.Mlstring	instDecidableEqMlstring.decEq	0	(x x_1 : mlstring) → Decidable (x = x_1)
+L	CandleLean.HolSyntax	update.NewAxiom.noConfusion	1	{P : Sort u} → {a a' : term} → NewAxiom a = NewAxiom a' → (a = a' → P) → P
+L	CandleLean.HolSyntaxExtra	ConstDef	0	mlstring → term → update
+L	CandleLean.Prelude.String	CHR	0	Nat → char
+L	CandleLean.Misc	app_list.below	1	{α : Type u} → {motive : app_list α → Sort u_1} → app_list α → Sort (max (u + 1) u_1)
+L	CandleLean.Prelude.Basic	antisymmetric	1	{α : Sort u} → (α → α → Prop) → Prop
+L	CandleLean.HolSyntax	dest_var.match_1	0	(motive : term → Sort u_1) →   (x : term) → ((x : mlstring) → (ty : type) → motive (Var x ty)) → ((x : term) → motive x) → motive x
+L	CandleLean.Prelude.Basic	EVEN.match_1	0	(motive : Nat → Sort u_1) → (x : Nat) → (Unit → motive 0) → ((n : Nat) → motive n.succ) → motive x
+L	CandleLean.HolSyntax	proves.EQ_MP	0	∀ (thy : thy) (h1 h2 : List term) (p q p' : term),   proves (thy, h1) (p === q) → proves (thy, h2) p' → ACONV p p' → proves (thy, term_union h1 h2) q
+L	CandleLean.HolSyntax	instHasSigofListUpdate	0	HasSigof (List update)
+L	CandleLean.HolSyntax	term_cmp	0	term → term → ordering
+L	CandleLean.HolSyntax	updates	0	update → List update → Prop
+L	CandleLean.HolSyntax	types_of_upd.match_1	0	(motive : update → Sort u_1) →   (x : update) →     ((a : List (mlstring × term)) → (a_1 : term) → motive (ConstSpec a a_1)) →       ((name : mlstring) → (pred : term) → (a a_1 : mlstring) → motive (TypeDefn name pred a a_1)) →         ((name : mlstring) → (arity : Nat) → motive (NewType name arity)) →           ((a : mlstring) → (a_1 : type) → motive (NewConst a a_1)) → ((a : term) → motive (NewAxiom a)) → motive x
+L	CandleLean.Prelude.List	FLAT	1	{α : Type u} → List (List α) → List α
+L	CandleLean.HolSyntaxExtra	arities_match.match_1	0	(motive : List type → List type → Sort u_1) →   (x x_1 : List type) →     (Unit → motive [] []) →       ((head : type) → (tail : List type) → motive [] (head :: tail)) →         ((head : type) → (tail : List type) → motive (head :: tail) []) →           ((c1 : mlstring) →               (a1 xs : List type) →                 (c2 : mlstring) → (a2 ys : List type) → motive (Tyapp c1 a1 :: xs) (Tyapp c2 a2 :: ys)) →             ((head : type) →                 (xs : List type) → (head_1 : type) → (ys : List type) → motive (head :: xs) (head_1 :: ys)) →               motive x x_1
+L	CandleLean.Misc	app_list.casesOn	1	{α : Type u} →   {motive : app_list α → Sort u_1} →     (t : app_list α) →       ((a : List α) → motive (app_list.List a)) →         ((a a_1 : app_list α) → motive (a.Append a_1)) → motive app_list.Nil → motive t
+L	CandleLean.HolSyntax	HasAxsof.axsof	1	{α : Type} → [self : HasAxsof α] → α → Set term
+L	CandleLean.Prelude.Sptree	sptree.spt.BN.elim	1	{α : Type u} →   {motive : sptree.spt α → Sort u_1} →     (t : sptree.spt α) → t.ctorIdx = 2 → ((a a_1 : sptree.spt α) → motive (a.BN a_1)) → motive t
+L	CandleLean.HolSyntax	term.Var.noConfusion	1	{P : Sort u} →   {a : mlstring} →     {a_1 : type} → {a' : mlstring} → {a'_1 : type} → Var a a_1 = Var a' a'_1 → (a = a' → a_1 = a'_1 → P) → P
+L	CandleLean.Prelude.FiniteMap	is_fmap.recOn	2	∀ {α : Type u} {β : Type v} {motive : (a : α → β ⊕ Unit) → is_fmap a → Prop} {a : α → β ⊕ Unit} (t : is_fmap a),   motive (fun x => Sum.inr ()) ⋯ →     (∀ (f : α → β ⊕ Unit) (a : α) (b : β) (a_1 : is_fmap f),         motive f a_1 → motive (fun x => if x = a then Sum.inl b else f x) ⋯) →       motive a t
+L	CandleLean.HolSemantics	tmvof	1	{U : Type u} → valuation U → tmval U
+L	CandleLean.Prelude.List	SORTED	1	{α : Type u} → (α → α → Prop) → List α → Prop
+L	CandleLean.HolSyntax	VARIANT	0	term → string → type → mlstring
+L	CandleLean.Prelude.Basic	UPDATE	2	{α : Sort u} → {β : Sort v} → α → β → (α → β) → α → β
+L	CandleLean.HolSyntax	update.ConstSpec	0	List (mlstring × term) → term → update
+L	CandleLean.SetSpec	is_power	1	{U : Type u} → (U → U → Prop) → (U → U) → Prop
+L	CandleLean.Misc	app_list.Append.noConfusion	2	{α : Type u} →   {P : Sort u_1} → {a a_1 a' a'_1 : app_list α} → a.Append a_1 = a'.Append a'_1 → (a ≍ a' → a_1 ≍ a'_1 → P) → P
+L	CandleLean.Prelude.Sptree	sptree.num_map	1	Type u → Type u
+L	CandleLean.HolSyntax	instHasTmsofThy	0	HasTmsof thy
+L	CandleLean.Mlstring	mlstring.noConfusionType	1	Sort u → mlstring → mlstring → Sort u
+L	CandleLean.Mlstring	chr_to_str	0	char → mlstring
+L	CandleLean.Prelude.List	EVERY2	2	{α : Type u} → {β : Type v} → (α → β → Prop) → List α → List β → Prop
+L	CandleLean.HolSyntaxLib	STRING_SORT	0	List string → List string
+L	CandleLean.Mlstring	instInhabitedApp_list_ann	1	{a : Type u_1} → Inhabited (app_list_ann a)
+L	CandleLean.HolSyntax	RACONV.abs	0	∀ (env : List (term × term)) (v1 v2 t1 t2 : term),   typeof v1 = typeof v2 → RACONV ((v1, v2) :: env) (t1, t2) → RACONV env (v1.Abs t1, v2.Abs t2)
+L	CandleLean.HolSyntaxLib	REV_ASSOCD.match_1	2	{α : Type u_2} →   {β : Type u_1} →     (motive : β → List (α × β) → α → Sort u_3) →       (x : β) →         (x_1 : List (α × β)) →           (x_2 : α) →             ((x : β) → (d : α) → motive x [] d) →               ((a : β) → (p : α × β) → (t : List (α × β)) → (d : α) → motive a (p :: t) d) → motive x x_1 x_2
+L	CandleLean.HolSyntaxExtra	dbterm_.ctorElimType	0	{motive : dbterm_ → Sort u} → Nat → Sort (max 1 u)
+L	CandleLean.HolSyntaxExtra	dbterm_.brecOn	0	{motive : dbterm_ → Sort u} → (t : dbterm_) → ((t : dbterm_) → dbterm_.below t → motive t) → motive t
+L	CandleLean.HolSyntax	type	0	Type
+L	CandleLean.Prelude.Basic	ordering.casesOn	0	{motive : ordering → Sort u} → (t : ordering) → motive LESS → motive EQUAL → motive GREATER → motive t
+L	CandleLean.HolSyntax	proves.below.BETA	0	∀ {motive : (a : thy × List term) → (a_1 : term) → proves a a_1 → Prop} (thy : thy) (ty : type) (t : term)   (x : mlstring) (a : theory_ok thy) (a_1 : type_ok (tysof thy) ty) (a_2 : term_ok (sigof thy) t), proves.below ⋯
+L	CandleLean.Prelude.List	termSet	0	ParserDescr
+L	CandleLean.HolSyntaxLib	RESULT	1	{α : Type u} → [Nonempty α] → result α → α
+L	CandleLean.Prelude.Basic	ordering.ctorElim	0	{motive : ordering → Sort u} →   (ctorIdx : Nat) → (t : ordering) → ctorIdx = t.ctorIdx → ordering.ctorElimType ctorIdx → motive t
+L	CandleLean.Mlstring	shrink	0	app_list_ann mlstring → app_list mlstring
+L	CandleLean.Prelude.FiniteMap	is_fmap.casesOn	2	∀ {α : Type u} {β : Type v} {motive : (a : α → β ⊕ Unit) → is_fmap a → Prop} {a : α → β ⊕ Unit} (t : is_fmap a),   motive (fun x => Sum.inr ()) ⋯ →     (∀ (f : α → β ⊕ Unit) (a : α) (b : β) (a_1 : is_fmap f), motive (fun x => if x = a then Sum.inl b else f x) ⋯) →       motive a t
+L	CandleLean.Prelude.Sptree	sptree.spt.BN	1	{α : Type u} → sptree.spt α → sptree.spt α → sptree.spt α
+L	CandleLean.Prelude.List	MAX_LIST.match_1	0	(motive : List Nat → Sort u_1) →   (x : List Nat) → (Unit → motive []) → ((h : Nat) → (t : List Nat) → motive (h :: t)) → motive x
+L	CandleLean.Prelude.Basic	K	2	{α : Sort u} → {β : Sort v} → α → β → α
+L	CandleLean.Mlstring	mlstring.implode	0	string → mlstring
+L	CandleLean.HolSyntax	types_of_upd	0	update → List (mlstring × Nat)
+L	CandleLean.Prelude.FiniteMap	is_fmap.below.empty	2	∀ {α : Type u} {β : Type v} {motive : (a : α → β ⊕ Unit) → is_fmap a → Prop}, is_fmap.below ⋯
+L	CandleLean.Misc	app_list.Append.elim	1	{α : Type u} →   {motive : app_list α → Sort u_1} →     (t : app_list α) → t.ctorIdx = 1 → ((a a_1 : app_list α) → motive (a.Append a_1)) → motive t
+L	CandleLean.HolSyntax	term_lt	0	term → term → Prop
+L	CandleLean.Prelude.List	ALL_DISTINCT	1	{α : Type u} → List α → Prop
+L	CandleLean.Prelude.Words	instDecidableEqWord.decEq	0	{d : Nat} → (x x_1 : word d) → Decidable (x = x_1)
+L	CandleLean.Prelude.List	FRONT	1	{α : Type u} → List α → List α
+L	CandleLean.SetSpec	binary_union	1	{U : Type u} → [Nonempty U] → (U → U → Prop) → U → U → U
+L	CandleLean.Prelude.String	char.ORD	0	char → Nat
+L	CandleLean.HolSyntaxExtra	dbterm_.recOn	0	{motive : dbterm_ → Sort u} →   (t : dbterm_) →     ((a : mlstring) → (a_1 : type) → motive (dbVar a a_1)) →       ((a : Nat) → motive (dbBound a)) →         ((a : mlstring) → (a_1 : type) → motive (dbConst a a_1)) →           ((a a_1 : dbterm_) → motive a → motive a_1 → motive (a.dbComb a_1)) →             ((a : type) → (a_1 : dbterm_) → motive a_1 → motive (dbAbs a a_1)) → motive t
+L	CandleLean.HolSyntax	type_lt	0	type → type → Prop
+L	CandleLean.Mlstring	app_list_ann.noConfusionType	3	Sort u_1 → {α : Type u} → app_list_ann α → {α' : Type u} → app_list_ann α' → Sort u_1
+L	CandleLean.HolSyntax	type.Tyapp	0	mlstring → List type → type
+L	CandleLean.SetSpec	pair	1	{U : Type u} → [Nonempty U] → (U → U → Prop) → U → U → U
+L	CandleLean.Prelude.Basic	RTC.refl	1	∀ {α : Sort u} {R : α → α → Prop} (x : α), RTC R x x
+L	CandleLean.HolSyntax	type.Tyapp.noConfusion	1	{P : Sort u} →   {a : mlstring} →     {a_1 : List type} →       {a' : mlstring} → {a'_1 : List type} → Tyapp a a_1 = Tyapp a' a'_1 → (a = a' → a_1 = a'_1 → P) → P
+L	CandleLean.HolSyntax	update.ctorIdx	0	update → Nat
+L	CandleLean.HolSyntax	HasAxsof.recOn	1	{α : Type} →   {motive : HasAxsof α → Sort u} → (t : HasAxsof α) → ((axsof : α → Set term) → motive { axsof := axsof }) → motive t
+L	CandleLean.HolSyntax	term.Var	0	mlstring → type → term
+L	CandleLean.SetSpec	apply	1	{U : Type u} → [Nonempty U] → (U → U → Prop) → U → U → U
+L	CandleLean.HolSyntax	proves.below.INST	0	∀ {motive : (a : thy × List term) → (a_1 : term) → proves a a_1 → Prop} (ilist : List (term × term)) (thy : thy)   (h : List term) (c : term)   (a : ∀ (s s' : term), MEM (s', s) ilist → ∃ x ty, s = Var x ty ∧ has_type s' ty ∧ term_ok (sigof thy) s')   (a_1 : proves (thy, h) c), proves.below a_1 → motive (thy, h) c a_1 → proves.below ⋯
+L	CandleLean.Prelude.FiniteMap	is_fmap.below.update	2	∀ {α : Type u} {β : Type v} {motive : (a : α → β ⊕ Unit) → is_fmap a → Prop} (f : α → β ⊕ Unit) (a : α) (b : β)   (a_1 : is_fmap f), is_fmap.below a_1 → motive f a_1 → is_fmap.below ⋯
+L	CandleLean.Prelude.List	FILTER	1	{α : Type u} → (α → Prop) → List α → List α
+L	CandleLean.HolSyntaxExtra	dbterm_	0	Type
+L	CandleLean.HolSyntaxLib	REV_ASSOCD_ALOOKUP.match_1	1	{α : Type u_1} →   (motive : Option α → Sort u_2) → (x : Option α) → (Unit → motive none) → ((y : α) → motive (some y)) → motive x
+L	CandleLean.Prelude.List	LIST_REL.match_1	2	{α : Type u_1} →   {β : Type u_2} →     (motive : List α → List β → Sort u_3) →       (x : List α) →         (x_1 : List β) →           (Unit → motive [] []) →             ((head : α) → (tail : List α) → motive (head :: tail) []) →               ((head : β) → (tail : List β) → motive [] (head :: tail)) →                 ((a : α) → (as : List α) → (b : β) → (bs : List β) → motive (a :: as) (b :: bs)) → motive x x_1
+L	CandleLean.HolSemantics	tmaof	1	{U : Type u} → interpretation U → tmass U
+L	CandleLean.Prelude.FiniteMap	instInhabitedFmap	2	{α : Type u} → {β : Type v} → Inhabited (fmap α β)
+L	CandleLean.HolSyntax	thy	0	Type
+L	CandleLean.HolSyntaxExtra	dbterm	0	List (mlstring × type) → term → dbterm_
+L	CandleLean.HolSyntax	HasTmsof.recOn	1	{α : Type} →   {motive : HasTmsof α → Sort u} → (t : HasTmsof α) → ((tmsof : α → tmsig) → motive { tmsof := tmsof }) → motive t
+L	CandleLean.HolSyntax	hypset_ok	0	List term → Prop
+L	CandleLean.Misc	find_index.match_1	1	{α : Type u_1} →   (motive : α → List α → Nat → Sort u_2) →     (x : α) →       (x_1 : List α) →         (x_2 : Nat) →           ((x : α) → (x_3 : Nat) → motive x [] x_3) →             ((y x : α) → (xs : List α) → (n : Nat) → motive y (x :: xs) n) → motive x x_1 x_2
+L	CandleLean.HolSyntax	orda.match_1	0	(motive : term → term → Sort u_1) →   (t1 t2 : term) →     ((a : mlstring) → (a_1 : type) → (a_2 : mlstring) → (a_3 : type) → motive (Var a a_1) (Var a_2 a_3)) →       ((a : mlstring) → (a_1 : type) → (a_2 : mlstring) → (a_3 : type) → motive (Const a a_1) (Const a_2 a_3)) →         ((s1 t1' s2 t2' : term) → motive (s1.Comb t1') (s2.Comb t2')) →           ((s1 t1' s2 t2' : term) → motive (s1.Abs t1') (s2.Abs t2')) →             ((a : mlstring) → (a_1 : type) → (x : term) → motive (Var a a_1) x) →               ((x : term) → (a : mlstring) → (a_1 : type) → motive x (Var a a_1)) →                 ((a : mlstring) → (a_1 : type) → (x : term) → motive (Const a a_1) x) →                   ((x : term) → (a : mlstring) → (a_1 : type) → motive x (Const a a_1)) →                     ((a a_1 x : term) → motive (a.Comb a_1) x) →                       ((x a a_1 : term) → motive x (a.Comb a_1)) → motive t1 t2
+L	CandleLean.HolSyntaxExtra	rename_bvars	0	List mlstring → List (mlstring × mlstring × type) → term → List mlstring × term
+L	CandleLean.HolSyntax	HasAxsof.casesOn	1	{α : Type} →   {motive : HasAxsof α → Sort u} → (t : HasAxsof α) → ((axsof : α → Set term) → motive { axsof := axsof }) → motive t
+L	CandleLean.Prelude.String	SPLITP_snd_length_le.match_1_1	1	∀ {α : Type u_1} (motive : List α → Prop) (x : List α),   (∀ (a : Unit), motive []) → (∀ (x : α) (l : List α), motive (x :: l)) → motive x
+L	CandleLean.Prelude.List	LIST_REL	2	{α : Type u} → {β : Type v} → (α → β → Prop) → List α → List β → Prop
+L	CandleLean.Prelude.Sptree	sptree.spt.LN.elim	1	{α : Type u} → {motive : sptree.spt α → Sort u_1} → (t : sptree.spt α) → t.ctorIdx = 0 → motive sptree.LN → motive t
+L	CandleLean.Prelude.Basic	TotOrd	1	{α : Sort u} → (α → α → ordering) → Prop
+L	CandleLean.Prelude.Sptree	sptree.domain	1	{α : Type u} → sptree.spt α → Set Nat
+L	CandleLean.HolSyntax	term.ctorIdx	0	term → Nat
+L	CandleLean.Mlstring	strlen	0	mlstring → Nat
+L	CandleLean.HolSyntax	update.ConstSpec.noConfusion	1	{P : Sort u} →   {a : List (mlstring × term)} →     {a_1 : term} →       {a' : List (mlstring × term)} →         {a'_1 : term} → ConstSpec a a_1 = ConstSpec a' a'_1 → (a = a' → a_1 = a'_1 → P) → P
+L	CandleLean.SetSpec	empty	1	{U : Type u} → [Nonempty U] → (U → U → Prop) → U
+L	CandleLean.Prelude.List	LLEX	1	{α : Type u} → (α → α → Prop) → List α → List α → Prop
+L	CandleLean.HolSyntax	thyof	0	List update → thy
+L	CandleLean.Prelude.Basic	RTC.below.casesOn	1	∀ {α : Sort u} {R : α → α → Prop} {motive : (a a_1 : α) → RTC R a a_1 → Prop}   {motive_1 : {a a_1 : α} → (t : RTC R a a_1) → RTC.below t → Prop} {a a_1 : α} {t : RTC R a a_1} (t_1 : RTC.below t),   (∀ (x : α), motive_1 ⋯ ⋯) →     (∀ (x y z : α) (a : R x y) (a_2 : RTC R y z) (ih : RTC.below a_2) (a_ih : motive y z a_2), motive_1 ⋯ ⋯) →       motive_1 t t_1
+L	CandleLean.Misc	APPLY_UPDATE_LIST_ALOOKUP.match_1	1	{β : Type} →   (motive : Option β → Sort u_1) → (x : Option β) → (Unit → motive none) → ((y : β) → motive (some y)) → motive x
+L	CandleLean.Prelude.List	HD	1	{α : Type u} → [Nonempty α] → List α → α
+L	CandleLean.HolSyntax	axexts_of_upd	0	update → List term
+L	CandleLean.HolSyntax	TYPE_SUBST	0	List (type × type) → type → type
+L	CandleLean.HolSyntaxExtra	types_in	0	term → Set type
+L	CandleLean.HolSyntax	HasSigof.noConfusionType	3	Sort u → {α : Type} → HasSigof α → {α' : Type} → HasSigof α' → Sort u
+L	CandleLean.Prelude.List	isPREFIX.match_1	1	{α : Type u_1} →   (motive : List α → List α → Sort u_2) →     (x x_1 : List α) →       ((x : List α) → motive [] x) →         ((head : α) → (tail : List α) → motive (head :: tail) []) →           ((h : α) → (t : List α) → (h' : α) → (t' : List α) → motive (h :: t) (h' :: t')) → motive x x_1
+L	CandleLean.HolSyntax	instHasTysofSig	0	HasTysof sig
+L	CandleLean.HolSyntax	update.TypeDefn.elim	0	{motive : update → Sort u} →   (t : update) →     t.ctorIdx = 1 → ((a : mlstring) → (a_1 : term) → (a_2 a_3 : mlstring) → motive (TypeDefn a a_1 a_2 a_3)) → motive t
+L	CandleLean.Mlstring	mlstring.implode.noConfusion	1	{P : Sort u} → {a a' : string} → implode a = implode a' → (a = a' → P) → P
+L	CandleLean.HolSyntax	domain.match_1	0	(motive : type → Sort u_1) →   (ty : type) →     ((a : mlstring) → (x : type) → (tail : List type) → motive (Tyapp a (x :: tail))) →       ((x : type) → motive x) → motive ty
+L	CandleLean.HolSyntaxLib	result.ctorIdx	1	{α : Type u} → result α → Nat
+L	CandleLean.Misc	find_index	1	{α : Type u} → α → List α → Nat → Option Nat
+L	CandleLean.HolSyntax	proves.REFL	0	∀ (thy : thy) (t : term), theory_ok thy → term_ok (sigof thy) t → proves (thy, []) (t === t)
+L	CandleLean.Prelude.Basic	OUTL	2	{α : Type u_1} → {β : Type u_2} → [Nonempty α] → α ⊕ β → α
+L	CandleLean.Misc	app_list.recOn	1	{α : Type u} →   {motive : app_list α → Sort u_1} →     (t : app_list α) →       ((a : List α) → motive (app_list.List a)) →         ((a a_1 : app_list α) → motive a → motive a_1 → motive (a.Append a_1)) → motive app_list.Nil → motive t
+L	CandleLean.HolSyntaxExtra	dbINST	0	List (type × type) → dbterm_ → dbterm_
+L	CandleLean.Prelude.FiniteMap	is_fmap.empty	2	∀ {α : Type u} {β : Type v}, is_fmap fun x => Sum.inr ()
+L	CandleLean.Mlstring	app_list_ann.BigAppend.elim	1	{α : Type u} →   {motive : app_list_ann α → Sort u_1} →     (t : app_list_ann α) → t.ctorIdx = 1 → ((a a_1 : app_list_ann α) → motive (a.BigAppend a_1)) → motive t
+L	CandleLean.HolSyntax	term_ok	0	sig → term → Prop
+L	CandleLean.Prelude.Basic	ordering.EQUAL.elim	0	{motive : ordering → Sort u} → (t : ordering) → t.ctorIdx = 1 → motive EQUAL → motive t
+L	CandleLean.Misc	instInhabitedApp_list.default	1	{a : Type u_1} → app_list a
+L	CandleLean.Mlstring	termMls!_	0	ParserDescr
+L	CandleLean.Mlstring	app_list_ann.BigList	1	{α : Type u} → List α → app_list_ann α
+L	CandleLean.HolSyntax	type.casesOn	0	{motive_1 : type → Sort u} →   (t : type) →     ((a : mlstring) → motive_1 (Tyvar a)) → ((a : mlstring) → (a_1 : List type) → motive_1 (Tyapp a a_1)) → motive_1 t
+L	CandleLean.Mlstring	app_list_ann.BigAppend.noConfusion	2	{α : Type u} →   {P : Sort u_1} →     {a a_1 a' a'_1 : app_list_ann α} → a.BigAppend a_1 = a'.BigAppend a'_1 → (a ≍ a' → a_1 ≍ a'_1 → P) → P
+L	CandleLean.HolSyntax	proves.INST	0	∀ (ilist : List (term × term)) (thy : thy) (h : List term) (c : term),   (∀ (s s' : term), MEM (s', s) ilist → ∃ x ty, s = Var x ty ∧ has_type s' ty ∧ term_ok (sigof thy) s') →     proves (thy, h) c → proves (thy, term_image (VSUBST ilist) h) (VSUBST ilist c)
+L	CandleLean.HolSyntax	type.Tyvar	0	mlstring → type
+L	CandleLean.Prelude.Set	FINITE	1	{α : Type u} → Set α → Prop
+L	CandleLean.Prelude.String	char.noConfusionType	1	Sort u → char → char → Sort u
+L	CandleLean.HolSyntax	Fun	0	type → type → type
+L	CandleLean.Prelude.Sptree	sptree.spt.LS.elim	1	{α : Type u} →   {motive : sptree.spt α → Sort u_1} → (t : sptree.spt α) → t.ctorIdx = 1 → ((a : α) → motive (sptree.LS a)) → motive t
+L	CandleLean.HolSyntax	INST_CORE	0	List (term × term) → List (type × type) → term → result term
+L	CandleLean.Prelude.Set	instEmptyCollectionSet	1	{α : Type u} → EmptyCollection (Set α)
+L	CandleLean.Prelude.Basic	inv_image	2	{α : Sort u} → {β : Sort v} → (β → β → Prop) → (α → β) → α → α → Prop
+L	CandleLean.Misc	app_list	1	Type u → Type u
+L	CandleLean.HolSyntax	updates.new_constant	0	∀ (name : mlstring) (ctxt : List update) (ty : type),   ¬name ∈ FDOM (tmsof ctxt) → type_ok (tysof ctxt) ty → updates (NewConst name ty) ctxt
+L	CandleLean.HolSyntax	«term_===_»	0	TrailingParserDescr
+L	CandleLean.HolSyntax	instHasAxsofListUpdate	0	HasAxsof (List update)
+L	CandleLean.Prelude.List	EVERY_unattach.match_1	1	{α : Type u_1} →   {Q : α → Prop} → (motive : Subtype Q → Sort u_2) → (x : Subtype Q) → ((x : α) → (h : Q x) → motive ⟨x, h⟩) → motive x
+L	CandleLean.Prelude.Sptree	sptree.insert	1	{α : Type u} → Nat → α → sptree.spt α → sptree.spt α
+L	CandleLean.HolSyntaxLib	result.Result	1	{α : Type u} → α → result α
+L	CandleLean.HolSyntax	typeof.match_1	0	(motive : term → Sort u_1) →   (x : term) →     ((a : mlstring) → (ty : type) → motive (Var a ty)) →       ((a : mlstring) → (ty : type) → motive (Const a ty)) →         ((s a : term) → motive (s.Comb a)) → ((v t : term) → motive (v.Abs t)) → motive x
+L	CandleLean.Prelude.ASCIInumbers	n2s	0	Nat → (Nat → char) → Nat → string
+L	CandleLean.HolSyntax	proves.INST_TYPE	0	∀ (thy : thy) (tyin : List (type × type)) (h : List term) (c : term),   EVERY (type_ok (tysof thy)) (List.map Prod.fst tyin) →     proves (thy, h) c → proves (thy, term_image (INST tyin) h) (INST tyin c)
+L	CandleLean.Prelude.Basic	StrongOrder	1	{α : Sort u} → (α → α → Prop) → Prop
+L	CandleLean.HolSyntax	term_union	0	List term → List term → List term
+L	CandleLean.HolSyntax	axiom_list	0	List update → List term
+L	CandleLean.HolSyntax	RACONV.below.abs	0	∀ {motive : (a : List (term × term)) → (a_1 : term × term) → RACONV a a_1 → Prop} (env : List (term × term))   (v1 v2 t1 t2 : term) (a : typeof v1 = typeof v2) (a_1 : RACONV ((v1, v2) :: env) (t1, t2)),   RACONV.below a_1 → motive ((v1, v2) :: env) (t1, t2) a_1 → RACONV.below ⋯
+L	CandleLean.Mllist	sort	1	{α : Type u} → (α → α → Prop) → List α → List α
+L	CandleLean.Prelude.Sptree	sptree.spt.recOn	1	{α : Type u} →   {motive : sptree.spt α → Sort u_1} →     (t : sptree.spt α) →       motive sptree.LN →         ((a : α) → motive (sptree.LS a)) →           ((a a_1 : sptree.spt α) → motive a → motive a_1 → motive (a.BN a_1)) →             ((a : sptree.spt α) → (a_1 : α) → (a_2 : sptree.spt α) → motive a → motive a_2 → motive (a.BS a_1 a_2)) →               motive t
+L	CandleLean.HolSyntax	HasTysof.tysof	1	{α : Type} → [self : HasTysof α] → α → tysig
+L	CandleLean.Prelude.Words	word.noConfusion	1	{P : Sort u} → {d : Nat} → {t : word d} → {d' : Nat} → {t' : word d'} → d = d' → t ≍ t' → word.noConfusionType P t t'
+L	CandleLean.SetSpec	upair	1	{U : Type u} → [Nonempty U] → (U → U → Prop) → U → U → U
+L	CandleLean.HolSyntaxExtra	term_union_thm.match_1	0	(motive : ordering → Sort u_1) →   (x : ordering) → (Unit → motive EQUAL) → (Unit → motive LESS) → (Unit → motive GREATER) → motive x
+L	CandleLean.HolSemantics	tmass	1	Type u → Type u
+L	CandleLean.Prelude.ASCIInumbers	num_to_hex_string	0	Nat → string
+L	CandleLean.HolSyntax	VARIANT_PRIMES	0	term → string → type → Nat
+L	CandleLean.Prelude.FiniteMap	is_fmap.update	2	∀ {α : Type u} {β : Type v} (f : α → β ⊕ Unit) (a : α) (b : β),   is_fmap f → is_fmap fun x => if x = a then Sum.inl b else f x
+L	CandleLean.HolSyntax	type.brecOn.go	0	{motive_1 : type → Sort u} →   {motive_2 : List type → Sort u} →     (t : type) →       ((t : type) → t.below → motive_1 t) → ((t : List type) → type.below_1 t → motive_2 t) → motive_1 t ×' t.below
+L	CandleLean.Misc	append_aux	1	{α : Type u} → app_list α → List α → List α
+L	CandleLean.Mlstring	app_list_ann.recOn	1	{α : Type u} →   {motive : app_list_ann α → Sort u_1} →     (t : app_list_ann α) →       ((a : List α) → motive (BigList a)) →         ((a a_1 : app_list_ann α) → motive a → motive a_1 → motive (a.BigAppend a_1)) →           ((a : app_list α) → motive (Small a)) → motive t
+L	CandleLean.Prelude.List	EL	1	{α : Type u} → [Nonempty α] → Nat → List α → α
+L	CandleLean.SetSpec	boolean	1	{U : Type u} → [Nonempty U] → (U → U → Prop) → Prop → U
+L	CandleLean.HolSyntax	update.NewConst.noConfusion	1	{P : Sort u} →   {a : mlstring} →     {a_1 : type} → {a' : mlstring} → {a'_1 : type} → NewConst a a_1 = NewConst a' a'_1 → (a = a' → a_1 = a'_1 → P) → P
+L	CandleLean.Prelude.List	GENLIST.match_1	0	(motive : Nat → Sort u_1) → (x : Nat) → (Unit → motive 0) → ((n : Nat) → motive n.succ) → motive x
+L	CandleLean.Misc	max3	0	Nat → Nat → Nat → Nat
+L	CandleLean.Mlstring	mlstring.ctorIdx	0	mlstring → Nat
+L	CandleLean.HolSyntax	RACONV.var	0	∀ (env : List (term × term)) (x1 : mlstring) (ty1 : type) (x2 : mlstring) (ty2 : type),   ALPHAVARS env (Var x1 ty1, Var x2 ty2) → RACONV env (Var x1 ty1, Var x2 ty2)
+L	CandleLean.Mlstring	instInhabitedMlstring	0	Inhabited mlstring
+L	CandleLean.HolSyntax	VFREE_IN	0	term → term → Prop
+L	CandleLean.HolSyntax	term.ctorElim	0	{motive : term → Sort u} → (ctorIdx : Nat) → (t : term) → ctorIdx = t.ctorIdx → term.ctorElimType ctorIdx → motive t
+L	CandleLean.Prelude.Basic	ordering.ofNat	0	Nat → ordering
+L	CandleLean.SetSpec	abstract	1	{U : Type u} → [Nonempty U] → (U → U → Prop) → U → U → (U → U) → U
+L	CandleLean.Prelude.Basic	LEX	2	{α : Type u_1} → {β : Type u_2} → (α → α → Prop) → (β → β → Prop) → α × β → α × β → Prop
+L	CandleLean.Prelude.String	char.noConfusion	1	{P : Sort u} → {t t' : char} → t = t' → char.noConfusionType P t t'
+L	CandleLean.HolSyntax	RACONV.below.var	0	∀ {motive : (a : List (term × term)) → (a_1 : term × term) → RACONV a a_1 → Prop} (env : List (term × term))   (x1 : mlstring) (ty1 : type) (x2 : mlstring) (ty2 : type) (a : ALPHAVARS env (Var x1 ty1, Var x2 ty2)), RACONV.below ⋯
+L	CandleLean.HolSemantics	termsem	1	{U : Type u} → [Nonempty U] → (U → U → Prop) → tmsig → interpretation U → valuation U → term → U
+L	CandleLean.Mlstring	instInhabitedApp_list_ann.default	1	{a : Type u_1} → app_list_ann a
+L	CandleLean.Mlstring	make_app_list_ann.match_1	0	(motive : app_list mlstring → Sort u_1) →   (x : app_list mlstring) →     ((input : app_list mlstring) → (h : input = app_list.Nil) → motive (namedPattern input app_list.Nil h)) →       ((input l1 l2 : app_list mlstring) → (h : input = l1.Append l2) → motive (namedPattern input (l1.Append l2) h)) →         ((input : app_list mlstring) →             (ls : List mlstring) → (h : input = app_list.List ls) → motive (namedPattern input (app_list.List ls) h)) →           motive x
+L	CandleLean.Prelude.FiniteMap	alist_to_fmap	2	{α : Type u} → {β : Type v} → List (α × β) → fmap α β
+L	CandleLean.Prelude.FiniteMap	is_fmap.below	2	{α : Type u} → {β : Type v} → {motive : (a : α → β ⊕ Unit) → is_fmap a → Prop} → {a : α → β ⊕ Unit} → is_fmap a → Prop
+L	CandleLean.Prelude.List	REV	1	{α : Type u} → List α → List α → List α
+L	CandleLean.HolSyntax	HasTmsof.ctorIdx	1	{α : Type} → HasTmsof α → Nat
+L	CandleLean.HolSyntax	HasSigof.noConfusion	3	{P : Sort u} →   {α : Type} → {t : HasSigof α} → {α' : Type} → {t' : HasSigof α'} → α = α' → t ≍ t' → HasSigof.noConfusionType P t t'
+L	CandleLean.Prelude.List	MAPi	2	{α : Type u} → {β : Type v} → (Nat → α → β) → List α → List β
+L	CandleLean.HolSyntax	INST	0	List (type × type) → term → term
+L	CandleLean.HolSyntaxExtra	dbterm_.dbAbs	0	type → dbterm_ → dbterm_
+L	CandleLean.HolSyntax	updates.casesOn	0	∀ {motive : (a : update) → (a_1 : List update) → updates a a_1 → Prop} {a : update} {a_1 : List update}   (t : updates a a_1),   (∀ (prop : term) (ctxt : List update) (a : has_type prop Bool_) (a_2 : term_ok (sigof ctxt) prop),       motive (NewAxiom prop) ctxt ⋯) →     (∀ (name : mlstring) (ctxt : List update) (ty : type) (a : ¬name ∈ FDOM (tmsof ctxt))         (a_2 : type_ok (tysof ctxt) ty), motive (NewConst name ty) ctxt ⋯) →       (∀ (ctxt : List update) (eqs : List (mlstring × term)) (prop : term)           (a : proves (thyof ctxt, List.map (fun p => Var p.fst (typeof p.snd) === p.snd) eqs) prop)           (a_2 :             EVERY (fun t => CLOSED t ∧ ∀ (v : mlstring), MEM v (tvars t) → MEM v (tyvars (typeof t)))               (List.map Prod.snd eqs))           (a_3 :             ∀ (x : mlstring) (ty : type),               VFREE_IN (Var x ty) prop → MEM (x, ty) (List.map (fun p => (p.fst, typeof p.snd)) eqs))           (a_4 : ∀ (s : mlstring), MEM s (List.map Prod.fst eqs) → ¬s ∈ FDOM (tmsof ctxt))           (a_5 : ALL_DISTINCT (List.map Prod.fst eqs)), motive (ConstSpec eqs prop) ctxt ⋯) →         (∀ (name : mlstring) (ctxt : List update) (arity : Nat) (a : ¬name ∈ FDOM (tysof ctxt)),             motive (NewType name arity) ctxt ⋯) →           (∀ (ctxt : List update) (pred witness : term) (name abs rep : mlstring)               (a : proves (thyof ctxt, []) (pred.Comb witness)) (a_2 : CLOSED pred) (a_3 : ¬name ∈ FDOM (tysof ctxt))               (a_4 : ¬abs ∈ FDOM (tmsof ctxt)) (a_5 : ¬rep ∈ FDOM (tmsof ctxt)) (a_6 : abs ≠ rep),               motive (TypeDefn name pred abs rep) ctxt ⋯) →             motive a a_1 t
+L	CandleLean.Prelude.Sptree	sptree.spt.below	1	{α : Type u} → {motive : sptree.spt α → Sort u_1} → sptree.spt α → Sort (max (u + 1) u_1)
+L	CandleLean.Prelude.Basic	PAIR_MAP	4	{α : Type u_1} → {β : Type u_2} → {γ : Type u_3} → {δ : Type u_4} → (α → γ) → (β → δ) → α × β → γ × δ
+L	CandleLean.HolSyntaxExtra	dbterm_.casesOn	0	{motive : dbterm_ → Sort u} →   (t : dbterm_) →     ((a : mlstring) → (a_1 : type) → motive (dbVar a a_1)) →       ((a : Nat) → motive (dbBound a)) →         ((a : mlstring) → (a_1 : type) → motive (dbConst a a_1)) →           ((a a_1 : dbterm_) → motive (a.dbComb a_1)) → ((a : type) → (a_1 : dbterm_) → motive (dbAbs a a_1)) → motive t
+L	CandleLean.HolSyntax	has_type.casesOn	0	∀ {motive : (a : term) → (a_1 : type) → has_type a a_1 → Prop} {a : term} {a_1 : type} (t : has_type a a_1),   (∀ (n : mlstring) (ty : type), motive (Var n ty) ty ⋯) →     (∀ (n : mlstring) (ty : type), motive (Const n ty) ty ⋯) →       (∀ (s t : term) (dty rty : type) (a : has_type s (Fun dty rty)) (a_2 : has_type t dty), motive (s.Comb t) rty ⋯) →         (∀ (n : mlstring) (dty : type) (t : term) (rty : type) (a : has_type t rty),             motive ((Var n dty).Abs t) (Fun dty rty) ⋯) →           motive a a_1 t
+L	CandleLean.Prelude.Set	«term{(_,_)|_}»	0	ParserDescr
+L	CandleLean.HolSyntax	term.Const.noConfusion	1	{P : Sort u} →   {a : mlstring} →     {a_1 : type} → {a' : mlstring} → {a'_1 : type} → Const a a_1 = Const a' a'_1 → (a = a' → a_1 = a'_1 → P) → P
+L	CandleLean.Prelude.FiniteMap	fmap_REP	2	{α : Type u} → {β : Type v} → fmap α β → α → β ⊕ Unit
+L	CandleLean.Prelude.Basic	UNCURRY	3	{α : Type u_1} → {β : Type u_2} → {γ : Type u_3} → (α → β → γ) → α × β → γ
+L	CandleLean.HolSyntax	alpha_lt	0	term → term → Prop
+L	CandleLean.HolSyntax	dest_var	0	term → mlstring × type
+L	CandleLean.Prelude.ASCIInumbers	HEX	0	Nat → char
+L	CandleLean.HolSyntaxLib	result.noConfusionType	3	Sort u_1 → {α : Type u} → result α → {α' : Type u} → result α' → Sort u_1
+L	CandleLean.HolSyntax	type.brecOn_1	0	{motive_1 : type → Sort u} →   {motive_2 : List type → Sort u} →     (t : List type) → ((t : type) → t.below → motive_1 t) → ((t : List type) → type.below_1 t → motive_2 t) → motive_2 t
+L	CandleLean.HolSyntax	instInhabitedUpdate.default	0	update
+L	CandleLean.HolSyntax	type.Tyvar.noConfusion	1	{P : Sort u} → {a a' : mlstring} → Tyvar a = Tyvar a' → (a = a' → P) → P
+L	CandleLean.Prelude.Sptree	sptree.spt.ctorElimType	1	{α : Type u} →   {motive : sptree.spt α → Sort u_1} →     Nat → Sort (max 1 u_1 (imax (u + 1) u_1) (imax (u + 1) (u + 1) u_1) (imax (u + 1) (u + 1) (u + 1) u_1))
+L	CandleLean.HolSyntax	term.Const	0	mlstring → type → term
+L	CandleLean.Misc	app_list.List	1	{α : Type u} → List α → app_list α
+L	CandleLean.Mlstring	sum_sizes.match_1	0	(motive : List mlstring → Nat → Sort u_1) →   (x : List mlstring) →     (x_1 : Nat) →       ((k : Nat) → motive [] k) →         ((l : mlstring) → (ls : List mlstring) → (k : Nat) → motive (l :: ls) k) → motive x x_1
+L	CandleLean.HolSyntax	HasSigof.mk	1	{α : Type} → (α → sig) → HasSigof α
+L	CandleLean.Misc	is_subseq.match_1	1	{α : Type u_1} →   (motive : List α → List α → Sort u_2) →     (x x_1 : List α) →       ((x : List α) → motive x []) →         ((head : α) → (tail : List α) → motive [] (head :: tail)) →           ((y : α) → (ys : List α) → (x : α) → (xs : List α) → motive (y :: ys) (x :: xs)) → motive x x_1
+L	CandleLean.Mlstring	strsub	0	mlstring → Nat → char
+L	CandleLean.HolSyntax	proves.below.axioms	0	∀ {motive : (a : thy × List term) → (a_1 : term) → proves a a_1 → Prop} (thy : thy) (c : term) (a : theory_ok thy)   (a_1 : c ∈ axsof thy), proves.below ⋯
+L	CandleLean.Mlstring	char_to_word8	0	char → word8
+L	CandleLean.HolSyntax	HasTmsof.tmsof	1	{α : Type} → [self : HasTmsof α] → α → tmsig
+L	CandleLean.Prelude.Basic	ordering.noConfusion	1	{P : Sort v✝} → {x y : ordering} → x = y → ordering.noConfusionType P x y
+L	CandleLean.Prelude.Basic	ordering.noConfusionType	1	Sort v✝ → ordering → ordering → Sort v✝
+L	CandleLean.SetSpec	two	1	{U : Type u} → [Nonempty U] → (U → U → Prop) → U
+L	CandleLean.Prelude.List	EXISTS	1	{α : Type u} → (α → Prop) → List α → Prop
+L	CandleLean.HolSemantics	typesem	1	{U : Type u} → tyass U → tyval U → type → U
+L	CandleLean.HolSyntax	consts_of_upd	0	update → List (mlstring × type)
+L	CandleLean.HolSyntax	update.NewType	0	mlstring → Nat → update
+L	CandleLean.Prelude.Sptree	sptree.spt.brecOn.go	1	{α : Type u} →   {motive : sptree.spt α → Sort u_1} →     (t : sptree.spt α) → ((t : sptree.spt α) → sptree.spt.below t → motive t) → motive t ×' sptree.spt.below t
+L	CandleLean.HolSyntax	updates.new_specification	0	∀ (ctxt : List update) (eqs : List (mlstring × term)) (prop : term),   proves (thyof ctxt, List.map (fun p => Var p.fst (typeof p.snd) === p.snd) eqs) prop →     EVERY (fun t => CLOSED t ∧ ∀ (v : mlstring), MEM v (tvars t) → MEM v (tyvars (typeof t))) (List.map Prod.snd eqs) →       (∀ (x : mlstring) (ty : type),           VFREE_IN (Var x ty) prop → MEM (x, ty) (List.map (fun p => (p.fst, typeof p.snd)) eqs)) →         (∀ (s : mlstring), MEM s (List.map Prod.fst eqs) → ¬s ∈ FDOM (tmsof ctxt)) →           ALL_DISTINCT (List.map Prod.fst eqs) → updates (ConstSpec eqs prop) ctxt
+L	CandleLean.Prelude.List	REV.match_1	1	{α : Type u_1} →   (motive : List α → List α → Sort u_2) →     (x x_1 : List α) →       ((acc : List α) → motive [] acc) → ((h : α) → (t acc : List α) → motive (h :: t) acc) → motive x x_1
+L	CandleLean.HolSyntaxExtra	dbVFREE_IN	0	dbterm_ → dbterm_ → Prop
+L	CandleLean.Prelude.Basic	ordering.EQUAL	0	ordering
+L	CandleLean.Prelude.Words	word8	0	Type
+L	CandleLean.Prelude.Basic	ARB	1	{α : Sort u} → [Nonempty α] → α
+L	CandleLean.HolSyntaxExtra	rename_bvars.match_1	0	(motive : List mlstring → List (mlstring × mlstring × type) → term → Sort u_1) →   (x : List mlstring) →     (x_1 : List (mlstring × mlstring × type)) →       (x_2 : term) →         ((names : List mlstring) →             (env : List (mlstring × mlstring × type)) → (s : mlstring) → (ty : type) → motive names env (Var s ty)) →           ((names : List mlstring) →               (x : List (mlstring × mlstring × type)) → (s : mlstring) → (ty : type) → motive names x (Const s ty)) →             ((names : List mlstring) →                 (env : List (mlstring × mlstring × type)) → (t1 t2 : term) → motive names env (t1.Comb t2)) →               ((env : List (mlstring × mlstring × type)) → (v tm : term) → motive [] env (v.Abs tm)) →                 ((s' : mlstring) →                     (names : List mlstring) →                       (env : List (mlstring × mlstring × type)) → (v tm : term) → motive (s' :: names) env (v.Abs tm)) →                   motive x x_1 x_2
+L	CandleLean.HolSyntax	has_type.below	0	{motive : (a : term) → (a_1 : type) → has_type a a_1 → Prop} → {a : term} → {a_1 : type} → has_type a a_1 → Prop
+L	CandleLean.Prelude.Set	UNIV	1	{α : Type u} → Set α
+L	CandleLean.HolSyntax	conexts	0	List update → List term
+L	CandleLean.Prelude.List	GENLIST	1	{α : Type u} → (Nat → α) → Nat → List α
+L	CandleLean.HolSyntaxExtra	dbterm_.dbConst.elim	0	{motive : dbterm_ → Sort u} →   (t : dbterm_) → t.ctorIdx = 2 → ((a : mlstring) → (a_1 : type) → motive (dbConst a a_1)) → motive t
+L	CandleLean.Prelude.String	string_lt	0	string → string → Prop
+L	CandleLean.HolSyntaxExtra	subtype1.recOn	0	∀ {a : type} {motive : (a_1 : type) → subtype1 a a_1 → Prop} {a_1 : type} (t : subtype1 a a_1),   (∀ (args : List type) (name : mlstring) (a_2 : MEM a args), motive (Tyapp name args) ⋯) → motive a_1 t
+L	CandleLean.SetSpec	is_separation	1	{U : Type u} → (U → U → Prop) → (U → (U → Prop) → U) → Prop
+L	CandleLean.HolSemantics	typesem.match_1	0	(motive : type → Sort u_1) →   (x : type) →     ((s : mlstring) → motive (Tyvar s)) → ((name : mlstring) → (args : List type) → motive (Tyapp name args)) → motive x
+L	CandleLean.Prelude.List	EL.match_1	1	{α : Type u_1} →   (motive : Nat → List α → Sort u_2) →     (x : Nat) →       (x_1 : List α) → ((l : List α) → motive 0 l) → ((n : Nat) → (l : List α) → motive n.succ l) → motive x x_1
+L	CandleLean.HolSemantics	interprets	1	{U : Type u} → (U → U → Prop) → tmass U → mlstring → List mlstring → (List U → U) → Prop
+L	CandleLean.HolSyntaxExtra	dbterm_.dbAbs.elim	0	{motive : dbterm_ → Sort u} →   (t : dbterm_) → t.ctorIdx = 4 → ((a : type) → (a_1 : dbterm_) → motive (dbAbs a a_1)) → motive t
+L	CandleLean.Prelude.List	SORTED.match_1	1	{α : Type u_1} →   (motive : List α → Sort u_2) →     (x : List α) →       (Unit → motive []) →         ((head : α) → motive [head]) → ((x y : α) → (rst : List α) → motive (x :: y :: rst)) → motive x
+L	CandleLean.HolSyntaxExtra	bind_	0	mlstring × type → Nat → dbterm_ → dbterm_
+L	CandleLean.HolSyntax	proves.casesOn	0	∀ {motive : (a : thy × List term) → (a_1 : term) → proves a a_1 → Prop} {a : thy × List term} {a_1 : term}   (t : proves a a_1),   (∀ (x : mlstring) (ty : type) (h : List term) (thy : thy) (l r : term) (a : ¬EXISTS (VFREE_IN (Var x ty)) h)       (a_2 : type_ok (tysof thy) ty) (a_3 : proves (thy, h) (l === r)),       motive (thy, h) ((Var x ty).Abs l === (Var x ty).Abs r) ⋯) →     (∀ (thy : thy) (p : term) (a : theory_ok thy) (a_2 : has_type p Bool_) (a_3 : term_ok (sigof thy) p),         motive (thy, [p]) p ⋯) →       (∀ (thy : thy) (ty : type) (t : term) (x : mlstring) (a : theory_ok thy) (a_2 : type_ok (tysof thy) ty)           (a_3 : term_ok (sigof thy) t), motive (thy, []) (((Var x ty).Abs t).Comb (Var x ty) === t) ⋯) →         (∀ (thy : thy) (h1 h2 : List term) (c1 c2 : term) (a : proves (thy, h1) c1) (a_2 : proves (thy, h2) c2),             motive (thy, term_union (term_remove c2 h1) (term_remove c1 h2)) (c1 === c2) ⋯) →           (∀ (thy : thy) (h1 h2 : List term) (p q p' : term) (a : proves (thy, h1) (p === q))               (a_2 : proves (thy, h2) p') (a_3 : ACONV p p'), motive (thy, term_union h1 h2) q ⋯) →             (∀ (ilist : List (term × term)) (thy : thy) (h : List term) (c : term)                 (a :                   ∀ (s s' : term), MEM (s', s) ilist → ∃ x ty, s = Var x ty ∧ has_type s' ty ∧ term_ok (sigof thy) s')                 (a_2 : proves (thy, h) c), motive (thy, term_image (VSUBST ilist) h) (VSUBST ilist c) ⋯) →               (∀ (thy : thy) (tyin : List (type × type)) (h : List term) (c : term)                   (a : EVERY (type_ok (tysof thy)) (List.map Prod.fst tyin)) (a_2 : proves (thy, h) c),                   motive (thy, term_image (_root_.INST tyin) h) (_root_.INST tyin c) ⋯) →                 (∀ (thy : thy) (h1 h2 : List term) (l1 r1 l2 r2 : term) (a : proves (thy, h1) (l1 === r1))                     (a_2 : proves (thy, h2) (l2 === r2)) (a_3 : welltyped (l1.Comb l2)),                     motive (thy, term_union h1 h2) (l1.Comb l2 === r1.Comb r2) ⋯) →                   (∀ (thy : thy) (t : term) (a : theory_ok thy) (a_2 : term_ok (sigof thy) t),                       motive (thy, []) (t === t) ⋯) →                     (∀ (thy : thy) (c : term) (a : theory_ok thy) (a_2 : c ∈ axsof thy), motive (thy, []) c ⋯) →                       motive a a_1 t
+L	CandleLean.Prelude.String	FIELDS.match_1	0	(motive : string → Sort u_1) →   (x : string) → (Unit → motive []) → ((h : char) → (t : List char) → motive (h :: t)) → motive x
+L	CandleLean.Prelude.Basic	StrongLinearOrder	1	{α : Sort u} → (α → α → Prop) → Prop
+L	CandleLean.Mlstring	app_list_ann.brecOn.go	1	{α : Type u} →   {motive : app_list_ann α → Sort u_1} →     (t : app_list_ann α) → ((t : app_list_ann α) → app_list_ann.below t → motive t) → motive t ×' app_list_ann.below t
+L	CandleLean.HolSyntax	instInhabitedTerm	0	Inhabited term
+L	CandleLean.HolSyntaxLib	IS_CLASH	1	{α : Type u} → result α → Prop
+L	CandleLean.Prelude.Words	word	0	Nat → Type
+L	CandleLean.Prelude.Basic	irreflexive	1	{α : Sort u} → (α → α → Prop) → Prop
+L	CandleLean.HolSyntaxLib	result.ctorElimType	1	{α : Type u} → {motive : result α → Sort u_1} → Nat → Sort (max 1 (imax (u + 1) u_1))
+L	CandleLean.Prelude.Basic	reflexive	1	{α : Sort u} → (α → α → Prop) → Prop
+L	CandleLean.HolSyntaxExtra	subtype	0	type → type → Prop
+L	CandleLean.Mlstring	app_list_ann.ctorIdx	1	{α : Type u} → app_list_ann α → Nat
+L	CandleLean.HolSyntax	has_type.const	0	∀ (n : mlstring) (ty : type), has_type (Const n ty) ty
+L	CandleLean.HolSyntaxLib	LIST_INSERT	1	{α : Type u} → α → List α → List α
+L	CandleLean.Prelude.String	instDecidableEqChar_1.decEq.match_1	0	(motive : char → char → Sort u_1) →   (x x_1 : char) →     ((a : Nat) →         (a_1 : a < 256) →           (b : Nat) → (b_1 : b < 256) → motive { ORD := a, ORD_lt := a_1 } { ORD := b, ORD_lt := b_1 }) →       motive x x_1
+L	CandleLean.HolSyntaxExtra	subterm1.abs_var	0	∀ (v tm : term), subterm1 v (v.Abs tm)
+L	CandleLean.Mlstring	concat	0	List mlstring → mlstring
+L	CandleLean.HolSyntax	ordav	0	List (term × term) → term → term → ordering
+L	CandleLean.HolSyntax	term.brecOn	0	{motive : term → Sort u} → (t : term) → ((t : term) → term.below t → motive t) → motive t
+L	CandleLean.HolSyntaxExtra	dbterm_.ctorElim	0	{motive : dbterm_ → Sort u} →   (ctorIdx : Nat) → (t : dbterm_) → ctorIdx = t.ctorIdx → dbterm_.ctorElimType ctorIdx → motive t
+L	CandleLean.Prelude.Basic	ordering.LESS	0	ordering
+L	CandleLean.HolSyntax	RACONV.below.comb	0	∀ {motive : (a : List (term × term)) → (a_1 : term × term) → RACONV a a_1 → Prop} (env : List (term × term))   (s1 s2 t1 t2 : term) (a : RACONV env (s1, s2)) (a_1 : RACONV env (t1, t2)),   RACONV.below a → motive env (s1, s2) a → RACONV.below a_1 → motive env (t1, t2) a_1 → RACONV.below ⋯
+L	CandleLean.Prelude.Sptree	sptree.spt.BS.noConfusion	2	{α : Type u} →   {P : Sort u_1} →     {a : sptree.spt α} →       {a_1 : α} →         {a_2 a' : sptree.spt α} →           {a'_1 : α} →             {a'_2 : sptree.spt α} → a.BS a_1 a_2 = a'.BS a'_1 a'_2 → (a ≍ a' → a_1 ≍ a'_1 → a_2 ≍ a'_2 → P) → P
+L	CandleLean.Prelude.String	char.mk	0	(ORD : Nat) → ORD < 256 → char
+L	CandleLean.Prelude.String	char.recOn	0	{motive : char → Sort u} →   (t : char) → ((ORD : Nat) → (ORD_lt : ORD < 256) → motive { ORD := ORD, ORD_lt := ORD_lt }) → motive t
+L	CandleLean.HolSyntax	type.below	0	{motive_1 : type → Sort u} → {motive_2 : List type → Sort u} → type → Sort (max 1 u)
+L	CandleLean.Prelude.Set	SUBSET	1	{α : Type u} → Set α → Set α → Prop
+L	CandleLean.Prelude.Basic	RTC.recOn	1	∀ {α : Sort u} {R : α → α → Prop} {motive : (a a_1 : α) → RTC R a a_1 → Prop} {a a_1 : α} (t : RTC R a a_1),   (∀ (x : α), motive x x ⋯) →     (∀ (x y z : α) (a : R x y) (a_2 : RTC R y z), motive y z a_2 → motive x z ⋯) → motive a a_1 t
+L	CandleLean.Prelude.FiniteMap	fmap	2	Type u → Type v → Type (max u v)
+L	CandleLean.HolSyntax	tyvars	0	type → List mlstring
+L	CandleLean.HolSyntax	axexts	0	List update → List term
+L	CandleLean.HolSemantics	is_term_assignment	1	{U : Type u} → (U → U → Prop) → tmsig → tyass U → tmass U → Prop
+L	CandleLean.HolSyntax	update.recOn	0	{motive : update → Sort u} →   (t : update) →     ((a : List (mlstring × term)) → (a_1 : term) → motive (ConstSpec a a_1)) →       ((a : mlstring) → (a_1 : term) → (a_2 a_3 : mlstring) → motive (TypeDefn a a_1 a_2 a_3)) →         ((a : mlstring) → (a_1 : Nat) → motive (NewType a a_1)) →           ((a : mlstring) → (a_1 : type) → motive (NewConst a a_1)) → ((a : term) → motive (NewAxiom a)) → motive t
+L	CandleLean.HolSyntax	HasTysof.mk	1	{α : Type} → (α → tysig) → HasTysof α
+L	CandleLean.HolSyntax	updates.new_type_definition	0	∀ (ctxt : List update) (pred witness : term) (name abs rep : mlstring),   proves (thyof ctxt, []) (pred.Comb witness) →     CLOSED pred →       ¬name ∈ FDOM (tysof ctxt) →         ¬abs ∈ FDOM (tmsof ctxt) → ¬rep ∈ FDOM (tmsof ctxt) → abs ≠ rep → updates (TypeDefn name pred abs rep) ctxt
+L	CandleLean.Misc	app_list.Nil	1	{α : Type u} → app_list α
+L	CandleLean.Prelude.Words	word.mk	0	{d : Nat} → (w2n : Nat) → w2n < 2 ^ d → word d
+L	CandleLean.HolSyntax	has_type.abs	0	∀ (n : mlstring) (dty : type) (t : term) (rty : type), has_type t rty → has_type ((Var n dty).Abs t) (Fun dty rty)
+L	CandleLean.HolSyntax	conexts_of_upd	0	update → List term
+L	CandleLean.Prelude.Set	IMAGE	2	{α : Type u} → {β : Type v} → (α → β) → Set α → Set β
+L	CandleLean.Prelude.Sptree	sptree.spt.BS.elim	1	{α : Type u} →   {motive : sptree.spt α → Sort u_1} →     (t : sptree.spt α) →       t.ctorIdx = 3 → ((a : sptree.spt α) → (a_1 : α) → (a_2 : sptree.spt α) → motive (a.BS a_1 a_2)) → motive t
+L	CandleLean.HolSyntax	axexts_of_upd.match_1	0	(motive : update → Sort u_1) →   (x : update) → ((prop : term) → motive (NewAxiom prop)) → ((x : update) → motive x) → motive x
+L	CandleLean.Misc	app_list.ctorElimType	1	{α : Type u} → {motive : app_list α → Sort u_1} → Nat → Sort (max 1 u_1 (imax (u + 1) u_1) (imax (u + 1) (u + 1) u_1))
+L	CandleLean.HolSyntax	RACONV.casesOn	0	∀ {motive : (a : List (term × term)) → (a_1 : term × term) → RACONV a a_1 → Prop} {a : List (term × term)}   {a_1 : term × term} (t : RACONV a a_1),   (∀ (env : List (term × term)) (x1 : mlstring) (ty1 : type) (x2 : mlstring) (ty2 : type)       (a : ALPHAVARS env (Var x1 ty1, Var x2 ty2)), motive env (Var x1 ty1, Var x2 ty2) ⋯) →     (∀ (env : List (term × term)) (x : mlstring) (ty : type), motive env (Const x ty, Const x ty) ⋯) →       (∀ (env : List (term × term)) (s1 s2 t1 t2 : term) (a : RACONV env (s1, s2)) (a_2 : RACONV env (t1, t2)),           motive env (s1.Comb t1, s2.Comb t2) ⋯) →         (∀ (env : List (term × term)) (v1 v2 t1 t2 : term) (a : typeof v1 = typeof v2)             (a_2 : RACONV ((v1, v2) :: env) (t1, t2)), motive env (v1.Abs t1, v2.Abs t2) ⋯) →           motive a a_1 t
+L	CandleLean.Prelude.Words	field	0	Nat → Nat → List Prop → List Prop
+L	CandleLean.Mlstring	explode_aux.match_1	0	(motive : mlstring → Nat → Nat → Sort u_1) →   (x : mlstring) →     (x_1 x_2 : Nat) →       ((x : mlstring) → (x_3 : Nat) → motive x x_3 0) →         ((s : mlstring) → (n len : Nat) → motive s n len.succ) → motive x x_1 x_2
+L	CandleLean.Prelude.List	LIST_TO_SET	1	{α : Type u} → List α → Set α
+L	CandleLean.HolSyntax	HasTmsof.noConfusionType	3	Sort u → {α : Type} → HasTmsof α → {α' : Type} → HasTmsof α' → Sort u
+L	CandleLean.Prelude.String	char.ctorIdx	0	char → Nat
+L	CandleLean.Mlstring	instLTMlstring	0	LT mlstring
+L	CandleLean.HolSyntax	instHasAxsofThy	0	HasAxsof thy
+L	CandleLean.Prelude.Sptree	sptree.spt.brecOn	1	{α : Type u} →   {motive : sptree.spt α → Sort u_1} →     (t : sptree.spt α) → ((t : sptree.spt α) → sptree.spt.below t → motive t) → motive t
+L	CandleLean.HolSyntax	HasAxsof.mk.noConfusion	2	{α : Type} →   {P : Sort u} → {axsof axsof' : α → Set term} → { axsof := axsof } = { axsof := axsof' } → (axsof ≍ axsof' → P) → P
+L	CandleLean.HolSyntax	sizeof	0	term → Nat
+L	CandleLean.Prelude.List	OPT_MMAP	2	{α : Type u} → {β : Type v} → (α → Option β) → List α → Option (List β)
+L	CandleLean.Prelude.Words	shiftr	0	List Prop → Nat → List Prop
+L	CandleLean.Mlstring	app_list_ann.noConfusion	3	{P : Sort u_1} →   {α : Type u} →     {t : app_list_ann α} →       {α' : Type u} → {t' : app_list_ann α'} → α = α' → t ≍ t' → app_list_ann.noConfusionType P t t'
+L	CandleLean.HolSyntax	HasSigof	1	Type → Type
+L	CandleLean.HolSyntax	term.noConfusionType	1	Sort u → term → term → Sort u
+L	CandleLean.HolSyntax	type.Tyapp.elim	0	{motive_1 : type → Sort u} →   (t : type) → t.ctorIdx = 1 → ((a : mlstring) → (a_1 : List type) → motive_1 (Tyapp a a_1)) → motive_1 t
+L	CandleLean.Prelude.String	char.mk.noConfusion	1	{P : Sort u} →   {ORD : Nat} →     {ORD_lt : ORD < 256} →       {ORD' : Nat} →         {ORD_lt' : ORD' < 256} →           { ORD := ORD, ORD_lt := ORD_lt } = { ORD := ORD', ORD_lt := ORD_lt' } → (ORD = ORD' → P) → P
+L	CandleLean.HolSyntaxExtra	dbterm_.dbComb.noConfusion	1	{P : Sort u} → {a a_1 a' a'_1 : dbterm_} → a.dbComb a_1 = a'.dbComb a'_1 → (a = a' → a_1 = a'_1 → P) → P
+L	CandleLean.Prelude.Words	word.ctorIdx	0	{d : Nat} → word d → Nat
+L	CandleLean.Prelude.List	PERM	1	{α : Type u} → List α → List α → Prop
+L	CandleLean.HolSyntax	HasTysof.recOn	1	{α : Type} →   {motive : HasTysof α → Sort u} → (t : HasTysof α) → ((tysof : α → tysig) → motive { tysof := tysof }) → motive t
+L	CandleLean.Prelude.Words	dimword	0	Nat → Nat
+L	CandleLean.HolSyntaxExtra	dbterm_.dbBound.elim	0	{motive : dbterm_ → Sort u} → (t : dbterm_) → t.ctorIdx = 1 → ((a : Nat) → motive (dbBound a)) → motive t
+L	CandleLean.Prelude.Basic	instReprOrdering_1.repr.match_1	0	(motive : ordering → Sort u_1) →   (x : ordering) → (Unit → motive LESS) → (Unit → motive EQUAL) → (Unit → motive GREATER) → motive x
+L	CandleLean.HolSyntaxLib	result.noConfusion	3	{P : Sort u_1} →   {α : Type u} → {t : result α} → {α' : Type u} → {t' : result α'} → α = α' → t ≍ t' → result.noConfusionType P t t'
+L	CandleLean.Prelude.String	instDecidableEqChar_1.decEq	0	(x x_1 : char) → Decidable (x = x_1)
+L	CandleLean.HolSyntax	update.ctorElimType	0	{motive : update → Sort u} → Nat → Sort (max 1 u)
+L	CandleLean.HolSyntax	type.ctorElimType	0	{motive_1 : type → Sort u} → Nat → Sort (max 1 u)
+L	CandleLean.Prelude.Set	instInsertSet	1	{α : Type u} → Insert α (Set α)
+L	CandleLean.HolSemantics	satisfies	1	{U : Type u} → [Nonempty U] → (U → U → Prop) → interpretation U → sig × List term × term → Prop
+L	CandleLean.HolSyntax	instHasTysofListUpdate	0	HasTysof (List update)
+L	CandleLean.Mlstring	substring.match_1	0	(motive : mlstring → Nat → Nat → Sort u_1) →   (x : mlstring) → (x_1 x_2 : Nat) → ((s : string) → (off len : Nat) → motive (implode s) off len) → motive x x_1 x_2
+L	CandleLean.Prelude.Basic	ISL	2	{α : Type u_1} → {β : Type u_2} → α ⊕ β → Prop
+L	CandleLean.HolSyntax	term_union.match_1	0	(motive : List term → List term → Sort u_1) →   (l1 l2 : List term) →     ((l2 : List term) → motive [] l2) →       ((l1 : List term) → motive l1 []) →         ((h1 : term) → (t1 : List term) → (h2 : term) → (t2 : List term) → motive (h1 :: t1) (h2 :: t2)) → motive l1 l2
+L	CandleLean.Prelude.Basic	transitive	1	{α : Sort u} → (α → α → Prop) → Prop
+L	CandleLean.HolSyntaxLib	result.Result.noConfusion	2	{α : Type u} → {P : Sort u_1} → {a a' : α} → Result a = Result a' → (a ≍ a' → P) → P
+L	CandleLean.Mlstring	instDecidableEqMlstring.decEq.match_1	0	(motive : mlstring → mlstring → Sort u_1) →   (x x_1 : mlstring) → ((a b : string) → motive (implode a) (implode b)) → motive x x_1
+L	CandleLean.HolSyntax	conexts_of_upd.match_1	0	(motive : update → Sort u_1) →   (x : update) →     ((eqs : List (mlstring × term)) → (prop : term) → motive (ConstSpec eqs prop)) →       ((name : mlstring) →           (pred : term) → (abs_name rep_name : mlstring) → motive (TypeDefn name pred abs_name rep_name)) →         ((x : update) → motive x) → motive x
+L	CandleLean.Prelude.ASCIInumbers	s2n	0	Nat → (char → Nat) → string → Nat
+L	CandleLean.Mlstring	strlen.match_1	0	(motive : mlstring → Sort u_1) → (x : mlstring) → ((s : string) → motive (implode s)) → motive x
+L	CandleLean.Prelude.Set	PERMUTES	1	{α : Type u} → (α → α) → Set α → Prop
+L	CandleLean.Prelude.FiniteMap	is_fmap	2	{α : Type u} → {β : Type v} → (α → β ⊕ Unit) → Prop
+L	CandleLean.Mlstring	instInhabitedMlstring.default	0	mlstring
+L	CandleLean.HolSyntax	term.Abs.elim	0	{motive : term → Sort u} → (t : term) → t.ctorIdx = 3 → ((a a_1 : term) → motive (a.Abs a_1)) → motive t
+L	CandleLean.HolSyntax	HasAxsof.noConfusion	3	{P : Sort u} →   {α : Type} → {t : HasAxsof α} → {α' : Type} → {t' : HasAxsof α'} → α = α' → t ≍ t' → HasAxsof.noConfusionType P t t'
+L	CandleLean.Prelude.Basic	RC	1	{α : Sort u} → (α → α → Prop) → α → α → Prop
+L	CandleLean.HolSyntax	HasTmsof	1	Type → Type
+L	CandleLean.Prelude.Words	instDecidableEqWord.decEq.match_1	0	{d : Nat} →   (motive : word d → word d → Sort u_1) →     (x x_1 : word d) →       ((a : Nat) →           (a_1 : a < 2 ^ d) →             (b : Nat) → (b_1 : b < 2 ^ d) → motive { w2n := a, w2n_lt := a_1 } { w2n := b, w2n_lt := b_1 }) →         motive x x_1
+L	CandleLean.HolSyntax	is_instance	0	type → type → Prop
+L	CandleLean.SetSpec	one	1	{U : Type u} → [Nonempty U] → (U → U → Prop) → U
+L	CandleLean.HolSyntax	RACONV	0	List (term × term) → term × term → Prop
+L	CandleLean.HolSyntax	proves.recOn	0	∀ {motive : (a : thy × List term) → (a_1 : term) → proves a a_1 → Prop} {a : thy × List term} {a_1 : term}   (t : proves a a_1),   (∀ (x : mlstring) (ty : type) (h : List term) (thy : thy) (l r : term) (a : ¬EXISTS (VFREE_IN (Var x ty)) h)       (a_2 : type_ok (tysof thy) ty) (a_3 : proves (thy, h) (l === r)),       motive (thy, h) (l === r) a_3 → motive (thy, h) ((Var x ty).Abs l === (Var x ty).Abs r) ⋯) →     (∀ (thy : thy) (p : term) (a : theory_ok thy) (a_2 : has_type p Bool_) (a_3 : term_ok (sigof thy) p),         motive (thy, [p]) p ⋯) →       (∀ (thy : thy) (ty : type) (t : term) (x : mlstring) (a : theory_ok thy) (a_2 : type_ok (tysof thy) ty)           (a_3 : term_ok (sigof thy) t), motive (thy, []) (((Var x ty).Abs t).Comb (Var x ty) === t) ⋯) →         (∀ (thy : thy) (h1 h2 : List term) (c1 c2 : term) (a : proves (thy, h1) c1) (a_2 : proves (thy, h2) c2),             motive (thy, h1) c1 a →               motive (thy, h2) c2 a_2 →                 motive (thy, term_union (term_remove c2 h1) (term_remove c1 h2)) (c1 === c2) ⋯) →           (∀ (thy : thy) (h1 h2 : List term) (p q p' : term) (a : proves (thy, h1) (p === q))               (a_2 : proves (thy, h2) p') (a_3 : ACONV p p'),               motive (thy, h1) (p === q) a → motive (thy, h2) p' a_2 → motive (thy, term_union h1 h2) q ⋯) →             (∀ (ilist : List (term × term)) (thy : thy) (h : List term) (c : term)                 (a :                   ∀ (s s' : term), MEM (s', s) ilist → ∃ x ty, s = Var x ty ∧ has_type s' ty ∧ term_ok (sigof thy) s')                 (a_2 : proves (thy, h) c),                 motive (thy, h) c a_2 → motive (thy, term_image (VSUBST ilist) h) (VSUBST ilist c) ⋯) →               (∀ (thy : thy) (tyin : List (type × type)) (h : List term) (c : term)                   (a : EVERY (type_ok (tysof thy)) (List.map Prod.fst tyin)) (a_2 : proves (thy, h) c),                   motive (thy, h) c a_2 → motive (thy, term_image (_root_.INST tyin) h) (_root_.INST tyin c) ⋯) →                 (∀ (thy : thy) (h1 h2 : List term) (l1 r1 l2 r2 : term) (a : proves (thy, h1) (l1 === r1))                     (a_2 : proves (thy, h2) (l2 === r2)) (a_3 : welltyped (l1.Comb l2)),                     motive (thy, h1) (l1 === r1) a →                       motive (thy, h2) (l2 === r2) a_2 → motive (thy, term_union h1 h2) (l1.Comb l2 === r1.Comb r2) ⋯) →                   (∀ (thy : thy) (t : term) (a : theory_ok thy) (a_2 : term_ok (sigof thy) t),                       motive (thy, []) (t === t) ⋯) →                     (∀ (thy : thy) (c : term) (a : theory_ok thy) (a_2 : c ∈ axsof thy), motive (thy, []) c ⋯) →                       motive a a_1 t
+L	CandleLean.Prelude.Set	EMPTY	1	{α : Type u} → Set α
+L	CandleLean.Mlstring	flip_ord	0	ordering → ordering
+L	CandleLean.HolSyntaxExtra	subterm1.abs_body	0	∀ (tm v : term), subterm1 tm (v.Abs tm)
+L	CandleLean.HolSyntaxExtra	subterm1.recOn	0	∀ {motive : (a a_1 : term) → subterm1 a a_1 → Prop} {a a_1 : term} (t : subterm1 a a_1),   (∀ (t1 t2 : term), motive t1 (t1.Comb t2) ⋯) →     (∀ (t1 t2 : term), motive t2 (t1.Comb t2) ⋯) →       (∀ (tm v : term), motive tm (v.Abs tm) ⋯) → (∀ (v tm : term), motive v (v.Abs tm) ⋯) → motive a a_1 t
+L	CandleLean.Prelude.List	ALOOKUP	2	{α : Type u} → {β : Type v} → List (α × β) → α → Option β
+L	CandleLean.Prelude.Words	instInhabitedWord	0	(d : Nat) → Inhabited (word d)
+L	CandleLean.Prelude.Mergesort	sort3_tail	1	{α : Type u} → Prop → (α → α → Prop) → α → α → α → List α
+L	CandleLean.HolSyntax	proves.below.EQ_MP	0	∀ {motive : (a : thy × List term) → (a_1 : term) → proves a a_1 → Prop} (thy : thy) (h1 h2 : List term) (p q p' : term)   (a : proves (thy, h1) (p === q)) (a_1 : proves (thy, h2) p') (a_2 : ACONV p p'),   proves.below a → motive (thy, h1) (p === q) a → proves.below a_1 → motive (thy, h2) p' a_1 → proves.below ⋯
+L	CandleLean.Prelude.Basic	C	3	{α : Sort u} → {β : Sort v} → {γ : Sort w} → (α → β → γ) → β → α → γ
+L	CandleLean.HolSemantics	is_type_assignment	1	{U : Type u} → (U → U → Prop) → tysig → tyass U → Prop
+L	CandleLean.HolSyntaxExtra	dbterm_.dbBound	0	Nat → dbterm_
+L	CandleLean.Misc	make_even	0	Nat → Nat
+L	CandleLean.Prelude.Basic	ordering.toCtorIdx	0	ordering → Nat
+L	CandleLean.HolSyntaxLib	ALPHAVARS.match_1	1	{α : Type u_1} →   (motive : List (α × α) → α × α → Sort u_2) →     (x : List (α × α)) →       (x_1 : α × α) →         ((tmp : α × α) → motive [] tmp) →           ((tp : α × α) → (oenv : List (α × α)) → (tmp : α × α) → motive (tp :: oenv) tmp) → motive x x_1
+L	CandleLean.HolSyntaxExtra	dbterm.match_3	0	(motive : List (mlstring × type) → term → Sort u_1) →   (x : List (mlstring × type)) →     (x_1 : term) →       ((env : List (mlstring × type)) → (s : mlstring) → (ty : type) → motive env (Var s ty)) →         ((x : List (mlstring × type)) → (s : mlstring) → (ty : type) → motive x (Const s ty)) →           ((env : List (mlstring × type)) → (t1 t2 : term) → motive env (t1.Comb t2)) →             ((env : List (mlstring × type)) → (v t : term) → motive env (v.Abs t)) → motive x x_1
+L	CandleLean.HolSemantics	is_valuation	1	{U : Type u} → (U → U → Prop) → tysig → tyass U → valuation U → Prop
+L	CandleLean.HolSyntaxExtra	dbVSUBST.match_1	0	(motive : dbterm_ → Sort u_1) →   (x : dbterm_) →     ((x : mlstring) → (ty : type) → motive (dbVar x ty)) →       ((m : Nat) → motive (dbBound m)) →         ((x : mlstring) → (ty : type) → motive (dbConst x ty)) →           ((t1 t2 : dbterm_) → motive (t1.dbComb t2)) → ((ty : type) → (t : dbterm_) → motive (dbAbs ty t)) → motive x
+L	CandleLean.HolSemantics	termsem.match_1	1	{U : Type u_1} →   (motive : valuation U → term → Sort u_2) →     (x : valuation U) →       (x_1 : term) →         ((v : valuation U) → (x : mlstring) → (ty : type) → motive v (Var x ty)) →           ((v : valuation U) → (name : mlstring) → (ty : type) → motive v (Const name ty)) →             ((v : valuation U) → (t1 t2 : term) → motive v (t1.Comb t2)) →               ((v : valuation U) → (x : mlstring) → (ty : type) → (b : term) → motive v ((Var x ty).Abs b)) →                 ((x : valuation U) → (a a_1 : term) → motive x (a.Abs a_1)) → motive x x_1
+L	CandleLean.Prelude.Basic	ordering	0	Type
+L	CandleLean.Prelude.Basic	MAX	0	Nat → Nat → Nat
+L	CandleLean.HolSyntaxLib	RESULT.match_1	1	{α : Type u_1} →   (motive : result α → Sort u_2) →     (x : result α) → ((t : α) → motive (Result t)) → ((a : α) → motive (Clash a)) → motive x
+L	CandleLean.Mlstring	instDecidableEqMlstring	0	DecidableEq mlstring
+L	CandleLean.SetSpec	unit	1	{U : Type u} → [Nonempty U] → (U → U → Prop) → U → U
+L	CandleLean.HolSyntaxLib	CLASH	1	{α : Type u} → [Nonempty α] → result α → α
+L	CandleLean.HolSyntaxExtra	bind_.match_1	0	(motive : Nat → dbterm_ → Sort u_1) →   (x : Nat) →     (x_1 : dbterm_) →       ((n : Nat) → (x : mlstring) → (ty : type) → motive n (dbVar x ty)) →         ((x m : Nat) → motive x (dbBound m)) →           ((x : Nat) → (x_2 : mlstring) → (ty : type) → motive x (dbConst x_2 ty)) →             ((n : Nat) → (t1 t2 : dbterm_) → motive n (t1.dbComb t2)) →               ((n : Nat) → (ty : type) → (tm : dbterm_) → motive n (dbAbs ty tm)) → motive x x_1
+L	CandleLean.HolSyntax	has_type.recOn	0	∀ {motive : (a : term) → (a_1 : type) → has_type a a_1 → Prop} {a : term} {a_1 : type} (t : has_type a a_1),   (∀ (n : mlstring) (ty : type), motive (Var n ty) ty ⋯) →     (∀ (n : mlstring) (ty : type), motive (Const n ty) ty ⋯) →       (∀ (s t : term) (dty rty : type) (a : has_type s (Fun dty rty)) (a_2 : has_type t dty),           motive s (Fun dty rty) a → motive t dty a_2 → motive (s.Comb t) rty ⋯) →         (∀ (n : mlstring) (dty : type) (t : term) (rty : type) (a : has_type t rty),             motive t rty a → motive ((Var n dty).Abs t) (Fun dty rty) ⋯) →           motive a a_1 t
+L	CandleLean.HolSyntax	sig	0	Type
+L	CandleLean.HolSyntax	term.noConfusion	1	{P : Sort u} → {t t' : term} → t = t' → term.noConfusionType P t t'
+L	CandleLean.Mlstring	app_list_ann.Small	1	{α : Type u} → app_list α → app_list_ann α
+L	CandleLean.HolSyntaxExtra	dbterm_.dbVar.elim	0	{motive : dbterm_ → Sort u} →   (t : dbterm_) → t.ctorIdx = 0 → ((a : mlstring) → (a_1 : type) → motive (dbVar a a_1)) → motive t
+L	CandleLean.HolSyntax	HasSigof.mk.noConfusion	2	{α : Type} →   {P : Sort u} → {sigof sigof' : α → sig} → { sigof := sigof } = { sigof := sigof' } → (sigof ≍ sigof' → P) → P
+L	CandleLean.Prelude.Basic	ISL.match_1	2	{α : Type u_1} →   {β : Type u_2} →     (motive : α ⊕ β → Sort u_3) →       (x : α ⊕ β) → ((val : α) → motive (Sum.inl val)) → ((val : β) → motive (Sum.inr val)) → motive x
+L	CandleLean.HolSyntax	tysig	0	Type
+L	CandleLean.Prelude.List	MAPi.match_1	2	{α : Type u_1} →   {β : Type u_3} →     (motive : (Nat → α → β) → List α → Sort u_2) →       (x : Nat → α → β) →         (x_1 : List α) →           ((x : Nat → α → β) → motive x []) →             ((f : Nat → α → β) → (h : α) → (t : List α) → motive f (h :: t)) → motive x x_1
+L	CandleLean.HolSyntax	tvars	0	term → List mlstring
+L	CandleLean.SetSpec	power	1	{U : Type u} → [Nonempty U] → (U → U → Prop) → U → U
+L	CandleLean.HolSyntax	type.below_1	0	{motive_1 : type → Sort u} → {motive_2 : List type → Sort u} → List type → Sort (max 1 u)
+L	CandleLean.HolSyntaxExtra	dbterm_.dbConst	0	mlstring → type → dbterm_
+L	CandleLean.Misc	app_list.ctorIdx	1	{α : Type u} → app_list α → Nat
+L	CandleLean.HolSyntax	domain	0	type → type
+L	CandleLean.HolSyntax	HasAxsof.mk	1	{α : Type} → (α → Set term) → HasAxsof α
+L	CandleLean.Prelude.Set	BIJ	2	{α : Type u} → {β : Type v} → (α → β) → Set α → Set β → Prop
+L	CandleLean.HolSyntax	HasTysof.noConfusionType	3	Sort u → {α : Type} → HasTysof α → {α' : Type} → HasTysof α' → Sort u
+L	CandleLean.HolSyntax	update.ctorElim	0	{motive : update → Sort u} →   (ctorIdx : Nat) → (t : update) → ctorIdx = t.ctorIdx → update.ctorElimType ctorIdx → motive t
+L	CandleLean.Prelude.Words	v2w	0	{d : Nat} → List Prop → word d
+L	CandleLean.Prelude.Words	fixwidth	0	Nat → List Prop → List Prop
+L	CandleLean.Misc	app_list.List.noConfusion	2	{α : Type u} → {P : Sort u_1} → {a a' : List α} → app_list.List a = app_list.List a' → (a ≍ a' → P) → P
+L	CandleLean.HolSyntax	update.noConfusion	1	{P : Sort u} → {t t' : update} → t = t' → update.noConfusionType P t t'
+L	CandleLean.HolSemantics	is_std_type_assignment	1	{U : Type u} → [Nonempty U] → (U → U → Prop) → tyass U → Prop
+L	CandleLean.Prelude.Basic	RTC	1	{α : Sort u} → (α → α → Prop) → α → α → Prop
+L	CandleLean.HolSyntax	type.brecOn_1.go	0	{motive_1 : type → Sort u} →   {motive_2 : List type → Sort u} →     (t : List type) →       ((t : type) → t.below → motive_1 t) →         ((t : List type) → type.below_1 t → motive_2 t) → motive_2 t ×' type.below_1 t
+L	CandleLean.Misc	num_map	1	Type u → Type u
+L	CandleLean.Prelude.FiniteMap	FUPDATE	2	{α : Type u} → {β : Type v} → fmap α β → α × β → fmap α β
+L	CandleLean.Prelude.Sptree	sptree.spt.LS.noConfusion	2	{α : Type u} → {P : Sort u_1} → {a a' : α} → sptree.LS a = sptree.LS a' → (a ≍ a' → P) → P
+L	CandleLean.Misc	app_list.brecOn.go	1	{α : Type u} →   {motive : app_list α → Sort u_1} →     (t : app_list α) → ((t : app_list α) → app_list.below t → motive t) → motive t ×' app_list.below t
+L	CandleLean.HolSyntax	proves.axioms	0	∀ (thy : thy) (c : term), theory_ok thy → c ∈ axsof thy → proves (thy, []) c
+L	CandleLean.HolSyntax	proves.below.MK_COMB	0	∀ {motive : (a : thy × List term) → (a_1 : term) → proves a a_1 → Prop} (thy : thy) (h1 h2 : List term)   (l1 r1 l2 r2 : term) (a : proves (thy, h1) (l1 === r1)) (a_1 : proves (thy, h2) (l2 === r2))   (a_2 : welltyped (l1.Comb l2)),   proves.below a → motive (thy, h1) (l1 === r1) a → proves.below a_1 → motive (thy, h2) (l2 === r2) a_1 → proves.below ⋯
+L	CandleLean.HolSyntax	proves.below.ABS	0	∀ {motive : (a : thy × List term) → (a_1 : term) → proves a a_1 → Prop} (x : mlstring) (ty : type) (h : List term)   (thy : thy) (l r : term) (a : ¬EXISTS (VFREE_IN (Var x ty)) h) (a_1 : type_ok (tysof thy) ty)   (a_2 : proves (thy, h) (l === r)), proves.below a_2 → motive (thy, h) (l === r) a_2 → proves.below ⋯
+L	CandleLean.HolSyntax	VSUBST	0	List (term × term) → term → term
+L	CandleLean.HolSyntaxExtra	bind_list_aux	0	Nat → List (mlstring × type) → dbterm_ → dbterm_
+L	CandleLean.HolSyntaxLib	IS_RESULT	1	{α : Type u} → result α → Prop
+L	CandleLean.Misc	SmartAppend.match_1	1	{α : Type u_1} →   (motive : app_list α → app_list α → Sort u_2) →     (x x_1 : app_list α) →       ((l2 : app_list α) → motive app_list.Nil l2) →         ((l1 : app_list α) → motive l1 app_list.Nil) → ((l1 l2 : app_list α) → motive l1 l2) → motive x x_1
+L	CandleLean.Prelude.Sptree	sptree.spt.ctorElim	1	{α : Type u} →   {motive : sptree.spt α → Sort u_1} →     (ctorIdx : Nat) → (t : sptree.spt α) → ctorIdx = t.ctorIdx → sptree.spt.ctorElimType ctorIdx → motive t
+L	CandleLean.Prelude.Basic	RTC.below	1	{α : Sort u} → {R : α → α → Prop} → {motive : (a a_1 : α) → RTC R a a_1 → Prop} → {a a_1 : α} → RTC R a a_1 → Prop
+L	CandleLean.Misc	UPDATE_LIST	2	{α : Type u} → {β : Type v} → (α → β) → List (α × β) → α → β
+L	CandleLean.Prelude.List	ALOOKUP.match_1	2	{α : Type u_2} →   {β : Type u_1} →     (motive : List (α × β) → α → Sort u_3) →       (x : List (α × β)) →         (x_1 : α) →           ((x : α) → motive [] x) →             ((x : α) → (y : β) → (t : List (α × β)) → (q : α) → motive ((x, y) :: t) q) → motive x x_1
+L	CandleLean.HolSyntax	codomain.match_1	0	(motive : type → Sort u_1) →   (ty : type) →     ((a : mlstring) → (head x : type) → (tail : List type) → motive (Tyapp a (head :: x :: tail))) →       ((x : type) → motive x) → motive ty
+L	CandleLean.HolSyntax	type.recOn	0	{motive_1 : type → Sort u} →   {motive_2 : List type → Sort u} →     (t : type) →       ((a : mlstring) → motive_1 (Tyvar a)) →         ((a : mlstring) → (a_1 : List type) → motive_2 a_1 → motive_1 (Tyapp a a_1)) →           motive_2 [] →             ((head : type) → (tail : List type) → motive_1 head → motive_2 tail → motive_2 (head :: tail)) → motive_1 t
+L	CandleLean.Prelude.String	FIELDS	0	(char → Prop) → string → List string
+L	CandleLean.HolSyntax	HasTmsof.mk.noConfusion	2	{α : Type} →   {P : Sort u} → {tmsof tmsof' : α → tmsig} → { tmsof := tmsof } = { tmsof := tmsof' } → (tmsof ≍ tmsof' → P) → P
+L	CandleLean.Mlstring	strcat	0	mlstring → mlstring → mlstring
+L	CandleLean.HolSyntax	instInhabitedUpdate	0	Inhabited update
+L	CandleLean.Prelude.Set	«term{_|_}»	0	ParserDescr
+L	CandleLean.HolSyntax	RACONV.comb	0	∀ (env : List (term × term)) (s1 s2 t1 t2 : term),   RACONV env (s1, s2) → RACONV env (t1, t2) → RACONV env (s1.Comb t1, s2.Comb t2)
+L	CandleLean.HolSyntax	const_list	0	List update → List (mlstring × type)
+L	CandleLean.SetSpec	is_set_theory	1	{U : Type u} → (U → U → Prop) → Prop
+L	CandleLean.Mlstring	mlstring.recOn	0	{motive : mlstring → Sort u} → (t : mlstring) → ((a : string) → motive (implode a)) → motive t
+L	CandleLean.Prelude.Words	word.mk.noConfusion	1	{d : Nat} →   {P : Sort u} →     {w2n : Nat} →       {w2n_lt : w2n < 2 ^ d} →         {w2n' : Nat} →           {w2n_lt' : w2n' < 2 ^ d} →             { w2n := w2n, w2n_lt := w2n_lt } = { w2n := w2n', w2n_lt := w2n_lt' } → (w2n = w2n' → P) → P
+L	CandleLean.Prelude.Sptree	sptree.spt	1	Type u → Type u
+L	CandleLean.SetSpec	product	1	{U : Type u} → [Nonempty U] → (U → U → Prop) → U → U → U
+L	CandleLean.Prelude.Basic	RTC.below.refl	1	∀ {α : Sort u} {R : α → α → Prop} {motive : (a a_1 : α) → RTC R a a_1 → Prop} (x : α), RTC.below ⋯
+L	CandleLean.HolSyntax	term.Const.elim	0	{motive : term → Sort u} →   (t : term) → t.ctorIdx = 1 → ((a : mlstring) → (a_1 : type) → motive (Const a a_1)) → motive t
+L	CandleLean.HolSyntax	proves.below.INST_TYPE	0	∀ {motive : (a : thy × List term) → (a_1 : term) → proves a a_1 → Prop} (thy : thy) (tyin : List (type × type))   (h : List term) (c : term) (a : EVERY (type_ok (tysof thy)) (List.map Prod.fst tyin)) (a_1 : proves (thy, h) c),   proves.below a_1 → motive (thy, h) c a_1 → proves.below ⋯
+L	CandleLean.HolSyntaxExtra	dbterm_.dbVar	0	mlstring → type → dbterm_
+L	CandleLean.HolSyntax	proves.below.casesOn	0	∀ {motive : (a : thy × List term) → (a_1 : term) → proves a a_1 → Prop}   {motive_1 : {a : thy × List term} → {a_1 : term} → (t : proves a a_1) → proves.below t → Prop} {a : thy × List term}   {a_1 : term} {t : proves a a_1} (t_1 : proves.below t),   (∀ (x : mlstring) (ty : type) (h : List term) (thy : thy) (l r : term) (a : ¬EXISTS (VFREE_IN (Var x ty)) h)       (a_2 : type_ok (tysof thy) ty) (a_3 : proves (thy, h) (l === r)) (ih : proves.below a_3)       (a_ih : motive (thy, h) (l === r) a_3), motive_1 ⋯ ⋯) →     (∀ (thy : thy) (p : term) (a : theory_ok thy) (a_2 : has_type p Bool_) (a_3 : term_ok (sigof thy) p),         motive_1 ⋯ ⋯) →       (∀ (thy : thy) (ty : type) (t : term) (x : mlstring) (a : theory_ok thy) (a_2 : type_ok (tysof thy) ty)           (a_3 : term_ok (sigof thy) t), motive_1 ⋯ ⋯) →         (∀ (thy : thy) (h1 h2 : List term) (c1 c2 : term) (a : proves (thy, h1) c1) (a_2 : proves (thy, h2) c2)             (ih : proves.below a) (a_ih : motive (thy, h1) c1 a) (ih_1 : proves.below a_2)             (a_ih_1 : motive (thy, h2) c2 a_2), motive_1 ⋯ ⋯) →           (∀ (thy : thy) (h1 h2 : List term) (p q p' : term) (a : proves (thy, h1) (p === q))               (a_2 : proves (thy, h2) p') (a_3 : ACONV p p') (ih : proves.below a) (a_ih : motive (thy, h1) (p === q) a)               (ih_1 : proves.below a_2) (a_ih_1 : motive (thy, h2) p' a_2), motive_1 ⋯ ⋯) →             (∀ (ilist : List (term × term)) (thy : thy) (h : List term) (c : term)                 (a :                   ∀ (s s' : term), MEM (s', s) ilist → ∃ x ty, s = Var x ty ∧ has_type s' ty ∧ term_ok (sigof thy) s')                 (a_2 : proves (thy, h) c) (ih : proves.below a_2) (a_ih : motive (thy, h) c a_2), motive_1 ⋯ ⋯) →               (∀ (thy : thy) (tyin : List (type × type)) (h : List term) (c : term)                   (a : EVERY (type_ok (tysof thy)) (List.map Prod.fst tyin)) (a_2 : proves (thy, h) c)                   (ih : proves.below a_2) (a_ih : motive (thy, h) c a_2), motive_1 ⋯ ⋯) →                 (∀ (thy : thy) (h1 h2 : List term) (l1 r1 l2 r2 : term) (a : proves (thy, h1) (l1 === r1))                     (a_2 : proves (thy, h2) (l2 === r2)) (a_3 : welltyped (l1.Comb l2)) (ih : proves.below a)                     (a_ih : motive (thy, h1) (l1 === r1) a) (ih_1 : proves.below a_2)                     (a_ih_1 : motive (thy, h2) (l2 === r2) a_2), motive_1 ⋯ ⋯) →                   (∀ (thy : thy) (t : term) (a : theory_ok thy) (a_2 : term_ok (sigof thy) t), motive_1 ⋯ ⋯) →                     (∀ (thy : thy) (c : term) (a : theory_ok thy) (a_2 : c ∈ axsof thy), motive_1 ⋯ ⋯) → motive_1 t t_1
+L	CandleLean.Mlstring	mlstring.noConfusion	1	{P : Sort u} → {t t' : mlstring} → t = t' → mlstring.noConfusionType P t t'
+L	CandleLean.Prelude.Mergesort	merge_tail	1	{α : Type u} → Prop → (α → α → Prop) → List α → List α → List α → List α
+L	CandleLean.Prelude.Sptree	sptree.spt.LS	1	{α : Type u} → α → sptree.spt α
+L	CandleLean.Misc	fmap_update	2	{α : Type u} → {β : Type v} → fmap α β → α → β → fmap α β
+L	CandleLean.Prelude.ASCIInumbers	num_from_hex_string	0	string → Nat
+L	CandleLean.HolSyntaxLib	result.casesOn	1	{α : Type u} →   {motive : result α → Sort u_1} →     (t : result α) → ((a : α) → motive (Clash a)) → ((a : α) → motive (Result a)) → motive t
+L	CandleLean.Prelude.Basic	I	1	{α : Sort u} → α → α
+L	CandleLean.Prelude.Set	INTER	1	{α : Type u} → Set α → Set α → Set α
+L	CandleLean.HolSyntax	HasTysof	1	Type → Type
+L	CandleLean.Prelude.Sptree	sptree.spt.casesOn	1	{α : Type u} →   {motive : sptree.spt α → Sort u_1} →     (t : sptree.spt α) →       motive sptree.LN →         ((a : α) → motive (sptree.LS a)) →           ((a a_1 : sptree.spt α) → motive (a.BN a_1)) →             ((a : sptree.spt α) → (a_1 : α) → (a_2 : sptree.spt α) → motive (a.BS a_1 a_2)) → motive t
+L	CandleLean.HolSyntaxExtra	dbterm_.dbAbs.noConfusion	1	{P : Sort u} →   {a : type} →     {a_1 : dbterm_} → {a' : type} → {a'_1 : dbterm_} → dbAbs a a_1 = dbAbs a' a'_1 → (a = a' → a_1 = a'_1 → P) → P
+L	CandleLean.Prelude.Set	Set	1	Type u → Type u
+L	CandleLean.HolSyntax	update.TypeDefn	0	mlstring → term → mlstring → mlstring → update
+L	CandleLean.HolSyntax	term.Abs.noConfusion	1	{P : Sort u} → {a a_1 a' a'_1 : term} → a.Abs a_1 = a'.Abs a'_1 → (a = a' → a_1 = a'_1 → P) → P
+L	CandleLean.HolSyntax	instInhabitedType.default	0	type
+L	CandleLean.HolSyntax	update.NewConst	0	mlstring → type → update
+L	CandleLean.HolSyntax	has_type.below.abs	0	∀ {motive : (a : term) → (a_1 : type) → has_type a a_1 → Prop} (n : mlstring) (dty : type) (t : term) (rty : type)   (a : has_type t rty), has_type.below a → motive t rty a → has_type.below ⋯
+L	CandleLean.Prelude.List	MEM	1	{α : Type u} → α → List α → Prop
+L	CandleLean.Prelude.Mergesort	merge_tail.match_1	1	{α : Type u_1} →   (motive : List α → List α → List α → Sort u_2) →     (x x_1 x_2 : List α) →       ((acc : List α) → motive [] [] acc) →         ((l acc : List α) → motive l [] acc) →           ((l acc : List α) → motive [] l acc) →             ((x : α) → (l1 : List α) → (y : α) → (l2 acc : List α) → motive (x :: l1) (y :: l2) acc) → motive x x_1 x_2
+L	CandleLean.Prelude.Set	instSingletonSet	1	{α : Type u} → Singleton α (Set α)
+L	CandleLean.Prelude.Basic	instInhabitedOrdering_1.default	0	ordering
+L	CandleLean.HolSyntax	HasTysof.noConfusion	3	{P : Sort u} →   {α : Type} → {t : HasTysof α} → {α' : Type} → {t' : HasTysof α'} → α = α' → t ≍ t' → HasTysof.noConfusionType P t t'
+L	CandleLean.Prelude.String	string_lt.match_1	0	(motive : string → string → Sort u_1) →   (x x_1 : string) →     ((x : string) → motive x []) →       ((head : char) → (tail : List char) → motive [] (head :: tail)) →         ((c1 : char) → (s1 : List char) → (c2 : char) → (s2 : List char) → motive (c1 :: s1) (c2 :: s2)) → motive x x_1
+L	CandleLean.HolSyntax	type.ctorElim	0	{motive_1 : type → Sort u} → (ctorIdx : Nat) → (t : type) → ctorIdx = t.ctorIdx → type.ctorElimType ctorIdx → motive_1 t
+L	CandleLean.HolSyntaxExtra	dbterm_.dbComb	0	dbterm_ → dbterm_ → dbterm_
+L	CandleLean.Prelude.Set	instMembershipSet	1	{α : Type u} → Membership α (Set α)
+L	CandleLean.Prelude.List	SEG	1	{α : Type u} → Nat → Nat → List α → List α
+L	CandleLean.HolSyntax	codomain	0	type → type
+L	CandleLean.HolSyntax	term.recOn	0	{motive : term → Sort u} →   (t : term) →     ((a : mlstring) → (a_1 : type) → motive (Var a a_1)) →       ((a : mlstring) → (a_1 : type) → motive (Const a a_1)) →         ((a a_1 : term) → motive a → motive a_1 → motive (a.Comb a_1)) →           ((a a_1 : term) → motive a → motive a_1 → motive (a.Abs a_1)) → motive t
+L	CandleLean.Prelude.FiniteMap	FRANGE	2	{α : Type u} → {β : Type v} → [Nonempty β] → fmap α β → Set β
+L	CandleLean.HolSyntax	proves.below.DEDUCT_ANTISYM	0	∀ {motive : (a : thy × List term) → (a_1 : term) → proves a a_1 → Prop} (thy : thy) (h1 h2 : List term) (c1 c2 : term)   (a : proves (thy, h1) c1) (a_1 : proves (thy, h2) c2),   proves.below a → motive (thy, h1) c1 a → proves.below a_1 → motive (thy, h2) c2 a_1 → proves.below ⋯
+L	CandleLean.HolSyntax	term	0	Type
+L	CandleLean.HolSyntaxExtra	subtype1	0	type → type → Prop
+L	CandleLean.HolSyntax	proves	0	thy × List term → term → Prop
+L	CandleLean.HolSyntax	term_remove.match_1	0	(motive : List term → Sort u_1) →   (l : List term) → (Unit → motive []) → ((s : term) → (ss : List term) → motive (s :: ss)) → motive l
+L	CandleLean.Prelude.Set	instUnionSet	1	{α : Type u} → Union (Set α)
+L	CandleLean.HolSyntax	has_type.below.comb	0	∀ {motive : (a : term) → (a_1 : type) → has_type a a_1 → Prop} (s t : term) (dty rty : type)   (a : has_type s (Fun dty rty)) (a_1 : has_type t dty),   has_type.below a → motive s (Fun dty rty) a → has_type.below a_1 → motive t dty a_1 → has_type.below ⋯
+L	CandleLean.HolSyntax	proves.below.ASSUME	0	∀ {motive : (a : thy × List term) → (a_1 : term) → proves a a_1 → Prop} (thy : thy) (p : term) (a : theory_ok thy)   (a_1 : has_type p Bool_) (a_2 : term_ok (sigof thy) p), proves.below ⋯
+L	CandleLean.HolSyntaxLib	result.Result.elim	1	{α : Type u} →   {motive : result α → Sort u_1} → (t : result α) → t.ctorIdx = 1 → ((a : α) → motive (Result a)) → motive t
+L	CandleLean.Prelude.Words	word32	0	Type
+L	CandleLean.HolSyntax	updates.new_type	0	∀ (name : mlstring) (ctxt : List update) (arity : Nat), ¬name ∈ FDOM (tysof ctxt) → updates (NewType name arity) ctxt
+L	CandleLean.HolSyntaxExtra	dbterm_.dbVar.noConfusion	1	{P : Sort u} →   {a : mlstring} →     {a_1 : type} → {a' : mlstring} → {a'_1 : type} → dbVar a a_1 = dbVar a' a'_1 → (a = a' → a_1 = a'_1 → P) → P
+L	CandleLean.Prelude.List	FLAT.match_1	1	{α : Type u_1} →   (motive : List (List α) → Sort u_2) →     (x : List (List α)) → (Unit → motive []) → ((h : List α) → (t : List (List α)) → motive (h :: t)) → motive x
+L	CandleLean.HolSyntax	type.brecOn	0	{motive_1 : type → Sort u} →   {motive_2 : List type → Sort u} →     (t : type) → ((t : type) → t.below → motive_1 t) → ((t : List type) → type.below_1 t → motive_2 t) → motive_1 t
+L	CandleLean.HolSyntax	update.NewType.noConfusion	1	{P : Sort u} →   {a : mlstring} →     {a_1 : Nat} → {a' : mlstring} → {a'_1 : Nat} → NewType a a_1 = NewType a' a'_1 → (a = a' → a_1 = a'_1 → P) → P
+L	CandleLean.HolSyntax	instHasTysofThy	0	HasTysof thy
+L	CandleLean.Prelude.List	EVERY_attach_unattach.match_1_1	1	∀ {α : Type u_1} {Q : α → Prop} (motive : List (Subtype Q) → Prop) (x : List (Subtype Q)),   (∀ (a : Unit), motive []) → (∀ (x : Subtype Q) (xs : List (Subtype Q)), motive (x :: xs)) → motive x
+L	CandleLean.HolSyntax	FILTER_mem_aux.match_1_1	1	∀ {α : Type u_1} (P : α → Prop) (motive : (x : List α) → (x_1 : α) → x_1 ∈ FILTER P x → Prop) (x : List α) (x_1 : α)   (x_2 : x_1 ∈ FILTER P x),   (∀ (x : α) (h : x ∈ FILTER P []), motive [] x h) →     (∀ (y : α) (l : List α) (x : α) (h : x ∈ FILTER P (y :: l)), motive (y :: l) x h) → motive x x_1 x_2
+L	CandleLean.Misc	app_list.Append	1	{α : Type u} → app_list α → app_list α → app_list α
+L	CandleLean.Prelude.Basic	ordering.recOn	0	{motive : ordering → Sort u} → (t : ordering) → motive LESS → motive EQUAL → motive GREATER → motive t
+L	CandleLean.HolSyntax	has_type.comb	0	∀ (s t : term) (dty rty : type), has_type s (Fun dty rty) → has_type t dty → has_type (s.Comb t) rty
+L	CandleLean.Mlstring	app_list_ann.casesOn	1	{α : Type u} →   {motive : app_list_ann α → Sort u_1} →     (t : app_list_ann α) →       ((a : List α) → motive (BigList a)) →         ((a a_1 : app_list_ann α) → motive (a.BigAppend a_1)) → ((a : app_list α) → motive (Small a)) → motive t
+L	CandleLean.Mlstring	app_list_ann.below	1	{α : Type u} → {motive : app_list_ann α → Sort u_1} → app_list_ann α → Sort (max (u + 1) u_1)
+L	CandleLean.HolSyntax	proves.DEDUCT_ANTISYM	0	∀ (thy : thy) (h1 h2 : List term) (c1 c2 : term),   proves (thy, h1) c1 →     proves (thy, h2) c2 → proves (thy, term_union (term_remove c2 h1) (term_remove c1 h2)) (c1 === c2)
+L	CandleLean.HolSyntax	HasAxsof.noConfusionType	3	Sort u → {α : Type} → HasAxsof α → {α' : Type} → HasAxsof α' → Sort u
+L	CandleLean.HolSyntax	term.Var.elim	0	{motive : term → Sort u} → (t : term) → t.ctorIdx = 0 → ((a : mlstring) → (a_1 : type) → motive (Var a a_1)) → motive t
+L	CandleLean.SetSpec	extensional	1	{U : Type u} → (U → U → Prop) → Prop
+L	CandleLean.Misc	num_set	0	Type
+L	CandleLean.HolSyntaxLib	result.Clash.elim	1	{α : Type u} → {motive : result α → Sort u_1} → (t : result α) → t.ctorIdx = 0 → ((a : α) → motive (Clash a)) → motive t
+L	CandleLean.HolSyntax	HasAxsof	1	Type → Type
+L	CandleLean.Misc	app_list.List.elim	1	{α : Type u} →   {motive : app_list α → Sort u_1} →     (t : app_list α) → t.ctorIdx = 0 → ((a : List α) → motive (app_list.List a)) → motive t
+L	CandleLean.Prelude.Words	n2w	0	{d : Nat} → Nat → word d
+L	CandleLean.Prelude.Sptree	sptree.num_set	0	Type
+L	CandleLean.Mlstring	app_list_ann.BigList.noConfusion	2	{α : Type u} → {P : Sort u_1} → {a a' : List α} → BigList a = BigList a' → (a ≍ a' → P) → P
+L	CandleLean.Prelude.FiniteMap	FAPPLY	2	{α : Type u} → {β : Type v} → [Nonempty β] → fmap α β → α → β
+L	CandleLean.HolSemantics	tyass	1	Type u → Type u
+L	CandleLean.HolSemantics	is_interpretation	1	{U : Type u} → (U → U → Prop) → sig → interpretation U → Prop
+L	CandleLean.Prelude.Mergesort	mergesortN_tail	1	{α : Type u} → Prop → (α → α → Prop) → Nat → List α → List α
+L	CandleLean.HolSemantics	is_structure	1	{U : Type u} → [Nonempty U] → (U → U → Prop) → sig → interpretation U → valuation U → Prop
+L	CandleLean.Prelude.Set	INFINITE	1	{α : Type u} → Set α → Prop
+L	CandleLean.HolSyntax	RACONV.const	0	∀ (env : List (term × term)) (x : mlstring) (ty : type), RACONV env (Const x ty, Const x ty)
+L	CandleLean.HolSyntax	HasTmsof.mk	1	{α : Type} → (α → tmsig) → HasTmsof α
+L	CandleLean.Misc	is_subseq	1	{α : Type u} → List α → List α → Prop
+L	CandleLean.HolSyntax	update.NewAxiom	0	term → update
+L	CandleLean.HolSyntax	ordav.match_1	0	(motive : List (term × term) → term → term → Sort u_1) →   (x : List (term × term)) →     (x_1 x_2 : term) →       ((x1 x2 : term) → motive [] x1 x2) →         ((t1 t2 : term) → (env : List (term × term)) → (x1 x2 : term) → motive ((t1, t2) :: env) x1 x2) →           motive x x_1 x_2
+L	CandleLean.HolSyntax	ACONV	0	term → term → Prop
+L	CandleLean.Mlstring	make_app_list_ann	0	app_list mlstring → app_list_ann mlstring × Nat
+L	CandleLean.HolSyntax	update	0	Type
+L	CandleLean.Prelude.Sptree	sptree.spt.noConfusion	3	{P : Sort u_1} →   {α : Type u} →     {t : sptree.spt α} → {α' : Type u} → {t' : sptree.spt α'} → α = α' → t ≍ t' → sptree.spt.noConfusionType P t t'
+L	CandleLean.HolSemantics	valuation	1	Type u → Type u
+L	CandleLean.HolSemantics	is_term_valuation	1	{U : Type u} → (U → U → Prop) → tysig → tyass U → tyval U → tmval U → Prop
+L	CandleLean.Prelude.Words	PAD_LEFT	1	{α : Type u} → α → Nat → List α → List α
+L	CandleLean.Prelude.Set	INJ	2	{α : Type u} → {β : Type v} → (α → β) → Set α → Set β → Prop
+L	CandleLean.HolSyntax	instInhabitedTerm.default	0	term
+L	CandleLean.SetSpec	funspace	1	{U : Type u} → [Nonempty U] → (U → U → Prop) → U → U → U
+L	CandleLean.Mlstring	explode_aux	0	mlstring → Nat → Nat → string
+L	CandleLean.Prelude.List	NULL	1	{α : Type u} → List α → Prop
+L	CandleLean.HolSyntax	HasTysof.ctorIdx	1	{α : Type} → HasTysof α → Nat
+L	CandleLean.Prelude.Words	word.recOn	0	{d : Nat} →   {motive : word d → Sort u} →     (t : word d) → ((w2n : Nat) → (w2n_lt : w2n < 2 ^ d) → motive { w2n := w2n, w2n_lt := w2n_lt }) → motive t
+L	CandleLean.Prelude.Mergesort	mergesortN_tail.match_1	1	{α : Type u_1} →   (motive : Nat → List α → Sort u_2) →     (x : Nat) →       (x_1 : List α) →         ((x : List α) → motive 0 x) →           ((x : α) → (tail : List α) → motive 1 (x :: tail)) →             (Unit → motive 1 []) →               ((x y : α) → (tail : List α) → motive 2 (x :: y :: tail)) →                 ((x : α) → motive 2 [x]) →                   (Unit → motive 2 []) →                     ((x y z : α) → (tail : List α) → motive 3 (x :: y :: z :: tail)) →                       ((x y : α) → motive 3 [x, y]) →                         ((x : α) → motive 3 [x]) →                           (Unit → motive 3 []) →                             ((n : Nat) → (l : List α) → motive n.succ.succ.succ.succ l) → motive x x_1
+L	CandleLean.Prelude.Mergesort	sort2_tail	1	{α : Type u} → Prop → (α → α → Prop) → α → α → List α
+L	CandleLean.Mlstring	app_list_ann.BigList.elim	1	{α : Type u} →   {motive : app_list_ann α → Sort u_1} →     (t : app_list_ann α) → t.ctorIdx = 0 → ((a : List α) → motive (BigList a)) → motive t
+L	CandleLean.Prelude.Words	FCP	0	{d : Nat} → (Nat → Prop) → word d
+L	CandleLean.HolSyntax	proves.ASSUME	0	∀ (thy : thy) (p : term), theory_ok thy → has_type p Bool_ → term_ok (sigof thy) p → proves (thy, [p]) p
+L	CandleLean.HolSyntax	term.Abs	0	term → term → term
+L	CandleLean.Prelude.Basic	instReprOrdering_1	0	Repr ordering
+L	CandleLean.HolSyntax	HasSigof.ctorIdx	1	{α : Type} → HasSigof α → Nat
+L	CandleLean.HolSyntaxExtra	subterm1.comb_right	0	∀ (t1 t2 : term), subterm1 t2 (t1.Comb t2)
+L	CandleLean.Prelude.Words	instDecidableEqWord	0	{d : Nat} → DecidableEq (word d)
+L	CandleLean.Prelude.String	char	0	Type
+L	CandleLean.HolSyntax	CLOSED	0	term → Prop
+L	CandleLean.Mlstring	app_list_ann.ctorElimType	1	{α : Type u} → {motive : app_list_ann α → Sort u_1} → Nat → Sort (max 1 (imax (u + 1) u_1) (imax (u + 1) (u + 1) u_1))
+L	CandleLean.Prelude.FiniteMap	FDOM	2	{α : Type u} → {β : Type v} → fmap α β → Set α
+L	CandleLean.HolSemantics	is_type_valuation	1	{U : Type u} → (U → U → Prop) → tyval U → Prop
+L	CandleLean.Prelude.FiniteMap	FEVERY	2	{α : Type u} → {β : Type v} → [Nonempty β] → (α × β → Prop) → fmap α β → Prop
+L	CandleLean.Mlstring	mlstring	0	Type
+L	CandleLean.HolSyntax	update.noConfusionType	1	Sort u → update → update → Sort u
+L	CandleLean.Prelude.Sptree	sptree.spt.ctorIdx	1	{α : Type u} → sptree.spt α → Nat
+L	CandleLean.HolSyntaxLib	INORDER_INSERT	0	string → List string → List string
+L	CandleLean.HolSyntax	term.Comb.noConfusion	1	{P : Sort u} → {a a_1 a' a'_1 : term} → a.Comb a_1 = a'.Comb a'_1 → (a = a' → a_1 = a'_1 → P) → P
+L	CandleLean.Prelude.Set	INSERT	1	{α : Type u} → α → Set α → Set α
+L	CandleLean.Misc	app_list.ctorElim	1	{α : Type u} →   {motive : app_list α → Sort u_1} →     (ctorIdx : Nat) → (t : app_list α) → ctorIdx = t.ctorIdx → app_list.ctorElimType ctorIdx → motive t
+L	CandleLean.Prelude.Basic	EVEN	0	Nat → Prop
+L	CandleLean.HolSyntax	term.below	0	{motive : term → Sort u} → term → Sort (max 1 u)
+L	CandleLean.Prelude.List	TL	1	{α : Type u} → List α → List α
+L	CandleLean.HolSyntaxExtra	dbVSUBST	0	List (dbterm_ × dbterm_) → dbterm_ → dbterm_
+L	CandleLean.HolSyntax	term.brecOn.go	0	{motive : term → Sort u} → (t : term) → ((t : term) → term.below t → motive t) → motive t ×' term.below t
+L	CandleLean.HolSyntaxExtra	dbterm_.dbConst.noConfusion	1	{P : Sort u} →   {a : mlstring} →     {a_1 : type} → {a' : mlstring} → {a'_1 : type} → dbConst a a_1 = dbConst a' a'_1 → (a = a' → a_1 = a'_1 → P) → P
+L	CandleLean.Prelude.String	instDecidableEqChar_1	0	DecidableEq char
+L	CandleLean.Prelude.List	HD.match_1	1	{α : Type u_1} →   (motive : List α → Sort u_2) →     (x : List α) → ((h : α) → (tail : List α) → motive (h :: tail)) → (Unit → motive []) → motive x
+L	CandleLean.Prelude.Sptree	sptree.spt.noConfusionType	3	Sort u_1 → {α : Type u} → sptree.spt α → {α' : Type u} → sptree.spt α' → Sort u_1
+L	CandleLean.HolSemantics	tyaof	1	{U : Type u} → interpretation U → tyass U
+L	CandleLean.Mlstring	app_list_ann.Small.elim	1	{α : Type u} →   {motive : app_list_ann α → Sort u_1} →     (t : app_list_ann α) → t.ctorIdx = 2 → ((a : app_list α) → motive (Small a)) → motive t
+L	CandleLean.HolSyntaxExtra	instInhabitedDbterm_.default	0	dbterm_
+L	CandleLean.Prelude.Sptree	sptree.insert.match_1	1	{α : Type u_1} →   (motive : sptree.spt α → Sort u_2) →     (x : sptree.spt α) →       (Unit → motive sptree.LN) →         ((a' : α) → motive (sptree.LS a')) →           ((t1 t2 : sptree.spt α) → motive (t1.BN t2)) →             ((t1 : sptree.spt α) → (a' : α) → (t2 : sptree.spt α) → motive (t1.BS a' t2)) → motive x
+L	CandleLean.HolSyntaxLib	result.Clash	1	{α : Type u} → α → result α
+L	CandleLean.HolSyntax	typeof	0	term → type
+L	CandleLean.HolSyntaxExtra	fresh	0	Set string → string
+L	CandleLean.Prelude.Basic	ordering.GREATER.elim	0	{motive : ordering → Sort u} → (t : ordering) → t.ctorIdx = 2 → motive GREATER → motive t
+L	CandleLean.Prelude.Words	word.casesOn	0	{d : Nat} →   {motive : word d → Sort u} →     (t : word d) → ((w2n : Nat) → (w2n_lt : w2n < 2 ^ d) → motive { w2n := w2n, w2n_lt := w2n_lt }) → motive t
+L	CandleLean.Prelude.Basic	RTC.below.step	1	∀ {α : Sort u} {R : α → α → Prop} {motive : (a a_1 : α) → RTC R a a_1 → Prop} (x y z : α) (a : R x y) (a_1 : RTC R y z),   RTC.below a_1 → motive y z a_1 → RTC.below ⋯
+L	CandleLean.HolSyntax	term.casesOn	0	{motive : term → Sort u} →   (t : term) →     ((a : mlstring) → (a_1 : type) → motive (Var a a_1)) →       ((a : mlstring) → (a_1 : type) → motive (Const a a_1)) →         ((a a_1 : term) → motive (a.Comb a_1)) → ((a a_1 : term) → motive (a.Abs a_1)) → motive t
+L	CandleLean.HolSyntax	proves.BETA	0	∀ (thy : thy) (ty : type) (t : term) (x : mlstring),   theory_ok thy →     type_ok (tysof thy) ty → term_ok (sigof thy) t → proves (thy, []) (((Var x ty).Abs t).Comb (Var x ty) === t)
+L	CandleLean.Prelude.List	LAST	1	{α : Type u} → [Nonempty α] → List α → α
+L	CandleLean.Prelude.Set	UNION	1	{α : Type u} → Set α → Set α → Set α
+L	CandleLean.HolSyntaxExtra	dbterm_.dbBound.noConfusion	1	{P : Sort u} → {a a' : Nat} → dbBound a = dbBound a' → (a = a' → P) → P
+L	CandleLean.Prelude.String	termCh!_	0	ParserDescr
+L	CandleLean.HolSyntax	proves.below.REFL	0	∀ {motive : (a : thy × List term) → (a_1 : term) → proves a a_1 → Prop} (thy : thy) (t : term) (a : theory_ok thy)   (a_1 : term_ok (sigof thy) t), proves.below ⋯
+L	CandleLean.Prelude.String	char_lt	0	char → char → Prop
+L	CandleLean.Prelude.Basic	ordering.ctorElimType	0	{motive : ordering → Sort u} → Nat → Sort (max 1 u)
+L	CandleLean.HolSyntaxExtra	bind_list_aux.match_1	0	(motive : Nat → List (mlstring × type) → dbterm_ → Sort u_1) →   (x : Nat) →     (x_1 : List (mlstring × type)) →       (x_2 : dbterm_) →         ((x : Nat) → (tm : dbterm_) → motive x [] tm) →           ((n : Nat) → (v : mlstring × type) → (vs : List (mlstring × type)) → (tm : dbterm_) → motive n (v :: vs) tm) →             motive x x_1 x_2

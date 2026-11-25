@@ -1,6 +1,8 @@
 # Continue this work on another PC
 
-Status: 25 November 2026. Read this file first, then `plan/v3/plan_v3.3.pdf` (draft, see "Open" below).
+Status: 26 November 2026. Read this file first, then `plan/v3/plan_v3.4.pdf` (draft, see "Open" below).
+
+**Blinding.** The author is still to score findings. Until that is done, this file and plan v3.4 hold no result by arm or row. Results: `audit/real/*.md`, `audit/pilot`, `baselines/ts_runs_v2/RESULTS.md`, `plan/v3/readiness_*`, older plans and commit messages. The author reads these after scoring.
 
 ## Set up
 
@@ -24,10 +26,12 @@ Status: 25 November 2026. Read this file first, then `plan/v3/plan_v3.3.pdf` (dr
 
 | What | Where |
 |---|---|
-| Plan v3.3 (draft) and the critiques of it | `plan/v3/` |
+| Plan v3.4 (draft), v3.3 (not adopted) and the critiques | `plan/v3/` |
 | Candle translations (Opus, Opus without lessons, Sonnet, Fable) | `baselines/*/lean` |
 | Type-soundness translations (three), their briefs and launch scripts | `baselines/ts_runs_v2/*/lean`, `baselines/ts_runs_v2/run` |
-| **Scoring sheet for the author (51 rows)** | `baselines/ts_runs_v2/scoring/scoring_sheet.csv` |
+| **1. Scoring sheet for the author (51 rows)** | `baselines/ts_runs_v2/scoring/scoring_sheet.csv` |
+| **2. Check sheet for the author (108 rows), how to fill it** | `audit/real/check/check_sheet.csv`, `audit/real/check/README.md` |
+| Tables of the audit, script alone and per translation (has results) | `audit/real/TABLES.md`, made by `report.py` |
 | Repaired Candle base used for proving and for the audit pilot | `audit_base/lean` |
 | HOL4 packages | `package/` (Candle), `package_ts/` (type soundness, from `typesound_lean4_sorry/hol4-ultramin` at `165e03b24`) |
 | Audit pilot, audit on real errors | `audit/pilot`, `audit/real` |
@@ -39,20 +43,23 @@ Status: 25 November 2026. Read this file first, then `plan/v3/plan_v3.3.pdf` (dr
 
 - Candle: four translations, scored against the v3.3 contract (`baselines/rescore_v33`); base repaired.
 - Type soundness: three translations, scored (`baselines/ts_runs_v2/RESULTS.md`).
-- Audit pilot: every arm found all 6 mutants (`audit/pilot/RESULTS.md`).
-- Audit on real errors: 105 known errors in 63 modules. Astra 101, Opus 63 and 59, Opus union 64, Astra reviewed by Neon 101 (`audit/real/RESULTS.md`).
+- Audit pilot with planted defects (`audit/pilot/RESULTS.md`). The experiment with planted defects is dropped (author, 25 November).
+- Audit on real errors, the main result of the paper (author, 25 November): 63 modules, six arms, tables by script (`audit/real/RESULTS.md`, `TABLES.md`; results inside).
+- Check sheet for the author and its analysis script, written before any answer (`audit/real/check`). The analysis was run on made-up answers only.
 - Proving without HOL4 proofs: Candle 278 of 278, type soundness 267 of 267 (`proving_nohol4/RESULTS.md`).
 
 ## Open
 
-1. The author scores `scoring_sheet.csv`: fill the last two columns. The 15 keyed "type too specific (statement)" errors are provisional until then.
-   Do not open `audit/real`, the two RESULTS files above or any translation before scoring: they show which run a row is from. `key.csv` (row to run) is not in the repository; after scoring, rebuild it with `make_csv.py`.
-   **`make_csv.py` overwrites `scoring_sheet.csv`: copy the filled sheet first.**
-2. Plan v3.3 is a draft. `plan/v3/plan.tex` (version 3.2) stays the adopted text until the author adopts v3.3.
+1. The author scores the 51 rows of `scoring_sheet.csv`: fill the last two columns. The statement entries of the key are provisional until then.
+   `key.csv` (row to run) is not in the repository; after scoring, rebuild it with `make_csv.py`. It now stops if the sheet has answers. Still copy the filled sheet first (`*_filled.csv`).
+   Then the author fills the check sheet (`audit/real/check/README.md`), then `analyse.py`. Order matters.
+   The author decided on 25 November to do the check and stated that they had not seen the results printed earlier in the work. Blinding: no file listed under "Blinding" above is opened before both sheets are filled.
+2. Plan v3.4 is a draft. `plan/v3/plan.tex` (version 3.2) stays the adopted text until the author adopts v3.4. v3.4 makes the author the checker, which 3.2 said was not done; the paper states it.
 3. `interprets0` in the Candle base is still too specific (known, not repaired).
-4. Of the 60 equivalent-change decoys, only the two used in the pilot have a proof; only needed if the mutant experiment goes on.
+4. Open decisions for the author: a second S1 (Astra) audit run, a second reader on a sample, the workflow loop (see "Open" in plan v3.4).
 5. One run per cell, except two Opus audit runs, so there are no variance estimates.
-6. Readiness: Astra's answer of 25 November is in `plan/v3/readiness_astra_2026-11-25.md` (it discusses results by arm: read it after scoring).
+6. Readiness: Astra's answer of 25 November is in `plan/v3/readiness_astra_2026-11-25.md`. Its three points are met in the files; whether they are met in fact depends on the author's check. Astra is asked again after the author has read plan v3.4 and done the scoring.
+7. Record error: `audit/pilot/leantv_opus_lessons.tsv` was made from the repaired base, not the unrepaired one that the pilot used; the correct dump is `audit/real/tv/tv_ts_opus_lessons.tsv`.
 
 ## Rules the author set
 
