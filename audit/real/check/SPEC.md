@@ -17,3 +17,5 @@ The 46 other errors found by all three are not checked one by one. Study-1 findi
 Controls: the claim is not true of the shown declaration, so the expected answer to q1 is `no`. Fewer than 7 of 8 `no` answers means the check is reported as unreliable. The controls are recognisable to a reader who sees that the claim names types absent from the text; the author had been told in a progress note that there are 8 controls.
 
 The scripted rules are fixed, but the claims and the shown excerpts were not edited by hand, so 4 rows ("missed by all") have a script-written claim that reads alike, and Astra's and Opus's claims differ in style.
+
+SHA-256 of the unpublished key at the time of writing (check_key.csv): caf111841e627b94601e7f2ab93c17e972d45b5ca2f19a42561a876c1f376e73. Sheet: 79a428c7c76c529179554c88f1e2480888c20e9bde099d167064592948e0a5d3.
