@@ -1,0 +1,10 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "In hol4/package/miscScript.sml, MAP3_def only gives equations for ([], [], []) and (h1::t1, h2::t2, h3::t3); HOL4's TotalDefn deletes the temporary tupled definition and saves only those two clauses (plus MAP3_ind), leaving mismatched-length inputs unconstrained. In lean/CmlTS/Misc.lean, the catch-all returns the single constant ARB, so Lean proves MAP3 f [] [0] [] = MAP3 f [] [] [0] by rfl, an equation over the mapped vocabulary left open by HOL4's saved theorems."
+  }
+ ]
+}

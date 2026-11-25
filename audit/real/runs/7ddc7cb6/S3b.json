@@ -1,0 +1,18 @@
+{
+ "module": "CmlTS.TypeSound",
+ "checked": 45,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "store_type_extension",
+   "lean": "lean/CmlTS/TypeSound.lean:20",
+   "hol4": "hol4/package/typeSoundScript.sml:487",
+   "class": "V-P",
+   "explanation": "The HOL4 definition has no type annotation and uses only FUNION and FLOOKUP. Its constant is therefore polymorphic: ('a |-> 'b) -> ('a |-> 'b) -> bool. Lean fixes it to tenv_store = FMap Nat store_t. As a result store_type_extension_refl (line 216), store_type_extension_trans (line 220) and store_type_extension_weakS (line 211) are only the num/store_t instance of the saved HOL4 theorems, i.e. a special case. HOL4's weakS is polymorphic too. For example, HOL4 gives store_type_extension s s for s : bool |-> bool, which cannot be stated in Lean. Module Weakening already generalises the analogous theorems, via weakS_poly and weakCT_poly.",
+   "repair": "def store_type_extension {α β : Type} (tenvS1 tenvS2 : FMap α β) : Prop :=\n  ∃ tenvS' : FMap α β, (tenvS2 = FUNION tenvS' tenvS1) ∧\n    (∀ l, (FLOOKUP tenvS' l = none) ∨ (FLOOKUP tenvS1 l = none))\n\ntheorem store_type_extension_weakS {α β : Type} :\n    ∀ (tenvS1 tenvS2 : FMap α β),\n      store_type_extension tenvS1 tenvS2 → weakS_poly tenvS2 tenvS1 := by\n  sorry\n\ntheorem store_type_extension_refl {α β : Type} :\n    ∀ (tenvS : FMap α β), store_type_extension tenvS tenvS := by\n  sorry\n\ntheorem store_type_extension_trans {α β : Type} :\n    ∀ (s1 s2 s3 : FMap α β),\n      store_type_extension s1 s2 ∧ store_type_extension s2 s3 →\n      store_type_extension s1 s3 := by\n  sorry",
+   "confidence": 0.55,
+   "lean_check": "import CmlTS.TypeSound\n\nexample : @store_type_extension = (fun (a b : tenv_store) => store_type_extension a b) := rfl\n\nexample : True := by\n  fail_if_success (have : Prop := store_type_extension (FEMPTY : FMap Bool Bool) (FEMPTY : FMap Bool Bool))\n  trivial\n",
+   "hol4_check": "!s:bool |-> bool. store_type_extension s s"
+  }
+ ]
+}

@@ -1,0 +1,10 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "HOL4's FAPPLY f x = OUTL (fmap_REP f x) with OUTL specified only by OUTL (INL x) = x. Off the domain it is OUTL (INR one), constrained only by NOT_FDOM_FAPPLY_FEMPTY; no saved theorem found equates it to ARB, an undefined new_constant, or to THE NONE or HD []. Lean's none => ARB proves FAPPLY FEMPTY x = ARB by unfolding, and FAPPLY FEMPTY x = THE none = HD [], since those also return ARB. Values on the domain agree."
+  }
+ ]
+}

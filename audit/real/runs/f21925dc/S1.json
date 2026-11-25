@@ -1,0 +1,30 @@
+{
+ "module": "CandleLean.Prelude.Words",
+ "checked": 16,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "HOL.word",
+   "lean": "lean/CandleLean/Prelude/Words.lean:9",
+   "hol4": "hol4/HOL4-src/src/n-bit/wordsScript.sml:989",
+   "class": "V-P",
+   "explanation": "The unrestricted width admits `word 0`, a singleton. At that width Lean computes `w2n (n2w 1) = 0`. HOL4 proves `word_1_n2w` for every word type: converting 1 to a word and back gives 1. The same unrestricted width appears directly in the signatures of `n2w`, `w2n`, `FCP`, and `v2w`.",
+   "repair": "abbrev word (n : Nat) [NeZero n] := BitVec n\n\ndef n2w {n : Nat} [NeZero n] (k : Nat) : word n := BitVec.ofNat n k\n\ndef w2n {n : Nat} [NeZero n] (w : word n) : Nat := w.toNat\n\ndef FCP {n : Nat} [NeZero n] (f : Nat → Prop) : word n := BitVec.ofNat n (FCP_bits n f)\n\ndef v2w {n : Nat} [NeZero n] (v : bitstring) : word n := FCP (fun i => testbit i v)",
+   "confidence": 1.0,
+   "lean_check": "import CandleLean.Prelude.Words\n\nexample : HOL.w2n (HOL.n2w 1 : HOL.word 0) = 0 := by rfl",
+   "hol4_check": "w2n (n2w 1 : 'a word) = 1"
+  },
+  {
+   "id": "F2",
+   "declaration": "HOL.dimindex",
+   "lean": "lean/CandleLean/Prelude/Words.lean:15",
+   "hol4": "hol4/HOL4-src/src/n-bit/fcpScript.sml:96",
+   "class": "V-P",
+   "explanation": "Lean computes `dimindex 0 = 0` and consequently `dimword 0 = 1`. HOL4 proves `DIMINDEX_NONZERO` for every index type and `ONE_LT_dimword` for every word dimension. Both Lean functions accept 0 directly, independently of whether a word value is constructed.",
+   "repair": "@[reducible] def dimindex (n : Nat) [NeZero n] : Nat := n\n\n@[reducible] def dimword (n : Nat) [NeZero n] : Nat := 2 ^ dimindex n",
+   "confidence": 1.0,
+   "lean_check": "import CandleLean.Prelude.Words\n\nexample : HOL.dimindex 0 = 0 ∧ HOL.dimword 0 = 1 := ⟨rfl, rfl⟩",
+   "hol4_check": "~(dimindex(:'a) = 0) /\\ 1 < dimword(:'a)"
+  }
+ ]
+}

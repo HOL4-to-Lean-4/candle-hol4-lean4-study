@@ -1,0 +1,16 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "In listScript.sml, HD is defined by primitive recursion (new_specification) with only HD (h::t) = h, leaving HD [] unspecified and independent of the uninterpreted constant ARB. In CandleLean.Prelude.List, HD [] reduces definitionally to ARB, making HD ([] : List Nat) = ARB (and out-of-bounds EL returning ARB) provable in Lean while left open by HOL4's saved theorems."
+  },
+  {
+   "id": "F2",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "In listScript.sml, LAST_DEF is defined by primitive recursion (new_specification) with only LAST (h::t) = if t = [] then h else LAST t, leaving LAST [] unspecified and independent of ARB and HD []. In CandleLean.Prelude.List, LAST [] reduces definitionally to ARB, making LAST ([] : List Nat) = ARB and LAST [] = HD [] provable in Lean while left open by HOL4's saved theorems."
+  }
+ ]
+}

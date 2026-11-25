@@ -1,0 +1,22 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "rich_listScript.sml:274-285 introduces SEG by new_specification with three clauses, none for SEG (SUC m) k []. Any value there satisfies all three, so no saved theorem can fix it. The SEG theorems I checked are length-guarded or stay within these clauses, and the emit SEG lemma's FAIL case leaves SEG m k [] open. Lean's `| _ + 1, _, [] => []` proves SEG 1 0 [] = [] and SEG 2 0 [x] = [x]."
+  },
+  {
+   "id": "F2",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "listScript.sml:138 gives only HD (h::t) = h. Defn.non_wfrec_defn passes it to Prim_rec.new_recursive_definition, whose new_specification saves only that clause, with no ARB completion. HD [] is therefore unconstrained, and the HD theorems I checked are guarded or neutral; the emit HD_NIL equates it with FAIL HD. Lean's `[] => ARB`, with ARB a transparent `default`, proves HD [] = ARB, HD ([] : List Nat) = 0 and HD [] = LAST []."
+  },
+  {
+   "id": "F3",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "LAST_DEF (listScript.sml:2124) has only the cons clause, saved through primitive recursion and new_specification, so LAST [] is unconstrained. The theorems I checked either need nonempty lists (LAST_EL, LAST_MAP, LAST_REVERSE) or leave LAST [] open (LAST_APPEND_CONS, LAST (MDILATE e n l) = LAST l). Lean's `[] => ARB` with transparent `default` proves LAST [] = ARB, LAST ([] : List Nat) = 0 and LAST [] = HD []."
+  }
+ ]
+}

@@ -1,0 +1,16 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "In HolSyntaxLib.lean, `RESULT (Clash t)` reduces to `@ARB α ⟨t⟩`, which is independent of `t` by proof irrelevance of `Nonempty α`; thus Lean proves `RESULT (Clash x) = RESULT (Clash y)` (e.g. for `true`/`false` or `True`/`False`) by `rfl`. In HOL4, `Definition RESULT_def` goes through `Prim_rec.new_recursive_definition` (`new_specification`) and saves only `∀t. RESULT (Result t) = t`, leaving `RESULT (Clash t)` unconstrained and consistent with returning `t`."
+  },
+  {
+   "id": "F2",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "In HolSyntaxLib.lean, `CLASH (Result t)` reduces to `@ARB α ⟨t⟩`, which is independent of `t` by proof irrelevance of `Nonempty α`; thus Lean proves `CLASH (Result x) = CLASH (Result y)` (e.g. for `true`/`false` or `True`/`False`) by `rfl`. In HOL4, `Definition CLASH_def` goes through `Prim_rec.new_recursive_definition` (`new_specification`) and saves only `∀t. CLASH (Clash t) = t`, leaving `CLASH (Result t)` unconstrained and consistent with returning `t`."
+  }
+ ]
+}

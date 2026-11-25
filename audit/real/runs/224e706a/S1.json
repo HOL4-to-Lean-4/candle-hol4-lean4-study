@@ -1,0 +1,30 @@
+{
+ "module": "CandleLean.Prelude.FMap",
+ "checked": 12,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "HOL.FAPPLY",
+   "lean": "lean/CandleLean/Prelude/FMap.lean:32",
+   "hol4": "hol4/HOL4-src/src/finite_maps/finite_mapScript.sml:181",
+   "class": "V-C",
+   "explanation": "Applying the empty map with natural-number values gives 0 in Lean because the missing-key branch returns ARB, which reduces to the type’s default. In HOL4, every missing key gives OUTL (INR one). The saved equation for OUTL specifies only OUTL (INL x) = x, so HOL4 leaves the shared missing-key value open.",
+   "repair": "private opaque missingFApplyValue (β : Type v) [Nonempty β] : β := Classical.choice inferInstance\n\ndef FAPPLY [Inhabited β] (f : FMap α β) (x : α) : β :=\n  match f.lookup x with\n  | some y => y\n  | none => missingFApplyValue β",
+   "confidence": 1.0,
+   "lean_check": "import CandleLean.Prelude.FMap\n\nexample : HOL.FAPPLY (HOL.FEMPTY : HOL.FMap Nat Nat) 0 = 0 := rfl",
+   "hol4_check": "FAPPLY (FEMPTY : num |-> num) 0 = OUTL (INR one : num + one)"
+  },
+  {
+   "id": "F2",
+   "declaration": "HOL.FUN_FMAP",
+   "lean": "lean/CandleLean/Prelude/FMap.lean:72",
+   "hol4": "hol4/HOL4-src/src/finite_maps/finite_mapScript.sml:1585",
+   "class": "V-C",
+   "explanation": "Lean returns FEMPTY for every infinite P, so even FUN_FMAP (fun n : Nat => n) UNIV equals FEMPTY. HOL4 guards the entire FUN_FMAP specification with FINITE P. On the set of all natural numbers, any finite map satisfies that specification.",
+   "repair": "private opaque infiniteFunFMap (f : α → β) (P : Set α) : FMap α β := FEMPTY\n\ndef FUN_FMAP (f : α → β) (P : Set α) : FMap α β :=\n  if h : FINITE P then\n    ⟨fun a => if a ∈ P then some (f a) else none,\n     by\n       obtain ⟨l, hl⟩ := h\n       refine ⟨l, fun a ha => ?_⟩\n       by_cases hp : a ∈ P\n       · exact hl a hp\n       · simp [hp] at ha⟩\n  else infiniteFunFMap f P",
+   "confidence": 1.0,
+   "lean_check": "import CandleLean.Prelude.FMap\n\nopen HOL\n\nexample (f : Nat → Nat) (P : HOL.Set Nat) (h : ¬ FINITE P) :\n    FUN_FMAP f P = FEMPTY := by\n  simp [FUN_FMAP, h]",
+   "hol4_check": "!f P k. FINITE P ==> (FLOOKUP (FUN_FMAP f P) k = if k IN P then SOME (f k) else NONE)"
+  }
+ ]
+}

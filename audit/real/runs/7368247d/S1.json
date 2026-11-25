@@ -1,0 +1,30 @@
+{
+ "module": "CmlTS.TypeSysProps",
+ "checked": 94,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "type_def_to_ctMap",
+   "lean": "lean/CmlTS/TypeSysProps.lean:44",
+   "hol4": "hol4/package/typeSysPropsScript.sml:1502",
+   "class": "V-C",
+   "explanation": "With no type definitions, Lean gives the same result for the ID lists `[true]` and `[false]`. Both calls reduce to the same `ARB`. HOL4 specifies the empty/empty and cons/cons cases only. Its equations allow those two mismatched calls to return different lists.",
+   "repair": "private opaque type_def_to_ctMap_unmatched {α β γ : Type} (tenvT : Namespace mlstring mlstring (List mlstring × typ)) (next : Nat) (tds : List (α × β × List (conN × List ast_t))) (ids : List γ) : List (stamp × (α × List typ × γ))\n\ndef type_def_to_ctMap {α β γ : Type}\n    (tenvT : Namespace mlstring mlstring (List mlstring × typ)) :\n    Nat → List (α × β × List (conN × List ast_t)) → List γ → List (stamp × (α × List typ × γ))\n  | _, [], [] => []\n  | next, (tvs, _, ctors) :: tds, id :: ids =>\n    type_def_to_ctMap tenvT (next + 1) tds ids ++\n      (ctors.map (fun (cn, ts) => (TypeStamp cn next, (tvs, ts.map (type_name_subst tenvT), id)))).reverse\n  | next, tds, ids => type_def_to_ctMap_unmatched tenvT next tds ids",
+   "confidence": 0.99,
+   "lean_check": "import CmlTS.TypeSysProps\nopen CmlTS\n\nexample (env : Namespace mlstring mlstring (List mlstring × typ)) :\n    type_def_to_ctMap (α := Unit) (β := Unit) env 0 [] [true] =\n    type_def_to_ctMap (α := Unit) (β := Unit) env 0 [] [false] := rfl",
+   "hol4_check": null
+  },
+  {
+   "id": "F2",
+   "declaration": "check_ctor_tenv_ok",
+   "lean": "lean/CmlTS/TypeSysProps.lean:784",
+   "hol4": "hol4/package/typeSysPropsScript.sml:1900",
+   "class": "V-P",
+   "explanation": "HOL4’s builder copies each ID into a constructor entry, and `tenv_ctor_ok` ignores that field. The ID type and the output namespace’s module-name type are independently polymorphic. For example, HOL4 permits Boolean IDs and Boolean module names. Lean fixes `tis` to `List type_ident` and the builder’s output to `tenv_ctor`, whose module names have type `modN`. The theorem therefore covers only a special case.",
+   "repair": "private def buildCtorTenvPoly {m ι : Type} (tenvT : Namespace modN typeN (List tvarN × typ)) :\n    List (List tvarN × mlstring × List (conN × List ast_t)) → List ι →\n      Namespace m conN (List tvarN × List typ × ι)\n  | (tvs, _, ctors) :: tds, id :: ids =>\n    nsAppend (buildCtorTenvPoly tenvT tds ids)\n      (alist_to_ns (ctors.map (fun (cn, ts) => (cn, (tvs, ts.map (type_name_subst tenvT), id)))).reverse)\n  | _, _ => alist_to_ns []\n\ntheorem check_ctor_tenv_ok {m ι : Type} :\n    ∀ (tenvT : Namespace modN typeN (List tvarN × typ))\n      (tds : List (List tvarN × mlstring × List (conN × List ast_t))) (tis : List ι),\n      tds.length = tis.length ∧ check_ctor_tenv tenvT tds ∧ tenv_abbrev_ok tenvT →\n      tenv_ctor_ok (buildCtorTenvPoly (m := m) tenvT tds tis) := by\n  sorry",
+   "confidence": 0.99,
+   "lean_check": null,
+   "hol4_check": "∀tenvT tds (tis : bool list). LENGTH tds = LENGTH tis ∧ check_ctor_tenv tenvT tds ∧ tenv_abbrev_ok tenvT ⇒ tenv_ctor_ok (build_ctor_tenv tenvT tds tis : (bool, conN, tvarN list # t list # bool) namespace)"
+  }
+ ]
+}

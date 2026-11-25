@@ -1,0 +1,18 @@
+{
+ "module": "CmlTS.Prelude.ListLib",
+ "checked": 16,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "CmlTS.HD",
+   "lean": "lean/CmlTS/Prelude/ListLib.lean:17",
+   "hol4": "hol4/HOL4-src/src/list/src/listScript.sml:138",
+   "class": "V-C",
+   "explanation": "HOL4 saves only HD (h::t) = h. The definition takes the PRIMREC path (Defn.sml:1182, non_wfrec_defn), which uses Prim_rec.new_recursive_definition and new_specification, so no primitive ARB equation is made and HD [] is unspecified. I found no saved theorem equating HD [] with ARB; bool$ARB is an undefined constant, so the two are unrelated. The Lean definition adds the clause HD [] = ARB, so Lean proves HD [] = ARB by rfl. As a consequence EL n [] = ARB also holds, and HD [] becomes equal to every other function value filled in with ARB, e.g. THE none.",
+   "repair": "opaque HD_NIL (α : Type) [Nonempty α] : α\n\ndef HD [Nonempty α] : List α → α\n  | h :: _ => h\n  | [] => HD_NIL α",
+   "confidence": 0.85,
+   "lean_check": "import CmlTS.Prelude.ListLib\n\nexample {α : Type} [Nonempty α] : CmlTS.HD ([] : List α) = CmlTS.ARB := rfl\n\nexample {α : Type} [Nonempty α] : CmlTS.HD ([] : List α) = CmlTS.THE (none : Option α) := rfl\n",
+   "hol4_check": null
+  }
+ ]
+}

@@ -1,0 +1,30 @@
+{
+ "module": "CmlTS.Prelude.List",
+ "checked": 14,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "CmlTS.HD",
+   "lean": "lean/CmlTS/Prelude/List.lean:20",
+   "hol4": "hol4/HOL4-src/src/list/src/listScript.sml:138",
+   "class": "V-C",
+   "explanation": "HOL4 defines HD by the single clause HD (h::t) = h. Definition goes through new_recursive_definition/new_specification (Defn.sml:1192, Prim_rec.sml:259-285), so no ARB clause is added, and I found no saved theorem giving HD []. Lean adds HD [] = ARB, which holds by rfl. Lean therefore proves an equation between two mapped constants that HOL4 leaves open, and also HD [] = THE none. Through EL, it proves that every out-of-range EL n l is ARB, where HOL4 only reduces it to HD [].",
+   "repair": "noncomputable opaque HD_NIL {α : Type u} [Nonempty α] : α := Classical.choice inferInstance\n\nnoncomputable def HD {α : Type u} [Nonempty α] : List α → α\n  | h :: _ => h\n  | [] => HD_NIL",
+   "confidence": 0.75,
+   "lean_check": "import CmlTS.Prelude.List\n\ntheorem hd_nil_eq_arb {α : Type} [Nonempty α] : CmlTS.HD ([] : List α) = CmlTS.ARB := rfl\n\ntheorem el_nil_eq_arb {α : Type} [Nonempty α] : CmlTS.EL 0 ([] : List α) = CmlTS.ARB := rfl\n",
+   "hol4_check": "!x:'a. ?hd:'a list -> 'a. (!h t. hd (h::t) = h) /\\ (hd [] = x)"
+  },
+  {
+   "id": "F2",
+   "declaration": "CmlTS.THE",
+   "lean": "lean/CmlTS/Prelude/List.lean:12",
+   "hol4": "hol4/HOL4-src/src/coretypes/optionScript.sml:176",
+   "class": "V-C",
+   "explanation": "HOL4 introduces THE by new_recursive_definition with the single clause THE (SOME x) = x, which becomes a new_specification. THE NONE is left open, and I found no saved theorem in optionScript giving its value. Lean adds THE none = ARB, which holds by rfl. This is a specific equation about an underspecified function outside its specification. Lean also proves THE none = HD [], which HOL4 does not determine.",
+   "repair": "noncomputable opaque THE_NONE {α : Type u} [Nonempty α] : α := Classical.choice inferInstance\n\nnoncomputable def THE {α : Type u} [Nonempty α] : Option α → α\n  | some x => x\n  | none => THE_NONE",
+   "confidence": 0.75,
+   "lean_check": "import CmlTS.Prelude.List\n\ntheorem the_none_eq_arb {α : Type} [Nonempty α] : CmlTS.THE (none : Option α) = CmlTS.ARB := rfl\n",
+   "hol4_check": "!y:'a. ?the:'a option -> 'a. (!x. the (SOME x) = x) /\\ (the NONE = y)"
+  }
+ ]
+}

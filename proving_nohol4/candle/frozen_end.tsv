@@ -1,0 +1,2014 @@
+ctor	Candle.RACONV.Abs	[]	1296693596	-
+ctor	Candle.RACONV.Comb	[]	3641597757	-
+ctor	Candle.RACONV.Const	[]	3644107669	-
+ctor	Candle.RACONV.Var	[]	1367110736	-
+ctor	Candle.RACONV.below.Abs	[]	4069165997	-
+ctor	Candle.RACONV.below.Comb	[]	3331351313	-
+ctor	Candle.RACONV.below.Const	[]	1368849727	-
+ctor	Candle.RACONV.below.Var	[]	598581450	-
+ctor	Candle.app_list.Append	[u]	1780921242	-
+ctor	Candle.app_list.List	[u]	3566012697	-
+ctor	Candle.app_list.Nil	[u]	439997075	-
+ctor	Candle.app_list_ann.BigAppend	[u]	1380072055	-
+ctor	Candle.app_list_ann.BigList	[u]	139697435	-
+ctor	Candle.app_list_ann.Small	[u]	889669592	-
+ctor	Candle.dbterm_t.dbAbs	[]	1315827113	-
+ctor	Candle.dbterm_t.dbBound	[]	803602023	-
+ctor	Candle.dbterm_t.dbComb	[]	3217429982	-
+ctor	Candle.dbterm_t.dbConst	[]	1859906612	-
+ctor	Candle.dbterm_t.dbVar	[]	1859906612	-
+ctor	Candle.has_type.Abs	[]	2043948755	-
+ctor	Candle.has_type.Comb	[]	3249327032	-
+ctor	Candle.has_type.Const	[]	916950822	-
+ctor	Candle.has_type.Var	[]	3347603621	-
+ctor	Candle.has_type.below.Abs	[]	116989177	-
+ctor	Candle.has_type.below.Comb	[]	4065476756	-
+ctor	Candle.has_type.below.Const	[]	3114411575	-
+ctor	Candle.has_type.below.Var	[]	2715658368	-
+ctor	Candle.mlstring.implode	[]	647471737	-
+ctor	Candle.proves.ABS	[]	1508906468	-
+ctor	Candle.proves.ASSUME	[]	2478696072	-
+ctor	Candle.proves.BETA	[]	3868686416	-
+ctor	Candle.proves.DEDUCT_ANTISYM	[]	3023284491	-
+ctor	Candle.proves.EQ_MP	[]	483307989	-
+ctor	Candle.proves.INST	[]	419224512	-
+ctor	Candle.proves.INST_TYPE	[]	2194850184	-
+ctor	Candle.proves.MK_COMB	[]	120983347	-
+ctor	Candle.proves.REFL	[]	1675157306	-
+ctor	Candle.proves.axioms	[]	584384543	-
+ctor	Candle.proves.below.ABS	[]	210743763	-
+ctor	Candle.proves.below.ASSUME	[]	1556878060	-
+ctor	Candle.proves.below.BETA	[]	1043093857	-
+ctor	Candle.proves.below.DEDUCT_ANTISYM	[]	3634775592	-
+ctor	Candle.proves.below.EQ_MP	[]	2739538473	-
+ctor	Candle.proves.below.INST	[]	1656261602	-
+ctor	Candle.proves.below.INST_TYPE	[]	3353391188	-
+ctor	Candle.proves.below.MK_COMB	[]	2297356206	-
+ctor	Candle.proves.below.REFL	[]	3293713510	-
+ctor	Candle.proves.below.axioms	[]	190557295	-
+ctor	Candle.result.Clash	[u]	1889997834	-
+ctor	Candle.result.Result	[u]	1889997834	-
+ctor	Candle.subterm1.abs_body	[]	3777637845	-
+ctor	Candle.subterm1.abs_var	[]	3946837444	-
+ctor	Candle.subterm1.comb_left	[]	175230462	-
+ctor	Candle.subterm1.comb_right	[]	3403234521	-
+ctor	Candle.subtype1.rule	[]	2955932265	-
+ctor	Candle.term.Abs	[]	3888687166	-
+ctor	Candle.term.Comb	[]	3888687166	-
+ctor	Candle.term.Const	[]	2378412143	-
+ctor	Candle.term.Var	[]	2378412143	-
+ctor	Candle.type.Tyapp	[]	2826297467	-
+ctor	Candle.type.Tyvar	[]	214603481	-
+ctor	Candle.update.ConstSpec	[]	2579472504	-
+ctor	Candle.update.NewAxiom	[]	1947602464	-
+ctor	Candle.update.NewConst	[]	1582923681	-
+ctor	Candle.update.NewType	[]	2556450447	-
+ctor	Candle.update.TypeDefn	[]	2334647739	-
+ctor	Candle.updates.new_axiom	[]	2743357590	-
+ctor	Candle.updates.new_constant	[]	968473568	-
+ctor	Candle.updates.new_specification	[]	1740236108	-
+ctor	Candle.updates.new_type	[]	3633161261	-
+ctor	Candle.updates.new_type_definition	[]	2308706608	-
+ctor	HOL.RTC.below.refl	[u]	2896997158	-
+ctor	HOL.RTC.below.step	[u]	2641097136	-
+ctor	HOL.RTC.refl	[u]	2809120837	-
+ctor	HOL.RTC.step	[u]	1675656693	-
+ctor	HOL.char.mk	[]	3601626284	-
+ctor	HOL.fmap.mk	[u, v]	1323678099	-
+ctor	HOL.ordering.EQUAL	[]	3026367931	-
+ctor	HOL.ordering.GREATER	[]	3026367931	-
+ctor	HOL.ordering.LESS	[]	3026367931	-
+ctor	HOL.spt.BN	[u]	3274606005	-
+ctor	HOL.spt.BS	[u]	2393544406	-
+ctor	HOL.spt.LN	[u]	3597673002	-
+ctor	HOL.spt.LS	[u]	3809223897	-
+def	Candle.ACONV	[]	712955946	3108869100
+def	Candle.ACONV_TYPE.match_1_1	[]	2881014083	3833269316
+def	Candle.ALPHAVARS	[u]	3099206120	244559975
+def	Candle.ALPHAVARS.match_1	[u_1, u_2]	2065538412	3436261259
+def	Candle.APPLY_UPDATE_LIST_ALOOKUP.match_1	[u_1, u_2]	4020443221	4174837595
+def	Candle.Aux.ALOOKUP_append.match_1	[u_1, u_2]	12790000	1750783197
+def	Candle.Aux.ALPHAVARS_SYM.match_1	[u_1, u_2]	3357648086	4187213614
+def	Candle.Aux.ALPHAVARS_SYM.match_1_1	[u_1]	647461739	1067629784
+def	Candle.Aux.ALPHAVARS_TRANS.match_1_1	[u_1]	3233947648	1715092455
+def	Candle.Aux.ALPHAVARS_fi.match_1_1	[]	3144554465	1168304720
+def	Candle.Aux.EL_cons_drop.match_1_1	[u_1]	2327488570	3488187021
+def	Candle.Aux.EL_eq.match_1_1	[u_1]	2327488570	3488187021
+def	Candle.Aux.FIELDS_cons.match_1	[u_1]	3546756274	3426095782
+def	Candle.Aux.FINITE_iff.match_1_1	[u_1]	3979195957	4020760948
+def	Candle.Aux.GENLIST_length.match_1_1	[]	1180777846	1270039535
+def	Candle.Aux.LLEX_irrefl.match_1_1	[u_1]	962303533	3840448187
+def	Candle.Aux.LLEX_mono.match_1_1	[u_1]	1747832135	511209853
+def	Candle.Aux.LLEX_trans.match_1_1	[u_1]	4209152541	567023186
+def	Candle.Aux.LLEX_tri.match_1_1	[u_1]	3473114485	676990462
+def	Candle.Aux.MEM_term_union.match_1_1	[]	2742584604	3591364203
+def	Candle.Aux.REV_ASSOCD_cases.match_1_1	[u_1]	308365470	1548897317
+def	Candle.Aux.REV_ASSOCD_not_mem.match_1_1	[u_1]	925118292	1566982221
+def	Candle.Aux.SORTED_cons.match_1_1	[u_1]	414461072	1141415759
+def	Candle.Aux.TT	[]	742879325	2335944540
+def	Candle.Aux.TYPE_SUBST_tyvars_imp.match_1_1	[]	1394080082	728877571
+def	Candle.Aux.VFREE_IN_ALPHAVARS.match_1_1	[u_1]	647461739	1067629784
+def	Candle.Aux.VFREE_IN_Var_len.match_1_1	[]	1113330396	3877328649
+def	Candle.Aux.bind_list_aux_Var.match_1	[u_1]	2549865312	3610645720
+def	Candle.Aux.bind_list_aux_Var.match_1_1	[]	4108747019	2968123654
+def	Candle.Aux.explode_aux_implode.match_1_1	[]	2287580060	2097218999
+def	Candle.Aux.fi	[]	973803844	1040964964
+def	Candle.Aux.fi_ALPHAVARS.match_1_1	[]	756527956	1068495826
+def	Candle.Aux.find_index_ge.match_1_1	[]	910655272	4088377014
+def	Candle.Aux.ival	[u]	2588231090	2127462271
+def	Candle.Aux.ival.match_1	[u_1]	3338452960	1784165863
+def	Candle.Aux.maxlen	[]	2380638311	2962624452
+def	Candle.Aux.mem_FILTER_imp'.match_1_1	[u_1]	459686013	1189067010
+def	Candle.Aux.mem_FILTER_imp.match_1_1	[u_1]	459686013	1189067010
+def	Candle.Aux.mem_STRING_SORT.match_1_1	[]	2603410988	3924236956
+def	Candle.Aux.mem_tyvars_foldr.match_1_1	[]	3756342836	1266479491
+def	Candle.Aux.merge_tail_perm.match_1_1	[u_1]	4255073608	3390560543
+def	Candle.Aux.mergesortN_tail_perm.match_1_1	[u_1]	2022432109	3958277945
+def	Candle.Aux.newname	[]	739462026	367804984
+def	Candle.Aux.ordav_TT.match_1_1	[]	2435187975	2846026227
+def	Candle.Aux.rank	[]	2380638311	4265586602
+def	Candle.Aux.rename_ALPHAVARS.match_1_1	[]	3904683783	3522086288
+def	Candle.Aux.sizeof_VSUBST_aux.match_1_1	[]	3412826014	2580240936
+def	Candle.Aux.string_lt_irrefl.match_1_1	[]	534271262	1395038174
+def	Candle.Aux.string_lt_trans.match_1_1	[]	2029755025	1098238461
+def	Candle.Aux.string_lt_trichotomous.match_1_1	[]	2155021872	1330790062
+def	Candle.Aux.term_lt_inv	[]	2770785439	2334836119
+def	Candle.Aux.term_lt_inv.match_1	[u_1]	3841091133	2011724449
+def	Candle.Aux.term_remove_cons.match_1	[u_1]	3606930989	2290177740
+def	Candle.Aux.type_ind.match_1_1	[]	813794981	3348215993
+def	Candle.Aux.type_lt_inv	[]	440982267	3136506611
+def	Candle.Aux.type_lt_inv.match_1	[u_1]	4258845768	1067305442
+def	Candle.Aux.upd	[u]	2301373135	43148722
+def	Candle.Aux.upd.match_1	[u_1]	2920733988	2252242347
+def	Candle.BoolTy	[]	3280570225	1322118779
+def	Candle.CLASH	[u]	369830458	4218855225
+def	Candle.CLOSED	[]	3844910108	2139578423
+def	Candle.Equal	[]	1183193331	3126348878
+def	Candle.Fun	[]	3565354183	1301181490
+def	Candle.INORDER_INSERT	[]	1211997855	2353368837
+def	Candle.INST	[]	3992357097	3526346755
+def	Candle.INST_CORE	[]	2452388245	1294758098
+def	Candle.INST_CORE_HAS_TYPE.match_1_1	[]	2742748454	810074931
+def	Candle.IS_CLASH	[u]	1449503280	577940276
+def	Candle.IS_RESULT	[u]	1449503280	2210828869
+def	Candle.IS_RESULT.match_1	[u_1, u_2]	4010477064	3688755062
+def	Candle.LIST_INSERT	[u]	584724244	1762063339
+def	Candle.LIST_UNION	[u]	468669386	3320853553
+def	Candle.RACONV.below.casesOn	[]	3134562386	750444422
+def	Candle.RACONV.casesOn	[]	3348873398	2058655628
+def	Candle.RACONV.recOn	[]	2528130577	2029112446
+def	Candle.RACONV_SYM.match_1	[u_1]	2920733988	2252242347
+def	Candle.RESULT	[u]	369830458	3469316133
+def	Candle.REV_ASSOCD	[u, v]	2205750299	4206249693
+def	Candle.REV_ASSOCD.match_1	[u_1, u_2, u_3]	2873308869	2093143446
+def	Candle.REV_ASSOCD_ALOOKUP.match_1	[u_1, u_2, u_3]	3630572994	2182981544
+def	Candle.REV_ASSOCD_ALOOKUP.match_3	[u_1, u_2]	4020443221	4174837595
+def	Candle.STRING_SORT	[]	1168526048	412165253
+def	Candle.SmartAppend	[u]	1780921242	2087029702
+def	Candle.SmartAppend.match_1	[u_1, u_2]	1154738153	1849729638
+def	Candle.StrongLinearOrder_mlstring_lt.match_1_1	[]	3222554353	2540395054
+def	Candle.TYPE_SUBST	[]	237550010	2611834675
+def	Candle.TYPE_SUBST.match_1	[u_1]	491504343	2425145019
+def	Candle.UPDATE_LIST	[u, v]	1957412807	1229184535
+def	Candle.VARIANT	[]	1827605216	502335780
+def	Candle.VARIANT_PRIMES	[]	3816192478	857353563
+def	Candle.VARIANT_PRIMES_P	[]	2207486496	2852560298
+def	Candle.VARIANT_PRIMES_spec	[]	1564593189	1552424339
+def	Candle.VFREE_IN	[]	712955946	4184730419
+def	Candle.VSUBST	[]	1859493887	3451883788
+def	Candle.abstract	[u]	1862390791	1704592207
+def	Candle.alpha_lt	[]	712955946	3398009225
+def	Candle.app_list.Append.elim	[u_1, u]	268453840	3097982461
+def	Candle.app_list.Append.noConfusion	[u_1, u]	986054140	1036708070
+def	Candle.app_list.List.elim	[u_1, u]	2875011169	1873287975
+def	Candle.app_list.List.noConfusion	[u_1, u]	1033045547	101980999
+def	Candle.app_list.Nil.elim	[u_1, u]	2406501383	1357560409
+def	Candle.app_list.below	[u_1, u]	311509361	2407056397
+def	Candle.app_list.brecOn	[u_1, u]	1268111952	2087427575
+def	Candle.app_list.brecOn.go	[u_1, u]	863312810	1327101174
+def	Candle.app_list.casesOn	[u_1, u]	61667687	158689048
+def	Candle.app_list.ctorElim	[u_1, u]	3594718554	3792862779
+def	Candle.app_list.ctorElimType	[u_1, u]	612665204	2888912415
+def	Candle.app_list.ctorIdx	[u]	77727495	1532392315
+def	Candle.app_list.noConfusion	[u_1, u]	3360495871	886921194
+def	Candle.app_list.noConfusionType	[u_1, u]	229530582	3235109062
+def	Candle.app_list.recOn	[u_1, u]	2024741366	4067822020
+def	Candle.app_list_ann.BigAppend.elim	[u_1, u]	4081205068	3652285551
+def	Candle.app_list_ann.BigAppend.noConfusion	[u_1, u]	2705604920	2355173684
+def	Candle.app_list_ann.BigList.elim	[u_1, u]	3529272571	3433249140
+def	Candle.app_list_ann.BigList.noConfusion	[u_1, u]	1673854035	396041210
+def	Candle.app_list_ann.Small.elim	[u_1, u]	841137233	742040407
+def	Candle.app_list_ann.Small.noConfusion	[u_1, u]	3495906343	2493208378
+def	Candle.app_list_ann.below	[u_1, u]	1396537008	2310043862
+def	Candle.app_list_ann.brecOn	[u_1, u]	2146531595	2552075132
+def	Candle.app_list_ann.brecOn.go	[u_1, u]	1433664410	200693523
+def	Candle.app_list_ann.casesOn	[u_1, u]	136381063	3143688996
+def	Candle.app_list_ann.ctorElim	[u_1, u]	584631414	3406181773
+def	Candle.app_list_ann.ctorElimType	[u_1, u]	4236864546	3926996481
+def	Candle.app_list_ann.ctorIdx	[u]	918577048	1806657182
+def	Candle.app_list_ann.noConfusion	[u_1, u]	559609417	3400596933
+def	Candle.app_list_ann.noConfusionType	[u_1, u]	3707914917	2630493184
+def	Candle.app_list_ann.recOn	[u_1, u]	940333556	4035483547
+def	Candle.append	[u]	2934692871	441339000
+def	Candle.append_aux	[u]	3788163241	3831280915
+def	Candle.append_aux.match_1	[u_1, u_2]	602989026	2509959159
+def	Candle.apply	[u]	2794459502	1472211878
+def	Candle.arities_match	[]	1313280819	521834801
+def	Candle.arities_match.match_1	[u_1]	1526463197	1219013872
+def	Candle.axexts	[]	321732528	3205773683
+def	Candle.axexts_of_upd	[]	1486706463	1877745903
+def	Candle.axexts_of_upd.match_1	[u_1]	1904843271	2838423486
+def	Candle.axiom_list	[]	321732528	404875622
+def	Candle.axioms_of_upd	[]	1486706463	998766041
+def	Candle.axsof	[]	86446754	2257346034
+def	Candle.binary_union	[u]	2794459502	3576211106
+def	Candle.bind	[]	2634382584	4040621161
+def	Candle.bind.match_1	[u_1]	654024579	3783084384
+def	Candle.bind_list_aux	[]	750390856	3617767544
+def	Candle.bind_list_aux.match_1	[u_1]	1863929683	472734636
+def	Candle.boolean	[u]	2374622883	41659583
+def	Candle.boolset	[u]	660636128	1538976353
+def	Candle.bv_names	[]	1787835968	2112572930
+def	Candle.char_to_word8	[]	4270050089	1874097967
+def	Candle.chr_to_str	[]	1203891893	2158972685
+def	Candle.codomain	[]	1738332225	2723006956
+def	Candle.codomain.match_1	[u_1]	1212063197	3862186245
+def	Candle.compare	[]	3501567090	556054752
+def	Candle.compare_aux	[]	2270574427	2257497213
+def	Candle.concat	[]	1331871235	3934672430
+def	Candle.conexts	[]	321732528	1296989065
+def	Candle.conexts_of_upd	[]	1486706463	3766973624
+def	Candle.conexts_of_upd.match_1	[u_1]	4118857986	1569771010
+def	Candle.const_list	[]	3811705308	4273499900
+def	Candle.consts_of_upd	[]	3529131100	2042082957
+def	Candle.ctxt_axsof	[]	234354530	3251281083
+def	Candle.ctxt_sigof	[]	2738799962	1976024229
+def	Candle.ctxt_tmsof	[]	2260595854	3554806157
+def	Candle.ctxt_tysof	[]	1933344577	2577339262
+def	Candle.db	[]	1042771877	2767354530
+def	Candle.db.match_1	[u_1]	2274441330	1343561994
+def	Candle.dbINST	[]	146464075	3231054323
+def	Candle.dbVFREE_IN	[]	339223565	327448291
+def	Candle.dbVSUBST	[]	1199258207	3961423938
+def	Candle.dbterm	[]	3058994086	1020257117
+def	Candle.dbterm.match_1	[u_1]	2549865312	3610645720
+def	Candle.dbterm_t.below	[u]	3276916751	3082933465
+def	Candle.dbterm_t.brecOn	[u]	3123648173	3766610987
+def	Candle.dbterm_t.brecOn.go	[u]	3588906534	458292673
+def	Candle.dbterm_t.casesOn	[u]	2429641328	720049301
+def	Candle.dbterm_t.ctorElim	[u]	3637557246	3947082909
+def	Candle.dbterm_t.ctorElimType	[u]	792551094	3398061981
+def	Candle.dbterm_t.ctorIdx	[]	4286349079	1959507660
+def	Candle.dbterm_t.dbAbs.elim	[u]	722092117	3789615201
+def	Candle.dbterm_t.dbAbs.noConfusion	[u]	3582714701	1847919728
+def	Candle.dbterm_t.dbBound.elim	[u]	2633051998	2786172897
+def	Candle.dbterm_t.dbBound.noConfusion	[u]	1389930097	393537116
+def	Candle.dbterm_t.dbComb.elim	[u]	4219748792	204060546
+def	Candle.dbterm_t.dbComb.noConfusion	[u]	2552724231	426305384
+def	Candle.dbterm_t.dbConst.elim	[u]	2238763516	3213865742
+def	Candle.dbterm_t.dbConst.noConfusion	[u]	3137274050	799086822
+def	Candle.dbterm_t.dbVar.elim	[u]	1504649102	3819167432
+def	Candle.dbterm_t.dbVar.noConfusion	[u]	1931272442	2255011879
+def	Candle.dbterm_t.noConfusion	[u]	3969166320	733633807
+def	Candle.dbterm_t.noConfusionType	[u]	3471284416	2028813123
+def	Candle.dbterm_t.recOn	[u]	93001429	511019690
+def	Candle.dest_var	[]	1074425407	2041271250
+def	Candle.domain	[]	1738332225	2303420741
+def	Candle.domain.match_1	[u_1]	3104812318	8336924
+def	Candle.empty	[u]	660636128	2285099368
+def	Candle.entails0	[u]	2426908367	1330192051
+def	Candle.equation	[]	3888687166	1137380394
+def	Candle.explode	[]	3833036254	1771424864
+def	Candle.explode_aux	[]	1820006419	3942641350
+def	Candle.explode_aux.match_1	[u_1]	3922020340	1943134909
+def	Candle.extensional	[u]	1029660862	2314593116
+def	Candle.false_	[u]	660636128	604987261
+def	Candle.find_index	[u]	1501106273	2152129911
+def	Candle.find_index.match_1	[u_1, u_2]	4115939008	3405351414
+def	Candle.find_index_ALL_DISTINCT_EL.match_1_1	[u_1]	3624346476	4117276011
+def	Candle.flip_ord	[]	1359506650	381789836
+def	Candle.fmap_update	[u, v]	1537351529	4185139687
+def	Candle.fresh	[]	4014690741	973795602
+def	Candle.fresh_spec	[]	3625827355	622519756
+def	Candle.funspace	[u]	2794459502	3395476667
+def	Candle.has_type.below.casesOn	[]	1919617611	1434648305
+def	Candle.has_type.casesOn	[]	3609592176	4172959389
+def	Candle.has_type.recOn	[]	1356351179	2714642419
+def	Candle.hypset_ok	[]	3092734868	1399429853
+def	Candle.inhabited	[u]	3000448379	3789596574
+def	Candle.instDecidableEqMlstring	[]	3243430089	3956190216
+def	Candle.instDecidableEqMlstring.decEq	[]	759627666	2589244074
+def	Candle.instDecidableEqMlstring.decEq.match_1	[u_1]	3602303901	4151928330
+def	Candle.instInhabitedApp_list	[u_1]	1965159333	473054531
+def	Candle.instInhabitedApp_list.default	[u_1]	2594312529	2281508818
+def	Candle.instInhabitedApp_list_ann	[u_1]	3887616138	2279020132
+def	Candle.instInhabitedApp_list_ann.default	[u_1]	3990381924	2891658627
+def	Candle.instInhabitedDbterm_t	[]	782264534	4004292600
+def	Candle.instInhabitedDbterm_t.default	[]	2986217951	2196710967
+def	Candle.instInhabitedMlstring	[]	1928636065	735344723
+def	Candle.instInhabitedMlstring.default	[]	3674971405	1357641655
+def	Candle.instInhabitedResult	[u_1]	2081330224	3008268309
+def	Candle.instInhabitedResult.default	[u_1]	843803257	845895648
+def	Candle.instInhabitedTerm	[]	2640799709	1251263082
+def	Candle.instInhabitedTerm.default	[]	2420723541	3570915491
+def	Candle.instInhabitedType	[]	2511479020	363919946
+def	Candle.instInhabitedUpdate	[]	4265387778	1788416851
+def	Candle.instInhabitedUpdate.default	[]	882550110	2902436044
+def	Candle.instance_	[u]	3487915329	1822629708
+def	Candle.instance_spec	[u]	191605489	3120124184
+def	Candle.interpretation	[u]	3807510281	800083476
+def	Candle.interprets0	[u]	3322144809	810985356
+def	Candle.is_instance	[]	2281543804	2333105165
+def	Candle.is_interpretation0	[u]	3999522516	1057491070
+def	Candle.is_power	[u]	3784553769	2629183858
+def	Candle.is_separation	[u]	2273351704	1714205345
+def	Candle.is_set_theory	[u]	1029660862	3514884859
+def	Candle.is_std_interpretation0	[u]	897091024	4099031345
+def	Candle.is_std_sig	[]	497364605	2136623679
+def	Candle.is_std_type_assignment0	[u]	1997382340	1337200857
+def	Candle.is_structure0	[u]	1792509961	3197497913
+def	Candle.is_subseq	[u]	3851801440	197657699
+def	Candle.is_subseq.match_1	[u_1, u_2]	981126845	584299733
+def	Candle.is_term_assignment0	[u]	2344043563	932177197
+def	Candle.is_term_valuation0	[u]	2263394834	3864895048
+def	Candle.is_type_assignment0	[u]	205421900	2175563508
+def	Candle.is_type_valuation0	[u]	2194148337	1164355240
+def	Candle.is_union	[u]	3784553769	4028709522
+def	Candle.is_upair	[u]	1221144703	42810585
+def	Candle.is_valuation0	[u]	2458209457	2478877921
+def	Candle.make_even	[]	2546708756	746731509
+def	Candle.max3	[]	3512939730	651395994
+def	Candle.mls	[]	4267782545	2956801276
+def	Candle.mlstring.casesOn	[u]	2374180667	4021488023
+def	Candle.mlstring.ctorIdx	[]	1282034460	1242011579
+def	Candle.mlstring.implode.noConfusion	[u]	3005941960	2289606933
+def	Candle.mlstring.noConfusion	[u]	1829967415	384016834
+def	Candle.mlstring.noConfusionType	[u]	3425370558	2394014334
+def	Candle.mlstring.recOn	[u]	2374180667	2209467991
+def	Candle.mlstring_lt	[]	2015120815	2464967218
+def	Candle.models0	[u]	2612849879	3504690285
+def	Candle.one	[u]	660636128	1058110740
+def	Candle.orda	[]	514756525	3764725670
+def	Candle.orda.match_1	[u_1]	1904426563	3269375605
+def	Candle.ordav	[]	514756525	2572259400
+def	Candle.ordav.match_1	[u_1]	2202443370	2660666195
+def	Candle.pair	[u]	2794459502	3960944237
+def	Candle.power	[u]	4174625714	3084575161
+def	Candle.product	[u]	2794459502	199304923
+def	Candle.proves.below.casesOn	[]	1465872434	1960517727
+def	Candle.proves.casesOn	[]	2351285867	521297262
+def	Candle.proves.recOn	[]	263223040	130763712
+def	Candle.relspace	[u]	2794459502	2362410613
+def	Candle.rename_bvars	[]	2069426464	590857835
+def	Candle.rename_bvars.match_1	[u_1]	1876532120	3586504129
+def	Candle.result.Clash.elim	[u_1, u]	3111958394	2739137883
+def	Candle.result.Clash.noConfusion	[u_1, u]	274815093	1510162493
+def	Candle.result.Result.elim	[u_1, u]	3686602840	1273860413
+def	Candle.result.Result.noConfusion	[u_1, u]	1450625309	1441760746
+def	Candle.result.casesOn	[u_1, u]	2669183926	1127020092
+def	Candle.result.ctorElim	[u_1, u]	171516792	3536517549
+def	Candle.result.ctorElimType	[u_1, u]	988676388	3922455722
+def	Candle.result.ctorIdx	[u]	3622776233	669556988
+def	Candle.result.noConfusion	[u_1, u]	3123138570	645869991
+def	Candle.result.noConfusionType	[u_1, u]	2610082004	2660828048
+def	Candle.result.recOn	[u_1, u]	2669183926	42485252
+def	Candle.satisfies0	[u]	3608533357	2974961141
+def	Candle.sig	[]	3931117990	515702916
+def	Candle.sigof	[]	2741317556	3614777168
+def	Candle.simple_inst	[]	3992357097	3996356655
+def	Candle.simple_subst	[]	1859493887	2070581658
+def	Candle.sizeof	[]	2380638311	764843092
+def	Candle.sort	[u]	1159003626	2075369295
+def	Candle.splitlines	[]	417596386	3032143524
+def	Candle.strcat	[]	54024607	3878422428
+def	Candle.strlen	[]	1282034460	6475540
+def	Candle.strlen.match_1	[u_1]	3840407014	1079560378
+def	Candle.strlit	[]	647471737	1897147611
+def	Candle.strsub	[]	3463789349	88473276
+def	Candle.strsub.match_1	[u_1]	3032442272	1282439396
+def	Candle.sub	[u]	2633205736	3658547654
+def	Candle.substring	[]	3920089304	1647803883
+def	Candle.substring.match_1	[u_1]	1648800892	2652016371
+def	Candle.subterm	[]	712955946	2955551413
+def	Candle.subterm1.casesOn	[]	2507425220	1428745946
+def	Candle.subterm1.recOn	[]	2507425220	4067763545
+def	Candle.subtype	[]	2281543804	1292312638
+def	Candle.subtype1.casesOn	[]	2858477708	2374333750
+def	Candle.subtype1.recOn	[]	2858477708	2844484196
+def	Candle.swap_ff.match_1	[u_1, u_2, u_3]	3630572994	2182981544
+def	Candle.term.Abs.elim	[u]	2542480503	2772819107
+def	Candle.term.Abs.noConfusion	[u]	2264690096	3288160225
+def	Candle.term.Comb.elim	[u]	854852320	3895918761
+def	Candle.term.Comb.noConfusion	[u]	3096125581	2667944221
+def	Candle.term.Const.elim	[u]	2422590502	3845370907
+def	Candle.term.Const.noConfusion	[u]	3734061965	304404673
+def	Candle.term.Var.elim	[u]	1150217785	1279116975
+def	Candle.term.Var.noConfusion	[u]	1800018486	1111624422
+def	Candle.term.below	[u]	2320415596	3891937744
+def	Candle.term.brecOn	[u]	2849670978	3307321387
+def	Candle.term.brecOn.go	[u]	298088597	3512221059
+def	Candle.term.casesOn	[u]	3458396286	1968108819
+def	Candle.term.ctorElim	[u]	506343992	1135126141
+def	Candle.term.ctorElimType	[u]	3530427392	2750468726
+def	Candle.term.ctorIdx	[]	2380638311	952740455
+def	Candle.term.noConfusion	[u]	3529337499	3898272619
+def	Candle.term.noConfusionType	[u]	3974084996	591141264
+def	Candle.term.recOn	[u]	994606272	716461306
+def	Candle.term_cmp	[]	2853137239	1556290870
+def	Candle.term_image	[]	802675844	3344425652
+def	Candle.term_lt	[]	712955946	1534755982
+def	Candle.term_ok	[]	2459866743	2480813591
+def	Candle.term_remove	[]	4202366966	2307970457
+def	Candle.term_remove.match_1	[u_1]	2510156971	2665727644
+def	Candle.term_union	[]	715845194	496958470
+def	Candle.term_union.match_1	[u_1]	3860909360	1037677802
+def	Candle.term_union_thm.match_1	[u_1]	2910743327	2620131252
+def	Candle.termsem0	[u]	967404787	982374630
+def	Candle.termsem_INST.match_1_1	[]	443225758	637890131
+def	Candle.termsem_raconv.match_1	[u_1]	2920733988	2252242347
+def	Candle.theory_ok	[]	4281124583	2527647317
+def	Candle.thy	[]	3931117990	231115959
+def	Candle.thy_tmsof	[]	3435624350	3633164798
+def	Candle.thy_tysof	[]	1339405255	1885006715
+def	Candle.thyof	[]	2279049268	2066806267
+def	Candle.tmaof	[u]	596719425	2333542894
+def	Candle.tmass	[u]	3807510281	698756647
+def	Candle.tmsig	[]	3931117990	2265629381
+def	Candle.tmsof	[]	1074737022	1044001146
+def	Candle.tmval	[u]	597859893	125276662
+def	Candle.tmvof	[u]	2289357711	2563270424
+def	Candle.trichotomous_inv_image.match_1_1	[u_1, u_2]	2920318323	3678213129
+def	Candle.true_	[u]	660636128	76548371
+def	Candle.tvars	[]	1787835968	2521609618
+def	Candle.two	[u]	660636128	1132369060
+def	Candle.tyaof	[u]	1737192883	4259369948
+def	Candle.tyass	[u]	3807510281	698756647
+def	Candle.type.Tyapp.elim	[u]	1425287758	500969519
+def	Candle.type.Tyapp.noConfusion	[u]	1449011896	688202609
+def	Candle.type.Tyvar.elim	[u]	3761454218	1730780382
+def	Candle.type.Tyvar.noConfusion	[u]	3195905522	910148725
+def	Candle.type.below	[u]	1091947177	1496368605
+def	Candle.type.below_1	[u]	2494287545	1757689041
+def	Candle.type.brecOn	[u]	1376976654	3135823073
+def	Candle.type.brecOn.go	[u]	4119008124	2502902101
+def	Candle.type.brecOn_1	[u]	1169016573	321084913
+def	Candle.type.brecOn_1.go	[u]	580073717	596023884
+def	Candle.type.casesOn	[u]	3673241445	1411772877
+def	Candle.type.ctorElim	[u]	4076145431	1516024671
+def	Candle.type.ctorElimType	[u]	2465804541	1376795808
+def	Candle.type.ctorIdx	[]	1822945211	3148962430
+def	Candle.type.noConfusion	[u]	1739171670	2920567483
+def	Candle.type.noConfusionType	[u]	1530752369	3266371886
+def	Candle.type.recOn	[u]	1707004483	426748638
+def	Candle.type_cmp	[]	856620979	4029929019
+def	Candle.type_list	[]	3821092951	3543086544
+def	Candle.type_lt	[]	2281543804	2484122251
+def	Candle.type_ok	[]	1302513313	4158870065
+def	Candle.typeof	[]	634167455	3946590040
+def	Candle.typeof.match_1	[u_1]	2274441330	1343561994
+def	Candle.types_in	[]	4196536611	2026087612
+def	Candle.types_of_upd	[]	4015122146	2746202593
+def	Candle.types_of_upd.match_1	[u_1]	716216466	4291535882
+def	Candle.typesem	[u]	4071888235	965980785
+def	Candle.typesem.match_1	[u_1]	491504343	2425145019
+def	Candle.tysig	[]	3931117990	2789428499
+def	Candle.tysof	[]	1780403235	3356308141
+def	Candle.tyval	[u]	3807510281	2632752436
+def	Candle.tyvars	[]	439759561	2882684176
+def	Candle.tyvof	[u]	3041015849	2995047494
+def	Candle.union	[u]	4174625714	682023115
+def	Candle.unit	[u]	4174625714	1246725611
+def	Candle.upair	[u]	2794459502	4031720770
+def	Candle.update.ConstSpec.elim	[u]	2907841626	1146382477
+def	Candle.update.ConstSpec.noConfusion	[u]	1890830221	3408029792
+def	Candle.update.NewAxiom.elim	[u]	1730404417	4176643012
+def	Candle.update.NewAxiom.noConfusion	[u]	3010580467	3879323924
+def	Candle.update.NewConst.elim	[u]	188490195	3157601263
+def	Candle.update.NewConst.noConfusion	[u]	867432131	4010084571
+def	Candle.update.NewType.elim	[u]	3234158824	2509034276
+def	Candle.update.NewType.noConfusion	[u]	1772804227	2759194561
+def	Candle.update.TypeDefn.elim	[u]	2700946603	1711393129
+def	Candle.update.TypeDefn.noConfusion	[u]	1759414895	3390505301
+def	Candle.update.casesOn	[u]	4024407547	1044587681
+def	Candle.update.ctorElim	[u]	3504845364	1846164606
+def	Candle.update.ctorElimType	[u]	802715827	4236612071
+def	Candle.update.ctorIdx	[]	416488410	173455072
+def	Candle.update.noConfusion	[u]	4289028296	1152372471
+def	Candle.update.noConfusionType	[u]	2203914991	3198392036
+def	Candle.update.recOn	[u]	4024407547	4091131484
+def	Candle.updates.casesOn	[]	3807029686	2480303429
+def	Candle.updates.recOn	[]	3807029686	4123094893
+def	Candle.valuation	[u]	3807510281	1989941239
+def	Candle.welltyped	[]	3844910108	432387520
+def	Candle.word8_to_char	[]	3631479308	1173384876
+def	HOL.ALL_DISTINCT	[u]	1852859670	2823184801
+def	HOL.ALOOKUP	[u, v]	3805508608	1923854682
+def	HOL.ALOOKUP.match_1	[u_1, u_2, u_3]	2249071734	1431959970
+def	HOL.Aux.EVERY_unattach.match_1	[u_1, u_2]	2491898433	1367529401
+def	HOL.Aux.FINITE_of_list_bound.match_1_1	[u_1]	2738228567	2171289390
+def	HOL.Aux.FINITE_of_list_bound.match_1_3	[u_1]	786274101	2185223636
+def	HOL.Aux.SPLITP_snd_length.match_1_1	[u_1]	633003051	1301180453
+def	HOL.BIJ	[u, v]	2052908503	3597688177
+def	HOL.C	[u, v, w]	2826022113	4104331942
+def	HOL.CHR	[]	3212887330	193608152
+def	HOL.DIFF	[u]	1418183581	1570178750
+def	HOL.DISJOINT	[u]	1631759263	2203959989
+def	HOL.DIV2	[]	2546708756	2940808718
+def	HOL.EL	[u]	2016969168	2439252879
+def	HOL.EL.match_1	[u_1, u_2]	1298636962	1534859170
+def	HOL.EMPTY	[u]	2202049362	3790018229
+def	HOL.EVEN	[]	1379455552	3607996337
+def	HOL.EVEN.match_1	[u_1]	413685589	1344119661
+def	HOL.EVERY	[u]	3342456677	1617770475
+def	HOL.EVERY2	[u, v]	3847212910	3477423106
+def	HOL.EXISTS	[u]	3342456677	2790764453
+def	HOL.EXISTS_UNIQUE	[u]	3900730662	1053057791
+def	HOL.FAPPLY	[u, v]	44351961	2353340755
+def	HOL.FAPPLY.match_1	[u_1, u_2]	12790000	1750783197
+def	HOL.FCP	[]	3428739402	530036881
+def	HOL.FCP_bits	[]	2441822747	1534899768
+def	HOL.FCP_bits.match_1	[u_1]	4102459480	2536696916
+def	HOL.FDOM	[u, v]	1615720025	2973364732
+def	HOL.FEMPTY	[u, v]	3427614548	3948184695
+def	HOL.FEVERY	[u, v]	3055257662	2400143352
+def	HOL.FIELDS	[]	300715362	1047740015
+def	HOL.FIELDS.match_1	[u_1]	423310173	760910756
+def	HOL.FILTER	[u]	2111421610	490978112
+def	HOL.FINITE	[u]	430316909	3060212144
+def	HOL.FLOOKUP	[u, v]	3511891749	1378183795
+def	HOL.FRANGE	[u, v]	3506841067	4261496433
+def	HOL.FRONT	[u]	1426615601	3939971466
+def	HOL.FUN_FMAP	[u, v]	2863872347	1947453346
+def	HOL.FUN_FMAP_spec	[u, v]	3586030629	324742249
+def	HOL.FUPDATE	[u, v]	1999671426	1782017262
+def	HOL.GENLIST	[u]	2858382342	3125320906
+def	HOL.GENLIST.match_1	[u_1]	413685589	1344119661
+def	HOL.GSPEC	[u, v]	2935171392	1415018130
+def	HOL.HD	[u]	2488405382	2116134854
+def	HOL.HEX	[]	3212887330	4027774032
+def	HOL.I	[u]	1324171196	2317393034
+def	HOL.IMAGE	[u, v]	53700749	2249550778
+def	HOL.IN	[u]	1260673722	2012684125
+def	HOL.INFINITE	[u]	430316909	3517304497
+def	HOL.INJ	[u, v]	2052908503	3219017366
+def	HOL.INSERT	[u]	1618617004	178242217
+def	HOL.INTER	[u]	1418183581	2389769101
+def	HOL.K	[u, v]	2894841867	3312208451
+def	HOL.LAST	[u]	2488405382	1818002056
+def	HOL.LEX	[u, v]	415742495	2675598438
+def	HOL.LIST_REL	[u, v]	3847212910	1556937270
+def	HOL.LIST_REL.match_1	[u_1, u_2, u_3]	225658584	1485400163
+def	HOL.LIST_TO_SET	[u]	919327331	863446885
+def	HOL.LLEX	[u]	1053023957	2627255823
+def	HOL.LinearOrder	[u]	1029660862	2738426376
+def	HOL.MAPi	[u, v]	2579306733	767491665
+def	HOL.MAPi.match_1	[u_1, u_2, u_3]	3251964693	276511684
+def	HOL.MAX	[]	9906956	3707855440
+def	HOL.MAX_LIST	[]	434822048	4084688229
+def	HOL.MIN	[]	9906956	3096439311
+def	HOL.NULL	[u]	1852859670	705305985
+def	HOL.ODD	[]	1379455552	2453875825
+def	HOL.OPT_MMAP	[u, v]	3441412593	3260485813
+def	HOL.ORD	[]	1553962487	3123338503
+def	HOL.Order	[u]	1029660862	1795268439
+def	HOL.PAD_LEFT	[u]	1618909835	711690797
+def	HOL.PAD_RIGHT	[u]	1618909835	796085866
+def	HOL.PAIR_MAP	[u, v, w, x]	2299645038	794288064
+def	HOL.PERM	[u]	3851801440	1334815981
+def	HOL.PERMUTES	[u]	1333893378	3273197887
+def	HOL.RC	[u]	2389319836	3416807935
+def	HOL.REV	[u]	468669386	965875161
+def	HOL.REV.match_1	[u_1, u_2]	2225519917	3946880817
+def	HOL.RTC.below.casesOn	[u]	4216298331	1320150856
+def	HOL.RTC.casesOn	[u]	2614642227	2155820161
+def	HOL.RTC.recOn	[u]	2715527678	2216941263
+def	HOL.SEG	[u]	2609157534	3980066909
+def	HOL.SEG_spec	[u]	3849177900	430512051
+def	HOL.SNOC	[u]	584724244	1035961458
+def	HOL.SORTED	[u]	4004995664	2947094720
+def	HOL.SORTED.match_1	[u_1, u_2]	1865344165	1675498825
+def	HOL.SPLITP	[u]	3505780963	877749824
+def	HOL.SUBSET	[u]	1631759263	367701636
+def	HOL.SUM	[]	434822048	3369355148
+def	HOL.SUM.match_1	[u_1]	171869156	3809820392
+def	HOL.SURJ	[u, v]	2052908503	3997412116
+def	HOL.Set	[u]	3807510281	722537027
+def	HOL.StrongLinearOrder	[u]	1029660862	1802778244
+def	HOL.StrongOrder	[u]	1029660862	4123683323
+def	HOL.TL	[u]	1426615601	104940468
+def	HOL.TL.match_1	[u_1, u_2]	3435673807	1035798657
+def	HOL.TO_of_LinearOrder	[u]	657288727	1768009578
+def	HOL.TotOrd	[u]	2598500077	1014540679
+def	HOL.UNCURRY	[u, v, w]	922872931	4198125228
+def	HOL.UNHEX	[]	1553962487	2765529154
+def	HOL.UNION	[u]	1418183581	3165618899
+def	HOL.UNIV	[u]	2202049362	1795701214
+def	HOL.UPDATE	[u, v]	862964944	3746189042
+def	HOL.ZIP	[u, v]	1228471332	4208858132
+def	HOL.ZIP.match_1	[u_1, u_2, u_3]	2716825129	287784346
+def	HOL.alist_to_fmap	[u, v]	4121529133	4279975687
+def	HOL.antisymmetric	[u]	1029660862	3599364613
+def	HOL.bitstring	[]	3931117990	2654133406
+def	HOL.ch	[]	3661986270	1946818276
+def	HOL.char.casesOn	[u]	2990085116	2725555391
+def	HOL.char.ctorIdx	[]	1553962487	2304693129
+def	HOL.char.mk.noConfusion	[u]	233303477	832610851
+def	HOL.char.noConfusion	[u]	542448371	2894992390
+def	HOL.char.noConfusionType	[u]	1112470080	3997182267
+def	HOL.char.ord	[]	1553962487	480868607
+def	HOL.char.recOn	[u]	2990085116	3454933670
+def	HOL.char_le	[]	2779810816	3440764800
+def	HOL.char_lt	[]	2779810816	3092769367
+def	HOL.comp	[u]	3807510281	2482692641
+def	HOL.cpn	[]	3931117990	3026367931
+def	HOL.dimindex	[]	2546708756	951834654
+def	HOL.dimword	[]	2546708756	918498654
+def	HOL.field	[]	3114501645	465375094
+def	HOL.fixwidth	[]	186483607	1850032834
+def	HOL.fmap.casesOn	[u_1, u, v]	2692361722	1526026661
+def	HOL.fmap.ctorIdx	[u, v]	701007764	1887580032
+def	HOL.fmap.mk.noConfusion	[u_1, u, v]	1042061621	3589512572
+def	HOL.fmap.noConfusion	[u_1, u, v]	1057054828	3368270854
+def	HOL.fmap.noConfusionType	[u_1, u, v]	56106633	1323040100
+def	HOL.fmap.recOn	[u_1, u, v]	2692361722	1945227850
+def	HOL.fmap.rep	[u, v]	2359504029	4057354311
+def	HOL.instDecidableEqChar	[]	2360609546	3253592089
+def	HOL.instDecidableEqChar.decEq	[]	3051418342	599149794
+def	HOL.instDecidableEqChar.decEq.match_1	[u_1]	3122440896	4126457355
+def	HOL.instDecidableEqOrdering	[]	740006693	3582561418
+def	HOL.instDecidableEqSpt	[u_1]	2062993265	172758039
+def	HOL.instDecidableEqSpt.decEq	[u_1]	3783531469	485346983
+def	HOL.instDecidableEqSpt.decEq.match_1	[u_1, u_2]	1480097034	3512182153
+def	HOL.instEmptyCollectionSet	[u]	164051140	2193859295
+def	HOL.instHasSubsetSet	[u]	890785388	2246456891
+def	HOL.instInhabitedChar	[]	3511886050	1473598998
+def	HOL.instInhabitedOrdering	[]	1074652061	907488112
+def	HOL.instInhabitedOrdering.default	[]	3026367931	3305025984
+def	HOL.instInhabitedSpt	[u_1]	1991586050	2370871860
+def	HOL.instInhabitedSpt.default	[u_1]	426608262	1106266505
+def	HOL.instInsertSet	[u]	1637185919	4201616093
+def	HOL.instInterSet	[u]	2593912121	2877998142
+def	HOL.instMembershipSet	[u]	1013760935	2472179167
+def	HOL.instReprOrdering	[]	4037362014	1474441026
+def	HOL.instReprOrdering.repr	[]	2555673765	3199404023
+def	HOL.instReprOrdering.repr.match_1	[u_1]	1612084319	1086784067
+def	HOL.instSDiffSet	[u]	1985224368	3741745278
+def	HOL.instSingletonSet	[u]	660335922	2122873718
+def	HOL.instUnionSet	[u]	3201591105	3455820911
+def	HOL.inv_image	[u, v]	2418223207	3580692579
+def	HOL.invert_comparison	[]	1359506650	1072741151
+def	HOL.invert_comparison.match_1	[u_1]	563689056	3276365526
+def	HOL.irreflexive	[u]	1029660862	530067144
+def	HOL.isPREFIX	[u]	3851801440	2672522479
+def	HOL.l2n	[]	536311525	3254486205
+def	HOL.l2n.match_1	[u_1]	171869156	3809820392
+def	HOL.merge_tail	[u]	2622977166	487969942
+def	HOL.merge_tail.match_1	[u_1, u_2]	810466567	1645087893
+def	HOL.mergesortN_tail	[u]	3728439925	518476480
+def	HOL.mergesortN_tail.match_1	[u_1, u_2]	2874729004	2781042024
+def	HOL.mergesort_tail	[u]	1159003626	3635178174
+def	HOL.n2l	[]	711861451	1758026922
+def	HOL.n2s	[]	3175736915	2778368377
+def	HOL.n2w	[]	37675164	341602698
+def	HOL.num_from_hex_string	[]	2216344336	2680840910
+def	HOL.num_map	[u]	3807510281	3597673002
+def	HOL.num_set	[]	3931117990	823606755
+def	HOL.num_to_hex_string	[]	2167218657	386307420
+def	HOL.ordering.EQUAL.elim	[u]	2548622752	879184884
+def	HOL.ordering.GREATER.elim	[u]	841712782	4192469992
+def	HOL.ordering.LESS.elim	[u]	3056194245	2307432551
+def	HOL.ordering.casesOn	[u]	1267635257	2332536081
+def	HOL.ordering.ctorElim	[u]	3549097317	1513465492
+def	HOL.ordering.ctorElimType	[u]	3365304201	2418405306
+def	HOL.ordering.ctorIdx	[]	3018876824	2953252471
+def	HOL.ordering.noConfusion	[v._@.CandleLean.Prelude.Basic.3303059932._hygCtx._hyg.6]	1370977459	497473611
+def	HOL.ordering.noConfusionType	[v._@.CandleLean.Prelude.Basic.3303059932._hygCtx._hyg.5]	3469138293	1573689675
+def	HOL.ordering.ofNat	[]	3297332155	622014732
+def	HOL.ordering.recOn	[u]	1267635257	2332536081
+def	HOL.ordering.toCtorIdx	[]	3018876824	3173510710
+def	HOL.reflexive	[u]	1029660862	803865944
+def	HOL.s2n	[]	439214871	2587499903
+def	HOL.setOf	[u]	3681634998	1829303678
+def	HOL.shiftr	[]	1608884456	3994110349
+def	HOL.sort2_tail	[u]	1941511020	2940022790
+def	HOL.sort3_tail	[u]	3787705894	560813078
+def	HOL.spt.BN.elim	[u_1, u]	913525153	2122440962
+def	HOL.spt.BN.noConfusion	[u_1, u]	3591777393	2507222809
+def	HOL.spt.BS.elim	[u_1, u]	205004657	2420340108
+def	HOL.spt.BS.noConfusion	[u_1, u]	1246408783	1435278588
+def	HOL.spt.LN.elim	[u_1, u]	3319351701	2716035202
+def	HOL.spt.LS.elim	[u_1, u]	1927508206	3869632745
+def	HOL.spt.LS.noConfusion	[u_1, u]	23020908	2889543368
+def	HOL.spt.below	[u_1, u]	2266431424	3455698233
+def	HOL.spt.brecOn	[u_1, u]	3085981518	1014425723
+def	HOL.spt.brecOn.go	[u_1, u]	3287235829	1886618486
+def	HOL.spt.casesOn	[u_1, u]	67176706	833434051
+def	HOL.spt.ctorElim	[u_1, u]	2865406034	826753123
+def	HOL.spt.ctorElimType	[u_1, u]	675539235	2812312357
+def	HOL.spt.ctorIdx	[u]	1823507516	3474143787
+def	HOL.spt.noConfusion	[u_1, u]	2332333389	2986383025
+def	HOL.spt.noConfusionType	[u_1, u]	2958421628	3739890905
+def	HOL.spt.recOn	[u_1, u]	191291264	3416853107
+def	HOL.sptree.domain	[u]	4028386729	1765588465
+def	HOL.sptree.insert	[u]	1595437598	1015989155
+def	HOL.sptree.lookup	[u]	1838362219	2444938158
+def	HOL.sptree.lookup.match_1	[u_1, u_2]	2131662644	3122173231
+def	HOL.str	[]	137925726	3789260448
+def	HOL.string	[]	3931117990	3385610345
+def	HOL.string_le	[]	1903420948	290654619
+def	HOL.string_lt	[]	1903420948	3159629744
+def	HOL.string_lt.match_1	[u_1]	1281259351	3603538747
+def	HOL.symmetric	[u]	1029660862	3404793185
+def	HOL.testbit	[]	2552982638	612173997
+def	HOL.transitive	[u]	1029660862	1767087242
+def	HOL.trichotomous	[u]	1029660862	4153011400
+def	HOL.v2w	[]	1075861277	3696380801
+def	HOL.w2n	[]	2256793602	1377518617
+def	HOL.word	[]	3972626760	4196992238
+def	HOL.word32	[]	3931117990	1720491714
+def	HOL.word8	[]	3931117990	1467947856
+def	HOL.zero_extend	[]	186483607	1691157147
+def	_private.CandleLean.HolSemantics.0.Candle.instance_exists.match_1_1	[]	2713585698	4118546974
+def	_private.CandleLean.HolSemantics.0.Candle.termsem0_wit	[u]	967404787	3516128437
+def	_private.CandleLean.HolSemantics.0.Candle.termsem0_wit.match_1	[u_1, u_2]	2759436423	2905850250
+def	_private.CandleLean.HolSemantics.0.Candle.termsem0_wit.match_1.splitter	[u_1, u_2]	2759436423	2755774094
+def	_private.CandleLean.HolSemantics.0.Candle.typesem.match_1.splitter	[u_1]	491504343	411111261
+def	_private.CandleLean.HolSemantics.0.List.map_unattach.match_1.splitter	[u_1, u_2]	2491898433	3414684441
+def	_private.CandleLean.HolSemanticsExtra.0.Candle.typesem.match_1.splitter	[u_1]	491504343	411111261
+def	_private.CandleLean.HolSyntax.0.Candle.TYPE_SUBST.match_1.splitter	[u_1]	491504343	712693014
+def	_private.CandleLean.HolSyntax.0.Candle.dest_var_pkg.match_1	[u_1]	2426309215	1846805208
+def	_private.CandleLean.HolSyntax.0.Candle.orda.match_1.splitter	[u_1]	686695361	3032466356
+def	_private.CandleLean.HolSyntax.0.Candle.term_union.match_1.splitter	[u_1]	2771824817	382196968
+def	_private.CandleLean.HolSyntax.0.Candle.typeof.match_1.splitter	[u_1]	2274441330	831235890
+def	_private.CandleLean.HolSyntax.0.HOL.Aux.EVERY_unattach.match_1.splitter	[u_1, u_2]	2491898433	95435504
+def	_private.CandleLean.HolSyntax.0.List.map_unattach.match_1.splitter	[u_1, u_2]	2491898433	3414684441
+def	_private.CandleLean.HolSyntaxExtra.0.Candle.ALPHAVARS.match_1.splitter	[u_1, u_2]	2065538412	3262237180
+def	_private.CandleLean.HolSyntaxExtra.0.Candle.arities_match.match_1.splitter	[u_1]	3904168760	1656937868
+def	_private.CandleLean.HolSyntaxExtra.0.Candle.db.match_1.splitter	[u_1]	2274441330	1063471714
+def	_private.CandleLean.HolSyntaxExtra.0.Candle.orda.match_1.splitter	[u_1]	686695361	4183028349
+def	_private.CandleLean.HolSyntaxExtra.0.Candle.ordav.match_1.splitter	[u_1]	2202443370	3252736234
+def	_private.CandleLean.HolSyntaxExtra.0.Candle.term_remove.match_1.splitter	[u_1]	2510156971	1540437266
+def	_private.CandleLean.HolSyntaxExtra.0.Candle.term_union.match_1.splitter	[u_1]	2771824817	382196968
+def	_private.CandleLean.HolSyntaxExtra.0.Candle.typeof.match_1.splitter	[u_1]	2274441330	831235890
+def	_private.CandleLean.HolSyntaxExtra.0.HOL.REV.match_1.splitter	[u_1, u_2]	2225519917	476330800
+def	_private.CandleLean.HolSyntaxExtra.0.HOL.SORTED.match_1.splitter	[u_1, u_2]	1865344165	4162565084
+def	_private.CandleLean.HolSyntaxExtra.0.HOL.TL.match_1.splitter	[u_1, u_2]	3435673807	3145727313
+def	_private.CandleLean.HolSyntaxExtra.0.HOL.ZIP.match_1.splitter	[u_1, u_2, u_3]	2716825129	373877004
+def	_private.CandleLean.HolSyntaxExtra.0.HOL.invert_comparison.match_1.splitter	[u_1]	563689056	2780307707
+def	_private.CandleLean.HolSyntaxExtra2.0.Candle.Aux.bind_list_aux_Var.match_1.splitter	[u_1]	2549865312	4242301347
+def	_private.CandleLean.HolSyntaxExtra2.0.Candle.IS_RESULT.match_1.splitter	[u_1, u_2]	4010477064	2026408147
+def	_private.CandleLean.HolSyntaxExtra2.0.Candle.TYPE_SUBST.match_1.splitter	[u_1]	491504343	712693014
+def	_private.CandleLean.HolSyntaxExtra2.0.Candle.arities_match.match_1.splitter	[u_1]	3904168760	3570372259
+def	_private.CandleLean.HolSyntaxExtra2.0.Candle.bind.match_1.splitter	[u_1]	654024579	1345324063
+def	_private.CandleLean.HolSyntaxExtra2.0.Candle.bind_list_aux.match_1.splitter	[u_1]	1863929683	1918373869
+def	_private.CandleLean.HolSyntaxExtra2.0.Candle.db.match_1.splitter	[u_1]	2274441330	1063471714
+def	_private.CandleLean.HolSyntaxExtra2.0.Candle.dbterm.match_1.splitter	[u_1]	2549865312	934583121
+def	_private.CandleLean.HolSyntaxExtra2.0.Candle.rename_bvars.match_1.splitter	[u_1]	1876532120	1455099548
+def	_private.CandleLean.HolSyntaxExtra2.0.Candle.typeof.match_1.splitter	[u_1]	2274441330	831235890
+def	_private.CandleLean.HolSyntaxLib.0.Candle.RESULT_pkg.match_1	[u_1, u_2]	1561312842	3970073806
+def	_private.CandleLean.HolSyntaxLib.0.Candle.REV_ASSOCD.match_1.splitter	[u_1, u_2, u_3]	2873308869	984887581
+def	_private.CandleLean.HolSyntaxLib.0.Candle.REV_ASSOCD_ALOOKUP.match_3.splitter	[u_1, u_2]	4020443221	3171690195
+def	_private.CandleLean.Misc.0.Candle.Aux.FIELDS_cons.match_1.splitter	[u_1]	3546756274	2556523703
+def	_private.CandleLean.Misc.0.Candle.SmartAppend.match_1.splitter	[u_1, u_2]	416519166	1769890296
+def	_private.CandleLean.Misc.0.Candle.append_aux.match_1.splitter	[u_1, u_2]	602989026	170582908
+def	_private.CandleLean.Misc.0.Candle.find_index.match_1.splitter	[u_1, u_2]	4115939008	3146931208
+def	_private.CandleLean.Misc.0.Candle.is_subseq.match_1.splitter	[u_1, u_2]	981126845	3810371829
+def	_private.CandleLean.Misc.0.HOL.FCP_bits.match_1.splitter	[u_1]	4102459480	3932183629
+def	_private.CandleLean.Misc.0.HOL.SUM.match_1.splitter	[u_1]	171869156	375457838
+def	_private.CandleLean.Misc.0.HOL.TL.match_1.splitter	[u_1, u_2]	3435673807	3145727313
+def	_private.CandleLean.Mllist.0.HOL.REV.match_1.splitter	[u_1, u_2]	2225519917	476330800
+def	_private.CandleLean.Mllist.0.HOL.merge_tail.match_1.splitter	[u_1, u_2]	6102158	2083523430
+def	_private.CandleLean.Mllist.0.HOL.mergesortN_tail.match_1.splitter	[u_1, u_2]	2874729004	3444078192
+def	_private.CandleLean.Mlstring.0.Candle.explode_aux.match_1.splitter	[u_1]	3922020340	2179116409
+def	_private.CandleLean.Mlstring.0.Candle.strlen.match_1.splitter	[u_1]	3840407014	397067269
+def	_private.CandleLean.Mlstring.0.Candle.strsub.match_1.splitter	[u_1]	3032442272	3288363459
+def	_private.CandleLean.Mlstring.0.Candle.substring.match_1.splitter	[u_1]	1648800892	2100197375
+def	_private.CandleLean.Mlstring.0.HOL.string_lt.match_1.splitter	[u_1]	1281259351	2046999640
+def	_private.CandleLean.Prelude.List.0.HOL.HD_pkg.match_1	[u_1, u_2]	3716742182	376643419
+def	_private.CandleLean.Prelude.List.0.HOL.LAST_wit	[u]	2488405382	1737663118
+def	_private.CandleLean.Prelude.List.0.HOL.TL.match_1.splitter	[u_1, u_2]	3435673807	3145727313
+def	_private.CandleLean.Prelude.List.0.HOL.ZIP.match_1.splitter	[u_1, u_2, u_3]	2716825129	373877004
+def	_private.CandleLean.Prelude.List.0.HOL.merge_tail.match_1.splitter	[u_1, u_2]	6102158	1414994980
+def	_private.CandleLean.Prelude.List.0.HOL.mergesortN_tail.match_1.splitter	[u_1, u_2]	2874729004	3444078192
+def	_private.CandleLean.Prelude.Sptree.0.HOL.sptree.lookup.match_1.splitter	[u_1, u_2]	2131662644	1730734626
+def	_private.CandleLean.Prelude.String.0.HOL.FIELDS.match_1.splitter	[u_1]	423310173	1220913943
+def	_private.CandleLean.Prelude.String.0.HOL.TL.match_1.splitter	[u_1, u_2]	3435673807	3145727313
+def	_private.CandleLean.Proofs.Base.0.Candle.Aux.ALOOKUP_append.match_1.splitter	[u_1, u_2]	12790000	237361074
+def	_private.CandleLean.Proofs.Base.0.Candle.Aux.FIELDS_cons.match_1.splitter	[u_1]	3546756274	2556523703
+def	_private.CandleLean.Proofs.Base.0.HOL.ALOOKUP.match_1.splitter	[u_1, u_2, u_3]	2249071734	931326631
+def	_private.CandleLean.Proofs.Base.0.HOL.EL.match_1.splitter	[u_1, u_2]	1298636962	586825703
+def	_private.CandleLean.Proofs.Base.0.HOL.EVEN.match_1.splitter	[u_1]	413685589	3978603579
+def	_private.CandleLean.Proofs.Base.0.HOL.FIELDS.match_1.splitter	[u_1]	423310173	1220913943
+def	_private.CandleLean.Proofs.Base.0.HOL.GENLIST.match_1.splitter	[u_1]	413685589	550955219
+def	_private.CandleLean.Proofs.Base.0.HOL.REV.match_1.splitter	[u_1, u_2]	2225519917	476330800
+def	_private.CandleLean.Proofs.Base.0.HOL.TL.match_1.splitter	[u_1, u_2]	3435673807	3145727313
+def	_private.CandleLean.Proofs.Base.0.HOL.l2n.match_1.splitter	[u_1]	171869156	3264153702
+def	_private.CandleLean.Proofs.Base.0.HOL.sptree.lookup.match_1.splitter	[u_1, u_2]	2131662644	1730734626
+def	_private.CandleLean.Proofs.SemBase.0.Candle.APPLY_UPDATE_LIST_ALOOKUP.match_1.splitter	[u_1, u_2]	4020443221	2347949714
+inductive	Candle.RACONV	[]	3740990802	-
+inductive	Candle.RACONV.below	[]	3306163231	-
+inductive	Candle.app_list	[u]	3807510281	-
+inductive	Candle.app_list_ann	[u]	3807510281	-
+inductive	Candle.dbterm_t	[]	3931117990	-
+inductive	Candle.has_type	[]	177953670	-
+inductive	Candle.has_type.below	[]	3088659122	-
+inductive	Candle.mlstring	[]	3931117990	-
+inductive	Candle.proves	[]	3123415088	-
+inductive	Candle.proves.below	[]	1527474381	-
+inductive	Candle.result	[u]	3807510281	-
+inductive	Candle.subterm1	[]	712955946	-
+inductive	Candle.subtype1	[]	2281543804	-
+inductive	Candle.term	[]	3931117990	-
+inductive	Candle.type	[]	3931117990	-
+inductive	Candle.update	[]	3931117990	-
+inductive	Candle.updates	[]	4136661689	-
+inductive	HOL.RTC	[u]	2389319836	-
+inductive	HOL.RTC.below	[u]	1137723319	-
+inductive	HOL.char	[]	3931117990	-
+inductive	HOL.fmap	[u, v]	3173088088	-
+inductive	HOL.ordering	[]	3931117990	-
+inductive	HOL.spt	[u]	3807510281	-
+opaque	HOL.ARB	[u]	2983478174	157480982
+opaque	_private.CandleLean.HolSemantics.0.Candle.instance_pkg	[u]	964055870	3002255354
+opaque	_private.CandleLean.HolSemantics.0.Candle.termsem0_pkg	[u]	2750701382	3219652188
+opaque	_private.CandleLean.HolSyntax.0.Candle.VARIANT_PRIMES_pkg	[]	301502158	3421002780
+opaque	_private.CandleLean.HolSyntax.0.Candle.dest_var_pkg	[]	3083540227	3885463187
+opaque	_private.CandleLean.HolSyntaxExtra.0.Candle.fresh_pkg	[]	1716917253	882728176
+opaque	_private.CandleLean.HolSyntaxLib.0.Candle.CLASH_pkg	[u]	4170043984	3527836107
+opaque	_private.CandleLean.HolSyntaxLib.0.Candle.RESULT_pkg	[u]	2789568890	1399491873
+opaque	_private.CandleLean.Prelude.FiniteMap.0.HOL.FAPPLY_outside	[v]	2122843666	2478738662
+opaque	_private.CandleLean.Prelude.FiniteMap.0.HOL.FUN_FMAP_pkg	[u, v]	2843128933	1765755360
+opaque	_private.CandleLean.Prelude.List.0.HOL.HD_pkg	[u]	1022422255	794832734
+opaque	_private.CandleLean.Prelude.List.0.HOL.LAST_pkg	[u]	2907561622	2058570631
+opaque	_private.CandleLean.Prelude.List.0.HOL.SEG_pkg	[u]	1450574617	422474446
+opaque	_private.CandleLean.Prelude.String.0.HOL.CHR_pkg	[]	1024734041	1425893409
+rec	Candle.RACONV.below.rec	[]	1555512839	-
+rec	Candle.RACONV.rec	[]	1046034840	-
+rec	Candle.app_list.rec	[u_1, u]	1952434440	-
+rec	Candle.app_list_ann.rec	[u_1, u]	2577744902	-
+rec	Candle.dbterm_t.rec	[u]	2828834114	-
+rec	Candle.has_type.below.rec	[]	1145332525	-
+rec	Candle.has_type.rec	[]	2753638936	-
+rec	Candle.mlstring.rec	[u]	741836864	-
+rec	Candle.proves.below.rec	[]	1560817576	-
+rec	Candle.proves.rec	[]	553955340	-
+rec	Candle.result.rec	[u_1, u]	2522745865	-
+rec	Candle.subterm1.rec	[]	3749595074	-
+rec	Candle.subtype1.rec	[]	1164411686	-
+rec	Candle.term.rec	[u]	2630800114	-
+rec	Candle.type.rec	[u]	124317561	-
+rec	Candle.type.rec_1	[u]	2018416582	-
+rec	Candle.update.rec	[u]	3207582043	-
+rec	Candle.updates.rec	[]	3514079230	-
+rec	HOL.RTC.below.rec	[u]	1599720964	-
+rec	HOL.RTC.rec	[u]	327723128	-
+rec	HOL.char.rec	[u]	108948347	-
+rec	HOL.fmap.rec	[u_1, u, v]	2335564748	-
+rec	HOL.ordering.rec	[u]	3937835079	-
+rec	HOL.spt.rec	[u_1, u]	2341093349	-
+theorem	Candle.ABS_correct	[u]	2619592788	-
+theorem	Candle.ACONV_INST	[]	1369268506	-
+theorem	Candle.ACONV_REFL	[]	572964596	-
+theorem	Candle.ACONV_SYM	[]	1150138163	-
+theorem	Candle.ACONV_TRANS	[]	3303690172	-
+theorem	Candle.ACONV_TYPE	[]	2659752327	-
+theorem	Candle.ACONV_VSUBST	[]	2049428900	-
+theorem	Candle.ACONV_db	[]	2285017365	-
+theorem	Candle.ACONV_eq_orda	[]	2369980325	-
+theorem	Candle.ALL_DISTINCT_LIST_UNION	[u]	1450879461	-
+theorem	Candle.ALL_DISTINCT_MAP_explode	[]	608699924	-
+theorem	Candle.ALL_DISTINCT_MAP_implode	[]	3577276526	-
+theorem	Candle.ALL_DISTINCT_STRING_SORT	[]	409010810	-
+theorem	Candle.ALOOKUP_MAP_dest_var	[u, v]	2560676511	-
+theorem	Candle.ALPHAVARS.eq_1	[u]	95192505	-
+theorem	Candle.ALPHAVARS.eq_2	[u]	3594744138	-
+theorem	Candle.ALPHAVARS.eq_def	[u]	233423278	-
+theorem	Candle.ALPHAVARS_MEM	[u]	987508029	-
+theorem	Candle.ALPHAVARS_REFL	[u]	3260074087	-
+theorem	Candle.ALPHAVARS_TYPE	[]	2243595491	-
+theorem	Candle.ALPHAVARS_eq_ordav	[]	1169859038	-
+theorem	Candle.APPLY_UPDATE_LIST_ALOOKUP	[u, v]	491751673	-
+theorem	Candle.ASSUME_correct	[u]	4219092737	-
+theorem	Candle.Aux.ALL_DISTINCT_iff	[u]	2429373851	-
+theorem	Candle.Aux.ALL_DISTINCT_map	[]	3139684771	-
+theorem	Candle.Aux.ALOOKUP_append	[u, v]	445931375	-
+theorem	Candle.Aux.ALPHAVARS_SYM	[u]	1041935627	-
+theorem	Candle.Aux.ALPHAVARS_TRANS	[u]	89022481	-
+theorem	Candle.Aux.ALPHAVARS_fi	[]	566947771	-
+theorem	Candle.Aux.CHR_w2n_n2w_ORD	[]	2599849884	-
+theorem	Candle.Aux.DISJOINT_iff	[u]	3137321536	-
+theorem	Candle.Aux.EL_cons_drop	[u]	745735143	-
+theorem	Candle.Aux.EL_eq	[u]	3147439518	-
+theorem	Candle.Aux.EVEN_iff	[]	3048138787	-
+theorem	Candle.Aux.EVERY_iff	[u]	258415861	-
+theorem	Candle.Aux.EXISTS_iff	[u]	3173294667	-
+theorem	Candle.Aux.FIELDS_cons	[]	1555185512	-
+theorem	Candle.Aux.FILTER_eq	[u]	3110286712	-
+theorem	Candle.Aux.FILTER_eq_replicate	[u]	1260770397	-
+theorem	Candle.Aux.FINITE_LIST_TO_SET	[u]	4035752908	-
+theorem	Candle.Aux.FINITE_UNION	[u]	1581391630	-
+theorem	Candle.Aux.FINITE_iff	[u]	2125383003	-
+theorem	Candle.Aux.FINITE_subset	[u]	2333783531	-
+theorem	Candle.Aux.FLOOKUP_eq_some	[u, v]	2741528525	-
+theorem	Candle.Aux.FST_rename_bvars	[]	2226902118	-
+theorem	Candle.Aux.GENLIST_K	[u]	2518063860	-
+theorem	Candle.Aux.GENLIST_length	[u]	3896720614	-
+theorem	Candle.Aux.INORDER_INSERT_perm	[]	3441326448	-
+theorem	Candle.Aux.INST_CORE_Abs_cases	[]	2290276050	-
+theorem	Candle.Aux.INST_CORE_Comb_cases	[]	671000666	-
+theorem	Candle.Aux.INST_CORE_dbINST	[]	3516267014	-
+theorem	Candle.Aux.INST_CORE_nil	[]	2887564355	-
+theorem	Candle.Aux.INST_CORE_simple_inst	[]	4178655166	-
+theorem	Candle.Aux.INST_eq	[]	3404062262	-
+theorem	Candle.Aux.LEX_irrefl	[u, v]	766775400	-
+theorem	Candle.Aux.LEX_mono	[u]	335400813	-
+theorem	Candle.Aux.LEX_trans	[u, v]	3678996303	-
+theorem	Candle.Aux.LEX_tri	[u, v]	2487116709	-
+theorem	Candle.Aux.LLEX_cons	[u]	4114992224	-
+theorem	Candle.Aux.LLEX_irrefl	[u]	3801035516	-
+theorem	Candle.Aux.LLEX_mono	[u]	1730881695	-
+theorem	Candle.Aux.LLEX_trans	[u]	1316269087	-
+theorem	Candle.Aux.LLEX_tri	[u]	1975246717	-
+theorem	Candle.Aux.MAX_eq	[]	2879531505	-
+theorem	Candle.Aux.MEM_term_image	[]	794273899	-
+theorem	Candle.Aux.MEM_term_remove	[]	294634986	-
+theorem	Candle.Aux.MEM_term_union	[]	1467707181	-
+theorem	Candle.Aux.PERM_iff	[u]	2284974145	-
+theorem	Candle.Aux.RACONV_rank	[]	1120060754	-
+theorem	Candle.Aux.REV_ASSOCD_FILTER_ne	[]	3535507373	-
+theorem	Candle.Aux.REV_ASSOCD_FILTER_self	[]	1274540581	-
+theorem	Candle.Aux.REV_ASSOCD_cases	[u]	2431411300	-
+theorem	Candle.Aux.REV_ASSOCD_not_mem	[u]	1667359244	-
+theorem	Candle.Aux.REV_ASSOCD_welltyped	[]	1337783841	-
+theorem	Candle.Aux.REV_eq	[u]	2056311270	-
+theorem	Candle.Aux.RTC_tail	[u]	314998082	-
+theorem	Candle.Aux.SNOC_eq	[u]	2781022291	-
+theorem	Candle.Aux.SORTED_cons	[u]	1581461271	-
+theorem	Candle.Aux.StrongLinearOrder_string_lt	[]	174389848	-
+theorem	Candle.Aux.TO_refl	[u]	2069347469	-
+theorem	Candle.Aux.TT_TotOrd	[u]	2111394733	-
+theorem	Candle.Aux.TT_lex	[]	1303552474	-
+theorem	Candle.Aux.TT_rank	[]	3369644175	-
+theorem	Candle.Aux.TYPE_SUBST_Fun	[]	2926728710	-
+theorem	Candle.Aux.TYPE_SUBST_tyvars_imp	[]	3987172662	-
+theorem	Candle.Aux.TotOrd_TO	[u]	2167615081	-
+theorem	Candle.Aux.TotOrd_flip	[u]	4228357606	-
+theorem	Candle.Aux.UNHEX_HEX	[]	3866582883	-
+theorem	Candle.Aux.UPDATE_ne	[u, v]	1730802671	-
+theorem	Candle.Aux.UPDATE_same	[u, v]	891914324	-
+theorem	Candle.Aux.VFREE_IN_ALPHAVARS	[u]	4282908359	-
+theorem	Candle.Aux.VFREE_IN_VSUBST_var	[]	3958784775	-
+theorem	Candle.Aux.VFREE_IN_Var_len	[]	462472828	-
+theorem	Candle.Aux.VFREE_IN_bound	[]	4118538727	-
+theorem	Candle.Aux.VSUBST_var_has_type	[]	3172247566	-
+theorem	Candle.Aux.alpha_lt_of_EQUAL	[]	3914151634	-
+theorem	Candle.Aux.alpha_lt_of_GREATER	[]	1229156129	-
+theorem	Candle.Aux.apply_spec	[u]	2098418638	-
+theorem	Candle.Aux.bind_list_aux_Var	[]	343956160	-
+theorem	Candle.Aux.bool_cases	[u]	3991459394	-
+theorem	Candle.Aux.bv_names_rename_bvars	[]	1695131725	-
+theorem	Candle.Aux.char_ext	[]	428934367	-
+theorem	Candle.Aux.compare_aux_LESS	[]	1358516617	-
+theorem	Candle.Aux.dbVFREE_IN_bind	[]	1898215878	-
+theorem	Candle.Aux.db_eq_dbVar	[]	3579318968	-
+theorem	Candle.Aux.dbterm_Var	[]	1624700123	-
+theorem	Candle.Aux.equation_true	[u]	388735026	-
+theorem	Candle.Aux.explode_aux_implode	[]	1932385732	-
+theorem	Candle.Aux.fi.eq_1	[]	2356695187	-
+theorem	Candle.Aux.fi_ALPHAVARS	[]	2155619412	-
+theorem	Candle.Aux.fi_cases	[]	1039278004	-
+theorem	Candle.Aux.fi_cons	[]	1006876995	-
+theorem	Candle.Aux.fi_ne	[]	1714021396	-
+theorem	Candle.Aux.find_index_ge	[]	3190460232	-
+theorem	Candle.Aux.has_type_Abs	[]	2426739717	-
+theorem	Candle.Aux.has_type_Comb	[]	691457442	-
+theorem	Candle.Aux.hyp_true	[u]	3398557584	-
+theorem	Candle.Aux.implode_explode_aux	[]	1715420622	-
+theorem	Candle.Aux.instance_eq	[u]	223560785	-
+theorem	Candle.Aux.isPREFIX_iff	[u]	2703524621	-
+theorem	Candle.Aux.is_valuation_UPDATE	[u]	3029561816	-
+theorem	Candle.Aux.l2n_n2l	[]	494639861	-
+theorem	Candle.Aux.least_exists	[]	225610200	-
+theorem	Candle.Aux.maxlen.eq_1	[]	2513900350	-
+theorem	Candle.Aux.maxlen.eq_2	[]	706288565	-
+theorem	Candle.Aux.maxlen.eq_3	[]	3838955104	-
+theorem	Candle.Aux.maxlen.eq_4	[]	923339513	-
+theorem	Candle.Aux.maxlen.eq_def	[]	4132457844	-
+theorem	Candle.Aux.mem_EMPTY	[u]	2371324164	-
+theorem	Candle.Aux.mem_FILTER	[u]	3697633861	-
+theorem	Candle.Aux.mem_FILTER_imp	[u]	1245361946	-
+theorem	Candle.Aux.mem_FILTER_imp'	[u]	1245361946	-
+theorem	Candle.Aux.mem_GSPEC	[u, v]	4021412749	-
+theorem	Candle.Aux.mem_IMAGE	[u, v]	4157428878	-
+theorem	Candle.Aux.mem_INORDER_INSERT	[]	184026232	-
+theorem	Candle.Aux.mem_INSERT	[u]	3168996664	-
+theorem	Candle.Aux.mem_INTER	[u]	2916122587	-
+theorem	Candle.Aux.mem_LIST_INSERT	[u]	4170724262	-
+theorem	Candle.Aux.mem_LIST_TO_SET	[u]	2457561020	-
+theorem	Candle.Aux.mem_LIST_UNION	[u]	416124068	-
+theorem	Candle.Aux.mem_STRING_SORT	[]	1748344831	-
+theorem	Candle.Aux.mem_STRING_SORT_iff	[]	2381247936	-
+theorem	Candle.Aux.mem_UNION	[u]	3630169900	-
+theorem	Candle.Aux.mem_UNIV	[u]	4014216110	-
+theorem	Candle.Aux.mem_abstract	[u]	1909785683	-
+theorem	Candle.Aux.mem_domain_insert	[u]	1162901368	-
+theorem	Candle.Aux.mem_ext	[u]	3730151508	-
+theorem	Candle.Aux.mem_setOf	[u]	2351130602	-
+theorem	Candle.Aux.mem_sorted_tyvars	[]	3886792577	-
+theorem	Candle.Aux.mem_tyvars_Tyapp	[]	2579692813	-
+theorem	Candle.Aux.mem_tyvars_foldr	[]	2811145832	-
+theorem	Candle.Aux.merge_tail_perm	[u]	1410388843	-
+theorem	Candle.Aux.mergesortN_tail_perm	[u]	2472539793	-
+theorem	Candle.Aux.mls_empty	[]	1050972460	-
+theorem	Candle.Aux.n2l_lt	[]	2142227186	-
+theorem	Candle.Aux.n2w_ORD_CHR_w2n	[]	3625661197	-
+theorem	Candle.Aux.newname_fresh	[]	1629240735	-
+theorem	Candle.Aux.orda_Abs	[]	1402063500	-
+theorem	Candle.Aux.orda_Comb	[]	3417881480	-
+theorem	Candle.Aux.orda_Const	[]	2703987962	-
+theorem	Candle.Aux.orda_TT	[]	3258984334	-
+theorem	Candle.Aux.orda_TT_nil	[]	184124552	-
+theorem	Candle.Aux.orda_Var	[]	646293926	-
+theorem	Candle.Aux.orda_rank_gt	[]	2788718650	-
+theorem	Candle.Aux.orda_rank_lt	[]	2274779951	-
+theorem	Candle.Aux.orda_rank_ne	[]	1300025211	-
+theorem	Candle.Aux.orda_refl	[]	3278736882	-
+theorem	Candle.Aux.ordav_TT	[]	3308140023	-
+theorem	Candle.Aux.ordav_refl	[]	1073128498	-
+theorem	Candle.Aux.rank.eq_1	[]	1225920665	-
+theorem	Candle.Aux.rank.eq_2	[]	3294778329	-
+theorem	Candle.Aux.rank.eq_3	[]	3699465668	-
+theorem	Candle.Aux.rank.eq_4	[]	4141437206	-
+theorem	Candle.Aux.rename_ALPHAVARS	[]	161089239	-
+theorem	Candle.Aux.rename_bvars_RACONV	[]	853007378	-
+theorem	Candle.Aux.rename_bvars_has_type	[]	3947306142	-
+theorem	Candle.Aux.rename_exists	[]	1299631173	-
+theorem	Candle.Aux.set_ext	[u]	2381228031	-
+theorem	Candle.Aux.sizeof_VSUBST_aux	[]	1310341635	-
+theorem	Candle.Aux.sizeof_VSUBST_var	[]	3774127071	-
+theorem	Candle.Aux.sort2_tail_perm	[u]	731028693	-
+theorem	Candle.Aux.sort3_tail_perm	[u]	770023907	-
+theorem	Candle.Aux.strcat_implode	[]	4250666334	-
+theorem	Candle.Aux.string_lt_irrefl	[]	2816520570	-
+theorem	Candle.Aux.string_lt_trans	[]	2071435593	-
+theorem	Candle.Aux.string_lt_trichotomous	[]	3741701058	-
+theorem	Candle.Aux.structure	[u]	2795826811	-
+theorem	Candle.Aux.term_image_cons	[]	2256142844	-
+theorem	Candle.Aux.term_lt_iff	[]	4062034965	-
+theorem	Candle.Aux.term_lt_inv_of	[]	1437928747	-
+theorem	Candle.Aux.term_lt_irrefl	[]	1262991169	-
+theorem	Candle.Aux.term_lt_of_inv	[]	437086396	-
+theorem	Candle.Aux.term_lt_trans	[]	3537623771	-
+theorem	Candle.Aux.term_lt_tri	[]	4236810332	-
+theorem	Candle.Aux.term_ok_INST_CORE	[]	3087822019	-
+theorem	Candle.Aux.term_remove_cons	[]	2669750471	-
+theorem	Candle.Aux.termsem_Abs	[u]	3644141639	-
+theorem	Candle.Aux.termsem_Comb	[u]	1050279101	-
+theorem	Candle.Aux.termsem_Const	[u]	3027080949	-
+theorem	Candle.Aux.termsem_UPDATE	[u]	3833961310	-
+theorem	Candle.Aux.termsem_Var	[u]	2124956700	-
+theorem	Candle.Aux.termsem_mem	[u]	2874209021	-
+theorem	Candle.Aux.termsem_simple_inst	[u]	2514406939	-
+theorem	Candle.Aux.type_ind	[]	4124966187	-
+theorem	Candle.Aux.type_lt_inv_of	[]	2515379274	-
+theorem	Candle.Aux.type_lt_irrefl	[]	2861261513	-
+theorem	Candle.Aux.type_lt_rules	[]	3773097275	-
+theorem	Candle.Aux.type_lt_trans	[]	3747510827	-
+theorem	Candle.Aux.type_lt_tri	[]	2624814593	-
+theorem	Candle.Aux.type_ok_Fun	[]	897431384	-
+theorem	Candle.Aux.upd_congr	[u]	733209646	-
+theorem	Candle.Aux.upd_val	[u]	3311409354	-
+theorem	Candle.Aux.welltyped_Abs	[]	3770064910	-
+theorem	Candle.Aux.welltyped_Comb	[]	377072285	-
+theorem	Candle.Aux.welltyped_equation	[]	2073798707	-
+theorem	Candle.BETA_correct	[u]	12251825	-
+theorem	Candle.CHR_w2n_n2w_ORD	[]	718638725	-
+theorem	Candle.CHR_w2n_n2w_ORD_simp	[]	2599849884	-
+theorem	Candle.CLASH_def	[u]	796190612	-
+theorem	Candle.DEDUCT_ANTISYM_correct	[u]	2847167344	-
+theorem	Candle.EQUATION_HAS_TYPE_BOOL	[]	1126451571	-
+theorem	Candle.EQ_MP_correct	[u]	353699979	-
+theorem	Candle.EVEN_make_even	[]	3333296615	-
+theorem	Candle.EVERY2_RC_same	[u]	4055033569	-
+theorem	Candle.EVERY_term_remove	[]	4135755660	-
+theorem	Candle.EVERY_term_union	[]	3523623405	-
+theorem	Candle.FIELDS_NEQ_NIL	[]	3951791279	-
+theorem	Candle.FIELDS_next	[]	1313064272	-
+theorem	Candle.FINITE_MEM_Var	[]	2571970374	-
+theorem	Candle.FINITE_VFREE_IN	[]	2847990189	-
+theorem	Candle.FINITE_VFREE_IN_2	[]	2176782403	-
+theorem	Candle.FINITE_VFREE_IN_list	[]	1503922549	-
+theorem	Candle.FST_rename_bvars	[]	1705065444	-
+theorem	Candle.FUN_FMAP_FAPPLY_FEMPTY_FAPPLY	[u, v]	3378723923	-
+theorem	Candle.INORDER_INSERT.eq_1	[]	1738859038	-
+theorem	Candle.INST_CORE.eq_1	[]	3044092118	-
+theorem	Candle.INST_CORE.eq_2	[]	3723367042	-
+theorem	Candle.INST_CORE.eq_3	[]	48343876	-
+theorem	Candle.INST_CORE.eq_4	[]	2306064318	-
+theorem	Candle.INST_CORE.eq_def	[]	3056131283	-
+theorem	Candle.INST_CORE_HAS_TYPE	[]	434744338	-
+theorem	Candle.INST_CORE_NIL_IS_RESULT	[]	1906703638	-
+theorem	Candle.INST_CORE_dbINST	[]	3568681047	-
+theorem	Candle.INST_CORE_simple_inst	[]	2411967289	-
+theorem	Candle.INST_HAS_TYPE	[]	1303314761	-
+theorem	Candle.INST_TYPE_correct	[u]	1043497006	-
+theorem	Candle.INST_WELLTYPED	[]	3380424261	-
+theorem	Candle.INST_correct	[u]	2034480292	-
+theorem	Candle.INST_dbINST	[]	2891336557	-
+theorem	Candle.INST_simple_inst	[]	463008697	-
+theorem	Candle.IS_CLASH.eq_1	[u]	3571759655	-
+theorem	Candle.IS_CLASH.eq_2	[u]	2241330462	-
+theorem	Candle.IS_RESULT.eq_1	[u]	844951281	-
+theorem	Candle.IS_RESULT.eq_2	[u]	3559099748	-
+theorem	Candle.I_PERMUTES	[u]	1885855491	-
+theorem	Candle.LENGTH_FIELDS	[]	1654370868	-
+theorem	Candle.LENGTH_STRING_SORT	[]	3855439151	-
+theorem	Candle.LENGTH_explode	[]	3761051112	-
+theorem	Candle.LESS_1	[]	2824451538	-
+theorem	Candle.LIST_INSERT.eq_1	[u]	314963778	-
+theorem	Candle.LIST_UNION.eq_1	[u]	290935836	-
+theorem	Candle.LIST_UNION_NIL	[u]	2949299581	-
+theorem	Candle.MAP_EQ_ID	[u]	1469451209	-
+theorem	Candle.MAP_FST_I_PAIR_MAP	[u, v, w]	1379335298	-
+theorem	Candle.MAP_db_FILTER_neq	[]	1005588364	-
+theorem	Candle.MAPi_ID	[u]	699780262	-
+theorem	Candle.MAX_LIST_APPEND	[]	925608708	-
+theorem	Candle.MAX_LIST_SNOC	[]	1919149516	-
+theorem	Candle.MEM_FOLDR_INORDER_INSERT	[]	2542935152	-
+theorem	Candle.MEM_FOLDR_LIST_UNION	[u, v]	632995570	-
+theorem	Candle.MEM_LIST_INSERT	[u]	2862261226	-
+theorem	Candle.MEM_LIST_UNION	[u]	2437774626	-
+theorem	Candle.MEM_STRING_SORT	[]	1130085233	-
+theorem	Candle.MEM_term_image	[]	4101676414	-
+theorem	Candle.MEM_term_image_imp	[]	1930232476	-
+theorem	Candle.MEM_term_remove	[]	1970500534	-
+theorem	Candle.MEM_term_remove_imp	[]	2201020549	-
+theorem	Candle.MEM_term_union	[]	1367826641	-
+theorem	Candle.MEM_term_union_imp	[]	4095789811	-
+theorem	Candle.MK_COMB_correct	[u]	3762723701	-
+theorem	Candle.OPTION_MAP_I	[u]	1315192715	-
+theorem	Candle.OPT_MMAP_SOME	[u]	1037895564	-
+theorem	Candle.PERM_STRING_SORT	[]	802785515	-
+theorem	Candle.PRIMED_INFINITE	[]	590898777	-
+theorem	Candle.PRIMED_NAME_EXISTS	[]	3075706309	-
+theorem	Candle.RACONV.brecOn	[]	2191859421	-
+theorem	Candle.RACONV_REFL	[]	3250992522	-
+theorem	Candle.RACONV_SYM	[]	2176811783	-
+theorem	Candle.RACONV_TRANS	[]	2952178087	-
+theorem	Candle.RACONV_TYPE	[]	906743360	-
+theorem	Candle.RACONV_dbterm	[]	2077811111	-
+theorem	Candle.RACONV_eq_orda	[]	434344574	-
+theorem	Candle.RACONV_thm	[]	1944175771	-
+theorem	Candle.REFL_correct	[u]	3250051324	-
+theorem	Candle.RESULT_def	[u]	3689954242	-
+theorem	Candle.REV_ASSOCD.eq_1	[u, v]	1539409130	-
+theorem	Candle.REV_ASSOCD.eq_2	[u, v]	3804060387	-
+theorem	Candle.REV_ASSOCD.eq_def	[u, v]	3706733247	-
+theorem	Candle.REV_ASSOCD_ALOOKUP	[u, v]	535437015	-
+theorem	Candle.REV_ASSOCD_FILTER	[u, v, w]	609360746	-
+theorem	Candle.REV_ASSOCD_MAP_db	[]	2644545628	-
+theorem	Candle.REV_ASSOCD_MEM	[u, v]	3231389964	-
+theorem	Candle.REV_ASSOCD_thm	[u, v]	610945226	-
+theorem	Candle.SIZEOF_VSUBST	[]	1310341635	-
+theorem	Candle.STRING_SORT.eq_1	[]	3664674636	-
+theorem	Candle.SmartAppend.eq_1	[u]	2818163371	-
+theorem	Candle.SmartAppend.eq_2	[u]	884058835	-
+theorem	Candle.SmartAppend.eq_3	[u]	2036167336	-
+theorem	Candle.SmartAppend_thm	[u]	3441718468	-
+theorem	Candle.StrongLinearOrder_mlstring_lt	[]	3767892748	-
+theorem	Candle.StrongLinearOrder_term_lt	[]	3334467400	-
+theorem	Candle.StrongLinearOrder_type_lt	[]	1835967989	-
+theorem	Candle.TYPE_SUBST.eq_1	[]	117633392	-
+theorem	Candle.TYPE_SUBST.eq_2	[]	818787150	-
+theorem	Candle.TYPE_SUBST.eq_def	[]	1509207476	-
+theorem	Candle.TYPE_SUBST_Bool	[]	3008547516	-
+theorem	Candle.TYPE_SUBST_NIL	[]	1966517054	-
+theorem	Candle.TYPE_SUBST_compose	[]	3258835155	-
+theorem	Candle.TYPE_SUBST_tyvars	[]	223828033	-
+theorem	Candle.TotOrd_term_cmp	[]	875986811	-
+theorem	Candle.TotOrd_type_cmp	[]	1915271415	-
+theorem	Candle.UPDATE_LIST_THM	[u, v]	1871857505	-
+theorem	Candle.VARIANT_PRIMES_def	[]	2742383602	-
+theorem	Candle.VARIANT_THM	[]	31718973	-
+theorem	Candle.VFREE_IN.eq_1	[]	769673932	-
+theorem	Candle.VFREE_IN.eq_2	[]	1488890775	-
+theorem	Candle.VFREE_IN.eq_3	[]	3815360258	-
+theorem	Candle.VFREE_IN.eq_4	[]	2136755415	-
+theorem	Candle.VFREE_IN.eq_def	[]	3721554277	-
+theorem	Candle.VFREE_IN_ACONV	[]	2983223990	-
+theorem	Candle.VFREE_IN_FINITE	[]	3548093378	-
+theorem	Candle.VFREE_IN_FINITE_ALT	[]	478013355	-
+theorem	Candle.VFREE_IN_RACONV	[]	2172819610	-
+theorem	Candle.VFREE_IN_VSUBST	[]	4198631167	-
+theorem	Candle.VSUBST.eq_1	[]	2162125354	-
+theorem	Candle.VSUBST.eq_2	[]	367914407	-
+theorem	Candle.VSUBST.eq_3	[]	3751315653	-
+theorem	Candle.VSUBST.eq_4	[]	4229294813	-
+theorem	Candle.VSUBST.eq_def	[]	2129245974	-
+theorem	Candle.VSUBST_HAS_TYPE	[]	1891402430	-
+theorem	Candle.VSUBST_NIL	[]	4102677117	-
+theorem	Candle.VSUBST_WELLTYPED	[]	2107850694	-
+theorem	Candle.VSUBST_dbVSUBST	[]	4263863699	-
+theorem	Candle.VSUBST_simple_subst	[]	2067324767	-
+theorem	Candle.WELLTYPED	[]	952995688	-
+theorem	Candle.WELLTYPED_CLAUSES	[]	2077889593	-
+theorem	Candle.WELLTYPED_LEMMA	[]	1965862158	-
+theorem	Candle.abstract_eq	[u]	1046808460	-
+theorem	Candle.abstract_in_funspace	[u]	3100261760	-
+theorem	Candle.alpha_lt_not_refl	[]	1322411682	-
+theorem	Candle.app_list.Append.inj	[u]	2180674840	-
+theorem	Candle.app_list.Append.injEq	[u]	2438800154	-
+theorem	Candle.app_list.Append.sizeOf_spec	[u]	3779646337	-
+theorem	Candle.app_list.List.inj	[u]	506576128	-
+theorem	Candle.app_list.List.injEq	[u]	2777721842	-
+theorem	Candle.app_list.List.sizeOf_spec	[u]	249969540	-
+theorem	Candle.app_list.Nil.sizeOf_spec	[u]	2481079377	-
+theorem	Candle.app_list.brecOn.eq	[u_1, u]	2629319961	-
+theorem	Candle.app_list_ann.BigAppend.inj	[u]	693816207	-
+theorem	Candle.app_list_ann.BigAppend.injEq	[u]	7093189	-
+theorem	Candle.app_list_ann.BigAppend.sizeOf_spec	[u]	2657131081	-
+theorem	Candle.app_list_ann.BigList.inj	[u]	3099823981	-
+theorem	Candle.app_list_ann.BigList.injEq	[u]	2661788576	-
+theorem	Candle.app_list_ann.BigList.sizeOf_spec	[u]	1207889186	-
+theorem	Candle.app_list_ann.Small.inj	[u]	1076963564	-
+theorem	Candle.app_list_ann.Small.injEq	[u]	3826914127	-
+theorem	Candle.app_list_ann.Small.sizeOf_spec	[u]	3904893176	-
+theorem	Candle.app_list_ann.brecOn.eq	[u_1, u]	1111531591	-
+theorem	Candle.append.eq_1	[u]	602166202	-
+theorem	Candle.append_SmartAppend	[u]	1726463044	-
+theorem	Candle.append_aux.eq_1	[u]	4073496578	-
+theorem	Candle.append_aux.eq_2	[u]	3992052435	-
+theorem	Candle.append_aux.eq_3	[u]	503335864	-
+theorem	Candle.append_aux.eq_def	[u]	2179013049	-
+theorem	Candle.append_aux_thm	[u]	2338695588	-
+theorem	Candle.append_thm	[u, v, w]	3656965546	-
+theorem	Candle.apply_abstract	[u]	1092966837	-
+theorem	Candle.apply_in_rng	[u]	1228579382	-
+theorem	Candle.arities_match.eq_1	[]	519920598	-
+theorem	Candle.arities_match.eq_2	[]	3660931120	-
+theorem	Candle.arities_match.eq_3	[]	1102511249	-
+theorem	Candle.arities_match.eq_4	[]	2199535323	-
+theorem	Candle.arities_match.eq_5	[]	2920558447	-
+theorem	Candle.arities_match.eq_def	[]	3974825606	-
+theorem	Candle.arities_match_Tyvar	[]	3644902587	-
+theorem	Candle.arities_match_nil	[]	677713144	-
+theorem	Candle.binary_inference_rule	[u]	1951357240	-
+theorem	Candle.bind.eq_1	[]	2386247014	-
+theorem	Candle.bind.eq_2	[]	4168767973	-
+theorem	Candle.bind.eq_3	[]	2771052400	-
+theorem	Candle.bind.eq_4	[]	1316567567	-
+theorem	Candle.bind.eq_5	[]	2035887884	-
+theorem	Candle.bind.eq_def	[]	1353371276	-
+theorem	Candle.bind_dbVSUBST	[]	2344698144	-
+theorem	Candle.bind_dbVSUBST_cons	[]	1982791666	-
+theorem	Candle.bind_list_aux.eq_1	[]	4248237009	-
+theorem	Candle.bind_list_aux.eq_2	[]	2617703772	-
+theorem	Candle.bind_list_aux.eq_def	[]	3666566153	-
+theorem	Candle.bind_list_aux_clauses	[]	267663113	-
+theorem	Candle.bind_not_free	[]	3858483543	-
+theorem	Candle.boolean.congr_simp	[u]	282263044	-
+theorem	Candle.boolean_eq_true	[u]	2336813194	-
+theorem	Candle.boolean_in_boolset	[u]	456819102	-
+theorem	Candle.boolset.congr_simp	[u]	2071194601	-
+theorem	Candle.bv_names.eq_1	[]	1521291242	-
+theorem	Candle.bv_names.eq_2	[]	2374672585	-
+theorem	Candle.bv_names.eq_3	[]	2034006764	-
+theorem	Candle.bv_names.eq_4	[]	2850880129	-
+theorem	Candle.bv_names.eq_def	[]	1343812474	-
+theorem	Candle.bv_names_rename_bvars	[]	2168360030	-
+theorem	Candle.codomain_def	[]	102278716	-
+theorem	Candle.compare.eq_1	[]	212122884	-
+theorem	Candle.compare_aux.eq_1	[]	856394411	-
+theorem	Candle.compare_aux.eq_def	[]	856394411	-
+theorem	Candle.concat.eq_1	[]	581471144	-
+theorem	Candle.concat_nil	[]	1527541925	-
+theorem	Candle.concat_sing	[]	1734028781	-
+theorem	Candle.db.eq_1	[]	3930343550	-
+theorem	Candle.db.eq_2	[]	3813470368	-
+theorem	Candle.db.eq_3	[]	2144408433	-
+theorem	Candle.db.eq_4	[]	247850765	-
+theorem	Candle.db.eq_def	[]	15504109	-
+theorem	Candle.dbINST.eq_1	[]	2906726869	-
+theorem	Candle.dbINST.eq_2	[]	1519564428	-
+theorem	Candle.dbINST.eq_3	[]	339239897	-
+theorem	Candle.dbINST.eq_4	[]	1356087216	-
+theorem	Candle.dbINST.eq_5	[]	1841622054	-
+theorem	Candle.dbINST.eq_def	[]	1482763134	-
+theorem	Candle.dbINST_bind	[]	3871705456	-
+theorem	Candle.dbVFREE_IN.eq_1	[]	4279155511	-
+theorem	Candle.dbVFREE_IN.eq_2	[]	2923332765	-
+theorem	Candle.dbVFREE_IN.eq_3	[]	4261612593	-
+theorem	Candle.dbVFREE_IN.eq_4	[]	4027972227	-
+theorem	Candle.dbVFREE_IN.eq_5	[]	97334440	-
+theorem	Candle.dbVFREE_IN.eq_def	[]	3680361538	-
+theorem	Candle.dbVFREE_IN_VFREE_IN	[]	1812388992	-
+theorem	Candle.dbVFREE_IN_bind	[u]	527501757	-
+theorem	Candle.dbVFREE_IN_dbVSUBST	[]	2987138923	-
+theorem	Candle.dbVSUBST.eq_1	[]	3960641727	-
+theorem	Candle.dbVSUBST.eq_2	[]	1180855566	-
+theorem	Candle.dbVSUBST.eq_3	[]	1271053573	-
+theorem	Candle.dbVSUBST.eq_4	[]	867344651	-
+theorem	Candle.dbVSUBST.eq_5	[]	161427724	-
+theorem	Candle.dbVSUBST.eq_def	[]	2529863416	-
+theorem	Candle.dbVSUBST_frees	[]	1627899658	-
+theorem	Candle.dbVSUBST_nil	[]	3073968836	-
+theorem	Candle.dbterm.eq_1	[]	1391049163	-
+theorem	Candle.dbterm.eq_2	[]	3613859326	-
+theorem	Candle.dbterm.eq_3	[]	3102672507	-
+theorem	Candle.dbterm.eq_4	[]	4222767306	-
+theorem	Candle.dbterm.eq_def	[]	2688350054	-
+theorem	Candle.dbterm_ACONV	[]	3213403832	-
+theorem	Candle.dbterm_RACONV	[]	2484558313	-
+theorem	Candle.dbterm_bind	[]	1488886101	-
+theorem	Candle.dbterm_db	[]	1645021549	-
+theorem	Candle.dbterm_t.brecOn.eq	[u]	444703818	-
+theorem	Candle.dbterm_t.dbAbs.inj	[]	1820552305	-
+theorem	Candle.dbterm_t.dbAbs.injEq	[]	918902117	-
+theorem	Candle.dbterm_t.dbAbs.sizeOf_spec	[]	2895680174	-
+theorem	Candle.dbterm_t.dbBound.inj	[]	1226732700	-
+theorem	Candle.dbterm_t.dbBound.injEq	[]	1116004471	-
+theorem	Candle.dbterm_t.dbBound.sizeOf_spec	[]	1068078073	-
+theorem	Candle.dbterm_t.dbComb.inj	[]	506581492	-
+theorem	Candle.dbterm_t.dbComb.injEq	[]	547589165	-
+theorem	Candle.dbterm_t.dbComb.sizeOf_spec	[]	3089773712	-
+theorem	Candle.dbterm_t.dbConst.inj	[]	3429402118	-
+theorem	Candle.dbterm_t.dbConst.injEq	[]	2136817536	-
+theorem	Candle.dbterm_t.dbConst.sizeOf_spec	[]	1651849257	-
+theorem	Candle.dbterm_t.dbVar.inj	[]	3383438842	-
+theorem	Candle.dbterm_t.dbVar.injEq	[]	706822308	-
+theorem	Candle.dbterm_t.dbVar.sizeOf_spec	[]	3351412291	-
+theorem	Candle.dest_var_def	[]	3169973246	-
+theorem	Candle.domain_def	[]	3080956220	-
+theorem	Candle.domain_nat_set_from_list	[]	340540072	-
+theorem	Candle.explode.eq_1	[]	3241781244	-
+theorem	Candle.explode_11	[]	1801053497	-
+theorem	Candle.explode_BIJ	[]	1152016448	-
+theorem	Candle.explode_aux.eq_1	[]	2988798987	-
+theorem	Candle.explode_aux.eq_2	[]	1967552341	-
+theorem	Candle.explode_aux.eq_def	[]	18165195	-
+theorem	Candle.explode_aux_thm	[]	3556258068	-
+theorem	Candle.explode_implode	[]	461903932	-
+theorem	Candle.explode_strcat	[]	3726294588	-
+theorem	Candle.explode_thm	[]	461903932	-
+theorem	Candle.explode_toString	[]	3906873671	-
+theorem	Candle.false_.congr_simp	[u]	704760048	-
+theorem	Candle.ff_def	[u, v, w, x]	4169565311	-
+theorem	Candle.find_index.eq_1	[u]	1901379311	-
+theorem	Candle.find_index.eq_2	[u]	1661830134	-
+theorem	Candle.find_index.eq_def	[u]	2665202735	-
+theorem	Candle.find_index_ALL_DISTINCT_EL	[u]	2098313582	-
+theorem	Candle.find_index_shift_0	[u]	2760160843	-
+theorem	Candle.fresh_def	[]	4068767733	-
+theorem	Candle.fresh_names_exist	[]	2772630752	-
+theorem	Candle.fresh_union	[]	3470705438	-
+theorem	Candle.has_type.brecOn	[]	1639204922	-
+theorem	Candle.hypset_ok_cons	[]	1407648106	-
+theorem	Candle.hypset_ok_nil	[]	3949290471	-
+theorem	Candle.hypset_ok_sing	[]	1323236348	-
+theorem	Candle.hypset_ok_term_image	[]	343896835	-
+theorem	Candle.hypset_ok_term_remove	[]	4285868437	-
+theorem	Candle.hypset_ok_term_union	[]	4223514025	-
+theorem	Candle.implode_explode	[]	1715420622	-
+theorem	Candle.instance_def	[u]	2035979512	-
+theorem	Candle.irreflexive_inv_image	[u, v]	2808812366	-
+theorem	Candle.is_extensional	[u]	3857182929	-
+theorem	Candle.is_instance_refl	[]	2870751483	-
+theorem	Candle.is_power_power	[u]	1344292245	-
+theorem	Candle.is_separation_sub	[u]	250599200	-
+theorem	Candle.is_std_interpretation_is_type	[u]	2971873403	-
+theorem	Candle.is_subseq.eq_1	[u]	135580119	-
+theorem	Candle.is_subseq.eq_2	[u]	2244393179	-
+theorem	Candle.is_subseq.eq_3	[u]	2351662203	-
+theorem	Candle.is_subseq.eq_def	[u]	790715788	-
+theorem	Candle.is_subseq_nil	[u]	3838163912	-
+theorem	Candle.is_subseq_refl	[u]	2843213595	-
+theorem	Candle.is_union_union	[u]	4184967706	-
+theorem	Candle.is_upair_upair	[u]	4268454646	-
+theorem	Candle.mem_binary_union	[u]	3748506737	-
+theorem	Candle.mem_boolset	[u]	1979161904	-
+theorem	Candle.mem_empty	[u]	3274916875	-
+theorem	Candle.mem_one	[u]	4002304708	-
+theorem	Candle.mem_power	[u]	2489515264	-
+theorem	Candle.mem_product	[u]	4117392473	-
+theorem	Candle.mem_sub	[u]	313091105	-
+theorem	Candle.mem_two	[u]	616193627	-
+theorem	Candle.mem_union	[u]	3984393972	-
+theorem	Candle.mem_unit	[u]	1256403954	-
+theorem	Candle.mem_upair	[u]	2209869840	-
+theorem	Candle.merge_tail_MEM	[u]	49822318	-
+theorem	Candle.merge_tail_PERM	[u]	3282568525	-
+theorem	Candle.mergesortN_tail_MEM	[u]	3940207972	-
+theorem	Candle.mergesortN_tail_PERM	[u]	3649137416	-
+theorem	Candle.mergesort_tail_MEM	[u]	2534160844	-
+theorem	Candle.mls.eq_1	[]	2700202561	-
+theorem	Candle.mlstring.implode.inj	[]	870784764	-
+theorem	Candle.mlstring.implode.injEq	[]	49600851	-
+theorem	Candle.mlstring.implode.sizeOf_spec	[]	1685089428	-
+theorem	Candle.mlstring_common_char_prefix	[]	3449850045	-
+theorem	Candle.mlstring_common_prefix	[]	3522433033	-
+theorem	Candle.mlstring_common_suffix	[]	4071101954	-
+theorem	Candle.mlstring_lt.eq_1	[]	2856346234	-
+theorem	Candle.mlstring_lt_inv_image	[]	1733999956	-
+theorem	Candle.n2w_ORD_CHR_w2n	[]	750981764	-
+theorem	Candle.n2w_ORD_CHR_w2n_simp	[]	3625661197	-
+theorem	Candle.num_from_hex_string_num_to_hex_string	[]	1702602252	-
+theorem	Candle.orda.eq_1	[]	2758706338	-
+theorem	Candle.orda.eq_10	[]	2128086423	-
+theorem	Candle.orda.eq_2	[]	1823694650	-
+theorem	Candle.orda.eq_3	[]	391722397	-
+theorem	Candle.orda.eq_4	[]	315022500	-
+theorem	Candle.orda.eq_5	[]	134146105	-
+theorem	Candle.orda.eq_6	[]	1838399127	-
+theorem	Candle.orda.eq_7	[]	1729871916	-
+theorem	Candle.orda.eq_8	[]	4254368909	-
+theorem	Candle.orda.eq_9	[]	1074433820	-
+theorem	Candle.orda.eq_def	[]	1483084100	-
+theorem	Candle.orda_sym	[]	2550900909	-
+theorem	Candle.ordav.eq_1	[]	1093335173	-
+theorem	Candle.ordav.eq_2	[]	83339209	-
+theorem	Candle.ordav.eq_def	[]	2967246508	-
+theorem	Candle.ordav_sym	[]	3245643199	-
+theorem	Candle.pair_inj	[u]	1789405078	-
+theorem	Candle.plus_0_I	[]	2244144204	-
+theorem	Candle.proves.brecOn	[]	332183191	-
+theorem	Candle.proves_sound	[u]	4235101059	-
+theorem	Candle.rename_bvars.eq_1	[]	1632501690	-
+theorem	Candle.rename_bvars.eq_2	[]	865855521	-
+theorem	Candle.rename_bvars.eq_3	[]	1148080989	-
+theorem	Candle.rename_bvars.eq_4	[]	4228968298	-
+theorem	Candle.rename_bvars.eq_5	[]	3564933645	-
+theorem	Candle.rename_bvars.eq_def	[]	791326726	-
+theorem	Candle.rename_bvars_ACONV	[]	189123588	-
+theorem	Candle.rename_bvars_RACONV	[]	20665912	-
+theorem	Candle.rename_bvars_has_type	[]	861099172	-
+theorem	Candle.rename_bvars_welltyped	[]	1332992099	-
+theorem	Candle.result.Clash.inj	[u]	865183285	-
+theorem	Candle.result.Clash.injEq	[u]	2398026499	-
+theorem	Candle.result.Clash.sizeOf_spec	[u]	2866131895	-
+theorem	Candle.result.Result.inj	[u]	1611184401	-
+theorem	Candle.result.Result.injEq	[u]	694868837	-
+theorem	Candle.result.Result.sizeOf_spec	[u]	4123441204	-
+theorem	Candle.set_LIST_UNION	[u]	2437774626	-
+theorem	Candle.simple_inst.eq_1	[]	3848153826	-
+theorem	Candle.simple_inst.eq_2	[]	1201876708	-
+theorem	Candle.simple_inst.eq_3	[]	2513248660	-
+theorem	Candle.simple_inst.eq_4	[]	1530210064	-
+theorem	Candle.simple_inst.eq_def	[]	123287016	-
+theorem	Candle.simple_inst_has_type	[]	2630096311	-
+theorem	Candle.simple_subst.eq_1	[]	3548923228	-
+theorem	Candle.simple_subst.eq_2	[]	2673219123	-
+theorem	Candle.simple_subst.eq_3	[]	4090246778	-
+theorem	Candle.simple_subst.eq_4	[]	2445230453	-
+theorem	Candle.simple_subst.eq_def	[]	2879226772	-
+theorem	Candle.simple_subst_has_type	[]	2479730830	-
+theorem	Candle.sizeof.eq_1	[]	3145237667	-
+theorem	Candle.sizeof.eq_2	[]	1622993539	-
+theorem	Candle.sizeof.eq_3	[]	3803058184	-
+theorem	Candle.sizeof.eq_4	[]	1405928388	-
+theorem	Candle.sizeof.eq_def	[]	3687442355	-
+theorem	Candle.sort2_tail_PERM	[u]	1035444380	-
+theorem	Candle.sort3_tail_PERM	[u]	3566445871	-
+theorem	Candle.sort_LENGTH	[u]	3402315644	-
+theorem	Candle.sort_MEM	[u]	2657233452	-
+theorem	Candle.sort_PERM	[u]	2477031137	-
+theorem	Candle.sort_set	[u]	3703774281	-
+theorem	Candle.splitlines.eq_1	[]	294104212	-
+theorem	Candle.splitlines_eq_nil	[]	3699047798	-
+theorem	Candle.splitlines_nil	[]	1039979463	-
+theorem	Candle.strcat.eq_1	[]	1530748351	-
+theorem	Candle.strcat_assoc	[]	2227387451	-
+theorem	Candle.strcat_nil	[]	4218766806	-
+theorem	Candle.strcat_thm	[]	2209657285	-
+theorem	Candle.strlen.eq_1	[]	2906197795	-
+theorem	Candle.strlen_implode	[]	2906197795	-
+theorem	Candle.strlen_strcat	[]	3699490873	-
+theorem	Candle.strlen_toString	[]	1213596736	-
+theorem	Candle.strsub.eq_1	[]	3092082636	-
+theorem	Candle.substring.eq_1	[]	3216691483	-
+theorem	Candle.substring_0	[]	1189064653	-
+theorem	Candle.substring_full	[]	2478584826	-
+theorem	Candle.subterm_Const	[]	3491576294	-
+theorem	Candle.subterm_Var	[]	614246118	-
+theorem	Candle.subtype_Tyvar	[]	1597637275	-
+theorem	Candle.swap_ff	[u, v, w, x]	3616342936	-
+theorem	Candle.term.Abs.inj	[]	3600975217	-
+theorem	Candle.term.Abs.injEq	[]	1475175761	-
+theorem	Candle.term.Abs.sizeOf_spec	[]	2078372806	-
+theorem	Candle.term.Comb.inj	[]	1018214527	-
+theorem	Candle.term.Comb.injEq	[]	1159092556	-
+theorem	Candle.term.Comb.sizeOf_spec	[]	3871856622	-
+theorem	Candle.term.Const.inj	[]	35566594	-
+theorem	Candle.term.Const.injEq	[]	597603257	-
+theorem	Candle.term.Const.sizeOf_spec	[]	1594053761	-
+theorem	Candle.term.Var.inj	[]	3440462738	-
+theorem	Candle.term.Var.injEq	[]	3400137198	-
+theorem	Candle.term.Var.sizeOf_spec	[]	2781923217	-
+theorem	Candle.term.brecOn.eq	[u]	348948736	-
+theorem	Candle.term_cmp_refl	[]	518436719	-
+theorem	Candle.term_image.eq_1	[]	499154181	-
+theorem	Candle.term_image.eq_2	[]	2256142844	-
+theorem	Candle.term_image.eq_def	[]	1014284103	-
+theorem	Candle.term_image_nil	[]	499154181	-
+theorem	Candle.term_lt_thm	[]	2287586166	-
+theorem	Candle.term_ok_INST	[]	1153274633	-
+theorem	Candle.term_ok_INST_CORE	[]	1062288351	-
+theorem	Candle.term_ok_VSUBST	[]	2086102519	-
+theorem	Candle.term_ok_aconv	[]	2566632864	-
+theorem	Candle.term_ok_equation	[]	3339200561	-
+theorem	Candle.term_ok_raconv	[]	1248844536	-
+theorem	Candle.term_ok_type_ok	[]	2828256350	-
+theorem	Candle.term_ok_welltyped	[]	2430620899	-
+theorem	Candle.term_remove.eq_1	[]	829216408	-
+theorem	Candle.term_remove.eq_2	[]	3582533573	-
+theorem	Candle.term_remove.eq_def	[]	2221255551	-
+theorem	Candle.term_remove_nil	[]	829216408	-
+theorem	Candle.term_union.eq_1	[]	1485490032	-
+theorem	Candle.term_union.eq_2	[]	356174319	-
+theorem	Candle.term_union.eq_3	[]	1296924322	-
+theorem	Candle.term_union.eq_def	[]	2912338062	-
+theorem	Candle.term_union_idem	[]	2658615667	-
+theorem	Candle.term_union_thm	[]	3428789525	-
+theorem	Candle.termsem0_def	[u]	335276618	-
+theorem	Candle.termsem_Equal	[u]	9545778	-
+theorem	Candle.termsem_INST	[u]	1063788168	-
+theorem	Candle.termsem_VSUBST	[u]	3282914310	-
+theorem	Candle.termsem_aconv	[u]	4211030084	-
+theorem	Candle.termsem_equation	[u]	2826914899	-
+theorem	Candle.termsem_frees	[u]	3199742469	-
+theorem	Candle.termsem_raconv	[u]	1919361071	-
+theorem	Candle.termsem_simple_inst	[u]	333183988	-
+theorem	Candle.termsem_simple_subst	[u]	3898661883	-
+theorem	Candle.termsem_typesem	[u]	656224235	-
+theorem	Candle.theory_ok_sig	[]	1617262006	-
+theorem	Candle.transitive_alpha_lt	[]	3805426539	-
+theorem	Candle.trichotomous_inv_image	[u, v]	2021070665	-
+theorem	Candle.true_.congr_simp	[u]	3983289598	-
+theorem	Candle.true_neq_false	[u]	2101803461	-
+theorem	Candle.tvars_ALL_DISTINCT	[]	3989796220	-
+theorem	Candle.type.Tyapp.inj	[]	942245817	-
+theorem	Candle.type.Tyapp.injEq	[]	1290114733	-
+theorem	Candle.type.Tyapp.sizeOf_spec	[]	186067911	-
+theorem	Candle.type.Tyvar.inj	[]	3273258193	-
+theorem	Candle.type.Tyvar.injEq	[]	46601020	-
+theorem	Candle.type.Tyvar.sizeOf_spec	[]	618877098	-
+theorem	Candle.type.brecOn.eq	[u]	2230278321	-
+theorem	Candle.type.brecOn_1.eq	[u]	861686359	-
+theorem	Candle.type_cmp_refl	[]	1162006217	-
+theorem	Candle.type_lt_thm	[]	1266064482	-
+theorem	Candle.type_ok.eq_1	[]	1492445129	-
+theorem	Candle.type_ok.eq_2	[]	416297012	-
+theorem	Candle.type_ok.eq_def	[]	3154618209	-
+theorem	Candle.type_ok_TYPE_SUBST	[]	452824851	-
+theorem	Candle.type_ok_TYPE_SUBST_imp	[]	1218152044	-
+theorem	Candle.typeof.eq_1	[]	1214204325	-
+theorem	Candle.typeof.eq_2	[]	960492563	-
+theorem	Candle.typeof.eq_3	[]	853346982	-
+theorem	Candle.typeof.eq_4	[]	1969740939	-
+theorem	Candle.typeof.eq_def	[]	3902173692	-
+theorem	Candle.typesem.eq_1	[u]	2553295890	-
+theorem	Candle.typesem.eq_2	[u]	3081416017	-
+theorem	Candle.typesem.eq_def	[u]	3256898646	-
+theorem	Candle.typesem_Bool	[u]	1939145635	-
+theorem	Candle.typesem_Fun	[u]	560671949	-
+theorem	Candle.typesem_TYPE_SUBST	[u]	2708780424	-
+theorem	Candle.typesem_inhabited	[u]	1426285761	-
+theorem	Candle.typesem_tyvars	[u]	3135740610	-
+theorem	Candle.tyvars.eq_1	[]	484535634	-
+theorem	Candle.tyvars.eq_2	[]	2841308217	-
+theorem	Candle.tyvars.eq_def	[]	2879113775	-
+theorem	Candle.tyvars_ALL_DISTINCT	[]	3983080169	-
+theorem	Candle.unit_eq_upair	[u]	2121065314	-
+theorem	Candle.unit_inj	[u]	3581117872	-
+theorem	Candle.upair_inj	[u]	524846922	-
+theorem	Candle.update.ConstSpec.inj	[]	3177074319	-
+theorem	Candle.update.ConstSpec.injEq	[]	2348839736	-
+theorem	Candle.update.ConstSpec.sizeOf_spec	[]	3999173940	-
+theorem	Candle.update.NewAxiom.inj	[]	3249234576	-
+theorem	Candle.update.NewAxiom.injEq	[]	3173309856	-
+theorem	Candle.update.NewAxiom.sizeOf_spec	[]	1041835082	-
+theorem	Candle.update.NewConst.inj	[]	1393281574	-
+theorem	Candle.update.NewConst.injEq	[]	1642229519	-
+theorem	Candle.update.NewConst.sizeOf_spec	[]	2427464948	-
+theorem	Candle.update.NewType.inj	[]	3572687837	-
+theorem	Candle.update.NewType.injEq	[]	4147870049	-
+theorem	Candle.update.NewType.sizeOf_spec	[]	298357120	-
+theorem	Candle.update.TypeDefn.inj	[]	1370038279	-
+theorem	Candle.update.TypeDefn.injEq	[]	742501771	-
+theorem	Candle.update.TypeDefn.sizeOf_spec	[]	1820376250	-
+theorem	Candle.v2w_32_F	[]	4189023143	-
+theorem	Candle.v2w_32_T	[]	1600789533	-
+theorem	Candle.w2n_lt_256	[]	1319187431	-
+theorem	HOL.ALL_DISTINCT.eq_1	[u]	2818347296	-
+theorem	HOL.ALL_DISTINCT.eq_2	[u]	2135106301	-
+theorem	HOL.ALL_DISTINCT.eq_def	[u]	1347271363	-
+theorem	HOL.ALOOKUP.eq_1	[u, v]	1042751159	-
+theorem	HOL.ALOOKUP.eq_2	[u, v]	1517624820	-
+theorem	HOL.ALOOKUP.eq_def	[u, v]	1317366854	-
+theorem	HOL.ARB.congr_simp	[u]	1702086401	-
+theorem	HOL.Aux.EVERY_unattach	[u]	3809859008	-
+theorem	HOL.Aux.EVERY_wfParam	[u]	3141259666	-
+theorem	HOL.Aux.FINITE_list_bound	[u]	1050960340	-
+theorem	HOL.Aux.FINITE_of_list_bound	[u]	1218340382	-
+theorem	HOL.Aux.SPLITP_snd_length	[u]	3685397914	-
+theorem	HOL.Aux.TL_length	[u]	2275653264	-
+theorem	HOL.Aux.mem_def	[u]	185700004	-
+theorem	HOL.CHR_of_lt	[]	1263371694	-
+theorem	HOL.EL.congr_simp	[u]	2362010457	-
+theorem	HOL.EL.eq_1	[u]	1485437668	-
+theorem	HOL.EL.eq_2	[u]	342422378	-
+theorem	HOL.EL.eq_def	[u]	2880067691	-
+theorem	HOL.EVEN.eq_1	[]	637234602	-
+theorem	HOL.EVEN.eq_2	[]	3949513215	-
+theorem	HOL.EVEN.eq_def	[]	1711464979	-
+theorem	HOL.EVERY.eq_1	[u]	3147049476	-
+theorem	HOL.EVERY.eq_2	[u]	1558997832	-
+theorem	HOL.EVERY.eq_def	[u]	1582574664	-
+theorem	HOL.EXISTS.eq_1	[u]	3623798279	-
+theorem	HOL.EXISTS.eq_2	[u]	3349270743	-
+theorem	HOL.EXISTS.eq_def	[u]	293984522	-
+theorem	HOL.FAPPLY.congr_simp	[u, v]	2093953128	-
+theorem	HOL.FAPPLY.eq_1	[u, v]	1622420657	-
+theorem	HOL.FCP.eq_1	[]	3712260936	-
+theorem	HOL.FCP_bits.eq_1	[]	3471979551	-
+theorem	HOL.FCP_bits.eq_2	[]	1345158249	-
+theorem	HOL.FCP_bits.eq_def	[]	3357790244	-
+theorem	HOL.FEMPTY.eq_1	[u, v]	977903852	-
+theorem	HOL.FIELDS.eq_1	[]	69632161	-
+theorem	HOL.FIELDS.eq_2	[]	1279264691	-
+theorem	HOL.FIELDS.eq_def	[]	1286214818	-
+theorem	HOL.FILTER.eq_1	[u]	2108268384	-
+theorem	HOL.FILTER.eq_2	[u]	1271492790	-
+theorem	HOL.FILTER.eq_def	[u]	2415519814	-
+theorem	HOL.FLOOKUP.congr_simp	[u, v]	1710960783	-
+theorem	HOL.FRONT.eq_1	[u]	2314253995	-
+theorem	HOL.FRONT.eq_2	[u]	1909970782	-
+theorem	HOL.FRONT.eq_def	[u]	2459624250	-
+theorem	HOL.FUN_FMAP_DEF	[u, v]	2046249598	-
+theorem	HOL.GENLIST.eq_1	[u]	1987298651	-
+theorem	HOL.GENLIST.eq_2	[u]	851692149	-
+theorem	HOL.GENLIST.eq_def	[u]	1824190310	-
+theorem	HOL.HD.congr_simp	[u]	1659636940	-
+theorem	HOL.HD_def	[u]	1612749521	-
+theorem	HOL.LAST.congr_simp	[u]	2536573336	-
+theorem	HOL.LAST_DEF	[u]	3684244875	-
+theorem	HOL.LEX.eq_1	[u, v]	3204123401	-
+theorem	HOL.LIST_TO_SET.eq_1	[u]	3267327942	-
+theorem	HOL.LIST_TO_SET.eq_2	[u]	1864604096	-
+theorem	HOL.LIST_TO_SET.eq_def	[u]	1659051191	-
+theorem	HOL.LLEX.eq_1	[u]	402769010	-
+theorem	HOL.LLEX.eq_2	[u]	2707581405	-
+theorem	HOL.LLEX.eq_3	[u]	2541110565	-
+theorem	HOL.LLEX.eq_def	[u]	3390844273	-
+theorem	HOL.MAX_LIST.eq_1	[]	2257992824	-
+theorem	HOL.MAX_LIST.eq_2	[]	3408874185	-
+theorem	HOL.MAX_LIST.eq_def	[]	623629612	-
+theorem	HOL.NULL.eq_1	[u]	1654426666	-
+theorem	HOL.NULL.eq_2	[u]	4028698691	-
+theorem	HOL.OPT_MMAP.eq_1	[u, v]	4170416105	-
+theorem	HOL.OPT_MMAP.eq_2	[u, v]	3193509061	-
+theorem	HOL.OPT_MMAP.eq_def	[u, v]	1616015156	-
+theorem	HOL.ORD.eq_1	[]	3267773085	-
+theorem	HOL.PAD_LEFT.eq_1	[u]	353160608	-
+theorem	HOL.REV.eq_1	[u]	3086347954	-
+theorem	HOL.REV.eq_2	[u]	908303134	-
+theorem	HOL.REV.eq_def	[u]	1222273869	-
+theorem	HOL.RTC.brecOn	[u]	1785065955	-
+theorem	HOL.SEG_def	[u]	3978948176	-
+theorem	HOL.SNOC.eq_1	[u]	3217401633	-
+theorem	HOL.SNOC.eq_2	[u]	2725728017	-
+theorem	HOL.SNOC.eq_def	[u]	1575334747	-
+theorem	HOL.SORTED.eq_1	[u]	1306812072	-
+theorem	HOL.SORTED.eq_2	[u]	2259733234	-
+theorem	HOL.SORTED.eq_3	[u]	3658230824	-
+theorem	HOL.SORTED.eq_def	[u]	1928506199	-
+theorem	HOL.SPLITP.eq_1	[u]	1476222508	-
+theorem	HOL.SPLITP.eq_2	[u]	1604917117	-
+theorem	HOL.SPLITP.eq_def	[u]	1913525316	-
+theorem	HOL.TL.eq_1	[u]	4148607915	-
+theorem	HOL.TL.eq_2	[u]	3452353812	-
+theorem	HOL.TO_of_LinearOrder.eq_1	[u]	1150939873	-
+theorem	HOL.UNCURRY.eq_1	[u, v, w]	2747046158	-
+theorem	HOL.UNHEX.eq_1	[]	1419877223	-
+theorem	HOL.UPDATE.eq_1	[u, v]	3704130364	-
+theorem	HOL.ZIP.eq_1	[u, v]	240995887	-
+theorem	HOL.ZIP.eq_2	[u, v]	204333782	-
+theorem	HOL.ZIP.eq_3	[u, v]	837028102	-
+theorem	HOL.ZIP.eq_def	[u, v]	1746414361	-
+theorem	HOL.char.mk.congr_simp	[]	1821440913	-
+theorem	HOL.char.mk.inj	[]	783007593	-
+theorem	HOL.char.mk.injEq	[]	142654275	-
+theorem	HOL.char.mk.sizeOf_spec	[]	658407503	-
+theorem	HOL.char.ord_lt	[]	530631925	-
+theorem	HOL.char_lt.eq_1	[]	4274490429	-
+theorem	HOL.field.eq_1	[]	4036819857	-
+theorem	HOL.fixwidth.eq_1	[]	302403079	-
+theorem	HOL.fmap.finite_support	[u, v]	2287917656	-
+theorem	HOL.fmap.mk.congr_simp	[u, v]	3448767622	-
+theorem	HOL.fmap.mk.inj	[u, v]	2924627476	-
+theorem	HOL.fmap.mk.injEq	[u, v]	1620159452	-
+theorem	HOL.fmap.mk.sizeOf_spec	[u, v]	434343702	-
+theorem	HOL.instNonemptyChar	[]	3282779329	-
+theorem	HOL.instNonemptyFmap	[u, v]	50218852	-
+theorem	HOL.inv_image.eq_1	[u, v]	4083180973	-
+theorem	HOL.invert_comparison.eq_1	[]	3346360304	-
+theorem	HOL.invert_comparison.eq_2	[]	1533901499	-
+theorem	HOL.invert_comparison.eq_3	[]	2527514673	-
+theorem	HOL.isPREFIX.eq_1	[u]	395824416	-
+theorem	HOL.isPREFIX.eq_2	[u]	176902551	-
+theorem	HOL.isPREFIX.eq_3	[u]	3366806392	-
+theorem	HOL.isPREFIX.eq_def	[u]	2319473866	-
+theorem	HOL.l2n.eq_1	[]	3276191365	-
+theorem	HOL.l2n.eq_2	[]	4027878991	-
+theorem	HOL.l2n.eq_def	[]	2599981141	-
+theorem	HOL.merge_tail.eq_1	[u]	194712651	-
+theorem	HOL.merge_tail.eq_2	[u]	3629869590	-
+theorem	HOL.merge_tail.eq_3	[u]	3399234070	-
+theorem	HOL.merge_tail.eq_4	[u]	1082265007	-
+theorem	HOL.merge_tail.eq_def	[u]	935164093	-
+theorem	HOL.mergesortN_tail.eq_1	[u]	3079444375	-
+theorem	HOL.mergesortN_tail.eq_10	[u]	3175022266	-
+theorem	HOL.mergesortN_tail.eq_11	[u]	4023732882	-
+theorem	HOL.mergesortN_tail.eq_2	[u]	2305063769	-
+theorem	HOL.mergesortN_tail.eq_3	[u]	2434063635	-
+theorem	HOL.mergesortN_tail.eq_4	[u]	1734745020	-
+theorem	HOL.mergesortN_tail.eq_5	[u]	51730969	-
+theorem	HOL.mergesortN_tail.eq_6	[u]	4116057366	-
+theorem	HOL.mergesortN_tail.eq_7	[u]	3281230892	-
+theorem	HOL.mergesortN_tail.eq_8	[u]	2450261533	-
+theorem	HOL.mergesortN_tail.eq_9	[u]	4167641624	-
+theorem	HOL.mergesortN_tail.eq_def	[u]	61239688	-
+theorem	HOL.n2l.eq_1	[]	975800691	-
+theorem	HOL.n2l.eq_def	[]	975800691	-
+theorem	HOL.n2s.eq_1	[]	1048461346	-
+theorem	HOL.n2w.eq_1	[]	451476085	-
+theorem	HOL.num_from_hex_string.eq_1	[]	1503222954	-
+theorem	HOL.num_to_hex_string.eq_1	[]	1880515661	-
+theorem	HOL.ordering.EQUAL.sizeOf_spec	[]	2557133738	-
+theorem	HOL.ordering.GREATER.sizeOf_spec	[]	1118124286	-
+theorem	HOL.ordering.LESS.sizeOf_spec	[]	3078048750	-
+theorem	HOL.ordering.ofNat_ctorIdx	[]	1581442993	-
+theorem	HOL.s2n.eq_1	[]	2608345975	-
+theorem	HOL.shiftr.eq_1	[]	1159623482	-
+theorem	HOL.spt.BN.inj	[u]	2295029440	-
+theorem	HOL.spt.BN.injEq	[u]	3370278869	-
+theorem	HOL.spt.BN.sizeOf_spec	[u]	441079458	-
+theorem	HOL.spt.BS.inj	[u]	997508942	-
+theorem	HOL.spt.BS.injEq	[u]	3200558635	-
+theorem	HOL.spt.BS.sizeOf_spec	[u]	3619465111	-
+theorem	HOL.spt.LN.sizeOf_spec	[u]	3774840145	-
+theorem	HOL.spt.LS.inj	[u]	4161106239	-
+theorem	HOL.spt.LS.injEq	[u]	3167095193	-
+theorem	HOL.spt.LS.sizeOf_spec	[u]	3923792664	-
+theorem	HOL.spt.brecOn.eq	[u_1, u]	3703704592	-
+theorem	HOL.sptree.domain.eq_1	[u]	271239554	-
+theorem	HOL.sptree.domain.eq_2	[u]	3724318615	-
+theorem	HOL.sptree.domain.eq_3	[u]	1493292146	-
+theorem	HOL.sptree.domain.eq_4	[u]	382560876	-
+theorem	HOL.sptree.domain.eq_def	[u]	1118135183	-
+theorem	HOL.sptree.insert.eq_1	[u]	1996414399	-
+theorem	HOL.sptree.insert.eq_2	[u]	2335446855	-
+theorem	HOL.sptree.insert.eq_3	[u]	2873295334	-
+theorem	HOL.sptree.insert.eq_4	[u]	3357695712	-
+theorem	HOL.sptree.insert.eq_def	[u]	1033377470	-
+theorem	HOL.sptree.lookup.eq_def	[u]	1415617585	-
+theorem	HOL.str.eq_1	[]	2060549038	-
+theorem	HOL.string_lt.eq_1	[]	2868605422	-
+theorem	HOL.string_lt.eq_2	[]	3077771780	-
+theorem	HOL.string_lt.eq_3	[]	2625339735	-
+theorem	HOL.string_lt.eq_def	[]	2884107969	-
+theorem	HOL.testbit.eq_1	[]	529492292	-
+theorem	HOL.v2w.eq_1	[]	3739945097	-
+theorem	HOL.w2n.eq_1	[]	3991516242	-
+theorem	HOL.zero_extend.eq_1	[]	1857385471	-
+theorem	_private.CandleLean.HolSemantics.0.Candle.instance_exists	[u]	556761045	-
+theorem	_private.CandleLean.HolSemantics.0.Candle.termsem0_exists	[u]	3297306140	-
+theorem	_private.CandleLean.HolSemantics.0.Candle.termsem0_wit.eq_1	[u]	1833269151	-
+theorem	_private.CandleLean.HolSemantics.0.Candle.termsem0_wit.eq_2	[u]	3792841472	-
+theorem	_private.CandleLean.HolSemantics.0.Candle.termsem0_wit.eq_3	[u]	1560116954	-
+theorem	_private.CandleLean.HolSemantics.0.Candle.termsem0_wit.eq_4	[u]	4112493841	-
+theorem	_private.CandleLean.HolSemantics.0.Candle.termsem0_wit.eq_5	[u]	620023642	-
+theorem	_private.CandleLean.HolSemantics.0.Candle.termsem0_wit.eq_6	[u]	3122729183	-
+theorem	_private.CandleLean.HolSemantics.0.Candle.termsem0_wit.eq_7	[u]	4265025651	-
+theorem	_private.CandleLean.HolSemantics.0.Candle.termsem0_wit.eq_def	[u]	1019151508	-
+theorem	_private.CandleLean.HolSemantics.0.Candle.termsem0_wit.match_1.eq_1	[u_1, u_2]	558534806	-
+theorem	_private.CandleLean.HolSemantics.0.Candle.termsem0_wit.match_1.eq_2	[u_1, u_2]	1767289564	-
+theorem	_private.CandleLean.HolSemantics.0.Candle.termsem0_wit.match_1.eq_3	[u_1, u_2]	4050997629	-
+theorem	_private.CandleLean.HolSemantics.0.Candle.termsem0_wit.match_1.eq_4	[u_1, u_2]	1426353030	-
+theorem	_private.CandleLean.HolSemantics.0.Candle.termsem0_wit.match_1.eq_5	[u_1, u_2]	2679068516	-
+theorem	_private.CandleLean.HolSemantics.0.Candle.termsem0_wit.match_1.eq_6	[u_1, u_2]	163842769	-
+theorem	_private.CandleLean.HolSemantics.0.Candle.termsem0_wit.match_1.eq_7	[u_1, u_2]	3129795263	-
+theorem	_private.CandleLean.HolSemantics.0.Candle.typesem.match_1.eq_1	[u_1]	3967974281	-
+theorem	_private.CandleLean.HolSemantics.0.Candle.typesem.match_1.eq_2	[u_1]	3828785055	-
+theorem	_private.CandleLean.HolSemantics.0.List.map_unattach.match_1.eq_1	[u_1, u_2]	2608232091	-
+theorem	_private.CandleLean.HolSemanticsExtra.0.Candle.typesem.match_1.eq_1	[u_1]	3967974281	-
+theorem	_private.CandleLean.HolSemanticsExtra.0.Candle.typesem.match_1.eq_2	[u_1]	3828785055	-
+theorem	_private.CandleLean.HolSyntax.0.Candle.TYPE_SUBST.match_1.eq_1	[u_1]	3760392213	-
+theorem	_private.CandleLean.HolSyntax.0.Candle.TYPE_SUBST.match_1.eq_2	[u_1]	2028220325	-
+theorem	_private.CandleLean.HolSyntax.0.Candle.VARIANT_PRIMES_exists	[]	338115671	-
+theorem	_private.CandleLean.HolSyntax.0.Candle.orda.match_1.eq_1	[u_1]	928047177	-
+theorem	_private.CandleLean.HolSyntax.0.Candle.orda.match_1.eq_10	[u_1]	3390321710	-
+theorem	_private.CandleLean.HolSyntax.0.Candle.orda.match_1.eq_2	[u_1]	3108162414	-
+theorem	_private.CandleLean.HolSyntax.0.Candle.orda.match_1.eq_3	[u_1]	3196045419	-
+theorem	_private.CandleLean.HolSyntax.0.Candle.orda.match_1.eq_4	[u_1]	2065743477	-
+theorem	_private.CandleLean.HolSyntax.0.Candle.orda.match_1.eq_5	[u_1]	2578254257	-
+theorem	_private.CandleLean.HolSyntax.0.Candle.orda.match_1.eq_6	[u_1]	3746100202	-
+theorem	_private.CandleLean.HolSyntax.0.Candle.orda.match_1.eq_7	[u_1]	1473230949	-
+theorem	_private.CandleLean.HolSyntax.0.Candle.orda.match_1.eq_8	[u_1]	2404046546	-
+theorem	_private.CandleLean.HolSyntax.0.Candle.orda.match_1.eq_9	[u_1]	1497575295	-
+theorem	_private.CandleLean.HolSyntax.0.Candle.term_union.match_1.eq_1	[u_1]	2680765204	-
+theorem	_private.CandleLean.HolSyntax.0.Candle.term_union.match_1.eq_2	[u_1]	3590900453	-
+theorem	_private.CandleLean.HolSyntax.0.Candle.term_union.match_1.eq_3	[u_1]	2900163864	-
+theorem	_private.CandleLean.HolSyntax.0.Candle.typeof.match_1.eq_1	[u_1]	4241162797	-
+theorem	_private.CandleLean.HolSyntax.0.Candle.typeof.match_1.eq_2	[u_1]	2836907930	-
+theorem	_private.CandleLean.HolSyntax.0.Candle.typeof.match_1.eq_3	[u_1]	3674151602	-
+theorem	_private.CandleLean.HolSyntax.0.Candle.typeof.match_1.eq_4	[u_1]	3678529185	-
+theorem	_private.CandleLean.HolSyntax.0.HOL.Aux.EVERY_unattach.match_1.eq_1	[u_1, u_2]	3456823934	-
+theorem	_private.CandleLean.HolSyntax.0.List.map_unattach.match_1.eq_1	[u_1, u_2]	2608232091	-
+theorem	_private.CandleLean.HolSyntaxExtra.0.Candle.ALPHAVARS.match_1.eq_1	[u_1, u_2]	1334129475	-
+theorem	_private.CandleLean.HolSyntaxExtra.0.Candle.ALPHAVARS.match_1.eq_2	[u_1, u_2]	3383264800	-
+theorem	_private.CandleLean.HolSyntaxExtra.0.Candle.arities_match.match_1.eq_1	[u_1]	566952606	-
+theorem	_private.CandleLean.HolSyntaxExtra.0.Candle.arities_match.match_1.eq_2	[u_1]	2151261543	-
+theorem	_private.CandleLean.HolSyntaxExtra.0.Candle.arities_match.match_1.eq_3	[u_1]	2391733171	-
+theorem	_private.CandleLean.HolSyntaxExtra.0.Candle.arities_match.match_1.eq_4	[u_1]	4222328511	-
+theorem	_private.CandleLean.HolSyntaxExtra.0.Candle.arities_match.match_1.eq_5	[u_1]	2842825225	-
+theorem	_private.CandleLean.HolSyntaxExtra.0.Candle.db.match_1.eq_1	[u_1]	3444247142	-
+theorem	_private.CandleLean.HolSyntaxExtra.0.Candle.db.match_1.eq_2	[u_1]	684504472	-
+theorem	_private.CandleLean.HolSyntaxExtra.0.Candle.db.match_1.eq_3	[u_1]	1390922975	-
+theorem	_private.CandleLean.HolSyntaxExtra.0.Candle.db.match_1.eq_4	[u_1]	2272126339	-
+theorem	_private.CandleLean.HolSyntaxExtra.0.Candle.fresh_exists	[]	235086812	-
+theorem	_private.CandleLean.HolSyntaxExtra.0.Candle.orda.match_1.eq_1	[u_1]	928047177	-
+theorem	_private.CandleLean.HolSyntaxExtra.0.Candle.orda.match_1.eq_10	[u_1]	3390321710	-
+theorem	_private.CandleLean.HolSyntaxExtra.0.Candle.orda.match_1.eq_2	[u_1]	3108162414	-
+theorem	_private.CandleLean.HolSyntaxExtra.0.Candle.orda.match_1.eq_3	[u_1]	3196045419	-
+theorem	_private.CandleLean.HolSyntaxExtra.0.Candle.orda.match_1.eq_4	[u_1]	2065743477	-
+theorem	_private.CandleLean.HolSyntaxExtra.0.Candle.orda.match_1.eq_5	[u_1]	2578254257	-
+theorem	_private.CandleLean.HolSyntaxExtra.0.Candle.orda.match_1.eq_6	[u_1]	3746100202	-
+theorem	_private.CandleLean.HolSyntaxExtra.0.Candle.orda.match_1.eq_7	[u_1]	1473230949	-
+theorem	_private.CandleLean.HolSyntaxExtra.0.Candle.orda.match_1.eq_8	[u_1]	2404046546	-
+theorem	_private.CandleLean.HolSyntaxExtra.0.Candle.orda.match_1.eq_9	[u_1]	1497575295	-
+theorem	_private.CandleLean.HolSyntaxExtra.0.Candle.ordav.match_1.eq_1	[u_1]	1461628636	-
+theorem	_private.CandleLean.HolSyntaxExtra.0.Candle.ordav.match_1.eq_2	[u_1]	2934751988	-
+theorem	_private.CandleLean.HolSyntaxExtra.0.Candle.term_remove.match_1.eq_1	[u_1]	580226591	-
+theorem	_private.CandleLean.HolSyntaxExtra.0.Candle.term_remove.match_1.eq_2	[u_1]	3772298587	-
+theorem	_private.CandleLean.HolSyntaxExtra.0.Candle.term_union.match_1.eq_1	[u_1]	2680765204	-
+theorem	_private.CandleLean.HolSyntaxExtra.0.Candle.term_union.match_1.eq_2	[u_1]	3590900453	-
+theorem	_private.CandleLean.HolSyntaxExtra.0.Candle.term_union.match_1.eq_3	[u_1]	2900163864	-
+theorem	_private.CandleLean.HolSyntaxExtra.0.Candle.typeof.match_1.eq_1	[u_1]	4241162797	-
+theorem	_private.CandleLean.HolSyntaxExtra.0.Candle.typeof.match_1.eq_2	[u_1]	2836907930	-
+theorem	_private.CandleLean.HolSyntaxExtra.0.Candle.typeof.match_1.eq_3	[u_1]	3674151602	-
+theorem	_private.CandleLean.HolSyntaxExtra.0.Candle.typeof.match_1.eq_4	[u_1]	3678529185	-
+theorem	_private.CandleLean.HolSyntaxExtra.0.HOL.REV.match_1.eq_1	[u_1, u_2]	1058245129	-
+theorem	_private.CandleLean.HolSyntaxExtra.0.HOL.REV.match_1.eq_2	[u_1, u_2]	38509323	-
+theorem	_private.CandleLean.HolSyntaxExtra.0.HOL.SORTED.match_1.eq_1	[u_1, u_2]	2248527860	-
+theorem	_private.CandleLean.HolSyntaxExtra.0.HOL.SORTED.match_1.eq_2	[u_1, u_2]	2072803324	-
+theorem	_private.CandleLean.HolSyntaxExtra.0.HOL.SORTED.match_1.eq_3	[u_1, u_2]	2306639744	-
+theorem	_private.CandleLean.HolSyntaxExtra.0.HOL.TL.match_1.eq_1	[u_1, u_2]	3756908876	-
+theorem	_private.CandleLean.HolSyntaxExtra.0.HOL.TL.match_1.eq_2	[u_1, u_2]	994215509	-
+theorem	_private.CandleLean.HolSyntaxExtra.0.HOL.ZIP.match_1.eq_1	[u_1, u_2, u_3]	189987973	-
+theorem	_private.CandleLean.HolSyntaxExtra.0.HOL.ZIP.match_1.eq_2	[u_1, u_2, u_3]	29905946	-
+theorem	_private.CandleLean.HolSyntaxExtra.0.HOL.ZIP.match_1.eq_3	[u_1, u_2, u_3]	2506524376	-
+theorem	_private.CandleLean.HolSyntaxExtra.0.HOL.invert_comparison.match_1.eq_1	[u_1]	773197595	-
+theorem	_private.CandleLean.HolSyntaxExtra.0.HOL.invert_comparison.match_1.eq_2	[u_1]	824489336	-
+theorem	_private.CandleLean.HolSyntaxExtra.0.HOL.invert_comparison.match_1.eq_3	[u_1]	3750891426	-
+theorem	_private.CandleLean.HolSyntaxExtra2.0.Candle.Aux.bind_list_aux_Var.match_1.eq_1	[u_1]	2481792558	-
+theorem	_private.CandleLean.HolSyntaxExtra2.0.Candle.Aux.bind_list_aux_Var.match_1.eq_2	[u_1]	1870196048	-
+theorem	_private.CandleLean.HolSyntaxExtra2.0.Candle.IS_RESULT.match_1.eq_1	[u_1, u_2]	2048294841	-
+theorem	_private.CandleLean.HolSyntaxExtra2.0.Candle.IS_RESULT.match_1.eq_2	[u_1, u_2]	2166331469	-
+theorem	_private.CandleLean.HolSyntaxExtra2.0.Candle.TYPE_SUBST.match_1.eq_1	[u_1]	3760392213	-
+theorem	_private.CandleLean.HolSyntaxExtra2.0.Candle.TYPE_SUBST.match_1.eq_2	[u_1]	2028220325	-
+theorem	_private.CandleLean.HolSyntaxExtra2.0.Candle.arities_match.match_1.eq_1	[u_1]	566952606	-
+theorem	_private.CandleLean.HolSyntaxExtra2.0.Candle.arities_match.match_1.eq_2	[u_1]	2151261543	-
+theorem	_private.CandleLean.HolSyntaxExtra2.0.Candle.arities_match.match_1.eq_3	[u_1]	2391733171	-
+theorem	_private.CandleLean.HolSyntaxExtra2.0.Candle.arities_match.match_1.eq_4	[u_1]	4222328511	-
+theorem	_private.CandleLean.HolSyntaxExtra2.0.Candle.arities_match.match_1.eq_5	[u_1]	2842825225	-
+theorem	_private.CandleLean.HolSyntaxExtra2.0.Candle.bind.match_1.eq_1	[u_1]	2381924706	-
+theorem	_private.CandleLean.HolSyntaxExtra2.0.Candle.bind.match_1.eq_2	[u_1]	2558539860	-
+theorem	_private.CandleLean.HolSyntaxExtra2.0.Candle.bind.match_1.eq_3	[u_1]	2787305934	-
+theorem	_private.CandleLean.HolSyntaxExtra2.0.Candle.bind.match_1.eq_4	[u_1]	3550721369	-
+theorem	_private.CandleLean.HolSyntaxExtra2.0.Candle.bind.match_1.eq_5	[u_1]	3345398755	-
+theorem	_private.CandleLean.HolSyntaxExtra2.0.Candle.bind_list_aux.match_1.eq_1	[u_1]	3451057165	-
+theorem	_private.CandleLean.HolSyntaxExtra2.0.Candle.bind_list_aux.match_1.eq_2	[u_1]	192171266	-
+theorem	_private.CandleLean.HolSyntaxExtra2.0.Candle.db.match_1.eq_1	[u_1]	3444247142	-
+theorem	_private.CandleLean.HolSyntaxExtra2.0.Candle.db.match_1.eq_2	[u_1]	684504472	-
+theorem	_private.CandleLean.HolSyntaxExtra2.0.Candle.db.match_1.eq_3	[u_1]	1390922975	-
+theorem	_private.CandleLean.HolSyntaxExtra2.0.Candle.db.match_1.eq_4	[u_1]	2272126339	-
+theorem	_private.CandleLean.HolSyntaxExtra2.0.Candle.dbterm.match_1.eq_1	[u_1]	345303351	-
+theorem	_private.CandleLean.HolSyntaxExtra2.0.Candle.dbterm.match_1.eq_2	[u_1]	2254512017	-
+theorem	_private.CandleLean.HolSyntaxExtra2.0.Candle.rename_bvars.match_1.eq_1	[u_1]	3893839228	-
+theorem	_private.CandleLean.HolSyntaxExtra2.0.Candle.rename_bvars.match_1.eq_2	[u_1]	2105382821	-
+theorem	_private.CandleLean.HolSyntaxExtra2.0.Candle.rename_bvars.match_1.eq_3	[u_1]	1439124504	-
+theorem	_private.CandleLean.HolSyntaxExtra2.0.Candle.rename_bvars.match_1.eq_4	[u_1]	4245417285	-
+theorem	_private.CandleLean.HolSyntaxExtra2.0.Candle.rename_bvars.match_1.eq_5	[u_1]	586626181	-
+theorem	_private.CandleLean.HolSyntaxExtra2.0.Candle.typeof.match_1.eq_1	[u_1]	4241162797	-
+theorem	_private.CandleLean.HolSyntaxExtra2.0.Candle.typeof.match_1.eq_2	[u_1]	2836907930	-
+theorem	_private.CandleLean.HolSyntaxExtra2.0.Candle.typeof.match_1.eq_3	[u_1]	3674151602	-
+theorem	_private.CandleLean.HolSyntaxExtra2.0.Candle.typeof.match_1.eq_4	[u_1]	3678529185	-
+theorem	_private.CandleLean.HolSyntaxLib.0.Candle.REV_ASSOCD.match_1.eq_1	[u_1, u_2, u_3]	95323909	-
+theorem	_private.CandleLean.HolSyntaxLib.0.Candle.REV_ASSOCD.match_1.eq_2	[u_1, u_2, u_3]	3604035678	-
+theorem	_private.CandleLean.HolSyntaxLib.0.Candle.REV_ASSOCD_ALOOKUP.match_3.eq_1	[u_1, u_2]	4087447466	-
+theorem	_private.CandleLean.HolSyntaxLib.0.Candle.REV_ASSOCD_ALOOKUP.match_3.eq_2	[u_1, u_2]	3986082792	-
+theorem	_private.CandleLean.Misc.0.Candle.Aux.FIELDS_cons.match_1.eq_1	[u_1]	1440902517	-
+theorem	_private.CandleLean.Misc.0.Candle.Aux.FIELDS_cons.match_1.eq_2	[u_1]	449393503	-
+theorem	_private.CandleLean.Misc.0.Candle.SmartAppend.match_1.eq_1	[u_1, u_2]	1956970122	-
+theorem	_private.CandleLean.Misc.0.Candle.SmartAppend.match_1.eq_2	[u_1, u_2]	3106664880	-
+theorem	_private.CandleLean.Misc.0.Candle.SmartAppend.match_1.eq_3	[u_1, u_2]	2010839478	-
+theorem	_private.CandleLean.Misc.0.Candle.append_aux.match_1.eq_1	[u_1, u_2]	3144903347	-
+theorem	_private.CandleLean.Misc.0.Candle.append_aux.match_1.eq_2	[u_1, u_2]	707097787	-
+theorem	_private.CandleLean.Misc.0.Candle.append_aux.match_1.eq_3	[u_1, u_2]	2303709307	-
+theorem	_private.CandleLean.Misc.0.Candle.find_index.match_1.eq_1	[u_1, u_2]	996572753	-
+theorem	_private.CandleLean.Misc.0.Candle.find_index.match_1.eq_2	[u_1, u_2]	1464957067	-
+theorem	_private.CandleLean.Misc.0.Candle.is_subseq.match_1.eq_1	[u_1, u_2]	1500541562	-
+theorem	_private.CandleLean.Misc.0.Candle.is_subseq.match_1.eq_2	[u_1, u_2]	3405498832	-
+theorem	_private.CandleLean.Misc.0.Candle.is_subseq.match_1.eq_3	[u_1, u_2]	773734812	-
+theorem	_private.CandleLean.Misc.0.HOL.FCP_bits.match_1.eq_1	[u_1]	2407460072	-
+theorem	_private.CandleLean.Misc.0.HOL.FCP_bits.match_1.eq_2	[u_1]	1495322775	-
+theorem	_private.CandleLean.Misc.0.HOL.SUM.match_1.eq_1	[u_1]	3639951702	-
+theorem	_private.CandleLean.Misc.0.HOL.SUM.match_1.eq_2	[u_1]	1330154433	-
+theorem	_private.CandleLean.Misc.0.HOL.TL.match_1.eq_1	[u_1, u_2]	3756908876	-
+theorem	_private.CandleLean.Misc.0.HOL.TL.match_1.eq_2	[u_1, u_2]	994215509	-
+theorem	_private.CandleLean.Mllist.0.HOL.REV.match_1.eq_1	[u_1, u_2]	1058245129	-
+theorem	_private.CandleLean.Mllist.0.HOL.REV.match_1.eq_2	[u_1, u_2]	38509323	-
+theorem	_private.CandleLean.Mllist.0.HOL.merge_tail.match_1.eq_1	[u_1, u_2]	1457482577	-
+theorem	_private.CandleLean.Mllist.0.HOL.merge_tail.match_1.eq_2	[u_1, u_2]	1702417218	-
+theorem	_private.CandleLean.Mllist.0.HOL.merge_tail.match_1.eq_3	[u_1, u_2]	3022936355	-
+theorem	_private.CandleLean.Mllist.0.HOL.merge_tail.match_1.eq_4	[u_1, u_2]	3924325376	-
+theorem	_private.CandleLean.Mllist.0.HOL.mergesortN_tail.match_1.eq_1	[u_1, u_2]	722672259	-
+theorem	_private.CandleLean.Mllist.0.HOL.mergesortN_tail.match_1.eq_10	[u_1, u_2]	1138145894	-
+theorem	_private.CandleLean.Mllist.0.HOL.mergesortN_tail.match_1.eq_11	[u_1, u_2]	375267224	-
+theorem	_private.CandleLean.Mllist.0.HOL.mergesortN_tail.match_1.eq_2	[u_1, u_2]	63726321	-
+theorem	_private.CandleLean.Mllist.0.HOL.mergesortN_tail.match_1.eq_3	[u_1, u_2]	3026755412	-
+theorem	_private.CandleLean.Mllist.0.HOL.mergesortN_tail.match_1.eq_4	[u_1, u_2]	124185100	-
+theorem	_private.CandleLean.Mllist.0.HOL.mergesortN_tail.match_1.eq_5	[u_1, u_2]	2611404247	-
+theorem	_private.CandleLean.Mllist.0.HOL.mergesortN_tail.match_1.eq_6	[u_1, u_2]	4222315001	-
+theorem	_private.CandleLean.Mllist.0.HOL.mergesortN_tail.match_1.eq_7	[u_1, u_2]	3979191013	-
+theorem	_private.CandleLean.Mllist.0.HOL.mergesortN_tail.match_1.eq_8	[u_1, u_2]	1902299663	-
+theorem	_private.CandleLean.Mllist.0.HOL.mergesortN_tail.match_1.eq_9	[u_1, u_2]	1714148168	-
+theorem	_private.CandleLean.Mlstring.0.Candle.explode_aux.match_1.eq_1	[u_1]	3699874378	-
+theorem	_private.CandleLean.Mlstring.0.Candle.explode_aux.match_1.eq_2	[u_1]	1793393617	-
+theorem	_private.CandleLean.Mlstring.0.Candle.strlen.match_1.eq_1	[u_1]	914275009	-
+theorem	_private.CandleLean.Mlstring.0.Candle.strsub.match_1.eq_1	[u_1]	2932644576	-
+theorem	_private.CandleLean.Mlstring.0.Candle.substring.match_1.eq_1	[u_1]	2483502369	-
+theorem	_private.CandleLean.Mlstring.0.HOL.string_lt.match_1.eq_1	[u_1]	750994732	-
+theorem	_private.CandleLean.Mlstring.0.HOL.string_lt.match_1.eq_2	[u_1]	1354752888	-
+theorem	_private.CandleLean.Mlstring.0.HOL.string_lt.match_1.eq_3	[u_1]	3858097548	-
+theorem	_private.CandleLean.Prelude.FiniteMap.0.HOL.FAPPLY_outside.congr_simp	[v]	3957263984	-
+theorem	_private.CandleLean.Prelude.FiniteMap.0.HOL.FUN_FMAP_exists	[u, v]	984631962	-
+theorem	_private.CandleLean.Prelude.List.0.HOL.LAST_wit.congr_simp	[u]	207124700	-
+theorem	_private.CandleLean.Prelude.List.0.HOL.LAST_wit.eq_1	[u]	2075505261	-
+theorem	_private.CandleLean.Prelude.List.0.HOL.LAST_wit.eq_2	[u]	1980946293	-
+theorem	_private.CandleLean.Prelude.List.0.HOL.LAST_wit.eq_def	[u]	3244080383	-
+theorem	_private.CandleLean.Prelude.List.0.HOL.SEG_exists	[u]	2824900952	-
+theorem	_private.CandleLean.Prelude.List.0.HOL.TL.match_1.eq_1	[u_1, u_2]	3756908876	-
+theorem	_private.CandleLean.Prelude.List.0.HOL.TL.match_1.eq_2	[u_1, u_2]	994215509	-
+theorem	_private.CandleLean.Prelude.List.0.HOL.ZIP.match_1.eq_1	[u_1, u_2, u_3]	189987973	-
+theorem	_private.CandleLean.Prelude.List.0.HOL.ZIP.match_1.eq_2	[u_1, u_2, u_3]	29905946	-
+theorem	_private.CandleLean.Prelude.List.0.HOL.ZIP.match_1.eq_3	[u_1, u_2, u_3]	2506524376	-
+theorem	_private.CandleLean.Prelude.List.0.HOL.merge_tail.match_1.eq_1	[u_1, u_2]	1457482577	-
+theorem	_private.CandleLean.Prelude.List.0.HOL.merge_tail.match_1.eq_2	[u_1, u_2]	1702417218	-
+theorem	_private.CandleLean.Prelude.List.0.HOL.merge_tail.match_1.eq_3	[u_1, u_2]	3022936355	-
+theorem	_private.CandleLean.Prelude.List.0.HOL.merge_tail.match_1.eq_4	[u_1, u_2]	3924325376	-
+theorem	_private.CandleLean.Prelude.List.0.HOL.mergesortN_tail.match_1.eq_1	[u_1, u_2]	722672259	-
+theorem	_private.CandleLean.Prelude.List.0.HOL.mergesortN_tail.match_1.eq_10	[u_1, u_2]	1138145894	-
+theorem	_private.CandleLean.Prelude.List.0.HOL.mergesortN_tail.match_1.eq_11	[u_1, u_2]	375267224	-
+theorem	_private.CandleLean.Prelude.List.0.HOL.mergesortN_tail.match_1.eq_2	[u_1, u_2]	63726321	-
+theorem	_private.CandleLean.Prelude.List.0.HOL.mergesortN_tail.match_1.eq_3	[u_1, u_2]	3026755412	-
+theorem	_private.CandleLean.Prelude.List.0.HOL.mergesortN_tail.match_1.eq_4	[u_1, u_2]	124185100	-
+theorem	_private.CandleLean.Prelude.List.0.HOL.mergesortN_tail.match_1.eq_5	[u_1, u_2]	2611404247	-
+theorem	_private.CandleLean.Prelude.List.0.HOL.mergesortN_tail.match_1.eq_6	[u_1, u_2]	4222315001	-
+theorem	_private.CandleLean.Prelude.List.0.HOL.mergesortN_tail.match_1.eq_7	[u_1, u_2]	3979191013	-
+theorem	_private.CandleLean.Prelude.List.0.HOL.mergesortN_tail.match_1.eq_8	[u_1, u_2]	1902299663	-
+theorem	_private.CandleLean.Prelude.List.0.HOL.mergesortN_tail.match_1.eq_9	[u_1, u_2]	1714148168	-
+theorem	_private.CandleLean.Prelude.Sptree.0.HOL.sptree.lookup.match_1.eq_1	[u_1, u_2]	2819633690	-
+theorem	_private.CandleLean.Prelude.Sptree.0.HOL.sptree.lookup.match_1.eq_2	[u_1, u_2]	2105249961	-
+theorem	_private.CandleLean.Prelude.Sptree.0.HOL.sptree.lookup.match_1.eq_3	[u_1, u_2]	3253089998	-
+theorem	_private.CandleLean.Prelude.Sptree.0.HOL.sptree.lookup.match_1.eq_4	[u_1, u_2]	3754308802	-
+theorem	_private.CandleLean.Prelude.String.0.HOL.FIELDS.match_1.eq_1	[u_1]	2480883141	-
+theorem	_private.CandleLean.Prelude.String.0.HOL.FIELDS.match_1.eq_2	[u_1]	2216416544	-
+theorem	_private.CandleLean.Prelude.String.0.HOL.TL.match_1.eq_1	[u_1, u_2]	3756908876	-
+theorem	_private.CandleLean.Prelude.String.0.HOL.TL.match_1.eq_2	[u_1, u_2]	994215509	-
+theorem	_private.CandleLean.Proofs.Base.0.Candle.Aux.ALOOKUP_append.match_1.eq_1	[u_1, u_2]	1720355816	-
+theorem	_private.CandleLean.Proofs.Base.0.Candle.Aux.ALOOKUP_append.match_1.eq_2	[u_1, u_2]	3739598438	-
+theorem	_private.CandleLean.Proofs.Base.0.Candle.Aux.FIELDS_cons.match_1.eq_1	[u_1]	1440902517	-
+theorem	_private.CandleLean.Proofs.Base.0.Candle.Aux.FIELDS_cons.match_1.eq_2	[u_1]	449393503	-
+theorem	_private.CandleLean.Proofs.Base.0.HOL.ALOOKUP.match_1.eq_1	[u_1, u_2, u_3]	866263357	-
+theorem	_private.CandleLean.Proofs.Base.0.HOL.ALOOKUP.match_1.eq_2	[u_1, u_2, u_3]	2997433761	-
+theorem	_private.CandleLean.Proofs.Base.0.HOL.EL.match_1.eq_1	[u_1, u_2]	388066312	-
+theorem	_private.CandleLean.Proofs.Base.0.HOL.EL.match_1.eq_2	[u_1, u_2]	4010047975	-
+theorem	_private.CandleLean.Proofs.Base.0.HOL.EVEN.match_1.eq_1	[u_1]	2150068031	-
+theorem	_private.CandleLean.Proofs.Base.0.HOL.EVEN.match_1.eq_2	[u_1]	619618160	-
+theorem	_private.CandleLean.Proofs.Base.0.HOL.FIELDS.match_1.eq_1	[u_1]	2480883141	-
+theorem	_private.CandleLean.Proofs.Base.0.HOL.FIELDS.match_1.eq_2	[u_1]	2216416544	-
+theorem	_private.CandleLean.Proofs.Base.0.HOL.GENLIST.match_1.eq_1	[u_1]	685437251	-
+theorem	_private.CandleLean.Proofs.Base.0.HOL.GENLIST.match_1.eq_2	[u_1]	368436367	-
+theorem	_private.CandleLean.Proofs.Base.0.HOL.REV.match_1.eq_1	[u_1, u_2]	1058245129	-
+theorem	_private.CandleLean.Proofs.Base.0.HOL.REV.match_1.eq_2	[u_1, u_2]	38509323	-
+theorem	_private.CandleLean.Proofs.Base.0.HOL.TL.match_1.eq_1	[u_1, u_2]	3756908876	-
+theorem	_private.CandleLean.Proofs.Base.0.HOL.TL.match_1.eq_2	[u_1, u_2]	994215509	-
+theorem	_private.CandleLean.Proofs.Base.0.HOL.l2n.match_1.eq_1	[u_1]	2059560983	-
+theorem	_private.CandleLean.Proofs.Base.0.HOL.l2n.match_1.eq_2	[u_1]	2371906987	-
+theorem	_private.CandleLean.Proofs.Base.0.HOL.sptree.lookup.match_1.eq_1	[u_1, u_2]	2819633690	-
+theorem	_private.CandleLean.Proofs.Base.0.HOL.sptree.lookup.match_1.eq_2	[u_1, u_2]	2105249961	-
+theorem	_private.CandleLean.Proofs.Base.0.HOL.sptree.lookup.match_1.eq_3	[u_1, u_2]	3253089998	-
+theorem	_private.CandleLean.Proofs.Base.0.HOL.sptree.lookup.match_1.eq_4	[u_1, u_2]	3754308802	-
+theorem	_private.CandleLean.Proofs.SemBase.0.Candle.APPLY_UPDATE_LIST_ALOOKUP.match_1.eq_1	[u_1, u_2]	913709452	-
+theorem	_private.CandleLean.Proofs.SemBase.0.Candle.APPLY_UPDATE_LIST_ALOOKUP.match_1.eq_2	[u_1, u_2]	930377858	-

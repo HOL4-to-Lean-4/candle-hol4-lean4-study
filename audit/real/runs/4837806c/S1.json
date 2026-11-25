@@ -1,0 +1,54 @@
+{
+ "module": "CmlTS.Weakening",
+ "checked": 31,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "weakS",
+   "lean": "lean/CmlTS/Weakening.lean:19",
+   "hol4": "hol4/package/weakeningScript.sml:19",
+   "class": "V-P",
+   "explanation": "HOL4 defines weakS on any two finite maps with the same key and value types. For example, weakS accepts two boolean-to-boolean maps. Lean fixes its arguments to tenv_store, which is FMap Nat store_t. The separate weakS_poly definition has the full HOL4 type.",
+   "repair": "def weakS {α : Type u} {β : Type v} (tenvS tenvS' : FMap α β) : Prop := SUBMAP tenvS' tenvS",
+   "confidence": 0.98,
+   "lean_check": null,
+   "hol4_check": "weakS (FEMPTY : (bool,bool) fmap) FEMPTY"
+  },
+  {
+   "id": "F2",
+   "declaration": "weakCT",
+   "lean": "lean/CmlTS/Weakening.lean:23",
+   "hol4": "hol4/package/weakeningScript.sml:281",
+   "class": "V-P",
+   "explanation": "HOL4 defines weakCT using SUBMAP alone, so its key and value types are arbitrary. Lean fixes both through ctMap. For example, HOL4 can apply weakCT to two boolean-to-boolean maps. In Lean that application requires the separate weakCT_poly definition.",
+   "repair": "def weakCT {α : Type u} {β : Type v} (cenv_impl cenv_spec : FMap α β) : Prop := SUBMAP cenv_spec cenv_impl",
+   "confidence": 0.98,
+   "lean_check": null,
+   "hol4_check": "weakCT (FEMPTY : (bool,bool) fmap) FEMPTY"
+  },
+  {
+   "id": "F3",
+   "declaration": "type_tenv_ctor_weakening",
+   "lean": "lean/CmlTS/Weakening.lean:148",
+   "hol4": "hol4/package/weakeningScript.sml:319",
+   "class": "V-P",
+   "explanation": "HOL4's type_ctor looks up a key, compares the retrieved triple, and checks the length of its middle component. This leaves the key type, the first and last component types, and the list element type polymorphic. It also ignores the namespace identifier, leaving both name types polymorphic. Lean fixes all six types through ctMap, tenv_ctor, and envC. For example, the HOL4 theorem admits a boolean-keyed map with values of type Bool × List Nat × Bool.",
+   "repair": "private def ctorEntry {K A B C I : Type} (m : FMap K (A × List B × C)) (_ : I) (entry : Nat × K) (scheme : A × List B × C) : Prop :=\n  FLOOKUP m entry.2 = some scheme ∧ scheme.2.1.length = entry.1\n\ntheorem type_tenv_ctor_weakening {M N K A B C : Type}\n    (m : FMap K (A × List B × C)) (tenvC : Namespace M N (A × List B × C))\n    (envC : Namespace M N (Nat × K)) (m' : FMap K (A × List B × C)) :\n    weakCT_poly m' m ∧ nsAll2 (ctorEntry m) envC tenvC →\n    nsAll2 (ctorEntry m') envC tenvC := by\n  intro h\n  refine nsAll2_mono _ _ _ _ ?_ h.2\n  intro i entry scheme he\n  exact ⟨h.1 entry.2 scheme he.1, he.2⟩",
+   "confidence": 0.99,
+   "lean_check": null,
+   "hol4_check": null
+  },
+  {
+   "id": "F4",
+   "declaration": "type_tenv_val_weakening_lemma",
+   "lean": "lean/CmlTS/Weakening.lean:155",
+   "hol4": "hol4/package/weakeningScript.sml:337",
+   "class": "V-P",
+   "explanation": "Both HOL4 nsAll2 predicates ignore the identifier i. The two namespaces must share their module-name and variable-name types, but either type can be arbitrary. Lean's tenv_val and env_val fix both to CakeML strings. For example, the HOL4 lemma also applies to namespaces with boolean module names and natural-number variable names.",
+   "repair": "theorem type_tenv_val_weakening_lemma {M N : Type}\n    (m : ctMap) (s : tenv_store) (tenvV : Namespace M N (Nat × Ty))\n    (envV : Namespace M N Value) (m' : ctMap) (s' : tenv_store) :\n    weakCT m' m ∧ weakS s' s ∧\n      nsAll2 (fun _ v p => ∀ (n : Nat) (m₂ : ctMap) (s₂ : tenv_store),\n        (p.1 = 0 ∨ p.1 = n) ∧ weakCT m₂ m ∧ weakS s₂ s →\n        type_v n m₂ s₂ v p.2) envV tenvV →\n    nsAll2 (fun _ v p => type_v p.1 m' s' v p.2) envV tenvV := by\n  intro h\n  refine nsAll2_mono _ _ _ _ ?_ h.2.2\n  intro i v p hp\n  exact hp p.1 m' s' ⟨Or.inr rfl, h.1, h.2.1⟩",
+   "confidence": 0.99,
+   "lean_check": null,
+   "hol4_check": null
+  }
+ ]
+}

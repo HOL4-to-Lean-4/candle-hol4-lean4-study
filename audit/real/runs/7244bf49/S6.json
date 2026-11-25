@@ -1,0 +1,136 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "UInt8 <<< reduces the shift amount mod 8, so word_lsl_8 1 8 = 1. HOL4's word_lsl_def requires n <= i < 8, so shifts n >= 8 give 0w. shift8_lookup maps Lsl to this function with arbitrary n."
+  },
+  {
+   "id": "F2",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "UInt8 >>> reduces the shift amount mod 8, so word_lsr_8 1 8 = 1. HOL4's word_lsr_def requires i + n < 8, so n >= 8 gives 0w."
+  },
+  {
+   "id": "F3",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "At n = 0 with the sign bit set, the mask 0xFF <<< 8 wraps to 0xFF, so word_asr_8 0x80 0 = 0xFF; HOL4 gives 0x80w. At n = 8, word_asr_8 1 8 = 1, whereas word_asr_def gives all msb bits, i.e. 0w."
+  },
+  {
+   "id": "F4",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "UInt64 <<< reduces the shift amount mod 64, so word_lsl_64 1 64 = 1. HOL4's word_lsl_def gives 0w for n >= 64."
+  },
+  {
+   "id": "F5",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "UInt64 >>> reduces the shift amount mod 64, so word_lsr_64 1 64 = 1. HOL4's word_lsr_def gives 0w for n >= 64."
+  },
+  {
+   "id": "F6",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "At n = 0 with a negative word, the mask shift by 64 wraps to 0, giving all ones instead of a. At n = 64 the logical shift wraps, so word_asr_64 1 64 = 1. HOL4's word_asr_def gives a and 0w respectively."
+  },
+  {
+   "id": "F7",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "FINITE's witness list has no Nodup condition and CARD takes the length of the chosen list. The value is therefore undetermined for every nonempty finite set. HOL4's CARD_DEF fixes it, e.g. CARD {x} = 1. CARD_IMAGE_ID_BIJ, which is sorry in Misc.lean, relies on this."
+  },
+  {
+   "id": "F8",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "The else branch makes CARD univ = 0 on Nat provable. HOL4's CARD comes from new_specification with CARD {} = 0 and an insertion clause under FINITE s only. I found no saved theorem fixing CARD on infinite sets."
+  },
+  {
+   "id": "F9",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "l[n]! returns default out of range, so EL 0 ([] : List Nat) = 0 is provable. In HOL4 TL [] = [], so out-of-range EL reduces to HD []. HD is specified only by HD (h::t) = h, leaving the value open."
+  },
+  {
+   "id": "F10",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "THE_DEF states only THE (SOME x) = x, so THE NONE is open. The only THE NONE theorem found is a local FAIL tautology in basis_emit. Lean proves THE (none : Option Nat) = 0."
+  },
+  {
+   "id": "F11",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "Char.ofNat sends the surrogate 55296 to '\\0', so Lean proves CHR 55296 = CHR 0. HOL4's CHR is a type-abstraction function constrained only for r < 256, so this equation is open. ORD (CHR 955) = 955 even contradicts ORD_CHR."
+  },
+  {
+   "id": "F12",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "HOL4 char has exactly 256 elements, with ORD_BOUND: ORD c < 256. Lean maps it to Unicode Char, so ORD is unbounded and has extra inputs. ORD_BOUND and the injectivity of char_to_word8 fail, since 955 and 187 collide mod 256. The representation is not faithful."
+  },
+  {
+   "id": "F13",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "HOL4's fmap is restricted by is_fmap, and FDOM_FINITE holds. Lean's Finmap is every function α → Option β, including maps with infinite domain. FDOM_FINITE is false in Lean, and quantification over maps covers extra values."
+  },
+  {
+   "id": "F14",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "Raw association lists allow duplicate keys and depend on insertion order, unlike spt trees. With names = [(0,1),(1,1),(1,0)], the toList set and the domain are both {0,1}, but tlookup sends 0 and 1 to 1. tlookup_bij_suff is therefore false in Lean."
+  },
+  {
+   "id": "F15",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "HOL4's fromAList folds insert, so duplicate keys collapse with the first pair winning. Lean's is the identity. On [(1,1),(1,0)], toList gives [1,0] in Lean and [1] in HOL4."
+  },
+  {
+   "id": "F16",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "Lean's toList returns values in list order. For insert 1 2 (insert 0 1 empty) it gives [2,1]. HOL4 builds BS LN 1 (LS 2), and toListA gives [1;2]. Lean also keeps shadowed duplicates."
+  },
+  {
+   "id": "F17",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "HOL4's toAList is foldi over the tree, and BS LN 1 (LS 2) yields [(1,2);(0,1)]. Lean returns the raw list [(0,1),(1,2)] for insert 0 1 (insert 1 2 empty). With duplicate keys MEM_toAList also fails."
+  },
+  {
+   "id": "F18",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "HOL4's llist is restricted by lrep_ok: IS_SOME (f (SUC n)) ==> IS_SOME (f n). Lean's LazyList is the full function space and includes sequences with gaps. These values inhabit behaviour.Diverge, and LNTH 0 ll = NONE ==> ll = LNIL fails."
+  },
+  {
+   "id": "F19",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "float_mul_add rounds float_to_real x * float_to_real y + float_to_real z once. Lean composes Float * and +, rounding twice. In the cited example, the product rounds to 1+2^-51 and the sum to 0, while HOL4 gives 2^-104 (0x3970000000000000)."
+  },
+  {
+   "id": "F20",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "float_negate flips Sign only, and fp64_negate lifts it bitwise, so NaN payloads are preserved. Lean goes through Float.ofBits/toBits, and toBits canonicalises NaNs. Results therefore differ on NaN words, and the bit equations are not derivable from opaque Float operations."
+  },
+  {
+   "id": "F21",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "float_abs only sets Sign := 0w and keeps NaN payloads, so 0xFFF8000000000001w maps to 0x7FF8000000000001w. Lean's Float.toBits canonicalises the NaN to 0x7FF8000000000000. HOL4's bit equations are not derivable in Lean."
+  },
+  {
+   "id": "F22",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "HOL4's rounding datatype has four distinct constructors, and float operations depend on the mode through round_def. Lean collapses rounding to Unit and ignores the argument. Every mode then equals roundTiesToEven, and the fp64 operations cover only one mode, though the package uses only that mode."
+  }
+ ]
+}

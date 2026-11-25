@@ -1,0 +1,10 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "FMap.lean:28 makes `FAPPLY FEMPTY x = ARB` provable by rfl. HOL4 has FAPPLY f x = OUTL (fmap_REP f x), and off the domain this is OUTL (INR one). OUTL comes from new_recursive_definition (via new_specification) with only the INL clause. NOT_FDOM_FAPPLY_FEMPTY and the other saved FEMPTY ' x theorems never fix the value. HOL4's ARB is a bare new_constant, so the equation is open there. Lean also derives FAPPLY FEMPTY x = HD []."
+  }
+ ]
+}

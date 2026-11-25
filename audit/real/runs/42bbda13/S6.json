@@ -1,0 +1,17 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "decision_note": "",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "HOL4 RESULT_def has only RESULT (Result t) = t. Defn tries Prim_rec.new_recursive_definition first, which uses new_specification and saves only the stated clause, with no ARB completion. No other theorem in the package fixes RESULT on Clash. The Lean clause `.Clash t => t` proves RESULT (Clash t) = t, e.g. RESULT (Clash 0) = 0, by rfl, an equation HOL4 leaves open."
+  },
+  {
+   "id": "F2",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "HOL4 CLASH_def has only CLASH (Clash t) = t, introduced through primitive-recursion new_specification, so the value on Result is unspecified. No other theorem in the package fixes it; INST_CORE only uses CLASH when IS_RESULT is false. The Lean clause `.Result t => t` proves CLASH (Result t) = t, e.g. CLASH (Result 0) = 0, by rfl, an equation HOL4 leaves open."
+  }
+ ]
+}

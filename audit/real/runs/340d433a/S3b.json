@@ -1,0 +1,30 @@
+{
+ "module": "CmlTS.Prelude.Words",
+ "checked": 34,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "CmlTS.int_div",
+   "lean": "lean/CmlTS/Prelude/Words.lean:15",
+   "hol4": "hol4/HOL4-src/src/integer/integerScript.sml:1989",
+   "class": "V-C",
+   "explanation": "HOL4 introduces int_div by new_specification whose only clause is guarded by ~(j = 0). The Skolemised constant takes both i and j, so i / 0 is unspecified and may differ for each i. I found no theorem about a zero divisor in the integer theory scripts. Lean sets int_div i 0 to the single constant ARB for every i. It therefore proves int_div 1 0 = int_div 2 0 (also int_div i 0 = ARB, and int_div 0 0 = int_mod 0 0), which the HOL4 specification leaves open. Values for j ≠ 0 agree (floor division).",
+   "repair": "opaque int_div_zero : Int → Int\n\ndef int_div (i j : Int) : Int := if j = 0 then int_div_zero i else Int.fdiv i j",
+   "confidence": 0.6,
+   "lean_check": "import CmlTS.Prelude.Words\n\nexample : CmlTS.int_div 1 0 = CmlTS.int_div 2 0 := by\n  simp [CmlTS.int_div]\n",
+   "hol4_check": "?d:int->int->int. (!i j. j <> 0 ==> (d i j = int_div i j)) /\\ d 1 0 <> d 2 0"
+  },
+  {
+   "id": "F2",
+   "declaration": "CmlTS.int_mod",
+   "lean": "lean/CmlTS/Prelude/Words.lean:17",
+   "hol4": "hol4/HOL4-src/src/integer/integerScript.sml:2074",
+   "class": "V-C",
+   "explanation": "HOL4 introduces int_mod by new_specification with only ~(j = 0) ==> (i % j = i - i / j * j), so i % 0 is unspecified separately for each i. I found no theorem about a zero divisor in the integer theory scripts. Lean sets int_mod i 0 to the single constant ARB for every i. It therefore proves int_mod 1 0 = int_mod 2 0 and int_mod 0 0 = int_div 0 0, which the HOL4 specification leaves open. Values for j ≠ 0 agree.",
+   "repair": "opaque int_mod_zero : Int → Int\n\ndef int_mod (i j : Int) : Int := if j = 0 then int_mod_zero i else i - int_div i j * j",
+   "confidence": 0.6,
+   "lean_check": "import CmlTS.Prelude.Words\n\nexample : CmlTS.int_mod 1 0 = CmlTS.int_mod 2 0 := by\n  simp [CmlTS.int_mod]\n",
+   "hol4_check": "?m:int->int->int. (!i j. j <> 0 ==> (m i j = i - int_div i j * j)) /\\ m 1 0 <> m 2 0"
+  }
+ ]
+}

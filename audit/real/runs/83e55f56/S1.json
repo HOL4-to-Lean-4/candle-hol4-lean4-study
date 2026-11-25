@@ -1,0 +1,42 @@
+{
+ "module": "CmlTS.Evaluate",
+ "checked": 17,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "fix_clock",
+   "lean": "lean/CmlTS/Evaluate.lean:16",
+   "hol4": "hol4/package/evaluateScript.sml:15",
+   "class": "V-P",
+   "explanation": "HOL4 reads only the first state's numeric clock, so the two states have independent FFI types. It can use a `num state` to cap the clock of a `bool state` and return the updated `bool state`. Lean requires both states to have the same FFI type `α`, excluding that input.",
+   "repair": "def fix_clock {α : Type u} {γ : Type w} {β : Type v} (s : state α) (p : state γ × β) : state γ × β :=\n  ({ p.1 with clock := if p.1.clock ≤ s.clock then p.1.clock else s.clock }, p.2)",
+   "confidence": 0.99,
+   "lean_check": null,
+   "hol4_check": "∀(s : num state) (t : bool state). t.clock ≤ s.clock ⇒ fix_clock s (t,T) = (t,T)"
+  },
+  {
+   "id": "F2",
+   "declaration": "do_eval_res",
+   "lean": "lean/CmlTS/Evaluate.lean:29",
+   "hol4": "hol4/package/evaluateScript.sml:23",
+   "class": "V-P",
+   "explanation": "HOL4 leaves the raised-exception payload type polymorphic. The failure branch constructs `Rabort Rtype_error`, which carries no such payload, and the success branch constructs `Rval`. For a state with `eval_state = NONE`, HOL4 therefore returns the type-error result even when the caller selects `num` as the exception payload type. Lean fixes that type to `Value`.",
+   "repair": "def do_eval_res {α : Type u} {ε : Type v} (vs : List Value) (s : state α) :\n    state α × result (sem_env Value × List dec) ε :=\n  match do_eval vs s.eval_state with\n  | none => (s, .Rerr (.Rabort .Rtype_error))\n  | some (env1, decs, es1) => ({ s with eval_state := es1 }, .Rval (env1, decs))",
+   "confidence": 0.99,
+   "lean_check": null,
+   "hol4_check": "∀s. s.eval_state = NONE ⇒ do_eval_res [] s = (s, Rerr (Rabort Rtype_error : num error_result))"
+  },
+  {
+   "id": "F3",
+   "declaration": "fix_clock_do_eval_res",
+   "lean": "lean/CmlTS/Evaluate.lean:316",
+   "hol4": "hol4/package/evaluateScript.sml:291",
+   "class": "V-P",
+   "explanation": "HOL4 saves the clock identity for every exception payload type of `do_eval_res`, including `num`. The Lean statement inherits the fixed `Value` payload type from `do_eval_res` and covers only that instance.",
+   "repair": "theorem fix_clock_do_eval_res {α : Type u} {ε : Type v} (s : state α) (vs : List Value) :\n    fix_clock s (do_eval_res (ε := ε) vs s) = do_eval_res vs s := by\n  sorry",
+   "confidence": 0.99,
+   "lean_check": null,
+   "hol4_check": "∀(s : unit state) vs. fix_clock s (do_eval_res vs s) = (do_eval_res vs s : unit state # (v sem_env # dec list, num) result)"
+  }
+ ]
+}

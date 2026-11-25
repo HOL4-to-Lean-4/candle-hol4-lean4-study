@@ -1,0 +1,22 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "In Basic.lean, HOL.ARB reduces to default, and String.lean:15 defines Inhabited char with ⟨0, by decide⟩, so Lean proves ORD (ARB : char) = 0. In HOL4 (boolScript.sml:245), ARB is declared via new_constant with no defining axioms, leaving ORD (ARB : char) open among 0..255. This is a true conservativity violation."
+  },
+  {
+   "id": "F2",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "String.lean:18 defines CHR n to return ⟨0, by decide⟩ when ¬ (n < 256), so Lean proves ORD (CHR 256) = 0. In HOL4 (stringScript.sml:25-52), char_BIJ only fixes CHR (ORD a) = a and (r < 256) <=> (ORD (CHR r) = r), and ORD_CHR_COMPUTE uses FAIL x y = x, leaving CHR 256 unconstrained among characters (e.g., CHR 1 satisfies all saved laws). This is a true conservativity violation."
+  },
+  {
+   "id": "F3",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "String.lean:86-93 parameterizes word, dimword, n2w, w2n, and v2w by an unrestricted n : Nat, admitting width 0 where dimword 0 = 1 and w2n (n2w 1 : word 0) = 0. In HOL4 (fcpScript.sml:107, wordsScript.sml:653,989), every index type 'a satisfies 0 < dimindex(:'a), so 1 < dimword(:'a) and w2n (1w : 'a word) = 1 hold unconditionally. Admitting width 0 breaks preservation of HOL4's word family."
+  }
+ ]
+}

@@ -1,0 +1,16 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "Lean defines `THE none := ARB`, so `THE none = ARB` holds by reflexivity, where `ARB` maps HOL4's uninterpreted constant `bool$ARB`. In HOL4 (`optionScript.sml:176-179`), `THE_DEF` uses `Prim_rec.new_recursive_definition` (`new_specification`), saving only `THE (SOME x) = x` and leaving `THE NONE` unconstrained. Thus Lean proves an equation in the mapped vocabulary that HOL4 leaves open, violating conservativity."
+  },
+  {
+   "id": "F2",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "Lean defines `HD [] := ARB`, proving `HD [] = ARB` (and via `EL 0 l = HD l`, `EL 0 [] = ARB`) by reflexivity, where `ARB` maps HOL4's uninterpreted `bool$ARB`. In HOL4 (`listScript.sml:138-140`), `Definition HD` goes through `Defn.non_wfrec_defn` and `Prim_rec.new_recursive_definition` (`new_specification`), saving only `HD (h::t) = h` and leaving `HD []` unconstrained. Thus Lean proves equations in the mapped vocabulary that HOL4 leaves open."
+  }
+ ]
+}

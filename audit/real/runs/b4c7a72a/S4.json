@@ -1,0 +1,10 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "In HOL4, Defn.defn_absyn_to_term parses each clause of collate_def separately and does not unify LHS pattern variables h and t across clauses, so mllist$collate has type ('a -> 'b -> ordering) -> 'a list -> 'b list -> ordering. Lean's Candle.Mllist.collate collapses 'a and 'b into one type α, rejecting heterogeneous lists and specializing the HOL4 definition."
+  }
+ ]
+}

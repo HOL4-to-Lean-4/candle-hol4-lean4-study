@@ -1,0 +1,16 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "RESULT_def has the single clause RESULT (Result t) = t. Defn.prim_mk_defn first tries non_wfrec_defn, which uses new_recursive_definition and new_specification, so only that clause is saved. No ARB completion occurs, and no other package theorem constrains RESULT on Clash. Lean's extra clause proves RESULT (Clash x) = ARB, hence RESULT (Clash x) = RESULT (Clash y). HOL4 leaves these open: a function returning t on Clash t also satisfies the specification."
+  },
+  {
+   "id": "F2",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "CLASH_def has the single clause CLASH (Clash t) = t, introduced by primitive recursion through new_specification, so CLASH (Result _) is unconstrained. No saved theorem in the package fixes it. Lean's clause `Result _ => ARB` proves CLASH (Result x) = ARB and CLASH (Result x) = CLASH (Result y). HOL4 cannot derive these, since a function returning t on Result t also satisfies CLASH_def."
+  }
+ ]
+}

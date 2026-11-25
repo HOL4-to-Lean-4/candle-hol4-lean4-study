@@ -1,0 +1,18 @@
+{
+ "module": "CmlTS.NamespaceProps",
+ "checked": 55,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "nsSub_compute",
+   "lean": "lean/CmlTS/NamespaceProps.lean:64",
+   "hol4": "hol4/package/namespacePropsScript.sml:423",
+   "class": "V-P",
+   "explanation": "HOL4's nsSub_compute has most general type 'm list -> (('m,'n) id -> 'v1 -> 'v2 -> bool) -> ('m,'n,'v1) namespace -> ('m,'n,'v2) namespace -> bool: nothing in the defining equation or the termination measure (which uses only the first namespace) identifies the two value types, and alistSub is polymorphic in both. The Lean definition forces both namespaces and R to use one value type V, so it is only the special case 'v1 = 'v2. The HOL4 constant at e.g. 'v1 = num, 'v2 = bool has no Lean counterpart. nsSub, alistSub and alist_rel_restr in the translation all keep two value types.",
+   "repair": "def nsSub_compute {M : Type u} {N : Type v} {V : Type w} {V' : Type _} :\n    List M → (Ident M N → V → V' → Prop) → Namespace M N V → Namespace M N V' → Prop\n  | path, R, .Bind e1V e1M, .Bind e2V e2M =>\n    alistSub (fun k v1 v2 => R (mk_id (REVERSE path) k) v1 v2) e1V e2V ∧\n    alist_rel_restr_mem e1M e2M (fun k v1 _ v2 => nsSub_compute (k :: path) R v1 v2)\n      (MAP FST e1M)\ntermination_by _ _ e1 _ => sizeOf e1\ndecreasing_by\n  rename_i h\n  have := sizeOf_ALOOKUP e1M _ _ h\n  simp\n  omega",
+   "confidence": 0.72,
+   "lean_check": "import CmlTS.NamespaceProps\n\nnoncomputable example : List Unit → (Ident Unit Unit → Nat → Nat → Prop) → Namespace Unit Unit Nat → Namespace Unit Unit Nat → Prop :=\n  @nsSub_compute Unit Unit Nat\n\nexample : True := by\n  fail_if_success\n    (have h : List Unit → (Ident Unit Unit → Nat → Bool → Prop) → Namespace Unit Unit Nat → Namespace Unit Unit Bool → Prop := nsSub_compute)\n  trivial\n",
+   "hol4_check": "nsSub_compute [] (\\(i:('m,'n) id) (x:num) (y:bool). T) (Bind [] []) (Bind [] [])"
+  }
+ ]
+}

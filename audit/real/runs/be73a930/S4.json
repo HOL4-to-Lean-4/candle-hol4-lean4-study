@@ -1,0 +1,94 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "In HOL4 (`typeSysPropsScript.sml:1502`), `type_def_to_ctMap` has no type annotations and leaves `tvs`, `tn`, and `id` as three independent polymorphic type parameters. Lean (`TypeSysProps.lean:35`) monomorphizes them to `List tvarN`, `mlstring`, and `type_ident`, restricting the definition to a special case."
+  },
+  {
+   "id": "F2",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "Lean (`TypeSysProps.lean:43`) maps all mismatched inputs to the constant `ARB`, proving `type_def_to_ctMap tenvT 0 [] [i] = type_def_to_ctMap tenvT 1 [] [i]` by `rfl`. HOL4's `Definition` (`TotalDefn.sml:54,882`; `Defn.sml:617`) saves only the `[]/[]` and `cons/cons` equations plus induction (deleting support defs), leaving that equation open."
+  },
+  {
+   "id": "F3",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "In HOL4 (`typeSoundInvariantsScript.sml:28`, `typeSysPropsScript.sml:79`), `tenv_val_ok` and `tenv_val_ok_nsEmpty` are polymorphic in both namespace key types. Lean (`TypeSysProps.lean:55`) uses monomorphic `tenv_val_ok` over `tenv_val`, fixing both key types to `modN` and `varN` and yielding only a special case."
+  },
+  {
+   "id": "F4",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "In HOL4 (`typeSoundInvariantsScript.sml:24`, `typeSysPropsScript.sml:85`), `tenv_ctor_ok` ignores the namespace keys and the third tuple component, making `tenv_ctor_ok_nsEmpty` polymorphic in three independent type parameters. Lean (`TypeSysProps.lean:58`) fixes all three via `tenv_ctor`, stating only a weaker special case."
+  },
+  {
+   "id": "F5",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "In HOL4 (`typeSoundInvariantsScript.sml:20`, `typeSysPropsScript.sml:91`), `tenv_abbrev_ok` and `tenv_abbrev_ok_nsEmpty` are polymorphic in both namespace key types. Lean (`TypeSysProps.lean:61`) specializes them to `modN` and `typeN` via `tenv_abbrev`, making the Lean theorem a special case."
+  },
+  {
+   "id": "F6",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "In HOL4 (`typeSysPropsScript.sml:498`), `tenv_abbrev_ok_lookup` is polymorphic in both key types shared by `tenvT` and `tn`. Lean (`TypeSysProps.lean:270`) fixes `tenvT : tenv_abbrev` and `tn : Ident modN typeN`, excluding non-string key instances and weakening the statement to a special case."
+  },
+  {
+   "id": "F7",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "In HOL4 (`typeSysPropsScript.sml:531`), `tenv_ctor_ok_merge` is polymorphic in both namespace key types and the stored identifier type of `tenvC1` and `tenvC2`. Lean (`TypeSysProps.lean:287`) fixes all three via `tenv_ctor`, stating only a monomorphic special case."
+  },
+  {
+   "id": "F8",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "In HOL4 (`typeSysPropsScript.sml:542`), `tenv_ctor_ok_lookup` is polymorphic in both namespace key types and the type of `tn`. Lean (`TypeSysProps.lean:294`) restricts `tenvC : tenv_ctor`, `cn : Ident modN conN`, and `tn : type_ident`, yielding a weaker special case."
+  },
+  {
+   "id": "F9",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "In HOL4 (`typeSysPropsScript.sml:1512`), `mem_type_def_to_ctMap` inherits all three polymorphic type parameters of `type_def_to_ctMap` on `tds`, `ids`, and `x`. Lean (`TypeSysProps.lean:715`) fixes them to `List tvarN`, `mlstring`, and `type_ident`, making the theorem a special case."
+  },
+  {
+   "id": "F10",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "In HOL4 (`typeSysPropsScript.sml:1594`), `type_def_to_ctMap_mem` leaves the `tvs`, `tn`, and `tids` element types polymorphic. Lean (`TypeSysProps.lean:740`) restricts `tids` to `List type_ident` and fixes both declaration fields, stating only a monomorphic special case."
+  },
+  {
+   "id": "F11",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "In HOL4 (`typeSoundInvariantsScript.sml:78`, `typeSysPropsScript.sml:1706`), `add_tenvE` only binds short `varN` names, so `nsLookup_add_tenvE1` is polymorphic in the module-key type of `tenvV`. Lean (`TypeSysProps.lean:769`) fixes `tenvV : tenv_val` (`modN`), yielding a special case."
+  },
+  {
+   "id": "F12",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "In HOL4 (`typeSysPropsScript.sml:1718`), `nsLookup_add_tenvE2` only uses `Short n` and `add_tenvE`, leaving the module-key type of `tenvV` polymorphic. Lean (`TypeSysProps.lean:776`) fixes `tenvV : tenv_val` (`modN`), making the theorem a weaker special case."
+  },
+  {
+   "id": "F13",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "In HOL4 (`typeSysPropsScript.sml:1730`), `nsLookup_add_tenvE3` is polymorphic in the module-key type shared by `tenvV`, `mn`, and `n`. Lean (`TypeSysProps.lean:783`) fixes `tenvV : tenv_val`, `mn : modN`, and `n : Ident modN varN`, yielding a special case."
+  },
+  {
+   "id": "F14",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "In HOL4 (`typeSysPropsScript.sml:1741`), `add_tenvE_bvl` operates only on short bindings and is polymorphic in the module-key type of `tenvV`. Lean (`TypeSysProps.lean:790`) fixes `tenvV : tenv_val` (`modN`), stating only a monomorphic special case."
+  },
+  {
+   "id": "F15",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "In HOL4 (`typeSystemScript.sml:477`, `typeSysPropsScript.sml:1900`), `build_ctor_tenv` and `tenv_ctor_ok` leave both the `tis` element type and the output namespace's module-key type polymorphic in `check_ctor_tenv_ok`. Lean (`TypeSysProps.lean:812`) fixes them to `type_ident` and `modN`, yielding a special case."
+  }
+ ]
+}

@@ -1,0 +1,22 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "HOL4 introduces int_div by new_specification guarded by ~(j = 0). The saved theorems I found (INT_DIV, INT_DIV_NEG, INT_DIV_0, INT_DIV_UNIQUE, INT_DIV_P, INT_DIV_REDUCE, INT_DIV_EDIV, cv_int_div) all have a nonzero divisor; the emit FAIL theorem returns i / 0 itself. Each i / 0 is therefore open and may vary with i. Lean's shared ARB proves int_div 1 0 = int_div 2 0."
+  },
+  {
+   "id": "F2",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "int_mod comes from new_specification guarded by ~(j = 0). The saved theorems found (INT_MOD, INT_DIVISION, INT_MOD_UNIQUE, INT_MOD_REDUCE, INT_MOD_EMOD, cv_int_mod) only concern nonzero divisors, and EMOD_DEF merely names i % ABS j. Values at divisor 0 are open. Lean returns one ARB : Int, proving int_mod 1 0 = int_mod 2 0, and also int_mod 1 0 = int_div 1 0."
+  },
+  {
+   "id": "F3",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "define_new_type_bijections specifies CHR and ORD only by CHR (ORD a) = a and r < 256 <=> ORD (CHR r) = r. CHR_11 is guarded by < 256, and ORD_CHR_COMPUTE's FAIL branch is just ORD (CHR n). For n >= 256 HOL4 gives no value and no equality between different arguments. Lean maps every such n to the same ARB, proving CHR 256 = CHR 257."
+  }
+ ]
+}

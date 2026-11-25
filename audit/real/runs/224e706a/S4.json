@@ -1,0 +1,16 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "In FMap.lean, FAPPLY returns ARB on missing keys, and Basic.lean defines ARB := default, so Lean proves FAPPLY (FEMPTY : FMap α Nat) x = 0. In HOL4's finite_mapScript.sml, FAPPLY FEMPTY x equals OUTL (INR one), and sumScript.sml defines OUTL via new_recursive_definition saving only OUTL (INL x) = x, leaving the missing-key value open. This is a true V-C violation."
+  },
+  {
+   "id": "F2",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "In FMap.lean, FUN_FMAP f P returns FEMPTY when ¬ FINITE P, so Lean proves FUN_FMAP (fun n : Nat => n) UNIV = FEMPTY since UNIV : Set Nat is infinite. In HOL4's finite_mapScript.sml, FUN_FMAP_DEF is introduced by new_specification guarded by FINITE P, leaving FUN_FMAP f P completely unconstrained on infinite sets. This is a true V-C violation."
+  }
+ ]
+}

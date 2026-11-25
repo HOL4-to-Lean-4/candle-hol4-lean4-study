@@ -1,0 +1,34 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "In HOL4 (typeSoundScript.sml:487), store_type_extension uses only FUNION and FLOOKUP with no type annotations, giving it polymorphic type ('a |-> 'b) -> ('a |-> 'b) -> bool. Lean (TypeSound.lean:20) monomorphizes its arguments and existential witness to tenv_store (FMap Nat store_t), making it a strict special case that cannot be applied to other finite-map types."
+  },
+  {
+   "id": "F2",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "In HOL4 (typeSoundInvariantsScript.sml:72), type_ctor uses only FLOOKUP and LENGTH with an unused identifier argument, so type_env_conv_thm (typeSoundScript.sml:296) is polymorphic over namespace name types, map keys, triple components, and list elements. Lean (TypeSound.lean:122) specializes these via ctMap, env_ctor, tenv_ctor, and monomorphic type_ctor, keeping only the two unused type variables and making the theorem a strict special case."
+  },
+  {
+   "id": "F3",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "In HOL4, both store_type_extension (typeSoundScript.sml:487) and weakS (weakeningScript.sml:19, defined via SUBMAP) are polymorphic over arbitrary ('a |-> 'b) finite maps, so store_type_extension_weakS (typeSoundScript.sml:493) holds for all key and value types. Lean (TypeSound.lean:211) restricts quantification to tenv_store (FMap Nat store_t), making the statement a monomorphic special case."
+  },
+  {
+   "id": "F4",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "In HOL4, store_type_extension is polymorphic over ('a |-> 'b), so store_type_extension_refl (typeSoundScript.sml:502) quantifies over finite maps of arbitrary key and value types. Lean (TypeSound.lean:216) restricts tenvS to tenv_store (FMap Nat store_t), yielding a strictly weaker monomorphic special case."
+  },
+  {
+   "id": "F5",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "In HOL4, store_type_extension is polymorphic over ('a |-> 'b), so store_type_extension_trans (typeSoundScript.sml:510) holds for any three finite maps sharing arbitrary key and value types. Lean (TypeSound.lean:220) restricts s1, s2, and s3 to tenv_store (FMap Nat store_t), making the theorem a monomorphic special case."
+  }
+ ]
+}

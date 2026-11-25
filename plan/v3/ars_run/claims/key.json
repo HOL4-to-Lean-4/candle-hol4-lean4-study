@@ -1,0 +1,278 @@
+{
+  "checker": "audit_panel_claims/1",
+  "seats": [
+    "eic",
+    "methodology",
+    "domain",
+    "perspective",
+    "da"
+  ],
+  "unread": [],
+  "manuscript_sha256": "e4923360d6d271c6cfc7cd413a1b5bdcaf6db2bbd587f9f68f9228ca820c4d99",
+  "items": [
+    {
+      "claim_id": "c001",
+      "seat": "domain",
+      "finding_id": "W7",
+      "text": "No related work on evaluating autoformalisation faithfulness or on large-scale porting\n**Severity**: Minor\n**Evidence Anchor**: absence: §2 What is known already — expected prior work on evaluating statement faithfulness in autoformalisation and on large library ports; checked Part A, §1, §2, §10 Research questions, Threats to validity\n**Confidence**: 3 — familiar with the benchmarks; their coverage of this setting is limited\nThe audit experiment measures how well LLMs judge statement faithfulness. Benchmarks such as miniF2F and ProofNet, and alignment evaluators such as FormalAlign, are the obvious comparison points for detection and false-alarm measures, even though they target mathematics rather than language semantics. The Lean 3 to Lean 4 Mathlib port (Mathport plus human repair) is the main large-port precedent for the Phase 2 claims. Candle itself should be cited for the target's provenance."
+    },
+    {
+      "claim_id": "c002",
+      "seat": "domain",
+      "finding_id": "W1",
+      "text": "Fixed defaults for unspecified values are a valid model in the baselines but a seeded defect in §8\n**Severity**: Major\n**Evidence Anchor**: text: §8 Mutants \"unspecified values fixed to a default\"\n**Confidence**: 5 — HOL4 definitional semantics and Lean modelling of underspecification\nPart B accepts Sonnet's fixed values (`RESULT (Clash t) = t`, `CHR n = CHR 0`, `FUN_FMAP` on infinite sets) as \"each a model of the HOL4 spec\". It also accepts Opus fixing `HD []` to a single `ARB` because no target is affected. §8, however, seeds exactly this change (`HD []` fixed to a default) as a defect, so any detector that flags it is scored as correct and any that accepts it as wrong. Under a statement-meaning criterion, a fixed default is a sound refinement: every HOL4 theorem about the constant still holds. It makes the Lean theory strictly stronger, so equations such as `HD [] = ARB` become provable in Lean but not in HOL4. That matters for provability and for the later proofs, not for whether a frozen statement is faithful. The plan needs one explicit fidelity definition (statement meaning, conservativity of the definitional theory, or both) and must score both the baselines and the mutants against it. Otherwise the detection rate and false-alarm rate for this class are undefined. If conservativity is the criterion, the baseline verdicts of \"no meaning defects\" need revisiting for Opus and Sonnet."
+    },
+    {
+      "claim_id": "c003",
+      "seat": "eic",
+      "finding_id": "W8",
+      "text": "Plan text is stale relative to measured results\n**Problem**: The \"What is known\" section reports two baselines and two mistaken auditors, while part B reports four runs and a third auditor making the same claim; the no-lessons ablation and Sonnet arm are still described as future or conditional.\n**Evidence Anchor**: `text: \"Two Claude auditors gave the same wrong reason for a correct verdict.\"`\n**Why it matters**: Readers of the plan cannot tell which design decisions are still open.\n**Suggestion**: Update the plan to version 3.3 with part B's results folded in and the ablation section rewritten as completed work.\n**Severity**: Minor\n**Confidence**: 5 — direct comparison of parts B and C"
+    },
+    {
+      "claim_id": "c004",
+      "seat": "da",
+      "finding_id": "M1",
+      "text": "D3\n\nInternal contradiction on what counts as a defect. The mutant list seeds fixing an unspecified value to a default as a defect, yet the Opus and Sonnet baselines do exactly this and are reported as having no meaning defects. Either the baselines have defects or the mutant class is a decoy; the plan must define meaning fidelity once and apply it to both.\n\nn/a, not norm-based\n\nn/a\n\n**Evidence Anchor**: text: Section C Mutants \"unspecified values fixed to a default\" and Section B item 2 \"is provable in Opus only; no target affected\""
+    },
+    {
+      "claim_id": "c005",
+      "seat": "da",
+      "finding_id": "M8",
+      "text": "D3\n\nContribution (3) cannot carry the weight given to it. Proving frozen statements shows they are provable, not that they mean what HOL4 means; a faithful-looking but stronger definition can make more statements provable. It is also the kind of porting result the venue call discounts, so it cannot shore up either the trust claim or the significance claim.\n\nn/a, not norm-based\n\nn/a\n\n**Evidence Anchor**: text: Section A \"the call says porting a proof to another prover yields no new insight by default\""
+    },
+    {
+      "claim_id": "c006",
+      "seat": "methodology",
+      "finding_id": "W11",
+      "text": "\"Lessons change nothing\" rests on one run and an LLM comparison\n**Problem**: The no-lessons conclusion comes from a single Opus run, judged against the baseline by an Opus comparison agent on a target where the with-lessons runs were already clean, so a ceiling effect is likely.\n**Evidence Anchor**: text: Part A \"removing study 1's lessons from the briefs changes nothing\"\n**Why it matters**: It is stated as a measured finding in contribution (1). The planned known-defect target is the right test, but the claim should wait for it.\n**Suggestion**: State the Candle result as no detected difference at ceiling, and draw the lessons conclusion from the type-soundness closure with repeated runs.\n**Severity**: Minor\n**Confidence**: 4 — core expertise: ablation design"
+    },
+    {
+      "claim_id": "c007",
+      "seat": "da",
+      "finding_id": "C1",
+      "text": "D3\n\nCircular premise. Contribution (1), translation now works, is established only by single-family Claude checking, which contribution (2) is motivated by showing to be unreliable. The headline finding is therefore untested by the plan's own standard, and the reframing's thesis (translation solved, trust open) asserts the conclusion the certification method is meant to test. Repairable by reordering: measure the checkers first, then apply the best grounded setup to the baselines before claiming fidelity.\n\nn/a, not norm-based\n\nn/a\n\n**Evidence Anchor**: text: Section B Note \"is judged by Claude auditors/comparison agents plus targeted HOL4 queries\" and Section A \"Translation now works\""
+    },
+    {
+      "claim_id": "c008",
+      "seat": "eic",
+      "finding_id": "W9",
+      "text": "Anonymisation plan is not stated\n**Problem**: The plan names the organization repositories and depends on the author's own FormaliSE paper, but says nothing about how the submission and artifact will be anonymised beyond the Zenodo upload.\n**Evidence Anchor**: `text: \"All plans, briefs, scripts, records and results live in the organization repository\"`\n**Why it matters**: Lightweight double-blind review requires third-person self-citation and scrubbed repository names in paper and artifact.\n**Suggestion**: Add an anonymisation checklist covering repository names, commit metadata, transcripts and the self-citation of study 1.\n**Severity**: Minor\n**Confidence**: 4 — ITP double-blind conventions"
+    },
+    {
+      "claim_id": "c009",
+      "seat": "methodology",
+      "finding_id": "W3",
+      "text": "Audit brief names the seeded defect classes\n**Problem**: Mutant types are drawn from the classes the audit briefs list, and auditors receive that same brief. Detection is therefore partly checklist recall rather than open-ended auditing.\n**Evidence Anchor**: text: §Audit experiment, Copies \"The auditors get the same brief as the baseline audits, with no hint that defects were seeded.\"\n**Why it matters**: Detection rates will overstate performance on defects outside the brief, which is what certification of a new development requires.\n**Suggestion**: Cross brief condition (with-lessons vs no-lessons brief) with setup, or hold out some mutant classes not named in any brief and report them separately.\n**Severity**: Major\n**Confidence**: 4 — core expertise: fault-injection validity"
+    },
+    {
+      "claim_id": "c010",
+      "seat": "domain",
+      "finding_id": "W6",
+      "text": "An extra Nonempty instance is seeded as a defect, although HOL types are inhabited\n**Severity**: Minor\n**Evidence Anchor**: text: §8 Mutants \"type signatures: an unused binder at a fixed type, or an extra\"\n**Confidence**: 4 — HOL type inhabitation versus Lean typeclass hypotheses\nEvery HOL4 type is nonempty by construction, and the baselines model unspecified values with `Classical.epsilon`, which needs `Nonempty`. An added `[Nonempty α]` or `[Inhabited α]` on a polymorphic statement is therefore often a faithful encoding of a HOL invariant, not a defect. It becomes a defect only where it changes which instances the statement covers in practice. The mutant list should say which binders count, or this mutant should be reclassified as a decoy."
+    },
+    {
+      "claim_id": "c011",
+      "seat": "domain",
+      "finding_id": "W2",
+      "text": "No positioning against kernel-term export or symbolic importers\n**Severity**: Major\n**Evidence Anchor**: absence: §2 What is known already and Part A contributions — expected positioning against typed HOL4 kernel-term export and symbolic importers (OpenTheory, HOL importers into Isabelle, Dedukti/Logipedia); checked Part A, Part B, §1, §2, §5, §6, §7, §8, Threats to validity\n**Confidence**: 4 — interoperability literature; exact HOL4 export coverage for this package not verified\nThe translators read HOL4 scripts, including ML-built theorems (`SIMP_CONV`, `EVAL`, `CONJUNCTS`). Several of the HOL4 questions in §6 (which overload `(a,b)` resolves to, ML-built statement shapes, the inferred types of unused binders) exist only because of that choice. HOL4 can print or export every stored theorem as a fully typed kernel term, and HOL4 has OpenTheory support. With such an export, these questions become mechanical, and a symbolic statement translator with a fixed constant map would give an independent reference translation. There is a long line of work on this: OpenTheory, the HOL importers into Isabelle/HOL, scalable LCF-style proof translation from HOL Light to Isabelle, and HOL-to-Dedukti translation. The plan cites none of it and does not explain why an LLM audit is needed where a kernel-term export plus a constant map would do. The gap is real in part: importers yield theorems about imported constants rather than idiomatic Lean types such as `Nat`, `Int` or `String`, and the gap lies in this mapping step. The paper must argue this, ideally with a kernel-term-export baseline for statement shapes. This is the basis of the D2 block, because the main contribution in Part A rests on it."
+    },
+    {
+      "claim_id": "c012",
+      "seat": "da",
+      "finding_id": "M4",
+      "text": "D3\n\nMotivating evidence does not match the claim it motivates. The shared Claude error is a wrong reason for a correct verdict, not a missed defect or a false alarm, so it shows correlated reasoning, not that single-family audit misses defects. The paper should not present it as evidence that cross-family audit detects more.\n\nn/a, not norm-based\n\nn/a\n\n**Evidence Anchor**: text: Section C What is known \"Two Claude auditors gave the same wrong reason for a correct verdict.\""
+    },
+    {
+      "claim_id": "c013",
+      "seat": "da",
+      "finding_id": "M7",
+      "text": "D3\n\nGrounding runs only on accepted findings, so a true defect that Neon wrongly rejects is never checked against HOL4 or Lean. In the main workflow this leaves the reviewer's false negatives invisible, which weakens the claim that every decision is grounded rather than taken on a model's word.\n\nn/a, not norm-based\n\nn/a\n\n**Evidence Anchor**: text: Section C Grounding \"For every accepted finding that makes a claim about meaning, a script runs the cited check\""
+    },
+    {
+      "claim_id": "c014",
+      "seat": "methodology",
+      "finding_id": "W8",
+      "text": "Reason-correctness and finding matching have no named scorer\n**Problem**: The plan measures how many reasons are wrong and must also match findings to mutants, but it removes the human expert and says the author does not adjudicate. It names no rater, rubric or agreement check.\n**Evidence Anchor**: text: §Audit experiment, Measures \"how many reported reasons are wrong even when the verdict is right\"\n**Why it matters**: If an LLM or the author scores these measures without a protocol, the measure inherits the judge's errors, which is the failure the study sets out to measure.\n**Suggestion**: Pre-specify a matching rule (declaration plus mutation class) and a rubric for reason correctness. Have two scorers apply it blind to setup, one human, and report agreement.\n**Severity**: Major\n**Confidence**: 4 — core expertise: LLM-judge validation"
+    },
+    {
+      "claim_id": "c015",
+      "seat": "methodology",
+      "finding_id": "W7",
+      "text": "No deterministic-scan baseline\n**Problem**: The structural scans already target extra typeclass hypotheses and binder types that differ from HOL4's, which are two of the seeded mutant classes, but no scan-only setup is scored.\n**Evidence Anchor**: text: §Workflow item 4 \"extra or missing typeclass hypotheses\"\n**Why it matters**: LLM detection of these classes cannot be credited to the auditors if a script finds them for free.\n**Suggestion**: Add S0 (structural scans only) and report each LLM setup's increment over S0.\n**Severity**: Major\n**Confidence**: 4 — core expertise: baseline selection in tool evaluation"
+    },
+    {
+      "claim_id": "c016",
+      "seat": "perspective",
+      "finding_id": "W6",
+      "text": "Adjacent-field positioning and key terms are missing\n**Problem**: Terms such as \"meaning defect\", \"form-only difference\", \"by-design difference\", \"pattern completion\" and \"grounding\" carry the results but are not defined for readers outside ITP. The plan also does not position the validator-plus-reviewer design against related work on N-version diversity, LLM-as-judge reliability, or mutant validity.\n**Evidence Anchor**: absence: §1 Goal and framing and §2 What is known already — expected definitions of the outcome terms and positioning against N-version, LLM-as-judge and mutation-testing work; checked section A, section B, §1, §2, §8, §Research questions, §Threats to validity\n**Why it matters**: The audit method is the part of the paper most likely to be cited outside ITP. Without the definitions and the positioning, readers from those fields cannot judge the contribution.\n**Suggestion**: Add a short glossary-style paragraph defining the outcome categories, and one paragraph of related work from the fields listed below. On mutant validity, cite evidence on whether mutants stand in for real faults, and use the two real study-1 defects (CARD, integer division) as a check on that.\n**Severity**: Minor\n**Confidence**: 4 — core expertise for the evaluation literature; outsider for ITP terminology"
+    },
+    {
+      "claim_id": "c017",
+      "seat": "eic",
+      "finding_id": "W3",
+      "text": "\"Certification\" overstates an empirical audit measure\n**Problem**: The plan calls the workflow's value certification, but what it measures is detection and false-alarm rates on seeded defects from known classes.\n**Evidence Anchor**: `text: \"the workflow's value is certification: evidence that a translation can be trusted\"`\n**Why it matters**: At ITP, certification connotes a formal guarantee; the term invites an objection the data cannot answer.\n**Suggestion**: Use \"audit\" or \"validation evidence\" and reserve stronger wording for what the Lean kernel and HOL4 actually check.\n**Severity**: Minor\n**Confidence**: 4 — ITP terminology norms"
+    },
+    {
+      "claim_id": "c018",
+      "seat": "eic",
+      "finding_id": "W6",
+      "text": "No outline or page budget for the 16-page paper\n**Problem**: The plan has no section-by-section allocation, figure or table plan, or statement of what goes to appendix or artifact, despite five RQs, five audit setups, two provers and three ablations.\n**Evidence Anchor**: `absence: whole study plan and part A — expected a page budget and figure/table plan for the 16-page LIPIcs paper; checked Goal and framing, Research questions, Timeline, Decisions taken, part A`\n**Why it matters**: Writing is scheduled for 1 to 15 February only, and the call forbids substantial AI-generated text, so the author must draft by hand in two weeks; an unplanned paper of this breadth is unlikely to fit.\n**Suggestion**: Add a one-page paper outline with page counts per section, the two or three key tables and figures, and an explicit list of results deferred to the artifact.\n**Severity**: Major\n**Confidence**: 4 — experience with LIPIcs page limits"
+    },
+    {
+      "claim_id": "c019",
+      "seat": "domain",
+      "finding_id": "W4",
+      "text": "Proving the statements is presented as certification of fidelity\n**Severity**: Major\n**Evidence Anchor**: text: Part A contribution 3 \"proving the 278 statements in Lean (kernel-checked, frozen statements, standard axioms only)\"\n**Confidence**: 4 — standard ITP fidelity reasoning\nKernel-checked proofs show that the Lean statements are true relative to the Lean definitions. They do not show that statements or definitions match HOL4. A weakened conclusion, a dropped conjunct, an added hypothesis, or a definition that diverges consistently between statement and proof is still provable. Proving exposes only translations that are too strong. Without a human, the plan also has no criterion for telling a stuck proof (prover failure within budget) from a false statement (a translation defect). RQ1 (\"do proof attempts again expose defects\") needs such a criterion, for example a Lean counterexample or a proof of the negation before a statement counts as false. The paper should present proving as one-sided evidence and say which mutant classes in §8 it can and cannot detect."
+    },
+    {
+      "claim_id": "c020",
+      "seat": "methodology",
+      "finding_id": "W1",
+      "text": "Cross-family benefit is confounded with staging and grounding\n**Problem**: The setups change family, number of stages and oracle access together. There is no same-family two-stage control (Claude auditor then Claude reviewer) and no single-model-plus-grounding control, so an S4/S5 advantage cannot be attributed to crossing families. If S4 filters S1's output, S4 and S5 are also bounded above by S1 on detection by construction.\n**Evidence Anchor**: text: §Audit experiment, Setups \"Astra followed by Neon review: the workflow as designed.\"\n**Why it matters**: The reframed main contribution is a cross-family certification method measured against single-family auditors. Without these controls the headline attribution is not licensed.\n**Suggestion**: Add S6 (Opus audit then a separate Claude reviewer, same instructions as Neon) and S7 (Opus alone with the HOL4/Lean grounding tool). State whether S4 reuses S1's output, and frame the hypothesis as precision gained at a recall cost.\n**Severity**: Critical\n**Confidence**: 4 — core expertise: experimental design and LLM-judge evaluation"
+    },
+    {
+      "claim_id": "c021",
+      "seat": "methodology",
+      "finding_id": "W6",
+      "text": "Mutant set lacks provable but silently wrong defects\n**Problem**: The listed hypothesis and quantifier mutants (dropped hypothesis, strengthened conclusion) mostly make statements false, so proof attempts would catch them anyway. There are no weakened-conclusion or extra-hypothesis mutants that stay provable while changing meaning. The script records an \"expected effect\", but nothing checks that effect with the oracle.\n**Evidence Anchor**: text: §Audit experiment, Mutants \"a dropped hypothesis, a swapped quantifier, a strengthened conclusion\"\n**Why it matters**: Certification matters most where proofs cannot help. The experiment underweights that case and so cannot show the method's distinctive value.\n**Suggestion**: Balance provable-silent against unprovable mutants, tag each mutant by whether proving would expose it, report detection separately for the two groups, and confirm each expected effect with a HOL4 or Lean check.\n**Severity**: Major\n**Confidence**: 4 — core expertise: mutation-operator design"
+    },
+    {
+      "claim_id": "c022",
+      "seat": "eic",
+      "finding_id": "W5",
+      "text": "Headline translation finding rests on same-family judgement\n**Problem**: Contribution (1) says translation now works without meaning defects, but this is judged by Claude auditors and comparison agents, the same family the plan shows making shared wrong claims, and the statements are not yet proved.\n**Evidence Anchor**: `text: \"the 278 statements have not been proved in Lean yet\"`\n**Why it matters**: A stated contribution of the paper is currently unsupported by the kind of evidence the paper itself argues is needed.\n**Suggestion**: Present the finding as conditional until the cross-family audit and Lean proofs confirm it, and report it from those results.\n**Severity**: Major\n**Confidence**: 3 — editorial reading; methodology detail is another seat's remit"
+    },
+    {
+      "claim_id": "c023",
+      "seat": "perspective",
+      "finding_id": "W1",
+      "text": "\"Certification\" claims more than known-mutant recall can show\n**Problem**: Section A names the main contribution a certification method and frames the open problem as certifying that a translation can be trusted. The planned evidence is detection rate on 36 seeded defects drawn from classes already known from study 1, which the threats section itself says does not cover unknown classes. In assurance-case terms, recall on known mutants is evidence about the checker, not an argument that a given translation has no remaining defects. The gap matters most in Phase 2, where the plan relies on the same checks for closures with new kinds of content, such as lazy lists, PEG parsing and unification.\n**Evidence Anchor**: text: §A Proposed reframing \"The open problem is certifying that a translation can be trusted.\"\n**Why it matters**: AI-assurance and safety readers take \"certification\" to mean a bounded claim about residual risk. If the paper uses the word for known-class recall, that audience will read the results as a much stronger guarantee than the experiment supports.\n**Suggestion**: Either replace \"certification\" with \"measured audit evidence\" or \"checker validation\", or state the claim as an explicit assurance argument: what the 278 statements are claimed to satisfy, which evidence supports each leg (oracle-grounded findings, mutant recall per class, proofs that go through), and which residual risks stay open. Treat proving all 278 statements as the strongest evidence leg, and report which defect classes the oracle can and cannot decide. Adding a few mutants from classes the briefs do not name would test generalisation directly.\n**Severity**: Major\n**Confidence**: 4 — core expertise: assurance cases and evaluation of AI checkers"
+    },
+    {
+      "claim_id": "c024",
+      "seat": "perspective",
+      "finding_id": "W2",
+      "text": "Cross-family independence is assumed from within-family evidence\n**Problem**: The motivating evidence is a shared wrong claim made by three Claude agents. That shows correlated error within one family. It does not show that GPT-6.2 Astra and Gemini Neon fail independently of Claude or of each other. All three families may share pretraining sources, including the public CakeML and Candle sources and HOL4 documentation, which is the mechanism most likely to produce the \"pattern completion\" misconception. The three Claude cases were also not independent draws: they shared briefs, and two of them saw leaked author chat messages. The plan measures overlap between families, which is good, but it does not say how overlap will be tested against what independent failures would predict, or what result would refute the independence premise.\n**Evidence Anchor**: text: §A Proposed reframing \"three Claude auditors independently made the same wrong claim about HOL4 semantics\"\n**Why it matters**: Correlated failure across diverse versions is well documented in software engineering (N-version programming) and is now being measured for LLMs. A reader from those fields will ask whether \"different family\" actually buys diversity. Without that test, the S4 versus S3 comparison could reflect validator strength, not diversity.\n**Suggestion**: Report pairwise joint-miss rates per defect class for S1 to S3 and compare them with the product of the marginal miss rates, as Knight and Leveson did for multiversion programs. Add a same-family two-stage control (Opus followed by Opus review), so that the effect of family diversity is separated from the effect of having two stages. Also stop calling the three Claude cases \"independent\", and state that the count is two auditors plus one comparison agent (section C says \"Two Claude auditors\").\n**Severity**: Major\n**Confidence**: 4 — core expertise: correlated model errors"
+    },
+    {
+      "claim_id": "c025",
+      "seat": "methodology",
+      "finding_id": "W2",
+      "text": "Too few defects and no repeats for per-type detection rates\n**Problem**: 36 defects over about thirteen subtypes gives two to three instances per subtype, and each setup runs once per copy. Per-type rates will be coarse fractions with unmeasured run-to-run noise, although the plan itself runs validation three times to measure variation.\n**Evidence Anchor**: text: §Audit experiment, Copies \"6 copies, each with 6 seeded defects and 3 decoys placed at random\"\n**Why it matters**: Differences between setups of one or two detections cannot be separated from nondeterminism, so RQ2 comparisons may be uninterpretable.\n**Suggestion**: Run each setup at least three times per copy, report pooled rates with exact binomial or bootstrap intervals, and report per-type results descriptively only. Alternatively, raise the defect count per subtype by using more copies.\n**Severity**: Major\n**Confidence**: 4 — core expertise: mutation-testing study design"
+    },
+    {
+      "claim_id": "c026",
+      "seat": "methodology",
+      "finding_id": "W9",
+      "text": "Cost matching and output reuse unspecified\n**Problem**: The single auditors S1 to S3 use one model call per copy while S4 and S5 use two or more, and the plan does not say whether S4 reuses S1's run.\n**Evidence Anchor**: absence: §Audit experiment, Setups and Budget — expected a statement of output reuse across S1, S4 and S5 and a cost-matched single-family comparison; checked Setups, Measures, Budget, Budget estimate table\n**Why it matters**: A multi-stage pipeline can look better simply by spending more.\n**Suggestion**: Report detection and false alarms per dollar, and add a cost-matched single-family arm (for example the union or a vote of two Opus runs).\n**Severity**: Minor\n**Confidence**: 4 — core expertise: cost-aware evaluation"
+    },
+    {
+      "claim_id": "c027",
+      "seat": "methodology",
+      "finding_id": "W5",
+      "text": "HD [] mutant contradicts the baseline's own labelling\n**Problem**: Fixing an unspecified value to a default is seeded as a defect, yet the baseline analysis accepts Opus's and Sonnet's fixed unspecified values as valid models of the HOL4 spec with no meaning difference.\n**Evidence Anchor**: text: §Audit experiment, Mutants \"unspecified values fixed to a default\"\n**Why it matters**: An auditor that correctly reports no meaning change would be scored as a miss, so the label is not valid ground truth.\n**Suggestion**: Either drop this class, or define precisely which fixes count as defects (for example ones that make a false HOL4 statement provable) and verify each label with HOL4 before the freeze.\n**Severity**: Major\n**Confidence**: 3 — adjacent field: relies on the plan's own HOL4 semantics account"
+    },
+    {
+      "claim_id": "c028",
+      "seat": "methodology",
+      "finding_id": "W10",
+      "text": "No pre-specified analysis or decision rule\n**Problem**: RQ2 asks whether two families \"beat\" a single auditor, but no primary metric, uncertainty interval, paired test or threshold is pre-specified.\n**Evidence Anchor**: absence: §Audit experiment and §Research questions — expected a primary metric, interval method and decision rule for RQ2; checked Measures, Budget, Research questions, Threats to validity\n**Why it matters**: With many per-type and per-setup comparisons, post-hoc choice of the favourable contrast is easy.\n**Suggestion**: Fix one primary contrast (for example S5 vs S3 precision and recall on pooled defects) with paired per-defect comparison and intervals, and label everything else exploratory.\n**Severity**: Minor\n**Confidence**: 4 — core expertise: evaluation statistics"
+    },
+    {
+      "claim_id": "c029",
+      "seat": "methodology",
+      "finding_id": "W4",
+      "text": "Clean-baseline ground truth is unproved\n**Problem**: False alarms \"on unchanged code\" and the Part A claim of \"no meaning defects\" both rest on Claude auditors, comparison agents and targeted HOL4 queries; the statements are not proved. No procedure decides whether a finding on unchanged code is a false alarm or a real defect.\n**Evidence Anchor**: text: Part B, Note \"the 278 statements have not been proved in Lean yet\"\n**Why it matters**: Misclassified real defects would inflate false-alarm rates for the best auditors and penalise exactly the behaviour the method rewards.\n**Suggestion**: Ground every unchanged-code finding by HOL4 query, Lean counterexample or proof before scoring, report an \"unresolved\" category, and run the planned proving on the baseline translation used for the mutants.\n**Severity**: Major\n**Confidence**: 4 — core expertise: ground-truth construction for evaluation"
+    },
+    {
+      "claim_id": "c030",
+      "seat": "eic",
+      "finding_id": "W1",
+      "text": "Two competing framings of the main contribution\n**Problem**: Version 3.2 frames the paper as testing whether study 1's workflow holds without a human expert (RQ1), while part A makes a certification method the main contribution and demotes the workflow question. The research questions still follow the older framing.\n**Evidence Anchor**: `text: \"the main contribution, a certification method: cross-family audit\"`\n**Why it matters**: Reviewers will judge the paper against its headline claim; with two headlines, neither is argued at full strength in 16 pages.\n**Suggestion**: Choose the audit/certification framing, rewrite the Goal section and RQ list around it, and move the workflow-holds question to a secondary RQ.\n**Severity**: Major\n**Confidence**: 4 — core editorial judgement on contribution framing"
+    },
+    {
+      "claim_id": "c031",
+      "seat": "perspective",
+      "finding_id": "W3",
+      "text": "Human engineering effort is not accounted for under the \"no human expert\" claim\n**Problem**: The plan removes the human adjudicator but keeps substantial human work: writing and revising briefs, building the mutants and decoys, building the HOL4 query tool, fixing merges (the Sonnet run needed a name fix at merge), deciding what goes back to Neon, and reading results. The ledger records model tokens, money and time but has no column for human hours. RQ1 and RQ5 are framed as replacing the human expert and as cost per theorem.\n**Evidence Anchor**: absence: §Costs and token usage and §Budget estimate — expected a record of author hours and manual interventions per phase; checked §Workflow step Records, §Costs and token usage, §Budget estimate, §Threats to validity, §Research questions\n**Why it matters**: For practitioners deciding whether to adopt the workflow, human effort is usually the main cost. A \"no human expert\" headline without that number invites the same criticism that hidden human-in-the-loop work attracts in other AI-automation claims.\n**Suggestion**: Add a human-effort log: date, task, minutes, and whether the step needed CakeML or HOL4 expertise. Report it next to the model costs, and say plainly which human steps carried expert knowledge. The briefs that carry study-1 lessons, for example, encode expert judgement even with no human adjudicator.\n**Severity**: Major\n**Confidence**: 4 — adjacent field: human-in-the-loop accounting in AI-automation evaluations"
+    },
+    {
+      "claim_id": "c032",
+      "seat": "eic",
+      "finding_id": "W2",
+      "text": "ITP porting bar is not explicitly answered\n**Problem**: The plan quotes the call's porting caveat but never states what ITP-specific insight the paper delivers beyond a port of Candle's closure.\n**Evidence Anchor**: `text: \"the call says porting a proof to another prover yields no new insight by default\"`\n**Why it matters**: A PC member applying the call literally could read Phase 1 proving as a port and discount the paper.\n**Suggestion**: State the transferable proof-engineering lesson up front, for example a catalogue of HOL4-to-Lean semantic gaps that defeat auditors and the measured effect of oracle grounding on them.\n**Severity**: Major\n**Confidence**: 4 — familiarity with ITP call norms"
+    },
+    {
+      "claim_id": "c033",
+      "seat": "eic",
+      "finding_id": "W4",
+      "text": "Delta from the author's FormaliSE 2027 paper is not stated\n**Problem**: Study 1 already used a Claude translator and a cross-family Gemini validator; the plan does not set out, in one place, which claims are new relative to that paper.\n**Evidence Anchor**: `text: \"which updates study 1 (the author's FormaliSE 2027 experience report, where a human expert was needed)\"`\n**Why it matters**: Without an explicit delta, reviewers may see overlap with a prior publication, and double-blind handling of the self-citation becomes harder.\n**Suggestion**: Add a short novelty statement: seeded-defect measurement, oracle grounding, removal of the human expert, and the second development, each tied to an RQ.\n**Severity**: Major\n**Confidence**: 4 — core editorial judgement"
+    },
+    {
+      "claim_id": "c034",
+      "seat": "da",
+      "finding_id": "M2",
+      "text": "D3\n\nSeeded classes leak into the auditor brief. Mutants are drawn from the classes the audit briefs name, and the auditors get that same brief, so detection rates measure recall of announced classes. This cannot support a general certification claim, which is the main contribution. The threats section concedes unknown classes are not measured, but the reframing still calls the method certification.\n\nn/a, not norm-based\n\nn/a\n\n**Evidence Anchor**: text: Section C Mutants \"from the classes the audit briefs name\" and Copies \"The auditors get the same brief as the baseline audits, with no hint that defects were seeded.\""
+    },
+    {
+      "claim_id": "c035",
+      "seat": "domain",
+      "finding_id": "W5",
+      "text": "The \"pattern completion\" error is described too broadly\n**Severity**: Minor\n**Evidence Anchor**: text: Part A motivating evidence \"three Claude auditors independently made the same wrong claim about HOL4 semantics\"\n**Confidence**: 4 — HOL4 TFL/`Define` behaviour\nHOL4's `Define` does complete missing patterns with `ARB`. The auditors' error was attributing that behaviour to constants defined through `Prim_rec`, recursion theorems or datatype destructors. Calling it a wrong claim about HOL4 semantics overstates the case, and §2 says two auditors while Part A says three. State the precise mechanism and the count per run. This also makes the motivating example more convincing to ITP readers."
+    },
+    {
+      "claim_id": "c036",
+      "seat": "eic",
+      "finding_id": "W7",
+      "text": "Scope too broad for one regular paper\n**Problem**: The budgeted work includes translation, validation rounds, the audit experiment, two ablations, a conditional Sonnet arm and two proving families, each a potential result section.\n**Evidence Anchor**: `table: Section \"Budget estimate\", item list`\n**Why it matters**: Breadth dilutes the single contribution ITP readers need to take away.\n**Suggestion**: Mark which arms are core to the chosen claim and which are reported only in the artifact or a follow-up.\n**Severity**: Minor\n**Confidence**: 4 — editorial scoping judgement"
+    },
+    {
+      "claim_id": "c037",
+      "seat": "domain",
+      "finding_id": "W3",
+      "text": "The HOL4/Lean oracle cannot settle most meaning questions, yet it is presented as ground truth\n**Severity**: Major\n**Evidence Anchor**: text: §1 item 2 \"HOL4 runs and Lean counterexamples check claims about meaning, so the study does not rely on a model's word.\"\n**Confidence**: 4 — limits of decision procedures and evaluation in both systems\nThe query tool answers four kinds of question: print, parse, ground evaluation, and a short proof attempt. Lean grounding uses `#eval` or `decide`. No kernel can check whether a Lean statement means the same as a HOL4 statement, because the two have no shared semantics. Ground evaluation also misses the usual defects: higher-order or quantified statements, inductive relations such as `type_lt`, and anything defined through `Classical.epsilon`. The baselines use `Classical.epsilon` for unspecified values, so those declarations are noncomputable and `#eval` cannot run on them. A failed short proof is not a refutation. In addition, a model writes the \"cited check\", so a check that is valid but irrelevant can still confirm a wrong finding. The paper should say which finding classes are decidable by grounding and which are not, report grounding as partial evidence, and validate the query construction itself, for example by checking that queries mention the constants at issue."
+    },
+    {
+      "claim_id": "c038",
+      "seat": "methodology",
+      "finding_id": "W12",
+      "text": "Motivating evidence counts and \"independent\" are loose\n**Problem**: Part A says three Claude auditors independently made the same wrong claim; the plan says two, and the third is a comparison agent. The runs shared a harness context, so \"independently\" is not established.\n**Evidence Anchor**: text: Part A \"three Claude auditors independently made the same wrong claim\"\n**Why it matters**: The shared-error motivation for crossing families is evidence of correlated error only if the instances are actually independent.\n**Suggestion**: Report the exact count and roles, and describe them as same-family agents in related sessions rather than as independent auditors.\n**Severity**: Minor\n**Confidence**: 3 — adjacent field: relies on the summaries in Part B"
+    },
+    {
+      "claim_id": "c039",
+      "seat": "da",
+      "finding_id": "M5",
+      "text": "D3\n\nToo few units for the planned per-type claims. 36 defects over roughly a dozen defect kinds gives about three per kind, and 6 copies per setup, so per-type detection rates and between-setup differences will not separate from run-to-run variation, which the plan itself expects to measure. Conclusions about one setup beating another need either more mutants or a pooled primary measure fixed in advance.\n\nn/a, not norm-based\n\nn/a\n\n**Evidence Anchor**: text: Section C Copies \"That gives 36 defects and 18 decoys in total.\" and Measures \"the detection rate per defect type\""
+    },
+    {
+      "claim_id": "c040",
+      "seat": "da",
+      "finding_id": "M3",
+      "text": "D3\n\nThe design cannot attribute any gain to cross-family checking. The only single-family setup is one Opus pass, while the cross-family setups have two model passes and optionally grounding. A same-family two-stage control is missing, so the claim that family diversity is what helps stays untested.\n\nn/a, not norm-based\n\nn/a\n\n**Evidence Anchor**: absence: Section C audit experiment Setups S1 to S5 — expected a same-family two-stage setup such as a Claude validator followed by a separate Claude reviewer, with and without grounding; checked Setups list, Measures, RQ2 and Section A contribution (2)"
+    },
+    {
+      "claim_id": "c041",
+      "seat": "da",
+      "finding_id": "M6",
+      "text": "D3\n\nOvergeneralisation from single runs on one closure. The claim that lessons change nothing rests on one no-lessons run on Candle, judged by an Opus agent against an Opus baseline. The plan's own known-defect target is meant to test this beyond Candle, but the reframing states the result before that test.\n\nn/a, not norm-based\n\nn/a\n\n**Evidence Anchor**: text: Section A \"removing study 1's lessons from the briefs changes nothing\" and Section B item 3 \"Opus-agent comparison with Opus baseline\""
+    },
+    {
+      "claim_id": "c042",
+      "seat": "perspective",
+      "finding_id": "W4",
+      "text": "Training-data contamination is acknowledged but not mitigated\n**Problem**: Contribution (1) says translation now works, at $7 to $31, without lessons. Both Candle and the study-1 closure are public, and the plan lists contamination as a threat with no mitigation. The no-lessons ablation cannot separate a capability from recall of the public development.\n**Evidence Anchor**: text: §Threats to validity \"CakeML and Candle are public, so all three model families may have seen them.\"\n**Why it matters**: ML-evaluation readers will discount any \"it now works\" claim on public benchmarks unless contamination is probed. The Phase 2 decision to let Sonnet translate the rest also rests on this generalisation.\n**Suggestion**: Add a small contamination probe. Options include renaming constants and permuting theory order in a sample of definitions, or translating a few HOL4 theories written or changed after the models' stated training cutoffs. Then compare defect and literalness rates. If that is not feasible, scope contribution (1) to public developments and say so in the abstract.\n**Severity**: Major\n**Confidence**: 3 — adjacent field: ML benchmark contamination; I cannot judge which HOL4 theories post-date each model's training data"
+    },
+    {
+      "claim_id": "c043",
+      "seat": "perspective",
+      "finding_id": "W7",
+      "text": "Practical value for CakeML maintainers is not addressed\n**Problem**: Phase 2 plans a separate Lean repository that mirrors CakeML. The plan does not say how the Lean copy stays in step as HOL4 CakeML changes, who maintains it, or whether CakeML developers were consulted about which milestones they would use.\n**Evidence Anchor**: absence: §Phase 2 more of CakeML — expected a maintenance and synchronisation plan and a statement of the intended users; checked §Phase 2 Repository, §Phase 2 Order, §Scope, §Threats to validity\n**Why it matters**: The practical impact claim for a migrated CakeML depends on whether anyone can maintain or use it once the study ends.\n**Suggestion**: Add a paragraph on keeping the copy in step, such as re-running the workflow on changed theories with the ledger used to estimate the cost, and name the intended users of each milestone.\n**Severity**: Minor\n**Confidence**: 3 — adjacent field: practical adoption of verified software artifacts"
+    },
+    {
+      "claim_id": "c044",
+      "seat": "perspective",
+      "finding_id": "W5",
+      "text": "Reproducibility under closed, drifting models and CLIs\n**Problem**: The validator is described as the latest Codex model, and the models run through vendor CLIs that may update silently or run under subscriptions. Pinning identifiers and recording dates documents drift but does not prevent it, and a third party cannot rerun the closed models later.\n**Evidence Anchor**: text: §Threats to validity \"Model versions can change during the study. We pin identifiers and record dates.\"\n**Why it matters**: The artifact will be reproducible at the level of logs and Lean checks but not at the level of model behaviour. Readers should be told which claims an artifact reviewer can actually recheck.\n**Suggestion**: Pin the CLI versions as well as the model strings, record any version change seen during the study, and separate claims an artifact reviewer can recheck (builds, axioms, oracle queries, scripted counts) from claims that need the closed models.\n**Severity**: Minor\n**Confidence**: 4 — core expertise: reproducibility of closed-model evaluations"
+    }
+  ]
+}

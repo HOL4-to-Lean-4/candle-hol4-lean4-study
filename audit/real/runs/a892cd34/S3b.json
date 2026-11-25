@@ -1,0 +1,18 @@
+{
+ "module": "CandleLean.HolSemantics",
+ "checked": 29,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "Candle.HolSemantics.instance_",
+   "lean": "lean/CandleLean/HolSemantics.lean:62",
+   "hol4": "hol4/package/candle/standard/semantics/holSemanticsScript.sml:112",
+   "class": "V-C",
+   "explanation": "HOL4 introduces `instance` by new_specification. The only saved theorem, instance_def, constrains it only when FLOOKUP tmsig name = SOME ty0 and ty = TYPE_SUBST tyin ty0. Outside that case (undeclared constant, or ty not an instance of the declared type) the value is open. The Lean definition adds a concrete else-branch, `fun _ => tmaof i name []`. So Lean proves, e.g., instance_ FEMPTY i name ty τ = tmaof i name [], and hence termsem mem FEMPTY i v (Const name ty) = tmaof i name []. HOL4 proves neither.",
+   "repair": "theorem instance_exists : ∃ f : tmsig → interpretation U → mlstring → type → tyval U → U,\n    ∀ (tmsig : tmsig) (i : interpretation U) (name : mlstring) (ty ty0 : type) (tyin : List (type × type)),\n      FLOOKUP tmsig name = some ty0 ∧ ty = TYPE_SUBST tyin ty0 →\n      f tmsig i name ty = fun τ => tmaof i name\n        (MAP (typesem (tyaof i) τ ∘ TYPE_SUBST tyin ∘ Tyvar)\n          (MAP .implode (STRING_SORT (MAP explode (tyvars ty0))))) := by sorry\n\ndef instance_ : tmsig → interpretation U → mlstring → type → tyval U → U :=\n  Classical.choose (instance_exists (U := U))\n\ntheorem instance_def : ∀ (tmsig : tmsig) (i : interpretation U) (name : mlstring) (ty ty0 : type) (tyin : List (type × type)),\n      FLOOKUP tmsig name = some ty0 ∧ ty = TYPE_SUBST tyin ty0 →\n      instance_ tmsig i name ty = fun τ => tmaof i name\n        (MAP (typesem (tyaof i) τ ∘ TYPE_SUBST tyin ∘ Tyvar)\n          (MAP .implode (STRING_SORT (MAP explode (tyvars ty0))))) :=\n  Classical.choose_spec (instance_exists (U := U))",
+   "confidence": 0.93,
+   "lean_check": "import CandleLean.HolSemantics\nopen HOL Candle.Mlstring Candle.HolSyntax Candle.HolSemantics\n\nexample {U : Type} (i : interpretation U) (name : mlstring) (ty : type) (τ : tyval U) :\n    instance_ (FEMPTY : tmsig) i name ty τ = tmaof i name [] := by\n  have hn : ¬ ∃ ty0 tyin, FLOOKUP (FEMPTY : tmsig) name = some ty0 ∧ ty = TYPE_SUBST tyin ty0 := by\n    rintro ⟨ty0, tyin, h, _⟩\n    simp [FLOOKUP, FEMPTY] at h\n  unfold instance_\n  rw [dif_neg hn]\n",
+   "hol4_check": "∃f. (∀tmsig (i:bool interpretation) name ty ty0 tyin. FLOOKUP tmsig name = SOME ty0 ∧ ty = TYPE_SUBST tyin ty0 ⇒ f tmsig i name ty = (λτ. SND i name (MAP (typesem (FST i) τ o TYPE_SUBST tyin o Tyvar) (MAP implode (STRING_SORT (MAP explode (tyvars ty0))))))) ∧ (∃tmsig i name ty. f tmsig i name ty ≠ (λτ. SND i name []))"
+  }
+ ]
+}

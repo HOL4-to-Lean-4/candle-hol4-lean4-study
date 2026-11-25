@@ -1,0 +1,10 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "In holSyntaxScript.sml:57-59, `Definition dest_var_def` goes through `Defn.non_wfrec_defn`, `Prim_rec.new_recursive_definition`, and `new_specification`, saving only `∀x ty. dest_var (Var x ty) = (x, ty)` and leaving `Const`, `Comb`, and `Abs` unconstrained. In HolSyntax.lean:44-48, all three non-`Var` cases return the same constant `ARB`, making `dest_var (Comb s t) = dest_var (Abs s t)` provable by `rfl` in Lean despite being unprovable from HOL4's saved theorems. This is a genuine V-C conservativity violation."
+  }
+ ]
+}

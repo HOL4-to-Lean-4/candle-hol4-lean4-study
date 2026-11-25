@@ -1,0 +1,30 @@
+{
+ "module": "CmlTS.Weakening",
+ "checked": 31,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "type_tenv_val_weakening_lemma",
+   "lean": "lean/CmlTS/Weakening.lean:155",
+   "hol4": "hol4/package/weakeningScript.sml:337",
+   "class": "V-P",
+   "explanation": "Special case. In HOL4 nothing fixes the module-name and name types of envV and tenvV: the relation is `λi v (tvs,t). ...`, the identifier i is unused, nsAll2 is polymorphic, and there are no annotations. The saved theorem is therefore about envV : ('m,'n,v) namespace and tenvV : ('m,'n,num#t) namespace for all 'm, 'n. Lean fixes tenvV : tenv_val and envV : env_val, i.e. Namespace modN varN, so the statement does not apply to e.g. Namespace Nat Nat. Elsewhere the module keeps HOL4's type variables (weakS_refl, weakCT_refl, weak_ctMap_lookup, weak_tenvE_bind_tvar2), and here they are dropped.",
+   "repair": "theorem type_tenv_val_weakening_lemma {M N : Type} :\n    ∀ (ctMap : ctMap) (tenvS : tenv_store) (tenvV : Namespace M N (Nat × Ty)) (envV : Namespace M N Value)\n      (ctMap' : _root_.ctMap) (tenvS' : tenv_store),\n      weakCT ctMap' ctMap ∧\n      weakS tenvS' tenvS ∧\n      nsAll2 (fun _ v p =>\n          ∀ (tvs' : Nat) (ctMap' : _root_.ctMap) (tenvS' : tenv_store),\n            (p.1 = 0 ∨ p.1 = tvs') ∧\n            weakCT ctMap' ctMap ∧\n            weakS tenvS' tenvS →\n            type_v tvs' ctMap' tenvS' v p.2)\n        envV tenvV →\n      nsAll2 (fun _ v p => type_v p.1 ctMap' tenvS' v p.2) envV tenvV := by\n  sorry",
+   "confidence": 0.5,
+   "lean_check": "import CmlTS.Weakening\n\nexample (c c' : ctMap) (s s' : tenv_store) (tV : Namespace Nat Nat (Nat × Ty)) (eV : Namespace Nat Nat Value) : True := by\n  fail_if_success (have h := type_tenv_val_weakening_lemma c s tV eV c' s')\n  trivial\n",
+   "hol4_check": "!ctMap tenvS (tenvV:('m,'n,num#t) namespace) (envV:('m,'n,v) namespace) ctMap' tenvS'. weakCT ctMap' ctMap /\\ weakS tenvS' tenvS /\\ nsAll2 (\\i v (tvs,t). !tvs' ctMap' tenvS'. (tvs = 0 \\/ tvs = tvs') /\\ weakCT ctMap' ctMap /\\ weakS tenvS' tenvS ==> type_v tvs' ctMap' tenvS' v t) envV tenvV ==> nsAll2 (\\i v (tvs,t). type_v tvs ctMap' tenvS' v t) envV tenvV"
+  },
+  {
+   "id": "F2",
+   "declaration": "type_tenv_ctor_weakening",
+   "lean": "lean/CmlTS/Weakening.lean:148",
+   "hol4": "hol4/package/weakeningScript.sml:319",
+   "class": "V-P",
+   "explanation": "Special case. HOL4's type_ctor ignores its second argument (`type_ctor ctMap _ (n,stamp) (tvs,ts,ti)`, typeSoundInvariantsScript.sml:73), so that argument has a free type variable. The theorem has no annotations, so envC : ('m,'n,num#stamp) namespace and tenvC : ('m,'n,tvarN list#t list#type_ident) namespace for arbitrary 'm, 'n. Lean states it only for Namespace modN conN (tenvC : tenv_ctor), so it does not apply to e.g. Namespace Nat Nat, unlike the saved HOL4 theorem.",
+   "repair": "theorem type_tenv_ctor_weakening {M N : Type} :\n    ∀ (ctMap : ctMap) (tenvC : Namespace M N (List tvarN × List Ty × type_ident))\n      (envC : Namespace M N (Nat × stamp)) (ctMap' : _root_.ctMap),\n      weakCT ctMap' ctMap ∧\n      nsAll2 (fun _ ns tti => FLOOKUP ctMap ns.2 = some (tti.1, tti.2.1, tti.2.2) ∧ LENGTH tti.2.1 = ns.1) envC tenvC →\n      nsAll2 (fun _ ns tti => FLOOKUP ctMap' ns.2 = some (tti.1, tti.2.1, tti.2.2) ∧ LENGTH tti.2.1 = ns.1) envC tenvC := by\n  sorry",
+   "confidence": 0.4,
+   "lean_check": "import CmlTS.Weakening\n\nexample (c c' : ctMap) (tC : Namespace Nat Nat (List tvarN × List Ty × type_ident)) (eC : Namespace Nat Nat (Nat × stamp)) : True := by\n  fail_if_success (have h := type_tenv_ctor_weakening c tC eC c')\n  trivial\n",
+   "hol4_check": "!ctMap (tenvC:('m,'n,tvarN list # t list # type_ident) namespace) (envC:('m,'n,num # stamp) namespace) ctMap'. weakCT ctMap' ctMap /\\ nsAll2 (type_ctor ctMap) envC tenvC ==> nsAll2 (type_ctor ctMap') envC tenvC"
+  }
+ ]
+}

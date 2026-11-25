@@ -1,0 +1,18 @@
+{
+ "module": "CmlTS.Prelude.Fmap",
+ "checked": 14,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "CmlTS.FAPPLY",
+   "lean": "lean/CmlTS/Prelude/Fmap.lean:41",
+   "hol4": "hol4/HOL4-src/src/finite_maps/finite_mapScript.sml:180",
+   "class": "V-C",
+   "explanation": "At a missing key, Lean reduces `FAPPLY` to `THE none`, which equals `ARB`. For example, `FAPPLY (FEMPTY : fmap Nat Bool) 0 = ARB` holds by reflexivity. HOL4 gives `OUTL (INR one)` at a missing key. Its saved `OUTL` equation specifies only `OUTL (INL x) = x`, leaving the equality with `ARB` open.",
+   "repair": "private noncomputable opaque fapplyMissing (δ : Type v) [Nonempty δ] : δ := ARB\n\nnoncomputable def FAPPLY [Nonempty β] (f : fmap α β) (x : α) : β :=\n  match FLOOKUP f x with\n  | some y => y\n  | none => fapplyMissing β",
+   "confidence": 1,
+   "lean_check": "import CmlTS.Prelude.Fmap\n\nopen CmlTS\n\nexample : FAPPLY (FEMPTY : fmap Nat Bool) 0 = (ARB : Bool) := rfl",
+   "hol4_check": "!x:num. FAPPLY (FEMPTY : num |-> bool) x = OUTL (INR one : bool + one)"
+  }
+ ]
+}

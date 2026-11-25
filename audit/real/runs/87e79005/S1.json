@@ -1,0 +1,18 @@
+{
+ "module": "CmlTS.Prelude.FiniteMap",
+ "checked": 14,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "CmlTS.FAPPLY",
+   "lean": "lean/CmlTS/Prelude/FiniteMap.lean:31",
+   "hol4": "hol4/HOL4-src/src/finite_maps/finite_mapScript.sml:181",
+   "class": "V-C",
+   "explanation": "Lean proves by reflexivity that applying the empty map at any key returns ARB. In HOL4, the empty map represents every key by INR one, so the same application yields OUTL (INR one). The saved OUTL equation specifies only OUTL (INL x) = x. HOL4 therefore shares one missing-key value across maps with the same value type, but leaves its equality to ARB open.",
+   "repair": "private axiom fapplyMissing {β : Type} [Nonempty β] : β\n\ndef FAPPLY [Nonempty β] (f : fmap α β) (x : α) : β :=\n  match f.rep x with\n  | some y => y\n  | none => fapplyMissing",
+   "confidence": 1.0,
+   "lean_check": "import CmlTS.Prelude.FiniteMap\n\nopen CmlTS\n\nexample : FAPPLY (FEMPTY : fmap Nat Bool) 0 = (ARB : Bool) := rfl",
+   "hol4_check": "FAPPLY (FEMPTY : num |-> bool) 0 = OUTL (INR one : bool + one)"
+  }
+ ]
+}

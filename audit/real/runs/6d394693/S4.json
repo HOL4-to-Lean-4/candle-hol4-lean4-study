@@ -1,0 +1,22 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "In Lean (String.lean:11), CHR n returns the fixed constant ARB for all n >= 256, so Lean proves CHR 256 = CHR 257. In HOL4 (stringScript.sml:27-40), CHR is introduced via define_new_type_bijections (new_specification), saving char_BIJ, which only constrains CHR on r < 256; for r >= 256, ORD (CHR r) < 256 <= r holds for any character, leaving CHR 256 = CHR 257 open."
+  },
+  {
+   "id": "F2",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "In Lean (String.lean:50), int_div i 0 returns ARB independent of i, so Lean proves int_div 0 0 = int_div 1 0. In HOL4 (integerScript.sml:1970-1989), int_div is introduced via new_specification with guard ~(j = 0), agreeing with Int.fdiv for nonzero divisors while placing no constraint on int_div i 0, which leaves int_div 0 0 = int_div 1 0 open."
+  },
+  {
+   "id": "F3",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "In Lean (String.lean:52), int_mod i 0 returns ARB independent of i, so Lean proves int_mod 0 0 = int_mod 1 0. In HOL4 (integerScript.sml:2063-2074), int_mod is introduced via new_specification with guard ~(j = 0) ==> (int_mod i j = i - i / j * j), which leaves int_mod i 0 unconstrained for each dividend and thus leaves int_mod 0 0 = int_mod 1 0 open."
+  }
+ ]
+}

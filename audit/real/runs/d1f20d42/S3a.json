@@ -1,0 +1,30 @@
+{
+ "module": "CmlTS.Prelude.List",
+ "checked": 14,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "CmlTS.THE",
+   "lean": "lean/CmlTS/Prelude/List.lean:10",
+   "hol4": "hol4/HOL4-src/src/coretypes/optionScript.sml:176",
+   "class": "V-C",
+   "explanation": "HOL4 introduces THE with new_recursive_definition, which uses new_specification on the single clause THE (SOME x) = x. Nothing saved fixes THE NONE. The Lean definition adds a clause for none, so Lean proves THE none = ARB by rfl. It also proves THE none = HD []. ARB is itself in the mapped vocabulary: HOL4 declares it as an undefined constant. The SOME clause is faithful.",
+   "repair": "noncomputable opaque THE_NONE {α : Type u} [Nonempty α] : α\n\nnoncomputable def THE {α : Type u} [Nonempty α] : Option α → α\n  | some x => x\n  | none => THE_NONE",
+   "confidence": 0.8,
+   "lean_check": "import CmlTS.Prelude.List\n\nexample {α : Type} [Nonempty α] : CmlTS.THE (none : Option α) = CmlTS.ARB := rfl\n\nexample {α : Type} [Nonempty α] : CmlTS.THE (none : Option α) = CmlTS.HD ([] : List α) := rfl\n",
+   "hol4_check": "?f:num option -> num. (!x. f (SOME x) = x) /\\ f NONE <> ARB"
+  },
+  {
+   "id": "F2",
+   "declaration": "CmlTS.HD",
+   "lean": "lean/CmlTS/Prelude/List.lean:18",
+   "hol4": "hol4/HOL4-src/src/list/src/listScript.sml:138",
+   "class": "V-C",
+   "explanation": "HOL4 defines HD by the single clause HD (h::t) = h. Definition takes the PRIMREC route (Defn.sml:1182, Prim_rec.sml:281), which is new_specification on that clause with no ARB completion, so HD [] is left open. The Lean definition adds HD [] = ARB, provable by rfl. Lean then also proves HD [] = THE none and EL n [] = ARB (EL n l = ARB for every n ≥ length l). The cons clause is faithful, and EL itself matches HOL4 once HD is repaired.",
+   "repair": "noncomputable opaque HD_NIL {α : Type u} [Nonempty α] : α\n\nnoncomputable def HD {α : Type u} [Nonempty α] : List α → α\n  | h :: _ => h\n  | [] => HD_NIL",
+   "confidence": 0.8,
+   "lean_check": "import CmlTS.Prelude.List\n\nexample {α : Type} [Nonempty α] : CmlTS.HD ([] : List α) = CmlTS.ARB := rfl\n",
+   "hol4_check": "?f:num list -> num. (!h t. f (h::t) = h) /\\ f [] <> ARB"
+  }
+ ]
+}

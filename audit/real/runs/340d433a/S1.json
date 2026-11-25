@@ -1,0 +1,54 @@
+{
+ "module": "CmlTS.Prelude.Words",
+ "checked": 34,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "CmlTS.int_div",
+   "lean": "lean/CmlTS/Prelude/Words.lean:15",
+   "hol4": "hol4/HOL4-src/src/integer/integerScript.sml:1971",
+   "class": "V-C",
+   "explanation": "Lean proves `int_div 0 0 = int_div 1 0` because both calls return the same `ARB : Int`. HOL4 constrains the quotient only when the divisor is nonzero. Its specification permits different quotients for these two dividends.",
+   "repair": "axiom intDivAtZero : Int → Int\n\ndef int_div (i j : Int) : Int :=\n  if j = 0 then intDivAtZero i else Int.fdiv i j",
+   "confidence": 1.0,
+   "lean_check": "import CmlTS.Prelude.Words\nopen CmlTS\nexample : int_div 0 0 = int_div 1 0 := by simp [int_div]",
+   "hol4_check": null
+  },
+  {
+   "id": "F2",
+   "declaration": "CmlTS.int_mod",
+   "lean": "lean/CmlTS/Prelude/Words.lean:17",
+   "hol4": "hol4/HOL4-src/src/integer/integerScript.sml:2064",
+   "class": "V-C",
+   "explanation": "Lean proves `int_mod 0 0 = int_mod 1 0` because both calls return the same `ARB : Int`. HOL4 guards the remainder equation with `j ≠ 0`, leaving each dividend’s remainder at zero unconstrained.",
+   "repair": "axiom intModAtZero : Int → Int\n\ndef int_mod (i j : Int) : Int :=\n  if j = 0 then intModAtZero i else i - int_div i j * j",
+   "confidence": 1.0,
+   "lean_check": "import CmlTS.Prelude.Words\nopen CmlTS\nexample : int_mod 0 0 = int_mod 1 0 := by simp [int_mod]",
+   "hol4_check": null
+  },
+  {
+   "id": "F3",
+   "declaration": "CmlTS.word_join",
+   "lean": "lean/CmlTS/Prelude/Words.lean:73",
+   "hol4": "hol4/HOL4-src/src/n-bit/wordsScript.sml:576",
+   "class": "V-P",
+   "explanation": "HOL4 joins into a word indexed by the sum type. By `fcpTheory.index_sum`, its width is 1 if either index type is infinite. With both operands indexed by `num`, each operand and the result have width 1. Joining `1w` and `0w` therefore yields zero. Lean adds the two operand widths, retains the shifted high bit, and yields a word with numeric value 2.",
+   "repair": "inductive WordIndex where\n  | finite (predWidth : Nat)\n  | infinite\n\ndef WordIndex.width : WordIndex → Nat\n  | .finite p => p + 1\n  | .infinite => 1\n\ndef WordIndex.sum : WordIndex → WordIndex → WordIndex\n  | .finite p, .finite q => .finite (p + q + 1)\n  | _, _ => .infinite\n\ndef word_join (a b : WordIndex) (v : BitVec a.width) (w : BitVec b.width) : BitVec (a.sum b).width :=\n  word_or (word_lsl (w2w v) b.width) (w2w w)",
+   "confidence": 1.0,
+   "lean_check": "import CmlTS.Prelude.Words\nopen CmlTS\nexample : w2n (word_join (1 : BitVec 1) (0 : BitVec 1)) = 2 := by decide",
+   "hol4_check": "w2n (word_join (1w : num word) (0w : num word)) = 0"
+  },
+  {
+   "id": "F4",
+   "declaration": "CmlTS.word_concat",
+   "lean": "lean/CmlTS/Prelude/Words.lean:76",
+   "hol4": "hol4/HOL4-src/src/n-bit/wordsScript.sml:583",
+   "class": "V-P",
+   "explanation": "The intermediate join changes the value even when the destination is a fixed `word8`. For `1w` and `0w` both indexed by `num`, HOL4 loses the shifted bit in the one-bit intermediate word, then widens zero to eight bits. Lean keeps the bit in a two-bit intermediate word and returns 2 at width eight.",
+   "repair": "def word_concat (a b : WordIndex) (v : BitVec a.width) (w : BitVec b.width) : BitVec k :=\n  w2w (word_join a b v w)",
+   "confidence": 1.0,
+   "lean_check": "import CmlTS.Prelude.Words\nopen CmlTS\nexample : (word_concat (1 : BitVec 1) (0 : BitVec 1) : word8) = 2 := by decide",
+   "hol4_check": "(word_concat (1w : num word) (0w : num word) : word8) = 0w"
+  }
+ ]
+}

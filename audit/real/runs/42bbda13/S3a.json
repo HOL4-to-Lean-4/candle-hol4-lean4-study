@@ -1,0 +1,30 @@
+{
+ "module": "CandleLean.HolSyntaxLib",
+ "checked": 29,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "Candle.HolSyntaxLib.RESULT",
+   "lean": "lean/CandleLean/HolSyntaxLib.lean:35",
+   "hol4": "hol4/package/candle/syntax-lib/holSyntaxLibScript.sml:89",
+   "class": "V-C",
+   "explanation": "HOL4's RESULT_def has the single clause RESULT (Result t) = t. The value on Clash is left open, and no other theorem saved in the theory fixes it. The Lean definition adds the clause RESULT (Clash t) = t, so Lean proves, for example, RESULT (Clash 0) = 0 by rfl, which the theorems saved in HOL4 do not give. The extra equation also reaches INST, which is RESULT applied to INST_CORE: whenever INST_CORE returns Clash tm, Lean proves INST equals tm.",
+   "repair": "opaque RESULT_unspec {α : Type u} (t : α) : α := t\n\ndef RESULT {α : Type u} : result α → α\n  | .Result t => t\n  | .Clash t => RESULT_unspec t",
+   "confidence": 0.93,
+   "lean_check": "import CandleLean.HolSyntaxLib\n\ntheorem RESULT_Clash_fixed {α : Type} (t : α) :\n    Candle.HolSyntaxLib.RESULT (Candle.HolSyntaxLib.result.Clash t) = t := rfl\n",
+   "hol4_check": null
+  },
+  {
+   "id": "F2",
+   "declaration": "Candle.HolSyntaxLib.CLASH",
+   "lean": "lean/CandleLean/HolSyntaxLib.lean:39",
+   "hol4": "hol4/package/candle/syntax-lib/holSyntaxLibScript.sml:93",
+   "class": "V-C",
+   "explanation": "HOL4's CLASH_def has the single clause CLASH (Clash t) = t. The value on Result is left open, and no other theorem saved in the theory fixes it. The Lean definition adds the clause CLASH (Result t) = t, so Lean proves, for example, CLASH (Result 0) = 0 by rfl, which the theorems saved in HOL4 do not give.",
+   "repair": "opaque CLASH_unspec {α : Type u} (t : α) : α := t\n\ndef CLASH {α : Type u} : result α → α\n  | .Clash t => t\n  | .Result t => CLASH_unspec t",
+   "confidence": 0.93,
+   "lean_check": "import CandleLean.HolSyntaxLib\n\ntheorem CLASH_Result_fixed {α : Type} (t : α) :\n    Candle.HolSyntaxLib.CLASH (Candle.HolSyntaxLib.result.Result t) = t := rfl\n",
+   "hol4_check": null
+  }
+ ]
+}

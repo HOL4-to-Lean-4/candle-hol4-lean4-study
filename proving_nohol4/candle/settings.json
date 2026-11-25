@@ -1,0 +1,40 @@
+{
+ "permissions": {
+  "allow": [
+   "Read(./**)",
+   "Edit(./**)",
+   "Write(./**)",
+   "Read(~/.elan/toolchains/leanprover--lean4---v4.28.0/**)",
+   "Bash(lake build:*)",
+   "Bash(lake env lean:*)",
+   "Bash(cd lean)",
+   "Bash(date -u:*)",
+   "Bash(ls:*)"
+  ],
+  "deny": [
+   "Read(//e/NUS/**)",
+   "Read(//e/ts_ws/**)",
+   "Read(//e/auditreal/**)",
+   "Read(//e/auditwork/**)",
+   "Read(//e/prove2/ts/**)",
+   "Edit(//e/NUS/**)",
+   "Edit(//e/ts_ws/**)",
+   "Edit(//e/auditreal/**)",
+   "Edit(//e/auditwork/**)",
+   "Edit(//e/prove2/ts/**)",
+   "Read(~/.claude/**)",
+   "Read(~/.codex/**)",
+   "Read(//wsl.localhost/**)",
+   "Read(//wsl$/**)",
+   "WebFetch",
+   "WebSearch",
+   "Task",
+   "Agent",
+   "Bash(git:*)",
+   "Bash(curl:*)",
+   "Bash(wget:*)",
+   "Bash(gh:*)",
+   "Bash(wsl:*)"
+  ]
+ }
+}

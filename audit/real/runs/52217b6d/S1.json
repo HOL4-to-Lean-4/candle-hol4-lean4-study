@@ -1,0 +1,54 @@
+{
+ "module": "CmlTS.Location",
+ "checked": 6,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "CmlTS.locnrow",
+   "lean": "lean/CmlTS/Location.lean:14",
+   "hol4": "hol4/package/locationScript.sml:7",
+   "class": "V-C",
+   "explanation": "Lean proves `locnrow UNKNOWNpt = locnrow EOFpt` because both calls reduce to the same `ARB : Nat`. The saved HOL4 equation constrains only `POSN r c` and permits the two other constructors to have different row values.",
+   "repair": "private opaque locnrowFallback : locn → Nat := fun _ => 0\n\nnoncomputable def locnrow : locn → Nat\n  | .POSN r _ => r\n  | p => locnrowFallback p",
+   "confidence": 1,
+   "lean_check": "import CmlTS.Location\nopen CmlTS\nexample : locnrow UNKNOWNpt = locnrow EOFpt := rfl",
+   "hol4_check": null
+  },
+  {
+   "id": "F2",
+   "declaration": "CmlTS.locn_rowupdate",
+   "lean": "lean/CmlTS/Location.lean:18",
+   "hol4": "hol4/package/locationScript.sml:12",
+   "class": "V-C",
+   "explanation": "For any `f` and `g`, Lean proves `locn_rowupdate f UNKNOWNpt = locn_rowupdate g EOFpt` because both calls reduce to the same `ARB : locn`. The saved HOL4 equation specifies updates only on `POSN r c`. On the other constructors it permits results to depend on both the function and the location.",
+   "repair": "private opaque locnRowupdateFallback : (Nat → Nat) → locn → locn := fun _ p => p\n\nnoncomputable def locn_rowupdate (f : Nat → Nat) : locn → locn\n  | .POSN r c => .POSN (f r) c\n  | p => locnRowupdateFallback f p",
+   "confidence": 1,
+   "lean_check": "import CmlTS.Location\nopen CmlTS\nexample (f g : Nat → Nat) : locn_rowupdate f UNKNOWNpt = locn_rowupdate g EOFpt := rfl",
+   "hol4_check": null
+  },
+  {
+   "id": "F3",
+   "declaration": "CmlTS.locncol",
+   "lean": "lean/CmlTS/Location.lean:22",
+   "hol4": "hol4/package/locationScript.sml:17",
+   "class": "V-C",
+   "explanation": "Lean proves `locncol UNKNOWNpt = locncol EOFpt` because both calls reduce to the same `ARB : Nat`. The saved HOL4 equation constrains only `POSN r c` and permits the two other constructors to have different column values.",
+   "repair": "private opaque locncolFallback : locn → Nat := fun _ => 0\n\nnoncomputable def locncol : locn → Nat\n  | .POSN _ c => c\n  | p => locncolFallback p",
+   "confidence": 1,
+   "lean_check": "import CmlTS.Location\nopen CmlTS\nexample : locncol UNKNOWNpt = locncol EOFpt := rfl",
+   "hol4_check": null
+  },
+  {
+   "id": "F4",
+   "declaration": "CmlTS.locn_colupdate",
+   "lean": "lean/CmlTS/Location.lean:26",
+   "hol4": "hol4/package/locationScript.sml:21",
+   "class": "V-C",
+   "explanation": "For any `f` and `g`, Lean proves `locn_colupdate f UNKNOWNpt = locn_colupdate g EOFpt` because both calls reduce to the same `ARB : locn`. The saved HOL4 equation specifies updates only on `POSN r c`. On the other constructors it permits results to depend on both the function and the location.",
+   "repair": "private opaque locnColupdateFallback : (Nat → Nat) → locn → locn := fun _ p => p\n\nnoncomputable def locn_colupdate (f : Nat → Nat) : locn → locn\n  | .POSN r c => .POSN r (f c)\n  | p => locnColupdateFallback f p",
+   "confidence": 1,
+   "lean_check": "import CmlTS.Location\nopen CmlTS\nexample (f g : Nat → Nat) : locn_colupdate f UNKNOWNpt = locn_colupdate g EOFpt := rfl",
+   "hol4_check": null
+  }
+ ]
+}

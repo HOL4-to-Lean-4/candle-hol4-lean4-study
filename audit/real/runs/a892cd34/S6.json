@@ -1,0 +1,10 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "HOL4 introduces `instance` by new_specification. The saved instance_def constrains it only when FLOOKUP tmsig name = SOME ty0 and ty = TYPE_SUBST tyin ty0; no other saved theorem fixes it elsewhere. Lean's transparent def has the else branch `fun _ => tmaof i name []`, so dif_neg proves `instance_ FEMPTY i name ty = fun _ => tmaof i name []`, and the analogous termsem equation for undeclared constants. HOL4 leaves both open."
+  }
+ ]
+}

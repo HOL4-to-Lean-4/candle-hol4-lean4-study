@@ -1,0 +1,16 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "In Lean (HolSemantics.lean:67), the else branch of instance_ returns fun _ => tmaof i name []. Since FLOOKUP FEMPTY name = none, Lean proves instance_ FEMPTY i name ty τ = tmaof i name []. In HOL4 (holSemanticsScript.sml:112), instance is introduced by new_specification solely under FLOOKUP tmsig name = SOME ty0 ∧ ty = TYPE_SUBST tyin ty0, leaving the FEMPTY case unconstrained. This is a true V-C violation."
+  },
+  {
+   "id": "F2",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "In Lean (HolSemantics.lean:77), termsem maps non-variable Abs binders to HOL.ARB, which unfolds to default (Prelude/Basic.lean:9). For U = Nat, Lean proves termsem mem tmsig i v (Abs (Const name ty) b) = 0. In HOL4 (holSemanticsScript.sml:134-142), termsem_def saves an abstraction equation only for Abs (Var x ty) b (and HOL4 ARB is unconstrained), leaving constant binders open. This is a true V-C violation."
+  }
+ ]
+}

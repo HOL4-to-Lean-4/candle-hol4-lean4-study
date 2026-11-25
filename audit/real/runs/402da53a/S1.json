@@ -1,0 +1,30 @@
+{
+ "module": "CandleLean.HolSyntaxLib",
+ "checked": 33,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "Candle.RESULT",
+   "lean": "lean/CandleLean/HolSyntaxLib.lean:36",
+   "hol4": "hol4/package/candle/syntax-lib/holSyntaxLibScript.sml:89",
+   "class": "V-C",
+   "explanation": "Lean proves `RESULT (Clash true) = RESULT (Clash false)` by reflexivity. Both sides reduce to `ARB` at type `Bool`, and the `Nonempty Bool` proofs are definitionally equal. HOL4 specifies only `RESULT (Result t) = t`. Returning the payload on both constructors satisfies that equation and gives different values on the two `Clash` inputs.",
+   "repair": "private axiom resultOnClash {α : Type u} : α → α\n\ndef RESULT {α : Type u} : result α → α\n  | Result t => t\n  | Clash t => resultOnClash t",
+   "confidence": 1.0,
+   "lean_check": "import CandleLean.HolSyntaxLib\nopen Candle\n\nexample : RESULT (Clash true) = RESULT (Clash false) := rfl",
+   "hol4_check": "∃f : bool result -> bool. (∀t. f (Result t) = t) ∧ f (Clash T) ≠ f (Clash F)"
+  },
+  {
+   "id": "F2",
+   "declaration": "Candle.CLASH",
+   "lean": "lean/CandleLean/HolSyntaxLib.lean:40",
+   "hol4": "hol4/package/candle/syntax-lib/holSyntaxLibScript.sml:93",
+   "class": "V-C",
+   "explanation": "Lean proves `CLASH (Result true) = CLASH (Result false)` by reflexivity because both calls reduce to the same `ARB` at type `Bool`. HOL4 specifies only `CLASH (Clash t) = t`. Returning the payload on both constructors satisfies that equation and distinguishes the two `Result` inputs.",
+   "repair": "private axiom clashOnResult {α : Type u} : α → α\n\ndef CLASH {α : Type u} : result α → α\n  | Clash t => t\n  | Result t => clashOnResult t",
+   "confidence": 1.0,
+   "lean_check": "import CandleLean.HolSyntaxLib\nopen Candle\n\nexample : CLASH (Result true) = CLASH (Result false) := rfl",
+   "hol4_check": "∃f : bool result -> bool. (∀t. f (Clash t) = t) ∧ f (Result T) ≠ f (Result F)"
+  }
+ ]
+}

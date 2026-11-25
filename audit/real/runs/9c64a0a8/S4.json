@@ -1,0 +1,10 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "In FiniteMap.lean, FAPPLY returns ARB on none and FEMPTY maps all keys to none, so Lean proves FAPPLY FEMPTY x = ARB by rfl. In HOL4, finite_mapScript.sml yields FAPPLY FEMPTY x = OUTL (INR one), where sumScript.sml specifies OUTL only on INL x (via new_specification) and boolScript.sml declares ARB as an unconstrained constant. HOL4 leaves FAPPLY FEMPTY x = ARB open, so equating these mapped constants is a genuine V-C violation."
+  }
+ ]
+}

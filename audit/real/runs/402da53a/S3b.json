@@ -1,0 +1,30 @@
+{
+ "module": "CandleLean.HolSyntaxLib",
+ "checked": 29,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "Candle.RESULT",
+   "lean": "lean/CandleLean/HolSyntaxLib.lean:36",
+   "hol4": "hol4/package/candle/syntax-lib/holSyntaxLibScript.sml:88",
+   "class": "V-C",
+   "explanation": "HOL4 saves only RESULT (Result t) = t. The definition goes through Prim_rec.new_recursive_definition/new_specification, so the Clash clause is left unspecified (no pattern completion with ARB). Lean sets RESULT (Clash t) = ARB for every t. Because the Nonempty witness is proof-irrelevant, the value does not depend on t, so Lean proves RESULT (Clash a) = RESULT (Clash b) for all a, b (and RESULT (Clash a) = CLASH (Result b)). HOL4 leaves this open: RESULT could, for example, return t on Clash t.",
+   "repair": "def RESULT {α : Type u} : result α → α :=\n  @Classical.epsilon (result α → α) ⟨fun r => match r with | Clash t => t | Result t => t⟩\n    (fun f => ∀ t, f (Result t) = t)\n\ntheorem RESULT_def {α : Type u} : ∀ t : α, RESULT (Result t) = t := by\n  apply Classical.epsilon_spec (p := fun f : result α → α => ∀ t, f (Result t) = t)\n  exact ⟨fun r => match r with | Clash t => t | Result t => t, fun _ => rfl⟩",
+   "confidence": 0.62,
+   "lean_check": "import CandleLean.HolSyntaxLib\n\ntheorem chk {α : Type} (a b : α) : Candle.RESULT (Candle.result.Clash a) = Candle.RESULT (Candle.result.Clash b) := rfl\n",
+   "hol4_check": null
+  },
+  {
+   "id": "F2",
+   "declaration": "Candle.CLASH",
+   "lean": "lean/CandleLean/HolSyntaxLib.lean:40",
+   "hol4": "hol4/package/candle/syntax-lib/holSyntaxLibScript.sml:92",
+   "class": "V-C",
+   "explanation": "HOL4 saves only CLASH (Clash t) = t, defined by new_recursive_definition/new_specification, so CLASH (Result t) is left unspecified. Lean sets CLASH (Result t) = ARB for every t, and the Nonempty witness is proof-irrelevant. Lean therefore proves CLASH (Result a) = CLASH (Result b) for all a, b, and CLASH (Result a) = RESULT (Clash b). HOL4 proves neither: CLASH could, for example, return t on Result t.",
+   "repair": "def CLASH {α : Type u} : result α → α :=\n  @Classical.epsilon (result α → α) ⟨fun r => match r with | Clash t => t | Result t => t⟩\n    (fun f => ∀ t, f (Clash t) = t)\n\ntheorem CLASH_def {α : Type u} : ∀ t : α, CLASH (Clash t) = t := by\n  apply Classical.epsilon_spec (p := fun f : result α → α => ∀ t, f (Clash t) = t)\n  exact ⟨fun r => match r with | Clash t => t | Result t => t, fun _ => rfl⟩",
+   "confidence": 0.62,
+   "lean_check": "import CandleLean.HolSyntaxLib\n\ntheorem chk {α : Type} (a b : α) : Candle.CLASH (Candle.result.Result a) = Candle.CLASH (Candle.result.Result b) := rfl\n",
+   "hol4_check": null
+  }
+ ]
+}

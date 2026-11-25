@@ -1,0 +1,18 @@
+{
+ "module": "CandleLean.HolSyntax",
+ "checked": 77,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "dest_var",
+   "lean": "lean/CandleLean/HolSyntax.lean:44",
+   "hol4": "hol4/package/candle/standard/syntax/holSyntaxScript.sml:57",
+   "class": "V-C",
+   "explanation": "HOL4 specifies dest_var only on Var. A single constructor-pattern clause goes through Prim_rec.new_recursive_definition (hol4/HOL4-src/src/tfl/src/Defn.sml:1192), which ends in new_specification of that equation alone, so dest_var on Const, Comb and Abs is unspecified. Lean returns the same ARB for all three constructors. It therefore proves dest_var (Const n ty) = dest_var (Comb s t), dest_var (Comb s t) = dest_var (Abs u v), dest_var (Const n ty) = dest_var (Const m ty'), and dest_var (Const n ty) = ARB. HOL4 leaves all of these open. Compare VARIANT_PRIMES in the same module, which is translated as an epsilon over its specification.",
+   "repair": "def dest_var_spec (f : term → mlstring × type) : Prop := ∀ x ty, f (Var x ty) = (x, ty)\n\ndef dest_var : term → mlstring × type := Classical.epsilon dest_var_spec\n\n@[simp] theorem dest_var_def : ∀ x ty, dest_var (Var x ty) = (x, ty) := by\n  have h : dest_var_spec dest_var := by\n    apply Classical.epsilon_spec (p := dest_var_spec)\n    exact ⟨fun t => match t with | .Var x ty => (x, ty) | _ => default, fun _ _ => rfl⟩\n  exact h",
+   "confidence": 0.8,
+   "lean_check": "import CandleLean.HolSyntax\n\nnamespace Candle\n\nexample (n : mlstring) (ty : type) (s t : term) : dest_var (term.Const n ty) = dest_var (term.Comb s t) := rfl\n\nexample (s t u v : term) : dest_var (term.Comb s t) = dest_var (term.Abs u v) := rfl\n\nexample (n m : mlstring) (ty ty' : type) : dest_var (term.Const n ty) = dest_var (term.Const m ty') := rfl\n\nend Candle\n",
+   "hol4_check": "?f:term -> mlstring # type. (!x ty. f (Var x ty) = (x,ty)) /\\ (!n ty s t. f (Const n ty) <> f (Comb s t))"
+  }
+ ]
+}

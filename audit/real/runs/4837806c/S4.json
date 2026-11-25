@@ -1,0 +1,28 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "In weakeningScript.sml:19, weakS is defined solely via SUBMAP with no type annotations, so HOL4 gives it polymorphic type ('a |-> 'b) -> ('a |-> 'b) -> bool. In Weakening.lean:19, weakS is monomorphized to tenv_store (FMap Nat store_t), strictly restricting its domain (Lean even adds a separate weakS_poly for weakS_refl). This is a V-P violation."
+  },
+  {
+   "id": "F2",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "In weakeningScript.sml:281, weakCT is defined solely via SUBMAP with no type annotations, giving it HOL4 polymorphic type ('a |-> 'b) -> ('a |-> 'b) -> bool. In Weakening.lean:23, weakCT is monomorphized to ctMap, strictly restricting its domain (Lean adds a separate weakCT_poly for its polymorphic lemmas). This is a V-P violation."
+  },
+  {
+   "id": "F3",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "In HOL4, type_ctor (typeSoundInvariantsScript.sml:72) and weakCT are polymorphic, leaving six free type variables in type_tenv_ctor_weakening (weakeningScript.sml:319): both namespace name types, the key type, the first and third triple components, and the middle list's element type. Weakening.lean:148 fixes all six through ctMap, tenv_ctor, and Namespace modN conN (Nat × stamp), yielding a monomorphic special case of the HOL4 theorem (V-P)."
+  },
+  {
+   "id": "F4",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "In weakeningScript.sml:337, both nsAll2 predicates in type_tenv_val_weakening_lemma ignore the identifier argument i, leaving the module-name and variable-name types of envV and tenvV polymorphic. Weakening.lean:155 fixes both to modN and varN (mlstring) through env_val and tenv_val, making the Lean statement a monomorphic special case of the HOL4 theorem (V-P)."
+  }
+ ]
+}

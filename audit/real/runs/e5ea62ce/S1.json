@@ -1,0 +1,18 @@
+{
+ "module": "CmlTS.Misc",
+ "checked": 27,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "MAP3",
+   "lean": "lean/CmlTS/Misc.lean:34",
+   "hol4": "hol4/package/miscScript.sml:74",
+   "class": "V-C",
+   "explanation": "Lean proves `MAP3 f [] [0] [] = MAP3 f [] [1] []` because both calls reduce to the same `ARB`. The equations saved for `misc$MAP3` cover only three empty lists and three nonempty lists. They allow these two mixed inputs to return different lists.",
+   "repair": "private axiom map3Unspecified {α : Type u} {β : Type v} {γ : Type w} {δ : Type _} : (α → β → γ → δ) → List α → List β → List γ → List δ\n\ndef MAP3 {α : Type u} {β : Type v} {γ : Type w} {δ : Type _}\n    (f : α → β → γ → δ) : List α → List β → List γ → List δ\n  | [], [], [] => []\n  | x :: xs, y :: ys, z :: zs => f x y z :: MAP3 f xs ys zs\n  | xs, ys, zs => map3Unspecified f xs ys zs",
+   "confidence": 1,
+   "lean_check": "import CmlTS.Misc\n\nexample (f : Nat → Nat → Nat → Nat) :\n    MAP3 f [] [0] [] = MAP3 f [] [1] [] := by rfl",
+   "hol4_check": null
+  }
+ ]
+}

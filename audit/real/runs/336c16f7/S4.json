@@ -1,0 +1,10 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "In lean/CmlTS/TypeSysProps.lean:45, all mismatched cases return the same ARB, so Lean proves type_def_to_ctMap tenvT 0 [] [id] = type_def_to_ctMap tenvT 1 [] [id]. In HOL4 (typeSysPropsScript.sml:1502), Definition saves only the two matched clauses in type_def_to_ctMap_def (plus _ind), deleting the _tupled support definition via DefnBase.delete_support, and all later theorems assume equal list lengths. Thus HOL4's saved theorems leave mismatched calls unconstrained, making this a true V-C conservativity violation."
+  }
+ ]
+}

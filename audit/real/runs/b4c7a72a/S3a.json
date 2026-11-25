@@ -1,0 +1,18 @@
+{
+ "module": "CandleLean.Mllist",
+ "checked": 22,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "Candle.Mllist.collate",
+   "lean": "lean/CandleLean/Mllist.lean:31",
+   "hol4": "hol4/package/basis/pure/mllistScript.sml:362",
+   "class": "V-P",
+   "explanation": "Nothing in HOL4's collate_def relates the element types of the two lists: f is only applied as `f h1 h2`, and the first two clauses fix no shared variable. The inferred principal type is therefore ('a -> 'b -> ordering) -> 'a list -> 'b list -> ordering. Lean forces both lists to have the same element type (f : α → α → Ordering), so it defines only the special case 'b = 'a. For example, `collate (f : num -> bool -> ordering) [0] [T]` is a legal HOL4 term with value `f 0 T` (since collate f [] [] = EQUAL), but it has no Lean counterpart. Other functions in the module (mapi, foldl, foldli_aux, map_rev') keep their independent type variables.",
+   "repair": "def collate {α : Type u} {β : Type v} (f : α → β → Ordering) : List α → List β → Ordering\n  | [], [] => EQUAL\n  | [], _ :: _ => LESS\n  | _ :: _, [] => GREATER\n  | h1 :: t1, h2 :: t2 => if f h1 h2 = EQUAL then collate f t1 t2 else f h1 h2",
+   "confidence": 0.72,
+   "lean_check": "import CandleLean.Mllist\n\nexample (f : Nat → Nat → Ordering) : True := by\n  have _h := Candle.Mllist.collate f [0] [1]\n  trivial\n\nexample (f : Nat → Bool → Ordering) : True := by\n  fail_if_success (have _h := Candle.Mllist.collate f [0] [true])\n  trivial\n",
+   "hol4_check": "mllist$collate (f : num -> bool -> ordering) [0] [T] = f 0 T"
+  }
+ ]
+}

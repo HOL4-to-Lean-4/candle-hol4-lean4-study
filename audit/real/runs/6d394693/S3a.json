@@ -1,0 +1,42 @@
+{
+ "module": "CmlTS.Prelude.String",
+ "checked": 26,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "CmlTS.CHR",
+   "lean": "lean/CmlTS/Prelude/String.lean:11",
+   "hol4": "hol4/HOL4-src/src/string/stringScript.sml:27-40",
+   "class": "V-C",
+   "explanation": "HOL4's CHR is the abstraction function from define_new_type_bijections. The saved theorems constrain it only for n < 256: CHR_ORD, ORD_CHR and CHR_11. ORD_CHR_COMPUTE says nothing for n >= 256, because FAIL unfolds to ORD (CHR n). So CHR 256 and CHR 257 may be equal or different in HOL4. The Lean definition maps every n >= 256 to the one value ARB. Lean therefore proves CHR 256 = CHR 257 and CHR n = ARB for all n >= 256, which HOL4 leaves open.",
+   "repair": "noncomputable def CHR : Nat → char := SELECT fun f : Nat → char => ∀ (n : Nat) (h : n < 256), f n = ⟨n, h⟩",
+   "confidence": 0.6,
+   "lean_check": "import CmlTS.Prelude.String\nopen CmlTS\ntheorem chr_out_of_range : CHR 256 = CHR 257 := by\n  simp [CHR]\n",
+   "hol4_check": null
+  },
+  {
+   "id": "F2",
+   "declaration": "CmlTS.int_div",
+   "lean": "lean/CmlTS/Prelude/String.lean:50",
+   "hol4": "hol4/HOL4-src/src/integer/integerScript.sml:1970-1989",
+   "class": "V-C",
+   "explanation": "HOL4 introduces int_div by new_specification with the single property !i j. ~(j = 0) ==> (i / j = ...). The general theorems about / that I read exclude divisor 0, so i / 0 is open and may depend on i. The Lean definition returns the same ARB for every i when j = 0. Lean therefore proves int_div 1 0 = int_div 2 0, int_div i 0 = ARB and int_div i 0 = int_mod k 0, all of which HOL4 leaves open. For j ≠ 0, Int.fdiv agrees with HOL4.",
+   "repair": "noncomputable def int_div : Int → Int → Int := SELECT fun f : Int → Int → Int => ∀ i j : Int, j ≠ 0 → f i j = Int.fdiv i j",
+   "confidence": 0.62,
+   "lean_check": "import CmlTS.Prelude.String\nopen CmlTS\ntheorem int_div_by_zero : int_div 1 0 = int_div 2 0 := by\n  simp [int_div]\n",
+   "hol4_check": null
+  },
+  {
+   "id": "F3",
+   "declaration": "CmlTS.int_mod",
+   "lean": "lean/CmlTS/Prelude/String.lean:52",
+   "hol4": "hol4/HOL4-src/src/integer/integerScript.sml:2063-2074",
+   "class": "V-C",
+   "explanation": "HOL4 introduces int_mod by new_specification with only !i j. ~(j = 0) ==> (i % j = i - i / j * j). The general theorems about % that I read exclude divisor 0, so i % 0 is open and may depend on i. The Lean definition returns the same ARB for every i when j = 0. Lean therefore proves int_mod 1 0 = int_mod 2 0 and int_mod 1 0 = int_div 1 0, which HOL4 leaves open. For j ≠ 0 it agrees with HOL4.",
+   "repair": "noncomputable def int_mod : Int → Int → Int := SELECT fun f : Int → Int → Int => ∀ i j : Int, j ≠ 0 → f i j = i - int_div i j * j",
+   "confidence": 0.62,
+   "lean_check": "import CmlTS.Prelude.String\nopen CmlTS\ntheorem int_mod_by_zero : int_mod 1 0 = int_mod 2 0 := by\n  simp [int_mod]\n",
+   "hol4_check": null
+  }
+ ]
+}

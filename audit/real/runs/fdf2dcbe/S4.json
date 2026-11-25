@@ -1,0 +1,10 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "In List.lean:32-34, HD is a transparent definition returning ARB on [], so Lean proves HD ([] : List Bool) = ARB (and EL 0 [] = ARB) by rfl. In HOL4, listScript.sml:138 defines HD via Prim_rec.new_recursive_definition and new_specification, saving only HD (h::t) = h, while ARB (boolScript.sml:245) is an unspecified constant. HOL4 therefore leaves HD [] = ARB open, making this a true V-C violation."
+  }
+ ]
+}

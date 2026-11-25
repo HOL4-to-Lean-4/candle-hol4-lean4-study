@@ -1,0 +1,220 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "HOL4's `ALOOKUP` tests propositional equality (`x = q`), whereas Lean's `HOL4.ALOOKUP` takes an unconstrained `[BEq α]` instance. On unlawful `BEq` instances (e.g., always-false, or Lean's canonical `Float` `BEq` on `NaN`), lookup of a present key returns `none`, differing from HOL4."
+  },
+  {
+   "id": "F2",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "Lean defines `EL n l := l[n]!`, which reduces `EL 0 ([] : List Nat)` to `default = 0`. HOL4 defines `EL 0 l = HD l` and `EL (SUC n) l = EL n (TL l)` with `TL [] = []`, leaving `HD []` completely open in its saved theorems. Lean thus proves an equation HOL4 leaves open."
+  },
+  {
+   "id": "F3",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "HOL4's `ALL_DISTINCT` uses equality-based `MEM`, returning `F` on `[0; 0]`. Lean's `HOL4.ALL_DISTINCT` takes an arbitrary `[BEq α]` without `LawfulBEq`, so with an always-false `BEq` instance it returns `true` on `[0, 0]`."
+  },
+  {
+   "id": "F4",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "HOL4's `nub` checks `MEM x l` using propositional equality, reducing `[0; 0]` to `[0]`. Lean's `HOL4.nub` depends on an arbitrary `[BEq α]`, so an always-false instance retains both elements in `[0, 0]`."
+  },
+  {
+   "id": "F5",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "HOL4's `MEM` tests propositional equality and proves `MEM x [x]` for all `x`. Lean's `HOL4.MEM` uses an unconstrained `[BEq α]`, so an always-false instance (or `Float.nan`) yields `MEM x [x] = false`."
+  },
+  {
+   "id": "F6",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "While Lean matches HOL4's argument order (`IS_PREFIX l1 l2` checks that `l2` is a prefix of `l1`), `List.isPrefixOf` uses an unconstrained `[BEq α]`. With an always-false `BEq` instance, `IS_PREFIX [0] [0]` evaluates to `false`, contradicting HOL4 reflexivity."
+  },
+  {
+   "id": "F7",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "HOL4 defines `THE` solely by `THE (SOME x) = x`, leaving `THE NONE` unspecified in its saved theorems. Lean's `HOL4.THE` returns `default` on `none`, proving `THE (none : Option Nat) = 0`, which HOL4 leaves open."
+  },
+  {
+   "id": "F8",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "HOL4 defines `'a |-> 'b` as the subtype of finite-domain maps and proves `FDOM_FINITE` (`!fm. FINITE (FDOM fm)`). Lean defines `Finmap α β := α → Option β`, admitting infinite-domain functions like `fun _ : Nat => some ()` and falsifying `FDOM_FINITE`."
+  },
+  {
+   "id": "F9",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "HOL4's `FUPDATE` updates using propositional equality (`a = x`), guaranteeing lookup at the updated key returns the new value. Lean's `Finmap.FUPDATE` takes an unconstrained `[BEq α]`, so an always-false instance makes `FUPDATE FEMPTY (0, 7) 0 = none`."
+  },
+  {
+   "id": "F10",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "Lean's `Finmap.FUPDATE_LIST` folds left with `FUPDATE`, matching HOL4's `FOLDL FUPDATE` direction, but inherits `FUPDATE`'s unconstrained `[BEq α]`. With an always-false `BEq` instance, updating `FEMPTY` with `[(0, 7)]` yields `none` at key `0`."
+  },
+  {
+   "id": "F11",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "Lean's `Finmap.alist_to_fmap` matches HOL4's first-binding precedence for lawful equality, but uses an unconstrained `[BEq α]`. With an always-true `BEq` instance, `alist_to_fmap [(0, 7)] 1` returns `some 7`, whereas HOL4's map has domain `{0}`."
+  },
+  {
+   "id": "F12",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "HOL4 defines `spt` as an inductive tree type with distinct empty-domain trees `LN` and `BN LN LN`. Lean represents `Sptree α` as `List (Nat × α)`, which has only one empty-domain element (`[]`) because every nonempty list succeeds on lookup at its head key."
+  },
+  {
+   "id": "F13",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "HOL4 proves `insert_insert`: inserting distinct keys commutes up to tree equality (`insert x1 v1 (insert x2 v2 t) = insert x2 v2 (insert x1 v1 t)`). Lean's `Sptree.insert` prepends the newly inserted pair, producing unequal lists `[(0, a), (1, b)]` and `[(1, b), (0, a)]`."
+  },
+  {
+   "id": "F14",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "Lean's `Sptree.delete` filters by key, so `lookup k t = none` always implies `delete k t = t`. In HOL4's `delete_def` (without `wf`), `lookup 1 (BN LN LN) = NONE` yet `delete 1 (BN LN LN) = mk_BN LN LN = LN ≠ BN LN LN`."
+  },
+  {
+   "id": "F15",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "HOL4 defines `fromAList` via repeated `insert` from right to left, so `fromAList [(0, 7); (0, 8)] = LS 7 = fromAList [(0, 7)]`. Lean defines `Sptree.fromAList` as the identity on lists, retaining the shadowed pair and making the two results unequal."
+  },
+  {
+   "id": "F16",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "HOL4's `toList` traverses even-key subtree, node value, then odd-key subtree, yielding `[10; 11]` on `fromAList [(1, 11); (0, 10)]` and omitting shadowed entries. Lean's `t.map Prod.snd` returns `[11, 10]` and retains shadowed values."
+  },
+  {
+   "id": "F17",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "HOL4's `toAList` traverses the tree via `foldi` and proves `ALL_DISTINCT (MAP FST (toAList t))`. Lean defines `Sptree.toAList` as the identity, so `toAList (fromAList [(0, 7), (0, 8)])` contains duplicate key `0`."
+  },
+  {
+   "id": "F18",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "HOL4 defines `llist` as the subtype of `num -> 'a option` satisfying `lrep_ok` (`IS_SOME (f (SUC n)) ==> IS_SOME (f n)`). Lean defines `LazyList α := Nat → Option α`, admitting gappy functions like `0 ↦ none, 1 ↦ some ()` and breaking prefix comparability."
+  },
+  {
+   "id": "F19",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "Under Lean's `LazyList α := Nat → Option α`, a gappy function with `some a` only at index 1 has cutoff `N ≥ 2`, so `LazyList.toList` uses `filterMap` to return `some [a]`, whose `fromList` places `a` at index 0 rather than recovering the original lazy list, violating HOL4's `to_fromList`."
+  },
+  {
+   "id": "F20",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "Lean defines `FINITE s` without requiring `Nodup` and defines `CARD s` as `(Classical.choose h).length`. For `{a}`, duplicate lists like `[a, a]` satisfy the witness predicate, so Lean's definition does not force `CARD {a} = 1`, contradicting HOL4's `CARD_INSERT` specification."
+  },
+  {
+   "id": "F21",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "HOL4 introduces `CARD` via `new_specification` constraining only `CARD EMPTY = 0` and insertion into finite sets, leaving `CARD s` on infinite sets open. Lean's `else 0` branch proves `CARD (Set.univ : Set Nat) = 0`, an equation HOL4 leaves open."
+  },
+  {
+   "id": "F22",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "HOL4's `word_lsl` shifts out all bits whenever `n ≥ 8`, returning `0w` for `word_lsl 1w 256`. Lean's `a <<< n.toUInt8` wraps `n` via `toUInt8` (and `UInt8` shift mod 8), returning `1` for `word_lsl_8 1 256`."
+  },
+  {
+   "id": "F23",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "HOL4's `word_lsr` returns `0w` whenever `n ≥ 8`, including `word_lsr 1w 256`. Lean's `a >>> n.toUInt8` converts `256` to `0 : UInt8`, returning `1` on `word_lsr_8 1 256`."
+  },
+  {
+   "id": "F24",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "HOL4's `word_asr` fills with the sign bit when `i + n ≥ 8` and is the identity at `n = 0`. Lean returns `1` instead of `0` on `word_asr_8 1 256` (shift wraps to 0), and for negative inputs at `n = 0`, `0xFF <<< (8 : UInt8)` wraps mod 8 to `0xFF`, corrupting `0x80` to `0xFF`."
+  },
+  {
+   "id": "F25",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "HOL4's `word_lsl` returns `0w` for any 64-bit left shift by `n ≥ 64`. Lean's `a <<< n.toUInt64` wraps `2^64` to `0 : UInt64` (and `UInt64` shifts mod 64), returning `1` instead of `0` on `word_lsl_64 1 (2^64)`."
+  },
+  {
+   "id": "F26",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "HOL4's `word_lsr` yields `0w` for any 64-bit right shift with `n ≥ 64`. Lean's `a >>> n.toUInt64` reduces `2^64` to `0 : UInt64`, returning `1` instead of `0` on `word_lsr_64 1 (2^64)`."
+  },
+  {
+   "id": "F27",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "HOL4's `word_asr` returns `0w` for `word_asr 1w (2**64)` and the identity at `n = 0`. Lean wraps `2^64` to `0` (returning `1`), and at `n = 0` on negative inputs computes `0xFFFFFFFFFFFFFFFF <<< (64 : UInt64)` which wraps mod 64 to all-ones, corrupting the result."
+  },
+  {
+   "id": "F28",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "HOL4 defines `rounding` with four distinct constructors (`roundTiesToEven`, `roundTowardPositive`, `roundTowardNegative`, `roundTowardZero`). Lean defines `roundTiesToEven : Unit := ()`, collapsing the rounding-mode type to a singleton so every rounding-mode argument equals `roundTiesToEven`."
+  },
+  {
+   "id": "F29",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "HOL4's `fp64_sqrt` depends on the `rounding` mode (e.g., `sqrt 2` differs between `roundTowardZero` and `roundTowardPositive`) and produces `float_some_qnan` for invalid inputs like `-1`. Lean discards `_rm : Unit` and calls a single native `Float.sqrt`."
+  },
+  {
+   "id": "F30",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "HOL4's `fp64_add` respects all four rounding modes (e.g., `1 + 2^-53` rounds to `1` under `roundTiesToEven` and to `1 + 2^-52` under `roundTowardPositive`) and uses `float_some_qnan` for NaNs and opposite infinities. Lean ignores `_rm : Unit`."
+  },
+  {
+   "id": "F31",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "HOL4's `fp64_sub` depends on the rounding mode: for `1 - 1`, `float_sub_def` sets `toneg` to `mode = roundTowardNegative`, yielding `-0.0` under `roundTowardNegative` and `+0.0` under `roundTiesToEven`. Lean takes `_rm : Unit` and cannot distinguish these modes."
+  },
+  {
+   "id": "F32",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "HOL4's `fp64_mul` respects the rounding mode: doubling the largest finite binary64 value overflows to `float_top` under `roundTowardZero` and to `+∞` under `roundTiesToEven`. Lean ignores `_rm : Unit` and always executes one native multiplication."
+  },
+  {
+   "id": "F33",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "HOL4's `fp64_div` depends on the rounding mode: for `1 / 3`, `roundTowardPositive` rounds up (low byte `0x56`) while `roundTowardZero` truncates (low byte `0x55`). Lean ignores `_rm : Unit` and returns a single result."
+  },
+  {
+   "id": "F34",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "HOL4's `fp64_mul_add` computes `a * b + c` in the reals and rounds once. Even under `roundTiesToEven`, for `a = 1 + 2^-27`, `b = 1 - 2^-27`, `c = -1`, HOL4 gives `-2^-54`, whereas Lean rounds `a * b` to `1` first and then adds `-1` to get `0`, besides discarding directed rounding modes."
+  },
+  {
+   "id": "F35",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "HOL4 defines `char` as natural numbers `< 256` and proves `ORD_BOUND` (`!c. ORD c < 256`). Lean maps characters to Unicode `Char` with `ORD c := c.toNat`, so `ORD (Char.ofNat 256) = 256`, falsifying `ORD_BOUND`."
+  },
+  {
+   "id": "F36",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "HOL4's `ORD_CHR` and `ORD_BOUND` prove `ORD (CHR n) < 256` and `ORD (CHR 256) <> 256` while leaving which byte character `CHR 256` denotes open. Lean defines `CHR := Char.ofNat`, proving `ORD (CHR 256) = 256`, which directly contradicts HOL4."
+  }
+ ]
+}

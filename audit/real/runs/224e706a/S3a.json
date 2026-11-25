@@ -1,0 +1,30 @@
+{
+ "module": "CandleLean.Prelude.FMap",
+ "checked": 11,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "HOL.FUN_FMAP",
+   "lean": "lean/CandleLean/Prelude/FMap.lean:63",
+   "hol4": "hol4/HOL4-src/src/finite_maps/finite_mapScript.sml:1585",
+   "class": "V-C",
+   "explanation": "HOL4 introduces FUN_FMAP by new_specification with only FINITE P ==> FDOM (FUN_FMAP f P) = P /\\ (!x. x IN P ==> FUN_FMAP f P ' x = f x). Every saved theorem that determines its value assumes FINITE, or uses {}. For infinite P the value is an arbitrary finite map. The Lean definition fixes the else branch to FEMPTY, so Lean proves ¬FINITE P → FUN_FMAP f P = FEMPTY, for example FUN_FMAP f UNIV = FEMPTY on Nat. HOL4 leaves that equation open.",
+   "repair": "opaque FUN_FMAP_infinite (f : α → β) (P : Set α) : FMap α β := FEMPTY\n\ndef FUN_FMAP (f : α → β) (P : Set α) : FMap α β :=\n  if h : FINITE P then\n    ⟨fun a => if a ∈ P then some (f a) else none,\n     by\n       obtain ⟨l, hl⟩ := h\n       exact ⟨l, fun a ha => by\n         by_cases hp : a ∈ P\n         · exact hl a hp\n         · simp [hp] at ha⟩⟩\n  else FUN_FMAP_infinite f P",
+   "confidence": 0.88,
+   "lean_check": "import CandleLean.Prelude.FMap\n\ntheorem bound_list : ∀ l : List Nat, ∃ n : Nat, ∀ m : Nat, m ∈ l → m < n := by\n  intro l\n  induction l with\n  | nil => exact ⟨0, fun m hm => by simp at hm⟩\n  | cons h t ih =>\n    obtain ⟨n, hn⟩ := ih\n    refine ⟨n + h + 1, fun m hm => ?_⟩\n    rcases List.mem_cons.mp hm with h1 | h1\n    · omega\n    · have := hn m h1\n      omega\n\ntheorem univ_not_finite : ¬ HOL.FINITE (HOL.UNIV : HOL.Set Nat) := by\n  intro h\n  obtain ⟨l, hl⟩ := h\n  obtain ⟨n, hn⟩ := bound_list l\n  exact Nat.lt_irrefl n (hn n (hl n trivial))\n\ntheorem fun_fmap_infinite (f : Nat → Nat) : HOL.FUN_FMAP f (HOL.UNIV : HOL.Set Nat) = HOL.FEMPTY := by\n  unfold HOL.FUN_FMAP\n  exact dif_neg univ_not_finite\n",
+   "hol4_check": "?g:(num->num)->(num->bool)->(num|->num). (!f P. FINITE P ==> (FDOM (g f P) = P) /\\ (!x. x IN P ==> (g f P ' x = f x))) /\\ ~(g I UNIV = FEMPTY)"
+  },
+  {
+   "id": "F2",
+   "declaration": "HOL.FAPPLY",
+   "lean": "lean/CandleLean/Prelude/FMap.lean:29",
+   "hol4": "hol4/HOL4-src/src/finite_maps/finite_mapScript.sml:180",
+   "class": "V-C",
+   "explanation": "HOL4 defines FAPPLY f x = OUTL (fmap_REP f x). OUTL is specified only on INL, so outside the domain the value is the unspecified OUTL (INR one). The saved theorem NOT_FDOM_FAPPLY_FEMPTY says only f ' x = FEMPTY ' x there, and nothing relates FEMPTY ' x to ARB or any concrete value. The Lean none branch returns ARB, a transparent def equal to default. Lean therefore proves FAPPLY FEMPTY x = ARB by rfl, and FAPPLY (FEMPTY : FMap Nat Nat) 0 = 0. HOL4 leaves these equations open.",
+   "repair": "opaque FAPPLY_outside {β : Type v} [Inhabited β] : β\n\ndef FAPPLY [Inhabited β] (f : FMap α β) (x : α) : β :=\n  match f.lookup x with\n  | some y => y\n  | none => FAPPLY_outside",
+   "confidence": 0.66,
+   "lean_check": "import CandleLean.Prelude.FMap\n\nexample : HOL.FAPPLY (HOL.FEMPTY : HOL.FMap Nat Nat) 0 = (HOL.ARB : Nat) := rfl\nexample : HOL.FAPPLY (HOL.FEMPTY : HOL.FMap Nat Nat) 0 = 0 := rfl\n",
+   "hol4_check": "?app:(num|->num)->num->num. (!f x y. app (f |+ (x,y)) x = y) /\\ (!f a x y. ~(a = x) ==> (app (f |+ (x,y)) a = app f a)) /\\ (!f x. ~(x IN FDOM f) ==> (app f x = app FEMPTY x)) /\\ ~(app FEMPTY 0 = ARB)"
+  }
+ ]
+}

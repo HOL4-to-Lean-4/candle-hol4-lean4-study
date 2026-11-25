@@ -1,0 +1,30 @@
+{
+ "module": "CmlTS.Prelude.List",
+ "checked": 22,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "CmlTS.THE",
+   "lean": "lean/CmlTS/Prelude/List.lean:12",
+   "hol4": "hol4/HOL4-src/src/coretypes/optionScript.sml:179",
+   "class": "V-C",
+   "explanation": "Lean proves `THE none = ARB` by reflexivity. HOL4 saves only `THE (SOME x) = x`. Any value at `NONE` satisfies that equation.",
+   "repair": "private axiom theNone {α : Type u} [Nonempty α] : α\n\nnoncomputable def THE {α : Type u} [Nonempty α] : Option α → α\n  | some x => x\n  | none => theNone",
+   "confidence": 1,
+   "lean_check": "import CmlTS.Prelude.List\n\nexample {α : Type} [Nonempty α] : CmlTS.THE (none : Option α) = CmlTS.ARB := rfl",
+   "hol4_check": "!v:'a. ?f:'a option -> 'a. (f NONE = v) /\\ (!x. f (SOME x) = x)"
+  },
+  {
+   "id": "F2",
+   "declaration": "CmlTS.HD",
+   "lean": "lean/CmlTS/Prelude/List.lean:20",
+   "hol4": "hol4/HOL4-src/src/list/src/listScript.sml:139",
+   "class": "V-C",
+   "explanation": "Lean proves `HD [] = ARB` by reflexivity. HOL4 saves only `HD (h::t) = h`, which leaves the empty-list value open. The same Lean branch also forces `EL 0 [] = ARB` through the defining equation `EL 0 l = HD l`.",
+   "repair": "private axiom hdNil {α : Type u} [Nonempty α] : α\n\nnoncomputable def HD {α : Type u} [Nonempty α] : List α → α\n  | h :: _ => h\n  | [] => hdNil",
+   "confidence": 1,
+   "lean_check": "import CmlTS.Prelude.List\n\nexample {α : Type} [Nonempty α] : CmlTS.HD ([] : List α) = CmlTS.ARB := rfl",
+   "hol4_check": "!v:'a. ?f:'a list -> 'a. (f [] = v) /\\ (!h t. f (h::t) = h)"
+  }
+ ]
+}

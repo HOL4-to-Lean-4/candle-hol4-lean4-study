@@ -5,6 +5,8 @@ Candle theorem `proves_sound` in `candle/standard/semantics/holSoundnessScript.s
 This repository is self-contained: it holds the reduced HOL4 package, the pinned
 HOL4 and Poly/ML sources, the build recipe, and the cost ledger.
 
+**To continue this work on another PC, read [CONTINUE.md](CONTINUE.md).**
+
 ## Pins
 
 | Component | Upstream | Commit | Date |
@@ -37,6 +39,9 @@ Aristotle runs used. Revisit when Aristotle's Lean support returns and states a 
 - `docker/Dockerfile`: builds Poly/ML and HOL4 from `vendor/` (no network clone).
 - `scripts/build.sh`, `scripts/build.ps1`: rebuild everything from a clean checkout.
 - `ledger/`: `costs.csv` and the extractors for Claude Code and Codex transcripts.
+- `package_ts/`: HOL4 package of the type-soundness theorem (from `typesound_lean4_sorry/hol4-ultramin`).
+- `baselines/`, `audit/`, `audit_base/`, `proving*/`: translations, audits and proving runs; see `CONTINUE.md`.
+- `scripts/setup_pc.py`: recreates the work folders outside the repository.
 - `plan/`: study plan.
 - `PROVENANCE.md`: origin, commit, license and hash of everything copied in.
 

@@ -1,0 +1,94 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "In HOL4 (`semanticPrimitivesScript.sml:20`), `sem_env` is polymorphic (`'v sem_env`), with polymorphic constructor and projections. Lean (`SemanticPrimitives.lean:26`) monomorphizes `sem_env` by fixing the variable-binding namespace to `v`, making `sem_env` and its projections strict special cases of the HOL4 declarations."
+  },
+  {
+   "id": "F2",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "Lean defines `instance : BEq v := ⟨fun _ _ => sorry⟩` (`SemanticPrimitives.lean:31`), discarding both operands before `sorry : Bool`. Thus `x == y` is provably constant, equating `Boolv true == Boolv true` with `Boolv false == Boolv true`, violating HOL4 equality in `the_Boolv`, `check_type`, `do_log`, `do_if`, `compiler_agrees`, and `do_eval`."
+  },
+  {
+   "id": "F3",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "Lean defines `instance : BEq sem_env := ⟨fun _ _ => sorry⟩` (`SemanticPrimitives.lean:32`), discarding both arguments before `sorry : Bool`. Thus `(· == ·)` on `sem_env` is a constant function that fails to distinguish unequal environments (such as an empty environment versus one with a constructor binding), violating HOL4 record equality."
+  },
+  {
+   "id": "F4",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "HOL4 explicitly defines `find_recfun` (`semanticPrimitivesScript.sml:339`) with polymorphic type `mlstring -> (mlstring # 'a # 'b) list -> ('a # 'b) option`. Lean (`SemanticPrimitives.lean:247`) restricts the two payload types to `varN` and `exp`, making Lean's declaration a strict special case of HOL4's."
+  },
+  {
+   "id": "F5",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "Lean's `shift8_lookup` delegates to `word_lsl_8`/`word_lsr_8`/`word_asr_8` (`HOL4Prelude.lean:256-262`), which convert the `Nat` shift count via `n.toUInt8`. For `n = 256` and word `1`, `n.toUInt8 = 0`, returning `1` for `Lsl`, `Lsr`, and `Asr`, whereas HOL4 (`wordsScript.sml:489-505`) shifts by the full natural count and returns `0w`."
+  },
+  {
+   "id": "F6",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "Lean's `shift64_lookup` delegates to `word_lsl_64`/`word_lsr_64`/`word_asr_64` (`HOL4Prelude.lean:272-279`), which convert the `Nat` shift count via `n.toUInt64`. For `n = 2^64` and word `1`, `n.toUInt64 = 0`, returning `1` for `Lsr` (and similarly for `Lsl`/`Asr`), whereas HOL4 (`wordsScript.sml:489-505`) shifts by the full natural count and returns `0w`."
+  },
+  {
+   "id": "F7",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "HOL4 (`semanticPrimitivesScript.sml:718`) only saves `the_Litv_IntLit (Litv (IntLit i)) = i`, leaving non-`IntLit` inputs unspecified. Lean (`SemanticPrimitives.lean:402-404`) adds `| _ => default`, proving `the_Litv_IntLit (.Loc false 0) = 0` (also observable via `do_conversion`), an equation HOL4 leaves open."
+  },
+  {
+   "id": "F8",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "HOL4 (`semanticPrimitivesScript.sml:722`) only saves `the_Litv_Word8 (Litv (Word8 w)) = w`, leaving off-pattern inputs unspecified. Lean (`SemanticPrimitives.lean:406-408`) adds `| _ => default`, proving `the_Litv_Word8 (.Loc false 0) = 0`, an equation that HOL4's saved theorems leave open."
+  },
+  {
+   "id": "F9",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "HOL4 (`semanticPrimitivesScript.sml:726`) only saves `the_Litv_Word64 (Litv (Word64 w)) = w`, leaving off-pattern inputs unspecified. Lean (`SemanticPrimitives.lean:410-412`) adds `| _ => default`, proving `the_Litv_Word64 (.Loc false 0) = 0`, an equation that HOL4's saved theorems leave open."
+  },
+  {
+   "id": "F10",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "HOL4 (`semanticPrimitivesScript.sml:730`) only saves `the_Litv_Float64 (Litv (Float64 w)) = w`, leaving off-pattern inputs unspecified. Lean (`SemanticPrimitives.lean:414-416`) adds `| _ => default`, proving `the_Litv_Float64 (.Loc false 0) = 0` (also observable via `do_conversion`), an equation that HOL4 leaves open."
+  },
+  {
+   "id": "F11",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "HOL4 (`semanticPrimitivesScript.sml:734`) only saves `the_Litv_Char (Litv (Char c)) = c`, leaving off-pattern inputs unspecified. Lean (`SemanticPrimitives.lean:418-420`) adds `| _ => default`, proving `the_Litv_Char (.Loc false 0) = default`, an equation that HOL4's saved theorems leave open."
+  },
+  {
+   "id": "F12",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "HOL4's `do_if` (`semanticPrimitivesScript.sml:1193`) is polymorphic (`v -> 'a -> 'a -> 'a option`), whereas Lean (`SemanticPrimitives.lean:447`) restricts both branches to `exp`. Moreover, Lean's guards use `instBEqV` (`fun _ _ => sorry`), so `do_if` cannot distinguish `Boolv true` from `Boolv false`."
+  },
+  {
+   "id": "F13",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "HOL4's `build_constrs` (`semanticPrimitivesScript.sml:1200`) only takes `LENGTH ts`, leaving the list element type polymorphic (`num -> (conN # 'a list) list -> (conN # num # stamp) list`). Lean (`SemanticPrimitives.lean:452`) monomorphizes `condefs` to `List (conN × List ast_t)`, making it a strict special case."
+  },
+  {
+   "id": "F14",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "HOL4's integer `/` and `%` (`integerScript.sml:1970-2150`) use floored division, so `1 / (~2) = ~1` and `1 % (~2) = ~1`. Lean's `do_arith` (`SemanticPrimitives.lean:647-650`) uses Euclidean `Int` `/` and `%`, yielding quotient `0` and remainder `1` on `(1, -2)`, disagreeing with HOL4."
+  },
+  {
+   "id": "F15",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "HOL4's `fp64_mul_add` (`binary_ieeeScript.sml:692-722`) performs single-rounded IEEE-754 fused multiply-add, yielding `-2^-54` on `v1 = -1`, `v2 = 1 + 2^-27`, `v3 = 1 - 2^-27`. Lean's `fp64_mul_add` (`HOL4Prelude.lean:308`) computes `fpOfBits a * fpOfBits b + fpOfBits c` with double rounding, rounding `1 - 2^-54` to `1` and returning `+0.0`."
+  }
+ ]
+}

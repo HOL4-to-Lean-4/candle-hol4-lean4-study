@@ -1,0 +1,10 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "HOL4 clauses (1502-1510) constrain only next_stamp (num), tenvT, cn and ts; tvs, tn and id are merely copied or ignored, so the constant is polymorphic in 'a,'b,'c. Lean fixes List tvarN, mlstring, type_ident. HOL4's mem_type_def_to_ctMap and type_def_to_ctMap_mem add no constraint, so the Lean theorems are type-instance special cases. Only ctMap_ok_type_defs forces these types. Lean elsewhere keeps polymorphism (ctors_of_tdef, ctMap_ok_lookup's cn : α), although library build_ctor_tenv is similarly specialised."
+  }
+ ]
+}

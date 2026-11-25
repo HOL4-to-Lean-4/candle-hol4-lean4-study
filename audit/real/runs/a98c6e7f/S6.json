@@ -1,0 +1,10 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "HOL4's FAPPLY_DEF gives OUTL (fmap_REP f x); OUTL is specified only on INL and THE only on SOME. Saved theorems fix out-of-domain values only as FEMPTY ' x (NOT_FDOM_FAPPLY_FEMPTY); TO_FLOOKUP's THE equation is guarded by FLOOKUP m x <> NONE. Nothing found relates FEMPTY ' x to THE NONE or ARB. Lean's THE (FLOOKUP f x), with THE none := ARB, proves FAPPLY FEMPTY x = THE none = ARB definitionally, for mapped constants. In-domain values agree."
+  }
+ ]
+}

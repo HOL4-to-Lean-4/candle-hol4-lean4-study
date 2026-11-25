@@ -1,0 +1,54 @@
+{
+ "module": "CmlTS.Location",
+ "checked": 6,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "locnrow",
+   "lean": "lean/CmlTS/Location.lean:19",
+   "hol4": "hol4/package/locationScript.sml:7",
+   "class": "V-C",
+   "explanation": "HOL4 gives only the POSN clause. Definition tries Defn.non_wfrec_defn first (Defn.sml:1182), which calls Prim_rec.new_recursive_definition, i.e. new_specification with just `!r c. locnrow (POSN r c) = r` (Prim_rec.sml:281). The values at UNKNOWNpt and EOFpt stay open and unrelated, and no ARB clause is saved. Lean maps both to ARB, so it proves locnrow UNKNOWNpt = ARB, locnrow UNKNOWNpt = locnrow EOFpt, and locnrow UNKNOWNpt = locncol EOFpt by rfl. None of these follows from the saved theorem.",
+   "repair": "def locnrow : locn → Nat :=\n  Classical.choose (show ∃ g : locn → Nat, ∀ r c, g (POSN r c) = r from\n    ⟨(fun l => match l with | .POSN r _ => r | _ => 0), fun _ _ => rfl⟩)\n\ntheorem locnrow_def (r c : Nat) : locnrow (POSN r c) = r :=\n  Classical.choose_spec (show ∃ g : locn → Nat, ∀ r c, g (POSN r c) = r from\n    ⟨(fun l => match l with | .POSN r _ => r | _ => 0), fun _ _ => rfl⟩) r c",
+   "confidence": 0.72,
+   "lean_check": "import CmlTS.Location\n\nexample : CmlTS.locnrow CmlTS.locn.UNKNOWNpt = CmlTS.locnrow CmlTS.locn.EOFpt := rfl\n",
+   "hol4_check": "?g:locn->num. (!r c. g (POSN r c) = r) /\\ g UNKNOWNpt <> g EOFpt"
+  },
+  {
+   "id": "F2",
+   "declaration": "locn_rowupdate",
+   "lean": "lean/CmlTS/Location.lean:23",
+   "hol4": "hol4/package/locationScript.sml:12",
+   "class": "V-C",
+   "explanation": "HOL4's new_specification (via Defn.non_wfrec_defn and Prim_rec.new_recursive_definition) saves only `locn_rowupdate f (POSN r c) = POSN (f r) c`. On UNKNOWNpt and EOFpt the result is open and may depend on f and on the constructor. Lean returns ARB there, so it proves locn_rowupdate f UNKNOWNpt = locn_rowupdate g EOFpt for all f and g, and also equality with locn_colupdate g EOFpt. The saved HOL4 theorem implies none of these.",
+   "repair": "def locn_rowupdate : (Nat → Nat) → locn → locn :=\n  Classical.choose (show ∃ h : (Nat → Nat) → locn → locn, ∀ f r c, h f (POSN r c) = POSN (f r) c from\n    ⟨(fun f l => match l with | .POSN r c => .POSN (f r) c | l' => l'), fun _ _ _ => rfl⟩)\n\ntheorem locn_rowupdate_def (f : Nat → Nat) (r c : Nat) : locn_rowupdate f (POSN r c) = POSN (f r) c :=\n  Classical.choose_spec (show ∃ h : (Nat → Nat) → locn → locn, ∀ f r c, h f (POSN r c) = POSN (f r) c from\n    ⟨(fun f l => match l with | .POSN r c => .POSN (f r) c | l' => l'), fun _ _ _ => rfl⟩) f r c",
+   "confidence": 0.72,
+   "lean_check": "import CmlTS.Location\n\nexample : ∀ f g : Nat → Nat, CmlTS.locn_rowupdate f CmlTS.locn.UNKNOWNpt = CmlTS.locn_rowupdate g CmlTS.locn.EOFpt := fun _ _ => rfl\n",
+   "hol4_check": "?h:(num->num)->locn->locn. (!f r c. h f (POSN r c) = POSN (f r) c) /\\ h (\\x. x) UNKNOWNpt <> h (\\x. x) EOFpt"
+  },
+  {
+   "id": "F3",
+   "declaration": "locncol",
+   "lean": "lean/CmlTS/Location.lean:27",
+   "hol4": "hol4/package/locationScript.sml:17",
+   "class": "V-C",
+   "explanation": "HOL4 saves only `locncol (POSN r c) = c`, introduced by new_specification through Prim_rec.new_recursive_definition (Defn.sml:1192, Prim_rec.sml:281). The values at UNKNOWNpt and EOFpt stay open and need not be equal. Lean sets both to ARB, so it proves locncol UNKNOWNpt = ARB, locncol UNKNOWNpt = locncol EOFpt, and locncol UNKNOWNpt = locnrow UNKNOWNpt by rfl. The saved HOL4 theorem leaves all of these open.",
+   "repair": "def locncol : locn → Nat :=\n  Classical.choose (show ∃ g : locn → Nat, ∀ r c, g (POSN r c) = c from\n    ⟨(fun l => match l with | .POSN _ c => c | _ => 0), fun _ _ => rfl⟩)\n\ntheorem locncol_def (r c : Nat) : locncol (POSN r c) = c :=\n  Classical.choose_spec (show ∃ g : locn → Nat, ∀ r c, g (POSN r c) = c from\n    ⟨(fun l => match l with | .POSN _ c => c | _ => 0), fun _ _ => rfl⟩) r c",
+   "confidence": 0.72,
+   "lean_check": "import CmlTS.Location\n\nexample : CmlTS.locncol CmlTS.locn.UNKNOWNpt = CmlTS.locncol CmlTS.locn.EOFpt := rfl\n",
+   "hol4_check": "?g:locn->num. (!r c. g (POSN r c) = c) /\\ g UNKNOWNpt <> g EOFpt"
+  },
+  {
+   "id": "F4",
+   "declaration": "locn_colupdate",
+   "lean": "lean/CmlTS/Location.lean:31",
+   "hol4": "hol4/package/locationScript.sml:21",
+   "class": "V-C",
+   "explanation": "HOL4's new_specification (via Defn.non_wfrec_defn and Prim_rec.new_recursive_definition) saves only `locn_colupdate f (POSN r c) = POSN r (f c)`. The result on UNKNOWNpt and EOFpt is open and may depend on f and on the constructor. Lean returns ARB there, so it proves locn_colupdate f UNKNOWNpt = locn_colupdate g EOFpt for all f and g, and also equality with locn_rowupdate g EOFpt. The saved HOL4 theorem implies none of these.",
+   "repair": "def locn_colupdate : (Nat → Nat) → locn → locn :=\n  Classical.choose (show ∃ h : (Nat → Nat) → locn → locn, ∀ f r c, h f (POSN r c) = POSN r (f c) from\n    ⟨(fun f l => match l with | .POSN r c => .POSN r (f c) | l' => l'), fun _ _ _ => rfl⟩)\n\ntheorem locn_colupdate_def (f : Nat → Nat) (r c : Nat) : locn_colupdate f (POSN r c) = POSN r (f c) :=\n  Classical.choose_spec (show ∃ h : (Nat → Nat) → locn → locn, ∀ f r c, h f (POSN r c) = POSN r (f c) from\n    ⟨(fun f l => match l with | .POSN r c => .POSN r (f c) | l' => l'), fun _ _ _ => rfl⟩) f r c",
+   "confidence": 0.72,
+   "lean_check": "import CmlTS.Location\n\nexample : ∀ f g : Nat → Nat, CmlTS.locn_colupdate f CmlTS.locn.UNKNOWNpt = CmlTS.locn_colupdate g CmlTS.locn.EOFpt := fun _ _ => rfl\n",
+   "hol4_check": "?h:(num->num)->locn->locn. (!f r c. h f (POSN r c) = POSN r (f c)) /\\ h (\\x. x) UNKNOWNpt <> h (\\x. x) EOFpt"
+  }
+ ]
+}

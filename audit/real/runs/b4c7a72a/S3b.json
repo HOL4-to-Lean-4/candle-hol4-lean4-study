@@ -1,0 +1,18 @@
+{
+ "module": "CandleLean.Mllist",
+ "checked": 22,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "Candle.Mllist.collate",
+   "lean": "lean/CandleLean/Mllist.lean:31",
+   "hol4": "hol4/package/basis/pure/mllistScript.sml:362",
+   "class": "V-P",
+   "explanation": "HOL4's collate has principal type ('a -> 'b -> ordering) -> 'a list -> 'b list -> ordering. Nothing in the four clauses equates the element types: f is only applied as f h1 h2. The reused names h and t in clauses 2 and 3 do not force equality, because Defn.defn_absyn_to_term (Defn.sml:1741-1799) excludes left-hand-side pattern variables from cross-clause unification and unifies only the head symbol and remaining free variables. Lean fixes both lists and f to one type α, so it is only the special case 'a = 'b. For example, collate (f : num -> bool -> ordering) [0] [T] = f 0 T is meaningful in HOL4 but cannot be stated in Lean.",
+   "repair": "def collate {α : Type u} {β : Type v} (f : α → β → Ordering) : List α → List β → Ordering\n  | [], [] => EQUAL\n  | [], _ :: _ => LESS\n  | _ :: _, [] => GREATER\n  | h1 :: t1, h2 :: t2 => if f h1 h2 = EQUAL then collate f t1 t2 else f h1 h2",
+   "confidence": 0.55,
+   "lean_check": "import CandleLean.Mllist\n\nexample : ∀ (α : Type) (f : α → α → Ordering), @Candle.Mllist.collate α f [] [] = Ordering.eq := by\n  intro α f\n  simp [Candle.Mllist.collate]\n",
+   "hol4_check": "!(f:num -> bool -> ordering). mllist$collate f [0n] [T] = f 0n T"
+  }
+ ]
+}

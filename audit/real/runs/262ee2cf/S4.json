@@ -1,0 +1,16 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "HOL4 defines dest_Refv via Prim_rec.new_recursive_definition and new_specification, saving only dest_Refv (Refv v) = v and leaving W8array, Varray, and Thunk unconstrained. In Lean, the wildcard branch returns the same ARB for every non-Refv constructor, so Lean proves dest_Refv (W8array [] : store_v Bool) = dest_Refv (Varray [] : store_v Bool), an equation in the mapped vocabulary left open by HOL4."
+  },
+  {
+   "id": "F2",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "HOL4 defines FV_dec via Prim_rec.new_recursive_definition and new_specification, saving only the five equations for Dlet, Dletrec, Dtype, Dtabbrev, and Dexn while leaving Dmod, Dlocal, and Denv unconstrained. In Lean, the wildcard branch returns the same ARB set for all omitted constructors, so Lean proves FV_dec (Dlocal [] []) = FV_dec (Denv n) for all n, an equation in the mapped vocabulary left open by HOL4."
+  }
+ ]
+}

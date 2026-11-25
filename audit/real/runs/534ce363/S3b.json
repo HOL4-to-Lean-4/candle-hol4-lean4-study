@@ -1,0 +1,18 @@
+{
+ "module": "CmlTS.Prelude.StringLib",
+ "checked": 7,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "CmlTS.CHR",
+   "lean": "lean/CmlTS/Prelude/StringLib.lean:15",
+   "hol4": "hol4/HOL4-src/src/string/stringScript.sml:27",
+   "class": "V-C",
+   "explanation": "HOL4's CHR is the abstraction function from define_new_type_bijections. The saved theorems about it (CHR_ORD, ORD_CHR, CHR_11, CHR_ONTO) fix its value only for n < 256. ORD_CHR_COMPUTE returns a FAIL term equal to ORD (CHR n) outside that range. HOL4 therefore leaves open whether CHR 256 = CHR 257. Lean sends every n >= 256 to the single constant ARB : char. It thus proves CHR 256 = CHR 257, and in general CHR m = CHR n for all m, n >= 256, as well as CHR 256 = ARB. None of these follow from the saved HOL4 theorems.",
+   "repair": "opaque CHR_spec : { f : Nat → char // ∀ (n : Nat) (h : n < 256), f n = ⟨n, h⟩ } :=\n  ⟨fun n => if h : n < 256 then ⟨n, h⟩ else ⟨0, by decide⟩, fun n h => by simp [h]⟩\n\ndef CHR (n : Nat) : char := CHR_spec.val n",
+   "confidence": 0.85,
+   "lean_check": "import CmlTS.Prelude.StringLib\n\ntheorem chr_out_of_range : CmlTS.CHR 256 = CmlTS.CHR 257 := by\n  simp [CmlTS.CHR]\n",
+   "hol4_check": "?f:num->char. (!a. f (ORD a) = a) /\\ (!r. r < 256 <=> (ORD (f r) = r)) /\\ f 256 <> f 257"
+  }
+ ]
+}

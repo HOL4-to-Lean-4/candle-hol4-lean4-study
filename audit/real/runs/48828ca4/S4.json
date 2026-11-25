@@ -1,0 +1,16 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "In HOL4 (typeSoundInvariantsScript.sml:173), ctMap_has_exns has no type annotation and compares the first two tuple fields only to [], so HOL4 infers (stamp, 'a list # 'b list # num) fmap -> bool with two independent type variables (Type ctMap is only a type abbreviation). Lean (TypeSoundInvariants.lean:256) monomorphizes ctMap to ctMap_ty, fixing those element types to tvarN and typ and making the definition a special case."
+  },
+  {
+   "id": "F2",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "In HOL4 (typeSoundInvariantsScript.sml:191), ctMap_has_bools compares the first two tuple fields only to [] and checks NONE for other constructor names, leaving both list element types independently polymorphic with type (stamp, 'a list # 'b list # num) fmap -> bool. Lean (TypeSoundInvariants.lean:268) fixes the parameter to ctMap_ty (List tvarN × List typ × type_ident), restricting HOL4's predicate to a monomorphic special case."
+  }
+ ]
+}

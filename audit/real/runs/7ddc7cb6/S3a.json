@@ -1,0 +1,54 @@
+{
+ "module": "CmlTS.TypeSound",
+ "checked": 45,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "store_type_extension_refl",
+   "lean": "lean/CmlTS/TypeSound.lean:216",
+   "hol4": "hol4/package/typeSoundScript.sml:502",
+   "class": "V-P",
+   "explanation": "HOL4's store_type_extension_def (line 487) has no type annotation and uses only FUNION and FLOOKUP. Its type is therefore ('a |-> 'b) -> ('a |-> 'b) -> bool, and store_type_extension_refl holds for every finite map. Lean fixes the constant (TypeSound.lean:20) and this theorem to tenv_store = FMap Nat store_t, so the statement is a strict special case; for example, nothing is stated for FMap Bool Bool. The library states the analogous weakS_refl and weakCT_refl polymorphically, through weakS_poly and weakCT_poly.",
+   "repair": "def store_type_extension {α β : Type} (tenvS1 tenvS2 : FMap α β) : Prop :=\n  ∃ tenvS' : FMap α β, (tenvS2 = FUNION tenvS' tenvS1) ∧\n    (∀ l, (FLOOKUP tenvS' l = none) ∨ (FLOOKUP tenvS1 l = none))\n\ntheorem store_type_extension_refl {α β : Type} :\n    ∀ (tenvS : FMap α β), store_type_extension tenvS tenvS := by\n  sorry",
+   "confidence": 0.72,
+   "lean_check": "import CmlTS.TypeSound\n\nexample (s : FMap Bool Bool) : True := by\n  fail_if_success (have _h := store_type_extension_refl s)\n  trivial\n",
+   "hol4_check": "!tenvS : 'a |-> 'b. store_type_extension tenvS tenvS"
+  },
+  {
+   "id": "F2",
+   "declaration": "store_type_extension_trans",
+   "lean": "lean/CmlTS/TypeSound.lean:220",
+   "hol4": "hol4/package/typeSoundScript.sml:510",
+   "class": "V-P",
+   "explanation": "HOL4's store_type_extension is polymorphic in the key and value types of the finite map, because its definition is unannotated. Transitivity is proved for all s1 s2 s3 : 'a |-> 'b. Lean states it only for tenv_store = FMap Nat store_t, which is a strict special case; for example, nothing is stated for FMap Bool Bool.",
+   "repair": "theorem store_type_extension_trans {α β : Type} :\n    ∀ (s1 s2 s3 : FMap α β),\n      store_type_extension s1 s2 ∧ store_type_extension s2 s3 →\n      store_type_extension s1 s3 := by\n  sorry\n-- with store_type_extension made polymorphic as in F1",
+   "confidence": 0.72,
+   "lean_check": "import CmlTS.TypeSound\n\nexample (s : FMap Bool Bool) : True := by\n  fail_if_success (have _h := store_type_extension_trans s s s)\n  trivial\n",
+   "hol4_check": "!s1 s2 s3 : 'a |-> 'b. store_type_extension s1 s2 /\\ store_type_extension s2 s3 ==> store_type_extension s1 s3"
+  },
+  {
+   "id": "F3",
+   "declaration": "store_type_extension_weakS",
+   "lean": "lean/CmlTS/TypeSound.lean:211",
+   "hol4": "hol4/package/typeSoundScript.sml:493",
+   "class": "V-P",
+   "explanation": "In HOL4 both store_type_extension and weakS (weakS tenvS tenvS' <=> tenvS' SUBMAP tenvS) are unannotated and polymorphic. The theorem therefore holds for all tenvS1 tenvS2 : 'a |-> 'b. Lean states it only for tenv_store = FMap Nat store_t, using the monomorphic weakS, although the Weakening module provides weakS_poly for this purpose. The Lean statement is a strict special case.",
+   "repair": "theorem store_type_extension_weakS {α β : Type} :\n    ∀ (tenvS1 tenvS2 : FMap α β),\n      store_type_extension tenvS1 tenvS2 → weakS_poly tenvS2 tenvS1 := by\n  sorry\n-- with store_type_extension made polymorphic as in F1",
+   "confidence": 0.72,
+   "lean_check": "import CmlTS.TypeSound\n\nexample (s : FMap Bool Bool) : True := by\n  fail_if_success (have _h := store_type_extension_weakS s s)\n  trivial\n",
+   "hol4_check": "!tenvS1 tenvS2 : 'a |-> 'b. store_type_extension tenvS1 tenvS2 ==> weakS tenvS2 tenvS1"
+  },
+  {
+   "id": "F4",
+   "declaration": "type_env_conv_thm",
+   "lean": "lean/CmlTS/TypeSound.lean:122",
+   "hol4": "hol4/package/typeSoundScript.sml:296",
+   "class": "V-P",
+   "explanation": "HOL4's type_ctor_def is unannotated: it ignores its identifier argument and uses only FLOOKUP and LENGTH. Nothing in type_env_conv_thm constrains the types either. The HOL4 theorem is therefore polymorphic in the namespace key types ('m,'n), the stamp type, the tvs type, the element type of ts, and the ti type. Lean states it only for env_ctor, tenv_ctor and ctMap, while generalising just the unused tn and cn'. It is a strict special case; for example, nothing is stated for namespaces keyed by Bool.",
+   "repair": "def type_ctor_poly {κ α β γ ι : Type} (ctMap : FMap κ (α × List β × γ)) (_ : ι) (ns : Nat × κ)\n    (tti : α × List β × γ) : Prop :=\n  FLOOKUP ctMap ns.2 = some tti ∧ LENGTH tti.2.1 = ns.1\n\ntheorem type_env_conv_thm {μ ν κ α β γ δ ε : Type} [Nonempty ε] :\n    ∀ (ctMap : FMap κ (α × List β × γ)) (envC : Namespace μ ν (Nat × κ))\n      (tenvC : Namespace μ ν (α × List β × γ)),\n      nsAll2 (type_ctor_poly ctMap) envC tenvC →\n      ∀ (cn : Ident μ ν) (tvs : α) (ts : List β) (tn : δ) (ti : γ),\n        (nsLookup tenvC cn = some (tvs, ts, ti) →\n          ∃ (cn' : ε) (stamp : κ),\n            nsLookup envC cn = some (LENGTH ts, stamp) ∧\n            FLOOKUP ctMap stamp = some (tvs, ts, ti)) ∧\n        (nsLookup tenvC cn = none → nsLookup envC cn = none) := by\n  sorry",
+   "confidence": 0.55,
+   "lean_check": "import CmlTS.TypeSound\n\nexample (m : ctMap) (envC : Namespace Bool Bool (Nat × stamp))\n    (tenvC : Namespace Bool Bool (List tvarN × List Ty × type_ident)) : True := by\n  fail_if_success (have _h := type_env_conv_thm (α := Nat) (β := Nat) m envC tenvC)\n  trivial\n",
+   "hol4_check": "!(ctMap : 'k |-> 'a # 'b list # 'c) (envC : ('m,'n,num # 'k) namespace) (tenvC : ('m,'n,'a # 'b list # 'c) namespace). nsAll2 (type_ctor ctMap) envC tenvC ==> !cn tvs ts ti. (nsLookup tenvC cn = SOME (tvs,ts,ti) ==> ?stamp. nsLookup envC cn = SOME (LENGTH ts,stamp) /\\ FLOOKUP ctMap stamp = SOME (tvs,ts,ti)) /\\ (nsLookup tenvC cn = NONE ==> nsLookup envC cn = NONE)"
+  }
+ ]
+}

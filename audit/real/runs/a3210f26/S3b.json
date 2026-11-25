@@ -1,0 +1,18 @@
+{
+ "module": "CmlTS.Prelude.FMap",
+ "checked": 14,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "FAPPLY",
+   "lean": "lean/CmlTS/Prelude/FMap.lean:25",
+   "hol4": "hol4/HOL4-src/src/finite_maps/finite_mapScript.sml:180",
+   "class": "V-C",
+   "explanation": "Outside the domain, Lean returns ARB, so `FAPPLY FEMPTY x = ARB` holds by rfl (and equals HD [], which is also ARB). HOL4 defines FAPPLY f x = OUTL (fmap_REP f x). For x not in FDOM f, this is OUTL (INR ()). OUTL (sumScript.sml:286) is specified only by OUTL (INL x) = x. ARB is an unconstrained constant (boolScript.sml:245). The saved theorem NOT_FDOM_FAPPLY_FEMPTY only gives f ' x = FEMPTY ' x, so `FEMPTY ' x = ARB` is left open. Lean therefore proves a specific equation about FAPPLY outside its specification. Values inside the domain agree.",
+   "repair": "opaque FAPPLY_undef {β : Type v} [Nonempty β] : β\n\ndef FAPPLY {α : Type u} {β : Type v} [Nonempty β] (f : FMap α β) (x : α) : β :=\n  match f.1 x with\n  | some v => v\n  | none => FAPPLY_undef",
+   "confidence": 0.6,
+   "lean_check": "import CmlTS.Prelude.FMap\n\nexample {α β : Type} [Nonempty β] (x : α) : FAPPLY (FEMPTY : FMap α β) x = ARB := rfl\n",
+   "hol4_check": "(!x:'a. (FEMPTY:'a |-> num) ' x = OUTL (INR () : num + one)) /\\ (?f:num + one -> num. (!n. f (INL n) = n) /\\ f (INR ()) <> ARB)"
+  }
+ ]
+}

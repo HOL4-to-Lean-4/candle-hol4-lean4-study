@@ -1,0 +1,7 @@
+381728020d6a535f8424bb05e786845c0bf94642c50bf7aab73b3b0c5587e32a *E:/NUS/mcomp/Dissertation/candle_study/plan/v3/plan_v3.3.tex
+5a2ab39992c406fcd36e1d209ef1284b8807d32cb3f498e37c896707dabfc576 *briefs/lessons_stage1.md
+1e1e99b27aa377f976c7edc68a6e203a9edf9da1556f8efbdcecabf63aa23f47 *briefs/lessons_stage2.md
+24140544235581d7317c4c9b7160ce951c2aff20e104a9e8f63a84483206e272 *briefs/nolessons_stage1.md
+b1a28454f5c07a76343937493b1baebf7305f2290380e640ec9cbc5d8c6d665d *briefs/nolessons_stage2.md
+857d79e695b70fd31365a32bd1a5dfb249af64968cfa447d9500490137fb03a9 *TARGETS.tsv
+hol4src: complete .sml/.sig from HOL4 tree at 9783a499, 1979 files; claude 2.1.325 (Claude Code); 2026-11-24T01:24:15Z

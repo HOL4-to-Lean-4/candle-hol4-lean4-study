@@ -1,0 +1,10 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "In `miscScript.sml:74`, `Definition MAP3_def` uses TFL tupling and `TotalDefn.delete_support`, deleting the auxiliary tupled constant so HOL4 saves only `MAP3_def` (three empty or three nonempty lists) and `MAP3_ind` (which omits `MAP3`). Thus HOL4 leaves mixed-shape calls unconstrained, allowing `MAP3 f [] [0] []` and `MAP3 f [] [1] []` to differ. `CmlTS.MAP3` (`Misc.lean:40`) sends all unmatched inputs to `ARB`, proving both equal `ARB` and each other, a `V-C` violation."
+  }
+ ]
+}

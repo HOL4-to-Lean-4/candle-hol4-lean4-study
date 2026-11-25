@@ -1,0 +1,18 @@
+{
+ "module": "CmlTS.Prelude.StringLib",
+ "checked": 7,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "CmlTS.CHR",
+   "lean": "lean/CmlTS/Prelude/StringLib.lean:15",
+   "hol4": "hol4/HOL4-src/src/string/stringScript.sml:27",
+   "class": "V-C",
+   "explanation": "HOL4's CHR is the abstraction function from define_new_type_bijections. The saved theorems (char_BIJ: CHR (ORD a) = a, and r < 256 <=> ORD (CHR r) = r; plus CHR_11, ORD_CHR, etc.) say nothing about the value of CHR n for n >= 256. The Lean definition sends every n >= 256 to the single constant ARB. Lean therefore proves CHR 256 = CHR 257, and also CHR 256 = ARB. HOL4 leaves both open: an abstraction function with f 256 <> f 257 also satisfies char_BIJ.",
+   "repair": "opaque CHR_outside : Nat → char := fun _ => ⟨0, by decide⟩\n\ndef CHR (n : Nat) : char := if h : n < 256 then ⟨n, h⟩ else CHR_outside n",
+   "confidence": 0.85,
+   "lean_check": "import CmlTS.Prelude.StringLib\n\ntheorem chr_out (n : Nat) (h : ¬ n < 256) : CmlTS.CHR n = CmlTS.ARB := by\n  unfold CmlTS.CHR\n  exact dif_neg h\n\ntheorem chr_256_257 : CmlTS.CHR 256 = CmlTS.CHR 257 :=\n  (chr_out 256 (by decide)).trans (chr_out 257 (by decide)).symm\n",
+   "hol4_check": "?f:num->char. (!a. f (ORD a) = a) /\\ (!r. r < 256 <=> (ORD (f r) = r)) /\\ f 256 <> f 257"
+  }
+ ]
+}

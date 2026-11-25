@@ -1,0 +1,10 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "In Basic.lean:26, OUTL is a transparent def equal to Classical.epsilon (fun f => ∀ x, f (.inl x) = x), so Lean proves by rfl that OUTL (Sum.inr ()) equals that Hilbert-selected function at Sum.inr (). In sumScript.sml:286, new_recursive_definition calls new_specification (Prim_rec.sml:281) and saves only OUTL (INL x) = x, leaving OUTL on INR inputs unconstrained relative to Hilbert choice. Lean therefore proves an equation in the mapped vocabulary that HOL4 leaves open."
+  }
+ ]
+}

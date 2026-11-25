@@ -1,0 +1,66 @@
+{
+ "module": "CmlTS.TypeSound",
+ "checked": 45,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "store_type_extension",
+   "lean": "lean/CmlTS/TypeSound.lean:20",
+   "hol4": "hol4/package/typeSoundScript.sml:487",
+   "class": "V-P",
+   "explanation": "HOL4 defines disjoint extension for finite maps with arbitrary key and value types. Its defining equation uses only FUNION and FLOOKUP. Lean fixes the arguments and the witness to tenv_store, which is FMap Nat store_t. For example, HOL4 can apply the relation to two maps from unit to num. Lean cannot express that instance with this declaration.",
+   "repair": "def store_type_extension {K : Type u} {V : Type v} (s1 s2 : FMap K V) : Prop :=\n  ∃ d : FMap K V, s2 = FUNION d s1 ∧\n    ∀ k, FLOOKUP d k = none ∨ FLOOKUP s1 k = none",
+   "confidence": 1.0,
+   "lean_check": null,
+   "hol4_check": "store_type_extension (FEMPTY : (unit,num) fmap) FEMPTY"
+  },
+  {
+   "id": "F2",
+   "declaration": "type_env_conv_thm",
+   "lean": "lean/CmlTS/TypeSound.lean:122",
+   "hol4": "hol4/package/typeSoundScript.sml:296",
+   "class": "V-P",
+   "explanation": "HOL4's type_ctor relates an arity and a map key to a triple by checking a lookup and the length of the triple's middle list. Its identifier argument is unused. Consequently this lookup theorem admits arbitrary namespace name types, map keys, triple metadata, and list elements. For example, it applies to namespaces with numeric names and a map keyed by unit. Lean's env_ctor, tenv_ctor, and ctMap annotations exclude that instance.",
+   "repair": "theorem type_env_conv_thm {M N K A B C α β : Type} [Nonempty β]\n    (m : FMap K (A × List B × C)) (envC : Namespace M N (Nat × K))\n    (tenvC : Namespace M N (A × List B × C)) :\n    nsAll2 (fun _ p q => FLOOKUP m p.2 = some q ∧ LENGTH q.2.1 = p.1) envC tenvC →\n    ∀ (cn : Ident M N) (tvs : A) (ts : List B) (tn : α) (ti : C),\n      (nsLookup tenvC cn = some (tvs, ts, ti) →\n        ∃ (cn' : β) (stamp : K), nsLookup envC cn = some (LENGTH ts, stamp) ∧\n          FLOOKUP m stamp = some (tvs, ts, ti)) ∧\n      (nsLookup tenvC cn = none → nsLookup envC cn = none) := by sorry",
+   "confidence": 0.99,
+   "lean_check": null,
+   "hol4_check": null
+  },
+  {
+   "id": "F3",
+   "declaration": "store_type_extension_weakS",
+   "lean": "lean/CmlTS/TypeSound.lean:211",
+   "hol4": "hol4/package/typeSoundScript.sml:493",
+   "class": "V-P",
+   "explanation": "HOL4 proves that disjoint extension implies the submap relation for any finite-map type. Both predicates are polymorphic. Lean quantifies only over tenv_store, so the theorem loses instances such as maps from unit to num.",
+   "repair": "theorem store_type_extension_weakS {K V : Type} (s1 s2 : FMap K V) :\n    store_type_extension s1 s2 → weakS_poly s2 s1 := by sorry",
+   "confidence": 1.0,
+   "lean_check": null,
+   "hol4_check": "!s1 s2 : (unit,num) fmap. store_type_extension s1 s2 ==> weakS s2 s1"
+  },
+  {
+   "id": "F4",
+   "declaration": "store_type_extension_refl",
+   "lean": "lean/CmlTS/TypeSound.lean:216",
+   "hol4": "hol4/package/typeSoundScript.sml:502",
+   "class": "V-P",
+   "explanation": "HOL4 proves reflexivity for every finite map, using the empty map as the extension witness. Lean restricts the quantified map to tenv_store. This excludes even the empty map of type FMap Unit Nat.",
+   "repair": "theorem store_type_extension_refl {K : Type u} {V : Type v} (s : FMap K V) :\n    store_type_extension s s := by sorry",
+   "confidence": 1.0,
+   "lean_check": null,
+   "hol4_check": "!s : (unit,num) fmap. store_type_extension s s"
+  },
+  {
+   "id": "F5",
+   "declaration": "store_type_extension_trans",
+   "lean": "lean/CmlTS/TypeSound.lean:220",
+   "hol4": "hol4/package/typeSoundScript.sml:510",
+   "class": "V-P",
+   "explanation": "HOL4 proves transitivity for three finite maps sharing any key and value types. Lean requires all three maps to have type tenv_store, so it cannot instantiate the theorem for a chain of maps from unit to num.",
+   "repair": "theorem store_type_extension_trans {K : Type u} {V : Type v} (s1 s2 s3 : FMap K V) :\n    store_type_extension s1 s2 ∧ store_type_extension s2 s3 →\n    store_type_extension s1 s3 := by sorry",
+   "confidence": 1.0,
+   "lean_check": null,
+   "hol4_check": "!s1 s2 s3 : (unit,num) fmap. store_type_extension s1 s2 /\\ store_type_extension s2 s3 ==> store_type_extension s1 s3"
+  }
+ ]
+}

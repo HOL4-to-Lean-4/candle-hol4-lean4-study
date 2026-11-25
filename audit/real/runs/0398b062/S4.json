@@ -1,0 +1,16 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "In List.lean:11-13, `HOL.HD` is a transparent definition returning `HOL.ARB` on `[]`, so Lean proves `HD ([] : List Nat) = ARB` (and via `EL`, `EL 0 [] = ARB`) by `rfl`. In HOL4 (`listScript.sml:138-140`), `HD` is specified via primitive recursion (`new_specification`) solely by `HD (h::t) = h`, while `ARB` (`boolScript.sml:245`) is an uninterpreted constant, leaving `HD [] = ARB` open."
+  },
+  {
+   "id": "F2",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "In List.lean:27-29, `HOL.LAST` is a transparent definition returning `HOL.ARB` on `[]`, so Lean proves `LAST ([] : List Nat) = ARB` and `LAST ([] : List Nat) = HD []` by `rfl`. In HOL4 (`listScript.sml:2124-2126`), `LAST` is specified via primitive recursion (`new_specification`) solely by `LAST (h::t) = if t = [] then h else LAST t`, leaving `LAST []` completely unconstrained and both equations open."
+  }
+ ]
+}

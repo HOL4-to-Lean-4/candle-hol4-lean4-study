@@ -1,0 +1,42 @@
+{
+ "module": "CmlTS.Prelude.Num",
+ "checked": 33,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "CHR",
+   "lean": "lean/CmlTS/Prelude/Num.lean:18",
+   "hol4": "hol4/HOL4-src/src/string/stringScript.sml:27",
+   "class": "V-C",
+   "explanation": "HOL4's CHR is the abstraction function of a type definition. It is characterised only by CHR (ORD c) = c and r < 256 <=> ORD (CHR r) = r, so its values at arguments >= 256 are left open separately for each argument. The Lean definition returns the same constant ARB for every n >= 256. Lean therefore proves CHR 256 = CHR 257 (and CHR n = ARB for all n >= 256). No saved HOL4 theorem gives or implies these equations.",
+   "repair": "def CHR : Nat → char := Classical.epsilon (fun f : Nat → char => ∀ (n : Nat) (h : n < 256), f n = ⟨n, h⟩)",
+   "confidence": 0.6,
+   "lean_check": "import CmlTS.Prelude.Num\n\nexample : CHR 256 = CHR 257 := by simp [CHR]\n",
+   "hol4_check": "?f:num->char. (!a. f (ORD a) = a) /\\ (!r. r < 256 <=> (ORD (f r) = r)) /\\ f 256 <> f 257"
+  },
+  {
+   "id": "F2",
+   "declaration": "int_div",
+   "lean": "lean/CmlTS/Prelude/Num.lean:46",
+   "hol4": "hol4/HOL4-src/src/integer/integerScript.sml:1989",
+   "class": "V-C",
+   "explanation": "HOL4 introduces int_div by new_specification with a Skolemised !i j. ~(j = 0) ==> ..., so i / 0 is an unspecified integer that may depend on i. The integer theorems I checked all assume a nonzero divisor. The Lean definition returns the same ARB for every i when j = 0. Lean therefore proves int_div 1 0 = int_div 2 0, and also int_div i 0 = int_mod k 0, since int_mod uses the same ARB : Int. HOL4 leaves these open. For j ≠ 0, Int.fdiv agrees with HOL4's floor division.",
+   "repair": "def int_div : Int → Int → Int := Classical.epsilon (fun f : Int → Int → Int => ∀ i j : Int, j ≠ 0 → f i j = Int.fdiv i j)",
+   "confidence": 0.6,
+   "lean_check": "import CmlTS.Prelude.Num\n\nexample : int_div 1 0 = int_div 2 0 := by simp [int_div]\n",
+   "hol4_check": "?d:int->int->int. (!i j. j <> 0 ==> (d i j = i / j)) /\\ d 1 0 <> d 2 0"
+  },
+  {
+   "id": "F3",
+   "declaration": "int_mod",
+   "lean": "lean/CmlTS/Prelude/Num.lean:48",
+   "hol4": "hol4/HOL4-src/src/integer/integerScript.sml:2074",
+   "class": "V-C",
+   "explanation": "HOL4 introduces int_mod by new_specification with !i j. ~(j = 0) ==> (int_mod i j = i - i / j * j), so i % 0 is unspecified and may depend on i. The Lean definition returns the same ARB for every i when j = 0. Lean therefore proves int_mod 1 0 = int_mod 2 0, and int_mod 1 0 = int_div 1 0. No saved HOL4 theorem decides these equations. For j ≠ 0, Int.fmod agrees with HOL4.",
+   "repair": "def int_mod : Int → Int → Int := Classical.epsilon (fun f : Int → Int → Int => ∀ i j : Int, j ≠ 0 → f i j = i - int_div i j * j)",
+   "confidence": 0.6,
+   "lean_check": "import CmlTS.Prelude.Num\n\nexample : int_mod 1 0 = int_mod 2 0 := by simp [int_mod]\n\nexample : int_mod 1 0 = int_div 1 0 := by simp [int_mod, int_div]\n",
+   "hol4_check": "?m:int->int->int. (!i j. j <> 0 ==> (m i j = i - i / j * j)) /\\ m 1 0 <> m 2 0"
+  }
+ ]
+}

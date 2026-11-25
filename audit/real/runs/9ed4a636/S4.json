@@ -1,0 +1,10 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "In holSyntaxScript.sml, `Definition dest_var_def` goes through `Defn.non_wfrec_defn` and `Prim_rec.new_recursive_definition`, which uses `new_specification` to save only `∀x ty. dest_var (Var x ty) = (x, ty)`, leaving `dest_var` unconstrained on `Const`, `Comb`, and `Abs`. In HolSyntax.lean, `dest_var` transparently maps every non-`Var` term to the single opaque constant `ARB`, making `dest_var (Const x ty) = dest_var (Comb s t)` provable by reflexivity. This is a true V-C conservativity violation."
+  }
+ ]
+}

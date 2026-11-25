@@ -1,0 +1,102 @@
+{
+ "module": "CmlTS.TypeSoundInvariants",
+ "checked": 21,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "tenv_abbrev_ok",
+   "lean": "lean/CmlTS/TypeSoundInvariants.lean:20",
+   "hol4": "hol4/package/typeSoundInvariantsScript.sml:20",
+   "class": "V-P",
+   "explanation": "HOL4 ignores the lookup identifier, so both namespace key types are polymorphic. A namespace with numeric module and abbreviation names can satisfy the predicate. Lean's tenv_abbrev fixes both key types to mlstring.",
+   "repair": "def tenv_abbrev_ok {M : Type u} {N : Type v} (tenvT : Namespace M N (List tvarN × Ty)) : Prop :=\n  nsAll (fun _ p => check_freevars 0 p.1 p.2) tenvT",
+   "confidence": 0.99,
+   "lean_check": null,
+   "hol4_check": "tenv_abbrev_ok (nsEmpty : (num, num, tvarN list # t) namespace)"
+  },
+  {
+   "id": "F2",
+   "declaration": "tenv_ctor_ok",
+   "lean": "lean/CmlTS/TypeSoundInvariants.lean:23",
+   "hol4": "hol4/package/typeSoundInvariantsScript.sml:24",
+   "class": "V-P",
+   "explanation": "HOL4 checks the argument types using the type variables. It ignores the identifier and the final tuple field, so both namespace key types and the final field type are polymorphic. Lean's tenv_ctor fixes the keys to mlstring and the final field to type_ident. This excludes a HOL4 namespace whose entry carries a Boolean final field.",
+   "repair": "def tenv_ctor_ok {M : Type u} {N : Type v} {A : Type w} (tenvC : Namespace M N (List tvarN × List Ty × A)) : Prop :=\n  nsAll (fun _ p => EVERY (check_freevars 0 p.1) p.2.1) tenvC",
+   "confidence": 0.99,
+   "lean_check": null,
+   "hol4_check": "tenv_ctor_ok (nsSing 0 ([], [], T) : (num, num, tvarN list # t list # bool) namespace)"
+  },
+  {
+   "id": "F3",
+   "declaration": "tenv_val_ok",
+   "lean": "lean/CmlTS/TypeSoundInvariants.lean:26",
+   "hol4": "hol4/package/typeSoundInvariantsScript.sml:28",
+   "class": "V-P",
+   "explanation": "HOL4 constrains the binding payload to a variable count and a type. Its namespace key types remain polymorphic. Lean's tenv_val excludes, for example, a namespace that binds a numeric name to (0, Tint).",
+   "repair": "def tenv_val_ok {M : Type u} {N : Type v} (tenvV : Namespace M N (Nat × Ty)) : Prop :=\n  nsAll (fun _ p => check_freevars p.1 [] p.2) tenvV",
+   "confidence": 0.99,
+   "lean_check": null,
+   "hol4_check": "tenv_val_ok (nsSing 0 (0, Tint) : (num, num, num # t) namespace)"
+  },
+  {
+   "id": "F4",
+   "declaration": "type_ctor",
+   "lean": "lean/CmlTS/TypeSoundInvariants.lean:50",
+   "hol4": "hol4/package/typeSoundInvariantsScript.sml:72",
+   "class": "V-P",
+   "explanation": "HOL4 requires the map key to match the supplied key, the lookup result to equal the supplied triple, and the middle list to have length n. The key type, ignored argument type, first field type, list element type, and final field type are independently polymorphic. For example, HOL4 accepts a Boolean key with payload (F, [T], F). Lean fixes all five types.",
+   "repair": "def type_ctor {K : Type u} {I : Type v} {A : Type w} {B : Type _} {C : Type _}\n    (m : FMap K (A × List B × C)) (_ : I) (ns : Nat × K) (tti : A × List B × C) : Prop :=\n  FLOOKUP m ns.2 = some tti ∧ LENGTH tti.2.1 = ns.1",
+   "confidence": 0.99,
+   "lean_check": null,
+   "hol4_check": "type_ctor (FEMPTY |+ (T, (F, [T], F))) F (1, T) (F, [T], F)"
+  },
+  {
+   "id": "F5",
+   "declaration": "add_tenvE",
+   "lean": "lean/CmlTS/TypeSoundInvariants.lean:54",
+   "hol4": "hol4/package/typeSoundInvariantsScript.sml:78",
+   "class": "V-P",
+   "explanation": "HOL4's Bind_name clause fixes the variable name and payload types through nsBind. The module name type remains polymorphic. For example, the Empty clause returns a namespace with numeric module names unchanged. Lean's tenv_val excludes that input.",
+   "repair": "def add_tenvE {M : Type u} : tenv_val_exp → Namespace M varN (Nat × Ty) → Namespace M varN (Nat × Ty)\n  | .Empty, tenvV => tenvV\n  | .Bind_tvar _ tenvE, tenvV => add_tenvE tenvE tenvV\n  | .Bind_name x tvs t tenvE, tenvV => nsBind x (tvs, t) (add_tenvE tenvE tenvV)",
+   "confidence": 0.99,
+   "lean_check": null,
+   "hol4_check": "∀env : (num, varN, num # t) namespace. add_tenvE Empty env = env"
+  },
+  {
+   "id": "F6",
+   "declaration": "ctMap_has_exns",
+   "lean": "lean/CmlTS/TypeSoundInvariants.lean:141",
+   "hol4": "hol4/package/typeSoundInvariantsScript.sml:173",
+   "class": "V-P",
+   "explanation": "All four HOL4 lookup tests use two empty lists. Their element types are independently polymorphic. HOL4 can therefore test a stamp map with payload type num list # bool list # type_ident. Lean's ctMap fixes the element types to tvarN and Ty.",
+   "repair": "def ctMap_has_exns {A : Type u} {B : Type v} (ctMap : FMap stamp (List A × List B × type_ident)) : Prop :=\n  FLOOKUP ctMap bind_stamp = some ([], [], Texn_num) ∧\n  FLOOKUP ctMap chr_stamp = some ([], [], Texn_num) ∧\n  FLOOKUP ctMap div_stamp = some ([], [], Texn_num) ∧\n  FLOOKUP ctMap subscript_stamp = some ([], [], Texn_num)",
+   "confidence": 0.99,
+   "lean_check": null,
+   "hol4_check": "¬ctMap_has_exns (FEMPTY : (stamp, num list # bool list # type_ident) fmap)"
+  },
+  {
+   "id": "F7",
+   "declaration": "ctMap_has_bools",
+   "lean": "lean/CmlTS/TypeSoundInvariants.lean:154",
+   "hol4": "hol4/package/typeSoundInvariantsScript.sml:191",
+   "class": "V-P",
+   "explanation": "Both successful HOL4 lookups require empty lists, and the remaining lookup test requires NONE. These tests leave both list element types polymorphic. Lean's ctMap excludes instances such as a stamp map with payload type num list # bool list # type_ident.",
+   "repair": "def ctMap_has_bools {A : Type u} {B : Type v} (ctMap : FMap stamp (List A × List B × type_ident)) : Prop :=\n  FLOOKUP ctMap (.TypeStamp (mlstr \"True\") bool_type_num) = some ([], [], Tbool_num) ∧\n  FLOOKUP ctMap (.TypeStamp (mlstr \"False\") bool_type_num) = some ([], [], Tbool_num) ∧\n  (∀ cn, cn ≠ mlstr \"True\" ∧ cn ≠ mlstr \"False\" →\n    FLOOKUP ctMap (.TypeStamp cn bool_type_num) = none)",
+   "confidence": 0.99,
+   "lean_check": null,
+   "hol4_check": "¬ctMap_has_bools (FEMPTY : (stamp, num list # bool list # type_ident) fmap)"
+  },
+  {
+   "id": "F8",
+   "declaration": "consistent_ctMap",
+   "lean": "lean/CmlTS/TypeSoundInvariants.lean:163",
+   "hol4": "hol4/package/typeSoundInvariantsScript.sml:229",
+   "class": "V-P",
+   "explanation": "HOL4 projects the third field of each map value and compares its range with type_ids. This makes the third field share its type with the set elements and leaves the first two field types arbitrary. The stamp bounds constrain only the keys. For example, HOL4 accepts a Boolean set and a stamp map carrying num # num # bool. Lean requires Set type_ident and ctMap.",
+   "repair": "def consistent_ctMap {α : Type u} {A : Type v} {B : Type w} {C : Type _}\n    (st : state α) (type_ids : Set C) (ctMap : FMap stamp (A × B × C)) : Prop :=\n  DISJOINT type_ids (FRANGE (o_f (SND ∘ SND) ctMap)) ∧\n  ∀ cn id,\n    (stamp.TypeStamp cn id ∈ FDOM ctMap → id < st.next_type_stamp) ∧\n    (stamp.ExnStamp id ∈ FDOM ctMap → id < st.next_exn_stamp)",
+   "confidence": 0.99,
+   "lean_check": null,
+   "hol4_check": "∀st. consistent_ctMap st UNIV (FEMPTY : (stamp, num # num # bool) fmap)"
+  }
+ ]
+}

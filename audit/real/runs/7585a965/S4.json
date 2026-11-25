@@ -1,0 +1,16 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "HOL4 defines `dest_Refv` via `Prim_rec.new_recursive_definition` (`new_specification`), saving only `∀ v, dest_Refv (Refv v) = v` and leaving `W8array`, `Varray`, and `Thunk` unconstrained. Lean maps all non-`Refv` constructors to the single constant `ARB`, proving `dest_Refv (W8array [] : store_v Bool) = dest_Refv (Varray [])`, an equation in the mapped vocabulary that HOL4's saved theorem leaves open (it admits `true` vs `false`)."
+  },
+  {
+   "id": "F2",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "HOL4 defines `FV_dec` via `Prim_rec.new_recursive_definition` (`new_specification`), saving only the five equations for `Dlet`, `Dletrec`, `Dtype`, `Dtabbrev`, and `Dexn`, leaving `Dmod`, `Dlocal`, and `Denv` unconstrained. Lean maps all three omitted constructors to the same `ARB`, proving `∀ m, FV_dec (Dmod m []) = FV_dec (Dlocal [] [])`, an equation in the mapped vocabulary left open by HOL4's saved theorem (e.g., `∅` vs `UNIV`)."
+  }
+ ]
+}

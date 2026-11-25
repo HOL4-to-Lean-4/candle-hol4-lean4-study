@@ -1,0 +1,18 @@
+{
+ "module": "CmlTS.Prelude.FiniteMap",
+ "checked": 13,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "FAPPLY",
+   "lean": "lean/CmlTS/Prelude/FiniteMap.lean:28",
+   "hol4": "hol4/HOL4-src/src/finite_maps/finite_mapScript.sml:180",
+   "class": "V-C",
+   "explanation": "HOL4 defines FAPPLY f x = OUTL (fmap_REP f x). OUTL is specified only by OUTL (INL x) = x (sumScript.sml:286). For x outside FDOM f, the saved theorems give only FAPPLY f x = FAPPLY FEMPTY x (NOT_FDOM_FAPPLY_FEMPTY, line 562), i.e. the unspecified OUTL (INR one). No saved theorem equates it with ARB. Lean returns ARB in the none case, so it proves FAPPLY FEMPTY x = ARB, and hence also FAPPLY FEMPTY x = THE none and = HD []. HOL4 leaves these equations open.",
+   "repair": "opaque FAPPLY_outside {β : Type} [Nonempty β] : β\n\ndef FAPPLY [Nonempty β] (f : fmap α β) (x : α) : β :=\n  match f.rep x with\n  | some y => y\n  | none => FAPPLY_outside",
+   "confidence": 0.85,
+   "lean_check": "import CmlTS.Prelude.FiniteMap\n\ntheorem fapply_fempty_arb {α β : Type} [Nonempty β] (x : α) :\n    CmlTS.FAPPLY (CmlTS.FEMPTY : CmlTS.fmap α β) x = (CmlTS.ARB : β) := rfl\n",
+   "hol4_check": null
+  }
+ ]
+}

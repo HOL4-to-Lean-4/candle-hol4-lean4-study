@@ -1,0 +1,30 @@
+{
+ "module": "CandleLean.HolSemantics",
+ "checked": 29,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "Candle.instance_",
+   "lean": "lean/CandleLean/HolSemantics.lean:71",
+   "hol4": "hol4/package/candle/standard/semantics/holSemanticsScript.sml:112",
+   "class": "V-C",
+   "explanation": "Lean proves by reflexivity that `instance_ FEMPTY i name ty τ` equals the value of the Hilbert-choice witness for `instance_spec` at those arguments. HOL4 saves only the conditional specification. On `FEMPTY`, the lookup premise fails for every name. With Boolean results, flipping a satisfying function’s value on the empty signature preserves the saved specification while changing its value there. Thus HOL4 leaves its equality to that particular witness open.",
+   "repair": "private theorem instance_exists : ∃ f, instance_spec (U := U) f := by sorry\n\nprivate opaque specifiedInstance : { f // instance_spec (U := U) f } :=\n  ⟨Classical.choose instance_exists, Classical.choose_spec instance_exists⟩\n\ndef instance_ : tmsig → interpretation U → mlstring → type → tyval U → U :=\n  (specifiedInstance (U := U)).val\n\ntheorem instance_def : instance_spec (U := U) instance_ :=\n  (specifiedInstance (U := U)).property",
+   "confidence": 0.97,
+   "lean_check": "import CandleLean.HolSemantics\nopen Candle HOL\n\nexample (i : interpretation Bool) (name : mlstring) (ty : Candle.type) (τ : tyval Bool) :\n    instance_ FEMPTY i name ty τ =\n      (Classical.epsilon (instance_spec (U := Bool))) FEMPTY i name ty τ := rfl",
+   "hol4_check": null
+  },
+  {
+   "id": "F2",
+   "declaration": "Candle.termsem0",
+   "lean": "lean/CandleLean/HolSemantics.lean:112",
+   "hol4": "hol4/package/candle/standard/semantics/holSemanticsScript.sml:139",
+   "class": "V-C",
+   "explanation": "HOL4’s saved abstraction equation covers only `Abs (Var x ty) b`. Lean assigns `HOL.ARB` to every abstraction whose binder is a `Const`, `Comb`, or `Abs`. For example, Lean proves that `Abs (Const name ty) b` evaluates to `HOL.ARB` for every body and valuation. The HOL4 equations leave that value open.",
+   "repair": "-- Before termsem0:\nprivate opaque malformedAbsSem (mem : U → U → Prop) (tmsig : tmsig)\n    (i : interpretation U) (v : valuation U) (binder body : term) : U :=\n  tmvof v default\n\n-- Replace the three ARB clauses after the variable-binder clause:\n  | v, Abs binder b => malformedAbsSem mem tmsig i v binder b",
+   "confidence": 0.99,
+   "lean_check": "import CandleLean.HolSemantics\nopen Candle HOL\n\nexample (mem : Bool → Bool → Prop) (Γ : tmsig) (i : interpretation Bool)\n    (v : valuation Bool) (name : mlstring) (ty : Candle.type) (b : term) :\n    termsem0 mem Γ i v (Abs (Const name ty) b) = (HOL.ARB : Bool) := by\n  simp only [termsem0]",
+   "hol4_check": null
+  }
+ ]
+}

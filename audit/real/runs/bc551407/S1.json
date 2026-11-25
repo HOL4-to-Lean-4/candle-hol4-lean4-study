@@ -1,0 +1,18 @@
+{
+ "module": "CmlTS.Misc",
+ "checked": 29,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "CmlTS.MAP3",
+   "lean": "lean/CmlTS/Misc.lean:39",
+   "hol4": "hol4/package/miscScript.sml:74",
+   "class": "V-C",
+   "explanation": "The catch-all branch returns the same `ARB` for every mixed empty/nonempty triple of a given result type. Lean therefore proves `MAP3 f [] [0] [] = MAP3 f [] [] [0]`. Neither input matches a saved HOL4 equation, and the equations permit these two results to differ.",
+   "repair": "private axiom MAP3_unspecified (f : α → β → γ → δ) (xs : List α) (ys : List β) (zs : List γ) : List δ\n\ndef MAP3 (f : α → β → γ → δ) : List α → List β → List γ → List δ\n  | [], [], [] => []\n  | h1 :: t1, h2 :: t2, h3 :: t3 => f h1 h2 h3 :: MAP3 f t1 t2 t3\n  | xs, ys, zs => MAP3_unspecified f xs ys zs",
+   "confidence": 1.0,
+   "lean_check": "import CmlTS.Misc\n\nexample (f : Nat → Nat → Nat → Nat) :\n    CmlTS.MAP3 f [] [0] [] = CmlTS.MAP3 f [] [] [0] := by\n  simp only [CmlTS.MAP3]",
+   "hol4_check": null
+  }
+ ]
+}

@@ -1,0 +1,54 @@
+{
+ "module": "CmlTS.Location",
+ "checked": 6,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "CmlTS.locnrow",
+   "lean": "lean/CmlTS/Location.lean:19",
+   "hol4": "hol4/package/locationScript.sml:7",
+   "class": "V-C",
+   "explanation": "Lean proves `locnrow UNKNOWNpt = locnrow EOFpt` by reflexivity because both sides reduce to the same `ARB : Nat`. The HOL4 equation specifies only the row of `POSN r c` and permits different rows for `UNKNOWNpt` and `EOFpt`.",
+   "repair": "private opaque locnrowOther : locn → Nat := fun _ => ARB\n\ndef locnrow : locn → Nat\n  | POSN r _ => r\n  | p => locnrowOther p",
+   "confidence": 1,
+   "lean_check": "import CmlTS.Location\nopen CmlTS\nexample : locnrow UNKNOWNpt = locnrow EOFpt := rfl",
+   "hol4_check": null
+  },
+  {
+   "id": "F2",
+   "declaration": "CmlTS.locn_rowupdate",
+   "lean": "lean/CmlTS/Location.lean:23",
+   "hol4": "hol4/package/locationScript.sml:12",
+   "class": "V-C",
+   "explanation": "Lean proves `locn_rowupdate f UNKNOWNpt = locn_rowupdate g EOFpt` for every `f` and `g`. Both calls return the same `ARB : locn`. HOL4 specifies row updates only on `POSN r c`, so the other results may depend on both the update function and the location.",
+   "repair": "private opaque locn_rowupdateOther : (Nat → Nat) → locn → locn := fun _ _ => ARB\n\ndef locn_rowupdate (f : Nat → Nat) : locn → locn\n  | POSN r c => POSN (f r) c\n  | p => locn_rowupdateOther f p",
+   "confidence": 1,
+   "lean_check": "import CmlTS.Location\nopen CmlTS\nexample (f g : Nat → Nat) : locn_rowupdate f UNKNOWNpt = locn_rowupdate g EOFpt := rfl",
+   "hol4_check": null
+  },
+  {
+   "id": "F3",
+   "declaration": "CmlTS.locncol",
+   "lean": "lean/CmlTS/Location.lean:27",
+   "hol4": "hol4/package/locationScript.sml:17",
+   "class": "V-C",
+   "explanation": "Lean proves `locncol UNKNOWNpt = locncol EOFpt` by reflexivity because both sides reduce to the same `ARB : Nat`. The HOL4 equation specifies only the column of `POSN r c` and permits different columns for `UNKNOWNpt` and `EOFpt`.",
+   "repair": "private opaque locncolOther : locn → Nat := fun _ => ARB\n\ndef locncol : locn → Nat\n  | POSN _ c => c\n  | p => locncolOther p",
+   "confidence": 1,
+   "lean_check": "import CmlTS.Location\nopen CmlTS\nexample : locncol UNKNOWNpt = locncol EOFpt := rfl",
+   "hol4_check": null
+  },
+  {
+   "id": "F4",
+   "declaration": "CmlTS.locn_colupdate",
+   "lean": "lean/CmlTS/Location.lean:31",
+   "hol4": "hol4/package/locationScript.sml:21",
+   "class": "V-C",
+   "explanation": "Lean proves `locn_colupdate f UNKNOWNpt = locn_colupdate g EOFpt` for every `f` and `g`. Both calls return the same `ARB : locn`. HOL4 specifies column updates only on `POSN r c`, so the other results may depend on both the update function and the location.",
+   "repair": "private opaque locn_colupdateOther : (Nat → Nat) → locn → locn := fun _ _ => ARB\n\ndef locn_colupdate (f : Nat → Nat) : locn → locn\n  | POSN r c => POSN r (f c)\n  | p => locn_colupdateOther f p",
+   "confidence": 1,
+   "lean_check": "import CmlTS.Location\nopen CmlTS\nexample (f g : Nat → Nat) : locn_colupdate f UNKNOWNpt = locn_colupdate g EOFpt := rfl",
+   "hol4_check": null
+  }
+ ]
+}

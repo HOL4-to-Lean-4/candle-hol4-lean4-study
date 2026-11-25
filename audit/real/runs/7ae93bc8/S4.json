@@ -1,0 +1,10 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "HOL4 introduces `fresh` via `new_specification`, saving only `∀s. FINITE s ⇒ fresh s ∉ s`, which leaves `fresh UNIV` unconstrained since `UNIV : Set string` is infinite. Lean defines `fresh` transparently as `select (fun f => ∀ s, FINITE s → f s ∉ s)`, proving `fresh UNIV = select (...) UNIV` by `rfl`, an equation in the mapped vocabulary left open by HOL4."
+  }
+ ]
+}

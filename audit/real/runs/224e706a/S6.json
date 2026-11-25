@@ -1,0 +1,16 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "FUN_FMAP comes from new_specification under FINITE P. Every saved theorem about it (FDOM_FMAP, FRANGE_FMAP, FLOOKUP_FUN_FMAP, FUN_FMAP_INSERT, FUN_FMAP_EMPTY, FUN_fmap_thm, unlookup and RELN_TO_FMAP results) assumes finiteness or concerns a finite set; f_o_DEF merely uses it. For infinite P the value is left open. Lean's else branch is the transparent FEMPTY, so Lean proves ¬FINITE P → FUN_FMAP f P = FEMPTY, e.g. for UNIV on Nat."
+  },
+  {
+   "id": "F2",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "FAPPLY f x = OUTL (fmap_REP f x), and OUTL is specified only on INL. Outside the domain, saved theorems give only f ' x = FEMPTY ' x, never a concrete value or ARB. ARB is an undefined constant in HOL4 and OUTL (INR one) is not equated with it. Lean returns ARB := default, so it proves FAPPLY FEMPTY x = ARB and FAPPLY (FEMPTY : FMap Nat Nat) 0 = 0, both open in HOL4."
+  }
+ ]
+}

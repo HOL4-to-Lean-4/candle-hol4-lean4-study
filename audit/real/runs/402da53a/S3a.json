@@ -1,0 +1,30 @@
+{
+ "module": "CandleLean.HolSyntaxLib",
+ "checked": 30,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "Candle.RESULT",
+   "lean": "lean/CandleLean/HolSyntaxLib.lean:34",
+   "hol4": "hol4/package/candle/syntax-lib/holSyntaxLibScript.sml:88",
+   "class": "V-C",
+   "explanation": "HOL4's only clause is RESULT (Result t) = t. This constructor-pattern definition goes through Prim_rec.new_recursive_definition, which uses new_specification (Defn.sml:1182-1197, Prim_rec.sml:281). So only that clause is saved, with no _primitive ARB equation, and RESULT (Clash t) is unconstrained. Lean sets RESULT (Clash t) := ARB. It therefore proves RESULT (Clash t) = ARB and, by proof irrelevance of the Nonempty witness, RESULT (Clash a) = RESULT (Clash b) for all a, b. It also proves RESULT (Clash a) = CLASH (Result a). HOL4 leaves all of these open; for example, an interpretation with RESULT (Clash t) = t satisfies RESULT_def.",
+   "repair": "def RESULT_spec {α : Type u} (f : result α → α) : Prop := ∀ t, f (Result t) = t\n\ndef RESULT {α : Type u} : result α → α :=\n  @Classical.epsilon _ ⟨fun r => match r with | .Result t => t | .Clash t => t⟩ RESULT_spec\n\ntheorem RESULT_def {α : Type u} : RESULT_spec (RESULT (α := α)) :=\n  Classical.epsilon_spec (p := RESULT_spec (α := α)) ⟨fun r => match r with | .Result t => t | .Clash t => t, fun _ => rfl⟩",
+   "confidence": 0.62,
+   "lean_check": "import CandleLean.HolSyntaxLib\n\nexample {α : Type} (a b : α) : Candle.RESULT (Candle.result.Clash a) = Candle.RESULT (Candle.result.Clash b) := rfl\n\nexample {α : Type} (a : α) : Candle.RESULT (Candle.result.Clash a) = @HOL.ARB α ⟨a⟩ := rfl\n",
+   "hol4_check": "?f:'a result -> 'a. (!t. f (Result t) = t) /\\ (!t. f (Clash t) = t)"
+  },
+  {
+   "id": "F2",
+   "declaration": "Candle.CLASH",
+   "lean": "lean/CandleLean/HolSyntaxLib.lean:38",
+   "hol4": "hol4/package/candle/syntax-lib/holSyntaxLibScript.sml:92",
+   "class": "V-C",
+   "explanation": "HOL4's only clause is CLASH (Clash t) = t. It is made by new_recursive_definition/new_specification, so only that clause is saved and CLASH (Result t) is unconstrained. Lean sets CLASH (Result t) := ARB. It therefore proves CLASH (Result t) = ARB and, by proof irrelevance of the Nonempty witness, CLASH (Result a) = CLASH (Result b) for all a, b. It also proves CLASH (Result a) = RESULT (Clash a). HOL4 leaves all of these open; for example, an interpretation with CLASH (Result t) = t satisfies CLASH_def.",
+   "repair": "def CLASH_spec {α : Type u} (f : result α → α) : Prop := ∀ t, f (Clash t) = t\n\ndef CLASH {α : Type u} : result α → α :=\n  @Classical.epsilon _ ⟨fun r => match r with | .Clash t => t | .Result t => t⟩ CLASH_spec\n\ntheorem CLASH_def {α : Type u} : CLASH_spec (CLASH (α := α)) :=\n  Classical.epsilon_spec (p := CLASH_spec (α := α)) ⟨fun r => match r with | .Clash t => t | .Result t => t, fun _ => rfl⟩",
+   "confidence": 0.62,
+   "lean_check": "import CandleLean.HolSyntaxLib\n\nexample {α : Type} (a b : α) : Candle.CLASH (Candle.result.Result a) = Candle.CLASH (Candle.result.Result b) := rfl\n\nexample {α : Type} (a : α) : Candle.CLASH (Candle.result.Result a) = Candle.RESULT (Candle.result.Clash a) := rfl\n",
+   "hol4_check": "?f:'a result -> 'a. (!t. f (Clash t) = t) /\\ (!t. f (Result t) = t)"
+  }
+ ]
+}

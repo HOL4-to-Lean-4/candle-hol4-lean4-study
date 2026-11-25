@@ -1,0 +1,28 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "HOL4's store_type_extension_def is unannotated and uses only FUNION and FLOOKUP. No overload or later use narrows it, so the constant has type ('a |-> 'b) -> ('a |-> 'b) -> bool, and reflexivity is proved for every finite map. Lean fixes both the definition and the theorem to FMap Nat store_t. FMap, FUNION and FLOOKUP are polymorphic in the library, and weakS_refl is stated polymorphically, so this is a strict special case."
+  },
+  {
+   "id": "F2",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "The HOL4 transitivity theorem has no annotations and concerns a polymorphic constant, so it covers all s1 s2 s3 : 'a |-> 'b. Lean quantifies only over tenv_store = FMap Nat store_t, through its own monomorphic store_type_extension. Other key and value types are not covered, whereas the library's weakCT_trans is stated polymorphically. It is a strict special case."
+  },
+  {
+   "id": "F3",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "In HOL4, weakS_def is plain SUBMAP and store_type_extension_def is unannotated, so both are polymorphic and the theorem holds for all 'a |-> 'b. Lean restricts it to FMap Nat store_t with the monomorphic weakS, although Weakening.lean provides weakS_poly for general finite maps. The Lean statement is a strict special case."
+  },
+  {
+   "id": "F4",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "HOL4's type_ctor_def ignores its identifier and uses only FLOOKUP and LENGTH, without annotations. nsAll2 and nsLookup are polymorphic too. The theorem therefore generalises over namespace keys, stamp, tvs, list elements and ti. Lean fixes these to modN, conN, stamp, tvarN list, Ty and type_ident, generalising only the unused tn and cn'. The library's monomorphic type_ctor explains the restriction, but the statement remains a strict special case."
+  }
+ ]
+}

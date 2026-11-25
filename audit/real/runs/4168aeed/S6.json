@@ -1,0 +1,10 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "HOL4 saves only HD (h::t) = h. Definition takes Defn.non_wfrec_defn to Prim_rec.new_recursive_definition, whose new_specification carries only the given clause. bool$ARB is an undefined constant, and I found no saved theorem fixing HD []; the emit HD_NIL is local and trivial, since FAIL x y = x. Other saved HD theorems are guarded or leave HD [] open. Lean's `| [] => ARB` proves HD [] = ARB by rfl, a specific equation HOL4 leaves open."
+  }
+ ]
+}

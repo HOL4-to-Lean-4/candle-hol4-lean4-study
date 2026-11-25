@@ -1,0 +1,28 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "Lean defines `int_div i j` as `if j = 0 then ARB else Int.fdiv i j` (`Words.lean:15`), proving `int_div 0 0 = int_div 1 0`. In `integerScript.sml:1970-1989`, HOL4 introduces `int_div` via `new_specification` guarded by `~(j = 0) ==> ...`, and all saved theorems require nonzero divisors, leaving `int_div i 0` unconstrained per dividend and `int_div 0 0 = int_div 1 0` open."
+  },
+  {
+   "id": "F2",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "Lean defines `int_mod i j` as `if j = 0 then ARB else i - int_div i j * j` (`Words.lean:17`), proving `int_mod 0 0 = int_mod 1 0`. In `integerScript.sml:2063-2074`, HOL4 introduces `int_mod` via `new_specification` guarded by `~(j = 0) ==> ...`, and all saved theorems require nonzero divisors, leaving `int_mod i 0` unconstrained per dividend and `int_mod 0 0 = int_mod 1 0` open."
+  },
+  {
+   "id": "F3",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "HOL4 `word_join` (`wordsScript.sml:576-581`) returns `('a + 'b) word` for arbitrary types `'a, 'b`. By `fcpScript.sml:349-354` (`index_sum`), `dimindex(:('a + 'b)) = 1` if either type is infinite; for `'a = 'b = num`, `dimindex = 1`, so `word_join 1w 0w = 0w` (width 1, value 0). Lean (`Words.lean:73-74`) drops finiteness, returning `BitVec (m + n)` and giving `2#2` on `(1#1, 0#1)`."
+  },
+  {
+   "id": "F4",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "HOL4 `word_concat` (`wordsScript.sml:583-585`) is `w2w (word_join v w)`. For `'a = 'b = num` and output `word8`, the intermediate `word_join 1w 0w` has width 1 and value `0w` (by `index_sum` and `LSL_LIMIT`), so `word_concat` yields `0w : word8`. Lean (`Words.lean:76`) computes `w2w` of the two-bit `word_join (1#1) (0#1) = 2#2`, returning `2#8` even at fixed output type `word8`."
+  }
+ ]
+}

@@ -1,0 +1,42 @@
+{
+ "module": "CandleLean.Prelude.String",
+ "checked": 32,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "HOL.instInhabitedChar",
+   "lean": "lean/CandleLean/Prelude/String.lean:15",
+   "hol4": "hol4/HOL4-src/src/bool/boolScript.sml:245",
+   "class": "V-C",
+   "explanation": "The instance chooses the character with ordinal 0. Since `HOL.ARB` reduces to `default`, Lean proves `ORD (ARB : char) = 0`. HOL4 declares `ARB` as an unconstrained polymorphic constant. Its character instance can have any ordinal below 256.",
+   "repair": "instance : Inhabited char := ⟨Classical.choice (show Nonempty char from ⟨⟨0, by decide⟩⟩)⟩",
+   "confidence": 0.99,
+   "lean_check": "import CandleLean.Prelude.String\n\nexample : HOL.ORD (HOL.ARB : HOL.char) = 0 := rfl",
+   "hol4_check": null
+  },
+  {
+   "id": "F2",
+   "declaration": "HOL.CHR",
+   "lean": "lean/CandleLean/Prelude/String.lean:18",
+   "hol4": "hol4/HOL4-src/src/string/stringScript.sml:42",
+   "class": "V-C",
+   "explanation": "Lean proves `ORD (CHR 256) = 0` because the fallback branch returns the zero character. HOL4 fixes `ORD (CHR n) = n` for `n < 256` and leaves the choice of character at 256 open. Choosing `CHR 256 = CHR 1` also satisfies the saved bijection laws.",
+   "repair": "axiom chrOutOfRange : Nat → char\n\ndef CHR (n : Nat) : char := if h : n < 256 then ⟨n, h⟩ else chrOutOfRange n",
+   "confidence": 1.0,
+   "lean_check": "import CandleLean.Prelude.String\n\nexample : HOL.ORD (HOL.CHR 256) = 0 := by simp [HOL.CHR, HOL.ORD]",
+   "hol4_check": "!n. n < 256 ==> ORD (CHR n) = n"
+  },
+  {
+   "id": "F3",
+   "declaration": "HOL.word",
+   "lean": "lean/CandleLean/Prelude/String.lean:86",
+   "hol4": "hol4/HOL4-src/src/n-bit/wordsScript.sml:653",
+   "class": "V-P",
+   "explanation": "The word family and its operations admit width 0. At that width Lean gives `dimword 0 = 1` and `w2n (n2w 1) = 0`. HOL4 proves `1 < dimword(:'a)` and `w2n (1w : 'a word) = 1` for every word index type. The unrestricted width parameter therefore loses both HOL4 laws.",
+   "repair": "abbrev word (n : Nat) [NeZero n] := BitVec n\nabbrev word8 := word 8\nabbrev word32 := word 32\ndef dimword (n : Nat) [NeZero n] : Nat := 2 ^ n\ndef n2w {n : Nat} [NeZero n] (k : Nat) : word n := BitVec.ofNat n k\ndef w2n {n : Nat} [NeZero n] (w : word n) : Nat := w.toNat\ndef v2n (l : List Prop) : Nat := l.foldl (fun acc b => 2 * acc + (if b then 1 else 0)) 0\ndef v2w {n : Nat} [NeZero n] (l : List Prop) : word n := n2w (v2n l)",
+   "confidence": 0.98,
+   "lean_check": "import CandleLean.Prelude.String\n\nexample : HOL.dimword 0 = 1 ∧ HOL.w2n (HOL.n2w (n := 0) 1) = 0 := ⟨rfl, rfl⟩",
+   "hol4_check": "1 < dimword(:'a) /\\ w2n (1w : 'a word) = 1"
+  }
+ ]
+}

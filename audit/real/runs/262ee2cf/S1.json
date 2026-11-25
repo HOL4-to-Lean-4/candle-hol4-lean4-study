@@ -1,0 +1,30 @@
+{
+ "module": "CmlTS.SemanticPrimitivesProps",
+ "checked": 27,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "CmlTS.dest_Refv",
+   "lean": "lean/CmlTS/SemanticPrimitivesProps.lean:45",
+   "hol4": "hol4/package/semanticPrimitivesPropsScript.sml:166",
+   "class": "V-C",
+   "explanation": "The wildcard branch returns the same ARB for every non-Refv input. Lean therefore proves that dest_Refv takes equal values on W8array [] and Varray [] at result type Bool. HOL4 specifies only the Refv equation and permits those two inputs to return different Booleans.",
+   "repair": "private axiom dest_Refv_other {α : Type} [Nonempty α] : store_v α → α\n\ndef dest_Refv [Nonempty α] : store_v α → α\n  | Refv v => v\n  | s => dest_Refv_other s",
+   "confidence": 1,
+   "lean_check": "import CmlTS.SemanticPrimitivesProps\nopen CmlTS\nexample : dest_Refv (store_v.W8array [] : store_v Bool) = dest_Refv (store_v.Varray [] : store_v Bool) := rfl",
+   "hol4_check": null
+  },
+  {
+   "id": "F2",
+   "declaration": "CmlTS.FV_dec",
+   "lean": "lean/CmlTS/SemanticPrimitivesProps.lean:98",
+   "hol4": "hol4/package/semanticPrimitivesPropsScript.sml:220",
+   "class": "V-C",
+   "explanation": "The wildcard branch assigns one ARB set to all Dmod, Dlocal, and Denv declarations. For example, Lean proves that Dlocal [] [] and Denv n have equal free-variable sets for every n. HOL4's five equations leave both values open.",
+   "repair": "private axiom FV_dec_other : dec → Set (ident modN varN)\n\ndef FV_dec : dec → Set (ident modN varN)\n  | Dlet _ p e => FV (exp.Mat e [(p, exp.Lit ARB)])\n  | Dletrec _ defs => FV (exp.Letrec defs (exp.Lit ARB))\n  | Dtype _ _ => ∅\n  | Dtabbrev _ _ _ _ => ∅\n  | Dexn _ _ _ => ∅\n  | d => FV_dec_other d",
+   "confidence": 1,
+   "lean_check": "import CmlTS.SemanticPrimitivesProps\nopen CmlTS\nexample (n : tvarN) : FV_dec (dec.Dlocal [] []) = FV_dec (dec.Denv n) := rfl",
+   "hol4_check": null
+  }
+ ]
+}

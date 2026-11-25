@@ -1,0 +1,18 @@
+{
+ "module": "CandleLean.HolSyntax",
+ "checked": 88,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "Candle.dest_var",
+   "lean": "lean/CandleLean/HolSyntax.lean:46",
+   "hol4": "hol4/package/candle/standard/syntax/holSyntaxScript.sml:58",
+   "class": "V-C",
+   "explanation": "HOL4 specifies only `dest_var (Var x ty) = (x,ty)`. Lean returns the same `ARB` pair on every `Const`, `Comb`, and `Abs`. This makes `dest_var (Comb s t) = dest_var (Abs s t)` provable by `rfl` for all `s` and `t`. The HOL4 equation permits those two results to differ.",
+   "repair": "private axiom dest_var_other : term → mlstring × type\n\ndef dest_var : term → mlstring × type\n  | Var x ty => (x, ty)\n  | t => dest_var_other t",
+   "confidence": 1.0,
+   "lean_check": "import CandleLean.HolSyntax\n\nopen Candle\n\nexample (s t : Candle.term) : dest_var (Comb s t) = dest_var (Abs s t) := rfl",
+   "hol4_check": null
+  }
+ ]
+}

@@ -1,0 +1,18 @@
+{
+ "module": "CmlTS.Prelude.Basic",
+ "checked": 29,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "CARD",
+   "lean": "lean/CmlTS/Prelude/Basic.lean:43",
+   "hol4": "hol4/HOL4-src/src/pred_set/src/pred_setScript.sml:3428",
+   "class": "V-C",
+   "explanation": "HOL4 introduces CARD by new_specification. CARD_DEF only gives CARD EMPTY = 0 and the INSERT equation under FINITE s. The witness is existentially hidden, and I found no saved theorem fixing CARD of an infinite set. The Lean definition has an explicit `else 0` branch, so Lean proves CARD s = 0 for every infinite s, e.g. CARD (UNIV : Set Nat) = 0. HOL4 leaves that value open. On finite sets the two agree.",
+   "repair": "opaque CARD_unspec {α : Type u} (s : Set α) : Nat\n\ndef CARD {α : Type u} (s : Set α) : Nat :=\n  if FINITE s then\n    Classical.epsilon (fun n : Nat => ∃ l : List α, l.Nodup ∧ (∀ x, x ∈ l ↔ s x) ∧ l.length = n)\n  else CARD_unspec s",
+   "confidence": 0.9,
+   "lean_check": "import CmlTS.Prelude.Basic\n\ntheorem not_fin_univ : ¬ FINITE (UNIV : Set Nat) := by\n  intro h\n  obtain ⟨l, hl⟩ := h\n  have key : ∀ l : List Nat, ∃ m : Nat, ∀ x, x ∈ l → x < m := by\n    intro l\n    induction l with\n    | nil => exact ⟨0, fun x hx => by cases hx⟩\n    | cons a t ih =>\n      obtain ⟨m, hm⟩ := ih\n      refine ⟨a + m + 1, fun x hx => ?_⟩\n      cases List.mem_cons.mp hx with\n      | inl h => omega\n      | inr h =>\n        have := hm x h\n        omega\n  obtain ⟨m, hm⟩ := key l\n  exact Nat.lt_irrefl m (hm m (hl m True.intro))\n\ntheorem card_univ_zero : CARD (UNIV : Set Nat) = 0 := by\n  unfold CARD\n  exact if_neg not_fin_univ\n",
+   "hol4_check": "?C1 C2. ((C1:(num->bool)->num) EMPTY = 0 /\\ (!s. FINITE s ==> !x. C1 (x INSERT s) = if x IN s then C1 s else SUC (C1 s))) /\\ (C2 EMPTY = 0 /\\ (!s. FINITE s ==> !x. C2 (x INSERT s) = if x IN s then C2 s else SUC (C2 s))) /\\ C1 UNIV = 0 /\\ C2 UNIV = 1"
+  }
+ ]
+}

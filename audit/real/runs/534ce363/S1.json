@@ -1,0 +1,18 @@
+{
+ "module": "CmlTS.Prelude.StringLib",
+ "checked": 6,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "CmlTS.CHR",
+   "lean": "lean/CmlTS/Prelude/StringLib.lean:15",
+   "hol4": "hol4/HOL4-src/src/string/stringScript.sml:29",
+   "class": "V-C",
+   "explanation": "Lean returns the same `ARB` character for every input at least 256, so it proves `CHR 256 = CHR 257`. HOL4’s character bijection fixes `CHR` on inputs below 256 and allows `CHR 256` and `CHR 257` to be distinct.",
+   "repair": "private axiom chrOutOfRange : Nat → char\n\ndef CHR (n : Nat) : char := if h : n < 256 then ⟨n, h⟩ else chrOutOfRange n",
+   "confidence": 1,
+   "lean_check": "import CmlTS.Prelude.StringLib\n\nexample : CmlTS.CHR 256 = CmlTS.CHR 257 := by\n  have h₁ : ¬ (256 : Nat) < 256 := by decide\n  have h₂ : ¬ (257 : Nat) < 256 := by decide\n  simp [CmlTS.CHR, h₁, h₂]",
+   "hol4_check": null
+  }
+ ]
+}

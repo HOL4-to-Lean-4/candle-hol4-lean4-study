@@ -1,0 +1,18 @@
+{
+ "module": "CandleLean.HolSyntax",
+ "checked": 76,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "dest_var",
+   "lean": "lean/CandleLean/HolSyntax.lean:41",
+   "hol4": "hol4/package/candle/standard/syntax/holSyntaxScript.sml:58",
+   "class": "V-C",
+   "explanation": "Lean returns the same `ARB` pair for every non-variable term. Consequently, `dest_var (Const x ty) = dest_var (Comb s t)` holds by reflexivity for all inputs. HOL4 specifies only `dest_var (Var x ty) = (x,ty)`, which permits different results on `Const` and `Comb`.",
+   "repair": "private opaque dest_var_other : term → mlstring × type\n\nnoncomputable def dest_var : term → mlstring × type\n  | Var x ty => (x, ty)\n  | t => dest_var_other t",
+   "confidence": 1.0,
+   "lean_check": "import CandleLean.HolSyntax\n\nexample (x : mlstring) (ty : type) (s t : term) :\n    dest_var (Const x ty) = dest_var (Comb s t) := rfl",
+   "hol4_check": "∀x ty s t. ∃f. (∀y u. f (Var y u) = (y,u)) ∧ f (Const x ty) ≠ f (Comb s t)"
+  }
+ ]
+}

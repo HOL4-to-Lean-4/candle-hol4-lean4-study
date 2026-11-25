@@ -1,0 +1,13 @@
+{
+ "step": "S1",
+ "unit": "fe8300cf",
+ "seconds": 60,
+ "rc": 0,
+ "usage": {
+  "input_tokens": 106882,
+  "cached_input_tokens": 53248,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 1314,
+  "reasoning_output_tokens": 221
+ }
+}

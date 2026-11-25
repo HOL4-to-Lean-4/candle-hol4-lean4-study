@@ -1,0 +1,18 @@
+{
+ "module": "CandleLean.HolSyntax",
+ "checked": 76,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "dest_var",
+   "lean": "lean/CandleLean/HolSyntax.lean:39",
+   "hol4": "hol4/package/candle/standard/syntax/holSyntaxScript.sml:57",
+   "class": "V-C",
+   "explanation": "HOL4 gives only dest_var (Var x ty) = (x,ty). The argument is a constructor pattern, so Defn.non_wfrec_defn (Defn.sml:1182) uses Prim_rec.new_recursive_definition, i.e. new_specification with just that clause (Prim_rec.sml:259). There is no primitive definition with an ARB case, so the values on Const, Comb and Abs are unspecified and may differ. Lean's catch-all `_ => ARB` proves dest_var (Const n ty) = ARB, dest_var (Comb s t) = ARB and dest_var (Abs v t) = ARB, hence dest_var (Const n ty) = dest_var (Comb s t), which HOL4 leaves open. This also affects VSUBST and INST_CORE on Abs with a non-Var binder.",
+   "repair": "noncomputable def dest_var : term → mlstring × type :=\n  Classical.epsilon (fun f : term → mlstring × type => ∀ x ty, f (Var x ty) = (x, ty))",
+   "confidence": 0.72,
+   "lean_check": "import CandleLean.HolSyntax\n\ntheorem dest_var_collapse (n : mlstring) (ty : type) (s t : term) :\n    dest_var (term.Const n ty) = dest_var (term.Comb s t) := rfl\n\ntheorem dest_var_const_arb (n : mlstring) (ty : type) :\n    dest_var (term.Const n ty) = ARB := rfl\n",
+   "hol4_check": "!n ty0 s t. ?f:term -> mlstring # type. (!x ty. f (Var x ty) = (x,ty)) /\\ f (Const n ty0) <> f (Comb s t)"
+  }
+ ]
+}

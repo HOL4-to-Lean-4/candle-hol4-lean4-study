@@ -1,0 +1,22 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "CHR is the new-type abstraction function. char_BIJ, CHR_11 and ORD_CHR fix it only below 256. ORD_CHR_COMPUTE is vacuous above, since FAIL_THM reduces FAIL ORD _ (CHR n) to ORD (CHR n). The other CHR theorems found (charOrd lemmas, CHR_ONTO, cv_prim) do not relate distinct values at n >= 256. Lean's dite returns a single ARB there, so CHR 256 = CHR 257 is provable but open in HOL4."
+  },
+  {
+   "id": "F2",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "new_specification constrains int_div only for j ≠ 0. Saved theorems (INT_DIV*, INT_DIVISION, INT_DIV_P, EDIV conversions, cv_int_div, intreal, rat) need a nonzero divisor or are vacuous at 0: basis_emit's version uses FAIL, and INT_DIV_UNIQUE's bounds are unsatisfiable. ARB is one fixed Int, so Lean proves int_div 1 0 = int_div 2 0, which HOL4 leaves open."
+  },
+  {
+   "id": "F3",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "new_specification constrains int_mod only for j ≠ 0. Saved theorems on % (INT_MOD_*, INT_DIVISION, INT_MOD_P, cv_int_mod, ratScript INT_MOD_MUL) assume a nonzero divisor or say nothing at 0. INT_DIVIDES_MOD0 guards with p ≠ 0, and the basis_emit equation uses FAIL. Lean returns the same ARB for every i, proving int_mod 1 0 = int_mod 2 0 and int_mod 1 0 = int_div 1 0, open in HOL4."
+  }
+ ]
+}

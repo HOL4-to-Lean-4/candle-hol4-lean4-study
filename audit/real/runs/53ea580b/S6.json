@@ -1,0 +1,16 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "optionScript.sml:176 uses new_recursive_definition, hence new_specification, with only THE (SOME x) = x. No saved theorem found fixes THE NONE; option_CLAUSES and option_case_compute guard THE by SOME/IS_SOME, and basis_emit's THE_NONE is local and only a FAIL wrapper. HOL4's ARB is an unconstrained constant. Core.lean:22-24 makes THE none = ARB true by rfl, a specific equation between mapped constants that HOL4 leaves open."
+  },
+  {
+   "id": "F2",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "HOL4 constrains @ only by SELECT_AX, and ARB is a bare new_constant (boolScript.sml:234,245). bool_defs' ARB_def is a separate constant whose theorem is just T, so (@x. F) = ARB is open. In Lean, unfolding Classical.epsilon and strongIndefiniteDescription with dif_neg gives Classical.choice h when P is unsatisfiable. ARB unfolds to the same term by proof irrelevance, so select (fun _ => False) = ARB is provable at every type."
+  }
+ ]
+}

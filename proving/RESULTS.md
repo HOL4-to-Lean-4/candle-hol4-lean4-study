@@ -5,6 +5,10 @@ Brief, settings, driver and hash pins are in this folder; the proved project is 
 
 **Result: 278 of 278 statements proved**, none refuted, in 32.7 minutes (378 turns, 262,289 output tokens, $11.35 list price).
 
+**Protocol deviation.** The plan says the prover never sees HOL4 proofs (v3.2 `plan.tex` lines 73 and 215, v3.3 draft line 85). This run broke that rule: the brief offered `hol4/package/` with proofs,
+and the transcript shows five reads of `holSyntaxExtraScript.sml`, `holSemanticsExtraScript.sml` and `holSoundnessScript.sml` that returned 127 `QED` proof ends. The brief was written without checking the plan.
+The proofs are valid Lean proofs of the frozen statements. The run is not evidence about proving without the HOL4 proofs.
+
 ## Checks (run by the main session, not by the prover)
 - `lake build` succeeds; `KernelCheck.lean`: 0 constants use `sorry`; axioms propext, Classical.choice, Quot.sound only.
 - The 278 target names are all theorems with only those axioms (`Ax278.lean`: OK 278).
@@ -18,5 +22,4 @@ Brief, settings, driver and hash pins are in this folder; the proved project is 
 ## What it does and does not show
 - All 278 Lean statements are provable, so none is false in Lean, and no definition blocked a proof.
 - It does not show that the statements mean what HOL4 says: a statement that is too weak, or a definition that is wrong in a way that keeps it provable, would pass.
-- The prover is the same model family as the translator, and the HOL4 proofs were available to it. This is the intended setting, but it is not evidence about proving without them.
 - One run, so there is no variance estimate.

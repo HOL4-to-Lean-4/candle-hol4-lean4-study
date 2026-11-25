@@ -1,0 +1,16 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "`result`'s TypeBase axiom is in existence form, so Defn.non_wfrec_defn takes the new_recursive_definition/new_specification route. It saves only RESULT (Result t) = t, with no wfrec/ARB completion and no primitive equation. Nothing saved constrains RESULT (Clash t); interpreting it as t satisfies RESULT_def. Lean proves RESULT (Clash t) = ARB by rfl and, by proof irrelevance of Nonempty, RESULT (Clash a) = RESULT (Clash b). HOL4 leaves both open."
+  },
+  {
+   "id": "F2",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "CLASH_def has the single clause CLASH (Clash t) = t, defined through new_recursive_definition/new_specification, so no equation for Result is saved. Interpreting CLASH (Result t) as t satisfies it. Lean proves CLASH (Result t) = ARB by rfl, CLASH (Result a) = CLASH (Result b) by proof irrelevance, and CLASH (Result a) = RESULT (Clash a). HOL4 leaves all of these open."
+  }
+ ]
+}

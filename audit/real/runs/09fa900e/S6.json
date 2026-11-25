@@ -1,0 +1,16 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "listScript:138 has only HD (h::t) = h. Definition tries non_wfrec_defn first (Defn.sml:1182-1197, 1288), so Prim_rec introduces HD by new_specification with no nil clause. Saved theorems found are guarded, concern non-empty lists, or hold for any HD []; basis_emit's local HD_NIL (HD [] = FAIL HD ... []) does not mention ARB. Lean's second clause makes HD [] = ARB and EL 0 [] = ARB provable, which HOL4 leaves open."
+  },
+  {
+   "id": "F2",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "LAST_DEF (listScript:2124) has only the cons clause and is primitive recursive, so new_specification leaves LAST [] free. LAST_CONS, LAST_compute, LAST_EL, LAST_MAP, APPEND_FRONT_LAST and similar concern non-empty lists. ELL 0 l = LAST l and LAST (MDILATE e n l) = LAST l hold for any value. FRONT [] = [] is saved, unlike LAST. Lean's nil clause proves LAST [] = ARB, and with HD's, LAST [] = HD []; both are open in HOL4."
+  }
+ ]
+}

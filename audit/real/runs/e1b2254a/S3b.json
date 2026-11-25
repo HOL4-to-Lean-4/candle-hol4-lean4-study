@@ -1,0 +1,42 @@
+{
+ "module": "CandleLean.Prelude.Basic",
+ "checked": 64,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "HOL.PERMUTES",
+   "lean": "lean/CandleLean/Prelude/Basic.lean:55",
+   "hol4": "hol4/HOL4-src/src/pred_set/src/pred_setScript.sml:6275",
+   "class": "V-P",
+   "explanation": "HOL4's PERMUTES is the overload `\\f s. BIJ f s s`, with no condition outside s. The Lean definition adds `∀ x, x ∉ s → f x = x`, which is the different constant `permutes` (permutesScript.sml:94-96 relates the two). They differ on f = (λn. 0), s = {0}: HOL4's PERMUTES is true there, but the Lean one is false because f 1 = 0 ≠ 1. The theorem I_PERMUTES (miscScript.sml:524) uses the pred_set overload, as its proof by BIJ_DEF, INJ_DEF and SURJ_DEF alone confirms.",
+   "repair": "def PERMUTES {α : Type u} (f : α → α) (s : Set α) : Prop := BIJ f s s",
+   "confidence": 0.96,
+   "lean_check": "import CandleLean.Prelude.Basic\n\nexample : HOL.BIJ (fun _ : Nat => (0:Nat)) (HOL.setOf (fun n : Nat => n = 0)) (HOL.setOf (fun n : Nat => n = 0)) ∧ ¬ HOL.PERMUTES (fun _ : Nat => (0:Nat)) (HOL.setOf (fun n : Nat => n = 0)) := by\n  constructor\n  · refine ⟨⟨?_, ?_⟩, ⟨?_, ?_⟩⟩\n    · intro x _\n      show (0:Nat) = 0\n      rfl\n    · intro x y hx hy _\n      have hx' : x = 0 := hx\n      have hy' : y = 0 := hy\n      rw [hx', hy']\n    · intro x _\n      show (0:Nat) = 0\n      rfl\n    · intro x hx\n      have hx' : x = 0 := hx\n      exact ⟨0, (show (0:Nat) = 0 from rfl), hx'.symm⟩\n  · intro h\n    obtain ⟨h1, _⟩ := h\n    have h4 : (0:Nat) = 1 := h1 1 (fun h2 => by\n      have h3 : (1:Nat) = 0 := h2\n      omega)\n    omega\n",
+   "hol4_check": "(\\n:num. 0n) PERMUTES {0n} /\\ ~((\\n:num. 0n) 1 = 1)"
+  },
+  {
+   "id": "F2",
+   "declaration": "HOL.ARB",
+   "lean": "lean/CandleLean/Prelude/Basic.lean:9",
+   "hol4": "hol4/HOL4-src/src/bool/boolScript.sml:245",
+   "class": "V-C",
+   "explanation": "HOL4 introduces ARB with new_constant and no axiom or definition (\"Doesn't have to be defined at all\"), so every value equation about it, such as `ARB = 0n`, is open. In Lean, ARB is a transparent definition equal to the Inhabited default. Lean therefore proves `(ARB : Nat) = 0` by rfl, and likewise `(ARB : Bool) = false` and `(ARB : List α) = []`. This also fixes the values of functions that fall back to ARB, for example HD [] = 0 on Nat.",
+   "repair": "opaque ARB {α : Sort u} [Inhabited α] : α",
+   "confidence": 0.95,
+   "lean_check": "import CandleLean.Prelude.Basic\n\nexample : (HOL.ARB : Nat) = 0 := rfl\n",
+   "hol4_check": null
+  },
+  {
+   "id": "F3",
+   "declaration": "HOL.LEAST",
+   "lean": "lean/CandleLean/Prelude/Basic.lean:120",
+   "hol4": "hol4/HOL4-src/src/num/theories/WhileScript.sml:135",
+   "class": "V-C",
+   "explanation": "HOL4 defines `LEAST P = WHILE ($~ o P) SUC 0`. WHILE is given by new_specification with only its unrolling equation, so LEAST of an unsatisfiable predicate is open; the saved theorems (LEAST_INTRO, LESS_LEAST, ...) constrain it only when P is satisfiable. In Lean, LEAST is a specific epsilon term, so on the empty predicate Lean proves `LEAST (fun _ => False) = ε (fun _ => False)`. HOL4 cannot prove `(LEAST n. F) = (@n. F)`.",
+   "repair": "def LEAST : (Nat → Prop) → Nat := Classical.epsilon (fun L : (Nat → Prop) → Nat => ∀ P n, P n → P (L P) ∧ L P ≤ n)",
+   "confidence": 0.4,
+   "lean_check": "import CandleLean.Prelude.Basic\n\nexample : HOL.LEAST (fun _ => False) = HOL.ε (fun _ : Nat => False) := by\n  have h : (fun n : Nat => False ∧ ∀ n' : Nat, n' < n → ¬ False) = (fun _ : Nat => False) :=\n    funext fun n => propext ⟨fun h => h.1, fun h => h.elim⟩\n  show Classical.epsilon (fun n : Nat => False ∧ ∀ n' : Nat, n' < n → ¬ False) = Classical.epsilon (fun _ : Nat => False)\n  rw [h]\n",
+   "hol4_check": null
+  }
+ ]
+}

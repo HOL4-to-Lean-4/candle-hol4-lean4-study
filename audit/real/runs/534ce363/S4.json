@@ -1,0 +1,10 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "In StringLib.lean:15, `CHR n` returns the fixed constant `ARB` for every `n >= 256`, so Lean proves `CHR 256 = CHR 257`. In HOL4 stringScript.sml:29, `define_new_type_bijections` specifies `CHR` and `ORD` solely by `CHR (ORD a) = a` and `r < 256 <=> ORD (CHR r) = r`, which leaves `CHR` unconstrained for `r >= 256` and leaves `CHR 256 = CHR 257` open."
+  }
+ ]
+}

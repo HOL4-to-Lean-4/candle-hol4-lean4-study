@@ -1,0 +1,18 @@
+{
+ "module": "CandleLean.HolSyntax",
+ "checked": 79,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "Candle.dest_var",
+   "lean": "lean/CandleLean/HolSyntax.lean:44",
+   "hol4": "hol4/package/candle/standard/syntax/holSyntaxScript.sml:57",
+   "class": "V-C",
+   "explanation": "HOL4 defines dest_var by the single clause dest_var (Var x ty) = (x,ty). That clause has a constructor pattern, so Defn.non_wfrec_defn uses Prim_rec.new_recursive_definition, which ends in new_specification (Defn.sml:1182-1197, Prim_rec.sml:259-285). Only the Var clause is saved, so the values on Const, Comb and Abs are open. They are not stated to be ARB or equal to each other. Lean fixes all three to ARB, so it proves by rfl that dest_var (Const n ty) = ARB and dest_var (Const n ty) = dest_var (Comb s t). The module's other underspecified constant, VARIANT_PRIMES, is correctly left open through an epsilon specification.",
+   "repair": "def dest_var_spec (f : term → mlstring × type) : Prop := ∀ x ty, f (Var x ty) = (x, ty)\n\ndef dest_var : term → mlstring × type := Classical.epsilon dest_var_spec\n\ntheorem dest_var_def : dest_var_spec dest_var := by\n  apply Classical.epsilon_spec (p := dest_var_spec)\n  exact ⟨fun t => match t with | Var x ty => (x, ty) | _ => default, fun _ _ => rfl⟩",
+   "confidence": 0.6,
+   "lean_check": "import CandleLean.HolSyntax\n\nopen Candle HOL\n\ntheorem dest_var_Const_ARB (n : mlstring) (ty : type) : dest_var (term.Const n ty) = ARB := rfl\n\ntheorem dest_var_Const_Comb (n : mlstring) (ty : type) (s t : term) : dest_var (term.Const n ty) = dest_var (term.Comb s t) := rfl\n",
+   "hol4_check": null
+  }
+ ]
+}

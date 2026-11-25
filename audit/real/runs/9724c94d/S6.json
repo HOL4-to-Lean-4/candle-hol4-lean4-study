@@ -1,0 +1,10 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "HOL4 introduces CARD by new_specification; CARD_DEF fixes only CARD EMPTY and the INSERT equation for FINITE s. The saved CARD theorems I checked are FINITE-guarded or about finite sets, and pred_setScript:3613 notes `SING s <=> (CARD s = 1)` cannot be proved. Lean's `else 0` yields CARD s = 0 for every infinite s, e.g. CARD UNIV = 0 on Nat, which those theorems leave open. Finite values agree."
+  }
+ ]
+}

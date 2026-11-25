@@ -1,0 +1,28 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "Verified in HOL4's type_grammar.type_to_structure (type_grammar.sml:276) and Type.compare: type-abbreviation parameters are sorted lexicographically by variable name, so 'ffi precedes 'v in store_ffi (semanticPrimitivesScript.sml:679). Thus HOL4's (num, int) store_ffi expands to int store # num ffi_state, whereas Lean's store_ffi (SemanticPrimitives.lean:462) reverses the parameter order to (V, α), producing List (store_v Nat) × ffi_state Int."
+  },
+  {
+   "id": "F2",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "In semanticPrimitivesScript.sml:690-701, thunk_op has no return-type annotation and only constructs Rval, leaving the error type parameter of (v, 'a) result polymorphic. Lean's thunk_op' (SemanticPrimitives.lean:472-474) monomorphizes the return type to result Value Value, making it a strict special case that excludes other error-type instantiations."
+  },
+  {
+   "id": "F3",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "In semanticPrimitivesScript.sml:1193-1196, do_if has no type annotations and returns SOME e1, SOME e2, or NONE, so HOL4 infers the polymorphic type v -> 'a -> 'a -> 'a option. Lean's do_if (SemanticPrimitives.lean:872) monomorphizes e1 and e2 to exp, making it a strict special case excluding inputs of other types."
+  },
+  {
+   "id": "F4",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "In semanticPrimitivesScript.sml:1200-1203, build_constrs has no type annotations and uses each constructor's argument list ts only via LENGTH ts, so HOL4 infers num -> (conN # 'a list) list -> (conN # num # stamp) list. Lean's build_constrs (SemanticPrimitives.lean:875) monomorphizes the element type to ast_t, making it a strict special case excluding other list element types."
+  }
+ ]
+}

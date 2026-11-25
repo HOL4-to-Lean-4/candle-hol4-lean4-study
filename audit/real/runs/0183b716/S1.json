@@ -1,0 +1,30 @@
+{
+ "module": "CandleLean.HolSyntaxLib",
+ "checked": 29,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "RESULT",
+   "lean": "lean/CandleLean/HolSyntaxLib.lean:30",
+   "hol4": "hol4/package/candle/syntax-lib/holSyntaxLibScript.sml:89",
+   "class": "V-C",
+   "explanation": "Lean returns the same `ARB` for every `Clash` payload of a given type, so `RESULT (Clash 0) = RESULT (Clash 1)` holds by reflexivity. HOL4 specifies only `RESULT (Result t) = t`. A selector that also returns `t` on `Clash t` satisfies the saved equation and gives different answers on those two inputs.",
+   "repair": "private axiom resultOnClash {α : Type u} : α → α\n\nnoncomputable def RESULT {α : Type u} [Nonempty α] : result α → α\n  | Result t => t\n  | Clash t => resultOnClash t",
+   "confidence": 1,
+   "lean_check": "import CandleLean.HolSyntaxLib\n\nexample : RESULT (Clash (0 : Nat)) = RESULT (Clash (1 : Nat)) := rfl",
+   "hol4_check": "∃f : num result -> num. (∀t. f (Result t) = t) ∧ f (Clash 0) ≠ f (Clash 1)"
+  },
+  {
+   "id": "F2",
+   "declaration": "CLASH",
+   "lean": "lean/CandleLean/HolSyntaxLib.lean:34",
+   "hol4": "hol4/package/candle/syntax-lib/holSyntaxLibScript.sml:93",
+   "class": "V-C",
+   "explanation": "Lean returns the same `ARB` for every `Result` payload of a given type, so `CLASH (Result 0) = CLASH (Result 1)` holds by reflexivity. HOL4 specifies only `CLASH (Clash t) = t`. A selector that also returns `t` on `Result t` satisfies the saved equation and gives different answers on those two inputs.",
+   "repair": "private axiom clashOnResult {α : Type u} : α → α\n\nnoncomputable def CLASH {α : Type u} [Nonempty α] : result α → α\n  | Clash t => t\n  | Result t => clashOnResult t",
+   "confidence": 1,
+   "lean_check": "import CandleLean.HolSyntaxLib\n\nexample : CLASH (Result (0 : Nat)) = CLASH (Result (1 : Nat)) := rfl",
+   "hol4_check": "∃f : num result -> num. (∀t. f (Clash t) = t) ∧ f (Result 0) ≠ f (Result 1)"
+  }
+ ]
+}

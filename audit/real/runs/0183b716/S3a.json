@@ -1,0 +1,30 @@
+{
+ "module": "CandleLean.HolSyntaxLib",
+ "checked": 29,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "RESULT",
+   "lean": "lean/CandleLean/HolSyntaxLib.lean:30",
+   "hol4": "hol4/package/candle/syntax-lib/holSyntaxLibScript.sml:88",
+   "class": "V-C",
+   "explanation": "HOL4's RESULT_def has the single clause RESULT (Result t) = t. Definition takes the primitive-recursion path (Defn.non_wfrec_defn, Prim_rec.new_recursive_definition, new_specification), so this clause is the only saved theorem about RESULT; its value on Clash is left open. Lean adds the clause RESULT (Clash _) = ARB, so it proves RESULT (Clash x) = ARB and RESULT (Clash x) = RESULT (Clash y) for all x, y, and also RESULT (Clash x) = CLASH (Result y). None of these follow in HOL4: a function returning t on Clash t also satisfies RESULT_def. OUTL, specified the same way, is correctly given by epsilon in Prelude/Basic.lean.",
+   "repair": "noncomputable def RESULT {α : Type u} [Nonempty α] : result α → α :=\n  Classical.epsilon (fun f : result α → α => ∀ t, f (Result t) = t)",
+   "confidence": 0.72,
+   "lean_check": "import CandleLean.HolSyntaxLib\n\nexample {α : Type} [Nonempty α] (x : α) : RESULT (Clash x) = ARB := rfl\n\nexample {α : Type} [Nonempty α] (x y : α) : RESULT (Clash x) = RESULT (Clash y) := rfl\n",
+   "hol4_check": "?f:bool result -> bool. (!t. f (Result t) = t) /\\ f (Clash T) <> f (Clash F)"
+  },
+  {
+   "id": "F2",
+   "declaration": "CLASH",
+   "lean": "lean/CandleLean/HolSyntaxLib.lean:34",
+   "hol4": "hol4/package/candle/syntax-lib/holSyntaxLibScript.sml:92",
+   "class": "V-C",
+   "explanation": "HOL4's CLASH_def has the single clause CLASH (Clash t) = t, introduced by new_recursive_definition/new_specification; no saved theorem says anything about CLASH (Result _). Lean adds the clause CLASH (Result _) = ARB, so it proves CLASH (Result x) = ARB and CLASH (Result x) = CLASH (Result y) for all x, y. HOL4 leaves these open: a function returning t on Result t also satisfies CLASH_def.",
+   "repair": "noncomputable def CLASH {α : Type u} [Nonempty α] : result α → α :=\n  Classical.epsilon (fun f : result α → α => ∀ t, f (Clash t) = t)",
+   "confidence": 0.72,
+   "lean_check": "import CandleLean.HolSyntaxLib\n\nexample {α : Type} [Nonempty α] (x : α) : CLASH (Result x) = ARB := rfl\n\nexample {α : Type} [Nonempty α] (x y : α) : CLASH (Result x) = CLASH (Result y) := rfl\n",
+   "hol4_check": "?f:bool result -> bool. (!t. f (Clash t) = t) /\\ f (Result T) <> f (Result F)"
+  }
+ ]
+}

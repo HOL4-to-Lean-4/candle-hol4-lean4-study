@@ -1,0 +1,10 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "HOL4 introduces CHR by new_specification via define_new_type_bijections, yielding only CHR(ORD c)=c and r<256 <=> ORD(CHR r)=r. Saved consequences (CHR_11, ORD_CHR_RWT, ORD_CHR_COMPUTE with FAIL, CHAR_INDUCT_THM) do not determine CHR n for n>=256, beyond ORD(CHR n)≠n and ORD(CHR n)<256. Lean's transparent else-branch ⟨0,_⟩ proves CHR 256 = CHR 0, a specific equation HOL4 leaves open. Agreement below 256 is faithful."
+  }
+ ]
+}

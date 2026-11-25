@@ -1,0 +1,10 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "In HOL4's nsSub_compute_def, alistSub allows two value types, R only relates v1 to v2, and the recursive call keeps R, e1M's and e2M's types in position. The measure uses only env. So the inferred type has independent 'v1 and 'v2, with no annotation unifying them. Lean forces R : Ident M N → V → V → Prop and both namespaces over V, a strict special case, although Lean's nsSub, alistSub and alist_rel_restr_mem keep two types."
+  }
+ ]
+}

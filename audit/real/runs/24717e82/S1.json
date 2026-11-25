@@ -1,0 +1,30 @@
+{
+ "module": "CandleLean.HolSemantics",
+ "checked": 27,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "Candle.instance'",
+   "lean": "lean/CandleLean/HolSemantics.lean:67",
+   "hol4": "hol4/package/candle/standard/semantics/holSemanticsScript.sml:112",
+   "class": "V-C",
+   "explanation": "Let P be the predicate passed to `select`. Lean proves by `rfl` that `instance' FEMPTY i name ty τ = (select P) FEMPTY i name ty τ`. HOL4 saves `instance_def` with a successful lookup as a premise. At `FEMPTY` that premise always fails. With a two-element result type, changing the specified function’s value at this input preserves `instance_def`, even with the choice operator held fixed. The saved specification therefore leaves this equation open.",
+   "repair": "axiom instance' [Nonempty U] : tmsig → interpretation U → mlstring → type → tyval U → U\n\ntheorem instance_def [Nonempty U] (s : tmsig) (i : interpretation U) (name : mlstring) (ty ty0 : type) (tyin : List (type × type)) (h : FLOOKUP s name = some ty0 ∧ ty = TYPE_SUBST tyin ty0) :\n    instance' s i name ty = fun τ => tmaof i name\n      (MAP (typesem (tyaof i) τ ∘ TYPE_SUBST tyin ∘ Tyvar)\n        (MAP implode (STRING_SORT (MAP explode (tyvars ty0))))) := by sorry",
+   "confidence": 0.98,
+   "lean_check": "import CandleLean.HolSemantics\n\nnamespace Candle\n\nprivate def spec {U : Type} (f : tmsig → interpretation U → mlstring → type → tyval U → U) : Prop :=\n  ∀ (s : tmsig) (i : interpretation U) (name : mlstring) (ty ty0 : type) (tyin : List (type × type)),\n    FLOOKUP s name = some ty0 ∧ ty = TYPE_SUBST tyin ty0 →\n    f s i name ty = fun τ => tmaof i name\n      (MAP (typesem (tyaof i) τ ∘ TYPE_SUBST tyin ∘ Tyvar)\n        (MAP implode (STRING_SORT (MAP explode (tyvars ty0)))))\n\nexample (i : interpretation Bool) (name : mlstring) (ty : type) (τ : tyval Bool) :\n    instance' FEMPTY i name ty τ = (select (spec (U := Bool))) FEMPTY i name ty τ := rfl\n\nend Candle",
+   "hol4_check": null
+  },
+  {
+   "id": "F2",
+   "declaration": "Candle.termsem0",
+   "lean": "lean/CandleLean/HolSemantics.lean:86",
+   "hol4": "hol4/package/candle/standard/semantics/holSemanticsScript.sml:139",
+   "class": "V-C",
+   "explanation": "Lean gives `Abs (Const name ty) b` the value `ARB` for every body and valuation. HOL4 saves an abstraction equation only for `Abs (Var x ty) b`. Its equations leave the value of an abstraction with a constant binder open. The same issue applies to `Comb` and `Abs` binders.",
+   "repair": "private opaque unspecifiedAbs [Nonempty U] (mem : U → U → Prop) (s : tmsig) (i : interpretation U) (v : valuation U) (binder body : term) : U := ARB\n\ndef termsem0 [Nonempty U] (mem : U → U → Prop) (tmsig : Candle.tmsig) (i : interpretation U) : valuation U → term → U\n  | v, Var x ty => tmvof v (x, ty)\n  | v, Const name ty => instance' tmsig i name ty (tyvof v)\n  | v, Comb t1 t2 => apply mem (termsem0 mem tmsig i v t1) (termsem0 mem tmsig i v t2)\n  | v, Abs (Var x ty) b =>\n    abstract mem (typesem (tyaof i) (tyvof v) ty) (typesem (tyaof i) (tyvof v) (typeof b))\n      (fun m => termsem0 mem tmsig i (tyvof v, UPDATE (x, ty) m (tmvof v)) b)\n  | v, Abs binder b => unspecifiedAbs mem tmsig i v binder b",
+   "confidence": 1,
+   "lean_check": "import CandleLean.HolSemantics\n\nnamespace Candle\n\nexample {U : Type} [Nonempty U] (mem : U → U → Prop) (s : tmsig) (i : interpretation U) (v : valuation U) (name : mlstring) (ty : type) (b : term) :\n    termsem0 mem s i v (Abs (Const name ty) b) = ARB := by\n  simp only [termsem0]\n\nend Candle",
+   "hol4_check": null
+  }
+ ]
+}

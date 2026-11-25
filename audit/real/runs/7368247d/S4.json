@@ -1,0 +1,16 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "HOL4's `type_def_to_ctMap_def` saves only the empty/empty and cons/cons equations (`delete_support` removes the auxiliary tupled definition), and all saved theorems assume equal list lengths, leaving mismatched calls unspecified. Lean's catch-all `| _, _, _ => ARB` evaluates every unmatched call to the same `ARB`, proving `type_def_to_ctMap tenvT n [] [true] = type_def_to_ctMap tenvT n [] [false]`, which violates conservativity."
+  },
+  {
+   "id": "F2",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "In HOL4, `build_ctor_tenv` has no type annotations, leaving the ID list element type and the output namespace's module-name type (from `alist_to_ns`/`nsAppend`) polymorphic, and `tenv_ctor_ok` ignores both. Hence HOL4's `check_ctor_tenv_ok` is polymorphic in both types. Lean's `check_ctor_tenv_ok` (via monomorphized `build_ctor_tenv`) fixes `tis` to `List type_ident` and module names to `modN`, making it strictly a special case of the HOL4 theorem."
+  }
+ ]
+}

@@ -1,0 +1,16 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "HOL4 defines HD only by HD (h::t) = h, through new_recursive_definition and new_specification (Defn.sml:1192, Prim_rec.sml:281), with no ARB completion. Saved HD theorems I searched concern nonempty lists or hold regardless of HD []. The unconditional EL_LUPDATE also leaves it open. ARB is an unconstrained new_constant. Lean proves HD [] = ARB by rfl, so also EL 0 [] = ARB and HD [] = LAST []. HOL4 leaves these open."
+  },
+  {
+   "id": "F2",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "LAST_DEF has only the cons clause and goes through the same new_specification route. Its recursive call on [] is guarded by the t = [] test. Saved LAST theorems I searched (LAST_CONS, LAST_compute, LAST_EL, LAST_MAP, LAST_APPEND_CONS, ELL 0 l = LAST l) leave LAST [] open. Lean's [] clause proves LAST [] = ARB by rfl and, with HD's clause, LAST [] = HD []. HOL4 leaves both open."
+  }
+ ]
+}

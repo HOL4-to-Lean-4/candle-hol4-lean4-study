@@ -1,0 +1,28 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "In HOL4, Definition locnrow_def goes through Prim_rec.new_recursive_definition and new_specification, saving only !r c. locnrow (POSN r c) = r (add_record_field only updates parsing). In Lean, both UNKNOWNpt and EOFpt reduce to the same ARB : Nat, so Lean proves locnrow .UNKNOWNpt = locnrow .EOFpt by rfl. Since HOL4's saved theorems allow distinct values (e.g., 0 and 1), this is a conservativity violation."
+  },
+  {
+   "id": "F2",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "In HOL4, Definition locn_rowupdate_def uses Prim_rec.new_recursive_definition and new_specification, saving only !f r c. locn_rowupdate f (POSN r c) = POSN (f r) c (add_record_fupdate only updates parsing). In Lean, both UNKNOWNpt and EOFpt reduce to the same ARB : locn regardless of f, so Lean proves locn_rowupdate id .UNKNOWNpt = locn_rowupdate id .EOFpt. HOL4 leaves this open (e.g., returning the input gives distinct results), making this a conservativity violation."
+  },
+  {
+   "id": "F3",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "In HOL4, Definition locncol_def uses Prim_rec.new_recursive_definition and new_specification, saving only !r c. locncol (POSN r c) = c (add_record_field only updates parsing). In Lean, both UNKNOWNpt and EOFpt reduce to the same ARB : Nat, so Lean proves locncol .UNKNOWNpt = locncol .EOFpt by rfl. Because HOL4's saved theorems admit distinct columns (e.g., 0 and 1), this is a conservativity violation."
+  },
+  {
+   "id": "F4",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "In HOL4, Definition locn_colupdate_def uses Prim_rec.new_recursive_definition and new_specification, saving only !f r c. locn_colupdate f (POSN r c) = POSN r (f c) (add_record_fupdate only updates parsing). In Lean, both UNKNOWNpt and EOFpt reduce to the same ARB : locn regardless of f, so Lean proves locn_colupdate id .UNKNOWNpt = locn_colupdate id .EOFpt. HOL4 leaves this open (e.g., returning the input gives distinct results), making this a conservativity violation."
+  }
+ ]
+}

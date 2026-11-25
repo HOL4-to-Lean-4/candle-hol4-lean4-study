@@ -1,0 +1,18 @@
+{
+ "module": "CmlTS.Prelude.FMap",
+ "checked": 14,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "FAPPLY",
+   "lean": "lean/CmlTS/Prelude/FMap.lean:28",
+   "hol4": "hol4/HOL4-src/src/finite_maps/finite_mapScript.sml:181",
+   "class": "V-C",
+   "explanation": "Lean proves `FAPPLY (FEMPTY : FMap Nat Nat) 0 = ARB` by `rfl`. In HOL4, applying the empty map at 0 gives `OUTL (INR one)`. The saved equation for `OUTL` covers only `OUTL (INL x) = x` (sumScript.sml:287), so HOL4 leaves equality with `ARB` open. All absent keys share the same result for a given value type, because each is represented by `INR one`.",
+   "repair": "private opaque fmapAbsentValue {β : Type v} [Nonempty β] : β := ARB\n\ndef FAPPLY {α : Type u} {β : Type v} [Nonempty β] (f : FMap α β) (x : α) : β :=\n  match f.1 x with\n  | some v => v\n  | none => fmapAbsentValue",
+   "confidence": 1.0,
+   "lean_check": "import CmlTS.Prelude.FMap\n\nexample : FAPPLY (FEMPTY : FMap Nat Nat) 0 = ARB := rfl",
+   "hol4_check": "FAPPLY (FEMPTY : num |-> num) 0 = OUTL (INR one : num + one)"
+  }
+ ]
+}

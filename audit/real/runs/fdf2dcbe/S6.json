@@ -1,0 +1,10 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "HOL4 HD has only the cons clause. non_wfrec_defn (Defn.sml:1182-1200) sends it to Prim_rec.new_recursive_definition, whose new_specification saves only HD (h::t) = h, without ARB completion. The saved HD/EL theorems I searched are conditional or leave HD [] undetermined; HD_NIL in basis_emit is local and trivial (FAIL). Lean proves HD [] = ARB, where ARB is the mapped HOL4 constant, and hence HD [] = CHR 256 at char. HOL4 leaves both open."
+  }
+ ]
+}

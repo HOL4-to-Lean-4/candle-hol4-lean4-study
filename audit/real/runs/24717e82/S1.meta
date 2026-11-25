@@ -1,0 +1,13 @@
+{
+ "step": "S1",
+ "unit": "24717e82",
+ "seconds": 98,
+ "rc": 0,
+ "usage": {
+  "input_tokens": 165539,
+  "cached_input_tokens": 80768,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 2980,
+  "reasoning_output_tokens": 653
+ }
+}

@@ -1,0 +1,18 @@
+{
+ "module": "CandleLean.Mllist",
+ "checked": 22,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "Candle.Mllist.collate",
+   "lean": "lean/CandleLean/Mllist.lean:31",
+   "hol4": "hol4/package/basis/pure/mllistScript.sml:362",
+   "class": "V-P",
+   "explanation": "HOL4 allows the two lists to have different element types. For example, it can compare `[0]` with `[T]` using a comparator of type `num → bool → ordering` that always returns `LESS`. Lean requires both lists to have element type `α`, so this application is ill-typed.",
+   "repair": "def collate {α : Type u} {β : Type v} (f : α → β → Ordering) : List α → List β → Ordering\n  | [], [] => EQUAL\n  | [], _ :: _ => LESS\n  | _ :: _, [] => GREATER\n  | h1 :: t1, h2 :: t2 => if f h1 h2 = EQUAL then collate f t1 t2 else f h1 h2",
+   "confidence": 0.99,
+   "lean_check": null,
+   "hol4_check": "mllist$collate (\\(n:num) (b:bool). LESS) [0] [T] = LESS"
+  }
+ ]
+}

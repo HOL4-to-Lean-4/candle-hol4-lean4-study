@@ -1,0 +1,22 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "In Lean, CHR returns the single constant ARB for all n >= 256, proving CHR 256 = CHR 257. In HOL4, define_new_type_bijections introduces CHR via new_specification with only char_BIJ, fixing CHR on n < 256 and leaving CHR 256 and CHR 257 independently unconstrained (since ORD c < 256). Thus Lean proves an equation HOL4 leaves open."
+  },
+  {
+   "id": "F2",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "In Lean, int_div i 0 reduces to the single constant ARB regardless of i, proving int_div 1 0 = int_div 2 0. In HOL4, int_div is introduced by new_specification with a ~(j = 0) guard, and saved theorems in integerScript.sml do not constrain division by zero. Because HOL4 leaves int_div 1 0 and int_div 2 0 independently unspecified, Lean proves an equation HOL4 leaves open."
+  },
+  {
+   "id": "F3",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "In Lean, int_mod i 0 reduces to the single constant ARB regardless of i, proving int_mod 1 0 = int_mod 2 0. In HOL4, int_mod is introduced by new_specification with a ~(j = 0) guard, and saved theorems in integerScript.sml do not constrain modulus by zero. Because HOL4 leaves int_mod 1 0 and int_mod 2 0 independently unspecified, Lean proves an equation HOL4 leaves open."
+  }
+ ]
+}

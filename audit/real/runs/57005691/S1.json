@@ -1,0 +1,18 @@
+{
+ "module": "CandleLean.Prelude.String",
+ "checked": 22,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "HOL.CHR",
+   "lean": "lean/CandleLean/Prelude/String.lean:22",
+   "hol4": "hol4/HOL4-src/src/string/stringScript.sml:29",
+   "class": "V-C",
+   "explanation": "Lean proves `CHR 256 = (ARB : Nat → char) 256`. Both `CHR` and `ARB` belong to the mapped vocabulary, so this equation ties two HOL4 constants together. HOL4’s saved bijection laws allow `CHR 256` to be any character while `ARB` stays fixed. Changing that one value preserves the laws because every character’s ordinal is less than 256.",
+   "repair": "private opaque chrOutOfRange : Nat → char\n\ndef CHR (n : Nat) : char :=\n  if h : n < 256 then ⟨n, h⟩ else chrOutOfRange n",
+   "confidence": 1,
+   "lean_check": "import CandleLean.Prelude.String\n\nexample : HOL.CHR 256 = (HOL.ARB : Nat → HOL.char) 256 := by\n  unfold HOL.CHR\n  exact dif_neg (Nat.lt_irrefl 256)",
+   "hol4_check": "!c:char. ?f:num -> char. f 256 = c /\\ (!x. f (ORD x) = x) /\\ (!n. n < 256 <=> ORD (f n) = n)"
+  }
+ ]
+}

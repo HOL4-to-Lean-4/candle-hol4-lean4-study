@@ -1,0 +1,22 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "In Basic.lean:9, HOL.ARB is defined as default, so Lean proves (HOL.ARB : Nat) = 0 by reflexivity via Inhabited Nat. In boolScript.sml:245, HOL4 declares ARB with new_constant and no defining theorems, leaving its value at type num open. Thus Lean proves a specific equation about ARB that HOL4 leaves open."
+  },
+  {
+   "id": "F2",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "In pred_setScript.sml:6275, HOL4 overloads uppercase PERMUTES as \\f s. BIJ f s s, whereas Basic.lean:55-56 also requires (forall x, x notin s -> f x = x), matching lowercase permutes in permutesScript.sml instead. On the empty set and Nat.succ, BIJ holds vacuously in HOL4 while Lean rejects Nat.succ at 0, so the definitions differ."
+  },
+  {
+   "id": "F3",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "In Basic.lean:11,120, HOL.LEAST uses Classical.epsilon (HOL.ε), so by funext and propext Lean proves LEAST (fun _ => False) = ε (fun _ : Nat => False). In WhileScript.sml:91,135, LEAST P = WHILE ($~ o P) SUC 0 with WHILE introduced by new_specification; on \\_. F the loop equation only forces a constant function on num, leaving LEAST (\\_. F) independent of @ (\\_:num. F)."
+  }
+ ]
+}

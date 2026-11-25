@@ -1,0 +1,30 @@
+{
+ "module": "CmlTS.TypeSoundInvariants",
+ "checked": 31,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "CmlTS.ctMap_has_exns",
+   "lean": "lean/CmlTS/TypeSoundInvariants.lean:256",
+   "hol4": "hol4/package/typeSoundInvariantsScript.sml:173",
+   "class": "V-P",
+   "explanation": "HOL4 compares the first two entry fields only with empty lists, so their element types are independently polymorphic. For example, HOL4 can apply the predicate to a map with entries of type `bool list # num list # num`. Lean’s `ctMap_ty` fixes the element types to `tvarN` and `typ`, excluding that input.",
+   "repair": "def ctMap_has_exns {α β : Type} (ctMap : fmap stamp (List α × List β × type_ident)) : Prop :=\n  FLOOKUP ctMap bind_stamp = some ([], [], Texn_num) ∧\n  FLOOKUP ctMap chr_stamp = some ([], [], Texn_num) ∧\n  FLOOKUP ctMap div_stamp = some ([], [], Texn_num) ∧\n  FLOOKUP ctMap subscript_stamp = some ([], [], Texn_num)",
+   "confidence": 1,
+   "lean_check": null,
+   "hol4_check": "~ctMap_has_exns (FEMPTY : (stamp, bool list # num list # num) fmap)"
+  },
+  {
+   "id": "F2",
+   "declaration": "CmlTS.ctMap_has_bools",
+   "lean": "lean/CmlTS/TypeSoundInvariants.lean:268",
+   "hol4": "hol4/package/typeSoundInvariantsScript.sml:191",
+   "class": "V-P",
+   "explanation": "HOL4 requires two empty lists at the `True` and `False` stamps. Its condition on other constructor names constrains only the lookup key. Thus HOL4 accepts maps with entries of type `bool list # num list # num`, among other instances. Lean’s `ctMap_ty` restricts the two fields to `List tvarN` and `List typ`.",
+   "repair": "def ctMap_has_bools {α β : Type} (ctMap : fmap stamp (List α × List β × type_ident)) : Prop :=\n  FLOOKUP ctMap (TypeStamp ml!\"True\" bool_type_num) = some ([], [], Tbool_num) ∧\n  FLOOKUP ctMap (TypeStamp ml!\"False\" bool_type_num) = some ([], [], Tbool_num) ∧\n  (∀ cn, cn ≠ ml!\"True\" ∧ cn ≠ ml!\"False\" → FLOOKUP ctMap (TypeStamp cn bool_type_num) = none)",
+   "confidence": 1,
+   "lean_check": null,
+   "hol4_check": "~ctMap_has_bools (FEMPTY : (stamp, bool list # num list # num) fmap)"
+  }
+ ]
+}

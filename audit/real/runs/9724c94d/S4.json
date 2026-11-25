@@ -1,0 +1,10 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "In HOL4 (pred_setScript.sml:3404-3428), CARD is introduced via new_specification with only CARD_DEF, constraining CARD on EMPTY and finite INSERT while leaving its value on infinite sets unspecified (as noted at line 3613). In CmlTS/Prelude/Basic.lean:43-46, the 'else 0' branch lets Lean prove CARD (UNIV : Set Nat) = 0, a specific equation over mapped constants that HOL4 leaves open, violating conservativity (V-C)."
+  }
+ ]
+}

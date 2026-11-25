@@ -1,0 +1,18 @@
+{
+ "module": "CmlTS.Prelude.ListLib",
+ "checked": 23,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "CmlTS.HD",
+   "lean": "lean/CmlTS/Prelude/ListLib.lean:17",
+   "hol4": "hol4/HOL4-src/src/list/src/listScript.sml:139",
+   "class": "V-C",
+   "explanation": "Lean proves `HD ([] : List Bool) = ARB` by reflexivity. HOL4 saves only `HD (h::t) = h`, which permits either Boolean value for `HD []`, independently of `ARB`. The empty-list branch also makes every out-of-bounds `EL` equal to `ARB` through its recursion on `TL`.",
+   "repair": "private opaque hdNil {α : Type} [Nonempty α] : α := ARB\n\ndef HD [Nonempty α] : List α → α\n  | h :: _ => h\n  | [] => hdNil",
+   "confidence": 1.0,
+   "lean_check": "import CmlTS.Prelude.ListLib\n\nexample : CmlTS.HD ([] : List Bool) = CmlTS.ARB := rfl",
+   "hol4_check": "!b:bool. ?f:bool list -> bool. (f [] = b) /\\ (!h t. f (h::t) = h)"
+  }
+ ]
+}

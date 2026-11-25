@@ -1,0 +1,10 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "HOL4's Definition has only the Var clause. Through qDefine, xDefine and non_wfrec_defn it reaches Prim_rec.new_recursive_definition0, which applies new_specification to `?dest_var. !x ty. dest_var (Var x ty) = (x,ty)`. No ARB completion occurs, and no saved theorem in the package fixes dest_var on Const, Comb or Abs. Lean's ARB clauses prove by rfl dest_var (Const n ty) = dest_var (Comb s t), dest_var (Const n ty) = dest_var (Const m ty') and dest_var (Const n ty) = ARB, which HOL4 leaves open."
+  }
+ ]
+}

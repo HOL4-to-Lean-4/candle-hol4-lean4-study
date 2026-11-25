@@ -1,0 +1,10 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "In hol4/package/namespacePropsScript.sml:423, nsSub_compute is defined via alistSub (which allows distinct value types 'v1 and 'v2) and its termination measure inspects only the first namespace, so HOL4 infers two distinct value type variables for the two namespaces and relation R. In lean/CmlTS/NamespaceProps.lean:64, nsSub_compute unifies both into a single type V, making the Lean definition a strict special case that excludes heterogeneous value-type relations allowed in HOL4."
+  }
+ ]
+}

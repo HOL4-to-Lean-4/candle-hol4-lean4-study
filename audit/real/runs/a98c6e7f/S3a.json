@@ -1,0 +1,18 @@
+{
+ "module": "CmlTS.Prelude.Fmap",
+ "checked": 14,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "CmlTS.FAPPLY",
+   "lean": "lean/CmlTS/Prelude/Fmap.lean:41",
+   "hol4": "hol4/HOL4-src/src/finite_maps/finite_mapScript.sml:180",
+   "class": "V-C",
+   "explanation": "Outside the domain, HOL4's FAPPLY f x is OUTL (fmap_REP f x) = OUTL (INR one). OUTL is specified only on INL (sumScript.sml:286), and the saved theorems give only f ' x = FEMPTY ' x (NOT_FDOM_FAPPLY_FEMPTY). FEMPTY ' x is never related to THE NONE or ARB, and THE is itself specified only on SOME (optionScript.sml:176). Lean defines FAPPLY f x := THE (FLOOKUP f x), so it proves by rfl that FAPPLY FEMPTY x = THE none, and also that it equals ARB. HOL4 leaves both equations open. In-domain values agree.",
+   "repair": "noncomputable opaque FAPPLY_undef {β : Type v} [Nonempty β] : β\n\nnoncomputable def FAPPLY [Nonempty β] (f : fmap α β) (x : α) : β :=\n  match FLOOKUP f x with\n  | some y => y\n  | none => FAPPLY_undef",
+   "confidence": 0.7,
+   "lean_check": "import CmlTS.Prelude.Fmap\nopen CmlTS\n\ntheorem chk1 {α β : Type} [Nonempty β] (x : α) :\n    FAPPLY (FEMPTY : fmap α β) x = THE (none : Option β) := rfl\n\ntheorem chk2 {α β : Type} [Nonempty β] (x : α) :\n    FAPPLY (FEMPTY : fmap α β) x = (ARB : β) := rfl\n",
+   "hol4_check": "?the:bool option -> bool. (!x. the (SOME x) = x) /\\ the NONE <> FAPPLY (FEMPTY : num |-> bool) 0"
+  }
+ ]
+}

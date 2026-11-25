@@ -1,0 +1,18 @@
+{
+ "module": "CmlTS.NamespaceProps",
+ "checked": 55,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "nsSub_compute",
+   "lean": "lean/CmlTS/NamespaceProps.lean:64",
+   "hol4": "hol4/package/namespacePropsScript.sml:423",
+   "class": "V-P",
+   "explanation": "HOL4 allows the two namespaces to have different value types. For example, it can compare a numeric binding of 0 with a Boolean binding of true at the same key, using a relation that says the Boolean is true exactly when the number is zero. Lean uses V for both namespaces and both value arguments of R, so this application is ill-typed.",
+   "repair": "def nsSub_compute {M : Type u} {N : Type v} {V : Type w} {V' : Type _} :\n    List M → (Ident M N → V → V' → Prop) → Namespace M N V → Namespace M N V' → Prop\n  | path, R, .Bind e1V e1M, .Bind e2V e2M =>\n    alistSub (fun k v1 v2 => R (mk_id (REVERSE path) k) v1 v2) e1V e2V ∧\n    alist_rel_restr_mem e1M e2M (fun k v1 _ v2 => nsSub_compute (k :: path) R v1 v2)\n      (MAP FST e1M)\ntermination_by _ _ e1 _ => sizeOf e1\ndecreasing_by\n  rename_i h\n  have := sizeOf_ALOOKUP e1M _ _ h\n  simp\n  omega",
+   "confidence": 1.0,
+   "lean_check": null,
+   "hol4_check": "nsSub_compute [T] (λi n b. b = (n = (0:num))) (Bind [(T,0)] []) (Bind [(T,T)] [])"
+  }
+ ]
+}

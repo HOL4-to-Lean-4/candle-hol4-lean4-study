@@ -1,0 +1,10 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "In Lean, FAPPLY FEMPTY x = ARB holds by reflexivity (FiniteMap.lean:28-31), proving an equation in the mapped vocabulary (FAPPLY, FEMPTY, ARB). In HOL4, FAPPLY FEMPTY x reduces to OUTL (INR one) (finite_mapScript.sml:176-182), whereas OUTL is specified via new_specification only by OUTL (INL x) = x (sumScript.sml:286-289) and ARB is an unspecified constant (boolScript.sml:245). HOL4 therefore leaves FAPPLY FEMPTY x = ARB open, so this is a genuine V-C violation."
+  }
+ ]
+}

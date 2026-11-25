@@ -1,0 +1,16 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "Definition tries Defn.non_wfrec_defn first. The sole argument `Refv v` is a constructor pattern, so Prim_rec.new_recursive_definition applies, via new_specification. It matches only supplied clauses, with no ARB completion. HOL4 saves just dest_Refv (Refv v) = v; no other package theorem mentions it. Lean's catch-all proves dest_Refv (W8array ws) = ARB and dest_Refv (W8array ws) = dest_Refv (Varray vs), which HOL4 leaves open."
+  },
+  {
+   "id": "F2",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "All five clauses are nonrecursive with single constructor patterns. The dec axiom has a plain clause for each, so Defn.non_wfrec_defn succeeds through new_recursive_definition/new_specification, without WFREC or ARB completion. The saved FV_dec_def says nothing about Dmod, Dlocal or Denv, and no other saved theorem does. Lean's `| _ => ARB` proves FV_dec (Denv n) = ARB and FV_dec (Denv n) = FV_dec (Dmod m ds), which HOL4 leaves open."
+  }
+ ]
+}

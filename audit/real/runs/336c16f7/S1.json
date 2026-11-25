@@ -1,0 +1,18 @@
+{
+ "module": "CmlTS.TypeSysProps",
+ "checked": 94,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "CmlTS.type_def_to_ctMap",
+   "lean": "lean/CmlTS/TypeSysProps.lean:45",
+   "hol4": "hol4/package/typeSysPropsScript.sml:1502",
+   "class": "V-C",
+   "explanation": "With no type definitions and one identifier, Lean returns the same `ARB` for every starting stamp. It therefore equates the results for starting stamps 0 and 1. HOL4 gives equations only for two empty lists and for two nonempty lists. Its equations allow these two mismatched calls to return different lists.",
+   "repair": "private axiom type_def_to_ctMap_unspecified {α β γ : Type} :\n  Namespace mlstring mlstring (List mlstring × typ) → Nat →\n  List (α × β × List (mlstring × List ast_t)) → List γ →\n  List (stamp × α × List typ × γ)\n\nnoncomputable def type_def_to_ctMap {α β γ : Type}\n    (tenvT : Namespace mlstring mlstring (List mlstring × typ)) :\n    Nat → List (α × β × List (mlstring × List ast_t)) → List γ →\n      List (stamp × α × List typ × γ)\n  | _, [], [] => []\n  | next_stamp, (tvs, _, ctors) :: tds, id :: ids =>\n    type_def_to_ctMap tenvT (next_stamp + 1) tds ids ++\n    List.reverse (ctors.map fun (cn, ts) =>\n      (.TypeStamp cn next_stamp, (tvs, ts.map (type_name_subst tenvT), id)))\n  | next_stamp, tds, ids => type_def_to_ctMap_unspecified tenvT next_stamp tds ids",
+   "confidence": 0.99,
+   "lean_check": "import CmlTS.TypeSysProps\nopen CmlTS\n\nexample (env : Namespace mlstring mlstring (List mlstring × typ)) :\n    type_def_to_ctMap (α := Unit) (β := Unit) env 0 [] [()] =\n    type_def_to_ctMap (α := Unit) (β := Unit) env 1 [] [()] := by\n  simp [type_def_to_ctMap]",
+   "hol4_check": null
+  }
+ ]
+}

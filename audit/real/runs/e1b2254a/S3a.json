@@ -1,0 +1,30 @@
+{
+ "module": "CandleLean.Prelude.Basic",
+ "checked": 63,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "HOL.PERMUTES",
+   "lean": "lean/CandleLean/Prelude/Basic.lean:55",
+   "hol4": "hol4/HOL4-src/src/pred_set/src/pred_setScript.sml:6275",
+   "class": "V-P",
+   "explanation": "HOL4 PERMUTES is the overload \\f s. BIJ f s s (also numberScript.sml:7889). Lean adds the conjunct ∀ x, x ∉ s → f x = x, so f must be the identity outside s. With f = fun _ => 0 on Nat and s = {0}, HOL4's f PERMUTES s is true but Lean's is false, because f 1 = 0 ≠ 1. Statements concluding PERMUTES become stronger, and hypotheses using it become more restrictive.",
+   "repair": "def PERMUTES {α : Type u} (f : α → α) (s : Set α) : Prop := BIJ f s s",
+   "confidence": 0.97,
+   "lean_check": "import CandleLean.Prelude.Basic\n\nexample : HOL.BIJ (fun _ : Nat => 0) (HOL.setOf (fun x : Nat => x = 0)) (HOL.setOf (fun x : Nat => x = 0)) ∧\n    ¬ HOL.PERMUTES (fun _ : Nat => 0) (HOL.setOf (fun x : Nat => x = 0)) := by\n  refine ⟨⟨⟨?_, ?_⟩, ⟨?_, ?_⟩⟩, ?_⟩\n  · intro x _\n    exact (show (0 : Nat) = 0 from rfl)\n  · intro x y hx hy _\n    have h1 : x = 0 := hx\n    have h2 : y = 0 := hy\n    exact h1.trans h2.symm\n  · intro x _\n    exact (show (0 : Nat) = 0 from rfl)\n  · intro x hx\n    have h1 : x = 0 := hx\n    exact ⟨0, (show (0 : Nat) = 0 from rfl), h1.symm⟩\n  · intro h\n    have h1 : (0 : Nat) = 1 := h.1 1 (fun h' => absurd (show (1 : Nat) = 0 from h') (by decide))\n    exact absurd h1 (by decide)\n",
+   "hol4_check": "(\\n:num. 0n) PERMUTES {0n} /\\ ~(!x. x NOTIN {0n} ==> ((\\n:num. 0n) x = x))"
+  },
+  {
+   "id": "F2",
+   "declaration": "HOL.ARB",
+   "lean": "lean/CandleLean/Prelude/Basic.lean:9",
+   "hol4": "hol4/HOL4-src/src/bool/boolScript.sml:245",
+   "class": "V-C",
+   "explanation": "HOL4 introduces ARB with new_constant and no axiom or definition ('Doesn't have to be defined at all'), so its value at every non-singleton type is open. Lean defines it as Inhabited.default, so it has concrete values by rfl: (ARB : Nat) = 0, (ARB : Bool) = false, (ARB : List α) = []. These are specific equations HOL4 cannot prove, and they propagate to every function that uses ARB outside its specification.",
+   "repair": "opaque ARB {α : Sort u} [Nonempty α] : α := Classical.choice inferInstance",
+   "confidence": 0.85,
+   "lean_check": "import CandleLean.Prelude.Basic\n\nexample : (HOL.ARB : Nat) = 0 := rfl\nexample : (HOL.ARB : Bool) = false := rfl\n",
+   "hol4_check": null
+  }
+ ]
+}

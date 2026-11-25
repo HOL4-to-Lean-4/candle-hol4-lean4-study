@@ -1,0 +1,54 @@
+{
+ "module": "CmlTS.Location",
+ "checked": 6,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "CmlTS.locnrow",
+   "lean": "lean/CmlTS/Location.lean:12",
+   "hol4": "hol4/package/locationScript.sml:6",
+   "class": "V-C",
+   "explanation": "HOL4's only clause is locnrow (POSN r c) = r. The definition goes through Prim_rec.new_recursive_definition (Defn.sml:1192), i.e. new_specification of exactly that clause (Prim_rec.sml:281). No ARB completion is made, so the values at UNKNOWNpt and EOFpt are open and may differ. Lean sends both to the same ARB : Nat. It therefore proves locnrow UNKNOWNpt = locnrow EOFpt by rfl, and also locnrow UNKNOWNpt = ARB and locnrow UNKNOWNpt = locncol UNKNOWNpt. The saved HOL4 theorems decide none of these.",
+   "repair": "opaque locnrow_unspec : locn → Nat\n\nnoncomputable def locnrow : locn → Nat\n  | .POSN r _ => r\n  | l => locnrow_unspec l",
+   "confidence": 0.6,
+   "lean_check": "import CmlTS.Location\nopen CmlTS\n\nexample : locnrow locn.UNKNOWNpt = locnrow locn.EOFpt := rfl\n",
+   "hol4_check": "?h. (!r c. h (POSN r c) = r) /\\ h UNKNOWNpt <> h EOFpt"
+  },
+  {
+   "id": "F2",
+   "declaration": "CmlTS.locn_rowupdate",
+   "lean": "lean/CmlTS/Location.lean:16",
+   "hol4": "hol4/package/locationScript.sml:11",
+   "class": "V-C",
+   "explanation": "HOL4 specifies only locn_rowupdate f (POSN r c) = POSN (f r) c, by new_specification through Prim_rec. The results on UNKNOWNpt and EOFpt are open and may depend on f and on the constructor. Lean maps both to the one value ARB : locn for every f. It therefore proves locn_rowupdate f UNKNOWNpt = locn_rowupdate g EOFpt for all f and g, by rfl. The saved HOL4 theorems leave this equation open.",
+   "repair": "opaque locn_rowupdate_unspec : (Nat → Nat) → locn → locn\n\nnoncomputable def locn_rowupdate (f : Nat → Nat) : locn → locn\n  | .POSN r c => .POSN (f r) c\n  | l => locn_rowupdate_unspec f l",
+   "confidence": 0.6,
+   "lean_check": "import CmlTS.Location\nopen CmlTS\n\nexample (f g : Nat → Nat) : locn_rowupdate f locn.UNKNOWNpt = locn_rowupdate g locn.EOFpt := rfl\n",
+   "hol4_check": "?h. (!f r c. h f (POSN r c) = POSN (f r) c) /\\ h I UNKNOWNpt <> h I EOFpt"
+  },
+  {
+   "id": "F3",
+   "declaration": "CmlTS.locncol",
+   "lean": "lean/CmlTS/Location.lean:20",
+   "hol4": "hol4/package/locationScript.sml:16",
+   "class": "V-C",
+   "explanation": "HOL4 specifies only locncol (POSN r c) = c, by new_specification through Prim_rec with no ARB completion. The values at UNKNOWNpt and EOFpt are open and unrelated. Lean maps both to the same ARB : Nat. It therefore proves locncol UNKNOWNpt = locncol EOFpt by rfl, and also locncol UNKNOWNpt = locnrow UNKNOWNpt. The saved HOL4 theorems leave these equations open.",
+   "repair": "opaque locncol_unspec : locn → Nat\n\nnoncomputable def locncol : locn → Nat\n  | .POSN _ c => c\n  | l => locncol_unspec l",
+   "confidence": 0.6,
+   "lean_check": "import CmlTS.Location\nopen CmlTS\n\nexample : locncol locn.UNKNOWNpt = locncol locn.EOFpt := rfl\n",
+   "hol4_check": "?h. (!r c. h (POSN r c) = c) /\\ h UNKNOWNpt <> h EOFpt"
+  },
+  {
+   "id": "F4",
+   "declaration": "CmlTS.locn_colupdate",
+   "lean": "lean/CmlTS/Location.lean:24",
+   "hol4": "hol4/package/locationScript.sml:20",
+   "class": "V-C",
+   "explanation": "HOL4 specifies only locn_colupdate f (POSN r c) = POSN r (f c), by new_specification through Prim_rec. The results on UNKNOWNpt and EOFpt are open and may depend on f and on the constructor. Lean maps both to the one value ARB : locn for every f. It therefore proves locn_colupdate f UNKNOWNpt = locn_colupdate g EOFpt by rfl, and also locn_colupdate f UNKNOWNpt = locn_rowupdate g UNKNOWNpt. The saved HOL4 theorems leave these equations open.",
+   "repair": "opaque locn_colupdate_unspec : (Nat → Nat) → locn → locn\n\nnoncomputable def locn_colupdate (f : Nat → Nat) : locn → locn\n  | .POSN r c => .POSN r (f c)\n  | l => locn_colupdate_unspec f l",
+   "confidence": 0.6,
+   "lean_check": "import CmlTS.Location\nopen CmlTS\n\nexample (f g : Nat → Nat) : locn_colupdate f locn.UNKNOWNpt = locn_colupdate g locn.EOFpt := rfl\n",
+   "hol4_check": "?h. (!f r c. h f (POSN r c) = POSN r (f c)) /\\ h I UNKNOWNpt <> h I EOFpt"
+  }
+ ]
+}

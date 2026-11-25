@@ -1,0 +1,30 @@
+{
+ "module": "CandleLean.Prelude.List",
+ "checked": 36,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "HOL.HD",
+   "lean": "lean/CandleLean/Prelude/List.lean:11",
+   "hol4": "hol4/HOL4-src/src/list/src/listScript.sml:138",
+   "class": "V-C",
+   "explanation": "HOL4's only defining theorem is HD (h::t) = h. It is made by primitive recursion through new_specification (Defn.sml:1192, Prim_rec.sml:281), which says nothing about the omitted [] clause, and I found no saved theorem fixing HD []. Lean's second clause proves HD [] = ARB, and through EL also EL n [] = ARB. Together with LAST it proves HD [] = LAST []. HOL4 leaves HD [] = ARB and HD [] = LAST [] open. SEG, in the same module, uses epsilon over its specification and avoids this.",
+   "repair": "def HD_spec {α : Type u} [Nonempty α] (f : List α → α) : Prop := ∀ h t, f (h :: t) = h\n\ndef HD {α : Type u} [Nonempty α] : List α → α := Classical.epsilon (HD_spec (α := α))\n\ntheorem HD_def {α : Type u} [Nonempty α] : HD_spec (HD (α := α)) := by\n  apply Classical.epsilon_spec (p := HD_spec (α := α))\n  exact ⟨fun l => match l with | h :: _ => h | [] => Classical.choice ‹Nonempty α›, fun _ _ => rfl⟩",
+   "confidence": 0.72,
+   "lean_check": "import CandleLean.Prelude.List\n\ntheorem hd_nil {α : Type} [Nonempty α] : HOL.HD ([] : List α) = HOL.ARB := by\n  simp [HOL.HD]\n",
+   "hol4_check": "?f:bool list -> bool. (!h t. f (h::t) = h) /\\ f [] <> ARB"
+  },
+  {
+   "id": "F2",
+   "declaration": "HOL.LAST",
+   "lean": "lean/CandleLean/Prelude/List.lean:27",
+   "hol4": "hol4/HOL4-src/src/list/src/listScript.sml:2124",
+   "class": "V-C",
+   "explanation": "HOL4's LAST_DEF has the single clause LAST (h::t) = if t = [] then h else LAST t. It is made by primitive recursion through new_specification with no [] clause. LAST_EL and LAST_MAP require a non-empty list, and I found no saved theorem fixing LAST []. Lean adds the clause LAST [] = ARB, so it proves LAST [] = ARB and also LAST [] = HD [], both of which HOL4 leaves open.",
+   "repair": "def LAST_spec {α : Type u} [Nonempty α] (f : List α → α) : Prop :=\n  ∀ h t, f (h :: t) = if t = [] then h else f t\n\ndef LAST {α : Type u} [Nonempty α] : List α → α := Classical.epsilon (LAST_spec (α := α))\n\ntheorem LAST_DEF {α : Type u} [Nonempty α] : LAST_spec (LAST (α := α)) := by\n  apply Classical.epsilon_spec (p := LAST_spec (α := α))\n  refine ⟨fun l => List.rec (motive := fun _ => α) (Classical.choice ‹Nonempty α›) (fun h t r => if t = [] then h else r) l, ?_⟩\n  intro h t\n  rfl",
+   "confidence": 0.72,
+   "lean_check": "import CandleLean.Prelude.List\n\ntheorem last_nil {α : Type} [Nonempty α] : HOL.LAST ([] : List α) = HOL.ARB := by\n  simp [HOL.LAST]\n",
+   "hol4_check": "?f:bool list -> bool. (!h t. f (h::t) = if t = [] then h else f t) /\\ f [] <> ARB"
+  }
+ ]
+}

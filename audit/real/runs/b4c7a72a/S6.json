@@ -1,0 +1,10 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "HOL4's Defn parser (Defn.sml defn_absyn_to_term) typechecks each clause separately and unifies only the head symbol and non-pattern frees. So the reused pattern variables h,t in clauses 2 and 3 do not identify the element types. The principal type is ('a->'b->ordering)->'a list->'b list->ordering. Lean's f : α→α→Ordering defines only the 'b='a instance, so heterogeneous instances such as f : num->bool->ordering have no counterpart. This is a special case of the HOL4 constant."
+  }
+ ]
+}

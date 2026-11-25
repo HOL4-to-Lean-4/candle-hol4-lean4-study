@@ -1,0 +1,18 @@
+{
+ "module": "CmlTS.Misc",
+ "checked": 29,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "CmlTS.MAP3",
+   "lean": "lean/CmlTS/Misc.lean:40",
+   "hol4": "hol4/package/miscScript.sml:74",
+   "class": "V-C",
+   "explanation": "Lean proves that `MAP3 f [] [0] []` and `MAP3 f [] [1] []` both equal `ARB`. HOL4 saves equations for three empty lists and for three nonempty lists. Those equations permit the two mixed-shape calls to return different lists. Lean forces them to agree.",
+   "repair": "private axiom MAP3_unmatched {α : Type u} {β : Type v} {γ : Type w} {δ : Type x} :\n    (α → β → γ → δ) → List α → List β → List γ → List δ\n\nnoncomputable def MAP3 {α : Type u} {β : Type v} {γ : Type w} {δ : Type x}\n    (f : α → β → γ → δ) : List α → List β → List γ → List δ\n  | [], [], [] => []\n  | h1 :: t1, h2 :: t2, h3 :: t3 => f h1 h2 h3 :: MAP3 f t1 t2 t3\n  | xs, ys, zs => MAP3_unmatched f xs ys zs",
+   "confidence": 1,
+   "lean_check": "import CmlTS.Misc\n\nopen CmlTS\n\nexample (f : Nat → Nat → Nat → Nat) :\n    MAP3 f [] [0] [] = MAP3 f [] [1] [] := by\n  simp [MAP3]",
+   "hol4_check": null
+  }
+ ]
+}

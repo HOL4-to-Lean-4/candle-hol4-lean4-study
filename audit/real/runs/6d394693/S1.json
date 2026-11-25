@@ -1,0 +1,42 @@
+{
+ "module": "CmlTS.Prelude.String",
+ "checked": 26,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "CmlTS.CHR",
+   "lean": "lean/CmlTS/Prelude/String.lean:11",
+   "hol4": "hol4/HOL4-src/src/string/stringScript.sml:40",
+   "class": "V-C",
+   "explanation": "Lean proves `CHR 256 = CHR 257` because both inputs return the same `ARB`. HOL4 constrains `CHR` on the range of `ORD`, which consists of the numbers below 256. Its saved bijection theorems allow `CHR 256` and `CHR 257` to be different characters.",
+   "repair": "private opaque chrOutOfRange : Nat → char\n\nnoncomputable def CHR (n : Nat) : char := if h : n < 256 then ⟨n, h⟩ else chrOutOfRange n",
+   "confidence": 1.0,
+   "lean_check": "import CmlTS.Prelude.String\nopen CmlTS\nexample : CHR 256 = CHR 257 := by\n  simp only [CHR, dif_neg (by decide : ¬ 256 < 256), dif_neg (by decide : ¬ 257 < 256)]",
+   "hol4_check": null
+  },
+  {
+   "id": "F2",
+   "declaration": "CmlTS.int_div",
+   "lean": "lean/CmlTS/Prelude/String.lean:50",
+   "hol4": "hol4/HOL4-src/src/integer/integerScript.sml:1970",
+   "class": "V-C",
+   "explanation": "Lean proves `int_div 0 0 = int_div 1 0` because the zero-divisor branch ignores the dividend and returns `ARB`. The HOL4 specification requires a particular quotient only when the divisor is nonzero. It allows these two quotients to differ.",
+   "repair": "private opaque intDivZero : Int → Int\n\nnoncomputable def int_div (i j : Int) : Int := if j = 0 then intDivZero i else Int.fdiv i j",
+   "confidence": 1.0,
+   "lean_check": "import CmlTS.Prelude.String\nopen CmlTS\nexample : int_div 0 0 = int_div 1 0 := by\n  simp [int_div]",
+   "hol4_check": null
+  },
+  {
+   "id": "F3",
+   "declaration": "CmlTS.int_mod",
+   "lean": "lean/CmlTS/Prelude/String.lean:52",
+   "hol4": "hol4/HOL4-src/src/integer/integerScript.sml:2063",
+   "class": "V-C",
+   "explanation": "Lean proves `int_mod 0 0 = int_mod 1 0` because both remainders reduce to `ARB`. HOL4 specifies the remainder equation only for a nonzero divisor. It leaves the remainder at zero open for each dividend.",
+   "repair": "private opaque intModZero : Int → Int\n\nnoncomputable def int_mod (i j : Int) : Int := if j = 0 then intModZero i else i - int_div i j * j",
+   "confidence": 1.0,
+   "lean_check": "import CmlTS.Prelude.String\nopen CmlTS\nexample : int_mod 0 0 = int_mod 1 0 := by\n  simp [int_mod]",
+   "hol4_check": null
+  }
+ ]
+}

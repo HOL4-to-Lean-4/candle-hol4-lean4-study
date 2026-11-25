@@ -1,0 +1,30 @@
+{
+ "module": "CandleLean.Prelude.List",
+ "checked": 36,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "HOL.HD",
+   "lean": "lean/CandleLean/Prelude/List.lean:13",
+   "hol4": "hol4/HOL4-src/src/list/src/listScript.sml:138",
+   "class": "V-C",
+   "explanation": "HOL4 saves only HD (h::t) = h. The definition goes through Prim_rec.new_recursive_definition, i.e. new_specification (Defn.sml:1192, Prim_rec.sml:281), so no saved equation fixes HD []. I found no saved theorem about HD [] in the list sources. In HOL4, ARB is an unconstrained constant (boolScript.sml:245). Lean proves HD [] = ARB, and hence EL 0 [] = ARB and, with LAST, HD [] = LAST []. HOL4 leaves all of these open. Differing input: [].",
+   "repair": "def HD {α : Type u} [Nonempty α] : List α → α\n  | h :: _ => h\n  | [] => Classical.epsilon (fun f : List α → α => ∀ h t, f (h :: t) = h) []",
+   "confidence": 0.72,
+   "lean_check": "import CandleLean.Prelude.List\n\nexample : HOL.HD ([] : List Nat) = HOL.ARB := by simp only [HOL.HD]\n",
+   "hol4_check": "!c:'a. ?hd. (!h t. hd (h::t) = h) /\\ (hd [] = c)"
+  },
+  {
+   "id": "F2",
+   "declaration": "HOL.LAST",
+   "lean": "lean/CandleLean/Prelude/List.lean:28",
+   "hol4": "hol4/HOL4-src/src/list/src/listScript.sml:2124",
+   "class": "V-C",
+   "explanation": "HOL4's LAST_DEF has only the clause LAST (h::t) = if t = [] then h else LAST t. It is made by new_recursive_definition, i.e. new_specification. The saved theorems I found (LAST_CONS, LAST_EL, LAST_compute, ...) concern nonempty lists, so LAST [] is open. Lean adds LAST [] = ARB and so proves that equation, and also LAST [] = HD [], which HOL4 leaves open. Differing input: [].",
+   "repair": "def LAST {α : Type u} [Nonempty α] : List α → α\n  | [] => Classical.epsilon (fun f : List α → α => ∀ h t, f (h :: t) = if t = [] then h else f t) []\n  | h :: t => if t = [] then h else LAST t",
+   "confidence": 0.72,
+   "lean_check": "import CandleLean.Prelude.List\n\nexample : HOL.LAST ([] : List Nat) = HOL.ARB := by simp only [HOL.LAST]\n",
+   "hol4_check": "!c:'a. ?last. (!h t. last (h::t) = if t = [] then h else last t) /\\ (last [] = c)"
+  }
+ ]
+}

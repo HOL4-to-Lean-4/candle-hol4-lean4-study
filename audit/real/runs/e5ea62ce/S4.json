@@ -1,0 +1,10 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "In `miscScript.sml:74`, `Definition MAP3_def` only saves the three-empty and three-nonempty equations (`Defn.sml:617-618`), while `TotalDefn.delete_support` deletes the internal tupled constant so the primitive/curried definitions using `ARB` are purged on export. HOL4 therefore leaves mixed-length calls unconstrained and does not prove `MAP3 f [] [0] [] = MAP3 f [] [1] []`. In `Misc.lean:34`, both reduce to the same `ARB`, proving that equation in Lean (V-C)."
+  }
+ ]
+}

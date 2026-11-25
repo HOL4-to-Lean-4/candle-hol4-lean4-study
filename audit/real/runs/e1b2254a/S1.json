@@ -1,0 +1,42 @@
+{
+ "module": "CandleLean.Prelude.Basic",
+ "checked": 63,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "HOL.ARB",
+   "lean": "lean/CandleLean/Prelude/Basic.lean:9",
+   "hol4": "hol4/HOL4-src/src/bool/boolScript.sml:245",
+   "class": "V-C",
+   "explanation": "Lean proves `(HOL.ARB : Nat) = 0` by reflexivity because the standard `Inhabited Nat` instance supplies zero. HOL4 declares `ARB` as a primitive constant and leaves its value at type `num` open.",
+   "repair": "opaque ARB {α : Sort u} [h : Nonempty α] : α := Classical.choice h",
+   "confidence": 1.0,
+   "lean_check": "import CandleLean.Prelude.Basic\n\nexample : (HOL.ARB : Nat) = 0 := rfl",
+   "hol4_check": null
+  },
+  {
+   "id": "F2",
+   "declaration": "HOL.PERMUTES",
+   "lean": "lean/CandleLean/Prelude/Basic.lean:55",
+   "hol4": "hol4/HOL4-src/src/pred_set/src/pred_setScript.sml:6275",
+   "class": "V-P",
+   "explanation": "HOL4 defines uppercase `f PERMUTES s` as `BIJ f s s`. Lean also requires `f` to fix every point outside `s`. On the empty set, HOL4 therefore accepts every function, including successor on natural numbers. Lean rejects successor because it moves zero.",
+   "repair": "def PERMUTES {α : Type u} (f : α → α) (s : Set α) : Prop := BIJ f s s",
+   "confidence": 1.0,
+   "lean_check": "import CandleLean.Prelude.Basic\n\nexample : ¬ HOL.PERMUTES Nat.succ (∅ : HOL.Set Nat) := by\n  intro h\n  exact Nat.succ_ne_zero 0 (h.1 0 (fun hx => hx))",
+   "hol4_check": "SUC PERMUTES ({} : num set)"
+  },
+  {
+   "id": "F3",
+   "declaration": "HOL.LEAST",
+   "lean": "lean/CandleLean/Prelude/Basic.lean:120",
+   "hol4": "hol4/HOL4-src/src/num/theories/WhileScript.sml:135",
+   "class": "V-C",
+   "explanation": "For the constantly false predicate, Lean proves `LEAST (fun _ => False) = ε (fun _ : Nat => False)` because the predicate passed to epsilon is itself constantly false. HOL4 defines `LEAST` using `WHILE`. On this input the loop equation only equates the result at each natural number with the result at its successor. Any constant result satisfies that equation, independently of Hilbert choice on the empty predicate.",
+   "repair": "private axiom leastOnEmpty : Nat\n\ndef LEAST (P : Nat → Prop) : Nat :=\n  if ∃ n, P n then\n    Classical.epsilon (fun n => P n ∧ ∀ m, m < n → ¬ P m)\n  else leastOnEmpty",
+   "confidence": 0.99,
+   "lean_check": "import CandleLean.Prelude.Basic\n\nexample : HOL.LEAST (fun _ => False) = HOL.ε (fun _ : Nat => False) := by\n  have h : (fun n : Nat => False ∧ ∀ m : Nat, m < n → ¬ False) = (fun _ : Nat => False) :=\n    funext fun _ => propext ⟨And.left, False.elim⟩\n  exact congrArg (fun p : Nat → Prop => HOL.ε p) h",
+   "hol4_check": "(LEAST n. F) = WHILE (\\n:num. T) SUC 0"
+  }
+ ]
+}

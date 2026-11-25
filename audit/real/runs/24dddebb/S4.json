@@ -1,0 +1,52 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "In HOL4 typeSoundInvariantsScript.sml:20, tenv_abbrev_ok ignores the namespace identifier, so its inferred type is polymorphic in both key types ('m, 'n, mlstring list # t) namespace -> bool. Lean's tenv_abbrev_ok restricts its parameter to tenv_abbrev (Namespace modN typeN ...), monomorphizing both key types to mlstring and yielding a strict special case of the HOL4 definition."
+  },
+  {
+   "id": "F2",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "In HOL4 typeSoundInvariantsScript.sml:24, tenv_ctor_ok ignores both the lookup identifier and the third tuple component tn, so HOL4 infers ('m, 'n, mlstring list # t list # 'a) namespace -> bool. Lean's tenv_ctor_ok restricts its parameter to tenv_ctor, fixing both key types to mlstring and the third field to type_ident, making it a strict monomorphic special case."
+  },
+  {
+   "id": "F3",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "In HOL4 typeSoundInvariantsScript.sml:28, tenv_val_ok ignores the namespace identifier and only constrains the payload via check_freevars tvs [] t, inferring ('m, 'n, num # t) namespace -> bool. Lean's tenv_val_ok fixes the input type to tenv_val (Namespace modN varN ...), monomorphizing both key types to mlstring and excluding other HOL4 type instantiations."
+  },
+  {
+   "id": "F4",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "In HOL4 typeSoundInvariantsScript.sml:72, type_ctor only constrains the map key to match stamp, the value to be a triple matching (tvs, ts, ti), and LENGTH ts = n, leaving five type variables polymorphic: ('k |-> 'a # 'b list # 'c) -> 'i -> num # 'k -> 'a # 'b list # 'c -> bool. Lean monomorphizes all five types, restricting the definition to a special case."
+  },
+  {
+   "id": "F5",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "In HOL4 typeSoundInvariantsScript.sml:78, add_tenvE constrains the namespace value name to varN and payload to num # t via Bind_name and nsBind, leaving the module name type polymorphic: tenv_val_exp -> ('m, varN, num # t) namespace -> ('m, varN, num # t) namespace. Lean's tenv_val fixes the module key type to modN (mlstring), dropping polymorphism."
+  },
+  {
+   "id": "F6",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "In HOL4 typeSoundInvariantsScript.sml:173, ctMap_has_exns checks four stamp lookups against SOME ([], [], Texn_num), leaving both empty-list element types independently polymorphic: (stamp |-> 'a list # 'b list # num) -> bool. Lean restricts ctMap_has_exns to ctMap, fixing those element types to tvarN and Ty and making it a strict special case."
+  },
+  {
+   "id": "F7",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "In HOL4 typeSoundInvariantsScript.sml:191, ctMap_has_bools checks two stamp lookups against SOME ([], [], Tbool_num) and other bool_type_num stamps against NONE, so HOL4 infers (stamp |-> 'a list # 'b list # num) -> bool with both list element types polymorphic. Lean restricts the argument to ctMap, fixing both element types to tvarN and Ty."
+  },
+  {
+   "id": "F8",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "In HOL4 typeSoundInvariantsScript.sml:229, consistent_ctMap constrains map keys to stamp and projects map values via SND o SND for DISJOINT with type_ids, inferring 'ffi state -> 'c set -> (stamp |-> 'a # 'b # 'c) -> bool. Lean preserves only 'ffi as α while fixing type_ids to Set type_ident and ctMap to ctMap, monomorphizing three polymorphic type parameters."
+  }
+ ]
+}

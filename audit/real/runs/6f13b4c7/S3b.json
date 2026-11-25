@@ -1,0 +1,42 @@
+{
+ "module": "CandleLean.Prelude.List",
+ "checked": 44,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "HOL.SEG",
+   "lean": "lean/CandleLean/Prelude/List.lean:123",
+   "hol4": "hol4/HOL4-src/src/list/src/rich_listScript.sml:277",
+   "class": "V-C",
+   "explanation": "HOL4 introduces SEG by new_specification with three clauses: SEG 0 k l, SEG (SUC m) 0 (x::l) and SEG (SUC m) (SUC k) (x::l). There is no clause for SEG (SUC m) k [], and the SEG theorems I found in rich_list either assume bounds such as n + m <= LENGTH l or follow from the three clauses. The value is therefore open. The Lean clause `| _ + 1, _, [] => []` proves SEG (m+1) k [] = [], for example SEG 1 0 [] = [].",
+   "repair": "opaque SEG_NIL {α : Type u} : Nat → Nat → List α\ndef SEG : Nat → Nat → List α → List α\n  | 0, _, _ => []\n  | m + 1, k, [] => SEG_NIL m k\n  | m + 1, 0, x :: l => x :: SEG m 0 l\n  | m + 1, k + 1, _ :: l => SEG (m + 1) k l",
+   "confidence": 0.93,
+   "lean_check": "import CandleLean.Prelude.List\n\nexample : HOL.SEG 1 0 ([] : List Nat) = [] := by\n  first | rfl | simp [HOL.SEG]\n",
+   "hol4_check": "?f. (!k l. f 0 k l = []) /\\ (!m x l. f (SUC m) 0 (x::l) = x :: f m 0 l) /\\ (!m k x l. f (SUC m) (SUC k) (x::l) = f (SUC m) k l) /\\ (f (SUC 0) 0 ([]:num list) = [0n])"
+  },
+  {
+   "id": "F2",
+   "declaration": "HOL.HD",
+   "lean": "lean/CandleLean/Prelude/List.lean:34",
+   "hol4": "hol4/HOL4-src/src/list/src/listScript.sml:138",
+   "class": "V-C",
+   "explanation": "HOL4 saves only HD (h::t) = h. The Definition goes through Prim_rec.new_recursive_definition (new_specification), which says nothing about HD []. Lean defines HD [] as ARB, and ARB unfolds to `default`, so Lean proves HD [] = ARB, HD ([] : List Nat) = 0 and HD [] = LAST []. EL inherits this for out-of-range indices, e.g. EL n [] = 0 at Nat.",
+   "repair": "opaque HD_NIL {α : Type u} [Inhabited α] : α\ndef HD [Inhabited α] : List α → α\n  | [] => HD_NIL\n  | h :: _ => h",
+   "confidence": 0.75,
+   "lean_check": "import CandleLean.Prelude.List\n\nexample : HOL.HD ([] : List Nat) = 0 := by\n  first | rfl | simp [HOL.HD, HOL.ARB]\n",
+   "hol4_check": "?f. (!h t. f (h::t) = (h:num)) /\\ (f [] = 1n)"
+  },
+  {
+   "id": "F3",
+   "declaration": "HOL.LAST",
+   "lean": "lean/CandleLean/Prelude/List.lean:77",
+   "hol4": "hol4/HOL4-src/src/list/src/listScript.sml:2124",
+   "class": "V-C",
+   "explanation": "HOL4 saves only LAST (h::t) = if t = [] then h else LAST t, a primitive-recursive specification with no [] clause (unlike FRONT_DEF, which has one). LAST [] is therefore open. Lean defines LAST [] as ARB, which unfolds to `default`, so Lean proves LAST [] = ARB, LAST ([] : List Nat) = 0 and LAST [] = HD [].",
+   "repair": "opaque LAST_NIL {α : Type u} [Inhabited α] : α\ndef LAST [Inhabited α] : List α → α\n  | [] => LAST_NIL\n  | h :: t => if t = [] then h else LAST t",
+   "confidence": 0.75,
+   "lean_check": "import CandleLean.Prelude.List\n\nexample : HOL.LAST ([] : List Nat) = 0 := by\n  first | rfl | simp [HOL.LAST, HOL.ARB]\n",
+   "hol4_check": "?f. (!h t. f (h::t) = if t = [] then (h:num) else f t) /\\ (f [] = 1n)"
+  }
+ ]
+}

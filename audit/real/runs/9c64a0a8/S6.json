@@ -1,0 +1,10 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "HOL4 FAPPLY f x = OUTL (fmap_REP f x). OUTL comes from new_recursive_definition, hence new_specification, with only OUTL (INL x) = x, so OUTL (INR one) is open. Saved theorems only equate off-domain values with FAPPLY FEMPTY x (NOT_FDOM_FAPPLY_FEMPTY); none fixes it. HOL4 ARB is an undefined constant, and HD [] is unspecified. Lean's none branch makes FAPPLY FEMPTY x = ARB = HD [] provable by rfl, over mapped constants, which HOL4 leaves open."
+  }
+ ]
+}

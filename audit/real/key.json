@@ -1,0 +1,1082 @@
+[
+ {
+  "unit": "4837806c",
+  "kind": "error",
+  "translation": "ts_sonnet",
+  "file": "CmlTS/Weakening.lean",
+  "module": "CmlTS.Weakening",
+  "errors": [
+   {
+    "declaration": "weakS",
+    "class": "V-P",
+    "kind": "type specialised"
+   },
+   {
+    "declaration": "weakCT",
+    "class": "V-P",
+    "kind": "type specialised"
+   },
+   {
+    "declaration": "type_tenv_ctor_weakening",
+    "class": "V-P",
+    "kind": "type specialised (statement)"
+   },
+   {
+    "declaration": "type_tenv_val_weakening_lemma",
+    "class": "V-P",
+    "kind": "type specialised (statement)"
+   }
+  ]
+ },
+ {
+  "unit": "6882794d",
+  "kind": "error",
+  "translation": "ts_sonnet",
+  "file": "CmlTS/TypeSystem.lean",
+  "module": "CmlTS.TypeSystem",
+  "errors": [
+   {
+    "declaration": "build_ctor_tenv",
+    "class": "V-P",
+    "kind": "type specialised"
+   }
+  ]
+ },
+ {
+  "unit": "a98c6e7f",
+  "kind": "error",
+  "translation": "ts_opus_nolessons",
+  "file": "CmlTS/Prelude/Fmap.lean",
+  "module": "CmlTS.Prelude.Fmap",
+  "errors": [
+   {
+    "declaration": "FAPPLY",
+    "class": "V-C",
+    "kind": "open value fixed"
+   }
+  ]
+ },
+ {
+  "unit": "add49820",
+  "kind": "control",
+  "translation": "candle_opus",
+  "file": "CandleLean/HolSemanticsExtra.lean",
+  "module": "CandleLean.HolSemanticsExtra",
+  "errors": []
+ },
+ {
+  "unit": "ce3f666c",
+  "kind": "control",
+  "translation": "ts_sonnet",
+  "file": "CmlTS/Ast.lean",
+  "module": "CmlTS.Ast",
+  "errors": []
+ },
+ {
+  "unit": "7a70c894",
+  "kind": "error",
+  "translation": "candle_opus",
+  "file": "CandleLean/HolSemantics.lean",
+  "module": "CandleLean.HolSemantics",
+  "errors": [
+   {
+    "declaration": "termsem0",
+    "class": "V-C",
+    "kind": "open value fixed"
+   },
+   {
+    "declaration": "interprets0",
+    "class": "V-P",
+    "kind": "type specialised"
+   }
+  ]
+ },
+ {
+  "unit": "09fa900e",
+  "kind": "error",
+  "translation": "candle_opus_nolessons",
+  "file": "CandleLean/Prelude/List.lean",
+  "module": "CandleLean.Prelude.List",
+  "errors": [
+   {
+    "declaration": "HD",
+    "class": "V-C",
+    "kind": "open value fixed"
+   },
+   {
+    "declaration": "LAST",
+    "class": "V-C",
+    "kind": "open value fixed"
+   }
+  ]
+ },
+ {
+  "unit": "6d394693",
+  "kind": "error",
+  "translation": "ts_opus_nolessons",
+  "file": "CmlTS/Prelude/String.lean",
+  "module": "CmlTS.Prelude.String",
+  "errors": [
+   {
+    "declaration": "CHR",
+    "class": "V-C",
+    "kind": "open value fixed"
+   },
+   {
+    "declaration": "int_div",
+    "class": "V-C",
+    "kind": "open value fixed"
+   },
+   {
+    "declaration": "int_mod",
+    "class": "V-C",
+    "kind": "open value fixed"
+   }
+  ]
+ },
+ {
+  "unit": "24717e82",
+  "kind": "error",
+  "translation": "candle_fable",
+  "file": "CandleLean/HolSemantics.lean",
+  "module": "CandleLean.HolSemantics",
+  "errors": [
+   {
+    "declaration": "interprets0",
+    "class": "V-P",
+    "kind": "type specialised"
+   }
+  ]
+ },
+ {
+  "unit": "f21925dc",
+  "kind": "control",
+  "translation": "candle_opus",
+  "file": "CandleLean/Prelude/Words.lean",
+  "module": "CandleLean.Prelude.Words",
+  "errors": []
+ },
+ {
+  "unit": "5186e4bc",
+  "kind": "error",
+  "translation": "ts_sonnet",
+  "file": "CmlTS/Location.lean",
+  "module": "CmlTS.Location",
+  "errors": [
+   {
+    "declaration": "locnrow",
+    "class": "V-C",
+    "kind": "open value fixed"
+   },
+   {
+    "declaration": "locncol",
+    "class": "V-C",
+    "kind": "open value fixed"
+   },
+   {
+    "declaration": "locn_rowupdate",
+    "class": "V-C",
+    "kind": "open value fixed"
+   },
+   {
+    "declaration": "locn_colupdate",
+    "class": "V-C",
+    "kind": "open value fixed"
+   }
+  ]
+ },
+ {
+  "unit": "162dcb90",
+  "kind": "error",
+  "translation": "ts_sonnet",
+  "file": "CmlTS/Prelude/Num.lean",
+  "module": "CmlTS.Prelude.Num",
+  "errors": [
+   {
+    "declaration": "CHR",
+    "class": "V-C",
+    "kind": "open value fixed"
+   },
+   {
+    "declaration": "int_div",
+    "class": "V-C",
+    "kind": "open value fixed"
+   },
+   {
+    "declaration": "int_mod",
+    "class": "V-C",
+    "kind": "open value fixed"
+   }
+  ]
+ },
+ {
+  "unit": "28fb71c3",
+  "kind": "error",
+  "translation": "study1",
+  "file": "LeanTypeSound/SemanticPrimitives.lean",
+  "module": "LeanTypeSound.SemanticPrimitives",
+  "errors": [
+   {
+    "declaration": "do_app",
+    "class": "V-P",
+    "kind": "study-1: Euclidean instead of floored division"
+   }
+  ]
+ },
+ {
+  "unit": "9069ab4b",
+  "kind": "control",
+  "translation": "candle_fable",
+  "file": "CandleLean/Mlstring.lean",
+  "module": "CandleLean.Mlstring",
+  "errors": []
+ },
+ {
+  "unit": "a892cd34",
+  "kind": "control",
+  "translation": "candle_sonnet",
+  "file": "CandleLean/HolSemantics.lean",
+  "module": "CandleLean.HolSemantics",
+  "errors": []
+ },
+ {
+  "unit": "ae8d74fe",
+  "kind": "error",
+  "translation": "candle_opus",
+  "file": "CandleLean/HolSyntax.lean",
+  "module": "CandleLean.HolSyntax",
+  "errors": [
+   {
+    "declaration": "dest_var",
+    "class": "V-C",
+    "kind": "open value fixed"
+   }
+  ]
+ },
+ {
+  "unit": "87e79005",
+  "kind": "error",
+  "translation": "ts_opus",
+  "file": "CmlTS/Prelude/FiniteMap.lean",
+  "module": "CmlTS.Prelude.FiniteMap",
+  "errors": [
+   {
+    "declaration": "FAPPLY",
+    "class": "V-C",
+    "kind": "open value fixed"
+   }
+  ]
+ },
+ {
+  "unit": "7244bf49",
+  "kind": "error",
+  "translation": "study1",
+  "file": "LeanTypeSound/HOL4Prelude.lean",
+  "module": "LeanTypeSound.HOL4Prelude",
+  "errors": [
+   {
+    "declaration": "CARD",
+    "class": "V-P",
+    "kind": "study-1: list may have duplicates"
+   }
+  ]
+ },
+ {
+  "unit": "702d971e",
+  "kind": "error",
+  "translation": "ts_sonnet",
+  "file": "CmlTS/SemanticPrimitivesProps.lean",
+  "module": "CmlTS.SemanticPrimitivesProps",
+  "errors": [
+   {
+    "declaration": "dest_Refv",
+    "class": "V-C",
+    "kind": "open value fixed"
+   },
+   {
+    "declaration": "FV_dec",
+    "class": "V-C",
+    "kind": "open value fixed"
+   }
+  ]
+ },
+ {
+  "unit": "402da53a",
+  "kind": "error",
+  "translation": "candle_opus",
+  "file": "CandleLean/HolSyntaxLib.lean",
+  "module": "CandleLean.HolSyntaxLib",
+  "errors": [
+   {
+    "declaration": "RESULT",
+    "class": "V-C",
+    "kind": "open value fixed"
+   },
+   {
+    "declaration": "CLASH",
+    "class": "V-C",
+    "kind": "open value fixed"
+   }
+  ]
+ },
+ {
+  "unit": "fdf2dcbe",
+  "kind": "error",
+  "translation": "ts_sonnet",
+  "file": "CmlTS/Prelude/List.lean",
+  "module": "CmlTS.Prelude.List",
+  "errors": [
+   {
+    "declaration": "HD",
+    "class": "V-C",
+    "kind": "open value fixed"
+   }
+  ]
+ },
+ {
+  "unit": "340d433a",
+  "kind": "error",
+  "translation": "ts_opus",
+  "file": "CmlTS/Prelude/Words.lean",
+  "module": "CmlTS.Prelude.Words",
+  "errors": [
+   {
+    "declaration": "int_div",
+    "class": "V-C",
+    "kind": "open value fixed"
+   },
+   {
+    "declaration": "int_mod",
+    "class": "V-C",
+    "kind": "open value fixed"
+   }
+  ]
+ },
+ {
+  "unit": "69398c74",
+  "kind": "control",
+  "translation": "ts_opus",
+  "file": "CmlTS/Ast.lean",
+  "module": "CmlTS.Ast",
+  "errors": []
+ },
+ {
+  "unit": "e5ea62ce",
+  "kind": "error",
+  "translation": "ts_sonnet",
+  "file": "CmlTS/Misc.lean",
+  "module": "CmlTS.Misc",
+  "errors": [
+   {
+    "declaration": "MAP3",
+    "class": "V-C",
+    "kind": "open value fixed"
+   }
+  ]
+ },
+ {
+  "unit": "24dddebb",
+  "kind": "error",
+  "translation": "ts_sonnet",
+  "file": "CmlTS/TypeSoundInvariants.lean",
+  "module": "CmlTS.TypeSoundInvariants",
+  "errors": [
+   {
+    "declaration": "type_ctor",
+    "class": "V-P",
+    "kind": "type specialised"
+   },
+   {
+    "declaration": "tenv_val_ok",
+    "class": "V-P",
+    "kind": "type specialised"
+   },
+   {
+    "declaration": "tenv_ctor_ok",
+    "class": "V-P",
+    "kind": "type specialised"
+   },
+   {
+    "declaration": "tenv_abbrev_ok",
+    "class": "V-P",
+    "kind": "type specialised"
+   },
+   {
+    "declaration": "ctMap_has_exns",
+    "class": "V-P",
+    "kind": "type specialised"
+   },
+   {
+    "declaration": "ctMap_has_bools",
+    "class": "V-P",
+    "kind": "type specialised"
+   },
+   {
+    "declaration": "consistent_ctMap",
+    "class": "V-P",
+    "kind": "type specialised"
+   },
+   {
+    "declaration": "add_tenvE",
+    "class": "V-P",
+    "kind": "type specialised"
+   }
+  ]
+ },
+ {
+  "unit": "9ed4a636",
+  "kind": "error",
+  "translation": "candle_opus_nolessons",
+  "file": "CandleLean/HolSyntax.lean",
+  "module": "CandleLean.HolSyntax",
+  "errors": [
+   {
+    "declaration": "dest_var",
+    "class": "V-C",
+    "kind": "open value fixed"
+   }
+  ]
+ },
+ {
+  "unit": "4168aeed",
+  "kind": "error",
+  "translation": "ts_opus",
+  "file": "CmlTS/Prelude/ListLib.lean",
+  "module": "CmlTS.Prelude.ListLib",
+  "errors": [
+   {
+    "declaration": "HD",
+    "class": "V-C",
+    "kind": "open value fixed"
+   }
+  ]
+ },
+ {
+  "unit": "48828ca4",
+  "kind": "error",
+  "translation": "ts_opus",
+  "file": "CmlTS/TypeSoundInvariants.lean",
+  "module": "CmlTS.TypeSoundInvariants",
+  "errors": [
+   {
+    "declaration": "ctMap_has_exns",
+    "class": "V-P",
+    "kind": "type specialised"
+   },
+   {
+    "declaration": "ctMap_has_bools",
+    "class": "V-P",
+    "kind": "type specialised"
+   }
+  ]
+ },
+ {
+  "unit": "e2fe01f0",
+  "kind": "error",
+  "translation": "ts_opus",
+  "file": "CmlTS/Location.lean",
+  "module": "CmlTS.Location",
+  "errors": [
+   {
+    "declaration": "locnrow",
+    "class": "V-C",
+    "kind": "open value fixed"
+   },
+   {
+    "declaration": "locncol",
+    "class": "V-C",
+    "kind": "open value fixed"
+   },
+   {
+    "declaration": "locn_rowupdate",
+    "class": "V-C",
+    "kind": "open value fixed"
+   },
+   {
+    "declaration": "locn_colupdate",
+    "class": "V-C",
+    "kind": "open value fixed"
+   }
+  ]
+ },
+ {
+  "unit": "8107facf",
+  "kind": "error",
+  "translation": "ts_sonnet",
+  "file": "CmlTS/SemanticPrimitives.lean",
+  "module": "CmlTS.SemanticPrimitives",
+  "errors": [
+   {
+    "declaration": "do_if",
+    "class": "V-P",
+    "kind": "type specialised"
+   },
+   {
+    "declaration": "build_constrs",
+    "class": "V-P",
+    "kind": "type specialised"
+   }
+  ]
+ },
+ {
+  "unit": "224e706a",
+  "kind": "error",
+  "translation": "candle_sonnet",
+  "file": "CandleLean/Prelude/FMap.lean",
+  "module": "CandleLean.Prelude.FMap",
+  "errors": [
+   {
+    "declaration": "FUN_FMAP",
+    "class": "V-C",
+    "kind": "open value fixed"
+   }
+  ]
+ },
+ {
+  "unit": "6f13b4c7",
+  "kind": "error",
+  "translation": "candle_sonnet",
+  "file": "CandleLean/Prelude/List.lean",
+  "module": "CandleLean.Prelude.List",
+  "errors": [
+   {
+    "declaration": "HD",
+    "class": "V-C",
+    "kind": "open value fixed"
+   },
+   {
+    "declaration": "LAST",
+    "class": "V-C",
+    "kind": "open value fixed"
+   },
+   {
+    "declaration": "SEG",
+    "class": "V-C",
+    "kind": "open value fixed"
+   }
+  ]
+ },
+ {
+  "unit": "57005691",
+  "kind": "error",
+  "translation": "candle_opus",
+  "file": "CandleLean/Prelude/String.lean",
+  "module": "CandleLean.Prelude.String",
+  "errors": [
+   {
+    "declaration": "CHR",
+    "class": "V-C",
+    "kind": "open value fixed"
+   }
+  ]
+ },
+ {
+  "unit": "53ea580b",
+  "kind": "error",
+  "translation": "ts_opus",
+  "file": "CmlTS/Prelude/Core.lean",
+  "module": "CmlTS.Prelude.Core",
+  "errors": [
+   {
+    "declaration": "THE",
+    "class": "V-C",
+    "kind": "open value fixed"
+   }
+  ]
+ },
+ {
+  "unit": "42bbda13",
+  "kind": "error",
+  "translation": "candle_sonnet",
+  "file": "CandleLean/HolSyntaxLib.lean",
+  "module": "CandleLean.HolSyntaxLib",
+  "errors": [
+   {
+    "declaration": "RESULT",
+    "class": "V-C",
+    "kind": "open value fixed"
+   },
+   {
+    "declaration": "CLASH",
+    "class": "V-C",
+    "kind": "open value fixed"
+   }
+  ]
+ },
+ {
+  "unit": "7ddc7cb6",
+  "kind": "error",
+  "translation": "ts_sonnet",
+  "file": "CmlTS/TypeSound.lean",
+  "module": "CmlTS.TypeSound",
+  "errors": [
+   {
+    "declaration": "store_type_extension",
+    "class": "V-P",
+    "kind": "type specialised"
+   },
+   {
+    "declaration": "store_type_extension_weakS",
+    "class": "V-P",
+    "kind": "type specialised (statement)"
+   },
+   {
+    "declaration": "store_type_extension_refl",
+    "class": "V-P",
+    "kind": "type specialised (statement)"
+   },
+   {
+    "declaration": "store_type_extension_trans",
+    "class": "V-P",
+    "kind": "type specialised (statement)"
+   }
+  ]
+ },
+ {
+  "unit": "1b5ddd14",
+  "kind": "control",
+  "translation": "candle_opus_nolessons",
+  "file": "CandleLean/Prelude/Set.lean",
+  "module": "CandleLean.Prelude.Set",
+  "errors": []
+ },
+ {
+  "unit": "f6841e8b",
+  "kind": "error",
+  "translation": "candle_sonnet",
+  "file": "CandleLean/Prelude/String.lean",
+  "module": "CandleLean.Prelude.String",
+  "errors": [
+   {
+    "declaration": "CHR",
+    "class": "V-C",
+    "kind": "open value fixed"
+   }
+  ]
+ },
+ {
+  "unit": "7585a965",
+  "kind": "error",
+  "translation": "ts_opus_nolessons",
+  "file": "CmlTS/SemanticPrimitivesProps.lean",
+  "module": "CmlTS.SemanticPrimitivesProps",
+  "errors": [
+   {
+    "declaration": "dest_Refv",
+    "class": "V-C",
+    "kind": "open value fixed"
+   },
+   {
+    "declaration": "FV_dec",
+    "class": "V-C",
+    "kind": "open value fixed"
+   }
+  ]
+ },
+ {
+  "unit": "be73a930",
+  "kind": "error",
+  "translation": "ts_sonnet",
+  "file": "CmlTS/TypeSysProps.lean",
+  "module": "CmlTS.TypeSysProps",
+  "errors": [
+   {
+    "declaration": "type_def_to_ctMap",
+    "class": "V-C",
+    "kind": "open value fixed"
+   },
+   {
+    "declaration": "type_def_to_ctMap",
+    "class": "V-P",
+    "kind": "type specialised"
+   },
+   {
+    "declaration": "tenv_abbrev_ok_lookup",
+    "class": "V-P",
+    "kind": "type specialised (statement)"
+   },
+   {
+    "declaration": "tenv_ctor_ok_merge",
+    "class": "V-P",
+    "kind": "type specialised (statement)"
+   },
+   {
+    "declaration": "tenv_ctor_ok_lookup",
+    "class": "V-P",
+    "kind": "type specialised (statement)"
+   },
+   {
+    "declaration": "mem_type_def_to_ctMap",
+    "class": "V-P",
+    "kind": "type specialised (statement)"
+   },
+   {
+    "declaration": "type_def_to_ctMap_mem",
+    "class": "V-P",
+    "kind": "type specialised (statement)"
+   },
+   {
+    "declaration": "nsLookup_add_tenvE1",
+    "class": "V-P",
+    "kind": "type specialised (statement)"
+   },
+   {
+    "declaration": "nsLookup_add_tenvE2",
+    "class": "V-P",
+    "kind": "type specialised (statement)"
+   },
+   {
+    "declaration": "nsLookup_add_tenvE3",
+    "class": "V-P",
+    "kind": "type specialised (statement)"
+   },
+   {
+    "declaration": "add_tenvE_bvl",
+    "class": "V-P",
+    "kind": "type specialised (statement)"
+   },
+   {
+    "declaration": "check_ctor_tenv_ok",
+    "class": "V-P",
+    "kind": "type specialised (statement)"
+   }
+  ]
+ },
+ {
+  "unit": "bbb6626e",
+  "kind": "error",
+  "translation": "ts_opus",
+  "file": "CmlTS/TypeSystem.lean",
+  "module": "CmlTS.TypeSystem",
+  "errors": [
+   {
+    "declaration": "build_ctor_tenv",
+    "class": "V-P",
+    "kind": "type specialised"
+   }
+  ]
+ },
+ {
+  "unit": "0183b716",
+  "kind": "error",
+  "translation": "candle_opus_nolessons",
+  "file": "CandleLean/HolSyntaxLib.lean",
+  "module": "CandleLean.HolSyntaxLib",
+  "errors": [
+   {
+    "declaration": "RESULT",
+    "class": "V-C",
+    "kind": "open value fixed"
+   },
+   {
+    "declaration": "CLASH",
+    "class": "V-C",
+    "kind": "open value fixed"
+   }
+  ]
+ },
+ {
+  "unit": "0398b062",
+  "kind": "error",
+  "translation": "candle_opus",
+  "file": "CandleLean/Prelude/List.lean",
+  "module": "CandleLean.Prelude.List",
+  "errors": [
+   {
+    "declaration": "HD",
+    "class": "V-C",
+    "kind": "open value fixed"
+   },
+   {
+    "declaration": "LAST",
+    "class": "V-C",
+    "kind": "open value fixed"
+   }
+  ]
+ },
+ {
+  "unit": "534ce363",
+  "kind": "error",
+  "translation": "ts_opus",
+  "file": "CmlTS/Prelude/StringLib.lean",
+  "module": "CmlTS.Prelude.StringLib",
+  "errors": [
+   {
+    "declaration": "CHR",
+    "class": "V-C",
+    "kind": "open value fixed"
+   }
+  ]
+ },
+ {
+  "unit": "336c16f7",
+  "kind": "error",
+  "translation": "ts_opus_nolessons",
+  "file": "CmlTS/TypeSysProps.lean",
+  "module": "CmlTS.TypeSysProps",
+  "errors": [
+   {
+    "declaration": "type_def_to_ctMap",
+    "class": "V-C",
+    "kind": "open value fixed"
+   }
+  ]
+ },
+ {
+  "unit": "7ae93bc8",
+  "kind": "control",
+  "translation": "candle_fable",
+  "file": "CandleLean/HolSyntaxExtra.lean",
+  "module": "CandleLean.HolSyntaxExtra",
+  "errors": []
+ },
+ {
+  "unit": "52217b6d",
+  "kind": "error",
+  "translation": "ts_opus_nolessons",
+  "file": "CmlTS/Location.lean",
+  "module": "CmlTS.Location",
+  "errors": [
+   {
+    "declaration": "locnrow",
+    "class": "V-C",
+    "kind": "open value fixed"
+   },
+   {
+    "declaration": "locncol",
+    "class": "V-C",
+    "kind": "open value fixed"
+   },
+   {
+    "declaration": "locn_rowupdate",
+    "class": "V-C",
+    "kind": "open value fixed"
+   },
+   {
+    "declaration": "locn_colupdate",
+    "class": "V-C",
+    "kind": "open value fixed"
+   }
+  ]
+ },
+ {
+  "unit": "7368247d",
+  "kind": "error",
+  "translation": "ts_opus",
+  "file": "CmlTS/TypeSysProps.lean",
+  "module": "CmlTS.TypeSysProps",
+  "errors": [
+   {
+    "declaration": "type_def_to_ctMap",
+    "class": "V-C",
+    "kind": "open value fixed"
+   },
+   {
+    "declaration": "check_ctor_tenv_ok",
+    "class": "V-P",
+    "kind": "type specialised"
+   }
+  ]
+ },
+ {
+  "unit": "430741ce",
+  "kind": "control",
+  "translation": "candle_opus_nolessons",
+  "file": "CandleLean/Prelude/Basic.lean",
+  "module": "CandleLean.Prelude.Basic",
+  "errors": []
+ },
+ {
+  "unit": "2af6f273",
+  "kind": "control",
+  "translation": "ts_sonnet",
+  "file": "CmlTS/Namespace.lean",
+  "module": "CmlTS.Namespace",
+  "errors": []
+ },
+ {
+  "unit": "e1b2254a",
+  "kind": "error",
+  "translation": "candle_sonnet",
+  "file": "CandleLean/Prelude/Basic.lean",
+  "module": "CandleLean.Prelude.Basic",
+  "errors": [
+   {
+    "declaration": "ARB",
+    "class": "V-C",
+    "kind": "open value fixed"
+   }
+  ]
+ },
+ {
+  "unit": "262ee2cf",
+  "kind": "error",
+  "translation": "ts_opus",
+  "file": "CmlTS/SemanticPrimitivesProps.lean",
+  "module": "CmlTS.SemanticPrimitivesProps",
+  "errors": [
+   {
+    "declaration": "dest_Refv",
+    "class": "V-C",
+    "kind": "open value fixed"
+   },
+   {
+    "declaration": "FV_dec",
+    "class": "V-C",
+    "kind": "open value fixed"
+   }
+  ]
+ },
+ {
+  "unit": "bc551407",
+  "kind": "error",
+  "translation": "ts_opus",
+  "file": "CmlTS/Misc.lean",
+  "module": "CmlTS.Misc",
+  "errors": [
+   {
+    "declaration": "MAP3",
+    "class": "V-C",
+    "kind": "open value fixed"
+   }
+  ]
+ },
+ {
+  "unit": "a3210f26",
+  "kind": "error",
+  "translation": "ts_sonnet",
+  "file": "CmlTS/Prelude/FMap.lean",
+  "module": "CmlTS.Prelude.FMap",
+  "errors": [
+   {
+    "declaration": "FAPPLY",
+    "class": "V-C",
+    "kind": "open value fixed"
+   }
+  ]
+ },
+ {
+  "unit": "4f6187a2",
+  "kind": "error",
+  "translation": "ts_sonnet",
+  "file": "CmlTS/NamespaceProps.lean",
+  "module": "CmlTS.NamespaceProps",
+  "errors": [
+   {
+    "declaration": "nsSub_compute",
+    "class": "V-P",
+    "kind": "type specialised"
+   }
+  ]
+ },
+ {
+  "unit": "b4c7a72a",
+  "kind": "error",
+  "translation": "candle_sonnet",
+  "file": "CandleLean/Mllist.lean",
+  "module": "CandleLean.Mllist",
+  "errors": [
+   {
+    "declaration": "collate",
+    "class": "V-P",
+    "kind": "type specialised"
+   }
+  ]
+ },
+ {
+  "unit": "38663a2a",
+  "kind": "control",
+  "translation": "ts_opus_nolessons",
+  "file": "CmlTS/Ast.lean",
+  "module": "CmlTS.Ast",
+  "errors": []
+ },
+ {
+  "unit": "83e55f56",
+  "kind": "error",
+  "translation": "ts_sonnet",
+  "file": "CmlTS/Evaluate.lean",
+  "module": "CmlTS.Evaluate",
+  "errors": [
+   {
+    "declaration": "fix_clock",
+    "class": "V-P",
+    "kind": "type specialised"
+   },
+   {
+    "declaration": "do_eval_res",
+    "class": "V-P",
+    "kind": "type specialised"
+   }
+  ]
+ },
+ {
+  "unit": "9c64a0a8",
+  "kind": "error",
+  "translation": "candle_opus",
+  "file": "CandleLean/Prelude/FiniteMap.lean",
+  "module": "CandleLean.Prelude.FiniteMap",
+  "errors": [
+   {
+    "declaration": "FAPPLY",
+    "class": "V-C",
+    "kind": "open value fixed"
+   }
+  ]
+ },
+ {
+  "unit": "6ca0a5f0",
+  "kind": "control",
+  "translation": "ts_opus_nolessons",
+  "file": "CmlTS/Weakening.lean",
+  "module": "CmlTS.Weakening",
+  "errors": []
+ },
+ {
+  "unit": "d1f20d42",
+  "kind": "error",
+  "translation": "ts_opus_nolessons",
+  "file": "CmlTS/Prelude/List.lean",
+  "module": "CmlTS.Prelude.List",
+  "errors": [
+   {
+    "declaration": "HD",
+    "class": "V-C",
+    "kind": "open value fixed"
+   },
+   {
+    "declaration": "THE",
+    "class": "V-C",
+    "kind": "open value fixed"
+   }
+  ]
+ },
+ {
+  "unit": "9724c94d",
+  "kind": "error",
+  "translation": "ts_sonnet",
+  "file": "CmlTS/Prelude/Basic.lean",
+  "module": "CmlTS.Prelude.Basic",
+  "errors": [
+   {
+    "declaration": "CARD",
+    "class": "V-C",
+    "kind": "open value fixed"
+   }
+  ]
+ },
+ {
+  "unit": "fe8300cf",
+  "kind": "error",
+  "translation": "ts_opus_nolessons",
+  "file": "CmlTS/Misc.lean",
+  "module": "CmlTS.Misc",
+  "errors": [
+   {
+    "declaration": "MAP3",
+    "class": "V-C",
+    "kind": "open value fixed"
+   }
+  ]
+ }
+]

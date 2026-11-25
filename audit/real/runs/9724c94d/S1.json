@@ -1,0 +1,18 @@
+{
+ "module": "CmlTS.Prelude.Basic",
+ "checked": 29,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "CARD",
+   "lean": "lean/CmlTS/Prelude/Basic.lean:46",
+   "hol4": "hol4/HOL4-src/src/pred_set/src/pred_setScript.sml:3428",
+   "class": "V-C",
+   "explanation": "Lean’s `else 0` proves that every infinite set has cardinality zero, including `UNIV : Set Nat`. HOL4’s `CARD_DEF` specifies the value on `EMPTY` and the result of inserting an element into a finite set. Assigning cardinality one to the natural-number universe satisfies those same equations.",
+   "repair": "opaque cardOnInfinite {α : Type u} (s : Set α) : Nat\n\ndef CARD {α : Type u} (s : Set α) : Nat :=\n  if FINITE s then\n    Classical.epsilon (fun n : Nat => ∃ l : List α, l.Nodup ∧ (∀ x, x ∈ l ↔ s x) ∧ l.length = n)\n  else cardOnInfinite s",
+   "confidence": 1,
+   "lean_check": "import CmlTS.Prelude.Basic\n\nexample {α : Type} (s : Set α) (h : ¬ FINITE s) : CARD s = 0 := by\n  classical\n  simp [CARD, h]",
+   "hol4_check": "?c : num set -> num. c UNIV = 1 /\\ c EMPTY = 0 /\\ (!s. FINITE s ==> !x. c (x INSERT s) = (if x IN s then c s else SUC (c s)))"
+  }
+ ]
+}

@@ -1,0 +1,30 @@
+{
+ "module": "CandleLean.HolSyntaxLib",
+ "checked": 29,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "Candle.HolSyntaxLib.RESULT",
+   "lean": "lean/CandleLean/HolSyntaxLib.lean:33",
+   "hol4": "hol4/package/candle/syntax-lib/holSyntaxLibScript.sml:88",
+   "class": "V-C",
+   "explanation": "HOL4's RESULT_def has the single clause RESULT (Result t) = t. No saved theorem fixes RESULT on Clash. The Lean definition adds the clause RESULT (Clash t) = t, so Lean proves this specific equation by rfl, while HOL4 leaves it open. It also propagates to INST and INST_CORE, which apply RESULT to results that could be Clash.",
+   "repair": "opaque RESULT_spec {α : Type u} : {f : result α → α // ∀ t, f (.Result t) = t} :=\n  ⟨fun r => match r with | .Result t => t | .Clash t => t, fun _ => rfl⟩\n\ndef RESULT {α : Type u} (r : result α) : α := RESULT_spec.1 r\n\ntheorem RESULT_def {α : Type u} (t : α) : RESULT (.Result t) = t := RESULT_spec.2 t",
+   "confidence": 0.9,
+   "lean_check": "import CandleLean.HolSyntaxLib\n\ntheorem RESULT_Clash {α : Type} (t : α) : Candle.HolSyntaxLib.RESULT (Candle.HolSyntaxLib.result.Clash t) = t := rfl\n",
+   "hol4_check": "?f : bool result -> bool. (!t. f (Result t) = t) /\\ f (Clash T) <> T"
+  },
+  {
+   "id": "F2",
+   "declaration": "Candle.HolSyntaxLib.CLASH",
+   "lean": "lean/CandleLean/HolSyntaxLib.lean:37",
+   "hol4": "hol4/package/candle/syntax-lib/holSyntaxLibScript.sml:92",
+   "class": "V-C",
+   "explanation": "HOL4's CLASH_def has the single clause CLASH (Clash t) = t. No saved theorem fixes CLASH on Result. The Lean definition adds the clause CLASH (Result t) = t, so Lean proves this specific equation by rfl, while HOL4 leaves it open.",
+   "repair": "opaque CLASH_spec {α : Type u} : {f : result α → α // ∀ t, f (.Clash t) = t} :=\n  ⟨fun r => match r with | .Clash t => t | .Result t => t, fun _ => rfl⟩\n\ndef CLASH {α : Type u} (r : result α) : α := CLASH_spec.1 r\n\ntheorem CLASH_def {α : Type u} (t : α) : CLASH (.Clash t) = t := CLASH_spec.2 t",
+   "confidence": 0.9,
+   "lean_check": "import CandleLean.HolSyntaxLib\n\ntheorem CLASH_Result {α : Type} (t : α) : Candle.HolSyntaxLib.CLASH (Candle.HolSyntaxLib.result.Result t) = t := rfl\n",
+   "hol4_check": "?f : bool result -> bool. (!t. f (Clash t) = t) /\\ f (Result T) <> T"
+  }
+ ]
+}

@@ -1,0 +1,28 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "`locnrow (POSN r c) = r` has a constructor argument, so Defn.sml:1192 takes the PRIMREC route. Prim_rec uses only the POSN clause of the axiom; new_specification and save_defn store just that equation, with no ARB clause. Values at UNKNOWNpt and EOFpt stay open. Lean's catch-all ARB proves `locnrow UNKNOWNpt = locnrow EOFpt` (and = ARB) by rfl, which HOL4 cannot derive."
+  },
+  {
+   "id": "F2",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "The constructor argument in second position is handled by Prim_rec's argument reshuffle, so this is still PRIMREC via new_specification, saving only the POSN equation. Values at UNKNOWNpt and EOFpt are open and may depend on f and the constructor. Lean's `_ => ARB` proves `locn_rowupdate f UNKNOWNpt = locn_rowupdate g EOFpt` (and = ARB) by rfl, which is underivable in HOL4."
+  },
+  {
+   "id": "F3",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "Same PRIMREC/new_specification route: the only saved fact about locncol is `locncol (POSN r c) = c`. Values at UNKNOWNpt and EOFpt are unconstrained and unrelated to locnrow. Lean's catch-all ARB proves `locncol UNKNOWNpt = locncol EOFpt`, `locncol UNKNOWNpt = ARB` and `locncol EOFpt = locnrow EOFpt` by rfl, all left open by HOL4."
+  },
+  {
+   "id": "F4",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "PRIMREC via new_specification saves only `locn_colupdate f (POSN r c) = POSN r (f c)`; no completed clause or primitive definition is stored. Results at UNKNOWNpt and EOFpt are open, possibly dependent on f and the constructor. Lean's `_ => ARB` proves `locn_colupdate f UNKNOWNpt = locn_colupdate g EOFpt` (and = ARB, also = locn_rowupdate there) by rfl."
+  }
+ ]
+}

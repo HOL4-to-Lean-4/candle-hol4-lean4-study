@@ -1,0 +1,30 @@
+{
+ "module": "CmlTS.SemanticPrimitivesProps",
+ "checked": 27,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "dest_Refv",
+   "lean": "lean/CmlTS/SemanticPrimitivesProps.lean:45",
+   "hol4": "hol4/package/semanticPrimitivesPropsScript.sml:165",
+   "class": "V-C",
+   "explanation": "HOL4's only clause is dest_Refv (Refv v) = v. The definition goes through non_wfrec_defn and Prim_rec.new_recursive_definition (Defn.sml:1182, Prim_rec.sml:259), i.e. new_specification, so only that clause is saved and no ARB equation exists. W8array, Varray and Thunk stay open. The Lean catch-all `_ => ARB` makes dest_Refv (W8array ws) = ARB and dest_Refv (W8array ws) = dest_Refv (Varray vs) provable by computation.",
+   "repair": "def dest_Refv [Nonempty α] : store_v α → α :=\n  select fun f : store_v α → α => ∀ v, f (Refv v) = v",
+   "confidence": 0.6,
+   "lean_check": "import CmlTS.SemanticPrimitivesProps\n\nnamespace CmlTS\n\ntheorem dest_Refv_arb (ws : List word8) : dest_Refv (W8array ws : store_v Nat) = ARB := by\n  first | rfl | simp [dest_Refv]\n\ntheorem dest_Refv_open (ws : List word8) (vs : List Nat) :\n    dest_Refv (W8array ws : store_v Nat) = dest_Refv (Varray vs : store_v Nat) := by\n  first | rfl | simp [dest_Refv]\n\nend CmlTS\n",
+   "hol4_check": "?f:num store_v -> num. (!v. f (Refv v) = v) /\\ f (W8array []) <> f (Varray [])"
+  },
+  {
+   "id": "F2",
+   "declaration": "FV_dec",
+   "lean": "lean/CmlTS/SemanticPrimitivesProps.lean:98",
+   "hol4": "hol4/package/semanticPrimitivesPropsScript.sml:220",
+   "class": "V-C",
+   "explanation": "HOL4 has clauses only for Dlet, Dletrec, Dtype, Dtabbrev and Dexn. As a constructor-pattern definition it is made by Prim_rec.new_recursive_definition (new_specification), so FV_dec_def is all that is saved and FV_dec on Dmod, Dlocal and Denv is open. The Lean catch-all `_ => ARB` proves FV_dec (Dmod m ds) = ARB, and also FV_dec (Dmod m ds) = FV_dec (Denv n) for all m, ds, n.",
+   "repair": "def FV_dec : dec → Set (ident modN varN) :=\n  select fun f : dec → Set (ident modN varN) =>\n    (∀ l p e, f (Dlet l p e) = FV (exp.Mat e [(p, exp.Lit ARB)])) ∧\n    (∀ l defs, f (Dletrec l defs) = FV (exp.Letrec defs (exp.Lit ARB))) ∧\n    (∀ l tds, f (Dtype l tds) = ∅) ∧\n    (∀ l tvs tn t, f (Dtabbrev l tvs tn t) = ∅) ∧\n    (∀ l cn ts, f (Dexn l cn ts) = ∅)",
+   "confidence": 0.58,
+   "lean_check": "import CmlTS.SemanticPrimitivesProps\n\nnamespace CmlTS\n\ntheorem FV_dec_arb (m : modN) (ds : List dec) : FV_dec (Dmod m ds) = ARB := by\n  first | rfl | simp [FV_dec]\n\ntheorem FV_dec_open (m : modN) (ds : List dec) (n : tvarN) :\n    FV_dec (Dmod m ds) = FV_dec (Denv n) := by\n  first | rfl | simp [FV_dec]\n\nend CmlTS\n",
+   "hol4_check": "?f:dec -> (mlstring,mlstring) id set. (!l p e. f (Dlet l p e) = FV (Mat e [(p,Lit ARB)])) /\\ (!l defs. f (Dletrec l defs) = FV (Letrec defs (Lit ARB))) /\\ (!l t. f (Dtype l t) = {}) /\\ (!l tvs tn t. f (Dtabbrev l tvs tn t) = {}) /\\ (!l c ts. f (Dexn l c ts) = {}) /\\ f (Dmod (strlit \"\") []) <> f (Denv (strlit \"\"))"
+  }
+ ]
+}

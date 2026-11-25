@@ -1,0 +1,28 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "In HOL4, Definition locnrow_def goes through Prim_rec.new_recursive_definition and new_specification, saving only !r c. locnrow (POSN r c) = r and leaving locnrow UNKNOWNpt and locnrow EOFpt unconstrained. In Lean, both branches return the same ARB : Nat, making locnrow UNKNOWNpt = locnrow EOFpt provable by rfl. This is a genuine V-C violation."
+  },
+  {
+   "id": "F2",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "In HOL4, Definition locn_rowupdate_def uses Prim_rec.new_recursive_definition and new_specification, saving only !f r c. locn_rowupdate f (POSN r c) = POSN (f r) c and leaving behavior on UNKNOWNpt and EOFpt unconstrained (including dependence on f and the constructor). In Lean, both reduce to ARB : locn, proving locn_rowupdate f UNKNOWNpt = locn_rowupdate g EOFpt for all f, g, a genuine V-C violation."
+  },
+  {
+   "id": "F3",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "In HOL4, Definition locncol_def uses Prim_rec.new_recursive_definition and new_specification, saving only !r c. locncol (POSN r c) = c and leaving locncol UNKNOWNpt and locncol EOFpt unconstrained. In Lean, both branches reduce to the same ARB : Nat, proving locncol UNKNOWNpt = locncol EOFpt by rfl. This is a genuine V-C violation."
+  },
+  {
+   "id": "F4",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "In HOL4, Definition locn_colupdate_def uses Prim_rec.new_recursive_definition and new_specification, saving only !f r c. locn_colupdate f (POSN r c) = POSN r (f c) and leaving behavior on UNKNOWNpt and EOFpt unconstrained (including dependence on f and the constructor). In Lean, both reduce to ARB : locn, proving locn_colupdate f UNKNOWNpt = locn_colupdate g EOFpt for all f, g, a genuine V-C violation."
+  }
+ ]
+}

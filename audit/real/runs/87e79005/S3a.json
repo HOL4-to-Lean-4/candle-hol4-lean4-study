@@ -1,0 +1,18 @@
+{
+ "module": "CmlTS.Prelude.FiniteMap",
+ "checked": 13,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "FAPPLY",
+   "lean": "lean/CmlTS/Prelude/FiniteMap.lean:28",
+   "hol4": "hol4/HOL4-src/src/finite_maps/finite_mapScript.sml:180",
+   "class": "V-C",
+   "explanation": "HOL4 defines FAPPLY f x = OUTL (fmap_REP f x). Outside FDOM f this is OUTL (INR one). OUTL's only saved defining equation is OUTL (INL x) = x (sumScript.sml:286, via new_specification), so that value is unspecified; HOL4 proves only f ' x = FEMPTY ' x there (NOT_FDOM_FAPPLY_FEMPTY). The Lean match returns ARB for none, so Lean proves FAPPLY FEMPTY x = ARB, and hence also FAPPLY FEMPTY x = THE none and = HD []. The theorems HOL4 saves leave these open. Values on the domain agree.",
+   "repair": "noncomputable opaque OUTL_INR_one {β : Type} [Nonempty β] : β\n\ndef FAPPLY [Nonempty β] (f : fmap α β) (x : α) : β :=\n  match f.rep x with\n  | some y => y\n  | none => OUTL_INR_one",
+   "confidence": 0.72,
+   "lean_check": "import CmlTS.Prelude.FiniteMap\n\nnamespace CmlTS\n\nexample {α β : Type} [Nonempty β] (x : α) : FAPPLY (FEMPTY : fmap α β) x = ARB := rfl\n\nexample {α β : Type} [Nonempty β] (x : α) : FAPPLY (FEMPTY : fmap α β) x = THE none := rfl\n\nend CmlTS\n",
+   "hol4_check": "!(f:'a |-> 'b) x. ~(x IN FDOM f) ==> (FAPPLY f x = FAPPLY FEMPTY x)"
+  }
+ ]
+}

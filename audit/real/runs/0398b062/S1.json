@@ -1,0 +1,30 @@
+{
+ "module": "CandleLean.Prelude.List",
+ "checked": 39,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "HOL.HD",
+   "lean": "lean/CandleLean/Prelude/List.lean:13",
+   "hol4": "hol4/HOL4-src/src/list/src/listScript.sml:139",
+   "class": "V-C",
+   "explanation": "Lean proves `HD ([] : List Nat) = ARB`. HOL4 specifies only `HD (h::t) = h`, which permits any natural number as the head of the empty list. The same extra equation reaches `EL` through `EL 0 [] = HD []`.",
+   "repair": "private opaque hdNil {α : Type u} [Nonempty α] : α := ARB\n\ndef HD {α : Type u} [Nonempty α] : List α → α\n  | h :: _ => h\n  | [] => hdNil",
+   "confidence": 1.0,
+   "lean_check": "import CandleLean.Prelude.List\n\nexample : HOL.HD ([] : List Nat) = HOL.ARB := rfl",
+   "hol4_check": "!a:num. ?f:num list -> num. f [] = a /\\ (!h t. f (h::t) = h)"
+  },
+  {
+   "id": "F2",
+   "declaration": "HOL.LAST",
+   "lean": "lean/CandleLean/Prelude/List.lean:28",
+   "hol4": "hol4/HOL4-src/src/list/src/listScript.sml:2125",
+   "class": "V-C",
+   "explanation": "Lean proves `LAST ([] : List Nat) = ARB`, and hence `LAST ([] : List Nat) = HD []`. HOL4’s `LAST` equation applies only to `h::t`. When `t = []` it returns `h`, so even the singleton case leaves `LAST []` unconstrained.",
+   "repair": "private opaque lastNil {α : Type u} [Nonempty α] : α := ARB\n\ndef LAST {α : Type u} [Nonempty α] : List α → α\n  | [] => lastNil\n  | h :: t => if t = [] then h else LAST t",
+   "confidence": 1.0,
+   "lean_check": "import CandleLean.Prelude.List\n\nexample : HOL.LAST ([] : List Nat) = HOL.ARB := by simp [HOL.LAST]",
+   "hol4_check": "!a:num. ?f:num list -> num. f [] = a /\\ (!h t. f (h::t) = (if t = [] then h else f t))"
+  }
+ ]
+}

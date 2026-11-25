@@ -1,0 +1,16 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "HOL4 introduces `instance` via `new_specification`, which saves only `instance_def` (guarded by `FLOOKUP tmsig name = SOME ty0`) and discards the Hilbert-choice witness. At `FEMPTY` the guard fails, so HOL4 leaves `instance FEMPTY i name ty τ = (@f. P f) FEMPTY i name ty τ` open even with choice fixed. Lean defines `instance' := select P` transparently, proving that equation by `rfl`."
+  },
+  {
+   "id": "F2",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "Lean defines `termsem0` with catch-all `| _, Abs _ _ => ARB`, proving `termsem0 mem tmsig i v (Abs (Const name ty) b) = ARB` (and similarly for `Comb`/`Abs` binders) by `rfl`. HOL4's `Definition termsem_def` goes through TFL with nested pattern `Abs (Var x ty) b`; it saves equations only for given patterns and `DefnBase.delete_support` deletes the auxiliary tupled constant and its underlying definition, leaving non-`Var` `Abs` binders open."
+  }
+ ]
+}

@@ -1,0 +1,18 @@
+{
+ "module": "CmlTS.Prelude.Basic",
+ "checked": 29,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "CARD",
+   "lean": "lean/CmlTS/Prelude/Basic.lean:43",
+   "hol4": "hol4/HOL4-src/src/pred_set/src/pred_setScript.sml:3428",
+   "class": "V-C",
+   "explanation": "HOL4 introduces CARD by new_specification with only CARD {} = 0 and the INSERT equation for FINITE s. Its value on infinite sets is unspecified; pred_setScript.sml:3613 notes that `SING s <=> (CARD s = 1)` cannot be proved. The Lean definition has `else 0`, so Lean proves CARD s = 0 for every infinite s, for example CARD (UNIV : Set Nat) = 0, and also the unprovable SING equivalence. Finite sets agree.",
+   "repair": "def CARD {α : Type u} : Set α → Nat :=\n  Classical.epsilon (fun C : Set α → Nat =>\n    C ∅ = 0 ∧ ∀ s : Set α, FINITE s → ∀ x : α, C (insert x s) = if s x then C s else Nat.succ (C s))",
+   "confidence": 0.95,
+   "lean_check": "import CmlTS.Prelude.Basic\n\ntheorem auditBound : ∀ l : List Nat, ∃ b : Nat, ∀ x, x ∈ l → x < b := by\n  intro l\n  induction l with\n  | nil => exact ⟨0, fun x h => absurd h (by simp)⟩\n  | cons a l ih =>\n    obtain ⟨b, hb⟩ := ih\n    refine ⟨a + b + 1, fun x h => ?_⟩\n    rcases List.mem_cons.mp h with h | h\n    · omega\n    · have := hb x h\n      omega\n\ntheorem auditCard : CARD (UNIV : Set Nat) = 0 := by\n  have h : ¬ FINITE (UNIV : Set Nat) := by\n    intro hf\n    obtain ⟨l, hl⟩ := hf\n    obtain ⟨b, hb⟩ := auditBound l\n    exact Nat.lt_irrefl b (hb b (hl b True.intro))\n  unfold CARD\n  exact if_neg h\n",
+   "hol4_check": "?C:(num -> bool) -> num. (C {} = 0) /\\ (!s. FINITE s ==> !x. C (x INSERT s) = if x IN s then C s else SUC (C s)) /\\ (C univ(:num) = 1)"
+  }
+ ]
+}

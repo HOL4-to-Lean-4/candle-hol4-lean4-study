@@ -1,0 +1,30 @@
+{
+ "module": "CmlTS.Prelude.Core",
+ "checked": 10,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "CmlTS.ARB",
+   "lean": "lean/CmlTS/Prelude/Core.lean:7",
+   "hol4": "hol4/HOL4-src/src/bool/boolScript.sml:245",
+   "class": "V-C",
+   "explanation": "Lean proves `select (fun _ : Bool => False) = ARB`. When the predicate has no witness, `Classical.epsilon` uses `Classical.choice` on the same nonemptiness proof that defines `ARB`. HOL4 introduces `bool$ARB` as an independent constant. Its selection axiom allows `(@x:bool. F)` and `ARB:bool` to differ.",
+   "repair": "axiom ARB {α : Type} [Nonempty α] : α",
+   "confidence": 0.98,
+   "lean_check": "import CmlTS.Prelude.Core\n\nexample : CmlTS.select (fun _ : Bool => False) = CmlTS.ARB := by\n  simp [CmlTS.select, CmlTS.ARB, Classical.epsilon, Classical.strongIndefiniteDescription]",
+   "hol4_check": null
+  },
+  {
+   "id": "F2",
+   "declaration": "CmlTS.THE",
+   "lean": "lean/CmlTS/Prelude/Core.lean:24",
+   "hol4": "hol4/HOL4-src/src/coretypes/optionScript.sml:179",
+   "class": "V-C",
+   "explanation": "The `none` branch makes `THE (none : Option Bool) = ARB` hold by reflexivity. HOL4 saves only `THE (SOME x) = x`. A function that returns `x` on `SOME x` and the Boolean negation of `ARB` on `NONE` satisfies that equation.",
+   "repair": "private axiom theNone {α : Type} [Nonempty α] : α\n\ndef THE {α : Type} [Nonempty α] : Option α → α\n  | some x => x\n  | none => theNone",
+   "confidence": 1,
+   "lean_check": "import CmlTS.Prelude.Core\n\nexample : CmlTS.THE (none : Option Bool) = CmlTS.ARB := rfl",
+   "hol4_check": "?f : bool option -> bool. (!x. f (SOME x) = x) /\\ f NONE <> ARB"
+  }
+ ]
+}

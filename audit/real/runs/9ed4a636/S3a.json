@@ -1,0 +1,18 @@
+{
+ "module": "CandleLean.HolSyntax",
+ "checked": 70,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "dest_var",
+   "lean": "lean/CandleLean/HolSyntax.lean:39",
+   "hol4": "hol4/package/candle/standard/syntax/holSyntaxScript.sml:57",
+   "class": "V-C",
+   "explanation": "HOL4 saves only dest_var (Var x ty) = (x,ty). The single constructor clause goes through Prim_rec.new_recursive_definition (Defn.sml:1182) and new_specification (Prim_rec.sml:281), so nothing is said about dest_var on Const, Comb or Abs; different arguments may have different values. The Lean match sends all of them to the one constant ARB. Lean therefore proves dest_var (Const n ty) = dest_var (Comb s t), and likewise for any two non-Var terms, by rfl. HOL4 leaves these equations open. They carry over to VSUBST, INST_CORE, db and bv_names on Abs with a non-variable binder. OUTL, defined by the same HOL4 mechanism, is translated with Classical.epsilon and does not have this leak.",
+   "repair": "noncomputable def dest_var : term → mlstring × type :=\n  Classical.epsilon (fun f : term → mlstring × type => ∀ x ty, f (Var x ty) = (x, ty))",
+   "confidence": 0.72,
+   "lean_check": "import CandleLean.HolSyntax\n\nexample (n : mlstring) (ty : type) (s t : term) :\n    dest_var (term.Const n ty) = dest_var (term.Comb s t) := rfl\n\nexample (n m : mlstring) (ty ty' : type) :\n    dest_var (term.Const n ty) = dest_var (term.Const m ty') := rfl\n",
+   "hol4_check": null
+  }
+ ]
+}

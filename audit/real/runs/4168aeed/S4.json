@@ -1,0 +1,10 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "In `ListLib.lean:15-17`, `HD []` reduces to `ARB` (`Core.lean:7`), so Lean proves `HD ([] : List Bool) = ARB` by reflexivity (and `EL n l = ARB` for out-of-bounds `n` via `TL [] = []`). In HOL4, `listScript.sml:138-140` introduces `HD` via `Prim_rec.new_recursive_definition` (`new_specification`) saving only `HD (h::t) = h`, while `boolScript.sml:245` declares `ARB` unspecified, leaving `HD []` independent of `ARB`. True V-C violation."
+  }
+ ]
+}

@@ -1,0 +1,28 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "locnrow_def gives only the POSN clause. non_wfrec_defn calls new_recursive_definition, which keeps only the given clause (Prim_rec.sml:155-157) and passes it to new_specification; no ARB clause is saved. Even a TFL fallback would save only the POSN equation. Lean's catch-all makes locnrow UNKNOWNpt = locnrow EOFpt (= ARB) provable. HOL4 leaves this open, since any values there satisfy the specification."
+  },
+  {
+   "id": "F2",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "The only theorem saved about the constant is locn_rowupdate f (POSN r c) = POSN (f r) c, via new_specification: the POSN argument takes the PRIMREC path and the variable f is reshuffled. Lean's catch-all ARB proves locn_rowupdate f UNKNOWNpt = locn_rowupdate g EOFpt for all f and g. HOL4 leaves this open, because the result there may depend on f and on the constructor."
+  },
+  {
+   "id": "F3",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "HOL4 saves only locncol (POSN r c) = c, through Prim_rec.new_recursive_definition and new_specification; the missing constructors get no clause. Lean's catch-all ARB proves locncol UNKNOWNpt = locncol EOFpt, and also locncol UNKNOWNpt = locnrow UNKNOWNpt, by unfolding. The HOL4 specification is satisfied by functions with arbitrary different values there, so these equations are open in HOL4."
+  },
+  {
+   "id": "F4",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "The only theorem HOL4 saves about the constant is locn_colupdate f (POSN r c) = POSN r (f c), introduced by new_specification. Lean returns ARB on UNKNOWNpt and EOFpt, so it proves locn_colupdate f UNKNOWNpt = locn_colupdate g EOFpt for all f and g, and equality with locn_rowupdate g EOFpt. The HOL4 theorem allows arbitrary results there, depending on f and the constructor, so these are open."
+  }
+ ]
+}

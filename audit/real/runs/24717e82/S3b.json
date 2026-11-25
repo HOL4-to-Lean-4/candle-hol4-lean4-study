@@ -1,0 +1,18 @@
+{
+ "module": "CandleLean.HolSemantics",
+ "checked": 27,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "Candle.termsem0",
+   "lean": "lean/CandleLean/HolSemantics.lean:86",
+   "hol4": "hol4/package/candle/standard/semantics/holSemanticsScript.sml:134",
+   "class": "V-C",
+   "explanation": "HOL4's termsem_def has four clauses and says nothing about Abs with a non-Var binder. Lean adds `| _, Abs _ _ => ARB`, so it proves e.g. termsem0 mem tmsig i v (Abs (Const n ty) b) = ARB. termsem0 is curried with a nested pattern, so it is not primitive recursive and TFL defines it through termsem0_tupled. The fall-through ARB occurs only in termsem0_tupled's primitive definition. TotalDefn.sml:876-883 and DefnBase.sml:76-85 (delete_support) delete that constant, which should drop the theorems mentioning it. termsem_def and termsem_ind, the remaining saved theorems, leave the value open. (Theory.sml's scrubbing code was not among the files I searched.)",
+   "repair": "def termsem0 [Nonempty U] : (U → U → Prop) → Candle.tmsig → interpretation U → valuation U → term → U :=\n  select (fun f =>\n    (∀ mem tmsig i v x ty, f mem tmsig i v (Var x ty) = tmvof v (x, ty)) ∧\n    (∀ mem tmsig i v name ty, f mem tmsig i v (Const name ty) = instance' tmsig i name ty (tyvof v)) ∧\n    (∀ mem tmsig i v t1 t2, f mem tmsig i v (Comb t1 t2) = apply mem (f mem tmsig i v t1) (f mem tmsig i v t2)) ∧\n    (∀ mem tmsig i v x ty b, f mem tmsig i v (Abs (Var x ty) b) =\n      abstract mem (typesem (tyaof i) (tyvof v) ty) (typesem (tyaof i) (tyvof v) (typeof b))\n        (fun m => f mem tmsig i (tyvof v, UPDATE (x, ty) m (tmvof v)) b)))\n-- and prove termsem_def by select_spec, using the current recursive function as the witness",
+   "confidence": 0.85,
+   "lean_check": "import CandleLean.HolSemantics\n\nnamespace Candle\n\ntheorem termsem0_open_case {U : Type} [Nonempty U] (mem : U → U → Prop) (sg : Candle.tmsig)\n    (i : interpretation U) (v : valuation U) (n : mlstring) (ty : type) (b : term) :\n    termsem0 mem sg i v (Abs (Const n ty) b) = (ARB : U) := by\n  first\n    | rfl\n    | simp [termsem0]\n    | (unfold termsem0; rfl)\n\nend Candle\n",
+   "hol4_check": null
+  }
+ ]
+}

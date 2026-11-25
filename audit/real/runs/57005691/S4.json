@@ -1,0 +1,10 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "In String.lean:21-22, HOL.CHR transparently returns (ARB : Nat -> char) n when not (n < 256), so Lean proves CHR 256 = (ARB : Nat -> char) 256 in the mapped vocabulary (both CHR and ARB map HOL4 constants). In HOL4 (stringScript.sml:27-29), define_new_type_bijections introduces CHR solely via char_BIJ, leaving CHR 256 unconstrained across all 256 characters and independent of the uninterpreted bool$ARB (boolScript.sml:245). This is a genuine V-C violation."
+  }
+ ]
+}

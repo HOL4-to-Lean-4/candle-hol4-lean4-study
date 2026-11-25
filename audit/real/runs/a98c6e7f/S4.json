@@ -1,0 +1,10 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "In Fmap.lean:41, FAPPLY f x is THE (FLOOKUP f x), and THE none reduces to ARB (List.lean:10-12), so Lean proves FAPPLY (FEMPTY : fmap Nat Bool) 0 = ARB by reflexivity. In HOL4 (finite_mapScript.sml:176-182), FAPPLY FEMPTY 0 reduces to OUTL (INR one), where OUTL is specified only on INL (sumScript.sml:286-289) and ARB is an unspecified constant (boolScript.sml:245), leaving FAPPLY FEMPTY 0 = ARB open. This is a genuine V-C violation."
+  }
+ ]
+}

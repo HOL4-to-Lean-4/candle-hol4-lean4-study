@@ -1,0 +1,18 @@
+{
+ "module": "CandleLean.Prelude.FiniteMap",
+ "checked": 13,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "HOL.FAPPLY",
+   "lean": "lean/CandleLean/Prelude/FiniteMap.lean:29",
+   "hol4": "hol4/HOL4-src/src/finite_maps/finite_mapScript.sml:180",
+   "class": "V-C",
+   "explanation": "HOL4 defines FAPPLY f x = OUTL (fmap_REP f x). sumTheory specifies OUTL only by OUTL (INL x) = x (sumScript.sml:286), so OUTL (INR ()) is open. Off the domain, HOL4 saves only NOT_FDOM_FAPPLY_FEMPTY (FAPPLY f x = FAPPLY FEMPTY x); FAPPLY_DEF also gives one fixed value per range type. Neither determines that value. Lean fills the none case with ARB, so FAPPLY FEMPTY x = ARB holds by rfl, as does FAPPLY f x = ARB for every x not in FDOM f. It also proves FAPPLY FEMPTY x = HD []. HOL4 leaves all these equations open, for example at range type bool.",
+   "repair": "def Aux.OUTL_spec {β : Type v} (o : Option β → β) : Prop := ∀ y, o (some y) = y\n\ndef Aux.OUTL {β : Type v} [Nonempty β] : Option β → β := Classical.epsilon (Aux.OUTL_spec (β := β))\n\ntheorem Aux.OUTL_def {β : Type v} [Nonempty β] : Aux.OUTL_spec (Aux.OUTL (β := β)) := by\n  apply Classical.epsilon_spec (p := Aux.OUTL_spec (β := β))\n  exact ⟨fun o => match o with | some y => y | none => Classical.choice inferInstance, fun _ => rfl⟩\n\ndef FAPPLY {α : Type u} {β : Type v} [Nonempty β] (f : fmap α β) (x : α) : β := Aux.OUTL (f.rep x)\n\n-- and end the proof of FUN_FMAP_DEF with: simp [FAPPLY, hx', Aux.OUTL_def (f x)]",
+   "confidence": 0.6,
+   "lean_check": "import CandleLean.Prelude.FiniteMap\n\nopen HOL\n\ntheorem chk1 {α : Type} {β : Type} [Nonempty β] (x : α) :\n    HOL.FAPPLY (HOL.FEMPTY : HOL.fmap α β) x = (HOL.ARB : β) := rfl\n\ntheorem chk2 {α : Type} {β : Type} [Nonempty β] (x : α) :\n    HOL.FAPPLY (HOL.FEMPTY : HOL.fmap α β) x = HOL.HD ([] : List β) := rfl\n",
+   "hol4_check": "?outl:bool + one -> bool. (!x. outl (INL x) = x) /\\ outl (INR ()) <> ARB"
+  }
+ ]
+}

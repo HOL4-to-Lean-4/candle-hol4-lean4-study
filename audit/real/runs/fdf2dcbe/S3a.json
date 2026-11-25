@@ -1,0 +1,18 @@
+{
+ "module": "CmlTS.Prelude.List",
+ "checked": 32,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "HD",
+   "lean": "lean/CmlTS/Prelude/List.lean:34",
+   "hol4": "hol4/HOL4-src/src/list/src/listScript.sml:138",
+   "class": "V-C",
+   "explanation": "HOL4 defines HD only by HD (h::t) = h. The clause goes through non_wfrec_defn (Defn.sml:1192) to Prim_rec.new_recursive_definition, which uses new_specification (Prim_rec.sml:281), with no ARB completion. A search of the HOL4 sources found no saved theorem giving HD [] a value. Lean adds the clause [] => ARB, so HD [] = ARB holds by rfl, and hence EL 0 [] = ARB. This identifies HD [] with the HOL4 constant ARB, and with other values Lean defines as ARB, e.g. HD ([] : List char) = CHR 256. HOL4 leaves these equations open.",
+   "repair": "opaque HD_NIL (α : Type u) [Nonempty α] : α\n\ndef HD {α : Type u} [Nonempty α] : List α → α\n  | h :: _ => h\n  | [] => HD_NIL α",
+   "confidence": 0.7,
+   "lean_check": "import CmlTS.Prelude.List\n\ntheorem HD_nil_eq_ARB {α : Type} [Nonempty α] : HD ([] : List α) = ARB := rfl\n\ntheorem EL_zero_nil_eq_ARB {α : Type} [Nonempty α] : EL 0 ([] : List α) = ARB := rfl\n",
+   "hol4_check": "?hd:bool list -> bool. (!h t. hd (h::t) = h) /\\ hd [] <> ARB"
+  }
+ ]
+}

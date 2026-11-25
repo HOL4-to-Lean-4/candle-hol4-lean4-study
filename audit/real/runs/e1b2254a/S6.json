@@ -1,0 +1,16 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "pred_setScript.sml:6275 overloads PERMUTES as \\f s. BIJ f s s. Lean adds identity outside s, which is HOL4's different lowercase `permutes` (permutes_alt, permutesScript.sml:95; the note at line 80 says the two are inequivalent). With f = fun _ => 0 and s = {0} on Nat, HOL4 is true and Lean is false. The library uses it in I_PERMUTES, whose HOL4 source uses the BIJ overload."
+  },
+  {
+   "id": "F2",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "boolScript.sml:245 introduces ARB by new_constant with no definition or axiom, so its value at num is open. Lean's ARB is a transparent def equal to Inhabited.default, so (ARB : Nat) = 0 holds by rfl. Library instances likewise fix ARB at type, term and mlstring, e.g. dest_var on non-Var terms and HD []. These specific equations are not provable in HOL4."
+  }
+ ]
+}

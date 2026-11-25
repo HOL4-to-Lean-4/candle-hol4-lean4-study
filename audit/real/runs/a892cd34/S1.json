@@ -1,0 +1,30 @@
+{
+ "module": "CandleLean.HolSemantics",
+ "checked": 29,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "instance_",
+   "lean": "lean/CandleLean/HolSemantics.lean:67",
+   "hol4": "hol4/package/candle/standard/semantics/holSemanticsScript.sml:112",
+   "class": "V-C",
+   "explanation": "With `tmsig = FEMPTY`, Lean proves `instance_ FEMPTY i name ty τ = tmaof i name []` for every valuation `τ`. HOL4 specifies the result only when lookup succeeds and a substitution produces `ty` from the declared type. An empty signature makes that premise false for every witness, leaving the result unconstrained.",
+   "repair": "axiom instance_ (tmsig : tmsig) (i : interpretation U) (name : mlstring) (ty : type) : tyval U → U\n\naxiom instance_spec (s : tmsig) (i : interpretation U) (name : mlstring) (ty ty0 : type) (tyin : List (type × type)) (hlookup : FLOOKUP s name = some ty0) (hsubst : ty = TYPE_SUBST tyin ty0) :\n  instance_ s i name ty = fun τ => tmaof i name (MAP (typesem (tyaof i) τ ∘ TYPE_SUBST tyin ∘ Tyvar) (MAP .implode (STRING_SORT (MAP explode (tyvars ty0)))))",
+   "confidence": 1.0,
+   "lean_check": "import CandleLean.HolSemantics\nopen HOL Candle.Mlstring Candle.HolSyntax Candle.HolSemantics\n\nexample {U : Type} (i : interpretation U) (name : mlstring) (ty : type) (τ : tyval U) :\n    instance_ FEMPTY i name ty τ = tmaof i name [] := by\n  simp [instance_, FLOOKUP, FEMPTY]",
+   "hol4_check": null
+  },
+  {
+   "id": "F2",
+   "declaration": "termsem",
+   "lean": "lean/CandleLean/HolSemantics.lean:77",
+   "hol4": "hol4/package/candle/standard/semantics/holSemanticsScript.sml:139",
+   "class": "V-C",
+   "explanation": "For `U = Nat`, Lean proves that `Abs (Const name ty) b` denotes `0` for every interpretation and valuation. The catch-all branch returns `HOL.ARB`, which unfolds to the `Nat` default. HOL4 saves an abstraction equation only for `Abs (Var x ty) b`. Its equations leave the value on a constant binder open.",
+   "repair": "private opaque unspecifiedAbs [Inhabited U] (mem : U → U → Prop) (s : tmsig) (i : interpretation U) (v : valuation U) (binder body : term) : U := ARB\n\ndef termsem [Inhabited U] (mem : U → U → Prop) (tmsig : tmsig) (i : interpretation U) : valuation U → term → U\n  | v, .Var x ty => tmvof v (x, ty)\n  | v, .Const name ty => instance_ tmsig i name ty (tyvof v)\n  | v, .Comb t1 t2 => apply mem (termsem mem tmsig i v t1) (termsem mem tmsig i v t2)\n  | v, .Abs (.Var x ty) b =>\n    abstract mem (typesem (tyaof i) (tyvof v) ty) (typesem (tyaof i) (tyvof v) (typeof b))\n      (fun m => termsem mem tmsig i (tyvof v, (UPDATE (x, ty) m) (tmvof v)) b)\n  | v, .Abs binder b => unspecifiedAbs mem tmsig i v binder b",
+   "confidence": 1.0,
+   "lean_check": "import CandleLean.HolSemantics\nopen Candle.Mlstring Candle.HolSyntax Candle.HolSemantics\n\nexample (mem : Nat → Nat → Prop) (s : tmsig) (i : interpretation Nat) (v : valuation Nat) (name : mlstring) (ty : type) (b : term) :\n    termsem mem s i v (.Abs (.Const name ty) b) = 0 := by\n  simp [termsem, HOL.ARB]",
+   "hol4_check": null
+  }
+ ]
+}

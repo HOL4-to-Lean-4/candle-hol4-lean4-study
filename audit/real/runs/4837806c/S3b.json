@@ -1,0 +1,18 @@
+{
+ "module": "CmlTS.Weakening",
+ "checked": 31,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "type_tenv_val_weakening_lemma",
+   "lean": "lean/CmlTS/Weakening.lean:155",
+   "hol4": "hol4/package/weakeningScript.sml:337",
+   "class": "V-P",
+   "explanation": "Special case. In HOL4 nothing fixes the namespace key types: the statement uses only nsAll2 (polymorphic in 'm,'n) with a lambda that ignores its identifier argument, and tenvV and envV carry no type annotation. Its principal type therefore has envV : ('a,'b,v) namespace and tenvV : ('a,'b,num#t) namespace. Lean fixes both to modN/varN (mlstring) through tenv_val and env_val, so it says nothing about, for example, num-keyed namespaces. Other lemmas in this module (weak_ctMap_lookup, weakS_refl, weakCT_refl) keep HOL4's polymorphism.",
+   "repair": "theorem type_tenv_val_weakening_lemma {M N : Type} :\n    ∀ (ctMap : ctMap) (tenvS : tenv_store) (tenvV : Namespace M N (Nat × Ty)) (envV : Namespace M N Value)\n      (ctMap' : _root_.ctMap) (tenvS' : tenv_store),\n      weakCT ctMap' ctMap ∧\n      weakS tenvS' tenvS ∧\n      nsAll2 (fun _ v p =>\n          ∀ (tvs' : Nat) (ctMap' : _root_.ctMap) (tenvS' : tenv_store),\n            (p.1 = 0 ∨ p.1 = tvs') ∧\n            weakCT ctMap' ctMap ∧\n            weakS tenvS' tenvS →\n            type_v tvs' ctMap' tenvS' v p.2)\n        envV tenvV →\n      nsAll2 (fun _ v p => type_v p.1 ctMap' tenvS' v p.2) envV tenvV := by\n  sorry",
+   "confidence": 0.55,
+   "lean_check": "import CmlTS.Weakening\n\nexample (M N : Type) (c : ctMap) (s : tenv_store) (tV : Namespace M N (Nat × Ty))\n    (eV : Namespace M N Value) : True := by\n  fail_if_success (have := type_tenv_val_weakening_lemma c s tV eV)\n  trivial\n",
+   "hol4_check": "!ctMap tenvS (tenvV:('a,'b,num#t) namespace) (envV:('a,'b,v) namespace) ctMap' tenvS'. weakCT ctMap' ctMap /\\ weakS tenvS' tenvS /\\ nsAll2 (\\i v (tvs,t). !tvs' ctMap' tenvS'. (tvs = 0 \\/ tvs = tvs') /\\ weakCT ctMap' ctMap /\\ weakS tenvS' tenvS ==> type_v tvs' ctMap' tenvS' v t) envV tenvV ==> nsAll2 (\\i v (tvs,t). type_v tvs ctMap' tenvS' v t) envV tenvV"
+  }
+ ]
+}

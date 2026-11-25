@@ -1,0 +1,54 @@
+{
+ "module": "CmlTS.Location",
+ "checked": 6,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "locnrow",
+   "lean": "lean/CmlTS/Location.lean:20",
+   "hol4": "hol4/package/locationScript.sml:6",
+   "class": "V-C",
+   "explanation": "HOL4 defines locnrow only on POSN. The Definition is made by Prim_rec.new_recursive_definition through new_specification (Prim_rec.sml:259-285), so the only saved fact is locnrow (POSN r c) = r. The values at UNKNOWNpt and EOFpt are independent and open. Lean sends both to the same ARB, so it proves locnrow UNKNOWNpt = locnrow EOFpt, and also that both equal locncol UNKNOWNpt. HOL4 proves neither.",
+   "repair": "opaque locnrow_spec : {f : locn → Nat // ∀ r c, f (.POSN r c) = r} :=\n  ⟨fun | .POSN r _ => r | _ => 0, fun _ _ => rfl⟩\n\ndef locnrow : locn → Nat := locnrow_spec.1\n\ntheorem locnrow_def (r c : Nat) : locnrow (.POSN r c) = r := locnrow_spec.2 r c",
+   "confidence": 0.85,
+   "lean_check": "import CmlTS.Location\n\nexample : locnrow locn.UNKNOWNpt = locnrow locn.EOFpt := by simp [locnrow]\n",
+   "hol4_check": "?f:locn->num. (!r c. f (POSN r c) = r) /\\ f UNKNOWNpt <> f EOFpt"
+  },
+  {
+   "id": "F2",
+   "declaration": "locn_rowupdate",
+   "lean": "lean/CmlTS/Location.lean:24",
+   "hol4": "hol4/package/locationScript.sml:11",
+   "class": "V-C",
+   "explanation": "HOL4 specifies locn_rowupdate f only on POSN (new_specification, sole fact locn_rowupdate f (POSN r c) = POSN (f r) c). Its values at UNKNOWNpt and EOFpt are open and may depend on the constructor and on f. Lean returns one ARB for every f and both constructors, so it proves locn_rowupdate f UNKNOWNpt = locn_rowupdate g EOFpt, and equality with locn_colupdate there. HOL4 leaves these open.",
+   "repair": "opaque locn_rowupdate_spec :\n    {u : (Nat → Nat) → locn → locn // ∀ f r c, u f (.POSN r c) = .POSN (f r) c} :=\n  ⟨fun f l => match l with | .POSN r c => .POSN (f r) c | l => l, fun _ _ _ => rfl⟩\n\ndef locn_rowupdate : (Nat → Nat) → locn → locn := locn_rowupdate_spec.1\n\ntheorem locn_rowupdate_def (f : Nat → Nat) (r c : Nat) :\n    locn_rowupdate f (.POSN r c) = .POSN (f r) c := locn_rowupdate_spec.2 f r c",
+   "confidence": 0.85,
+   "lean_check": "import CmlTS.Location\n\nexample (f g : Nat → Nat) : locn_rowupdate f locn.UNKNOWNpt = locn_rowupdate g locn.EOFpt := by simp [locn_rowupdate]\n",
+   "hol4_check": "?u:(num->num)->locn->locn. (!f r c. u f (POSN r c) = POSN (f r) c) /\\ !f. u f UNKNOWNpt <> u f EOFpt"
+  },
+  {
+   "id": "F3",
+   "declaration": "locncol",
+   "lean": "lean/CmlTS/Location.lean:28",
+   "hol4": "hol4/package/locationScript.sml:16",
+   "class": "V-C",
+   "explanation": "HOL4 specifies locncol only on POSN (new_specification, sole fact locncol (POSN r c) = c). The values at UNKNOWNpt and EOFpt are independent and open. Lean maps both to the same ARB, so it proves locncol UNKNOWNpt = locncol EOFpt, and also locncol UNKNOWNpt = locnrow UNKNOWNpt. HOL4's saved theorems do not decide these.",
+   "repair": "opaque locncol_spec : {f : locn → Nat // ∀ r c, f (.POSN r c) = c} :=\n  ⟨fun | .POSN _ c => c | _ => 0, fun _ _ => rfl⟩\n\ndef locncol : locn → Nat := locncol_spec.1\n\ntheorem locncol_def (r c : Nat) : locncol (.POSN r c) = c := locncol_spec.2 r c",
+   "confidence": 0.85,
+   "lean_check": "import CmlTS.Location\n\nexample : locncol locn.UNKNOWNpt = locncol locn.EOFpt := by simp [locncol]\n",
+   "hol4_check": "?f:locn->num. (!r c. f (POSN r c) = c) /\\ f UNKNOWNpt <> f EOFpt"
+  },
+  {
+   "id": "F4",
+   "declaration": "locn_colupdate",
+   "lean": "lean/CmlTS/Location.lean:32",
+   "hol4": "hol4/package/locationScript.sml:20",
+   "class": "V-C",
+   "explanation": "HOL4 specifies locn_colupdate f only on POSN (new_specification, sole fact locn_colupdate f (POSN r c) = POSN r (f c)). Its values at UNKNOWNpt and EOFpt are open and may depend on the constructor and on f. Lean returns one ARB for every f and both constructors, so it proves locn_colupdate f UNKNOWNpt = locn_colupdate g EOFpt. HOL4 leaves this open.",
+   "repair": "opaque locn_colupdate_spec :\n    {u : (Nat → Nat) → locn → locn // ∀ f r c, u f (.POSN r c) = .POSN r (f c)} :=\n  ⟨fun f l => match l with | .POSN r c => .POSN r (f c) | l => l, fun _ _ _ => rfl⟩\n\ndef locn_colupdate : (Nat → Nat) → locn → locn := locn_colupdate_spec.1\n\ntheorem locn_colupdate_def (f : Nat → Nat) (r c : Nat) :\n    locn_colupdate f (.POSN r c) = .POSN r (f c) := locn_colupdate_spec.2 f r c",
+   "confidence": 0.85,
+   "lean_check": "import CmlTS.Location\n\nexample (f g : Nat → Nat) : locn_colupdate f locn.UNKNOWNpt = locn_colupdate g locn.EOFpt := by simp [locn_colupdate]\n",
+   "hol4_check": "?u:(num->num)->locn->locn. (!f r c. u f (POSN r c) = POSN r (f c)) /\\ !f. u f UNKNOWNpt <> u f EOFpt"
+  }
+ ]
+}

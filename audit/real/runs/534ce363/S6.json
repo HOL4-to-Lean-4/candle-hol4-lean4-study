@@ -1,0 +1,10 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "define_new_type_bijections uses new_specification, so HOL4 fixes CHR only by CHR (ORD a) = a and r < 256 <=> ORD (CHR r) = r. The saved theorems (CHR_11, ORD_CHR, CHR_ONTO, charOrd_*_lem) fix no out-of-range values; ORD_CHR_COMPUTE's FAIL branch is trivial. Lean's CHR sends all n >= 256 to one ARB, so it proves CHR 256 = CHR 257 (and CHR 256 = ARB). HOL4 leaves both open."
+  }
+ ]
+}

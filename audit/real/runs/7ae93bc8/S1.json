@@ -1,0 +1,18 @@
+{
+ "module": "CandleLean.HolSyntaxExtra",
+ "checked": 80,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "Candle.fresh",
+   "lean": "lean/CandleLean/HolSyntaxExtra.lean:116",
+   "hol4": "hol4/package/candle/standard/syntax/holSyntaxExtraScript.sml:2325",
+   "class": "V-C",
+   "explanation": "Lean proves by reflexivity that `fresh UNIV` equals the Hilbert-selected function satisfying the freshness specification applied to `UNIV`. HOL4 saves only the property that `fresh s` lies outside each finite `s`. The set of all strings is infinite, so changing a witness at `UNIV` to any string preserves the saved property. The Lean equation fixes a value that this property leaves open.",
+   "repair": "opaque fresh : Set string → string\naxiom fresh_def (s : Set string) : FINITE s → fresh s ∉ s",
+   "confidence": 1.0,
+   "lean_check": "import CandleLean.HolSyntaxExtra\n\nnamespace Candle\n\nexample : fresh UNIV = (select (fun (f : Set string → string) => ∀ s : Set string, FINITE s → f s ∉ s)) UNIV := rfl\n\nend Candle",
+   "hol4_check": "!w:string. ?f:(string set -> string). (!s. FINITE s ==> f s NOTIN s) /\\ f UNIV = w"
+  }
+ ]
+}

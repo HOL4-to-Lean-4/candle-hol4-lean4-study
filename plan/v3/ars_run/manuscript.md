@@ -1,0 +1,355 @@
+# Material for review
+
+## A. Proposed reframing (not yet in the plan)
+
+Translation now works: Fable 5.2, Opus 5.5 and Sonnet 5.5 all translate the 278 Candle statements with no meaning defects, at $7-31, and removing study 1's lessons from the briefs changes nothing. The open problem is certifying that a translation can be trusted. Contributions of the ITP 2027 paper: (1) the measured finding above, which updates study 1 (the author's FormaliSE 2027 experience report, where a human expert was needed); (2) the main contribution, a certification method: cross-family audit (GPT-6.2 Astra validates, Gemini Neon reviews) with every finding grounded in a HOL4 run or Lean counterexample, measured against single-family Claude auditors on seeded known defects (detection rate, false alarms, cost). Motivating evidence: three Claude auditors independently made the same wrong claim about HOL4 semantics (that pattern completion fixes RESULT (Clash t) to ARB), refuted by HOL4; (3) end-to-end: proving the 278 statements in Lean (kernel-checked, frozen statements, standard axioms only). Phase 2 (separate repo cakeml-lean4): migrate CakeML by milestone theorems; Opus 5.5 and Sonnet 5.5 both translate the first milestone (the type-soundness closure from study 1, which has known real defects: CARD and Euclidean vs floored integer division); if Sonnet matches, Sonnet translates the rest with an Opus re-translation of a random sample. Target venue ITP 2027 (abstract 8 Feb, paper 15 Feb 2027; 16 pages LIPIcs; lightweight double-blind; the call says porting a proof to another prover yields no new insight by default, and forbids substantial AI-generated text in the paper).
+
+## B. Measured baseline results (summaries of baselines/*/RESULTS.md, 21-22 Nov 2026)
+
+Common setup: Candle `proves_sound` kernel closure, reduced HOL4 package (CakeML 48ee98a7, HOL4 9783a499), 10 theories, 278 target theorems, 114 definitions, 3 inductive relations, 6 datatypes. Lean 4.28.0 + Batteries only, no Mathlib. Two stages: one agent writes all definitions plus CONVENTIONS.md; four agents in parallel write the 278 statements, all proofs `sorry`. Translators saw full HOL4 scripts including proofs. Kernel check: exactly the 278 targets depend on sorryAx; everything else uses only propext, Classical.choice, Quot.sound. Transcript scans found no web/git/out-of-workspace access (some scratch files in /tmp). Training data of all models may include public CakeML.
+
+1. **Fable 5.2** (claude-fable-5-2): 40 min, ~$30.60 API-equivalent. Three Claude Opus 5.5 auditors (briefs listing study-1 defect classes): 0 defects, 0 suspects, 27 notes. Modelling: 8-bit char structure, HOL4's own finite-map representation, unspecified values (HD [], dest_var, RESULT, CLASH) as Classical.epsilon of the spec; type_lt/term_lt as least relations closed under rules (nested LEX rejected by Lean inductive). A separate Gemini review found one type-signature discrepancy (unused bound variable typed concretely) no Claude audit reported.
+
+2. **Opus 5.5** (claude-opus-5-5), same briefs: 45 min, ~$18.66. Three Opus auditors: 0/0/22 notes. Metaprogram-based comparison with Fable: no meaning difference; 245/278 statements identical after normalisation; Fable more literal in 8 places, Opus in 2. Opus fixes HD [], dest_var, RESULT/CLASH on wrong constructor to a single ARB (so `HD [] = ARB` is provable in Opus only; no target affected). Auditors claimed this is HOL4 "pattern completion"; HOL4 check showed these definitions leave cases unspecified (Prim_rec). Type-signature deviations from HOL4 in targets: Fable 1, Opus 3 (all equivalent). Context leak: harness attached two author chat messages to every agent (saying Fable was "almost perfect, one minor type-signature discrepancy"); two auditors referenced it. HOL4 queries settled pair_inj overload, unspecified values, type signatures, ML-built statements.
+
+3. **Opus 5.5, no lessons**: briefs with every study-1 edge-case list removed. 40 min, ~$15.34. Opus-agent comparison with Opus baseline: 0 of 278 statements and 0 definitions differ in meaning; 231 identical, 47 form-only. Still chose 8-bit char, HOL4 finite-map representation, opaque ARB, Hilbert choice. No audit brief used: check is comparison with audited baseline. Stage-2 agents received four unrelated author chat messages.
+
+4. **Sonnet 5.5** (claude-sonnet-5-5), with-lessons briefs: ~26 min agent time, ~$7.21. Compiles after one name fix at merge (shadowing of RACONV across two agents' files). Comparison: 0 of 278 statements differ in meaning; 227 identical, 51 form-only. Sonnet fixes some unspecified values (RESULT (Clash t) = t, CHR n = CHR 0 for n>=256, FUN_FMAP infinite = FEMPTY) - each a model of the HOL4 spec. The Opus comparison agent wrongly claimed RESULT (Clash t) is fixed to ARB by pattern completion; HOL4 refuted it. Third Claude auditor making that claim.
+
+Additional: Fable 5.2 proved 269/269 type-soundness theorems from the study-1 sorry benchmark in 62 min (~$60) without help.
+
+Note: "no meaning defects" in 2-4 is judged by Claude auditors/comparison agents plus targeted HOL4 queries; the 278 statements have not been proved in Lean yet.
+
+## C. The study plan, version 3.2 (LaTeX source)
+
+﻿\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}\usepackage{lmodern}
+\usepackage[margin=2.2cm]{geometry}
+\usepackage{booktabs,tabularx,enumitem,xcolor}
+\usepackage[hidelinks]{hyperref}
+\newcommand{\code}[1]{\texttt{#1}}
+\setlist{itemsep=2pt,topsep=3pt}
+\title{Migrating CakeML from HOL4 to Lean~4 with a three-family AI workflow: study plan}
+\author{Draft, version 3.2, 22 November 2026}
+\date{}
+\begin{document}\sloppy
+\maketitle
+
+\noindent This version replaces plan version~2 (13 November 2026, \code{rerun\_plan/plan.tex}). The changes are:
+\begin{itemize}
+\item The workflow has no human expert.
+\item Three model families take the three roles.
+\item Aristotle is no longer used, because it does not accept Lean projects at present.
+\item An audit experiment with seeded defects measures how well the checking works.
+\end{itemize}
+
+\section{Goal and framing}
+The FormaliSE 2027 experience report (study~1) migrated CakeML's type soundness closure, 269 theorems, from HOL4 to Lean~4. Its workflow had three steps:
+\begin{enumerate}
+\item A Claude agent translated.
+\item A validator from another model family (Gemini) reported possible defects.
+\item A human expert triaged and adjudicated every finding before a repair.
+\end{enumerate}
+Proof attempts later exposed defects that this review had missed.
+
+This study builds on study~1 and tests whether its workflow holds. It runs the same workflow on a second development, Candle's soundness theorem \code{proves\_sound}, with one change: an AI reviewer from a third model family takes the human expert's seat. It adds three things study~1 lacked:
+\begin{enumerate}
+\item A measured audit. Known defects are seeded into a clean translation, and we count how many each checking setup finds and how many false alarms it raises.
+\item Ground truth from HOL4 and Lean. HOL4 runs and Lean counterexamples check claims about meaning, so the study does not rely on a model's word.
+\item A full ledger of tokens, money and time from day one.
+\end{enumerate}
+The paper is a full research paper. The target is ITP 2027 (Glasgow, 3--6 August 2027; regular paper, 16 pages plus references, LIPIcs, lightweight double-blind). Abstract due 8 February 2027, paper due 15 February 2027 (AoE), notification 26 April. CICM 2027 (about 1 April) is the fallback. The ITP call allows preprints, asks for anonymised supplementary material with the formalisation, does not allow substantial passages of AI-generated text in the paper, and requires the AI use to be disclosed in the main text.
+
+\section{What is known already}
+Three runs on the Candle closure and the study-1 closure set the starting point.
+\begin{itemize}
+\item \textbf{Direct translation by Claude Fable 5.2} (21 Nov): all 278 kernel-closure statements, with \code{sorry} proofs. It took 40 minutes and cost about US\$31 at API prices. Audit: 0 defects, 0 suspects, 27 notes.
+\item \textbf{Direct translation by Claude Opus 5.5} (22 Nov, same briefs): 45 minutes, about US\$19. Audit: 0 defects, 0 suspects, 22 notes. A comparison found no difference in meaning from Fable. In form, Fable follows the HOL4 text more literally in 8 places and Opus in 2.
+\item \textbf{Proving by Fable 5.2} (21 Nov): 269 of 269 type-soundness theorems from the study-1 \code{sorry} benchmark, in 62 minutes, without help.
+\item \textbf{Audit weaknesses seen.}
+  \begin{itemize}
+  \item Two Claude auditors gave the same wrong reason for a correct verdict. They said that HOL4 fills missing cases of \code{dest\_var} with \code{ARB}, but these definitions go through \code{Prim\_rec}, which leaves those cases unspecified.
+  \item A Gemini review found one type-signature difference in Fable's translation, which no meaning-level audit had reported.
+  \item The audits ran in the same session as the project chat, and the harness passed two chat messages to every agent.
+  \end{itemize}
+\end{itemize}
+These runs show two things. First, a strong single model now translates this closure with few or no meaning defects, so the workflow's value has to be shown by what its checks catch, not by the raw translation. Second, the checks themselves need measuring, because same-family auditors can share mistakes.
+
+\section{Scope}
+\paragraph{Phase 1 (this paper): Candle \code{proves\_sound}.}
+\begin{itemize}
+\item The package is already frozen: the reduced HOL4 package in \code{candle-hol4-lean4-study/package/}, at CakeML \code{48ee98a7}, HOL4 \code{9783a499} and Poly/ML 5.9.2.
+\item It has 10 theories and 278 kernel-closure theorems, plus the definitions they need (114 definitions, 3 inductive relations and 6 datatypes listed as a minimum).
+\item The canonical manifest is the 278 kernel-closure theorems.
+\end{itemize}
+
+\paragraph{Phase 2 (after this paper): more of CakeML.} See Section~\ref{sec:phase2}. Migrating all of CakeML (about 1{,}000 theory scripts) cannot finish by February. Phase~1 measures the cost per theorem, from which Phase~2 can be sized.
+
+\section{Roles and models}
+\begin{table}[h]\small
+\begin{tabularx}{\textwidth}{@{}lllX@{}}
+\toprule
+Role & Family & Model & Task\\
+\midrule
+Translator & Anthropic & Claude Opus 5.5 (\code{claude-opus-5-5}), high effort & Definitions and statements, in two stages as in the baselines (one agent for definitions, four for statements); repairs.\\
+Validator & OpenAI & GPT-6.2 Astra (latest Codex model) via Codex CLI & Compares each Lean declaration with its HOL4 source and reports possible defects with evidence.\\
+Reviewer & Google & Gemini Neon via the \code{agy} CLI & Takes the human expert's role. Accepts or rejects each finding with a reason, then triages accepted findings into repair, by-design difference, or note.\\
+Prover 1 & Anthropic & Claude Opus 5.5, high effort & Fills \code{sorry} proofs. Never sees HOL4 proofs.\\
+Prover 2 & OpenAI & GPT-6.2 Astra via Codex CLI & Same task and files, run separately, to see whether proving depends on the family.\\
+Oracle & (none) & HOL4 and the Lean kernel & Settles questions about meaning. Checks builds, axioms and unchanged statements.\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\paragraph{Why these roles.}
+\begin{itemize}
+\item Each step is checked by a different family from the one whose output it reads. The validator (OpenAI) reads Claude's translation, and the reviewer (Google) judges the validator's findings.
+\item This keeps study~1's structure, with one model finding issues and another party deciding them. Only the decider changes: Neon replaces the human expert.
+\item Keeping the validator and the reviewer apart means each can be measured on its own (Section~\ref{sec:audit}).
+\end{itemize}
+
+\paragraph{Translator choice (decided 22 Nov).} Opus 5.5, with the two-stage method of the baselines. It reached the same meaning-level result as Fable 5.2 at about 60\% of the cost. Fable 5.2's translation stays as a second baseline.
+
+\paragraph{Where it runs (decided 22 Nov).} The whole migration runs on the author's PC, because the Codex and \code{agy} credentials must not go to a cloud machine. HOL4 runs there in the pinned Docker image (\code{docker/Dockerfile}). All plans, briefs, scripts, records and results live in the organization repository \code{HOL4-to-Lean-4/candle-hol4-lean4-study}.
+
+\paragraph{To record at the freeze.} The exact Codex model string for GPT-6.2 Astra, the Neon model name that \code{agy} reports, reasoning settings, and the Codex and \code{agy} versions. They stay fixed for the whole study.
+
+\section{Workflow}
+\begin{enumerate}
+\item \textbf{Freeze.} Pin the commits, the manifest, the briefs, the model identifiers and settings, and the budgets. Record their hashes in the repository before any model sees the target.
+
+\item \textbf{Isolation.} Every model run starts in a fresh session on the PC that holds only its workspace. Claude runs use headless Claude Code (\code{claude -p}) in a separate directory, not a project-chat session, so that no chat message can reach an agent. Codex and \code{agy} runs get only their input files. A script scans every transcript for paths outside the workspace and for web or git use.
+
+\item \textbf{Translation (round 0).} This repeats the baseline procedure: stage~1 (all definitions plus \code{CONVENTIONS.md}), then stage~2 (four agents writing the statements). The translators see the full HOL4 scripts, proofs included. The result must build, and a kernel check confirms that exactly the 278 targets use \code{sorry}.
+
+\item \textbf{Structural scans} run on every revision:
+\begin{itemize}
+\item statements that are \code{True} or vacuous;
+\item definitions without bodies, and uses of \code{partial}, \code{opaque}, \code{axiom}, \code{native\_decide} or \code{decreasing\_by sorry};
+\item extra or missing typeclass hypotheses;
+\item bound variables whose type differs from HOL4's inferred type;
+\item byte identity of frozen statements.
+\end{itemize}
+
+\item \textbf{Validation round $k$.}
+\begin{itemize}
+\item Astra audits the whole translation, module by module, against the HOL4 scripts and library sources.
+\item The prelude is paired with the HOL4 library from round~1.
+\item Each round runs three times with the same input, so we can measure run-to-run variation. Findings are merged by declaration.
+\end{itemize}
+
+\item \textbf{Evidence rule.} Every finding must cite the Lean and HOL4 lines and say what would show the difference: a Lean counterexample, a HOL4 query, or a proof. A finding without that is marked unverified, but is still passed on.
+
+\item \textbf{Review.}
+\begin{itemize}
+\item Neon receives each finding with the HOL4 and Lean pair and written instructions, the same material the human expert received in study~1.
+\item It returns accept or reject with a reason. For each accepted finding it gives the class (defect, by design, misread convention, misquote) and the repair it proposes.
+\item No finding changes the translation without an accept from Neon.
+\end{itemize}
+
+\item \textbf{Grounding.}
+\begin{itemize}
+\item For every accepted finding that makes a claim about meaning, a script runs the cited check: \code{\#eval} or \code{decide} in Lean, or a query in HOL4 (Section~\ref{sec:hol4}).
+\item If the check contradicts the finding, the finding goes back to Neon once, with the check output.
+\item We record every case where the check overturns the reviewer.
+\end{itemize}
+
+\item \textbf{Repair.} Claude repairs accepted defects with a minimal edit. Each repair is re-checked by the structural scans and by Astra on the changed declarations only.
+
+\item \textbf{Stopping rule.} The loop stops in the first round in which no finding survives review and grounding, with at most 5 rounds.
+
+\item \textbf{Proving round 1} (Section~\ref{sec:proving}).
+
+\item \textbf{Back to review.} Every defect that a proof attempt exposes, such as a false statement, a missing hypothesis or an unprovable definition equation, goes to Astra and Neon, then to repair. Counts are taken again on the repaired translation.
+
+\item \textbf{Proving round 2} on the repaired translation.
+
+\item \textbf{Records.} Session logs, commits, findings, verdicts, check outputs, the cost ledger and a scripted counter, all packaged as an anonymous Zenodo artifact.
+\end{enumerate}
+
+\section{HOL4 as oracle}\label{sec:hol4}
+Several open questions are about what HOL4 itself means. A model can only guess these, while HOL4 answers them directly. Examples:
+\begin{itemize}
+\item which overload \code{(a,b)} resolves to in \code{pair\_inj};
+\item what the statements that HOL4 builds with ML (\code{SIMP\_CONV}, \code{EVAL}, \code{CONJUNCTS}) are;
+\item whether \code{dest\_var (Const x ty) = ARB} is provable;
+\item the inferred type of an unused bound variable.
+\end{itemize}
+
+HOL4 runs on the PC in the pinned Docker image (\code{scripts/build.sh docker}). A cloud build from the same vendored sources (started 22 November) settles the open questions before the freeze. A small query tool loads the package theories and answers four kinds of question:
+\begin{itemize}
+\item print a theorem with its types;
+\item parse a term and show which constants it resolves to;
+\item evaluate a ground term;
+\item try a short proof.
+\end{itemize}
+Both the validator's evidence and the grounding step call it. Its log is part of the artifact.
+
+\section{Baselines and ablations}\label{sec:ablation}
+Both direct baselines (Fable 5.2, Opus 5.5) have no meaning defects on Candle. Their briefs, however, carry study~1's lessons: the translator briefs list the edge cases that went wrong before (division and modulus, truncated subtraction, characters, finite maps, choice and \code{ARB}), and the audit brief lists the defect kinds found in study~1. So final fidelity alone cannot separate the workflow from the baselines. Three additions measure where the quality comes from.
+\begin{enumerate}
+\item \textbf{No-lessons ablation (Opus 5.5).} The same two-stage run, with every study-1 lesson removed from the briefs; everything else is unchanged. Compared with the Opus baseline, it shows how much the lessons from study~1 contribute. Cost about US\$20.
+\item \textbf{A target with known real defects.} The study-1 type-soundness closure, where real defects are known (\code{CARD}; Euclidean instead of floored integer division). The no-lessons and with-lessons Opus runs are repeated there, so that ``near perfect'' is tested beyond Candle.
+\item \textbf{Cheaper translator (Sonnet 5.5), if the no-lessons Opus run is also clean.} Sonnet 5.5 runs the baseline procedure, and then the full workflow. The question is whether the workflow brings a cheaper translator to the quality of Opus at lower total cost.
+\end{enumerate}
+If the baselines stay near perfect, the workflow's value is certification: evidence that a translation can be trusted, and what that evidence costs. The seeded-defect experiment (Section~\ref{sec:audit}) measures this directly.
+
+\section{Audit experiment with seeded defects}\label{sec:audit}
+This experiment measures how well each checking setup works. It runs on the clean Opus 5.5 baseline translation, apart from the main workflow, so that its results do not depend on which defects the workflow happened to make.
+
+\paragraph{Mutants.} We seed known defects into copies of the clean translation. The defect types come from study~1 and from the classes the audit briefs name:
+\begin{itemize}
+\item numbers: division and modulus conventions, truncated subtraction;
+\item characters and strings: 8-bit \code{char} replaced by Unicode \code{Char};
+\item overloads: the HOL pair in place of the set-theory pair (\code{pair\_inj});
+\item hypotheses and quantifiers: a dropped hypothesis, a swapped quantifier, a strengthened conclusion;
+\item definitions: changed clause order for overlapping patterns; a library constant redefined so that it changes on infinite sets (the study-1 \code{CARD} case); a derived \code{BEq} in place of equality;
+\item type signatures: an unused binder at a fixed type, or an extra \code{[Nonempty]};
+\item unspecified values fixed to a default (\code{HD []}).
+\end{itemize}
+Each mutant must still build. A script records the mutation and its expected effect.
+
+We also add meaning-preserving rewrites as decoys: \code{UNCURRY} instead of a pattern match, \code{=} instead of \code{$\leftrightarrow$} on \code{Prop}, an equivalent recursion measure. A report on a decoy counts as a false alarm.
+
+\paragraph{Copies.} 6 copies, each with 6 seeded defects and 3 decoys placed at random (fixed seed, spread across modules). That gives 36 defects and 18 decoys in total. The auditors get the same brief as the baseline audits, with no hint that defects were seeded.
+
+\paragraph{Setups.} Five setups run on every copy:
+\begin{enumerate}[label=S\arabic*.]
+\item Astra alone (the validator).
+\item Neon alone.
+\item Opus 5.5 alone (same family as the translator).
+\item Astra followed by Neon review: the workflow as designed.
+\item Astra followed by Neon review, then grounding: the workflow with the oracle.
+\end{enumerate}
+
+\paragraph{Measures.} For each setup we report:
+\begin{itemize}
+\item the detection rate per defect type;
+\item false alarms on decoys and on unchanged code;
+\item how many reported reasons are wrong even when the verdict is right;
+\item cost and time.
+\end{itemize}
+We also report the overlap between families, to show which defects only one family catches.
+
+\paragraph{Budget.} 30 audit runs. At the baseline audit cost of about US\$9 per full audit this is roughly US\$270, plus grounding queries.
+
+\section{Proving}\label{sec:proving}
+Study~1's five proving workflows assumed Aristotle, which now rejects Lean projects. Proving uses Claude Opus 5.5 agents, as in the 21 November type-soundness test (which used Fable 5.2), and GPT-6.2 Astra as a second prover.
+\begin{itemize}
+\item The prover workspace holds only the Lean translation with \code{sorry} proofs, the prelude and the briefs. HOL4 scripts are removed.
+\item The prover may add lemmas but may not change frozen statements or definitions. The structural scans and a byte check enforce this.
+\item Three runs per round, each with a fixed budget: a wall-clock cap of 6 hours and a cap on output tokens.
+\item Measures, as in study~1: theorems proved locally, complete modulo admissions, a strict transitive audit, and unchanged statements. We also count statements found false and the defects that proofs expose.
+\item A second prover family: Astra through Codex runs the same three runs per round on the same files, to see whether proving results depend on the family.
+\end{itemize}
+
+\section{Research questions}
+\begin{enumerate}[label=RQ\arabic*.]
+\item Does study~1's workflow hold on a second development once an AI reviewer replaces the human expert? In particular, do proof attempts again expose defects that review missed?
+\item How well do the checking setups find known defects, and how many false alarms and wrong reasons do they produce? Does a validator plus reviewer from two other families beat a single auditor, and does HOL4 grounding change the result?
+\item How does the workflow's final translation compare with the direct-translation baselines (Fable 5.2, Opus 5.5) in defects, literalness and cost? How much of the baselines' quality comes from study~1's lessons in the briefs, and can the workflow bring a cheaper translator (Sonnet 5.5) to the same quality?
+\item How much do validation and proving vary across repeated runs?
+\item What does each step cost, in tokens, money and time, per accepted statement and per proved theorem?
+\end{enumerate}
+
+\section{Costs and token usage}
+Every model call goes into the ledger \code{ledger/costs.csv} from day one, as in the baselines. Each row records:
+\begin{itemize}
+\item phase, round, run and tool;
+\item the exact model identifier;
+\item start and end time;
+\item input, output, cache-read and cache-write tokens;
+\item the billed cost and the API-equivalent cost;
+\item the machine used.
+\end{itemize}
+The sources are:
+\begin{itemize}
+\item Claude: the per-message usage in the transcripts.
+\item Codex: the \code{turn.completed} and \code{token\_count} events.
+\item Gemini: the usage metadata of each response.
+\end{itemize}
+A script checks the ledger against the logs before each proving round, so that no run is missing.
+
+\section{Budget estimate}
+\begin{tabularx}{\textwidth}{@{}Xr@{}}
+\toprule
+Item & US\$ (API-equivalent)\\
+\midrule
+Round-0 translation (one Opus 5.5 run) & 20\\
+Validation: up to 5 rounds $\times$ 3 Astra runs & 100--250\\
+Review: Neon, one call per finding & 20--50\\
+Repairs and re-checks & 30--80\\
+Audit experiment: 30 audits plus grounding & 270--350\\
+No-lessons ablation on Candle and both Opus runs on the type-soundness closure & 60--100\\
+Sonnet 5.5 arm (baseline and workflow), if run & 100--250\\
+Claude proving: 2 rounds $\times$ 3 runs, at about \$40--150 per run (the Fable type-soundness test cost about \$60) & 360--900\\
+Astra prover, 2 rounds $\times$ 3 runs & 200--500\\
+\midrule
+Total & about 1{,}150--2{,}550\\
+\bottomrule
+\end{tabularx}
+
+\medskip\noindent Codex and Gemini may run under subscriptions; the ledger then gives API-equivalent costs. These numbers are estimates from the baselines and will be replaced by measured figures.
+
+\section{Timeline}
+\begin{tabularx}{\textwidth}{@{}lX@{}}
+\toprule
+23--29 Nov & HOL4 build and query tool in the cloud; settle the open HOL4 questions. Confirm the Astra and Neon ids and access. Set up isolated runs. Freeze.\\
+30 Nov--6 Dec & Round-0 translation, structural scans, validation round~1 (3 runs), review, grounding. Build the mutants.\\
+7--20 Dec & Validation and repair rounds until the stopping rule holds. Run the audit experiment (30 audits).\\
+21 Dec--3 Jan & Proving round~1 (3 runs) and audits.\\
+4--17 Jan & Review and repair of the defects that proofs expose; proving round~2. FormaliSE notification on 11 Jan.\\
+18--31 Jan & FormaliSE camera-ready (29 Jan). Analysis. \textbf{Go/no-go on 25 Jan}: if proving round~2 is not done, move to CICM.\\
+1--15 Feb & Write the ITP paper; abstract 8 Feb, paper and anonymous supplementary material 15 Feb (AoE).\\
+\bottomrule
+\end{tabularx}
+
+\section{Phase 2: more of CakeML}\label{sec:phase2}
+Phase~2 applies the same workflow, unchanged, to further closures in order of size, reusing the shared prelude and each repaired translation.
+\begin{enumerate}
+\item Study~1's type-soundness closure again, with the new workflow, as a direct comparison with study~1's human-expert result.
+\item \code{small\_big\_decs\_equiv} (21 scripts, 11 shared with type soundness; lazy lists and divergence).
+\item \code{completeness} of the parser (11 scripts; needs HOL4's PEG library).
+\item \code{infer\_prog\_sound} (26 scripts; unification and termination).
+\end{enumerate}
+Phase~1's ledger gives the cost and time per theorem for translation, validation, review and proving. Multiplied by the theorem count of a candidate closure, it sizes each Phase~2 target before it starts. Merging closures needs one shared prelude and one naming convention, which Phase~1's \code{CONVENTIONS.md} starts.
+
+\paragraph{Repository (decided 22 Nov).} Phase~2 lives in its own repository, \code{HOL4-to-Lean-4/cakeml-lean4}. The Candle repository stays the Phase~1 case study and the ITP artifact. Layout:
+\begin{itemize}
+\item \code{vendor/}: pinned CakeML, HOL4 and Poly/ML commits, and the Docker recipe for HOL4.
+\item \code{manifest/}: freeze pins, the theories in scope, dependency order and batch plan.
+\item \code{lean/}: one Lake project, one module per HOL4 theory, mirroring CakeML's directory tree.
+\item \code{workflow/}: briefs and scripts for translation, Astra validation, Neon review and HOL4 grounding, carried over from Phase~1.
+\item \code{runs/<batch>/}: transcripts, findings and reports per batch.
+\item \code{ledger/costs.csv}: same format as Phase~1.
+\item \code{plan/}: this plan's Phase~2 successor, in \LaTeX.
+\end{itemize}
+\paragraph{Order (decided 22 Nov).} By milestone theorems. Each milestone's dependency closure is translated bottom-up in dependency order, and modules already done by an earlier milestone are reused, not translated again. Each milestone ends with a usable, checked result, and the shared modules grow with every step. Sequence:
+\begin{enumerate}
+\item Semantics and type soundness (study~1's closure), with the new workflow.
+\item Candle \code{proves\_sound} (done in Phase~1; merged in).
+\item \code{small\_big\_decs\_equiv}, the parser's \code{completeness}, and \code{infer\_prog\_sound}, in order of new scripts.
+\item Larger milestones towards the compiler's top-level correctness theorem, sized from the ledger before each starts.
+\end{enumerate}
+
+\section{Threats to validity}
+\begin{itemize}
+\item \textbf{No human expert.} The reviewer's decisions are checked only by HOL4 and Lean grounding, by the seeded-defect experiment and by proofs. A meaning question that none of these can settle stays open and is reported as such. The author designs the protocol and reads the results, but does not adjudicate.
+\item \textbf{One target in Phase~1}, in one source logic, though a different one from study~1.
+\item \textbf{Seeded defects come from known classes.} The experiment measures detection of those classes, not of unknown ones.
+\item \textbf{Lessons in the prompts.} The baseline briefs list study~1's defect kinds; the no-lessons ablation measures their effect. In the Opus baseline, two chat messages of the author were also attached to the agents' context by the harness; runs from now on start agents in isolated sessions.
+\item \textbf{Training data.} CakeML and Candle are public, so all three model families may have seen them.
+\item \textbf{Model drift.} Model versions can change during the study. We pin identifiers and record dates.
+\end{itemize}
+
+\section{Decisions taken}
+\begin{enumerate}
+\item No human expert; Claude translates, Astra validates, Neon reviews (22 Nov).
+\item Translator Opus 5.5 with the two-stage method (22 Nov).
+\item Astra is the validator and also a second prover; Neon runs through the \code{agy} CLI (22 Nov).
+\item Everything runs on the author's PC; everything is kept in the organization repository (22 Nov).
+\item Target venue ITP 2027: abstract 8 Feb, paper 15 Feb 2027 (22 Nov, from the published call).
+\item Add the no-lessons ablation, the known-defect target and a conditional Sonnet 5.5 arm (22 Nov).
+\item Phase~2 gets its own repository, \code{cakeml-lean4}, and proceeds by milestone theorems (22 Nov).
+\end{enumerate}
+\end{document}

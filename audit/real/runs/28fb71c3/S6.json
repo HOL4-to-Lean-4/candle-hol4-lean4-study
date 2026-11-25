@@ -1,0 +1,46 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "The only BEq v instance is `fun _ _ => sorry`, a data-level sorry that ignores its arguments, not a missing proof. Every `==` on v is thus the same indeterminate Bool. Lean proves do_if a e1 e2 = do_if b e1 e2 and cannot return `some e2` via the else branch. HOL4 do_if distinguishes Boolv T from Boolv F. do_log, check_type BoolT, the_Boolv, compiler_agrees and do_eval are also affected."
+  },
+  {
+   "id": "F2",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "HOL4 `/` and `%` on int are int_div (integerScript.sml:1989, floor division) and int_mod (i - i/j*j). Lean core Int `/` and `%` are Euclidean, and no library module overrides them. They differ for negative divisors with a nonzero remainder: 7 and -2 give -4 and -1 in HOL4, but -3 and 1 in Lean. Only v2 = 0 is guarded, so do_arith IntT Div and Mod differ."
+  },
+  {
+   "id": "F3",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "HOL4's only defining clause is the_Litv_IntLit (Litv (IntLit i)) = i. No theorem in the package fixes other arguments, which are at best ARB. Lean's fallback `default` is 0, so the_Litv_IntLit (Loc true 0) = 0 holds by rfl, a specific equation HOL4 leaves open."
+  },
+  {
+   "id": "F4",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "HOL4's only defining clause is the_Litv_Word8 (Litv (Word8 w)) = w; other arguments are unspecified. word8 is UInt8, whose `default` is 0, so Lean proves the_Litv_Word8 (Loc true 0) = 0, which HOL4 leaves open."
+  },
+  {
+   "id": "F5",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "HOL4's only defining clause is the_Litv_Word64 (Litv (Word64 w)) = w; other arguments are unspecified. word64 is UInt64, whose `default` is 0, so Lean proves the_Litv_Word64 (Loc true 0) = 0, which HOL4 leaves open."
+  },
+  {
+   "id": "F6",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "HOL4's only defining clause is the_Litv_Float64 (Litv (Float64 w)) = w; other arguments are unspecified. Lean returns `default : UInt64` = 0, so it proves the_Litv_Float64 (Loc true 0) = 0, which HOL4 leaves open."
+  },
+  {
+   "id": "F7",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "HOL4's only defining clause is the_Litv_Char (Litv (Char c)) = c; other arguments are unspecified. Lean returns `default : Char` = 'A', so it proves the_Litv_Char (Loc true 0) = 'A', which HOL4 leaves open."
+  }
+ ]
+}

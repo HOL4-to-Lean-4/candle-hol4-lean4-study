@@ -1,0 +1,22 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "In listScript.sml:138, HD is defined via Prim_rec.new_recursive_definition (new_specification) with only HD (h::t) = h, leaving HD [] unconstrained. In List.lean:33-35, HD [] returns ARB, which Basic.lean:9 transparently defines as default. Thus Lean proves HD ([] : List Nat) = 0, a specific equation in the mapped vocabulary that HOL4 leaves open."
+  },
+  {
+   "id": "F2",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "In listScript.sml:2124, LAST_DEF is defined via Prim_rec.new_recursive_definition (new_specification) with only LAST (h::t) = if t = [] then h else LAST t. Since the singleton case returns h directly, HOL4 leaves LAST [] completely unconstrained. In List.lean:76-78, LAST [] returns ARB (transparently default in Basic.lean:9), so Lean proves LAST ([] : List Nat) = 0, which HOL4 leaves open."
+  },
+  {
+   "id": "F3",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "In rich_listScript.sml:274-286, SEG is introduced via Definition.new_specification with only three clauses: SEG 0 k l = [] and two cons-input clauses for SUC m. Although TAKE/DROP witnesses existence, new_specification discards the witness, leaving SEG (SUC m) k [] open. In List.lean:121-125, the branch | _ + 1, _, [] => [] lets Lean prove SEG 1 0 ([] : List Nat) = [], which HOL4 leaves open."
+  }
+ ]
+}

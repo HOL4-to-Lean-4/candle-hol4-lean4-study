@@ -1,0 +1,18 @@
+{
+ "module": "CandleLean.Prelude.String",
+ "checked": 33,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "HOL.CHR",
+   "lean": "lean/CandleLean/Prelude/String.lean:18",
+   "hol4": "hol4/HOL4-src/src/string/stringScript.sml:27",
+   "class": "V-C",
+   "explanation": "HOL4's CHR is the ABS function of the char type definition. It is specified only by char_BIJ: CHR (ORD a) = a, and n < 256 <=> ORD (CHR n) = n. Saved theorems (CHR_11, ORD_CHR_RWT, CHR_ONTO, ...) leave CHR n open for n >= 256, apart from ORD (CHR n) <> n; ORD_CHR_COMPUTE gives only a FAIL term there. The Lean definition is transparent and returns the character 0 for every n >= 256, so Lean proves CHR 256 = CHR 0, ORD (CHR 256) = 0 and CHR 256 = CHR 257, none of which HOL4 decides.",
+   "repair": "opaque CHR_unspec : Nat → char\ndef CHR (n : Nat) : char := if h : n < 256 then ⟨n, h⟩ else CHR_unspec n",
+   "confidence": 0.93,
+   "lean_check": "import CandleLean.Prelude.String\n\nexample : HOL.CHR 256 = HOL.CHR 0 := by\n  first\n    | rfl\n    | simp [HOL.CHR]\n\nexample : HOL.ORD (HOL.CHR 256) = 0 := by\n  first\n    | rfl\n    | simp [HOL.CHR, HOL.ORD]\n",
+   "hol4_check": "?f:num->char. (!a. f (ORD a) = a) /\\ (!r. r < 256 <=> (ORD (f r) = r)) /\\ f 256 <> f 0"
+  }
+ ]
+}

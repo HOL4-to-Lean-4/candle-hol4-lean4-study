@@ -1,0 +1,30 @@
+{
+ "module": "CandleLean.HolSyntaxLib",
+ "checked": 29,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "RESULT",
+   "lean": "lean/CandleLean/HolSyntaxLib.lean:28",
+   "hol4": "hol4/package/candle/syntax-lib/holSyntaxLibScript.sml:88",
+   "class": "V-C",
+   "explanation": "HOL4 gives only the clause RESULT (Result t) = t. The argument is a constructor pattern, so Definition goes through Defn.non_wfrec_defn and Prim_rec.new_recursive_definition (new_specification). The only saved characterising theorem is RESULT_def, and no ARB completion is made, so RESULT (Clash t) is left open. The Lean definition adds the clause Clash _ => ARB. Lean therefore proves RESULT (Clash t) = ARB, and RESULT (Clash x) = RESULT (Clash y) for all x, y, by rfl. Neither follows from RESULT_def in HOL4.",
+   "repair": "noncomputable def RESULT {α : Type u} [Nonempty α] : result α → α :=\n  Classical.epsilon (fun f : result α → α => ∀ t, f (Result t) = t)",
+   "confidence": 0.85,
+   "lean_check": "import CandleLean.HolSyntaxLib\n\ntheorem RESULT_Clash_ARB (x : Nat) : RESULT (Clash x) = (ARB : Nat) := rfl\n\ntheorem RESULT_Clash_const (x y : Nat) : RESULT (Clash x) = RESULT (Clash y) := rfl\n",
+   "hol4_check": "?f. (!t. f (Result t) = t) /\\ f (Clash 0n) <> f (Clash 1n)"
+  },
+  {
+   "id": "F2",
+   "declaration": "CLASH",
+   "lean": "lean/CandleLean/HolSyntaxLib.lean:32",
+   "hol4": "hol4/package/candle/syntax-lib/holSyntaxLibScript.sml:92",
+   "class": "V-C",
+   "explanation": "HOL4 gives only the clause CLASH (Clash t) = t, also made by Prim_rec.new_recursive_definition (new_specification). The saved CLASH_def leaves CLASH (Result t) open. The Lean definition adds the clause Result _ => ARB. Lean therefore proves CLASH (Result t) = ARB, CLASH (Result x) = CLASH (Result y) for all x, y, and, with RESULT, CLASH (Result x) = RESULT (Clash y), all by rfl. None of these follows from the theorems HOL4 saves.",
+   "repair": "noncomputable def CLASH {α : Type u} [Nonempty α] : result α → α :=\n  Classical.epsilon (fun f : result α → α => ∀ t, f (Clash t) = t)",
+   "confidence": 0.85,
+   "lean_check": "import CandleLean.HolSyntaxLib\n\ntheorem CLASH_Result_ARB (x : Nat) : CLASH (Result x) = (ARB : Nat) := rfl\n\ntheorem CLASH_Result_const (x y : Nat) : CLASH (Result x) = CLASH (Result y) := rfl\n",
+   "hol4_check": "?f. (!t. f (Clash t) = t) /\\ f (Result 0n) <> f (Result 1n)"
+  }
+ ]
+}

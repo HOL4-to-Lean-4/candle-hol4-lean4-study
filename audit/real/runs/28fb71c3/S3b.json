@@ -1,0 +1,90 @@
+{
+ "module": "LeanTypeSound.SemanticPrimitives",
+ "checked": 105,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "instBEqV",
+   "lean": "lean/LeanTypeSound/SemanticPrimitives.lean:31",
+   "hol4": "hol4/package/semanticPrimitivesScript.sml:1194",
+   "class": "V-P",
+   "explanation": "HOL4 compares values with real equality (v = Boolv T, st_v = s.compiler_state, st = st_v). Lean uses `==` from `BEq v := ⟨fun _ _ => sorry⟩`. This is missing data, not a missing proof: `==` is one unknown constant Bool that ignores its arguments. So do_if x e1 e2 = do_if y e1 e2 holds for all x and y, and do_if can never choose e2 over a different e1. HOL4 gives do_if (Boolv T) e1 e2 = SOME e1 and do_if (Boolv F) e1 e2 = SOME e2. The same defect breaks check_type BoolT, the_Boolv, do_log, compiler_agrees and do_eval. `BEq sem_env` on line 32 is equally bogus.",
+   "repair": "open Classical in\nnoncomputable instance : BEq v := ⟨fun a b => decide (a = b)⟩\nopen Classical in\nnoncomputable instance : BEq sem_env := ⟨fun a b => decide (a = b)⟩\n-- and mark the dependent definitions (check_type, the_Boolv, do_log, do_if, compiler_agrees, do_eval, do_test, do_arith, do_app) noncomputable",
+   "confidence": 0.93,
+   "lean_check": "import LeanTypeSound.SemanticPrimitives\n\nexample (a b c d : v) : (a == b) = (c == d) := rfl\n\nexample (x y : v) (e1 e2 : exp) : do_if x e1 e2 = do_if y e1 e2 := rfl\n",
+   "hol4_check": "do_if (Boolv T) e1 e2 = SOME e1 /\\ do_if (Boolv F) e1 e2 = SOME e2"
+  },
+  {
+   "id": "F2",
+   "declaration": "do_arith",
+   "lean": "lean/LeanTypeSound/SemanticPrimitives.lean:647",
+   "hol4": "hol4/package/semanticPrimitivesScript.sml:790",
+   "class": "V-P",
+   "explanation": "In the IntT Div and Mod cases HOL4 uses integer `/` and `%` (int_div, int_mod), which round towards minus infinity; the remainder takes the sign of the divisor. Lean's `/` and `%` on Int are Int.ediv and Int.emod (Euclidean, non-negative remainder). They differ for a negative divisor with a non-zero remainder. For 7 and -2, HOL4 gives 7 / -2 = -4 and 7 % -2 = -1, while Lean gives -3 and 1. Both lines 648 and 650 are wrong.",
+   "repair": "    | .Div, [v1, v2] => some (if v2 == 0 then .inl div_exn_v\n                               else .inr (.Litv (.IntLit (Int.fdiv v1 v2))))\n    | .Mod, [v1, v2] => some (if v2 == 0 then .inl div_exn_v\n                               else .inr (.Litv (.IntLit (Int.fmod v1 v2))))",
+   "confidence": 0.98,
+   "lean_check": "import LeanTypeSound.SemanticPrimitives\n\nexample : do_arith .Div .IntT [.Litv (.IntLit 7), .Litv (.IntLit (-2))] = some (Sum.inr (.Litv (.IntLit (-3)))) := by\n  first\n    | rfl\n    | simp [do_arith, the_Litv_IntLit]\n\nexample : do_arith .Mod .IntT [.Litv (.IntLit 7), .Litv (.IntLit (-2))] = some (Sum.inr (.Litv (.IntLit 1))) := by\n  first\n    | rfl\n    | simp [do_arith, the_Litv_IntLit]\n",
+   "hol4_check": "do_arith Div IntT [Litv (IntLit 7); Litv (IntLit (-2))] = SOME (INR (Litv (IntLit (-4)))) /\\ do_arith Mod IntT [Litv (IntLit 7); Litv (IntLit (-2))] = SOME (INR (Litv (IntLit (-1))))"
+  },
+  {
+   "id": "F3",
+   "declaration": "the_Litv_IntLit",
+   "lean": "lean/LeanTypeSound/SemanticPrimitives.lean:404",
+   "hol4": "hol4/package/semanticPrimitivesScript.sml:718",
+   "class": "V-C",
+   "explanation": "The HOL4 theorem the_Litv_IntLit_def has one clause, for Litv (IntLit i), and leaves every other argument unspecified. Lean returns `default` there, so it proves the_Litv_IntLit (Loc true 0) = 0.",
+   "repair": "opaque the_Litv_IntLit_undef : v → Int\n\ndef the_Litv_IntLit : v → Int\n  | .Litv (.IntLit i) => i\n  | x => the_Litv_IntLit_undef x",
+   "confidence": 0.93,
+   "lean_check": "import LeanTypeSound.SemanticPrimitives\n\nexample : the_Litv_IntLit (.Loc true 0) = 0 := by\n  first\n    | rfl\n    | simp [the_Litv_IntLit]\n",
+   "hol4_check": null
+  },
+  {
+   "id": "F4",
+   "declaration": "the_Litv_Word8",
+   "lean": "lean/LeanTypeSound/SemanticPrimitives.lean:408",
+   "hol4": "hol4/package/semanticPrimitivesScript.sml:722",
+   "class": "V-C",
+   "explanation": "The HOL4 theorem the_Litv_Word8_def has one clause, for Litv (Word8 w), and leaves every other argument unspecified. Lean returns `default` there, so it proves the_Litv_Word8 (Loc true 0) = 0.",
+   "repair": "opaque the_Litv_Word8_undef : v → word8\n\ndef the_Litv_Word8 : v → word8\n  | .Litv (.Word8 w) => w\n  | x => the_Litv_Word8_undef x",
+   "confidence": 0.93,
+   "lean_check": "import LeanTypeSound.SemanticPrimitives\n\nexample : the_Litv_Word8 (.Loc true 0) = 0 := by\n  first\n    | rfl\n    | decide\n    | simp [the_Litv_Word8]\n",
+   "hol4_check": null
+  },
+  {
+   "id": "F5",
+   "declaration": "the_Litv_Word64",
+   "lean": "lean/LeanTypeSound/SemanticPrimitives.lean:412",
+   "hol4": "hol4/package/semanticPrimitivesScript.sml:726",
+   "class": "V-C",
+   "explanation": "The HOL4 theorem the_Litv_Word64_def has one clause, for Litv (Word64 w), and leaves every other argument unspecified. Lean returns `default` there, so it proves the_Litv_Word64 (Loc true 0) = 0.",
+   "repair": "opaque the_Litv_Word64_undef : v → word64\n\ndef the_Litv_Word64 : v → word64\n  | .Litv (.Word64 w) => w\n  | x => the_Litv_Word64_undef x",
+   "confidence": 0.93,
+   "lean_check": "import LeanTypeSound.SemanticPrimitives\n\nexample : the_Litv_Word64 (.Loc true 0) = 0 := by\n  first\n    | rfl\n    | decide\n    | simp [the_Litv_Word64]\n",
+   "hol4_check": null
+  },
+  {
+   "id": "F6",
+   "declaration": "the_Litv_Float64",
+   "lean": "lean/LeanTypeSound/SemanticPrimitives.lean:416",
+   "hol4": "hol4/package/semanticPrimitivesScript.sml:730",
+   "class": "V-C",
+   "explanation": "The HOL4 theorem the_Litv_Float64_def has one clause, for Litv (Float64 w), and leaves every other argument unspecified. Lean returns `default` there, so it proves the_Litv_Float64 (Loc true 0) = 0.",
+   "repair": "opaque the_Litv_Float64_undef : v → word64\n\ndef the_Litv_Float64 : v → word64\n  | .Litv (.Float64 w) => w\n  | x => the_Litv_Float64_undef x",
+   "confidence": 0.93,
+   "lean_check": "import LeanTypeSound.SemanticPrimitives\n\nexample : the_Litv_Float64 (.Loc true 0) = 0 := by\n  first\n    | rfl\n    | decide\n    | simp [the_Litv_Float64]\n",
+   "hol4_check": null
+  },
+  {
+   "id": "F7",
+   "declaration": "the_Litv_Char",
+   "lean": "lean/LeanTypeSound/SemanticPrimitives.lean:420",
+   "hol4": "hol4/package/semanticPrimitivesScript.sml:734",
+   "class": "V-C",
+   "explanation": "The HOL4 theorem the_Litv_Char_def has one clause, for Litv (Char c), and leaves every other argument unspecified. Lean returns `default` there, so it proves the_Litv_Char (Loc true 0) = 'A'.",
+   "repair": "opaque the_Litv_Char_undef : v → Char\n\ndef the_Litv_Char : v → Char\n  | .Litv (.Char c) => c\n  | x => the_Litv_Char_undef x",
+   "confidence": 0.93,
+   "lean_check": "import LeanTypeSound.SemanticPrimitives\n\nexample : the_Litv_Char (.Loc true 0) = 'A' := by\n  first\n    | rfl\n    | decide\n    | simp [the_Litv_Char]\n",
+   "hol4_check": null
+  }
+ ]
+}

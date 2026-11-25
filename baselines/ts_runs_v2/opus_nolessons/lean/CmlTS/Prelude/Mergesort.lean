@@ -1,0 +1,93 @@
+import CmlTS.Prelude.List
+/-
+  HOL4 library constants: `mergesort`.
+-/
+set_option autoImplicit false
+
+namespace CmlTS
+open Classical
+
+universe u
+variable {α : Type u}
+
+/- HOL4: mergesort$sort2_tail
+   sort2_tail (neg:bool) R x y = if R x y <> neg then [x;y] else [y;x] -/
+noncomputable def sort2_tail (neg : Bool) (R : α → α → Prop) (x y : α) : List α :=
+  if decide (R x y) ≠ neg then [x, y] else [y, x]
+
+/- HOL4: mergesort$sort3_tail
+   sort3_tail (neg:bool) R x y z =
+    if R x y <> neg then
+      if R y z <> neg then [x;y;z]
+      else if R x z <> neg then [x;z;y]
+      else [z;x;y]
+    else if R y z <> neg then
+      if R x z <> neg then [y;x;z] else [y;z;x]
+    else [z;y;x] -/
+noncomputable def sort3_tail (neg : Bool) (R : α → α → Prop) (x y z : α) : List α :=
+  if decide (R x y) ≠ neg then
+    if decide (R y z) ≠ neg then [x, y, z]
+    else if decide (R x z) ≠ neg then [x, z, y]
+    else [z, x, y]
+  else if decide (R y z) ≠ neg then
+    if decide (R x z) ≠ neg then [y, x, z] else [y, z, x]
+  else [z, y, x]
+
+/- HOL4: mergesort$merge_tail
+   (merge_tail (negate:bool) R [] [] acc = acc) /\
+   (merge_tail negate R l [] acc = REV l acc) /\
+   (merge_tail negate R [] l acc = REV l acc) /\
+   (merge_tail negate R (x::l1) (y::l2) acc =
+     if R x y <> negate then merge_tail negate R l1 (y::l2) (x::acc)
+     else merge_tail negate R (x::l1) l2 (y::acc)) -/
+noncomputable def merge_tail (negate : Bool) (R : α → α → Prop) :
+    List α → List α → List α → List α
+  | [], [], acc => acc
+  | l, [], acc => REV l acc
+  | [], l, acc => REV l acc
+  | x :: l1, y :: l2, acc =>
+    if decide (R x y) ≠ negate then merge_tail negate R l1 (y :: l2) (x :: acc)
+    else merge_tail negate R (x :: l1) l2 (y :: acc)
+termination_by l1 l2 _ => l1.length + l2.length
+
+/- HOL4: mergesort$mergesortN_tail
+   (mergesortN_tail (negate :bool) R 0 l = []) /\
+   (mergesortN_tail negate R 1 (x::l) = [x]) /\
+   (mergesortN_tail negate R 1 [] = []) /\
+   (mergesortN_tail negate R 2 (x::y::l) = sort2_tail negate R x y) /\
+   (mergesortN_tail negate R 2 [x] = [x]) /\
+   (mergesortN_tail negate R 2 [] = []) /\
+   (mergesortN_tail negate R 3 (x::y::z::l) = sort3_tail negate R x y z) /\
+   (mergesortN_tail negate R 3 [x;y] = sort2_tail negate R x y) /\
+   (mergesortN_tail negate R 3 [x] = [x]) /\
+   (mergesortN_tail negate R 3 [] = []) /\
+   (mergesortN_tail negate R n l =
+     let len1 = DIV2 n in
+     let neg = ~negate in
+       merge_tail neg R (mergesortN_tail neg R (DIV2 n) l)
+                        (mergesortN_tail neg R (n - len1) (DROP len1 l)) [])
+   (The last clause applies to n >= 4 only.) -/
+noncomputable def mergesortN_tail (negate : Bool) (R : α → α → Prop) : Nat → List α → List α
+  | 0, _ => []
+  | 1, x :: _ => [x]
+  | 1, [] => []
+  | 2, x :: y :: _ => sort2_tail negate R x y
+  | 2, [x] => [x]
+  | 2, [] => []
+  | 3, x :: y :: z :: _ => sort3_tail negate R x y z
+  | 3, [x, y] => sort2_tail negate R x y
+  | 3, [x] => [x]
+  | 3, [] => []
+  | n + 4, l =>
+    let len1 := DIV2 (n + 4)
+    let neg := !negate
+    merge_tail neg R (mergesortN_tail neg R (DIV2 (n + 4)) l)
+      (mergesortN_tail neg R (n + 4 - len1) (l.drop len1)) []
+termination_by n _ => n
+decreasing_by all_goals simp only [DIV2]; omega
+
+/- HOL4: mergesort$mergesort_tail:  mergesort_tail R l = mergesortN_tail F R (LENGTH l) l -/
+noncomputable def mergesort_tail (R : α → α → Prop) (l : List α) : List α :=
+  mergesortN_tail false R l.length l
+
+end CmlTS

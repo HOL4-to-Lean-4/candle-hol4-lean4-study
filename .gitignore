@@ -14,3 +14,10 @@
 /lean/**/.lake/
 **/.lake/
 __pycache__/
+# Raw model transcripts (account details) and the scoring key (rebuilt by make_csv.py).
+audit/**/runs/**/*.raw
+audit/**/runs/**/*.err
+audit/**/runs/**/*.last
+*.jsonl.err
+run_*.jsonl
+/baselines/ts_runs_v2/scoring/key.csv

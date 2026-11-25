@@ -1,0 +1,16 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "reject",
+   "class": "none",
+   "reason": "Lean does not prove `select (fun _ : Bool => False) = ARB`. `Classical.epsilon` is defined via `strongIndefiniteDescription` and `indefiniteDescription`: the case split on existence occurs inside `Prop`, and `Classical.choice` is applied to the subtype `{x : Bool // (∃ y : Bool, False) → False}`, not to `Bool`. Because `Classical.choice` is uninterpreted across distinct types, Lean cannot equate that projection with `ARB`."
+  },
+  {
+   "id": "F2",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "In `Core.lean:22-24`, `THE` defines the `none` branch as `ARB`, so Lean proves `THE (none : Option Bool) = ARB` by reflexivity. In `optionScript.sml:176-179`, HOL4 defines `THE` via `new_recursive_definition` (`new_specification`), saving only `THE (SOME x) = x` and leaving `THE NONE` unconstrained across all saved theorems in `optionScript.sml`. Thus HOL4 leaves `THE (NONE : bool option) = ARB` open, making this a true conservativity violation."
+  }
+ ]
+}

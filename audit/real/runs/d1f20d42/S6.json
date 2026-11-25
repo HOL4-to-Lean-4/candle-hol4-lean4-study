@@ -1,0 +1,16 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "optionScript.sml:176 defines THE by new_recursive_definition on the sole clause THE (SOME x) = x. Prim_rec.sml:281 uses new_specification on exactly that clause, with no completion. Saved theorems I found on THE are guarded or about SOME; emit's THE_NONE is local and vacuous via FAIL. ARB is a separate, undefined constant (boolScript:245) mapped to Lean ARB. Lean's none clause makes THE none = ARB provable by rfl, which HOL4 leaves open."
+  },
+  {
+   "id": "F2",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "listScript.sml:138 gives only HD (h::t) = h. Defn.prim_mk_defn tries non_wfrec_defn first, which succeeds through Prim_rec.new_recursive_definition (new_specification on that clause, no ARB completion). Saved HD facts I found are guarded or do not fix HD []; emit's HD_NIL is local and vacuous via FAIL. Lean's extra clause proves HD [] = ARB by rfl, and so HD [] = THE none and out-of-range EL n l = ARB, all open in HOL4."
+  }
+ ]
+}

@@ -1,0 +1,30 @@
+{
+ "module": "CmlTS.SemanticPrimitivesProps",
+ "checked": 27,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "CmlTS.dest_Refv",
+   "lean": "lean/CmlTS/SemanticPrimitivesProps.lean:258",
+   "hol4": "hol4/package/semanticPrimitivesPropsScript.sml:165",
+   "class": "V-C",
+   "explanation": "HOL4 specifies only `dest_Refv (Refv v) = v`. Lean returns the same `ARB` for every other constructor. At element type `Bool`, Lean therefore proves that `W8array []` and `Varray []` have equal `dest_Refv` results. The HOL4 equation permits those results to be `true` and `false`, respectively.",
+   "repair": "private axiom dest_Refv_unspecified {α : Type} [Nonempty α] : store_v α → α\n\nnoncomputable def dest_Refv {α : Type} [Nonempty α] : store_v α → α\n  | .Refv v => v\n  | s => dest_Refv_unspecified s",
+   "confidence": 1,
+   "lean_check": "import CmlTS.SemanticPrimitivesProps\nopen CmlTS\n\nexample : dest_Refv (α := Bool) (.W8array []) = dest_Refv (α := Bool) (.Varray []) := rfl",
+   "hol4_check": null
+  },
+  {
+   "id": "F2",
+   "declaration": "CmlTS.FV_dec",
+   "lean": "lean/CmlTS/SemanticPrimitivesProps.lean:318",
+   "hol4": "hol4/package/semanticPrimitivesPropsScript.sml:220",
+   "class": "V-C",
+   "explanation": "HOL4 leaves `FV_dec` open on `Dmod`, `Dlocal`, and `Denv`. Lean returns one fixed set, `ARB`, for all three constructors and all their arguments. For example, Lean proves that `Dmod m []` and `Dlocal [] []` have equal free-variable sets for every `m`. The five HOL4 equations permit different sets on those inputs.",
+   "repair": "private axiom FV_dec_unspecified : dec → Set (ident modN varN)\n\nnoncomputable def FV_dec : dec → Set (ident modN varN)\n  | .Dlet _ p e => FV (.Mat e [(p, .Lit ARB)])\n  | .Dletrec _ defs => FV (.Letrec defs (.Lit ARB))\n  | .Dtype _ _ => ∅\n  | .Dtabbrev _ _ _ _ => ∅\n  | .Dexn _ _ _ => ∅\n  | d => FV_dec_unspecified d",
+   "confidence": 1,
+   "lean_check": "import CmlTS.SemanticPrimitivesProps\nopen CmlTS\n\nexample (m : modN) : FV_dec (.Dmod m []) = FV_dec (.Dlocal [] []) := rfl",
+   "hol4_check": null
+  }
+ ]
+}

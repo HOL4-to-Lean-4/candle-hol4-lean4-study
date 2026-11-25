@@ -1,0 +1,16 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "HOL4 introduces `instance` via `new_specification` (`gen_new_specification`), saving only the conditional theorem `instance_def`, which leaves `instance FEMPTY i name ty τ` unconstrained (flipping a satisfying Boolean function on `FEMPTY` preserves `instance_def`). Lean defines `instance_` transparently as `Classical.epsilon instance_spec`, so Lean proves by reflexivity that `instance_ FEMPTY i name ty τ` equals the Hilbert-choice witness, an equation in the mapped vocabulary that HOL4 leaves open."
+  },
+  {
+   "id": "F2",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "Because `termsem0` is curried with a nested pattern `Abs (Var x ty) b`, HOL4 compiles it via TFL tupling and deletes the auxiliary tupled constant (`delete_support`), saving only the four equations of `termsem_def` and `termsem_ind`. Thus HOL4 leaves `termsem0` open on malformed abstractions. Lean explicitly assigns `HOL.ARB` on those branches, proving `termsem0 mem tmsig i v (Abs (Const name ty) b) = ARB` (for nonempty `U`), violating conservativity."
+  }
+ ]
+}

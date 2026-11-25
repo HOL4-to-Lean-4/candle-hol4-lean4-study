@@ -1,0 +1,30 @@
+{
+ "module": "CmlTS.SemanticPrimitivesProps",
+ "checked": 27,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "dest_Refv",
+   "lean": "lean/CmlTS/SemanticPrimitivesProps.lean:45",
+   "hol4": "hol4/package/semanticPrimitivesPropsScript.sml:166",
+   "class": "V-C",
+   "explanation": "HOL4 specifies only `dest_Refv (Refv v) = v`. Lean returns the same `ARB` for every other constructor, so it proves that `dest_Refv` gives equal results on `W8array []` and `Varray []` at result type `Nat`. The HOL4 equation leaves those two results independent.",
+   "repair": "private opaque dest_Refv_unspecified {α : Type u} [Nonempty α] : store_v α → α := fun _ => ARB\n\ndef dest_Refv {α : Type u} [Nonempty α] : store_v α → α\n  | .Refv v => v\n  | s => dest_Refv_unspecified s",
+   "confidence": 1.0,
+   "lean_check": "import CmlTS.SemanticPrimitivesProps\n\nexample : dest_Refv (.W8array [] : store_v Nat) = dest_Refv (.Varray [] : store_v Nat) := rfl",
+   "hol4_check": null
+  },
+  {
+   "id": "F2",
+   "declaration": "FV_dec",
+   "lean": "lean/CmlTS/SemanticPrimitivesProps.lean:92",
+   "hol4": "hol4/package/semanticPrimitivesPropsScript.sml:220",
+   "class": "V-C",
+   "explanation": "HOL4 saves no `FV_dec` equation for `Dmod`, `Dlocal` or `Denv`. Lean returns the same `ARB` set on all three constructors. For example, it proves `FV_dec (.Dmod m []) = FV_dec (.Dlocal [] [])` for every module name `m`, although the HOL4 equations allow those sets to differ.",
+   "repair": "private opaque FV_dec_unspecified : dec → Set (Ident modN varN) := fun _ => ARB\n\ndef FV_dec : dec → Set (Ident modN varN)\n  | .Dlet _ p e => FV (.Mat e [(p, .Lit ARB)])\n  | .Dletrec _ defs => FV (.Letrec defs (.Lit ARB))\n  | .Dtype _ _ => ∅\n  | .Dtabbrev _ _ _ _ => ∅\n  | .Dexn _ _ _ => ∅\n  | d => FV_dec_unspecified d",
+   "confidence": 1.0,
+   "lean_check": "import CmlTS.SemanticPrimitivesProps\n\nexample (m : modN) : FV_dec (.Dmod m []) = FV_dec (.Dlocal [] []) := rfl",
+   "hol4_check": null
+  }
+ ]
+}

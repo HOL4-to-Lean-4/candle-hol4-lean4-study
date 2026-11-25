@@ -1,0 +1,30 @@
+{
+ "module": "CandleLean.Prelude.List",
+ "checked": 30,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "HD",
+   "lean": "lean/CandleLean/Prelude/List.lean:19",
+   "hol4": "hol4/HOL4-src/src/list/src/listScript.sml:138",
+   "class": "V-C",
+   "explanation": "HOL4 saves only HD (h::t) = h. This clause set takes the primitive-recursive path (Defn.non_wfrec_defn, then Prim_rec.new_recursive_definition, then new_specification), which adds no ARB clause for []. HD [] is therefore open; the saved theorems relating it to LAST (HD_REVERSE, LAST_REVERSE) require a non-empty list. Lean's clause `| [] => ARB` makes HD [] = ARB provable, and with LAST also HD [] = LAST []. EL inherits this, e.g. EL n [] = ARB. ARB being opaque does not help, because the equation with the mapped constant ARB is itself provable. OUTL and SEG avoid this by using Classical.epsilon over the saved clauses.",
+   "repair": "noncomputable def HD {α : Type u} [Nonempty α] : List α → α :=\n  Classical.epsilon (fun HD : List α → α => ∀ h t, HD (h :: t) = h)",
+   "confidence": 0.6,
+   "lean_check": "import CandleLean.Prelude.List\n\nexample {α : Type} [Nonempty α] : HD ([] : List α) = ARB := by simp [HD]\n",
+   "hol4_check": "?f:bool list -> bool. (!h t. f (h::t) = h) /\\ f [] <> ARB"
+  },
+  {
+   "id": "F2",
+   "declaration": "LAST",
+   "lean": "lean/CandleLean/Prelude/List.lean:55",
+   "hol4": "hol4/HOL4-src/src/list/src/listScript.sml:2124",
+   "class": "V-C",
+   "explanation": "HOL4's LAST_DEF has only the clause LAST (h::t) = if t = [] then h else LAST t, introduced by new_specification through the primitive-recursive path with no [] clause. LAST [] is therefore open. (FRONT, by contrast, has an explicit FRONT [] = [] clause in HOL4.) Lean's clause `| [] => ARB` makes LAST [] = ARB provable, and with the current HD also LAST [] = HD []. HOL4's saved theorems leave both equations open; HD_REVERSE, LAST_REVERSE and LAST_EL all require a non-empty list.",
+   "repair": "noncomputable def LAST {α : Type u} [Nonempty α] : List α → α :=\n  Classical.epsilon (fun LAST : List α → α =>\n    ∀ h t, LAST (h :: t) = if t = [] then h else LAST t)",
+   "confidence": 0.6,
+   "lean_check": "import CandleLean.Prelude.List\n\nexample {α : Type} [Nonempty α] : LAST ([] : List α) = ARB := by simp [LAST]\n\nexample {α : Type} [Nonempty α] : LAST ([] : List α) = HD [] := by simp [LAST, HD]\n",
+   "hol4_check": "?f:bool list -> bool. (!h t. f (h::t) = if t = [] then h else f t) /\\ f [] <> ARB"
+  }
+ ]
+}

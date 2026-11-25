@@ -1,0 +1,16 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "In Words.lean, word, n2w, w2n, FCP, and v2w take an unrestricted width n : Nat, admitting the singleton word 0 = BitVec 0, where w2n (n2w 1) = 0. In HOL4 (wordsScript.sml), every word type 'a word has positive width and satisfies word_1_n2w (w2n 1w = 1). Omitting a positive-width constraint such as [NeZero n] fails to preserve the HOL4 word domain and operations at n = 0."
+  },
+  {
+   "id": "F2",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "In Words.lean, dimindex (n : Nat) := n and dimword (n : Nat) := 2 ^ dimindex n accept 0 directly, yielding dimindex 0 = 0 and dimword 0 = 1. In HOL4, fcpScript.sml proves DIMINDEX_NONZERO (~(dimindex(:'a) = 0)) for every index type and wordsScript.sml proves ONE_LT_dimword (1 < dimword(:'a)). Without a nonzero constraint such as [NeZero n], both Lean definitions violate preservation on input 0."
+  }
+ ]
+}

@@ -1,0 +1,42 @@
+{
+ "module": "CandleLean.Prelude.List",
+ "checked": 44,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "HOL.HD",
+   "lean": "lean/CandleLean/Prelude/List.lean:34",
+   "hol4": "hol4/HOL4-src/src/list/src/listScript.sml:138",
+   "class": "V-C",
+   "explanation": "Lean proves `HD ([] : List Nat) = 0` because the empty branch returns `ARB`, which reduces to the default natural number. HOL4 saves only `HD (h::t) = h`. An empty-list value of 1 also satisfies that equation. The Lean choice propagates to `EL 0 []` through its defining equation.",
+   "repair": "private opaque hdNil {α : Type u} [Inhabited α] : α := default\n\ndef HD [Inhabited α] : List α → α\n  | [] => hdNil\n  | h :: _ => h",
+   "confidence": 1.0,
+   "lean_check": "import CandleLean.Prelude.List\nexample : HOL.HD ([] : List Nat) = 0 := rfl",
+   "hol4_check": "?f : num list -> num. (!h t. f (h::t) = h) /\\ f [] = 1"
+  },
+  {
+   "id": "F2",
+   "declaration": "HOL.LAST",
+   "lean": "lean/CandleLean/Prelude/List.lean:77",
+   "hol4": "hol4/HOL4-src/src/list/src/listScript.sml:2124",
+   "class": "V-C",
+   "explanation": "Lean proves `LAST ([] : List Nat) = 0`. HOL4's saved equation applies only to `h::t`. For a singleton it returns `h` directly, so computing the last element of a nonempty list never constrains `LAST []`.",
+   "repair": "private opaque lastNil {α : Type u} [Inhabited α] : α := default\n\ndef LAST [Inhabited α] : List α → α\n  | [] => lastNil\n  | h :: t => if t = [] then h else LAST t",
+   "confidence": 1.0,
+   "lean_check": "import CandleLean.Prelude.List\nexample : HOL.LAST ([] : List Nat) = 0 := by simp [HOL.LAST, HOL.ARB]",
+   "hol4_check": "?f : num list -> num. (!h t. f (h::t) = (if t = [] then h else f t)) /\\ f [] = 1"
+  },
+  {
+   "id": "F3",
+   "declaration": "HOL.SEG",
+   "lean": "lean/CandleLean/Prelude/List.lean:123",
+   "hol4": "hol4/HOL4-src/src/list/src/rich_listScript.sml:277",
+   "class": "V-C",
+   "explanation": "Lean proves `SEG 1 0 ([] : List Nat) = []`. HOL4 specifies every zero-length request, but both positive-length clauses require a cons input. The script uses `TAKE` and `DROP` to witness existence, then saves just the three specification clauses. They leave the positive-length result on an empty list open for each length and offset.",
+   "repair": "private opaque segNil {α : Type u} : Nat → Nat → List α := fun _ _ => []\n\ndef SEG : Nat → Nat → List α → List α\n  | 0, _, _ => []\n  | m + 1, k, [] => segNil m k\n  | m + 1, 0, x :: l => x :: SEG m 0 l\n  | m + 1, k + 1, _ :: l => SEG (m + 1) k l",
+   "confidence": 1.0,
+   "lean_check": "import CandleLean.Prelude.List\nexample : HOL.SEG 1 0 ([] : List Nat) = [] := by simp [HOL.SEG]",
+   "hol4_check": "?s : num -> num -> num list -> num list. (!k l. s 0 k l = []) /\\ (!m x l. s (SUC m) 0 (x::l) = x::s m 0 l) /\\ (!m k x l. s (SUC m) (SUC k) (x::l) = s (SUC m) k l) /\\ s 1 0 [] = [7]"
+  }
+ ]
+}

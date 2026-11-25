@@ -1,0 +1,16 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "In holSyntaxLibScript.sml, RESULT is defined via Prim_rec.new_recursive_definition (new_specification), saving only ∀t. RESULT (Result t) = t and leaving RESULT (Clash t) unconstrained (returning t satisfies it and separates Clash 0 from Clash 1). In HolSyntaxLib.lean, RESULT maps every Clash _ to the same ARB, so Lean proves RESULT (Clash 0) = RESULT (Clash 1) by reflexivity. This is a true V-C violation."
+  },
+  {
+   "id": "F2",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "In holSyntaxLibScript.sml, CLASH is defined via Prim_rec.new_recursive_definition (new_specification), saving only ∀t. CLASH (Clash t) = t and leaving CLASH (Result t) unconstrained (returning t satisfies it and separates Result 0 from Result 1). In HolSyntaxLib.lean, CLASH maps every Result _ to the same ARB, so Lean proves CLASH (Result 0) = CLASH (Result 1) by reflexivity. This is a true V-C violation."
+  }
+ ]
+}

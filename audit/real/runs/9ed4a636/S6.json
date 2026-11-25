@@ -1,0 +1,10 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "HOL4's single constructor clause succeeds through non_wfrec_defn, new_recursive_definition and new_specification, which save only dest_var (Var x ty) = (x,ty). No other theorem in the package constrains Const, Comb or Abs arguments. The Lean wildcard sends all of these to one ARB : mlstring × type, so dest_var (Const n ty) = dest_var (Comb s t) is provable by rfl. HOL4 leaves that equation open. An epsilon over the clause, as used for OUTL, avoids it."
+  }
+ ]
+}

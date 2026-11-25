@@ -1,0 +1,18 @@
+{
+ "module": "CmlTS.Prelude.List",
+ "checked": 32,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "HD",
+   "lean": "lean/CmlTS/Prelude/List.lean:34",
+   "hol4": "hol4/HOL4-src/src/list/src/listScript.sml:138",
+   "class": "V-C",
+   "explanation": "HOL4 defines HD only by `HD (h::t) = h`. Defn.sml's non_wfrec_defn tries Prim_rec.new_recursive_definition first, so the saved specification leaves HD [] open and adds no ARB clause. Lean's `[] => ARB` makes `HD [] = ARB` provable by rfl, at every nonempty type. ARB is itself a mapped constant. Through EL and TL, `EL n [] = ARB` also follows, whereas HOL4 only gives `EL n [] = HD []`. HD [] is thereby also identified with other ARB-valued defaults (e.g. FAPPLY FEMPTY x), an equation no HOL4 theorem found in the sources establishes.",
+   "repair": "opaque HD_NIL {α : Type u} [Nonempty α] : α\n\ndef HD {α : Type u} [Nonempty α] : List α → α\n  | h :: _ => h\n  | [] => HD_NIL",
+   "confidence": 0.75,
+   "lean_check": "import CmlTS.Prelude.List\n\nuniverse u\n\nexample {α : Type u} [Nonempty α] : HD ([] : List α) = ARB := rfl\n",
+   "hol4_check": "!v:'a. ?f:'a list -> 'a. (!h t. f (h::t) = h) /\\ (f [] = v)"
+  }
+ ]
+}

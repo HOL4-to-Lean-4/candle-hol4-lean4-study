@@ -1,0 +1,54 @@
+{
+ "module": "CmlTS.SemanticPrimitives",
+ "checked": 101,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "store_ffi",
+   "lean": "lean/CmlTS/SemanticPrimitives.lean:462",
+   "hol4": "hol4/package/semanticPrimitivesScript.sml:679",
+   "class": "V-P",
+   "explanation": "HOL4 orders type-abbreviation parameters by variable name, so `'ffi` precedes `'v`. Thus `(num,int) store_ffi` expands to `int store # num ffi_state`. Lean's `store_ffi Nat Int` puts `Nat` in the store and `Int` in the FFI state.",
+   "repair": "abbrev store_ffi (F : Type u) (V : Type v) : Type (max u v) := List (store_v V) × ffi_state F",
+   "confidence": 0.99,
+   "lean_check": "import CmlTS.SemanticPrimitives\n\nexample : store_ffi Nat Int = (List (store_v Nat) × ffi_state Int) := rfl",
+   "hol4_check": "∀s : (num,int) store_ffi. (s : int store # num ffi_state) = s"
+  },
+  {
+   "id": "F2",
+   "declaration": "thunk_op'",
+   "lean": "lean/CmlTS/SemanticPrimitives.lean:474",
+   "hol4": "hol4/package/semanticPrimitivesScript.sml:690",
+   "class": "V-P",
+   "explanation": "HOL4 uses only `Rval` in the successful branches, leaving the error payload type polymorphic. For example, allocating a thunk can return a `(v,num) result`. Lean fixes the error payload to `Value`, excluding that instantiation.",
+   "repair": "def thunk_op' {α : Type u} {ε : Type v} (st : List (store_v Value) × ffi_state α) (th_op : thunk_op) (vs : List Value) : Option ((List (store_v Value) × ffi_state α) × result Value ε) :=\n  match st with\n  | (s, t) =>\n    match th_op, vs with\n    | .AllocThunk m, [v] =>\n      let (s', n) := store_alloc (.Thunk m v) s\n      some ((s', t), .Rval (.Loc False n))\n    | .UpdateThunk m, [.Loc _ n, v] =>\n      match store_assign n (.Thunk m v) s with\n      | some s' => some ((s', t), .Rval (.Conv none []))\n      | none => none\n    | _, _ => none",
+   "confidence": 0.99,
+   "lean_check": null,
+   "hol4_check": "∀t m v. thunk_op ([],t) (AllocThunk m) [v] = SOME (([Thunk m v],t), (Rval (Loc F 0) : (v,num) result))"
+  },
+  {
+   "id": "F3",
+   "declaration": "do_if",
+   "lean": "lean/CmlTS/SemanticPrimitives.lean:872",
+   "hol4": "hol4/package/semanticPrimitivesScript.sml:1194",
+   "class": "V-P",
+   "explanation": "HOL4 returns either branch inside `SOME`, so the branches can have any common type. For example, `do_if (Boolv T) 1 2` returns `SOME 1` at type `num option`. Lean requires both branches to have type `exp`.",
+   "repair": "def do_if {α : Type u} (v : Value) (e1 e2 : α) : Option α :=\n  if v = Boolv True then some e1 else if v = Boolv False then some e2 else none",
+   "confidence": 1.0,
+   "lean_check": null,
+   "hol4_check": "do_if (Boolv T) (1:num) 2 = SOME 1"
+  },
+  {
+   "id": "F4",
+   "declaration": "build_constrs",
+   "lean": "lean/CmlTS/SemanticPrimitives.lean:875",
+   "hol4": "hol4/package/semanticPrimitivesScript.sml:1201",
+   "class": "V-P",
+   "explanation": "HOL4 uses each constructor's argument list only to compute its length, so its element type is polymorphic. A constructor paired with `[T; F]` receives arity 2. Lean requires a `List ast_t` and excludes this input.",
+   "repair": "def build_constrs {α : Type u} (stamp_n : Nat) (condefs : List (conN × List α)) :\n    List (conN × Nat × stamp) :=\n  MAP (fun cts => (cts.1, LENGTH cts.2, .TypeStamp cts.1 stamp_n)) condefs",
+   "confidence": 1.0,
+   "lean_check": null,
+   "hol4_check": "∀c : conN. build_constrs 7 [(c,[T; F])] = [(c,2,TypeStamp c 7)]"
+  }
+ ]
+}

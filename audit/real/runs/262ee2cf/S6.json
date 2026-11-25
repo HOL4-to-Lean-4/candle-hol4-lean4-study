@@ -1,0 +1,16 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "HOL4's single constructor-pattern clause succeeds in non_wfrec_defn via new_recursive_definition. The existence theorem keeps only the given clauses, so new_specification saves just dest_Refv (Refv v) = v; no WFREC/ARB definition arises and no other saved theorem mentions dest_Refv. Lean's `_ => ARB` proves dest_Refv (W8array ws) = ARB and dest_Refv (W8array ws) = dest_Refv (Varray vs), both left open in HOL4."
+  },
+  {
+   "id": "F2",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "The five non-recursive clauses have plain constructor patterns on dec, so new_recursive_definition succeeds (subsets of clauses are allowed) and new_specification saves only FV_dec_def. No saved theorem constrains FV_dec on Dmod, Dlocal or Denv; typeSysProps only mentions it in stale or local material. Lean's catch-all proves FV_dec (Dmod m ds) = ARB and FV_dec (Dmod m ds) = FV_dec (Denv n), left open in HOL4."
+  }
+ ]
+}

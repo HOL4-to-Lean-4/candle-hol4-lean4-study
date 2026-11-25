@@ -1,0 +1,16 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "int_div comes from new_specification with only a j ≠ 0 property. The int_div theorems I checked (integer, integer_word, Omega, int_arith, intreal, rat, cv_prim) are conditional or have nonzero divisors; total_int_div is a separate constant. Lean's shared ARB proves int_div 1 0 = int_div 2 0 and int_div i 0 = int_mod k 0, both left open in HOL4. Nonzero divisors agree (floor)."
+  },
+  {
+   "id": "F2",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "int_mod is specified only for j ≠ 0 (i - i / j * j). Saved theorems (INT_MOD_UNIQUE, INT_LESS_MOD, INT_MOD_P, INT_MOD_REDUCE etc.) imply or assume a nonzero divisor, so i % 0 is open for each i. Lean's shared ARB proves int_mod 1 0 = int_mod 2 0 and int_mod i 0 = int_div i 0, neither derivable in HOL4. Nonzero divisors agree."
+  }
+ ]
+}

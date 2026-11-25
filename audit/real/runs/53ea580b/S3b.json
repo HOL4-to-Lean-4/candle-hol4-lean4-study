@@ -1,0 +1,30 @@
+{
+ "module": "CmlTS.Prelude.Core",
+ "checked": 10,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "CmlTS.THE",
+   "lean": "lean/CmlTS/Prelude/Core.lean:24",
+   "hol4": "hol4/HOL4-src/src/coretypes/optionScript.sml:176",
+   "class": "V-C",
+   "explanation": "HOL4 specifies THE by the single clause THE (SOME x) = x (new_recursive_definition). No saved theorem in optionScript determines THE NONE. Lean adds the clause `none => ARB`, so `THE none = ARB` holds by rfl for every type. ARB translates HOL4's constant ARB, so this is a specific equation about THE outside its specification, which HOL4 leaves open. It also identifies THE NONE with any other constant the translation sends to ARB, such as HD [].",
+   "repair": "opaque THE_NONE {α : Type} [Nonempty α] : α\n\ndef THE {α : Type} [Nonempty α] : Option α → α\n  | some x => x\n  | none => THE_NONE",
+   "confidence": 0.7,
+   "lean_check": "import CmlTS.Prelude.Core\n\ntheorem the_none_check {α : Type} [Nonempty α] : CmlTS.THE (none : Option α) = CmlTS.ARB := rfl\n",
+   "hol4_check": null
+  },
+  {
+   "id": "F2",
+   "declaration": "CmlTS.ARB",
+   "lean": "lean/CmlTS/Prelude/Core.lean:7",
+   "hol4": "hol4/HOL4-src/src/bool/boolScript.sml:245",
+   "class": "V-C",
+   "explanation": "In HOL4, ARB is a bare new_constant with no axiom, and @ is constrained only by SELECT_AX (boolScript.sml:234), so (@x. F) = ARB is open on any type with two or more elements. Lean defines ARB as Classical.choice and select as Classical.epsilon. On an unsatisfiable predicate, epsilon reduces to Classical.choice of the same Nonempty proof, up to proof irrelevance. Lean therefore proves `select (fun _ => False) = ARB` at every type, and any select-defined constant equals ARB wherever its predicate is empty.",
+   "repair": "opaque ARB {α : Type} [Nonempty α] : α",
+   "confidence": 0.4,
+   "lean_check": "import CmlTS.Prelude.Core\n\ntheorem select_false_check {α : Type} [Nonempty α] : CmlTS.select (fun _ : α => False) = (CmlTS.ARB : α) := by\n  unfold CmlTS.select CmlTS.ARB Classical.epsilon Classical.strongIndefiniteDescription\n  split\n  all_goals first\n    | rfl\n    | (rename_i hp _; exact False.elim (Exists.elim hp fun _ h => h))\n    | (rename_i hp; exact False.elim (Exists.elim hp fun _ h => h))\n    | simp_all\n",
+   "hol4_check": null
+  }
+ ]
+}

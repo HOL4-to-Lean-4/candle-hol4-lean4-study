@@ -1,0 +1,16 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "HOL4 defines RESULT via Prim_rec.new_recursive_definition (new_specification), saving only ∀t. RESULT (Result t) = t and leaving RESULT (Clash t) completely unconstrained. In Lean, RESULT transparently defines the .Clash t branch as t, so Lean proves RESULT (Clash 0) = 0 by reduction, an equation HOL4's saved theorems leave open. This is a genuine V-C conservativity violation."
+  },
+  {
+   "id": "F2",
+   "verdict": "accept",
+   "class": "V-C",
+   "reason": "HOL4 defines CLASH via Prim_rec.new_recursive_definition (new_specification), saving only ∀t. CLASH (Clash t) = t and leaving CLASH (Result t) completely unconstrained. In Lean, CLASH transparently defines the .Result t branch as t, so Lean proves CLASH (Result 0) = 0 by reduction, an equation HOL4's saved theorems leave open. This is a genuine V-C conservativity violation."
+  }
+ ]
+}

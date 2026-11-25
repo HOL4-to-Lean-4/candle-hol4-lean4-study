@@ -1,0 +1,90 @@
+{
+ "module": "LeanTypeSound.SemanticPrimitives",
+ "checked": 103,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "instBEqV",
+   "lean": "lean/LeanTypeSound/SemanticPrimitives.lean:31",
+   "hol4": "hol4/package/semanticPrimitivesScript.sml:1193",
+   "class": "V-P",
+   "explanation": "Equality on v is `fun _ _ => sorry`, one indeterminate Bool independent of its arguments. All definitions using `==` on v (check_type BoolT, the_Boolv, do_if, do_log, compiler_agrees, do_eval; HOL4 lines 194, 185, 704, 739, 535, 549) therefore lose HOL4's real equality. Lean proves do_if a e1 e2 = do_if b e1 e2 for all a, b. HOL4 has do_if (Boolv T) e1 e2 = SOME e1 and do_if (Boolv F) e1 e2 = SOME e2. Lean's do_if can never reach the else branch, since both tests are the same Bool. do_log, check_type BoolT and do_eval are similarly wrong. The sem_env instance on line 32 has the same defect but is unused in this module.",
+   "repair": "open Classical in\nnoncomputable instance : BEq v := ⟨fun a b => decide (a = b)⟩\nopen Classical in\nnoncomputable instance : BEq sem_env := ⟨fun a b => decide (a = b)⟩\n-- and mark the definitions that use them noncomputable",
+   "confidence": 0.9,
+   "lean_check": "import LeanTypeSound.SemanticPrimitives\n\nexample (a b : v) (e1 e2 : exp) : do_if a e1 e2 = do_if b e1 e2 := rfl\n",
+   "hol4_check": "e1 <> e2 ==> do_if (Boolv T) e1 e2 <> do_if (Boolv F) e1 e2"
+  },
+  {
+   "id": "F2",
+   "declaration": "do_arith",
+   "lean": "lean/LeanTypeSound/SemanticPrimitives.lean:648",
+   "hol4": "hol4/package/semanticPrimitivesScript.sml:790",
+   "class": "V-P",
+   "explanation": "In the IntT Div and Mod cases, HOL4's `/` and `%` on int are int_div and int_mod (integerScript.sml:1989, 2074). These are floor division and the matching modulus, whose sign follows the divisor. Lean's `/` and `%` on Int are Euclidean (ediv/emod), so the results differ when the divisor is negative and does not divide the dividend. For 7 and -2, HOL4 gives Div = -4 and Mod = -1; Lean gives Div = -3 and Mod = 1. The same error reaches do_app (Arith Div IntT) and (Arith Mod IntT).",
+   "repair": "    | .Div, [v1, v2] => some (if v2 == 0 then .inl div_exn_v\n                               else .inr (.Litv (.IntLit (Int.fdiv v1 v2))))\n    | .Mod, [v1, v2] => some (if v2 == 0 then .inl div_exn_v\n                               else .inr (.Litv (.IntLit (Int.fmod v1 v2))))",
+   "confidence": 0.96,
+   "lean_check": "import LeanTypeSound.SemanticPrimitives\n\nexample : do_arith .Div .IntT [.Litv (.IntLit 7), .Litv (.IntLit (-2))] = some (.inr (.Litv (.IntLit (-3)))) := by\n  first | rfl | simp [do_arith, the_Litv_IntLit]\n\nexample : do_arith .Mod .IntT [.Litv (.IntLit 7), .Litv (.IntLit (-2))] = some (.inr (.Litv (.IntLit 1))) := by\n  first | rfl | simp [do_arith, the_Litv_IntLit]\n",
+   "hol4_check": "do_arith Div IntT [Litv (IntLit 7); Litv (IntLit (-2))] = SOME (INR (Litv (IntLit (-4)))) /\\ do_arith Mod IntT [Litv (IntLit 7); Litv (IntLit (-2))] = SOME (INR (Litv (IntLit (-1))))"
+  },
+  {
+   "id": "F3",
+   "declaration": "the_Litv_IntLit",
+   "lean": "lean/LeanTypeSound/SemanticPrimitives.lean:404",
+   "hol4": "hol4/package/semanticPrimitivesScript.sml:718",
+   "class": "V-C",
+   "explanation": "The only equation HOL4 saves is the_Litv_IntLit (Litv (IntLit i)) = i; the value on every other v is unspecified. Lean uses `default`, so it proves for example the_Litv_IntLit (Loc true 0) = 0.",
+   "repair": "opaque the_Litv_IntLit_unspec : v → Int\ndef the_Litv_IntLit : v → Int\n  | .Litv (.IntLit i) => i\n  | x => the_Litv_IntLit_unspec x",
+   "confidence": 0.85,
+   "lean_check": "import LeanTypeSound.SemanticPrimitives\n\nexample : the_Litv_IntLit (.Loc true 0) = 0 := by first | rfl | decide\n",
+   "hol4_check": null
+  },
+  {
+   "id": "F4",
+   "declaration": "the_Litv_Word8",
+   "lean": "lean/LeanTypeSound/SemanticPrimitives.lean:408",
+   "hol4": "hol4/package/semanticPrimitivesScript.sml:722",
+   "class": "V-C",
+   "explanation": "The only equation HOL4 saves is the_Litv_Word8 (Litv (Word8 w)) = w; other arguments are unspecified. Lean uses `default`, so it proves for example the_Litv_Word8 (Loc true 0) = 0.",
+   "repair": "opaque the_Litv_Word8_unspec : v → word8\ndef the_Litv_Word8 : v → word8\n  | .Litv (.Word8 w) => w\n  | x => the_Litv_Word8_unspec x",
+   "confidence": 0.85,
+   "lean_check": "import LeanTypeSound.SemanticPrimitives\n\nexample : the_Litv_Word8 (.Loc true 0) = 0 := by first | rfl | decide\n",
+   "hol4_check": null
+  },
+  {
+   "id": "F5",
+   "declaration": "the_Litv_Word64",
+   "lean": "lean/LeanTypeSound/SemanticPrimitives.lean:412",
+   "hol4": "hol4/package/semanticPrimitivesScript.sml:726",
+   "class": "V-C",
+   "explanation": "The only equation HOL4 saves is the_Litv_Word64 (Litv (Word64 w)) = w; other arguments are unspecified. Lean uses `default`, so it proves for example the_Litv_Word64 (Loc true 0) = 0.",
+   "repair": "opaque the_Litv_Word64_unspec : v → word64\ndef the_Litv_Word64 : v → word64\n  | .Litv (.Word64 w) => w\n  | x => the_Litv_Word64_unspec x",
+   "confidence": 0.85,
+   "lean_check": "import LeanTypeSound.SemanticPrimitives\n\nexample : the_Litv_Word64 (.Loc true 0) = 0 := by first | rfl | decide\n",
+   "hol4_check": null
+  },
+  {
+   "id": "F6",
+   "declaration": "the_Litv_Float64",
+   "lean": "lean/LeanTypeSound/SemanticPrimitives.lean:416",
+   "hol4": "hol4/package/semanticPrimitivesScript.sml:730",
+   "class": "V-C",
+   "explanation": "The only equation HOL4 saves is the_Litv_Float64 (Litv (Float64 w)) = w; other arguments are unspecified. Lean uses `default`, so it proves for example the_Litv_Float64 (Loc true 0) = 0.",
+   "repair": "opaque the_Litv_Float64_unspec : v → word64\ndef the_Litv_Float64 : v → word64\n  | .Litv (.Float64 w) => w\n  | x => the_Litv_Float64_unspec x",
+   "confidence": 0.85,
+   "lean_check": "import LeanTypeSound.SemanticPrimitives\n\nexample : the_Litv_Float64 (.Loc true 0) = 0 := by first | rfl | decide\n",
+   "hol4_check": null
+  },
+  {
+   "id": "F7",
+   "declaration": "the_Litv_Char",
+   "lean": "lean/LeanTypeSound/SemanticPrimitives.lean:420",
+   "hol4": "hol4/package/semanticPrimitivesScript.sml:734",
+   "class": "V-C",
+   "explanation": "The only equation HOL4 saves is the_Litv_Char (Litv (Char c)) = c; other arguments are unspecified. Lean uses `default`, so it proves for example the_Litv_Char (Loc true 0) = 'A'.",
+   "repair": "opaque the_Litv_Char_unspec : v → Char\ndef the_Litv_Char : v → Char\n  | .Litv (.Char c) => c\n  | x => the_Litv_Char_unspec x",
+   "confidence": 0.85,
+   "lean_check": "import LeanTypeSound.SemanticPrimitives\n\nexample : the_Litv_Char (.Loc true 0) = 'A' := by first | rfl | decide\n",
+   "hol4_check": null
+  }
+ ]
+}

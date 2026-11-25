@@ -1,0 +1,30 @@
+{
+ "module": "CmlTS.SemanticPrimitivesProps",
+ "checked": 27,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "dest_Refv",
+   "lean": "lean/CmlTS/SemanticPrimitivesProps.lean:45",
+   "hol4": "hol4/package/semanticPrimitivesPropsScript.sml:165",
+   "class": "V-C",
+   "explanation": "HOL4 saves only `dest_Refv (Refv v) = v`. It is a one-clause primitive-recursive definition made by new_specification, so the values at W8array, Varray and Thunk are open and may differ by constructor and argument. Lean returns the single constant ARB there, so it proves by rfl equations HOL4 leaves open, for example `dest_Refv (W8array []) = dest_Refv (Varray [])` and `dest_Refv (Thunk m v) = dest_Refv (Thunk m' v')`.",
+   "repair": "opaque dest_Refv_unspec {α : Type u} [Nonempty α] : store_v α → α\n\ndef dest_Refv {α : Type u} [Nonempty α] : store_v α → α\n  | .Refv v => v\n  | x => dest_Refv_unspec x",
+   "confidence": 0.5,
+   "lean_check": "import CmlTS.SemanticPrimitivesProps\n\nexample : dest_Refv (α := Nat) (.W8array []) = dest_Refv (α := Nat) (.Varray []) := rfl\n",
+   "hol4_check": "?f : num store_v -> num. (!v. f (Refv v) = v) /\\ f (W8array []) <> f (Varray [])"
+  },
+  {
+   "id": "F2",
+   "declaration": "FV_dec",
+   "lean": "lean/CmlTS/SemanticPrimitivesProps.lean:92",
+   "hol4": "hol4/package/semanticPrimitivesPropsScript.sml:220",
+   "class": "V-C",
+   "explanation": "FV_dec_def has clauses only for Dlet, Dletrec, Dtype, Dtabbrev and Dexn. The values at Dmod, Dlocal and Denv are unspecified in HOL4 and may depend on constructor and arguments. Lean maps all three to the single constant ARB, so it proves by rfl equations HOL4 leaves open, for example `FV_dec (Dmod mn ds) = FV_dec (Denv n)` and `FV_dec (Dmod mn ds) = FV_dec (Dmod mn' ds')`.",
+   "repair": "opaque FV_dec_unspec : dec → Set (Ident modN varN)\n\ndef FV_dec : dec → Set (Ident modN varN)\n  | .Dlet _ p e => FV (.Mat e [(p, .Lit ARB)])\n  | .Dletrec _ defs => FV (.Letrec defs (.Lit ARB))\n  | .Dtype _ _ => ∅\n  | .Dtabbrev _ _ _ _ => ∅\n  | .Dexn _ _ _ => ∅\n  | d => FV_dec_unspec d",
+   "confidence": 0.5,
+   "lean_check": "import CmlTS.SemanticPrimitivesProps\n\nexample (mn : modN) (ds : List dec) (n : tvarN) : FV_dec (.Dmod mn ds) = FV_dec (.Denv n) := rfl\n",
+   "hol4_check": "?f : dec -> (modN,varN) id set. (!l p e. f (Dlet l p e) = FV (Mat e [(p,Lit ARB)])) /\\ (!l defs. f (Dletrec l defs) = FV (Letrec defs (Lit ARB))) /\\ (!l t. f (Dtype l t) = {}) /\\ (!l a b c. f (Dtabbrev l a b c) = {}) /\\ (!l a b. f (Dexn l a b) = {}) /\\ (!mn ds n. f (Dmod mn ds) <> f (Denv n))"
+  }
+ ]
+}

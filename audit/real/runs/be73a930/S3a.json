@@ -1,0 +1,18 @@
+{
+ "module": "CmlTS.TypeSysProps",
+ "checked": 94,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "type_def_to_ctMap",
+   "lean": "lean/CmlTS/TypeSysProps.lean:35",
+   "hol4": "hol4/package/typeSysPropsScript.sml:1502",
+   "class": "V-P",
+   "explanation": "HOL4's definition has no type annotations, and nothing in it constrains tvs, tn or id. Its type is (mlstring,mlstring,mlstring list # t) namespace -> num -> ('a # 'b # (mlstring # ast_t list) list) list -> 'c list -> (stamp # 'a # t list # 'c) list. Lean fixes 'a = List tvarN, 'b = mlstring and 'c = type_ident (Nat). So the Lean constant is one instance of the HOL4 constant, and mem_type_def_to_ctMap (line 715) and type_def_to_ctMap_mem (line 740) are special cases of HOL4's polymorphic theorems (script lines 1512 and 1594). Only ctMap_ok_type_defs forces these types. Elsewhere the translation keeps such polymorphism (ctors_of_tdef, fupdate2_union).",
+   "repair": "def type_def_to_ctMap {α : Type u} {β : Type v} {γ : Type w} (tenvT : Namespace modN typeN (List tvarN × Ty)) :\n    Nat → List (α × β × List (conN × List ast_t)) → List γ → List (stamp × (α × List Ty × γ))\n  | _, [], [] => []\n  | next_stamp, (tvs, _, ctors) :: tds, i :: ids =>\n    type_def_to_ctMap tenvT (next_stamp + 1) tds ids ++\n    REVERSE (MAP (fun cnts =>\n      (.TypeStamp cnts.1 next_stamp, (tvs, MAP (type_name_subst tenvT) cnts.2, i))) ctors)\n  | _, _, _ => ARB\n-- and generalise mem_type_def_to_ctMap / type_def_to_ctMap_mem over {α β γ}, with x : α × List Ty × γ, tds : List (α × β × List (conN × List ast_t)), ids : List γ",
+   "confidence": 0.4,
+   "lean_check": "import CmlTS.TypeSysProps\n\nnoncomputable example : Namespace modN typeN (List tvarN × Ty) → Nat →\n    List (List tvarN × mlstring × List (conN × List ast_t)) → List type_ident →\n    List (stamp × (List tvarN × List Ty × type_ident)) := @type_def_to_ctMap\n",
+   "hol4_check": "LENGTH (type_def_to_ctMap tenvT n [([]:num list, T, [(cn, [])])] [F]) = 1"
+  }
+ ]
+}

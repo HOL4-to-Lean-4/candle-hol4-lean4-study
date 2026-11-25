@@ -1,0 +1,22 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "In HOL4 (`evaluateScript.sml:14-17`), `fix_clock` only reads `s.clock` and updates `s'`, so its inferred type is `'a state -> 'b state # 'c -> 'b state # 'c` with independent FFI type variables. Lean (`Evaluate.lean:16-17`) unifies both states to one parameter `α`, strictly specializing the constant's domain and excluding cross-FFI-type inputs."
+  },
+  {
+   "id": "F2",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "In HOL4 (`evaluateScript.sml:23-28`), `do_eval_res` constructs only `Rerr (Rabort Rtype_error)` and `Rval (env1, decs)`, leaving the exception payload type of `result` polymorphic (`v list -> 'a state -> 'a state # (v sem_env # dec list, 'b) result`). Lean (`Evaluate.lean:28-32`) monomorphizes that parameter to `Value`, strictly specializing the HOL4 definition."
+  },
+  {
+   "id": "F3",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "In HOL4 (`evaluateScript.sml:291-297`), `fix_clock_do_eval_res` is saved polymorphically over every exception payload type `'b` of `do_eval_res`. Lean (`Evaluate.lean:316-318`) inherits the monomorphized `Value` error type from `do_eval_res`, making the theorem a strictly weaker special case of the HOL4 statement."
+  }
+ ]
+}

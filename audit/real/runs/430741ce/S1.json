@@ -1,0 +1,18 @@
+{
+ "module": "CandleLean.Prelude.Basic",
+ "checked": 28,
+ "findings": [
+  {
+   "id": "F1",
+   "declaration": "OUTL",
+   "lean": "lean/CandleLean/Prelude/Basic.lean:26",
+   "hol4": "hol4/HOL4-src/src/coretypes/sumScript.sml:286",
+   "class": "V-C",
+   "explanation": "At `Sum.inr () : Nat ⊕ Unit`, Lean proves by `rfl` that `OUTL` returns the value of the Hilbert-selected left inverse of `Sum.inl` at that input. HOL4 saves only `OUTL (INL x) = x`. With Hilbert choice held fixed, a function can satisfy that equation and return the successor of the selected function’s value at `INR ()`. The Lean definition therefore exposes an equation that the HOL4 specification leaves open.",
+   "repair": "noncomputable opaque OUTL_inr {α β : Type _} [Nonempty α] : β → α\n\nnoncomputable def OUTL {α β : Type _} [Nonempty α] : α ⊕ β → α\n  | .inl x => x\n  | .inr y => OUTL_inr y",
+   "confidence": 0.95,
+   "lean_check": "import CandleLean.Prelude.Basic\n\nexample : OUTL (Sum.inr () : Nat ⊕ Unit) =\n    (Classical.epsilon (fun f : Nat ⊕ Unit → Nat => ∀ x, f (.inl x) = x)) (.inr ()) := rfl",
+   "hol4_check": "?g : (num + unit) -> num. (!x. g (INL x) = x) /\\ g (INR ()) <> (@f : (num + unit) -> num. !x. f (INL x) = x) (INR ())"
+  }
+ ]
+}

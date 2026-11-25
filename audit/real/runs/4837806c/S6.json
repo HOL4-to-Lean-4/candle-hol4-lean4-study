@@ -1,0 +1,16 @@
+{
+ "verdicts": [
+  {
+   "id": "F1",
+   "verdict": "accept",
+   "class": "V-P",
+   "reason": "HOL4's relation ignores the identifier, and nothing (nsAll2, type_v, weakCT, weakS) constrains the namespaces' module and name types, so the theorem holds for arbitrary ('m,'n). Lean's library nsAll2/Namespace are equally polymorphic and no library constant forces modN/varN, yet Lean fixes tenv_val/env_val. Neighbouring lemmas, including local ones, keep HOL4's type variables. This is a proper, avoidable special case."
+  },
+  {
+   "id": "F2",
+   "verdict": "reject",
+   "class": "none",
+   "reason": "HOL4's type_ctor is polymorphic in its ignored argument, but the Lean library module TypeSoundInvariants maps it to a constant with Ident modN conN. Under that mapping, nsAll2 (type_ctor ctMap) forces Namespace modN conN. Lean states the theorem at the full generality of the mapped constant. The restriction comes from the library, and the proposed repair must discard type_ctor and inline its body."
+  }
+ ]
+}
