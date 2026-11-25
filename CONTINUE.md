@@ -17,8 +17,8 @@ Status: 25 November 2026. Read this file first, then `plan/v3/plan_v3.3.pdf` (dr
 5. Only for HOL4 queries: in WSL, clone to `~/candle_build/repo` and run `sh scripts/build.sh native` (about 16 minutes). `tools/hol4_query/README.md` says more.
 6. Only for new model runs: install and sign in to the `claude`, `codex` and `agy` CLIs on that PC. Do not copy credentials between PCs. Versions used: Claude Code 2.1.325, Codex CLI 0.169.0, agy 1.5.16.
    `run.py`, `drive.sh` and `launch.sh` contain `D:\Git\bin\bash.exe`; change it to where Git is on the new PC.
-7. Only to rebuild the audit units: `python audit/real/build_units.py` writes `E:\auditreal` (63 units, about 2 GB) and rewrites `audit/real/key.json`; `git diff` should then show only the one correction described in `audit/real/RESULTS.md`.
-   Restore the file with `git checkout audit/real/key.json`. The pilot's `build_units.py` writes `E:\auditwork`; `pilot/ground.py` and `mk_decoy.py` use it.
+7. Only to rebuild the audit units: `python audit/real/build_units.py` writes `E:\auditreal` (63 units, about 2 GB) and rewrites `audit/real/key.json`; `git diff` should then show no change in it (the one correction to the key is made in `final.py`).
+   The pilot's `build_units.py` writes `E:\auditwork`; `pilot/ground.py` and `mk_decoy.py` use it.
 
 ## Where things are
 
@@ -33,7 +33,7 @@ Status: 25 November 2026. Read this file first, then `plan/v3/plan_v3.3.pdf` (dr
 | Audit pilot, audit on real errors | `audit/pilot`, `audit/real` |
 | Proving runs with HOL4 proofs (broke the plan's rule) | `proving`, `proving_ts` |
 | Proving runs without HOL4 proofs (the valid ones) | `proving_nohol4` |
-| Costs of every run | `ledger/costs.csv` |
+| Costs of the model runs (some scoring agents are missing: `baselines/ts_runs_v2/RESULTS.md`) | `ledger/costs.csv` |
 
 ## Done so far
 
@@ -50,8 +50,9 @@ Status: 25 November 2026. Read this file first, then `plan/v3/plan_v3.3.pdf` (dr
    **`make_csv.py` overwrites `scoring_sheet.csv`: copy the filled sheet first.**
 2. Plan v3.3 is a draft. `plan/v3/plan.tex` (version 3.2) stays the adopted text until the author adopts v3.3.
 3. `interprets0` in the Candle base is still too specific (known, not repaired).
-4. 60 equivalent-change decoys have no proof; only needed if the mutant experiment goes on.
-5. One run per cell everywhere, so there are no variance estimates.
+4. Of the 60 equivalent-change decoys, only the two used in the pilot have a proof; only needed if the mutant experiment goes on.
+5. One run per cell, except two Opus audit runs, so there are no variance estimates.
+6. Readiness: Astra's answer of 25 November is in `plan/v3/readiness_astra_2026-11-25.md` (it discusses results by arm: read it after scoring).
 
 ## Rules the author set
 

@@ -33,7 +33,7 @@ One correction to the key after the run: the integer-division error of study 1 w
 
 New true errors: Candle Sonnet `PERMUTES` (demands more than HOL4; checked in Lean and HOL4), `instance_`, `termsem`, `FAPPLY`; Candle Fable `termsem0`; TS Sonnet `thunk_op'`, `tenv_val_ok_nsEmpty`, `tenv_ctor_ok_nsEmpty`,
 `tenv_abbrev_ok_nsEmpty`, `type_env_conv_thm`, `fix_clock_do_eval_res`. The five Candle ones have Lean checks in `proofs/`; the six TS ones were confirmed by comparing the HOL4 types with the Lean ones.
-Fable, for which the earlier test of named constants found no V-C, has one. The key was incomplete, so the true number of errors is above 116.
+Fable, for which the earlier test of named constants found no V-C, has one. The key was incomplete: 116 errors are known (105 and 11) if the 15 provisional ones stand.
 
 Controls (12): Astra flagged 4, each Opus run 1. Adjudicated: one (candle_sonnet HolSemantics, `instance_`, `termsem`) has true errors, two are tier 2, one (word width 0) is disputed. No control got a plainly false finding.
 

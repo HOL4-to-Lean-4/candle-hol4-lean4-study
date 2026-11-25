@@ -29,7 +29,7 @@ propext, Quot.sound, Classical.choice. 263 of 267 theorem names equal the target
 ## Definitions (Sonnet 5.5 scorers, one per run; witness files compiled by me)
 Preservation violations found: 0 in all three runs. This is a same-family search with partial coverage, not evidence of absence:
 for Sonnet the "ok" lines are generic and written in batches; Opus-lessons statements: 98 read line by line, 167 by token diff only; no-lessons `BinaryIeee` and `Real` unread.
-All three scorers logged the Sonnet or Opus statements as `ok`, including the statements that S0 shows to be less polymorphic in HOL4.
+All three scorers logged the Sonnet or Opus statements as `ok`, including the statements that S0 shows to be less polymorphic in Lean than in HOL4.
 So the model reading missed what the scan found.
 
 Conservativity, tier 1 (kernel-checked witnesses; the value is fixed in Lean, open in HOL4's saved theorems):
