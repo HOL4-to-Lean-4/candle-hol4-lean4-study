@@ -1,0 +1,330 @@
+
+val _ = List.app load ("smlTimeout" :: ["typeSoundTheory","weakeningTheory","typeSysPropsTheory","evaluatePropsTheory","semantics_minTheory","semanticPrimitivesPropsTheory","namespacePropsTheory","typeSoundInvariantsTheory"]);
+open HolKernel boolLib bossLib;
+val _ = new_theory "vcheck_scratch";
+val c0 = prim_mk_const {Thy = "list", Name = "HD"};
+val n = 1;
+val (dom, rng) = strip_fun (type_of c0);
+val dom = List.take (dom, n);
+val rng = List.foldr (op -->) rng (List.drop (#1 (strip_fun (type_of c0)), n)) handle _ => rng;
+val xs = List.tabulate (n, fn i => mk_var ("vcx" ^ Int.toString i, List.nth (dom, i)));
+val g = mk_var ("vc_g", List.foldr (op -->) rng dom);
+val cprime =
+  if n = 0 then g else
+  let val P0 = Parse.Term [QUOTE "\\(l:'a list). l = []"]
+      val theta = match_type (type_of P0) (List.foldr (op -->) bool dom)
+      val P = inst theta P0
+      val body = mk_cond (rhs (concl (QCONV (DEPTH_CONV BETA_CONV) (list_mk_comb (P, xs)))),list_mk_comb (g, xs), list_mk_comb (c0, xs))
+  in list_mk_abs (xs, body) end;
+val _ = print ("CPRIME " ^ term_to_string cprime ^ " : " ^ type_to_string (type_of cprime) ^ "\n");
+fun same a b = is_const b andalso let val x = dest_thy_const a val y = dest_thy_const b in #Thy x = #Thy y andalso #Name x = #Name y end;
+fun repl_with subs t =
+  case List.find (fn (k, _) => same k t) subs of
+    SOME (k, v) => inst (match_type (type_of k) (type_of t)) v
+  | NONE =>
+    if is_comb t then mk_comb (repl_with subs (rator t), repl_with subs (rand t))
+    else if is_abs t then let val (v, b) = dest_abs t in mk_abs (v, repl_with subs b) end
+    else t;
+(* constants that must change together with c (their definitions use c): replacement given in closed form, with c inside *)
+val cov = map (fn (cthy, cname, s) =>
+  let val d0 = prim_mk_const {Thy = cthy, Name = cname}
+      val t0 = Parse.Term [QUOTE s]
+      val t1 = inst (match_type (type_of t0) (type_of d0)) t0
+  in (d0, repl_with [(c0, cprime)] t1) end) [("list", "EL", "\\(n:num) (l:'a list). HD (FUNPOW TL n l)")];
+val subs = (c0, cprime) :: cov;
+val _ = List.app (fn (k, v) => print ("COVARY " ^ term_to_string k ^ " := " ^ term_to_string v ^ "\n")) cov;
+val repl = repl_with subs;
+fun is_c t = List.exists (fn (k, _) => same k t) subs;
+fun mentions th = List.exists (fn t => can (find_term is_c) t) (concl th :: hyp th);
+val thys = ancestry "-";
+val all = List.filter (fn ((th, _), _) => List.exists (fn x => x = th) thys) (DB.listDB ());
+val rel = List.filter (fn (_, (th, _)) => mentions th) all;
+val _ = print ("RELEVANT " ^ Int.toString (length rel) ^ "\n");
+fun cls DB.Thm = "thm" | cls DB.Axm = "axiom" | cls DB.Def = "def";
+fun try_tacs goal th =
+  let val tacs = [("rw", rw [] THEN gvs [] THEN NO_TAC),
+                  ("rw_metis", rw [] THEN gvs [] THEN metis_tac [th]),
+                  ("metis", metis_tac [th]),
+                  ("rw_simp_th", rw [] THEN gvs [th] THEN NO_TAC),
+                  ("split_metis", rpt strip_tac THEN rpt (COND_CASES_TAC THEN gvs []) THEN metis_tac [th])]
+      fun go [] = "FAILED"
+        | go ((nm, tac) :: rest) =
+            ((smlTimeout.timeout 15.0 (fn () => Tactical.TAC_PROOF (([], goal), tac)) (); nm)
+             handle _ => go rest)
+  in go tacs end;
+fun check ((thy, nm), (th, {class = cl, private = pv, loc = _} : DB.thminfo)) =
+  let val goal = gen_all (list_mk_imp (map repl (hyp th), repl (concl th)))
+      val r = if aconv goal (gen_all (list_mk_imp (hyp th, concl th))) then "unchanged" else try_tacs goal th
+  in print ("RESULT\t" ^ thy ^ "\t" ^ nm ^ "\t" ^ cls cl ^ (if pv then "/local" else "") ^ "\t" ^ r ^ "\n") end
+  handle e => print ("RESULT\t" ^ thy ^ "\t" ^ nm ^ "\t" ^ cls cl ^ (if pv then "/local" else "") ^ "\tERROR " ^ String.translate (fn #"\n" => " " | c => str c) (exn_to_string e) ^ "\n");
+val _ = List.app check rel;
+val _ = print "DONE\n";
+
+==== OUTPUT ====
+<<HOL message: Created theory "vcheck_scratch">>
+CPRIME λvcx0. if vcx0 = [] then vc_g vcx0 else HD vcx0 : :α list -> α
+COVARY EL := λn l. (λvcx0. if vcx0 = [] then vc_g vcx0 else HD vcx0) (FUNPOW TL n l)
+RELEVANT 261
+RESULT	alist	ALOOKUP_ALL_DISTINCT_EL	thm	FAILED
+RESULT	alist	ALOOKUP_LEAST_EL	thm	FAILED
+RESULT	bitstring	el_field	thm	FAILED
+RESULT	bitstring	el_fixwidth	thm	FAILED
+RESULT	bitstring	el_rev_count_list	thm	FAILED
+RESULT	bitstring	el_shiftr	thm	FAILED
+RESULT	bitstring	el_sign_extend	thm	FAILED
+RESULT	bitstring	el_w2v	thm	FAILED
+RESULT	bitstring	el_zero_extend	thm	FAILED
+RESULT	bitstring	extend	thm	FAILED
+RESULT	bitstring	sign_extend_def	def	FAILED
+RESULT	bitstring	testbit	thm	FAILED
+RESULT	bitstring	testbit_el	thm	FAILED
+RESULT	bitstring	word_asr_v2w	thm	FAILED
+RESULT	bitstring	word_reduce_v2w	thm	FAILED
+RESULT	byte	bytes_to_word_same	thm	FAILED
+RESULT	byte	EL_bytes_of_num	thm	FAILED
+RESULT	byte	EL_word_to_bytes_aux	thm	FAILED
+RESULT	byte	first_byte_at_0w	thm	FAILED
+RESULT	byte	first_byte_at_offset	thm	FAILED
+RESULT	byte	num_of_bytes_DIV_EXP_MOD	thm	FAILED
+RESULT	evaluate	evaluate_decs_def	thm	FAILED
+RESULT	evaluate	evaluate_def	thm	FAILED
+RESULT	evaluate	evaluate_ind	thm	FAILED
+RESULT	evaluate	full_evaluate_def	thm	FAILED
+RESULT	evaluate	full_evaluate_ind	thm	FAILED
+RESULT	fcp	EL_V2L	thm	FAILED
+RESULT	fcp	FCP_HD	thm	FAILED
+RESULT	fcp	L2V_def	def	FAILED
+RESULT	fcp	READ_L2V	thm	FAILED
+RESULT	finite_map	FUPDATE_LIST_APPLY_HO_THM	thm	FAILED
+RESULT	finite_map	FUPDATE_LIST_APPLY_MEM	thm	FAILED
+RESULT	indexedLists	EL_delN_AFTER	thm	FAILED
+RESULT	indexedLists	EL_delN_BEFORE	thm	FAILED
+RESULT	indexedLists	EL_findi	thm	FAILED
+RESULT	indexedLists	EL_MAP2i	thm	FAILED
+RESULT	indexedLists	EL_MAPi	thm	FAILED
+RESULT	indexedLists	findi_EL	thm	FAILED
+RESULT	indexedLists	findi_EL_iff	thm	FAILED
+RESULT	indexedLists	FOLDRi_CONG'	thm	FAILED
+RESULT	indexedLists	LIST_RELi_EL_EQN	thm	FAILED
+RESULT	indexedLists	MAPi_CONG'	thm	FAILED
+RESULT	indexedLists	MAPi_GENLIST	thm	FAILED
+RESULT	indexedLists	MEM_MAPi	thm	FAILED
+RESULT	list	adjacent_EL	thm	FAILED
+RESULT	list	ALL_DISTINCT_EL_IMP	thm	FAILED
+RESULT	list	ALL_DISTINCT_FILTER_EL_IMP	thm	FAILED
+RESULT	list	ALL_DISTINCT_INDEX_OF_EL	thm	FAILED
+RESULT	list	CONS	thm	rw
+RESULT	list	dropWhile_id	thm	rw_metis
+RESULT	list	EL	thm	FAILED
+RESULT	list	EL_ALL_DISTINCT_EL_EQ	thm	FAILED
+RESULT	list	el_append3	thm	FAILED
+RESULT	list	EL_APPEND_EQN	thm	FAILED
+RESULT	list	EL_compute	thm	FAILED
+RESULT	list	EL_def	def	FAILED
+RESULT	list	EL_DROP	thm	FAILED
+RESULT	list	EL_GENLIST	thm	FAILED
+RESULT	list	EL_LENGTH_dropWhile_REVERSE	thm	FAILED
+RESULT	list	EL_LENGTH_SNOC	thm	FAILED
+RESULT	list	EL_LUPDATE	thm	FAILED
+RESULT	list	EL_MAP	thm	FAILED
+RESULT	list	EL_MAP2	thm	FAILED
+RESULT	list	EL_MAP3	thm	FAILED
+RESULT	list	EL_MEM	thm	FAILED
+RESULT	list	EL_restricted	thm	FAILED
+RESULT	list	EL_REVERSE	thm	FAILED
+RESULT	list	EL_simp	thm	FAILED
+RESULT	list	EL_simp_restricted	thm	FAILED
+RESULT	list	EL_SNOC	thm	FAILED
+RESULT	list	EL_TAKE	thm	FAILED
+RESULT	list	EL_ZIP	thm	FAILED
+RESULT	list	EVERY_EL	thm	FAILED
+RESULT	list	EXISTS_FIRST	thm	FAILED
+RESULT	list	GENLIST_EL	thm	FAILED
+RESULT	list	GENLIST_EL_MAP	thm	FAILED
+RESULT	list	GENLIST_ID	thm	FAILED
+RESULT	list	HD	def	rw
+RESULT	list	HD_DROP	thm	FAILED
+RESULT	list	HD_dropWhile	thm	FAILED
+RESULT	list	HD_GENLIST	thm	FAILED
+RESULT	list	HD_GENLIST_COR	thm	FAILED
+RESULT	list	HD_REVERSE	thm	rw_metis
+RESULT	list	HD_TAKE	thm	rw_metis
+RESULT	list	IMAGE_EL_count_LENGTH	thm	FAILED
+RESULT	list	INDEX_OF_eq_SOME	thm	FAILED
+RESULT	list	LAST_EL	thm	FAILED
+RESULT	list	LAST_REVERSE	thm	rw_metis
+RESULT	list	lazy_list_case_compute	thm	FAILED
+RESULT	list	list_case_compute	thm	rw_metis
+RESULT	list	LIST_EQ	thm	FAILED
+RESULT	list	LIST_EQ_REWRITE	thm	FAILED
+RESULT	list	LIST_NOT_NIL	thm	rw
+RESULT	list	LIST_REL_EL_EQN	thm	FAILED
+RESULT	list	LIST_REL_trans	thm	FAILED
+RESULT	list	LLEX_EL_THM	thm	FAILED
+RESULT	list	LUPDATE_SAME	thm	FAILED
+RESULT	list	LUPDATE_SEM	thm	FAILED
+RESULT	list	MEM_DROP	thm	FAILED
+RESULT	list	MEM_EL	thm	FAILED
+RESULT	list	MEM_LUPDATE	thm	FAILED
+RESULT	list	MEM_ZIP	thm	FAILED
+RESULT	list	NOT_EVERY_EXISTS_FIRST	thm	FAILED
+RESULT	list	oEL_EQ_EL	thm	FAILED
+RESULT	list	oEL_THM	thm	FAILED
+RESULT	list	SING_HD	thm	rw
+RESULT	list	splitAtPki_APPEND	thm	FAILED
+RESULT	list	splitAtPki_change_predicate	thm	FAILED
+RESULT	list	splitAtPki_EQN	thm	FAILED
+RESULT	list	TAKE1	thm	rw_simp_th
+RESULT	list	TAKE1_DROP	thm	FAILED
+RESULT	list	ZIP_GENLIST	thm	FAILED
+RESULT	llist	LAPPEND_fromSeq	thm	FAILED
+RESULT	llist	LHD_fromList	thm	FAILED
+RESULT	llist	LNTH_fromList	thm	FAILED
+RESULT	llist	lnth_fromList_some	thm	FAILED
+RESULT	llist	LREPEAT_def	def	FAILED
+RESULT	llist	LTAKE_LNTH_EL	thm	FAILED
+RESULT	misc	ALOOKUP_find_index_SOME	thm	FAILED
+RESULT	misc	IS_PREFIX_THM	thm	FAILED
+RESULT	misc	lookup_vars_def	def	FAILED
+RESULT	mllist	nth_def	def	FAILED
+RESULT	mlstring	strsub_def	def	FAILED
+RESULT	mlstring	TOKENS_eq_tokens_aux	thm	FAILED
+RESULT	numposrep	BIT_l2n_2	thm	FAILED
+RESULT	numposrep	BIT_num_from_bin_list	thm	FAILED
+RESULT	numposrep	EL_n2l	thm	FAILED
+RESULT	numposrep	EL_num_to_bin_list	thm	FAILED
+RESULT	numposrep	l2n_DIGIT	thm	FAILED
+RESULT	path	nth_label_LTAKE	thm	FAILED
+RESULT	patternMatches	EL1_STRONGEST_REDUNDANT_ROWS_INFO_AUX	thm	FAILED
+RESULT	patternMatches	EL2_STRONGEST_REDUNDANT_ROWS_INFO_AUX	thm	FAILED
+RESULT	patternMatches	EL_STRONGEST_REDUNDANT_ROWS_INFO	thm	FAILED
+RESULT	patternMatches	IS_REDUNDANT_ROWS_INFO_def	def	FAILED
+RESULT	patternMatches	PMATCH_ROW_REDUNDANT_def	def	FAILED
+RESULT	patternMatches	PMATCH_ROWS_DROP_REDUNDANT_TRIVIAL_SOUNDNESS	thm	FAILED
+RESULT	patternMatches	PMATCH_ROWS_DROP_REDUNDANT_TRIVIAL_SOUNDNESS_EQUIV	thm	FAILED
+RESULT	quantHeuristics	CONS_EQ_REWRITE	thm	rw_metis
+RESULT	quantHeuristics	HD_TL_EQ_1	thm	rw
+RESULT	quantHeuristics	HD_TL_EQ_NIL_1_bothways	thm	rw
+RESULT	quantHeuristics	HD_TL_EQ_THMS	thm/local	FAILED
+RESULT	rich_list	ALL_DISTINCT_EL_APPEND	thm	FAILED
+RESULT	rich_list	ALL_DISTINCT_LAST_EL_IFF	thm	FAILED
+RESULT	rich_list	all_distinct_list_el_inj	thm	FAILED
+RESULT	rich_list	BUTFIRSTN_CONS_EL	thm	FAILED
+RESULT	rich_list	CONS	thm	rw
+RESULT	rich_list	DROP_BY_DROP_SUC	thm	FAILED
+RESULT	rich_list	DROP_CONS_EL	thm	FAILED
+RESULT	rich_list	DROP_EL_CONS	thm	FAILED
+RESULT	rich_list	DROP_HEAD_ELEMENT	thm	FAILED
+RESULT	rich_list	EL	thm	FAILED
+RESULT	rich_list	EL_APPEND	thm	FAILED
+RESULT	rich_list	EL_APPEND1	thm	FAILED
+RESULT	rich_list	EL_APPEND2	thm	FAILED
+RESULT	rich_list	EL_BUTFIRSTN	thm	FAILED
+RESULT	rich_list	EL_chunks	thm	FAILED
+RESULT	rich_list	EL_CONS	thm	FAILED
+RESULT	rich_list	EL_COUNT_LIST	thm	FAILED
+RESULT	rich_list	EL_DROP	thm	FAILED
+RESULT	rich_list	EL_ELL	thm	FAILED
+RESULT	rich_list	EL_FIRSTN	thm	FAILED
+RESULT	rich_list	EL_FRONT	thm	FAILED
+RESULT	rich_list	EL_GENLIST	thm	FAILED
+RESULT	rich_list	EL_IS_EL	thm	FAILED
+RESULT	rich_list	EL_LENGTH_APPEND	thm	FAILED
+RESULT	rich_list	EL_LENGTH_APPEND_0	thm	FAILED
+RESULT	rich_list	EL_LENGTH_APPEND_1	thm	FAILED
+RESULT	rich_list	EL_LENGTH_APPEND_rwt	thm	FAILED
+RESULT	rich_list	EL_LENGTH_SNOC	thm	FAILED
+RESULT	rich_list	EL_MAP	thm	FAILED
+RESULT	rich_list	el_map_count	thm	FAILED
+RESULT	rich_list	EL_MEM	thm	FAILED
+RESULT	rich_list	EL_PRE_LENGTH	thm	FAILED
+RESULT	rich_list	EL_REPLICATE	thm	FAILED
+RESULT	rich_list	EL_REVERSE	thm	FAILED
+RESULT	rich_list	EL_REVERSE_ELL	thm	FAILED
+RESULT	rich_list	EL_SEG	thm	FAILED
+RESULT	rich_list	EL_SNOC	thm	FAILED
+RESULT	rich_list	EL_SPLIT	thm	FAILED
+RESULT	rich_list	EL_SPLIT_2	thm	FAILED
+RESULT	rich_list	EL_TAIL	thm	FAILED
+RESULT	rich_list	EL_TAKE	thm	FAILED
+RESULT	rich_list	ELL_EL	thm	FAILED
+RESULT	rich_list	ELL_LENGTH_SNOC	thm	rw_metis
+RESULT	rich_list	ELL_PRE_LENGTH	thm	rw_metis
+RESULT	rich_list	ELL_REVERSE_EL	thm	FAILED
+RESULT	rich_list	ELL_SEG	thm	FAILED
+RESULT	rich_list	FILTER_EL_IFF	thm	FAILED
+RESULT	rich_list	FILTER_EL_IMP	thm	FAILED
+RESULT	rich_list	FILTER_EL_NEXT	thm	FAILED
+RESULT	rich_list	FILTER_EL_NEXT_IFF	thm	FAILED
+RESULT	rich_list	FILTER_HD	thm	FAILED
+RESULT	rich_list	FILTER_HD_IFF	thm	FAILED
+RESULT	rich_list	FILTER_MONO_DEC	thm	FAILED
+RESULT	rich_list	FILTER_MONO_INC	thm	FAILED
+RESULT	rich_list	FRONT_EL	thm	FAILED
+RESULT	rich_list	HD	thm	rw
+RESULT	rich_list	HD_APPEND	thm	rw
+RESULT	rich_list	HD_APPEND_NOT_NIL	thm	rw_metis
+RESULT	rich_list	HD_GENLIST	thm	FAILED
+RESULT	rich_list	HEAD_MEM	thm	rw_metis
+RESULT	rich_list	is_prefix_el	thm	FAILED
+RESULT	rich_list	LAST_EL_CONS	thm	FAILED
+RESULT	rich_list	LAST_TAKE_EL	thm	FAILED
+RESULT	rich_list	lcp2_is_nil	thm	rw_metis
+RESULT	rich_list	LIST_ELEM_COUNT_CARD_EL	thm	FAILED
+RESULT	rich_list	LIST_EQ_HEAD_TAIL	thm	rw_metis
+RESULT	rich_list	LIST_HEAD_TAIL	thm	rw_simp_th
+RESULT	rich_list	list_to_set_eq_el_image	thm	FAILED
+RESULT	rich_list	MAP_HD	thm	rw_metis
+RESULT	rich_list	MAX_LIST_MONO_DEC	thm	FAILED
+RESULT	rich_list	MAX_LIST_MONO_INC	thm	FAILED
+RESULT	rich_list	MEM_SPLIT_TAKE_DROP_distinct	thm	FAILED
+RESULT	rich_list	MEM_SPLIT_TAKE_DROP_first	thm	FAILED
+RESULT	rich_list	MEM_SPLIT_TAKE_DROP_last	thm	FAILED
+RESULT	rich_list	MIN_LIST_MONO_DEC	thm	FAILED
+RESULT	rich_list	MIN_LIST_MONO_INC	thm	FAILED
+RESULT	rich_list	MONO_DEC_CONS	thm	FAILED
+RESULT	rich_list	MONO_DEC_HD	thm	FAILED
+RESULT	rich_list	MONO_DEC_NIL	thm	rw
+RESULT	rich_list	MONO_INC_CONS	thm	FAILED
+RESULT	rich_list	MONO_INC_HD	thm	FAILED
+RESULT	rich_list	MONO_INC_NIL	thm	rw
+RESULT	rich_list	REVERSE_HD	thm	rw_metis
+RESULT	rich_list	SCANR	def	FAILED
+RESULT	rich_list	SEG1	thm	FAILED
+RESULT	rich_list	SEG_SUC_EL	thm	FAILED
+RESULT	rich_list	set_list_eq_count	thm	FAILED
+RESULT	rich_list	SNOC_EL_FIRSTN	thm	FAILED
+RESULT	rich_list	SNOC_EL_TAKE	thm	FAILED
+RESULT	rich_list	SPLITP_IMP	thm	rw_metis
+RESULT	rich_list	sublist_head_sing	thm	rw_metis
+RESULT	rich_list	sublist_MONO_DEC	thm	FAILED
+RESULT	rich_list	sublist_MONO_INC	thm	FAILED
+RESULT	rich_list	TAKE_DROP_SUC	thm	FAILED
+RESULT	rich_list	TAKE_EL_SNOC	thm	FAILED
+RESULT	rich_list	TAKE_SUC_BY_TAKE	thm	FAILED
+RESULT	rich_list	ZIP_COUNT_LIST	thm	FAILED
+RESULT	rich_list	ZIP_GENLIST	thm	FAILED
+RESULT	semanticPrimitives	do_app_def	def	FAILED
+RESULT	semanticPrimitives	store_assign_def	def	FAILED
+RESULT	semanticPrimitives	store_lookup_def	def	FAILED
+RESULT	semanticPrimitivesProps	do_app_cases	thm	FAILED
+RESULT	sorting	EL_FILTER_COUNT_LIST_LEAST	thm	FAILED
+RESULT	sorting	PERM_BIJ	thm	FAILED
+RESULT	sorting	PERM_BIJ_IFF	thm	FAILED
+RESULT	sorting	SORTED_APPEND_GEN	thm	rw_metis
+RESULT	sorting	SORTED_EL_LESS	thm	FAILED
+RESULT	sorting	SORTED_EL_SUC	thm	FAILED
+RESULT	sptree	lookup_fromList	thm	FAILED
+RESULT	string	SUB_def	def	FAILED
+RESULT	typeSound	exp_type_sound	thm	FAILED
+RESULT	typeSystem	deBruijn_subst_def	thm	FAILED
+RESULT	words	foldl_reduce_and	thm	FAILED
+RESULT	words	foldl_reduce_nand	thm	FAILED
+RESULT	words	foldl_reduce_nor	thm	FAILED
+RESULT	words	foldl_reduce_or	thm	FAILED
+RESULT	words	foldl_reduce_xnor	thm	FAILED
+RESULT	words	foldl_reduce_xor	thm	FAILED
+RESULT	words	word_reduce_def	def	FAILED
+RESULT	words	word_reduce_n2w	thm	FAILED
+DONE
+exit=0

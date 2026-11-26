@@ -66,7 +66,9 @@ def row(name, h):
 
 
 tot = collections.Counter(F.g(e) for k, e in F.key.values())
-w("# Tables of the audit on real errors\n\nWritten by `report.py`. Known errors only; a hit means the finding names the declaration (reasons are not checked here).\n")
+w("# Tables of the audit on real errors%s\n\nWritten by `report.py`. Known errors only; a hit means the finding names the declaration (reasons are not checked here).\n" % (" (key as run, before the V-C recheck)" if s.PRE else ""))
+w(("Key as run, before the V-C recheck of 27 November: 105 errors. The current key is in `TABLES.md`." if s.PRE else
+   "Key after the V-C recheck of 27 November (`vc_recheck/RECHECK.md`): %d errors. %d open-value errors left the key because the Lean equation holds in every model of the HOL4 theory (TFL fills missing patterns with ARB). The key as run (105) is in `TABLES_pre_recheck.md` (`AUDIT_KEY=pre_recheck python report.py`).\n" % (sum(len(k["errors"]) for k in s.K), len(s.DROPPED))))
 w("## Known errors found\n")
 w("| Arm | All (%d) | Open value fixed (%d) | Type too specific, definitions (%d) | Type too specific, statements, provisional (%d) | Study 1 (%d) | Without provisional (%d) |" % (
     len(allk), *[tot[q] for q in G], len(allk - prov)))
@@ -99,7 +101,7 @@ for t in TV:
         w("| %s | %d | %d | %d | %d | %d |" % (t, n, len(f), len(ok), len(st[t]), len(set(st[t]) & ks)))
 w("\nA flag that is no known or new error is a name match between different things (`thunk_op` is a type in two translations), a word length that is a number in Lean (`shift_lookup`), "
   "or a statement with another shape that was not shown to differ in meaning.\n")
-w("## Errors outside the key (11, confirmed by the main session; the author's check is open)\n")
+w("## Errors outside the key (%d, confirmed by the main session and by the author's check)\n" % len(F.CATS["new"]))
 INH = {"tenv_val_ok_nsEmpty": "tenv_val_ok", "tenv_ctor_ok_nsEmpty": "tenv_ctor_ok", "tenv_abbrev_ok_nsEmpty": "tenv_abbrev_ok",
        "fix_clock_do_eval_res": "fix_clock, do_eval_res", "type_env_conv_thm": "type_ctor"}  # statement mentions a keyed constant whose type is too specific
 w("| Translation | Declaration | Flagged by S0 | Follows from a known error | S1 | S3a | S3b |")
@@ -114,7 +116,7 @@ for u, d in F.CATS["new"]:
         f.append("statement (%s)" % ", ".join(st[t][d]))
     beyond += not f
     w("| %s | `%s` | %s | %s | %s |" % (t, d, "; ".join(f) or "no", "`%s`" % INH[d] if d in INH else "no", " | ".join("yes" if (u, d) in F.extra[a]["new"] else "no" for a in ("S1", "S3a", "S3b"))))
-w("\n%d of the 11 are not flagged by S0. Flagged ones were dismissed or not keyed before the run, so they are not discoveries beyond the scripts. %d only repeat the type of a constant that is itself a known error; %d are neither flagged nor repeated. Many of the 15 provisional statement errors are of the repeating kind too (not checked one by one).\n" % (
+w(("\n%d of the " + str(len(F.CATS["new"])) + " are not flagged by S0. Flagged ones were dismissed or not keyed before the run, so they are not discoveries beyond the scripts. %d only repeat the type of a constant that is itself a known error; %d are neither flagged nor repeated. Many of the 15 provisional statement errors are of the repeating kind too (not checked one by one).\n") % (
     beyond, len(INH), sum(d not in INH and d != "thunk_op'" for u, d in F.CATS["new"])))
 w("## Paired comparison by module\n")
 mods = sorted({x[0] for x in allk})
@@ -122,7 +124,7 @@ B = 10000
 
 
 def comp(a, b, sel):
-    ks = [x for x in allk if x in sel]
+    ks = sorted(x for x in allk if x in sel)  # sorted: the p value must not depend on the hash seed
     by = collections.defaultdict(list)
     for x in ks:
         by[x[0]].append((x in hits[a]) - (x in hits[b]))
@@ -134,7 +136,7 @@ def comp(a, b, sel):
         c = [by[rng.choice(M)] for _ in M]
         bs.append(sum(map(sum, c)) / sum(map(len, c)))
     bs.sort()
-    ms = [sum(v) for v in by.values()]
+    ms = [sum(by[m]) for m in M]
     obs = abs(sum(ms))
     p = (1 + sum(abs(sum(m if rng.random() < .5 else -m for m in ms)) >= obs for _ in range(B))) / (B + 1)
     tr = []
@@ -154,5 +156,5 @@ for n, q in sel.items():
     w(comp("S1 Astra", "S8 Opus a or b", q))
 w("\nAstra has one draw and Opus two, so the interval does not include run-to-run variation of Astra. Modules of one translation share a translator, and the same constant fails in several translations, "
   "so modules are not independent; with 8 translations no cluster interval at that level is reported. These numbers describe the selected errors, not model families.")
-io.open(H + "TABLES.md", "w", encoding="utf-8", newline="\n").write("\n".join(out) + "\n")
+io.open(H + ("TABLES_pre_recheck.md" if s.PRE else "TABLES.md"), "w", encoding="utf-8", newline="\n").write("\n".join(out) + "\n")
 print("\n".join(out))

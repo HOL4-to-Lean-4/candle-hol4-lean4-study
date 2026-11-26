@@ -1,0 +1,47 @@
+{
+ "entry": {
+  "key_decl": "dest_Refv",
+  "translations": [
+   "ts_opus_nolessons"
+  ],
+  "family": "ts",
+  "hol_const": "semanticPrimitivesProps$dest_Refv",
+  "arity": 1,
+  "args": [
+   [
+    "r",
+    "'a store_v"
+   ]
+  ],
+  "P": "r = Varray []",
+  "witnesses": [
+   {
+    "translation": "ts_opus_nolessons",
+    "file": "baselines/ts_runs_v2/opus_nolessons/witnesses.lean",
+    "line": 56,
+    "eq": "dest_Refv (store_v.Varray ([] : List Nat)) = (ARB : Nat)"
+   }
+  ],
+  "note": "Same HOL4 facts. Witness: dest_Refv (Varray []) = ARB.",
+  "doubt": "",
+  "P_wide": "!v. ~(r = Refv v)",
+  "type_instance": "",
+  "hol4_source": "E:/NUS/mcomp/Dissertation/candle_study/package_ts/semanticPrimitivesPropsScript.sml:165"
+ },
+ "cprime": "λvcx0. if vcx0 = Varray [] then vc_g vcx0 else dest_Refv vcx0 : :α store_v -> α",
+ "relevant": 1,
+ "checked": 1,
+ "proved": 1,
+ "not_proved": [],
+ "results": [
+  [
+   "semanticPrimitivesProps",
+   "dest_Refv_def",
+   "def",
+   "rw"
+  ]
+ ],
+ "verdict": "V-C",
+ "seconds": 17,
+ "log": "logs/dest_Refv_ts_ts_opus_nolessons.log"
+}

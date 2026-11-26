@@ -1,0 +1,47 @@
+{
+ "entry": {
+  "key_decl": "FV_dec",
+  "translations": [
+   "ts_opus"
+  ],
+  "family": "ts",
+  "hol_const": "semanticPrimitivesProps$FV_dec",
+  "arity": 1,
+  "args": [
+   [
+    "d",
+    "dec"
+   ]
+  ],
+  "P": "?n. d = Denv n",
+  "witnesses": [
+   {
+    "translation": "ts_opus",
+    "file": "baselines/ts_runs_v2/opus_lessons/witnesses.lean",
+    "line": 122,
+    "eq": "(n : tvarN) : FV_dec (dec.Denv n) = ARB"
+   }
+  ],
+  "note": "FV_dec_def has clauses for Dlet, Dletrec, Dtype, Dtabbrev, Dexn only (astScript.sml:226-246 also has Dmod, Dlocal, Denv). Opus witness FV_dec (Denv n) for every n.",
+  "doubt": "",
+  "P_wide": "(?m ds. d = Dmod m ds) \\/ (?a b. d = Dlocal a b) \\/ (?n. d = Denv n)",
+  "type_instance": "",
+  "hol4_source": "E:/NUS/mcomp/Dissertation/candle_study/package_ts/semanticPrimitivesPropsScript.sml:220"
+ },
+ "cprime": "λvcx0. if ∃n. vcx0 = Denv n then vc_g vcx0 else FV_dec vcx0 : :dec -> (mlstring, mlstring) id -> bool",
+ "relevant": 1,
+ "checked": 1,
+ "proved": 1,
+ "not_proved": [],
+ "results": [
+  [
+   "semanticPrimitivesProps",
+   "FV_dec_def",
+   "def",
+   "rw"
+  ]
+ ],
+ "verdict": "V-C",
+ "seconds": 15,
+ "log": "logs/FV_dec_ts_ts_opus.log"
+}

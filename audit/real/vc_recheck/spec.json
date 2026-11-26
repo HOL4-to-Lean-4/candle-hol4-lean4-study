@@ -1,0 +1,1660 @@
+[
+ {
+  "key_decl": "ARB",
+  "translations": [
+   "candle_sonnet"
+  ],
+  "family": "candle",
+  "hol_const": "bool$ARB",
+  "arity": 0,
+  "args": [],
+  "P": "T",
+  "witnesses": [
+   {
+    "translation": "candle_sonnet",
+    "file": "baselines/rescore_v33/sonnet55_direct_translation.lean",
+    "line": 4,
+    "eq": "(ARB : Nat) = 0"
+   }
+  ],
+  "note": "ARB is new_constant (boolScript.sml:245), no axiom. Lean sonnet defines ARB := default, so at type num it is 0. Arity 0, so P has no arguments and is the constant T: the replacement is simply ARB:num := g. The witness is the single point ARB:num, inside P.",
+  "doubt": "Arity-0 and polymorphic ('a): the instance used by the witness is num (ARB = 0). A replacement must be done at type num only (a polymorphic g cannot be a different value per type, and a uniform g is not what the Lean side fixes). If the script cannot instantiate types, treat this entry as needing a hand-made replacement ARB:num -> g.",
+  "P_wide": "T",
+  "type_instance": "num",
+  "hol4_source": "E:/ts_ws/hol4src/src/bool/boolScript.sml:245"
+ },
+ {
+  "key_decl": "CARD",
+  "translations": [
+   "ts_sonnet"
+  ],
+  "family": "ts",
+  "hol_const": "pred_set$CARD",
+  "arity": 1,
+  "args": [
+   [
+    "s",
+    "'a set"
+   ]
+  ],
+  "P": "s = UNIV /\\ INFINITE s",
+  "witnesses": [
+   {
+    "translation": "ts_sonnet",
+    "file": "baselines/ts_runs_v2/sonnet_lessons/witnesses.lean",
+    "line": 38,
+    "eq": "CARD (UNIV : Set Nat) = 0"
+   }
+  ],
+  "note": "CARD_DEF (pred_setScript.sml:3428, new_specification) has only CARD {} = 0 and FINITE s ==> CARD (x INSERT s) = ...; no saved theorem fixes CARD of an infinite set (grep of the HOL4 sources for INFINITE/~FINITE with CARD found only cardinality (<=_c) lemmas). Sonnet Lean gives CARD s = 0 for non-FINITE s; the witness point is s = UNIV : num set, which is infinite, so P holds.",
+  "doubt": "P adds INFINITE s so the generic term stays false on finite types such as bool (UNIV : bool set is finite and CARD UNIV is fixed by CARD_INSERT). The Lean witness is at type num.",
+  "P_wide": "INFINITE s",
+  "type_instance": "",
+  "hol4_source": "E:/ts_ws/hol4src/src/pred_set/src/pred_setScript.sml:3428"
+ },
+ {
+  "key_decl": "CHR",
+  "translations": [
+   "candle_opus",
+   "candle_sonnet"
+  ],
+  "family": "candle",
+  "hol_const": "string$CHR",
+  "arity": 1,
+  "args": [
+   [
+    "n",
+    "num"
+   ]
+  ],
+  "P": "n = 256",
+  "witnesses": [
+   {
+    "translation": "candle_opus",
+    "file": "baselines/rescore_v33/opus55_direct_translation.lean",
+    "line": 10,
+    "eq": "CHR 256 = (ARB : Nat → char) 256"
+   },
+   {
+    "translation": "candle_sonnet",
+    "file": "baselines/rescore_v33/sonnet55_direct_translation.lean",
+    "line": 8,
+    "eq": "CHR 256 = CHR 0"
+   }
+  ],
+  "note": "HOL4: CHR comes from define_new_type_bijections (stringScript.sml:28); saved CHR_ORD, ORD_CHR (r < 256 <=> ORD (CHR r) = r), ORD_CHR_RWT (r < 256), CHR_11 (guarded), so CHR n for n >= 256 is open. Candle opus: CHR n = ARB n for n >= 256; sonnet: CHR n = CHR 0 for n >= 256. Both witnesses use n = 256.",
+  "doubt": "",
+  "P_wide": "256 <= n",
+  "type_instance": "",
+  "hol4_source": "E:/ts_ws/hol4src/src/string/stringScript.sml:28"
+ },
+ {
+  "key_decl": "CHR",
+  "translations": [
+   "ts_opus"
+  ],
+  "family": "ts",
+  "hol_const": "string$CHR",
+  "arity": 1,
+  "args": [
+   [
+    "n",
+    "num"
+   ]
+  ],
+  "P": "n = 256 \\/ n = 257",
+  "witnesses": [
+   {
+    "translation": "ts_opus",
+    "file": "baselines/ts_runs_v2/opus_lessons/witnesses.lean",
+    "line": 29,
+    "eq": "CHR 256 = CHR 257"
+   },
+   {
+    "translation": "ts_opus",
+    "file": "baselines/ts_runs_v2/opus_lessons/witnesses.lean",
+    "line": 31,
+    "eq": "CHR 256 = ARB"
+   }
+  ],
+  "note": "Same HOL4 facts as above. Lean (CHR n = ARB for n >= 256) witnesses use n = 256 and n = 257.",
+  "doubt": "",
+  "P_wide": "256 <= n",
+  "type_instance": "",
+  "hol4_source": "E:/ts_ws/hol4src/src/string/stringScript.sml:28"
+ },
+ {
+  "key_decl": "CHR",
+  "translations": [
+   "ts_opus_nolessons"
+  ],
+  "family": "ts",
+  "hol_const": "string$CHR",
+  "arity": 1,
+  "args": [
+   [
+    "n",
+    "num"
+   ]
+  ],
+  "P": "n = 256",
+  "witnesses": [
+   {
+    "translation": "ts_opus_nolessons",
+    "file": "baselines/ts_runs_v2/opus_nolessons/witnesses.lean",
+    "line": 102,
+    "eq": "CHR 256 = (ARB : char)"
+   }
+  ],
+  "note": "Same HOL4 facts as above. Witness uses n = 256.",
+  "doubt": "",
+  "P_wide": "256 <= n",
+  "type_instance": "",
+  "hol4_source": "E:/ts_ws/hol4src/src/string/stringScript.sml:28"
+ },
+ {
+  "key_decl": "CHR",
+  "translations": [
+   "ts_sonnet"
+  ],
+  "family": "ts",
+  "hol_const": "string$CHR",
+  "arity": 1,
+  "args": [
+   [
+    "n",
+    "num"
+   ]
+  ],
+  "P": "n = 300 \\/ n = 301",
+  "witnesses": [
+   {
+    "translation": "ts_sonnet",
+    "file": "baselines/ts_runs_v2/sonnet_lessons/witnesses.lean",
+    "line": 17,
+    "eq": "CHR 300 = ARB"
+   },
+   {
+    "translation": "ts_sonnet",
+    "file": "baselines/ts_runs_v2/sonnet_lessons/witnesses.lean",
+    "line": 20,
+    "eq": "CHR 300 = CHR 301"
+   }
+  ],
+  "note": "Same HOL4 facts as above. Witnesses use n = 300 and n = 301.",
+  "doubt": "",
+  "P_wide": "256 <= n",
+  "type_instance": "",
+  "hol4_source": "E:/ts_ws/hol4src/src/string/stringScript.sml:28"
+ },
+ {
+  "key_decl": "CLASH",
+  "translations": [
+   "candle_opus",
+   "candle_opus_nolessons",
+   "candle_sonnet"
+  ],
+  "family": "candle",
+  "hol_const": "holSyntaxLib$CLASH",
+  "arity": 1,
+  "args": [
+   [
+    "r",
+    "'a result"
+   ]
+  ],
+  "P": "?s. r = Result s",
+  "witnesses": [
+   {
+    "translation": "candle_opus",
+    "file": "baselines/rescore_v33/opus55_direct_translation.lean",
+    "line": 9,
+    "eq": "(s t : Nat) : CLASH (Result s) = RESULT (Clash t)"
+   },
+   {
+    "translation": "candle_opus_nolessons",
+    "file": "baselines/rescore_v33/opus55_nolessons.lean",
+    "line": 7,
+    "eq": "(s t : Nat) : CLASH (result.Result s) = RESULT (result.Clash t)"
+   },
+   {
+    "translation": "candle_sonnet",
+    "file": "baselines/rescore_v33/sonnet55_direct_translation.lean",
+    "line": 10,
+    "eq": "(t : Nat) : Candle.HolSyntaxLib.CLASH (.Result t) = t"
+   }
+  ],
+  "note": "HOL4: CLASH_def (holSyntaxLibScript.sml:92) has only CLASH (Clash t) = t. Constant is in theory holSyntaxLib (datatype result = Clash 'a | Result 'a), not holSyntax. Lean opus/nolessons: CLASH (Result s) = ARB; sonnet: CLASH (Result t) = t. All witnesses are CLASH applied to a Result, so P holds.",
+  "doubt": "",
+  "P_wide": "?s. r = Result s",
+  "type_instance": "",
+  "hol4_source": "E:/NUS/mcomp/Dissertation/candle_study/package/candle/syntax-lib/holSyntaxLibScript.sml:92"
+ },
+ {
+  "key_decl": "FAPPLY",
+  "translations": [
+   "candle_opus"
+  ],
+  "family": "candle",
+  "hol_const": "sum$OUTL",
+  "arity": 1,
+  "args": [
+   [
+    "s",
+    "'a + 'b"
+   ]
+  ],
+  "P": "?y. s = INR y",
+  "witnesses": [
+   {
+    "translation": "candle_opus",
+    "file": "baselines/rescore_v33/README.md",
+    "line": 34,
+    "eq": "FAPPLY FEMPTY 0 = ARB (stated in prose, not a Lean example in opus55_direct_translation.lean); definition: baselines/opus55_direct_translation/lean/CandleLean/Prelude/FiniteMap.lean:50 `| none => ARB`"
+   }
+  ],
+  "note": "Witness is FAPPLY FEMPTY 0 : num |-> num -> num, i.e. f = FEMPTY, x = 0 (FDOM FEMPTY = {}). Inside P. There is no Lean example file line for this one (README only).",
+  "doubt": "HOL4 FAPPLY is a defined constant: FAPPLY_DEF (finite_mapScript.sml:180) says FAPPLY f x = OUTL (fmap_REP f x), so off the domain the value is the single closed term OUTL (INR one) for every f and x, not a free value. Saved theorem NOT_FDOM_FAPPLY_FEMPTY (line 562: ~(x IN FDOM f) ==> f ' x = FEMPTY ' x) ties all off-domain values together, and FAPPLY_DEF itself mentions the constant. A replacement with P = `f = FEMPTY` and a g that depends on f will therefore break NOT_FDOM_FAPPLY_FEMPTY (and FAPPLY_DEF) for reasons that say nothing about the witnesses; a consistent test needs P = `~(x IN FDOM f)` (P_wide) and g independent of f (e.g. g x), and FAPPLY_DEF must be excluded from the check or restated. Lean fixes the off-domain value of every map and key, so P_wide is also the region the Lean definition fixes.",
+  "P_wide": "~(x IN FDOM f)",
+  "type_instance": "",
+  "hol4_source": "E:/ts_ws/hol4src/src/finite_maps/finite_mapScript.sml:180",
+  "vary_note": "HOL4 defines FAPPLY f x = OUTL (fmap_REP f x); FEMPTY maps every x to INR one, so OUTL is varied on INR values and FAPPLY co-varies.",
+  "covary": [
+   {
+    "const": "finite_map$FAPPLY",
+    "term": "\\(f:'a |-> 'b) (x:'a). OUTL (fmap_REP f x)"
+   }
+  ]
+ },
+ {
+  "key_decl": "FAPPLY",
+  "translations": [
+   "ts_opus",
+   "ts_opus_nolessons",
+   "ts_sonnet"
+  ],
+  "family": "ts",
+  "hol_const": "sum$OUTL",
+  "arity": 1,
+  "args": [
+   [
+    "s",
+    "'a + 'b"
+   ]
+  ],
+  "P": "?y. s = INR y",
+  "witnesses": [
+   {
+    "translation": "ts_opus",
+    "file": "baselines/ts_runs_v2/opus_lessons/witnesses.lean",
+    "line": 35,
+    "eq": "FAPPLY (FEMPTY : fmap Nat Nat) 0 = ARB"
+   },
+   {
+    "translation": "ts_opus_nolessons",
+    "file": "baselines/ts_runs_v2/opus_nolessons/witnesses.lean",
+    "line": 96,
+    "eq": "(x : Nat) : FAPPLY (FEMPTY : fmap Nat Nat) x = ARB"
+   },
+   {
+    "translation": "ts_sonnet",
+    "file": "baselines/ts_runs_v2/sonnet_lessons/witnesses.lean",
+    "line": 33,
+    "eq": "FAPPLY (FEMPTY : FMap Nat Nat) 0 = FAPPLY (FEMPTY : FMap Nat Nat) 1"
+   },
+   {
+    "translation": "ts_sonnet",
+    "file": "baselines/ts_runs_v2/sonnet_lessons/witnesses.lean",
+    "line": 109,
+    "eq": "FAPPLY (FEMPTY : FMap Nat Nat) 5 = locncol .EOFpt"
+   }
+  ],
+  "note": "Witnesses: FAPPLY FEMPTY 0 = ARB (opus), FAPPLY FEMPTY x = ARB for every x (nolessons), FAPPLY FEMPTY 0 = FAPPLY FEMPTY 1 and FAPPLY FEMPTY 5 = locncol EOFpt (sonnet). All have f = FEMPTY, so P holds; keys x = 0, 1, 5, any x are not restricted (P is type-generic; x is polymorphic).",
+  "doubt": "HOL4 FAPPLY is a defined constant: FAPPLY_DEF (finite_mapScript.sml:180) says FAPPLY f x = OUTL (fmap_REP f x), so off the domain the value is the single closed term OUTL (INR one) for every f and x, not a free value. Saved theorem NOT_FDOM_FAPPLY_FEMPTY (line 562: ~(x IN FDOM f) ==> f ' x = FEMPTY ' x) ties all off-domain values together, and FAPPLY_DEF itself mentions the constant. A replacement with P = `f = FEMPTY` and a g that depends on f will therefore break NOT_FDOM_FAPPLY_FEMPTY (and FAPPLY_DEF) for reasons that say nothing about the witnesses; a consistent test needs P = `~(x IN FDOM f)` (P_wide) and g independent of f (e.g. g x), and FAPPLY_DEF must be excluded from the check or restated. Lean fixes the off-domain value of every map and key, so P_wide is also the region the Lean definition fixes.",
+  "P_wide": "~(x IN FDOM f)",
+  "type_instance": "",
+  "hol4_source": "E:/ts_ws/hol4src/src/finite_maps/finite_mapScript.sml:180",
+  "vary_note": "HOL4 defines FAPPLY f x = OUTL (fmap_REP f x); FEMPTY maps every x to INR one, so OUTL is varied on INR values and FAPPLY co-varies.",
+  "covary": [
+   {
+    "const": "finite_map$FAPPLY",
+    "term": "\\(f:'a |-> 'b) (x:'a). OUTL (fmap_REP f x)"
+   }
+  ]
+ },
+ {
+  "key_decl": "FUN_FMAP",
+  "translations": [
+   "candle_sonnet"
+  ],
+  "family": "candle",
+  "hol_const": "finite_map$FUN_FMAP",
+  "arity": 2,
+  "args": [
+   [
+    "f",
+    "'a -> 'b"
+   ],
+   [
+    "s",
+    "'a set"
+   ]
+  ],
+  "P": "INFINITE s",
+  "witnesses": [
+   {
+    "translation": "candle_sonnet",
+    "file": "baselines/rescore_v33/sonnet55_direct_translation.lean",
+    "line": 11,
+    "eq": "(f : Nat → Nat) (P : Set Nat) (h : ¬ FINITE P) : FUN_FMAP f P = FEMPTY"
+   }
+  ],
+  "note": "FUN_FMAP_DEF (finite_mapScript.sml:1585, new_specification) constrains FUN_FMAP f P only under FINITE P. Sonnet Lean sets FUN_FMAP f P = FEMPTY for non-FINITE P; the witness is universally quantified over f and over infinite P (hypothesis h : not FINITE P), which is exactly INFINITE s.",
+  "doubt": "",
+  "P_wide": "INFINITE s",
+  "type_instance": "",
+  "hol4_source": "E:/ts_ws/hol4src/src/finite_maps/finite_mapScript.sml:1585"
+ },
+ {
+  "key_decl": "FV_dec",
+  "translations": [
+   "ts_opus"
+  ],
+  "family": "ts",
+  "hol_const": "semanticPrimitivesProps$FV_dec",
+  "arity": 1,
+  "args": [
+   [
+    "d",
+    "dec"
+   ]
+  ],
+  "P": "?n. d = Denv n",
+  "witnesses": [
+   {
+    "translation": "ts_opus",
+    "file": "baselines/ts_runs_v2/opus_lessons/witnesses.lean",
+    "line": 122,
+    "eq": "(n : tvarN) : FV_dec (dec.Denv n) = ARB"
+   }
+  ],
+  "note": "FV_dec_def has clauses for Dlet, Dletrec, Dtype, Dtabbrev, Dexn only (astScript.sml:226-246 also has Dmod, Dlocal, Denv). Opus witness FV_dec (Denv n) for every n.",
+  "doubt": "",
+  "P_wide": "(?m ds. d = Dmod m ds) \\/ (?a b. d = Dlocal a b) \\/ (?n. d = Denv n)",
+  "type_instance": "",
+  "hol4_source": "E:/NUS/mcomp/Dissertation/candle_study/package_ts/semanticPrimitivesPropsScript.sml:220"
+ },
+ {
+  "key_decl": "FV_dec",
+  "translations": [
+   "ts_opus_nolessons"
+  ],
+  "family": "ts",
+  "hol_const": "semanticPrimitivesProps$FV_dec",
+  "arity": 1,
+  "args": [
+   [
+    "d",
+    "dec"
+   ]
+  ],
+  "P": "(?m. d = Dmod m []) \\/ d = Dlocal [] []",
+  "witnesses": [
+   {
+    "translation": "ts_opus_nolessons",
+    "file": "baselines/ts_runs_v2/opus_nolessons/witnesses.lean",
+    "line": 62,
+    "eq": "(m : modN) : FV_dec (dec.Dmod m []) = (ARB : Set (ident modN varN))"
+   },
+   {
+    "translation": "ts_opus_nolessons",
+    "file": "baselines/ts_runs_v2/opus_nolessons/witnesses.lean",
+    "line": 63,
+    "eq": "FV_dec (dec.Dlocal [] []) = (ARB : Set (ident modN varN))"
+   }
+  ],
+  "note": "Same HOL4 facts. Witnesses: FV_dec (Dmod m []) for every m, FV_dec (Dlocal [] []). Both points satisfy P.",
+  "doubt": "",
+  "P_wide": "(?m ds. d = Dmod m ds) \\/ (?a b. d = Dlocal a b) \\/ (?n. d = Denv n)",
+  "type_instance": "",
+  "hol4_source": "E:/NUS/mcomp/Dissertation/candle_study/package_ts/semanticPrimitivesPropsScript.sml:220"
+ },
+ {
+  "key_decl": "FV_dec",
+  "translations": [
+   "ts_sonnet"
+  ],
+  "family": "ts",
+  "hol_const": "semanticPrimitivesProps$FV_dec",
+  "arity": 1,
+  "args": [
+   [
+    "d",
+    "dec"
+   ]
+  ],
+  "P": "d = Denv (strlit \"\") \\/ d = Dmod (strlit \"\") [] \\/ d = Dlocal [] []",
+  "witnesses": [
+   {
+    "translation": "ts_sonnet",
+    "file": "baselines/ts_runs_v2/sonnet_lessons/witnesses.lean",
+    "line": 83,
+    "eq": "FV_dec (.Denv default) = ARB"
+   },
+   {
+    "translation": "ts_sonnet",
+    "file": "baselines/ts_runs_v2/sonnet_lessons/witnesses.lean",
+    "line": 86,
+    "eq": "FV_dec (.Dmod default []) = ARB"
+   },
+   {
+    "translation": "ts_sonnet",
+    "file": "baselines/ts_runs_v2/sonnet_lessons/witnesses.lean",
+    "line": 89,
+    "eq": "FV_dec (.Dlocal [] []) = ARB"
+   }
+  ],
+  "note": "Same HOL4 facts. Witnesses use Lean `default` for the name, which is mlstring.strlit [] (Mlstring.lean:24 in the sonnet translation), i.e. HOL4 strlit \"\" (the empty mlstring).",
+  "doubt": "Confirm the HOL4 spelling of the empty mlstring in the Term quotation (strlit \"\" or implode \"\"). Lean FV_dec is uniform in the name (`| _ => ARB`), so `?n. d = Denv n` etc. (P_wide) is also within what Lean fixes.",
+  "P_wide": "(?m ds. d = Dmod m ds) \\/ (?a b. d = Dlocal a b) \\/ (?n. d = Denv n)",
+  "type_instance": "",
+  "hol4_source": "E:/NUS/mcomp/Dissertation/candle_study/package_ts/semanticPrimitivesPropsScript.sml:220"
+ },
+ {
+  "key_decl": "HD",
+  "translations": [
+   "candle_opus",
+   "candle_opus_nolessons",
+   "candle_sonnet"
+  ],
+  "family": "candle",
+  "hol_const": "list$HD",
+  "arity": 1,
+  "args": [
+   [
+    "l",
+    "'a list"
+   ]
+  ],
+  "P": "l = []",
+  "witnesses": [
+   {
+    "translation": "candle_opus",
+    "file": "baselines/rescore_v33/opus55_direct_translation.lean",
+    "line": 4,
+    "eq": "HD ([] : List Nat) = ARB"
+   },
+   {
+    "translation": "candle_opus",
+    "file": "baselines/rescore_v33/opus55_direct_translation.lean",
+    "line": 6,
+    "eq": "HD ([] : List Nat) = LAST []"
+   },
+   {
+    "translation": "candle_opus_nolessons",
+    "file": "baselines/rescore_v33/opus55_nolessons.lean",
+    "line": 2,
+    "eq": "HD ([] : List Nat) = ARB"
+   },
+   {
+    "translation": "candle_opus_nolessons",
+    "file": "baselines/rescore_v33/opus55_nolessons.lean",
+    "line": 4,
+    "eq": "HD ([] : List Nat) = LAST []"
+   },
+   {
+    "translation": "candle_sonnet",
+    "file": "baselines/rescore_v33/sonnet55_direct_translation.lean",
+    "line": 5,
+    "eq": "HD ([] : List Nat) = 0"
+   }
+  ],
+  "note": "listScript.sml:138 `Definition HD[simp]: HD (h::t) = h` saves only the cons clause. Every witness (HD [] = ARB, HD [] = LAST [], HD [] = 0) is at l = [] (all at element type num).",
+  "doubt": "",
+  "P_wide": "l = []",
+  "type_instance": "",
+  "hol4_source": "E:/ts_ws/hol4src/src/list/src/listScript.sml:138",
+  "covary": [
+   {
+    "const": "list$EL",
+    "term": "\\(n:num) (l:'a list). HD (FUNPOW TL n l)"
+   }
+  ]
+ },
+ {
+  "key_decl": "HD",
+  "translations": [
+   "ts_opus",
+   "ts_opus_nolessons",
+   "ts_sonnet"
+  ],
+  "family": "ts",
+  "hol_const": "list$HD",
+  "arity": 1,
+  "args": [
+   [
+    "l",
+    "'a list"
+   ]
+  ],
+  "P": "l = []",
+  "witnesses": [
+   {
+    "translation": "ts_opus",
+    "file": "baselines/ts_runs_v2/opus_lessons/witnesses.lean",
+    "line": 14,
+    "eq": "(HD ([] : List Nat)) = ARB"
+   },
+   {
+    "translation": "ts_opus",
+    "file": "baselines/ts_runs_v2/opus_lessons/witnesses.lean",
+    "line": 24,
+    "eq": "(HD ([] : List Nat)) = THE (none : Option Nat)"
+   },
+   {
+    "translation": "ts_opus_nolessons",
+    "file": "baselines/ts_runs_v2/opus_nolessons/witnesses.lean",
+    "line": 83,
+    "eq": "HD ([] : List Nat) = ARB"
+   },
+   {
+    "translation": "ts_sonnet",
+    "file": "baselines/ts_runs_v2/sonnet_lessons/witnesses.lean",
+    "line": 13,
+    "eq": "HD ([] : List Nat) = ARB"
+   },
+   {
+    "translation": "ts_sonnet",
+    "file": "baselines/ts_runs_v2/sonnet_lessons/witnesses.lean",
+    "line": 106,
+    "eq": "HD ([] : List Nat) = locnrow .UNKNOWNpt"
+   }
+  ],
+  "note": "Same HOL4 clause. Witnesses: HD [] = ARB, HD [] = THE NONE, HD [] = locnrow UNKNOWNpt, all at l = [].",
+  "doubt": "",
+  "P_wide": "l = []",
+  "type_instance": "",
+  "hol4_source": "E:/ts_ws/hol4src/src/list/src/listScript.sml:138",
+  "covary": [
+   {
+    "const": "list$EL",
+    "term": "\\(n:num) (l:'a list). HD (FUNPOW TL n l)"
+   }
+  ]
+ },
+ {
+  "key_decl": "LAST",
+  "translations": [
+   "candle_opus",
+   "candle_opus_nolessons",
+   "candle_sonnet"
+  ],
+  "family": "candle",
+  "hol_const": "list$LAST",
+  "arity": 1,
+  "args": [
+   [
+    "l",
+    "'a list"
+   ]
+  ],
+  "P": "l = []",
+  "witnesses": [
+   {
+    "translation": "candle_opus",
+    "file": "baselines/rescore_v33/opus55_direct_translation.lean",
+    "line": 5,
+    "eq": "LAST ([] : List Nat) = ARB"
+   },
+   {
+    "translation": "candle_opus",
+    "file": "baselines/rescore_v33/opus55_direct_translation.lean",
+    "line": 6,
+    "eq": "HD ([] : List Nat) = LAST []"
+   },
+   {
+    "translation": "candle_opus_nolessons",
+    "file": "baselines/rescore_v33/opus55_nolessons.lean",
+    "line": 3,
+    "eq": "LAST ([] : List Nat) = ARB"
+   },
+   {
+    "translation": "candle_opus_nolessons",
+    "file": "baselines/rescore_v33/opus55_nolessons.lean",
+    "line": 4,
+    "eq": "HD ([] : List Nat) = LAST []"
+   },
+   {
+    "translation": "candle_sonnet",
+    "file": "baselines/rescore_v33/sonnet55_direct_translation.lean",
+    "line": 6,
+    "eq": "LAST ([] : List Nat) = 0"
+   }
+  ],
+  "note": "LAST_DEF (listScript.sml:2124) has only LAST (h::t) = if t = [] then h else LAST t. Witnesses LAST [] = ARB, HD [] = LAST [], LAST [] = 0, all at l = [].",
+  "doubt": "",
+  "P_wide": "l = []",
+  "type_instance": "",
+  "hol4_source": "E:/ts_ws/hol4src/src/list/src/listScript.sml:2124"
+ },
+ {
+  "key_decl": "MAP3",
+  "translations": [
+   "ts_opus"
+  ],
+  "family": "ts",
+  "hol_const": "misc$MAP3",
+  "arity": 4,
+  "args": [
+   [
+    "f",
+    "'a -> 'b -> 'c -> 'd"
+   ],
+   [
+    "l1",
+    "'a list"
+   ],
+   [
+    "l2",
+    "'b list"
+   ],
+   [
+    "l3",
+    "'c list"
+   ]
+  ],
+  "P": "(l1 = [] /\\ ~(l2 = []) /\\ l3 = []) \\/ (~(l1 = []) /\\ l2 = [] /\\ l3 = [])",
+  "witnesses": [
+   {
+    "translation": "ts_opus",
+    "file": "baselines/ts_runs_v2/opus_lessons/witnesses.lean",
+    "line": 89,
+    "eq": "MAP3 (fun (a b c : Nat) => a) ([] : List Nat) [1] ([] : List Nat) = ARB"
+   },
+   {
+    "translation": "ts_opus",
+    "file": "baselines/ts_runs_v2/opus_lessons/witnesses.lean",
+    "line": 92,
+    "eq": "MAP3 (fun (a b c : Nat) => a) ([] : List Nat) [1] ([] : List Nat) = MAP3 (fun (a b c : Nat) => b) [2] ([] : List Nat) ([] : List Nat)"
+   }
+  ],
+  "note": "MAP3_def saves only [] [] [] and cons/cons/cons. Witnesses: MAP3 f [] [1] [] and MAP3 f' [2] [] [] (list shapes nil/cons/nil and cons/nil/nil, f arbitrary). P is stated by shape, since the element values are polymorphic and Lean is uniform in them.",
+  "doubt": "",
+  "P_wide": "~((l1 = [] /\\ l2 = [] /\\ l3 = []) \\/ (?h1 t1 h2 t2 h3 t3. l1 = h1::t1 /\\ l2 = h2::t2 /\\ l3 = h3::t3))",
+  "type_instance": "",
+  "hol4_source": "E:/NUS/mcomp/Dissertation/candle_study/package_ts/miscScript.sml:74"
+ },
+ {
+  "key_decl": "MAP3",
+  "translations": [
+   "ts_opus_nolessons"
+  ],
+  "family": "ts",
+  "hol_const": "misc$MAP3",
+  "arity": 4,
+  "args": [
+   [
+    "f",
+    "'a -> 'b -> 'c -> 'd"
+   ],
+   [
+    "l1",
+    "'a list"
+   ],
+   [
+    "l2",
+    "'b list"
+   ],
+   [
+    "l3",
+    "'c list"
+   ]
+  ],
+  "P": "l1 = [] /\\ ~(l2 = []) /\\ l3 = []",
+  "witnesses": [
+   {
+    "translation": "ts_opus_nolessons",
+    "file": "baselines/ts_runs_v2/opus_nolessons/witnesses.lean",
+    "line": 49,
+    "eq": "(f : Nat → Nat → Nat → Nat) : MAP3 f ([] : List Nat) [0] ([] : List Nat) = (ARB : List Nat)"
+   }
+  ],
+  "note": "Witness: MAP3 f [] [0] [] (f arbitrary): shape nil/cons/nil.",
+  "doubt": "",
+  "P_wide": "~((l1 = [] /\\ l2 = [] /\\ l3 = []) \\/ (?h1 t1 h2 t2 h3 t3. l1 = h1::t1 /\\ l2 = h2::t2 /\\ l3 = h3::t3))",
+  "type_instance": "",
+  "hol4_source": "E:/NUS/mcomp/Dissertation/candle_study/package_ts/miscScript.sml:74"
+ },
+ {
+  "key_decl": "MAP3",
+  "translations": [
+   "ts_sonnet"
+  ],
+  "family": "ts",
+  "hol_const": "misc$MAP3",
+  "arity": 4,
+  "args": [
+   [
+    "f",
+    "'a -> 'b -> 'c -> 'd"
+   ],
+   [
+    "l1",
+    "'a list"
+   ],
+   [
+    "l2",
+    "'b list"
+   ],
+   [
+    "l3",
+    "'c list"
+   ]
+  ],
+  "P": "~(l1 = []) /\\ l2 = [] /\\ l3 = []",
+  "witnesses": [
+   {
+    "translation": "ts_sonnet",
+    "file": "baselines/ts_runs_v2/sonnet_lessons/witnesses.lean",
+    "line": 60,
+    "eq": "MAP3 (fun a b c : Nat => a + b + c) [1] [] [] = ARB"
+   }
+  ],
+  "note": "Witness: MAP3 (a+b+c) [1] [] []: shape cons/nil/nil.",
+  "doubt": "",
+  "P_wide": "~((l1 = [] /\\ l2 = [] /\\ l3 = []) \\/ (?h1 t1 h2 t2 h3 t3. l1 = h1::t1 /\\ l2 = h2::t2 /\\ l3 = h3::t3))",
+  "type_instance": "",
+  "hol4_source": "E:/NUS/mcomp/Dissertation/candle_study/package_ts/miscScript.sml:74"
+ },
+ {
+  "key_decl": "RESULT",
+  "translations": [
+   "candle_opus",
+   "candle_opus_nolessons",
+   "candle_sonnet"
+  ],
+  "family": "candle",
+  "hol_const": "holSyntaxLib$RESULT",
+  "arity": 1,
+  "args": [
+   [
+    "r",
+    "'a result"
+   ]
+  ],
+  "P": "?s. r = Clash s",
+  "witnesses": [
+   {
+    "translation": "candle_opus",
+    "file": "baselines/rescore_v33/opus55_direct_translation.lean",
+    "line": 8,
+    "eq": "(s t : Nat) : RESULT (Clash s) = RESULT (Clash t)"
+   },
+   {
+    "translation": "candle_opus",
+    "file": "baselines/rescore_v33/opus55_direct_translation.lean",
+    "line": 9,
+    "eq": "(s t : Nat) : CLASH (Result s) = RESULT (Clash t)"
+   },
+   {
+    "translation": "candle_opus_nolessons",
+    "file": "baselines/rescore_v33/opus55_nolessons.lean",
+    "line": 6,
+    "eq": "(s t : Nat) : RESULT (result.Clash s) = RESULT (result.Clash t)"
+   },
+   {
+    "translation": "candle_opus_nolessons",
+    "file": "baselines/rescore_v33/opus55_nolessons.lean",
+    "line": 7,
+    "eq": "(s t : Nat) : CLASH (result.Result s) = RESULT (result.Clash t)"
+   },
+   {
+    "translation": "candle_sonnet",
+    "file": "baselines/rescore_v33/sonnet55_direct_translation.lean",
+    "line": 9,
+    "eq": "(t : Nat) : Candle.HolSyntaxLib.RESULT (.Clash t) = t"
+   }
+  ],
+  "note": "RESULT_def (holSyntaxLibScript.sml:88) has only RESULT (Result t) = t; constant is in theory holSyntaxLib. Lean: RESULT (Clash t) = ARB (opus, nolessons) or = t (sonnet). All witnesses apply RESULT to a Clash.",
+  "doubt": "",
+  "P_wide": "?s. r = Clash s",
+  "type_instance": "",
+  "hol4_source": "E:/NUS/mcomp/Dissertation/candle_study/package/candle/syntax-lib/holSyntaxLibScript.sml:88"
+ },
+ {
+  "key_decl": "SEG",
+  "translations": [
+   "candle_sonnet"
+  ],
+  "family": "candle",
+  "hol_const": "rich_list$SEG",
+  "arity": 3,
+  "args": [
+   [
+    "m",
+    "num"
+   ],
+   [
+    "k",
+    "num"
+   ],
+   [
+    "l",
+    "'a list"
+   ]
+  ],
+  "P": "m = 1 /\\ k = 0 /\\ l = []",
+  "witnesses": [
+   {
+    "translation": "candle_sonnet",
+    "file": "baselines/rescore_v33/sonnet55_direct_translation.lean",
+    "line": 7,
+    "eq": "SEG 1 0 ([] : List Nat) = []"
+   }
+  ],
+  "note": "SEG is a new_specification in rich_listScript.sml:267-285 with SEG 0 k l = [], SEG (SUC m) 0 (x::l), SEG (SUC m) (SUC k) (x::l); SEG (SUC m) k [] is open. Sonnet Lean makes it []; witness SEG 1 0 [] = [] is m = 1 = SUC 0, k = 0, l = [].",
+  "doubt": "Argument order is SEG m k l (m = length, k = start), as in the spec. Lean fixes all SEG (m+1) k [] (P_wide).",
+  "P_wide": "0 < m /\\ l = []",
+  "type_instance": "",
+  "hol4_source": "E:/ts_ws/hol4src/src/list/src/rich_listScript.sml:283"
+ },
+ {
+  "key_decl": "THE",
+  "translations": [
+   "ts_opus",
+   "ts_opus_nolessons"
+  ],
+  "family": "ts",
+  "hol_const": "option$THE",
+  "arity": 1,
+  "args": [
+   [
+    "x",
+    "'a option"
+   ]
+  ],
+  "P": "x = NONE",
+  "witnesses": [
+   {
+    "translation": "ts_opus",
+    "file": "baselines/ts_runs_v2/opus_lessons/witnesses.lean",
+    "line": 21,
+    "eq": "(THE (none : Option Nat)) = ARB"
+   },
+   {
+    "translation": "ts_opus",
+    "file": "baselines/ts_runs_v2/opus_lessons/witnesses.lean",
+    "line": 24,
+    "eq": "(HD ([] : List Nat)) = THE (none : Option Nat)"
+   },
+   {
+    "translation": "ts_opus_nolessons",
+    "file": "baselines/ts_runs_v2/opus_nolessons/witnesses.lean",
+    "line": 78,
+    "eq": "THE (none : Option Nat) = ARB"
+   }
+  ],
+  "note": "THE_DEF (optionScript.sml:176) saves only THE (SOME x) = x. Witnesses THE NONE = ARB and HD [] = THE NONE are at x = NONE.",
+  "doubt": "",
+  "P_wide": "x = NONE",
+  "type_instance": "",
+  "hol4_source": "E:/ts_ws/hol4src/src/coretypes/optionScript.sml:176"
+ },
+ {
+  "key_decl": "dest_Refv",
+  "translations": [
+   "ts_opus",
+   "ts_sonnet"
+  ],
+  "family": "ts",
+  "hol_const": "semanticPrimitivesProps$dest_Refv",
+  "arity": 1,
+  "args": [
+   [
+    "r",
+    "'a store_v"
+   ]
+  ],
+  "P": "r = W8array []",
+  "witnesses": [
+   {
+    "translation": "ts_opus",
+    "file": "baselines/ts_runs_v2/opus_lessons/witnesses.lean",
+    "line": 119,
+    "eq": "dest_Refv (store_v.W8array ([] : List word8) : store_v value) = ARB"
+   },
+   {
+    "translation": "ts_sonnet",
+    "file": "baselines/ts_runs_v2/sonnet_lessons/witnesses.lean",
+    "line": 78,
+    "eq": "dest_Refv (store_v.W8array [] : store_v Nat) = ARB"
+   }
+  ],
+  "note": "dest_Refv_def has only the Refv clause; store_v = Refv | W8array | Varray | Thunk (semanticPrimitivesScript.sml:106). Witnesses: dest_Refv (W8array []) = ARB.",
+  "doubt": "",
+  "P_wide": "!v. ~(r = Refv v)",
+  "type_instance": "",
+  "hol4_source": "E:/NUS/mcomp/Dissertation/candle_study/package_ts/semanticPrimitivesPropsScript.sml:165"
+ },
+ {
+  "key_decl": "dest_Refv",
+  "translations": [
+   "ts_opus_nolessons"
+  ],
+  "family": "ts",
+  "hol_const": "semanticPrimitivesProps$dest_Refv",
+  "arity": 1,
+  "args": [
+   [
+    "r",
+    "'a store_v"
+   ]
+  ],
+  "P": "r = Varray []",
+  "witnesses": [
+   {
+    "translation": "ts_opus_nolessons",
+    "file": "baselines/ts_runs_v2/opus_nolessons/witnesses.lean",
+    "line": 56,
+    "eq": "dest_Refv (store_v.Varray ([] : List Nat)) = (ARB : Nat)"
+   }
+  ],
+  "note": "Same HOL4 facts. Witness: dest_Refv (Varray []) = ARB.",
+  "doubt": "",
+  "P_wide": "!v. ~(r = Refv v)",
+  "type_instance": "",
+  "hol4_source": "E:/NUS/mcomp/Dissertation/candle_study/package_ts/semanticPrimitivesPropsScript.sml:165"
+ },
+ {
+  "key_decl": "dest_var",
+  "translations": [
+   "candle_opus",
+   "candle_opus_nolessons"
+  ],
+  "family": "candle",
+  "hol_const": "holSyntax$dest_var",
+  "arity": 1,
+  "args": [
+   [
+    "tm",
+    "term"
+   ]
+  ],
+  "P": "?a ty. tm = Const a ty",
+  "witnesses": [
+   {
+    "translation": "candle_opus",
+    "file": "baselines/rescore_v33/opus55_direct_translation.lean",
+    "line": 7,
+    "eq": "(a : mlstring) (t : type) : dest_var (Const a t) = ARB"
+   },
+   {
+    "translation": "candle_opus_nolessons",
+    "file": "baselines/rescore_v33/opus55_nolessons.lean",
+    "line": 5,
+    "eq": "(a : mlstring) (t : type) : dest_var (term.Const a t) = ARB"
+   }
+  ],
+  "note": "dest_var_def (holSyntaxScript.sml:57) has only dest_var (Var x ty) = (x,ty). Lean returns ARB for Const, Comb and Abs; both witnesses use `Const a t`.",
+  "doubt": "",
+  "P_wide": "!x ty. ~(tm = Var x ty)",
+  "type_instance": "",
+  "hol4_source": "E:/NUS/mcomp/Dissertation/candle_study/package/candle/standard/syntax/holSyntaxScript.sml:57"
+ },
+ {
+  "key_decl": "int_div",
+  "translations": [
+   "ts_opus"
+  ],
+  "family": "ts",
+  "hol_const": "integer$int_div",
+  "arity": 2,
+  "args": [
+   [
+    "i",
+    "int"
+   ],
+   [
+    "j",
+    "int"
+   ]
+  ],
+  "P": "j = 0 /\\ (i = 5 \\/ i = 1 \\/ i = 2)",
+  "witnesses": [
+   {
+    "translation": "ts_opus",
+    "file": "baselines/ts_runs_v2/opus_lessons/witnesses.lean",
+    "line": 41,
+    "eq": "int_div 5 0 = ARB"
+   },
+   {
+    "translation": "ts_opus",
+    "file": "baselines/ts_runs_v2/opus_lessons/witnesses.lean",
+    "line": 43,
+    "eq": "int_div 1 0 = int_div 2 0"
+   },
+   {
+    "translation": "ts_opus",
+    "file": "baselines/ts_runs_v2/opus_lessons/witnesses.lean",
+    "line": 47,
+    "eq": "int_div 1 0 = int_mod 1 0"
+   }
+  ],
+  "note": "int_div is a new_specification (integerScript.sml:1989) whose existence statement is guarded by ~(j = 0) (int_div_exists0, 1963-1980); INT_DIV and INT_DIV_0 assume nonzero divisors. Witnesses: int_div 5 0, int_div 1 0, int_div 2 0 (i : int, j = 0). In the Term quotation give i and j type int.",
+  "doubt": "",
+  "P_wide": "j = 0",
+  "type_instance": "",
+  "hol4_source": "E:/ts_ws/hol4src/src/integer/integerScript.sml:1989"
+ },
+ {
+  "key_decl": "int_div",
+  "translations": [
+   "ts_opus_nolessons"
+  ],
+  "family": "ts",
+  "hol_const": "integer$int_div",
+  "arity": 2,
+  "args": [
+   [
+    "i",
+    "int"
+   ],
+   [
+    "j",
+    "int"
+   ]
+  ],
+  "P": "j = 0",
+  "witnesses": [
+   {
+    "translation": "ts_opus_nolessons",
+    "file": "baselines/ts_runs_v2/opus_nolessons/witnesses.lean",
+    "line": 109,
+    "eq": "(i : Int) : int_div i 0 = ARB"
+   },
+   {
+    "translation": "ts_opus_nolessons",
+    "file": "baselines/ts_runs_v2/opus_nolessons/witnesses.lean",
+    "line": 111,
+    "eq": "int_div 7 0 = int_div 8 0"
+   }
+  ],
+  "note": "Same HOL4 facts. Witnesses int_div i 0 for every i (and 7 0, 8 0).",
+  "doubt": "",
+  "P_wide": "j = 0",
+  "type_instance": "",
+  "hol4_source": "E:/ts_ws/hol4src/src/integer/integerScript.sml:1989"
+ },
+ {
+  "key_decl": "int_div",
+  "translations": [
+   "ts_sonnet"
+  ],
+  "family": "ts",
+  "hol_const": "integer$int_div",
+  "arity": 2,
+  "args": [
+   [
+    "i",
+    "int"
+   ],
+   [
+    "j",
+    "int"
+   ]
+  ],
+  "P": "j = 0 /\\ (i = 1 \\/ i = 2)",
+  "witnesses": [
+   {
+    "translation": "ts_sonnet",
+    "file": "baselines/ts_runs_v2/sonnet_lessons/witnesses.lean",
+    "line": 25,
+    "eq": "int_div 1 0 = int_div 2 0"
+   }
+  ],
+  "note": "Same HOL4 facts. Witness int_div 1 0 = int_div 2 0.",
+  "doubt": "",
+  "P_wide": "j = 0",
+  "type_instance": "",
+  "hol4_source": "E:/ts_ws/hol4src/src/integer/integerScript.sml:1989"
+ },
+ {
+  "key_decl": "int_mod",
+  "translations": [
+   "ts_opus"
+  ],
+  "family": "ts",
+  "hol_const": "integer$int_mod",
+  "arity": 2,
+  "args": [
+   [
+    "i",
+    "int"
+   ],
+   [
+    "j",
+    "int"
+   ]
+  ],
+  "P": "j = 0 /\\ (i = 1 \\/ i = 2)",
+  "witnesses": [
+   {
+    "translation": "ts_opus",
+    "file": "baselines/ts_runs_v2/opus_lessons/witnesses.lean",
+    "line": 45,
+    "eq": "int_mod 1 0 = int_mod 2 0"
+   },
+   {
+    "translation": "ts_opus",
+    "file": "baselines/ts_runs_v2/opus_lessons/witnesses.lean",
+    "line": 47,
+    "eq": "int_div 1 0 = int_mod 1 0"
+   }
+  ],
+  "note": "int_mod is a new_specification (integerScript.sml:2074), existence guarded by ~(j = 0) (int_mod_exists0). Witnesses int_mod 1 0 = int_mod 2 0 and int_div 1 0 = int_mod 1 0.",
+  "doubt": "Lean opus defines int_mod i 0 = ARB; HOL4's guarded spec has `~(j=0) ==> r = i - i / j * j`, so int_mod i 0 is free. A grep of integerScript.sml found no saved theorem about x / 0 or x % 0 without a nonzero guard (other HOL4 theories were not searched).",
+  "P_wide": "j = 0",
+  "type_instance": "",
+  "hol4_source": "E:/ts_ws/hol4src/src/integer/integerScript.sml:2074"
+ },
+ {
+  "key_decl": "int_mod",
+  "translations": [
+   "ts_opus_nolessons"
+  ],
+  "family": "ts",
+  "hol_const": "integer$int_mod",
+  "arity": 2,
+  "args": [
+   [
+    "i",
+    "int"
+   ],
+   [
+    "j",
+    "int"
+   ]
+  ],
+  "P": "j = 0",
+  "witnesses": [
+   {
+    "translation": "ts_opus_nolessons",
+    "file": "baselines/ts_runs_v2/opus_nolessons/witnesses.lean",
+    "line": 110,
+    "eq": "(i : Int) : int_mod i 0 = ARB"
+   }
+  ],
+  "note": "Same HOL4 facts. Witness int_mod i 0 = ARB for every i.",
+  "doubt": "",
+  "P_wide": "j = 0",
+  "type_instance": "",
+  "hol4_source": "E:/ts_ws/hol4src/src/integer/integerScript.sml:2074"
+ },
+ {
+  "key_decl": "int_mod",
+  "translations": [
+   "ts_sonnet"
+  ],
+  "family": "ts",
+  "hol_const": "integer$int_mod",
+  "arity": 2,
+  "args": [
+   [
+    "i",
+    "int"
+   ],
+   [
+    "j",
+    "int"
+   ]
+  ],
+  "P": "j = 0 /\\ i = 7",
+  "witnesses": [
+   {
+    "translation": "ts_sonnet",
+    "file": "baselines/ts_runs_v2/sonnet_lessons/witnesses.lean",
+    "line": 28,
+    "eq": "int_mod 7 0 = ARB"
+   }
+  ],
+  "note": "Same HOL4 facts. Witness int_mod 7 0 = ARB.",
+  "doubt": "",
+  "P_wide": "j = 0",
+  "type_instance": "",
+  "hol4_source": "E:/ts_ws/hol4src/src/integer/integerScript.sml:2074"
+ },
+ {
+  "key_decl": "locnrow",
+  "translations": [
+   "ts_opus",
+   "ts_sonnet"
+  ],
+  "family": "ts",
+  "hol_const": "location$locnrow",
+  "arity": 1,
+  "args": [
+   [
+    "l",
+    "locn"
+   ]
+  ],
+  "P": "l = UNKNOWNpt",
+  "witnesses": [
+   {
+    "translation": "ts_opus",
+    "file": "baselines/ts_runs_v2/opus_lessons/witnesses.lean",
+    "line": 97,
+    "eq": "locnrow locn.UNKNOWNpt = ARB"
+   },
+   {
+    "translation": "ts_opus",
+    "file": "baselines/ts_runs_v2/opus_lessons/witnesses.lean",
+    "line": 105,
+    "eq": "locnrow locn.UNKNOWNpt = locncol locn.EOFpt"
+   },
+   {
+    "translation": "ts_sonnet",
+    "file": "baselines/ts_runs_v2/sonnet_lessons/witnesses.lean",
+    "line": 65,
+    "eq": "locnrow .UNKNOWNpt = ARB"
+   },
+   {
+    "translation": "ts_sonnet",
+    "file": "baselines/ts_runs_v2/sonnet_lessons/witnesses.lean",
+    "line": 106,
+    "eq": "HD ([] : List Nat) = locnrow .UNKNOWNpt"
+   }
+  ],
+  "note": "Theory `location` defines locn = UNKNOWNpt | EOFpt | POSN num num (locationScript.sml:3) and the four accessors by single POSN clauses; add_record_field only gives syntax, so the constants are plain definitions location$locnrow etc. Witnesses: locnrow UNKNOWNpt = ARB, locnrow UNKNOWNpt = locncol EOFpt, = HD [].",
+  "doubt": "",
+  "P_wide": "!r c. ~(l = POSN r c)",
+  "type_instance": "",
+  "hol4_source": "E:/NUS/mcomp/Dissertation/candle_study/package_ts/locationScript.sml:6"
+ },
+ {
+  "key_decl": "locnrow",
+  "translations": [
+   "ts_opus_nolessons"
+  ],
+  "family": "ts",
+  "hol_const": "location$locnrow",
+  "arity": 1,
+  "args": [
+   [
+    "l",
+    "locn"
+   ]
+  ],
+  "P": "l = EOFpt",
+  "witnesses": [
+   {
+    "translation": "ts_opus_nolessons",
+    "file": "baselines/ts_runs_v2/opus_nolessons/witnesses.lean",
+    "line": 21,
+    "eq": "locnrow EOFpt = (ARB : Nat)"
+   }
+  ],
+  "note": "Theory `location` defines locn = UNKNOWNpt | EOFpt | POSN num num (locationScript.sml:3) and the four accessors by single POSN clauses; add_record_field only gives syntax, so the constants are plain definitions location$locnrow etc. Witness locnrow EOFpt = ARB.",
+  "doubt": "",
+  "P_wide": "!r c. ~(l = POSN r c)",
+  "type_instance": "",
+  "hol4_source": "E:/NUS/mcomp/Dissertation/candle_study/package_ts/locationScript.sml:6"
+ },
+ {
+  "key_decl": "locncol",
+  "translations": [
+   "ts_opus",
+   "ts_sonnet"
+  ],
+  "family": "ts",
+  "hol_const": "location$locncol",
+  "arity": 1,
+  "args": [
+   [
+    "l",
+    "locn"
+   ]
+  ],
+  "P": "l = EOFpt",
+  "witnesses": [
+   {
+    "translation": "ts_opus",
+    "file": "baselines/ts_runs_v2/opus_lessons/witnesses.lean",
+    "line": 99,
+    "eq": "locncol locn.EOFpt = ARB"
+   },
+   {
+    "translation": "ts_opus",
+    "file": "baselines/ts_runs_v2/opus_lessons/witnesses.lean",
+    "line": 105,
+    "eq": "locnrow locn.UNKNOWNpt = locncol locn.EOFpt"
+   },
+   {
+    "translation": "ts_sonnet",
+    "file": "baselines/ts_runs_v2/sonnet_lessons/witnesses.lean",
+    "line": 68,
+    "eq": "locncol .EOFpt = ARB"
+   },
+   {
+    "translation": "ts_sonnet",
+    "file": "baselines/ts_runs_v2/sonnet_lessons/witnesses.lean",
+    "line": 109,
+    "eq": "FAPPLY (FEMPTY : FMap Nat Nat) 5 = locncol .EOFpt"
+   }
+  ],
+  "note": "Theory `location` defines locn = UNKNOWNpt | EOFpt | POSN num num (locationScript.sml:3) and the four accessors by single POSN clauses; add_record_field only gives syntax, so the constants are plain definitions location$locnrow etc. Witnesses: locncol EOFpt = ARB and the shared-ARB equations.",
+  "doubt": "",
+  "P_wide": "!r c. ~(l = POSN r c)",
+  "type_instance": "",
+  "hol4_source": "E:/NUS/mcomp/Dissertation/candle_study/package_ts/locationScript.sml:16"
+ },
+ {
+  "key_decl": "locncol",
+  "translations": [
+   "ts_opus_nolessons"
+  ],
+  "family": "ts",
+  "hol_const": "location$locncol",
+  "arity": 1,
+  "args": [
+   [
+    "l",
+    "locn"
+   ]
+  ],
+  "P": "l = UNKNOWNpt",
+  "witnesses": [
+   {
+    "translation": "ts_opus_nolessons",
+    "file": "baselines/ts_runs_v2/opus_nolessons/witnesses.lean",
+    "line": 26,
+    "eq": "locncol UNKNOWNpt = (ARB : Nat)"
+   }
+  ],
+  "note": "Theory `location` defines locn = UNKNOWNpt | EOFpt | POSN num num (locationScript.sml:3) and the four accessors by single POSN clauses; add_record_field only gives syntax, so the constants are plain definitions location$locnrow etc. Witness locncol UNKNOWNpt = ARB.",
+  "doubt": "",
+  "P_wide": "!r c. ~(l = POSN r c)",
+  "type_instance": "",
+  "hol4_source": "E:/NUS/mcomp/Dissertation/candle_study/package_ts/locationScript.sml:16"
+ },
+ {
+  "key_decl": "locn_rowupdate",
+  "translations": [
+   "ts_opus"
+  ],
+  "family": "ts",
+  "hol_const": "location$locn_rowupdate",
+  "arity": 2,
+  "args": [
+   [
+    "f",
+    "num -> num"
+   ],
+   [
+    "l",
+    "locn"
+   ]
+  ],
+  "P": "l = UNKNOWNpt",
+  "witnesses": [
+   {
+    "translation": "ts_opus",
+    "file": "baselines/ts_runs_v2/opus_lessons/witnesses.lean",
+    "line": 101,
+    "eq": "locn_rowupdate (fun x => x + 1) locn.UNKNOWNpt = ARB"
+   }
+  ],
+  "note": "Theory `location` defines locn = UNKNOWNpt | EOFpt | POSN num num (locationScript.sml:3) and the four accessors by single POSN clauses; add_record_field only gives syntax, so the constants are plain definitions location$locnrow etc. Witness locn_rowupdate (fun x => x+1) UNKNOWNpt = ARB (f arbitrary in the Lean definition).",
+  "doubt": "",
+  "P_wide": "!r c. ~(l = POSN r c)",
+  "type_instance": "",
+  "hol4_source": "E:/NUS/mcomp/Dissertation/candle_study/package_ts/locationScript.sml:11"
+ },
+ {
+  "key_decl": "locn_rowupdate",
+  "translations": [
+   "ts_opus_nolessons",
+   "ts_sonnet"
+  ],
+  "family": "ts",
+  "hol_const": "location$locn_rowupdate",
+  "arity": 2,
+  "args": [
+   [
+    "f",
+    "num -> num"
+   ],
+   [
+    "l",
+    "locn"
+   ]
+  ],
+  "P": "l = EOFpt",
+  "witnesses": [
+   {
+    "translation": "ts_opus_nolessons",
+    "file": "baselines/ts_runs_v2/opus_nolessons/witnesses.lean",
+    "line": 31,
+    "eq": "(f : Nat → Nat) : locn_rowupdate f EOFpt = (ARB : locn)"
+   },
+   {
+    "translation": "ts_sonnet",
+    "file": "baselines/ts_runs_v2/sonnet_lessons/witnesses.lean",
+    "line": 71,
+    "eq": "(f : Nat → Nat) : locn_rowupdate f .EOFpt = ARB"
+   }
+  ],
+  "note": "Theory `location` defines locn = UNKNOWNpt | EOFpt | POSN num num (locationScript.sml:3) and the four accessors by single POSN clauses; add_record_field only gives syntax, so the constants are plain definitions location$locnrow etc. Witnesses locn_rowupdate f EOFpt = ARB for every f.",
+  "doubt": "",
+  "P_wide": "!r c. ~(l = POSN r c)",
+  "type_instance": "",
+  "hol4_source": "E:/NUS/mcomp/Dissertation/candle_study/package_ts/locationScript.sml:11"
+ },
+ {
+  "key_decl": "locn_colupdate",
+  "translations": [
+   "ts_opus",
+   "ts_opus_nolessons"
+  ],
+  "family": "ts",
+  "hol_const": "location$locn_colupdate",
+  "arity": 2,
+  "args": [
+   [
+    "f",
+    "num -> num"
+   ],
+   [
+    "l",
+    "locn"
+   ]
+  ],
+  "P": "l = EOFpt",
+  "witnesses": [
+   {
+    "translation": "ts_opus",
+    "file": "baselines/ts_runs_v2/opus_lessons/witnesses.lean",
+    "line": 103,
+    "eq": "locn_colupdate (fun x => x + 1) locn.EOFpt = ARB"
+   },
+   {
+    "translation": "ts_opus_nolessons",
+    "file": "baselines/ts_runs_v2/opus_nolessons/witnesses.lean",
+    "line": 38,
+    "eq": "(f : Nat → Nat) : locn_colupdate f EOFpt = (ARB : locn)"
+   }
+  ],
+  "note": "Theory `location` defines locn = UNKNOWNpt | EOFpt | POSN num num (locationScript.sml:3) and the four accessors by single POSN clauses; add_record_field only gives syntax, so the constants are plain definitions location$locnrow etc. Witnesses locn_colupdate f EOFpt = ARB.",
+  "doubt": "",
+  "P_wide": "!r c. ~(l = POSN r c)",
+  "type_instance": "",
+  "hol4_source": "E:/NUS/mcomp/Dissertation/candle_study/package_ts/locationScript.sml:20"
+ },
+ {
+  "key_decl": "locn_colupdate",
+  "translations": [
+   "ts_sonnet"
+  ],
+  "family": "ts",
+  "hol_const": "location$locn_colupdate",
+  "arity": 2,
+  "args": [
+   [
+    "f",
+    "num -> num"
+   ],
+   [
+    "l",
+    "locn"
+   ]
+  ],
+  "P": "l = UNKNOWNpt",
+  "witnesses": [
+   {
+    "translation": "ts_sonnet",
+    "file": "baselines/ts_runs_v2/sonnet_lessons/witnesses.lean",
+    "line": 74,
+    "eq": "(f : Nat → Nat) : locn_colupdate f .UNKNOWNpt = ARB"
+   }
+  ],
+  "note": "Theory `location` defines locn = UNKNOWNpt | EOFpt | POSN num num (locationScript.sml:3) and the four accessors by single POSN clauses; add_record_field only gives syntax, so the constants are plain definitions location$locnrow etc. Witness locn_colupdate f UNKNOWNpt = ARB.",
+  "doubt": "",
+  "P_wide": "!r c. ~(l = POSN r c)",
+  "type_instance": "",
+  "hol4_source": "E:/NUS/mcomp/Dissertation/candle_study/package_ts/locationScript.sml:20"
+ },
+ {
+  "key_decl": "termsem0",
+  "translations": [
+   "candle_opus"
+  ],
+  "family": "candle",
+  "hol_const": "holSemantics$termsem0",
+  "arity": 5,
+  "args": [
+   [
+    "mem",
+    "'U -> 'U -> bool"
+   ],
+   [
+    "tmsig",
+    "mlstring |-> type"
+   ],
+   [
+    "i",
+    "'U interpretation"
+   ],
+   [
+    "v",
+    "'U valuation"
+   ],
+   [
+    "t",
+    "term"
+   ]
+  ],
+  "P": "?a b. t = Abs a b /\\ (!x ty. ~(a = Var x ty))",
+  "witnesses": [
+   {
+    "translation": "candle_opus",
+    "file": "baselines/opus55_direct_translation/lean/CandleLean/HolSemantics.lean",
+    "line": 206,
+    "eq": "termsem0 mem tmsig i v (Abs (Const _ _) _) = @ARB U <tmvof v default>  (also lines 207 Abs (Comb _ _) _ and 208 Abs (Abs _ _) _; the repaired file makes this opaque, see rescore_v33/README.md:47-49)"
+   }
+  ],
+  "note": "termsem_def (holSemanticsScript.sml:134-142) has four clauses (Var, Const, Comb, Abs (Var x ty) b); Abs of a non-variable is left open (README.md:47-49: the theory saves only termsem_def, no primitive definition). The Lean definition (unrepaired baseline) returns ARB for Abs (Const..), Abs (Comb..), Abs (Abs..). No standalone Lean equation theorem exists for termsem0 in rescore_v33/opus55_direct_translation.lean: the witness is the definitional equation at lines 206-208, so the point set is the whole non-variable-Abs region. Equation text: `termsem0 mem tmsig i v (Abs a b) = ARB`-like, with a not a Var.",
+  "doubt": "(1) No separate witness theorem/line exists for termsem0 (it was found by a Sonnet audit, README.md:45-49), so line 206 is the definition clause. (2) HOL4 `?a b. ... Abs a b` presumes Abs has type term -> term -> term (it does: Abs term term). (3) termsem0 is a TFL definition; check that the HOL4 build does not also save termsem0_primitive (README says it does not).",
+  "P_wide": "?a b. t = Abs a b /\\ (!x ty. ~(a = Var x ty))",
+  "type_instance": "",
+  "hol4_source": "E:/NUS/mcomp/Dissertation/candle_study/package/candle/standard/semantics/holSemanticsScript.sml:134"
+ },
+ {
+  "key_decl": "type_def_to_ctMap",
+  "translations": [
+   "ts_opus",
+   "ts_opus_nolessons"
+  ],
+  "family": "ts",
+  "hol_const": "typeSysProps$type_def_to_ctMap",
+  "arity": 4,
+  "args": [
+   [
+    "tenvT",
+    "(mlstring, mlstring, tvarN list # type) namespace"
+   ],
+   [
+    "next_stamp",
+    "num"
+   ],
+   [
+    "tds",
+    "('a # 'b # (conN # ast_t list) list) list"
+   ],
+   [
+    "ids",
+    "'c list"
+   ]
+  ],
+  "P": "tds = [] /\\ (?i. ids = [i])",
+  "witnesses": [
+   {
+    "translation": "ts_opus",
+    "file": "baselines/ts_runs_v2/opus_lessons/witnesses.lean",
+    "line": 125,
+    "eq": "(tenvT : Namespace mlstring mlstring (List mlstring × typ)) (next : Nat) : type_def_to_ctMap tenvT next ([] : List (List mlstring × mlstring × List (conN × List ast_t))) [(0 : Nat)] = ARB"
+   },
+   {
+    "translation": "ts_opus_nolessons",
+    "file": "baselines/ts_runs_v2/opus_nolessons/witnesses.lean",
+    "line": 69,
+    "eq": "(tenvT : Namespace mlstring mlstring (List mlstring × typ)) (n : Nat) : type_def_to_ctMap (α"
+   }
+  ],
+  "note": "type_def_to_ctMap_def has clauses only for ([],[]) and (td::tds, id::ids). Witnesses: tds = [], ids = [x] (a one-element list), any tenvT and next_stamp.",
+  "doubt": "The HOL4 type of tds/ids is polymorphic ('a/'b/'c); the Lean witnesses fix Nat. conN, typeN, tvarN abbreviations: check the exact HOL4 argument type for tenvT (tenv_abbrev) when typing the replacement.",
+  "P_wide": "~((tds = [] /\\ ids = []) \\/ (?a b c d. tds = a::b /\\ ids = c::d))",
+  "type_instance": "",
+  "hol4_source": "E:/NUS/mcomp/Dissertation/candle_study/package_ts/typeSysPropsScript.sml:1502"
+ },
+ {
+  "key_decl": "type_def_to_ctMap",
+  "translations": [
+   "ts_sonnet"
+  ],
+  "family": "ts",
+  "hol_const": "typeSysProps$type_def_to_ctMap",
+  "arity": 4,
+  "args": [
+   [
+    "tenvT",
+    "(mlstring, mlstring, tvarN list # type) namespace"
+   ],
+   [
+    "next_stamp",
+    "num"
+   ],
+   [
+    "tds",
+    "('a # 'b # (conN # ast_t list) list) list"
+   ],
+   [
+    "ids",
+    "'c list"
+   ]
+  ],
+  "P": "next_stamp = 0 /\\ tds = [] /\\ (?i. ids = [i])",
+  "witnesses": [
+   {
+    "translation": "ts_sonnet",
+    "file": "baselines/ts_runs_v2/sonnet_lessons/witnesses.lean",
+    "line": 101,
+    "eq": "(ns : Namespace modN typeN (List tvarN × Ty)) : type_def_to_ctMap ns 0 [] [3] = ARB"
+   }
+  ],
+  "note": "Same HOL4 facts. Witness type_def_to_ctMap ns 0 [] [3] = ARB: next_stamp = 0, tds = [], ids a one-element list, tenvT any.",
+  "doubt": "Same typing caveat as above.",
+  "P_wide": "~((tds = [] /\\ ids = []) \\/ (?a b c d. tds = a::b /\\ ids = c::d))",
+  "type_instance": "",
+  "hol4_source": "E:/NUS/mcomp/Dissertation/candle_study/package_ts/typeSysPropsScript.sml:1502"
+ }
+]

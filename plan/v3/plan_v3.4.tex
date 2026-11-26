@@ -6,7 +6,7 @@
 \newcommand{\code}[1]{\texttt{#1}}
 \setlist{itemsep=2pt,topsep=3pt}
 \title{Migrating CakeML from HOL4 to Lean~4 with a three-family AI workflow: study plan}
-\author{Draft, version 3.4, 27 November 2026 (third revision). Supersedes version 3.2 once adopted.}
+\author{Draft, version 3.4, 27 November 2026 (fourth revision). Supersedes version 3.2 once adopted.}
 \date{}
 \begin{document}\sloppy
 \maketitle
@@ -15,7 +15,7 @@
 \begin{enumerate}
 \item The audit on real errors is the main result.
 \item The experiment with planted defects is dropped; its pilot is reported as a pilot.
-\item The author, with colleagues, checks the reasons of the findings (Section~\ref{sec:check}).
+\item The author, with volunteer readers, checks the reasons of the findings (Section~\ref{sec:check}).
 \end{enumerate}
 Type soundness is part of Phase~1. Limitations, deviations and disclosures are collected in Section~\ref{sec:limits}, at the end.
 
@@ -69,11 +69,11 @@ These runs show two things. First, a strong single model now translates this clo
 \paragraph{Test for V-C.} Every total Lean definition proves some Lean-only equation, so the test is restricted to equations $e$ written with \emph{mapped} constants only (including the images of \code{ARB} and \code{@}). A V-C label needs:
 \begin{enumerate}[label=(\alph*)]
 \item a Lean proof of $e$;
-\item a counterexample interpretation: values for the HOL4 constants in $e$ under which $e$ is false;
-\item the list of \emph{relevant saved theorems}: every theorem saved in the pinned theories, or in the HOL4 library theories they load, whose statement mentions a constant of $e$, together with the theorems these depend on through the constants they mention (definitions, characterisations, recursion and induction theorems, type axioms). The list is produced by a HOL4 query of the theorem database, not by hand, and stored with the label;
-\item for each theorem on that list, a record that the interpretation of (b) satisfies it: by proof in Lean or HOL4, by evaluation, or by a short written argument that the theorem does not constrain the value changed.
+\item a counterexample model: an interpretation of the HOL4 theory in which $e$ is false, obtained by changing the value of one loosely specified constant (or of \code{ARB}) on a region $P$; constants defined from it are reinterpreted by their own definitions;
+\item the kernel introduction of the changed constant, read from the HOL4 and CakeML sources: a specification (including primitive recursion, which leaves missing cases open), a constant definition, or a TFL definition, whose kernel definition fills missing patterns with \code{ARB};
+\item a HOL4 proof that the changed value satisfies that specification for every choice on $P$ (\code{ARB} has no axiom).
 \end{enumerate}
-Satisfying only the defining theorem is not enough: two interpretations can satisfy one defining theorem and still disagree with another saved theorem. A HOL4 proof of the negation of $e$ is not expected, and a failed HOL4 proof search is not evidence. Where any theorem of the list is not checked, the label stays \emph{unsure}: it is not counted as V-C, and in the tables it counts as unresolved. The same rule holds for tier-2 cases and for V-C findings outside the key. The V-C entries of the key were made with the defining theorem only; they are rechecked with this test before the paper (Section~\ref{sec:timeline}).
+With (c) and (d), the new interpretation is a model of the HOL4 theory, so every saved theorem holds in it, with the theorems and definitions it depends on (soundness of HOL with loose specifications). This is how the counterexample respects the relevant saved theorems: two interpretations that satisfy one defining theorem but disagree with another saved theorem are excluded, because the second theorem is a consequence of the theory. If the kernel definition fixes the value (TFL's \code{ARB} completion) and $e$ states that value, $e$ holds in HOL4 and is not V-C. A HOL4 proof of the negation of $e$ is not expected, and a failed HOL4 proof search is not evidence. Where (c) or (d) is missing, the label stays \emph{unsure}: it is not counted as V-C, and in the tables it counts as unresolved. The same rule holds for tier-2 cases and for V-C findings outside the key. As a supplement, a script rewrites every saved theorem that mentions the changed constant and tries fixed HOL4 tactics; its failures are not refutations. The V-C entries of the key were first made with the defining theorem only; the recheck with this test (27 November, \code{audit/real/vc\_recheck/RECHECK.md}) keeps 56 of the 63 pairs and removes 7, which hold in HOL4 by TFL's \code{ARB} completion (\code{MAP3}, \code{type\_def\_to\_ctMap}, \code{termsem0}).
 \paragraph{Re-scoring of the baselines.}\label{sec:rescore} The four baselines are scored against this contract with kernel checks where possible: for each constant fixed in \code{CONVENTIONS.md}, a Lean script tests whether a concrete equation not in $\Phi$ is provable, and the test above decides the label. Counts: V-P (by hand and HOL4 query), V-C, type deviations, encodings.
 
 \section{Scope}
@@ -99,7 +99,7 @@ Reviewer & Google & Gemini Neon (\code{gemini-4-neon-high}) through \code{agy} &
 Auditor O & Anthropic & Claude Opus 5.5 & Same-family auditor (arms S3a, S3b).\\
 Reviewer O & Anthropic & Claude Opus 5.5, separate session & Same-family reviewer (arm S6).\\
 Prover & Anthropic & Claude Opus 5.5, high effort & Fills \code{sorry}; never sees HOL4 proofs.\\
-Checkers & -- & the author and colleagues & Score the 51 statement rows and check the reasons of findings, blinded (Section~\ref{sec:check}).\\
+Checkers & -- & the author and volunteer readers & Score the 51 statement rows and check the reasons of findings, blinded (Section~\ref{sec:check}).\\
 Oracle & (none) & HOL4 (typed export, queries) and the Lean kernel & Settles what it can (Section~\ref{sec:hol4}).\\
 \bottomrule
 \end{tabularx}}
@@ -144,7 +144,7 @@ Arms reuse the audits: S4 uses S1, S6 uses S3a, S8 uses S3a and S3b.
 \paragraph{Pilot with planted defects.} Ten units (\code{audit/pilot/RESULTS.md}), reported as a pilot.
 
 \section{Human check of the reasons}\label{sec:check}
-\paragraph{Who.} The author and a group of colleagues from a university mathematics department, working on the rows in parallel, all blinded to the run, the reviewer verdict, the translation and the results. Each reader recorded an estimate of the minutes per row.
+\paragraph{Who.} The author and volunteer readers from a university mathematics department, all familiar with Lean and HOL4, working on the rows in parallel, all blinded to the run, the reviewer verdict, the translation and the results. Each row had one reader, who saw only the four self-contained check files. Each reader recorded an estimate of the minutes per row. The author and the readers filled the 51-row scoring sheet together.
 \paragraph{Order.} First the 51-row sheet (\code{baselines/ts\_runs\_v2/scoring}), then the 108-row sheet (\code{audit/real/check}).
 \paragraph{Rows (fixed by script, seed \code{check-20261126}).} 108 rows, 91 declarations: findings of the three audit runs, chosen by rule, and some controls. The rule and the counts are in \code{audit/real/check/SPEC.md}.
 \paragraph{Questions.} Is the difference real; which kind; is the stated reason right, partly, or wrong.
@@ -223,13 +223,13 @@ The full loop that version~3.3 planned, kept for a later round:
 \section{Decisions taken}
 \begin{enumerate}
 \item Framing: measured, evidence-backed audit; no certification claim (24 Nov, adopting Neon's accepted set).
-\item Fidelity contract: preservation and conservativity; \code{HD []} and similar defaults are conservativity violations; baselines re-scored (author, 24 Nov). The V-C test checks counterexamples against all relevant saved theorems; unchecked cases stay unsure (author, 26 Nov).
+\item Fidelity contract: preservation and conservativity; \code{HD []} and similar defaults are conservativity violations; baselines re-scored (author, 24 Nov). The V-C test checks counterexamples against all relevant saved theorems; unchecked cases stay unsure (author, 26 Nov). The test is met by a model of the HOL4 theory: the changed constant's kernel introduction and a HOL4 proof that it still holds; the theorem-by-theorem check is a supplement (27 Nov). The recheck removes 7 of the 63 V-C pairs (27 Nov).
 \item Spending: no limit for Opus and Sonnet; report at each milestone (author, 24 Nov).
 \item Reviewer cards of simulated reviews decided by Gemini Neon (author, 23 Nov).
 \item Translator Opus 5.5; Sonnet 5.5 also translates the type-soundness closure (22 and 24 Nov).
 \item Phase~2 order by milestones, repository \code{cakeml-lean4} (22 Nov).
 \item Neon is reviewer (arm S4); Astra is auditor (22 Nov); the Astra prover is dropped (24 Nov).
-\item Real-error audit is the main result, planted-defect experiment dropped, the author checks findings (25 Nov); colleagues share the check (26 Nov).
+\item Real-error audit is the main result, planted-defect experiment dropped, the author checks findings (25 Nov); volunteer readers share the check, one reader per row (26 Nov).
 \item Limitations, deviations and disclosures stand at the end of the plan, the paper and every write-up (author, 26 Nov).
 \item Target ITP 2027: abstract 8 Feb, paper 15 Feb 2027 (22 Nov).
 \end{enumerate}
@@ -243,7 +243,7 @@ The full loop that version~3.3 planned, kept for a later round:
 \end{itemize}
 \paragraph{People.}
 \begin{itemize}
-\item The author designed the study and the contract and is not independent of it. Version~3.2 said that the author does not adjudicate, and version~3.3 asked for an independent person; both were given up on 25 November. The author stated on 25 November that they had not seen the results printed earlier in the work, and the documents needed for the check held no result; a progress note did tell the author that the sheet has 8 controls. The colleagues who shared the check did not take part in the design; the split of rows between readers is not recorded in the sheet, and readers are not named.
+\item The author designed the study and the contract and is not independent of it. Version~3.2 said that the author does not adjudicate, and version~3.3 asked for an independent person; both were given up on 25 November. The author stated on 25 November that they had not seen the results printed earlier in the work, and the documents needed for the check held no result; a progress note did tell the author that the sheet has 8 controls. The readers who shared the check did not take part in the design; each row had one reader, so no agreement between readers is measured; the split of rows between readers is not recorded in the sheet, and readers are not named. The acknowledgements thank them as a group.
 \item The key, the row selection and the sheets were made by Claude, not by the author. Claude also confirmed findings outside the key before the check.
 \item The minutes in the filled check sheet are each reader's estimate, not timed, so human effort for the check is approximate.
 \item Readers see the claim before answering, which can anchor the answer. The sheet does not record whether any row was read twice, so agreement between readers is not measured.
@@ -259,7 +259,7 @@ The full loop that version~3.3 planned, kept for a later round:
 \end{itemize}
 \paragraph{Threats to validity.}
 \begin{itemize}
-\item \textbf{Contract choice.} Conservativity counts choices that HOL4 leaves open as violations. A different contract gives different labels; V-P and V-C are reported separately. The V-C entries made before the stricter test are rechecked.
+\item \textbf{Contract choice.} Conservativity counts choices that HOL4 leaves open as violations. A different contract gives different labels; V-P and V-C are reported separately. The V-C entries made before the stricter test were rechecked (27 November): 7 of 63 pairs left the key because TFL's kernel definition gives the same \code{ARB} value as Lean. The readers of the blinded check had confirmed these 7 against the saved theorems, which do not state the \code{ARB} cases. The model argument rests on soundness of HOL with loose specifications; the type-soundness theories were built with \code{--fast}, so their proofs rest on CakeML's full build. For the TFL constants the kernel definition was reproduced on a copy made by the same \code{Define}. The key as run and its tables are kept for comparison.
 \item \textbf{Known errors} are selected: part came from scripts, the rest from named-constant tests and proofs, and they are unevenly spread over the translations. Errors outside the key show the key is incomplete; general discovery is not measured, and the totals do not describe translation errors in general.
 \item \textbf{One run of Astra, two of Opus}: run-to-run variation of Astra is unknown; modules of one translation are not independent; intervals are by module and conditional on the key.
 \item \textbf{Model families.} Results hold for these configurations; no claim that one family is better. The same-family and cross-family arms also differ in number of runs and cost. Agreement among agents of one family is not independent evidence.

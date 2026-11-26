@@ -1,0 +1,136 @@
+{
+ "entry": {
+  "key_decl": "FUN_FMAP",
+  "translations": [
+   "candle_sonnet"
+  ],
+  "family": "candle",
+  "hol_const": "finite_map$FUN_FMAP",
+  "arity": 2,
+  "args": [
+   [
+    "f",
+    "'a -> 'b"
+   ],
+   [
+    "s",
+    "'a set"
+   ]
+  ],
+  "P": "INFINITE s",
+  "witnesses": [
+   {
+    "translation": "candle_sonnet",
+    "file": "baselines/rescore_v33/sonnet55_direct_translation.lean",
+    "line": 11,
+    "eq": "(f : Nat → Nat) (P : Set Nat) (h : ¬ FINITE P) : FUN_FMAP f P = FEMPTY"
+   }
+  ],
+  "note": "FUN_FMAP_DEF (finite_mapScript.sml:1585, new_specification) constrains FUN_FMAP f P only under FINITE P. Sonnet Lean sets FUN_FMAP f P = FEMPTY for non-FINITE P; the witness is universally quantified over f and over infinite P (hypothesis h : not FINITE P), which is exactly INFINITE s.",
+  "doubt": "",
+  "P_wide": "INFINITE s",
+  "type_instance": "",
+  "hol4_source": "E:/ts_ws/hol4src/src/finite_maps/finite_mapScript.sml:1585"
+ },
+ "cprime": "λvcx0 vcx1. if INFINITE vcx1 then vc_g vcx0 vcx1 else FUN_FMAP vcx0 vcx1 : :(α -> β) -> (α -> bool) -> (α |-> β)",
+ "relevant": 13,
+ "checked": 13,
+ "proved": 11,
+ "not_proved": [
+  [
+   "finite_map",
+   "f_o_DEF",
+   "def",
+   "FAILED"
+  ],
+  [
+   "finite_map",
+   "MAP_KEYS_witness",
+   "thm",
+   "FAILED"
+  ]
+ ],
+ "results": [
+  [
+   "finite_map",
+   "f_o_DEF",
+   "def",
+   "FAILED"
+  ],
+  [
+   "finite_map",
+   "f_o_FUPDATE",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "finite_map",
+   "FDOM_FMAP",
+   "thm",
+   "rw"
+  ],
+  [
+   "finite_map",
+   "FLOOKUP_FUN_FMAP",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "finite_map",
+   "FLOOKUP_SIMP",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "finite_map",
+   "FMAP_MAP2_def",
+   "def",
+   "rw_metis"
+  ],
+  [
+   "finite_map",
+   "FRANGE_FMAP",
+   "thm",
+   "rw"
+  ],
+  [
+   "finite_map",
+   "FUN_FMAP_DEF",
+   "def",
+   "rw_metis"
+  ],
+  [
+   "finite_map",
+   "FUN_FMAP_EMPTY",
+   "thm",
+   "rw"
+  ],
+  [
+   "finite_map",
+   "FUN_FMAP_INSERT",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "finite_map",
+   "MAP_KEYS_using_LINV",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "finite_map",
+   "MAP_KEYS_witness",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "misc",
+   "FUN_FMAP_FAPPLY_FEMPTY_FAPPLY",
+   "thm",
+   "rw"
+  ]
+ ],
+ "verdict": "unsure",
+ "seconds": 59,
+ "log": "logs/FUN_FMAP_candle_candle_sonnet.log"
+}

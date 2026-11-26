@@ -1,0 +1,346 @@
+{
+ "entry": {
+  "key_decl": "int_div",
+  "translations": [
+   "ts_opus_nolessons"
+  ],
+  "family": "ts",
+  "hol_const": "integer$int_div",
+  "arity": 2,
+  "args": [
+   [
+    "i",
+    "int"
+   ],
+   [
+    "j",
+    "int"
+   ]
+  ],
+  "P": "j = 0",
+  "witnesses": [
+   {
+    "translation": "ts_opus_nolessons",
+    "file": "baselines/ts_runs_v2/opus_nolessons/witnesses.lean",
+    "line": 109,
+    "eq": "(i : Int) : int_div i 0 = ARB"
+   },
+   {
+    "translation": "ts_opus_nolessons",
+    "file": "baselines/ts_runs_v2/opus_nolessons/witnesses.lean",
+    "line": 111,
+    "eq": "int_div 7 0 = int_div 8 0"
+   }
+  ],
+  "note": "Same HOL4 facts. Witnesses int_div i 0 for every i (and 7 0, 8 0).",
+  "doubt": "",
+  "P_wide": "j = 0",
+  "type_instance": "",
+  "hol4_source": "E:/ts_ws/hol4src/src/integer/integerScript.sml:1989"
+ },
+ "cprime": "λvcx0 vcx1. if vcx1 = 0 then vc_g vcx0 vcx1 else vcx0 / vcx1 : :int -> int -> int",
+ "relevant": 39,
+ "checked": 39,
+ "proved": 29,
+ "not_proved": [
+  [
+   "Omega",
+   "calc_nightmare_def",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "Omega",
+   "nightmare_def",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "Omega",
+   "nightmare_EXISTS",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "integer",
+   "EDIV_DEF",
+   "def",
+   "FAILED"
+  ],
+  [
+   "integer",
+   "INT_DIV_REDUCE",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "integer",
+   "INT_DIV_UNIQUE",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "integer",
+   "INT_MOD_REDUCE",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "integer_word",
+   "i2w_DIV",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "integer_word",
+   "word_sdiv_def",
+   "def",
+   "FAILED"
+  ],
+  [
+   "intreal",
+   "INT_FLOOR_compute",
+   "thm",
+   "FAILED"
+  ]
+ ],
+ "results": [
+  [
+   "Omega",
+   "calc_nightmare_def",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "Omega",
+   "modhat_def",
+   "def",
+   "rw_simp_th"
+  ],
+  [
+   "Omega",
+   "nightmare_def",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "Omega",
+   "nightmare_EXISTS",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "cooper",
+   "elim_eq_coeffs'",
+   "thm/local",
+   "rw_metis"
+  ],
+  [
+   "cooper",
+   "negated_elim_lt_coeffs1",
+   "thm/local",
+   "rw_simp_th"
+  ],
+  [
+   "cooper",
+   "negated_elim_lt_coeffs2",
+   "thm/local",
+   "rw_simp_th"
+  ],
+  [
+   "int_arith",
+   "elim_eq_coeffs",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "int_arith",
+   "elim_le_coeffs",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "int_arith",
+   "elim_lt_coeffs1",
+   "thm",
+   "rw_simp_th"
+  ],
+  [
+   "int_arith",
+   "elim_lt_coeffs2",
+   "thm",
+   "rw_simp_th"
+  ],
+  [
+   "int_arith",
+   "gcdthm2",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "integer",
+   "EDIV_DEF",
+   "def",
+   "FAILED"
+  ],
+  [
+   "integer",
+   "INT_ADD_DIV",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "integer",
+   "INT_DIV",
+   "thm",
+   "rw"
+  ],
+  [
+   "integer",
+   "int_div",
+   "def",
+   "metis"
+  ],
+  [
+   "integer",
+   "INT_DIV_0",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "integer",
+   "INT_DIV_1",
+   "thm",
+   "rw"
+  ],
+  [
+   "integer",
+   "INT_DIV_CALCULATE",
+   "thm",
+   "rw"
+  ],
+  [
+   "integer",
+   "INT_DIV_EDIV",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "integer",
+   "INT_DIV_FORALL_P",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "integer",
+   "INT_DIV_ID",
+   "thm",
+   "rw"
+  ],
+  [
+   "integer",
+   "INT_DIV_LMUL",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "integer",
+   "INT_DIV_MUL_ID",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "integer",
+   "INT_DIV_NEG",
+   "thm",
+   "rw"
+  ],
+  [
+   "integer",
+   "INT_DIV_P",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "integer",
+   "INT_DIV_REDUCE",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "integer",
+   "INT_DIV_RMUL",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "integer",
+   "INT_DIV_UNIQUE",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "integer",
+   "INT_DIVISION",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "integer",
+   "INT_EXP_SUBTRACT_EXPONENTS",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "integer",
+   "int_mod",
+   "def",
+   "rw_metis"
+  ],
+  [
+   "integer",
+   "INT_MOD_REDUCE",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "integer",
+   "INT_MUL_DIV",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "integer_word",
+   "i2w_DIV",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "integer_word",
+   "word_sdiv_def",
+   "def",
+   "FAILED"
+  ],
+  [
+   "intreal",
+   "INT_FLOOR_compute",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "intreal",
+   "INT_FLOOR_EQNS",
+   "thm",
+   "rw_simp_th"
+  ],
+  [
+   "semanticPrimitives",
+   "do_arith_def",
+   "thm",
+   "rw_simp_th"
+  ]
+ ],
+ "verdict": "unsure",
+ "seconds": 253,
+ "log": "logs/int_div_ts_ts_opus_nolessons.log"
+}

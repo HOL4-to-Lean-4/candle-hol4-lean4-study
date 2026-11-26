@@ -1,0 +1,196 @@
+{
+ "entry": {
+  "key_decl": "termsem0",
+  "translations": [
+   "candle_opus"
+  ],
+  "family": "candle",
+  "hol_const": "holSemantics$termsem0",
+  "arity": 5,
+  "args": [
+   [
+    "mem",
+    "'U -> 'U -> bool"
+   ],
+   [
+    "tmsig",
+    "mlstring |-> type"
+   ],
+   [
+    "i",
+    "'U interpretation"
+   ],
+   [
+    "v",
+    "'U valuation"
+   ],
+   [
+    "t",
+    "term"
+   ]
+  ],
+  "P": "?a b. t = Abs a b /\\ (!x ty. ~(a = Var x ty))",
+  "witnesses": [
+   {
+    "translation": "candle_opus",
+    "file": "baselines/opus55_direct_translation/lean/CandleLean/HolSemantics.lean",
+    "line": 206,
+    "eq": "termsem0 mem tmsig i v (Abs (Const _ _) _) = @ARB U <tmvof v default>  (also lines 207 Abs (Comb _ _) _ and 208 Abs (Abs _ _) _; the repaired file makes this opaque, see rescore_v33/README.md:47-49)"
+   }
+  ],
+  "note": "termsem_def (holSemanticsScript.sml:134-142) has four clauses (Var, Const, Comb, Abs (Var x ty) b); Abs of a non-variable is left open (README.md:47-49: the theory saves only termsem_def, no primitive definition). The Lean definition (unrepaired baseline) returns ARB for Abs (Const..), Abs (Comb..), Abs (Abs..). No standalone Lean equation theorem exists for termsem0 in rescore_v33/opus55_direct_translation.lean: the witness is the definitional equation at lines 206-208, so the point set is the whole non-variable-Abs region. Equation text: `termsem0 mem tmsig i v (Abs a b) = ARB`-like, with a not a Var.",
+  "doubt": "(1) No separate witness theorem/line exists for termsem0 (it was found by a Sonnet audit, README.md:45-49), so line 206 is the definition clause. (2) HOL4 `?a b. ... Abs a b` presumes Abs has type term -> term -> term (it does: Abs term term). (3) termsem0 is a TFL definition; check that the HOL4 build does not also save termsem0_primitive (README says it does not).",
+  "P_wide": "?a b. t = Abs a b /\\ (!x ty. ~(a = Var x ty))",
+  "type_instance": "",
+  "hol4_source": "E:/NUS/mcomp/Dissertation/candle_study/package/candle/standard/semantics/holSemanticsScript.sml:134"
+ },
+ "cprime": "λvcx0 vcx1 vcx2 vcx3 vcx4.",
+ "relevant": 13,
+ "checked": 13,
+ "proved": 3,
+ "not_proved": [
+  [
+   "holSemantics",
+   "satisfies_def",
+   "def",
+   "FAILED"
+  ],
+  [
+   "holSemantics",
+   "termsem_def",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "holSemanticsExtra",
+   "termsem_equation",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "holSemanticsExtra",
+   "termsem_INST",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "holSemanticsExtra",
+   "termsem_raconv",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "holSemanticsExtra",
+   "termsem_simple_inst",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "holSemanticsExtra",
+   "termsem_simple_subst",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "holSemanticsExtra",
+   "termsem_typesem",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "holSemanticsExtra",
+   "termsem_VSUBST",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "holSoundness",
+   "binary_inference_rule",
+   "thm",
+   "FAILED"
+  ]
+ ],
+ "results": [
+  [
+   "holSemantics",
+   "satisfies_def",
+   "def",
+   "FAILED"
+  ],
+  [
+   "holSemantics",
+   "termsem_def",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "holSemanticsExtra",
+   "termsem_aconv",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "holSemanticsExtra",
+   "termsem_Equal",
+   "thm",
+   "rw_simp_th"
+  ],
+  [
+   "holSemanticsExtra",
+   "termsem_equation",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "holSemanticsExtra",
+   "termsem_frees",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "holSemanticsExtra",
+   "termsem_INST",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "holSemanticsExtra",
+   "termsem_raconv",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "holSemanticsExtra",
+   "termsem_simple_inst",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "holSemanticsExtra",
+   "termsem_simple_subst",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "holSemanticsExtra",
+   "termsem_typesem",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "holSemanticsExtra",
+   "termsem_VSUBST",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "holSoundness",
+   "binary_inference_rule",
+   "thm",
+   "FAILED"
+  ]
+ ],
+ "verdict": "unsure",
+ "seconds": 256,
+ "log": "logs/termsem0_candle_candle_opus.log"
+}

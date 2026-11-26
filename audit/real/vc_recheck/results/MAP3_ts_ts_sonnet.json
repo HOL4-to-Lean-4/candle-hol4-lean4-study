@@ -1,0 +1,66 @@
+{
+ "entry": {
+  "key_decl": "MAP3",
+  "translations": [
+   "ts_sonnet"
+  ],
+  "family": "ts",
+  "hol_const": "misc$MAP3",
+  "arity": 4,
+  "args": [
+   [
+    "f",
+    "'a -> 'b -> 'c -> 'd"
+   ],
+   [
+    "l1",
+    "'a list"
+   ],
+   [
+    "l2",
+    "'b list"
+   ],
+   [
+    "l3",
+    "'c list"
+   ]
+  ],
+  "P": "~(l1 = []) /\\ l2 = [] /\\ l3 = []",
+  "witnesses": [
+   {
+    "translation": "ts_sonnet",
+    "file": "baselines/ts_runs_v2/sonnet_lessons/witnesses.lean",
+    "line": 60,
+    "eq": "MAP3 (fun a b c : Nat => a + b + c) [1] [] [] = ARB"
+   }
+  ],
+  "note": "Witness: MAP3 (a+b+c) [1] [] []: shape cons/nil/nil.",
+  "doubt": "",
+  "P_wide": "~((l1 = [] /\\ l2 = [] /\\ l3 = []) \\/ (?h1 t1 h2 t2 h3 t3. l1 = h1::t1 /\\ l2 = h2::t2 /\\ l3 = h3::t3))",
+  "type_instance": "",
+  "hol4_source": "E:/NUS/mcomp/Dissertation/candle_study/package_ts/miscScript.sml:74"
+ },
+ "cprime": "λvcx0 vcx1 vcx2 vcx3.",
+ "relevant": 1,
+ "checked": 1,
+ "proved": 0,
+ "not_proved": [
+  [
+   "misc",
+   "MAP3_def",
+   "thm",
+   "FAILED"
+  ]
+ ],
+ "results": [
+  [
+   "misc",
+   "MAP3_def",
+   "thm",
+   "FAILED"
+  ]
+ ],
+ "verdict": "unsure",
+ "seconds": 60,
+ "log": "logs/MAP3_ts_ts_sonnet.log"
+}

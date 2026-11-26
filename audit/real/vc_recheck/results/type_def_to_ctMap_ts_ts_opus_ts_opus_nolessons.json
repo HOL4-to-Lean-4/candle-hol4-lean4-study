@@ -1,0 +1,59 @@
+{
+ "entry": {
+  "key_decl": "type_def_to_ctMap",
+  "translations": [
+   "ts_opus",
+   "ts_opus_nolessons"
+  ],
+  "family": "ts",
+  "hol_const": "typeSysProps$type_def_to_ctMap",
+  "arity": 4,
+  "args": [
+   [
+    "tenvT",
+    "(mlstring, mlstring, tvarN list # type) namespace"
+   ],
+   [
+    "next_stamp",
+    "num"
+   ],
+   [
+    "tds",
+    "('a # 'b # (conN # ast_t list) list) list"
+   ],
+   [
+    "ids",
+    "'c list"
+   ]
+  ],
+  "P": "tds = [] /\\ (?i. ids = [i])",
+  "witnesses": [
+   {
+    "translation": "ts_opus",
+    "file": "baselines/ts_runs_v2/opus_lessons/witnesses.lean",
+    "line": 125,
+    "eq": "(tenvT : Namespace mlstring mlstring (List mlstring × typ)) (next : Nat) : type_def_to_ctMap tenvT next ([] : List (List mlstring × mlstring × List (conN × List ast_t))) [(0 : Nat)] = ARB"
+   },
+   {
+    "translation": "ts_opus_nolessons",
+    "file": "baselines/ts_runs_v2/opus_nolessons/witnesses.lean",
+    "line": 69,
+    "eq": "(tenvT : Namespace mlstring mlstring (List mlstring × typ)) (n : Nat) : type_def_to_ctMap (α"
+   }
+  ],
+  "note": "type_def_to_ctMap_def has clauses only for ([],[]) and (td::tds, id::ids). Witnesses: tds = [], ids = [x] (a one-element list), any tenvT and next_stamp.",
+  "doubt": "The HOL4 type of tds/ids is polymorphic ('a/'b/'c); the Lean witnesses fix Nat. conN, typeN, tvarN abbreviations: check the exact HOL4 argument type for tenvT (tenv_abbrev) when typing the replacement.",
+  "P_wide": "~((tds = [] /\\ ids = []) \\/ (?a b c d. tds = a::b /\\ ids = c::d))",
+  "type_instance": "",
+  "hol4_source": "E:/NUS/mcomp/Dissertation/candle_study/package_ts/typeSysPropsScript.sml:1502"
+ },
+ "cprime": null,
+ "relevant": null,
+ "checked": 0,
+ "proved": 0,
+ "not_proved": [],
+ "results": [],
+ "verdict": "error",
+ "seconds": 17,
+ "log": "logs/type_def_to_ctMap_ts_ts_opus_ts_opus_nolessons.log"
+}

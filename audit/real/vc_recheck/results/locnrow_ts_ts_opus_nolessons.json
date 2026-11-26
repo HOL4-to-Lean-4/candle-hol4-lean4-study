@@ -1,0 +1,47 @@
+{
+ "entry": {
+  "key_decl": "locnrow",
+  "translations": [
+   "ts_opus_nolessons"
+  ],
+  "family": "ts",
+  "hol_const": "location$locnrow",
+  "arity": 1,
+  "args": [
+   [
+    "l",
+    "locn"
+   ]
+  ],
+  "P": "l = EOFpt",
+  "witnesses": [
+   {
+    "translation": "ts_opus_nolessons",
+    "file": "baselines/ts_runs_v2/opus_nolessons/witnesses.lean",
+    "line": 21,
+    "eq": "locnrow EOFpt = (ARB : Nat)"
+   }
+  ],
+  "note": "Theory `location` defines locn = UNKNOWNpt | EOFpt | POSN num num (locationScript.sml:3) and the four accessors by single POSN clauses; add_record_field only gives syntax, so the constants are plain definitions location$locnrow etc. Witness locnrow EOFpt = ARB.",
+  "doubt": "",
+  "P_wide": "!r c. ~(l = POSN r c)",
+  "type_instance": "",
+  "hol4_source": "E:/NUS/mcomp/Dissertation/candle_study/package_ts/locationScript.sml:6"
+ },
+ "cprime": "λvcx0. if vcx0 = EOFpt then vc_g vcx0 else vcx0.row : :locn -> num",
+ "relevant": 1,
+ "checked": 1,
+ "proved": 1,
+ "not_proved": [],
+ "results": [
+  [
+   "location",
+   "locnrow_def",
+   "def",
+   "rw_metis"
+  ]
+ ],
+ "verdict": "V-C",
+ "seconds": 16,
+ "log": "logs/locnrow_ts_ts_opus_nolessons.log"
+}

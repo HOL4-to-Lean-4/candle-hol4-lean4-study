@@ -1,0 +1,209 @@
+
+val _ = List.app load ("smlTimeout" :: ["typeSoundTheory","weakeningTheory","typeSysPropsTheory","evaluatePropsTheory","semantics_minTheory","semanticPrimitivesPropsTheory","namespacePropsTheory","typeSoundInvariantsTheory"]);
+open HolKernel boolLib bossLib;
+val _ = new_theory "vcheck_scratch";
+val c0 = prim_mk_const {Thy = "pred_set", Name = "CARD"};
+val n = 1;
+val (dom, rng) = strip_fun (type_of c0);
+val dom = List.take (dom, n);
+val rng = List.foldr (op -->) rng (List.drop (#1 (strip_fun (type_of c0)), n)) handle _ => rng;
+val xs = List.tabulate (n, fn i => mk_var ("vcx" ^ Int.toString i, List.nth (dom, i)));
+val g = mk_var ("vc_g", List.foldr (op -->) rng dom);
+val cprime =
+  if n = 0 then g else
+  let val P0 = Parse.Term [QUOTE "\\(s:'a set). s = UNIV /\\ INFINITE s"]
+      val theta = match_type (type_of P0) (List.foldr (op -->) bool dom)
+      val P = inst theta P0
+      val body = mk_cond (rhs (concl (QCONV (DEPTH_CONV BETA_CONV) (list_mk_comb (P, xs)))),list_mk_comb (g, xs), list_mk_comb (c0, xs))
+  in list_mk_abs (xs, body) end;
+val _ = print ("CPRIME " ^ term_to_string cprime ^ " : " ^ type_to_string (type_of cprime) ^ "\n");
+fun same a b = is_const b andalso let val x = dest_thy_const a val y = dest_thy_const b in #Thy x = #Thy y andalso #Name x = #Name y end;
+fun repl_with subs t =
+  case List.find (fn (k, _) => same k t) subs of
+    SOME (k, v) => inst (match_type (type_of k) (type_of t)) v
+  | NONE =>
+    if is_comb t then mk_comb (repl_with subs (rator t), repl_with subs (rand t))
+    else if is_abs t then let val (v, b) = dest_abs t in mk_abs (v, repl_with subs b) end
+    else t;
+(* constants that must change together with c (their definitions use c): replacement given in closed form, with c inside *)
+val cov = map (fn (cthy, cname, s) =>
+  let val d0 = prim_mk_const {Thy = cthy, Name = cname}
+      val t0 = Parse.Term [QUOTE s]
+      val t1 = inst (match_type (type_of t0) (type_of d0)) t0
+  in (d0, repl_with [(c0, cprime)] t1) end) [];
+val subs = (c0, cprime) :: cov;
+val _ = List.app (fn (k, v) => print ("COVARY " ^ term_to_string k ^ " := " ^ term_to_string v ^ "\n")) cov;
+val repl = repl_with subs;
+fun is_c t = List.exists (fn (k, _) => same k t) subs;
+fun mentions th = List.exists (fn t => can (find_term is_c) t) (concl th :: hyp th);
+val thys = ancestry "-";
+val all = List.filter (fn ((th, _), _) => List.exists (fn x => x = th) thys) (DB.listDB ());
+val rel = List.filter (fn (_, (th, _)) => mentions th) all;
+val _ = print ("RELEVANT " ^ Int.toString (length rel) ^ "\n");
+fun cls DB.Thm = "thm" | cls DB.Axm = "axiom" | cls DB.Def = "def";
+fun try_tacs goal th =
+  let val tacs = [("rw", rw [] THEN gvs [] THEN NO_TAC),
+                  ("rw_metis", rw [] THEN gvs [] THEN metis_tac [th]),
+                  ("metis", metis_tac [th]),
+                  ("rw_simp_th", rw [] THEN gvs [th] THEN NO_TAC),
+                  ("split_metis", rpt strip_tac THEN rpt (COND_CASES_TAC THEN gvs []) THEN metis_tac [th])]
+      fun go [] = "FAILED"
+        | go ((nm, tac) :: rest) =
+            ((smlTimeout.timeout 15.0 (fn () => Tactical.TAC_PROOF (([], goal), tac)) (); nm)
+             handle _ => go rest)
+  in go tacs end;
+fun check ((thy, nm), (th, {class = cl, private = pv, loc = _} : DB.thminfo)) =
+  let val goal = gen_all (list_mk_imp (map repl (hyp th), repl (concl th)))
+      val r = if aconv goal (gen_all (list_mk_imp (hyp th, concl th))) then "unchanged" else try_tacs goal th
+  in print ("RESULT\t" ^ thy ^ "\t" ^ nm ^ "\t" ^ cls cl ^ (if pv then "/local" else "") ^ "\t" ^ r ^ "\n") end
+  handle e => print ("RESULT\t" ^ thy ^ "\t" ^ nm ^ "\t" ^ cls cl ^ (if pv then "/local" else "") ^ "\tERROR " ^ String.translate (fn #"\n" => " " | c => str c) (exn_to_string e) ^ "\n");
+val _ = List.app check rel;
+val _ = print "DONE\n";
+
+==== OUTPUT ====
+<<HOL message: Created theory "vcheck_scratch">>
+CPRIME λvcx0. if vcx0 = 𝕌(:α) ∧ INFINITE vcx0 then vc_g vcx0 else CARD vcx0 : :(α -> bool) -> num
+RELEVANT 141
+RESULT	alist	LENGTH_fmap_to_alist	thm	rw
+RESULT	bag	BAG_CARD_BAG_OF_SET	thm	rw_metis
+RESULT	bag	BAG_CARD_EQ_CARD_SET_OF_BAG	thm	rw_metis
+RESULT	cardinalityCore	CARD_ADD_C	thm	FAILED
+RESULT	cardinalityCore	CARD_BIGUNION_LE	thm	FAILED
+RESULT	cardinalityCore	CARD_BOOL	thm	rw
+RESULT	cardinalityCore	CARD_CARDEQ_I	thm	rw_metis
+RESULT	cardinalityCore	CARD_DISJOINT_UNION	thm	rw_metis
+RESULT	cardinalityCore	CARD_EQ_BIJECTION	thm	rw_simp_th
+RESULT	cardinalityCore	CARD_EQ_BIJECTIONS	thm	rw_metis
+RESULT	cardinalityCore	CARD_EQ_CARD	thm	rw_metis
+RESULT	cardinalityCore	CARD_EQ_CARD_IMP	thm	FAILED
+RESULT	cardinalityCore	CARD_LE_CARD	thm	rw_metis
+RESULT	cardinalityCore	CARD_LE_CARD_IMP	thm	FAILED
+RESULT	cardinalityCore	CARD_LE_INJ	thm	rw_metis
+RESULT	cardinalityCore	CARD_LT_CARD	thm	rw_metis
+RESULT	cardinalityCore	CARD_SUBSET_EQ	thm	rw_metis
+RESULT	cardinalityCore	CARDEQ_CARD	thm	FAILED
+RESULT	cardinalityCore	CARDEQ_CARD_EQN	thm	rw_metis
+RESULT	cardinalityCore	CARDLEQ_CARD	thm	rw_metis
+RESULT	cardinalityCore	count_cardle	thm	rw
+RESULT	cardinalityCore	FINITE_012	thm	rw_metis
+RESULT	container	BAG_OF_FMAP	def	FAILED
+RESULT	container	SET_TO_LIST_CARD	thm	rw_metis
+RESULT	fcp	CARD_CART	thm	FAILED
+RESULT	fcp	CARD_CART_UNIV	thm	FAILED
+RESULT	fcp	card_dimindex	thm	rw_metis
+RESULT	fcp	dimindex_def	def	rw_metis
+RESULT	finite_map	FCARD_DEF	def	rw_metis
+RESULT	iterate	CARD_BIGUNION	thm	FAILED
+RESULT	iterate	CARD_EQ_NSUM	thm	rw_metis
+RESULT	iterate	CARD_NUMSEG	thm	FAILED
+RESULT	iterate	CARD_NUMSEG_1	thm	FAILED
+RESULT	iterate	CARD_NUMSEG_LEMMA	thm	FAILED
+RESULT	iterate	CARD_UNION_EQ	thm	rw_simp_th
+RESULT	iterate	CHOOSE_SUBSET	thm	rw_metis
+RESULT	iterate	CHOOSE_SUBSET_STRONG	thm	rw_metis
+RESULT	iterate	FINITE_INDEX_NUMSEG	thm	FAILED
+RESULT	iterate	NPRODUCT_CONST	thm	rw_metis
+RESULT	iterate	NSUM_BOUND	thm	metis
+RESULT	iterate	NSUM_BOUND_GEN	thm	rw_metis
+RESULT	iterate	NSUM_BOUND_LT	thm	metis
+RESULT	iterate	NSUM_BOUND_LT_ALL	thm	metis
+RESULT	iterate	NSUM_BOUND_LT_GEN	thm	rw_metis
+RESULT	iterate	NSUM_CONST	thm	metis
+RESULT	iterate	NSUM_MULTICOUNT	thm	FAILED
+RESULT	iterate	NSUM_MULTICOUNT_GEN	thm	FAILED
+RESULT	list	ALL_DISTINCT_CARD_LIST_TO_SET	thm	rw_metis
+RESULT	list	CARD_LIST_TO_SET	thm	rw_metis
+RESULT	list	CARD_LIST_TO_SET_ALL_DISTINCT	thm	rw_metis
+RESULT	list	CARD_LIST_TO_SET_EQN	thm	rw_metis
+RESULT	list	SET_TO_LIST_CARD	thm	rw_metis
+RESULT	misc	CARD_IMAGE_ID_BIJ	thm	rw_metis
+RESULT	permutes	CARD_PERMUTATIONS	thm	FAILED
+RESULT	pred_set	CARD_AS_SIGMA	thm	rw_metis
+RESULT	pred_set	CARD_BIGUNION_SAME_SIZED_SETS	thm	FAILED
+RESULT	pred_set	CARD_CLAUSES	thm	rw
+RESULT	pred_set	CARD_COUNT	thm	rw
+RESULT	pred_set	CARD_CROSS	thm	rw_metis
+RESULT	pred_set	CARD_DEF	def	rw
+RESULT	pred_set	CARD_DELETE	thm	rw
+RESULT	pred_set	CARD_DIFF	thm	rw
+RESULT	pred_set	CARD_DIFF_EQN	thm	rw_metis
+RESULT	pred_set	CARD_disjUNION	thm	FAILED
+RESULT	pred_set	CARD_EMPTY	thm	rw
+RESULT	pred_set	CARD_EQ_0	thm	rw
+RESULT	pred_set	CARD_EQ_SIGMA	thm	rw_metis
+RESULT	pred_set	CARD_IMAGE	thm	rw_metis
+RESULT	pred_set	CARD_IMAGE_INJ	thm	rw_metis
+RESULT	pred_set	CARD_IMAGE_LE	thm	rw_metis
+RESULT	pred_set	CARD_IMAGE_SUC	thm	rw_metis
+RESULT	pred_set	CARD_INJ_IMAGE	thm	rw_metis
+RESULT	pred_set	CARD_INSERT	thm	rw
+RESULT	pred_set	CARD_INTER_LESS_EQ	thm	rw
+RESULT	pred_set	CARD_LE_MAX_SET	thm	rw_metis
+RESULT	pred_set	CARD_POW	thm	rw_metis
+RESULT	pred_set	CARD_PRODUCT	thm	FAILED
+RESULT	pred_set	CARD_PSUBSET	thm	FAILED
+RESULT	pred_set	CARD_REST	thm	rw_metis
+RESULT	pred_set	CARD_SING	thm	rw
+RESULT	pred_set	CARD_SING_CROSS	thm	rw_metis
+RESULT	pred_set	CARD_SUBSET	thm	FAILED
+RESULT	pred_set	CARD_UNION	thm	FAILED
+RESULT	pred_set	CARD_UNION_DISJOINT	thm	rw_metis
+RESULT	pred_set	CARD_UNION_EQN	thm	rw_metis
+RESULT	pred_set	CARD_UNION_LE	thm	rw_metis
+RESULT	pred_set	FINITE_BIJ	thm	rw_metis
+RESULT	pred_set	FINITE_BIJ_CARD	thm	FAILED
+RESULT	pred_set	FINITE_BIJ_CARD_EQ	thm	rw_metis
+RESULT	pred_set	FINITE_CARD_IMAGE	thm	rw_metis
+RESULT	pred_set	FINITE_HAS_SIZE	thm	FAILED
+RESULT	pred_set	FINITE_ISO_NUM	thm	rw_metis
+RESULT	pred_set	FINITE_SURJ_BIJ	thm	FAILED
+RESULT	pred_set	HAS_SIZE	def	rw_metis
+RESULT	pred_set	HAS_SIZE_CARD	thm	FAILED
+RESULT	pred_set	INJ_CARD	thm	FAILED
+RESULT	pred_set	INJ_CARD_IMAGE	thm	rw_metis
+RESULT	pred_set	INJ_CARD_IMAGE_EQ	thm	rw_metis
+RESULT	pred_set	LESS_CARD_DIFF	thm	FAILED
+RESULT	pred_set	partition_CARD	thm	FAILED
+RESULT	pred_set	PHP	thm	FAILED
+RESULT	pred_set	PI_CONSTANT	thm	rw_metis
+RESULT	pred_set	PROD_IMAGE_CONSTANT	thm	rw_metis
+RESULT	pred_set	SIGMA_CARD_CONSTANT	thm	FAILED
+RESULT	pred_set	SIGMA_CARD_SAME_SIZE_SETS	thm	FAILED
+RESULT	pred_set	SIGMA_CONSTANT	thm	rw_metis
+RESULT	pred_set	SING_CARD_1	thm	FAILED
+RESULT	pred_set	SING_IFF_CARD1	thm	rw_metis
+RESULT	pred_set	SUBSET_EQ_CARD	thm	rw_metis
+RESULT	pred_set	SUM_IMAGE_CONSTANT	thm	rw_metis
+RESULT	pred_set	SUM_IMAGE_lower_bound	thm	metis
+RESULT	pred_set	SUM_IMAGE_upper_bound	thm	metis
+RESULT	pred_set	SUM_SAME_IMAGE	thm	metis
+RESULT	pred_set	SURJ_CARD	thm	rw_metis
+RESULT	pred_set	SURJECTIVE_IFF_INJECTIVE_GEN	thm	rw_simp_th
+RESULT	rich_list	LIST_ELEM_COUNT_CARD_EL	thm	FAILED
+RESULT	sptree	size_domain	thm	rw_metis
+RESULT	words	CARD_WORD	thm	rw_metis
+RESULT	words	card_word1	thm	rw_simp_th
+RESULT	words	card_word10	thm	rw_simp_th
+RESULT	words	card_word11	thm	rw_simp_th
+RESULT	words	card_word12	thm	rw_simp_th
+RESULT	words	card_word128	thm	rw_simp_th
+RESULT	words	card_word16	thm	rw_simp_th
+RESULT	words	card_word2	thm	rw_simp_th
+RESULT	words	card_word20	thm	rw_simp_th
+RESULT	words	card_word24	thm	rw_simp_th
+RESULT	words	card_word28	thm	rw_simp_th
+RESULT	words	card_word3	thm	rw_simp_th
+RESULT	words	card_word30	thm	rw_simp_th
+RESULT	words	card_word32	thm	rw_simp_th
+RESULT	words	card_word4	thm	rw_simp_th
+RESULT	words	card_word48	thm	rw_simp_th
+RESULT	words	card_word5	thm	rw_simp_th
+RESULT	words	card_word56	thm	rw_simp_th
+RESULT	words	card_word6	thm	rw_simp_th
+RESULT	words	card_word64	thm	rw_simp_th
+RESULT	words	card_word7	thm	rw_simp_th
+RESULT	words	card_word8	thm	rw_simp_th
+RESULT	words	card_word9	thm	rw_simp_th
+RESULT	words	card_word96	thm	rw_simp_th
+DONE
+exit=0

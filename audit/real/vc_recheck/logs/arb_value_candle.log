@@ -1,0 +1,48 @@
+﻿<<HOL message: Created theory "arbprobe">>
+EQS mytermsem mem tmsig i v (Var x ty) = tmvof v (x,ty) ∧
+mytermsem mem tmsig i v (Const name ty) = instance tmsig i name ty (tyvof v) ∧
+mytermsem mem tmsig i v (Comb t1 t2) =
+mytermsem mem tmsig i v t1 ' (mytermsem mem tmsig i v t2) ∧
+mytermsem mem tmsig i v (Abs (Var x ty) b) =
+Abstract (typesem (tyaof i) (tyvof v) ty)
+  (typesem (tyaof i) (tyvof v) (typeof b))
+  (λm. mytermsem mem tmsig i (tyvof v,(tmvof v)⦇(x,ty) ↦ m⦈) b)
+<<HOL message: mk_functional: 
+  pattern completion has added 3 clauses to the original specification.>>
+<<HOL warning: Context.snapshot: ambient context read while a proof was running (in arbprobe)>>
+Saved definition ____ "mytermsem_def"
+Saved induction _____ "mytermsem_ind"
+PRIM ⊢ (∀x x0 x1 x2 x3.
+     mytermsem x x0 x1 x2 x3 =
+     arbprobe$old1968->mytermsem_def_tupled<-old (x,x0,x1,x2,x3)) ∧
+  arbprobe$old1968->mytermsem_def_tupled<-old =
+  WFREC
+    (@R. WF R ∧
+         (∀t1 t2 v i tmsig mem.
+            R (mem,tmsig,i,v,t2) (mem,tmsig,i,v,Comb t1 t2)) ∧
+         (∀t2 t1 v i tmsig mem.
+            R (mem,tmsig,i,v,t1) (mem,tmsig,i,v,Comb t1 t2)) ∧
+         ∀b ty x v i tmsig mem m.
+           R (mem,tmsig,i,(tyvof v,(tmvof v)⦇(x,ty) ↦ m⦈),b)
+             (mem,tmsig,i,v,Abs (Var x ty) b))
+    (λmytermsem_def_tupled a.
+       case a of
+         (mem',tmsig,i,v,Var x ty) => I (tmvof v (x,ty))
+       | (mem',tmsig,i,v,Const name ty') =>
+         I (instance tmsig i name ty' (tyvof v))
+       | (mem',tmsig,i,v,Comb t1 t2) =>
+         I
+           (apply mem' (mytermsem_def_tupled (mem',tmsig,i,v,t1))
+              (mytermsem_def_tupled (mem',tmsig,i,v,t2)))
+       | (mem',tmsig,i,v,Abs (Var x' ty'') b) =>
+         I
+           (abstract mem' (typesem (tyaof i) (tyvof v) ty'')
+              (typesem (tyaof i) (tyvof v) (typeof b))
+              (λm.
+                 mytermsem_def_tupled
+                   (mem',tmsig,i,(tyvof v,(tmvof v)⦇(x',ty'') ↦ m⦈),b)))
+       | (mem',tmsig,i,v,Abs (Const v19 v20) b) => ARB
+       | (mem',tmsig,i,v,Abs (Comb v23 v24) b) => ARB
+       | (mem',tmsig,i,v,Abs (Abs v27 v28) b) => ARB)
+PROVED termsem
+exit=0

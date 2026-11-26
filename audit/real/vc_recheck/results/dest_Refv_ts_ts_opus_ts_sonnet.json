@@ -1,0 +1,54 @@
+{
+ "entry": {
+  "key_decl": "dest_Refv",
+  "translations": [
+   "ts_opus",
+   "ts_sonnet"
+  ],
+  "family": "ts",
+  "hol_const": "semanticPrimitivesProps$dest_Refv",
+  "arity": 1,
+  "args": [
+   [
+    "r",
+    "'a store_v"
+   ]
+  ],
+  "P": "r = W8array []",
+  "witnesses": [
+   {
+    "translation": "ts_opus",
+    "file": "baselines/ts_runs_v2/opus_lessons/witnesses.lean",
+    "line": 119,
+    "eq": "dest_Refv (store_v.W8array ([] : List word8) : store_v value) = ARB"
+   },
+   {
+    "translation": "ts_sonnet",
+    "file": "baselines/ts_runs_v2/sonnet_lessons/witnesses.lean",
+    "line": 78,
+    "eq": "dest_Refv (store_v.W8array [] : store_v Nat) = ARB"
+   }
+  ],
+  "note": "dest_Refv_def has only the Refv clause; store_v = Refv | W8array | Varray | Thunk (semanticPrimitivesScript.sml:106). Witnesses: dest_Refv (W8array []) = ARB.",
+  "doubt": "",
+  "P_wide": "!v. ~(r = Refv v)",
+  "type_instance": "",
+  "hol4_source": "E:/NUS/mcomp/Dissertation/candle_study/package_ts/semanticPrimitivesPropsScript.sml:165"
+ },
+ "cprime": "λvcx0. if vcx0 = W8array [] then vc_g vcx0 else dest_Refv vcx0 : :α store_v -> α",
+ "relevant": 1,
+ "checked": 1,
+ "proved": 1,
+ "not_proved": [],
+ "results": [
+  [
+   "semanticPrimitivesProps",
+   "dest_Refv_def",
+   "def",
+   "rw"
+  ]
+ ],
+ "verdict": "V-C",
+ "seconds": 16,
+ "log": "logs/dest_Refv_ts_ts_opus_ts_sonnet.log"
+}

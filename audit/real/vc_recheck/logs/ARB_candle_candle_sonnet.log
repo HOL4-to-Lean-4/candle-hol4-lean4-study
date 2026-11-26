@@ -1,0 +1,148 @@
+
+val _ = List.app load ("smlTimeout" :: ["holSoundnessTheory"]);
+open HolKernel boolLib bossLib;
+val _ = new_theory "vcheck_scratch";
+val c0 = prim_mk_const {Thy = "bool", Name = "ARB"};
+val n = 0;
+val (dom, rng) = strip_fun (type_of c0);
+val dom = List.take (dom, n);
+val rng = List.foldr (op -->) rng (List.drop (#1 (strip_fun (type_of c0)), n)) handle _ => rng;
+val xs = List.tabulate (n, fn i => mk_var ("vcx" ^ Int.toString i, List.nth (dom, i)));
+val g = mk_var ("vc_g", List.foldr (op -->) rng dom);
+val cprime =
+  if n = 0 then g else
+  let val P0 = Parse.Term [QUOTE "T"]
+      val theta = match_type (type_of P0) (List.foldr (op -->) bool dom)
+      val P = inst theta P0
+      val body = mk_cond (rhs (concl (QCONV (DEPTH_CONV BETA_CONV) (list_mk_comb (P, xs)))),list_mk_comb (g, xs), list_mk_comb (c0, xs))
+  in list_mk_abs (xs, body) end;
+val _ = print ("CPRIME " ^ term_to_string cprime ^ " : " ^ type_to_string (type_of cprime) ^ "\n");
+fun same a b = is_const b andalso let val x = dest_thy_const a val y = dest_thy_const b in #Thy x = #Thy y andalso #Name x = #Name y end;
+fun repl_with subs t =
+  case List.find (fn (k, _) => same k t) subs of
+    SOME (k, v) => inst (match_type (type_of k) (type_of t)) v
+  | NONE =>
+    if is_comb t then mk_comb (repl_with subs (rator t), repl_with subs (rand t))
+    else if is_abs t then let val (v, b) = dest_abs t in mk_abs (v, repl_with subs b) end
+    else t;
+(* constants that must change together with c (their definitions use c): replacement given in closed form, with c inside *)
+val cov = map (fn (cthy, cname, s) =>
+  let val d0 = prim_mk_const {Thy = cthy, Name = cname}
+      val t0 = Parse.Term [QUOTE s]
+      val t1 = inst (match_type (type_of t0) (type_of d0)) t0
+  in (d0, repl_with [(c0, cprime)] t1) end) [];
+val subs = (c0, cprime) :: cov;
+val _ = List.app (fn (k, v) => print ("COVARY " ^ term_to_string k ^ " := " ^ term_to_string v ^ "\n")) cov;
+val repl = repl_with subs;
+fun is_c t = List.exists (fn (k, _) => same k t) subs;
+fun mentions th = List.exists (fn t => can (find_term is_c) t) (concl th :: hyp th);
+val thys = ancestry "-";
+val all = List.filter (fn ((th, _), _) => List.exists (fn x => x = th) thys) (DB.listDB ());
+val rel = List.filter (fn (_, (th, _)) => mentions th) all;
+val _ = print ("RELEVANT " ^ Int.toString (length rel) ^ "\n");
+fun cls DB.Thm = "thm" | cls DB.Axm = "axiom" | cls DB.Def = "def";
+fun try_tacs goal th =
+  let val tacs = [("rw", rw [] THEN gvs [] THEN NO_TAC),
+                  ("rw_metis", rw [] THEN gvs [] THEN metis_tac [th]),
+                  ("metis", metis_tac [th]),
+                  ("rw_simp_th", rw [] THEN gvs [th] THEN NO_TAC),
+                  ("split_metis", rpt strip_tac THEN rpt (COND_CASES_TAC THEN gvs []) THEN metis_tac [th])]
+      fun go [] = "FAILED"
+        | go ((nm, tac) :: rest) =
+            ((smlTimeout.timeout 15.0 (fn () => Tactical.TAC_PROOF (([], goal), tac)) (); nm)
+             handle _ => go rest)
+  in go tacs end;
+fun check ((thy, nm), (th, {class = cl, private = pv, loc = _} : DB.thminfo)) =
+  let val goal = gen_all (list_mk_imp (map repl (hyp th), repl (concl th)))
+      val r = if aconv goal (gen_all (list_mk_imp (hyp th, concl th))) then "unchanged" else try_tacs goal th
+  in print ("RESULT\t" ^ thy ^ "\t" ^ nm ^ "\t" ^ cls cl ^ (if pv then "/local" else "") ^ "\t" ^ r ^ "\n") end
+  handle e => print ("RESULT\t" ^ thy ^ "\t" ^ nm ^ "\t" ^ cls cl ^ (if pv then "/local" else "") ^ "\tERROR " ^ String.translate (fn #"\n" => " " | c => str c) (exn_to_string e) ^ "\n");
+val _ = List.app check rel;
+val _ = print "DONE\n";
+
+==== OUTPUT ====
+<<HOL message: Created theory "vcheck_scratch">>
+CPRIME vc_g : :α
+RELEVANT 80
+RESULT	bag	ITBAG_tupled_primitive_def	def	FAILED
+RESULT	binary_ieee	clear_flags_def	def	rw_metis
+RESULT	binary_ieee	EXISTS_flags	thm	rw_metis
+RESULT	binary_ieee	EXISTS_float	thm	rw_metis
+RESULT	binary_ieee	flags_literal_11	thm	rw
+RESULT	binary_ieee	flags_literal_nchotomy	thm	rw_metis
+RESULT	binary_ieee	flags_updates_eq_literal	thm	rw
+RESULT	binary_ieee	float_literal_11	thm	rw
+RESULT	binary_ieee	float_literal_nchotomy	thm	rw_metis
+RESULT	binary_ieee	float_minus_infinity	thm	rw_metis
+RESULT	binary_ieee	float_minus_zero	thm	rw_metis
+RESULT	binary_ieee	float_plus_infinity_def	def	rw_metis
+RESULT	binary_ieee	float_plus_min_def	def	rw_metis
+RESULT	binary_ieee	float_plus_zero_def	def	rw_metis
+RESULT	binary_ieee	float_round_non_zero	thm	rw_metis
+RESULT	binary_ieee	float_tests	thm	rw_metis
+RESULT	binary_ieee	float_to_real	thm	rw_simp_th
+RESULT	binary_ieee	float_top_def	def	rw_metis
+RESULT	binary_ieee	float_updates_eq_literal	thm	rw
+RESULT	binary_ieee	FORALL_flags	thm	rw_metis
+RESULT	binary_ieee	FORALL_float	thm	rw_metis
+RESULT	binary_ieee	next_hi_def	def	rw_metis
+RESULT	binary_ieee	next_lo_def	def	rw_metis
+RESULT	bnfInitial	ARBIFY_def	def	FAILED
+RESULT	bnfInitial	HOM_arbification	thm	FAILED
+RESULT	bnfInitial	INITIALITY0	thm	FAILED
+RESULT	bnfInitial	LAMBEK	thm	FAILED
+RESULT	bnfInitial	NEWTYPE_INITIALITY	thm	FAILED
+RESULT	bnfInitial	NEWTYPE_RECURSION	thm	FAILED
+RESULT	bnfPrelims	pair_inh1	thm	rw
+RESULT	bnfPrelims	pair_inh2	thm	rw
+RESULT	bool	itself_TY_DEF	def	FAILED
+RESULT	cardinal	EMPTY_set_exp	thm	FAILED
+RESULT	cardinal	exp_c	thm	FAILED
+RESULT	cardinal	set_exp_def	thm	FAILED
+RESULT	cardinal	SING_set_exp	thm	FAILED
+RESULT	cardinalityCore	EMPTY_set_exp	thm	FAILED
+RESULT	cardinalityCore	exp_c	thm	FAILED
+RESULT	cardinalityCore	set_exp_def	def	FAILED
+RESULT	cardinalityCore	SING_set_exp	thm	FAILED
+RESULT	combin	EXTENSIONAL_def	def	FAILED
+RESULT	combin	IN_EXTENSIONAL	thm	FAILED
+RESULT	combin	IN_EXTENSIONAL_UNDEFINED	thm	FAILED
+RESULT	combin	RESTRICTION	def	FAILED
+RESULT	combin	RESTRICTION_THM	thm	FAILED
+RESULT	combin	RESTRICTION_UNDEFINED	thm	FAILED
+RESULT	container	BAG_TO_LIST_primitive_def	def	FAILED
+RESULT	fcp	bit0_wit	thm	FAILED
+RESULT	fcp	bit1_wit	thm	FAILED
+RESULT	fcp	finite_image_TY_DEF	def	FAILED
+RESULT	fcp	finite_image_tybij	def	FAILED
+RESULT	finite_map	fmap_inh1	thm	rw
+RESULT	finite_map	MAP_KEYS_witness	thm	FAILED
+RESULT	holSyntaxLib	result_wit	thm	FAILED
+RESULT	list	list_inh	thm	FAILED
+RESULT	list	list_wit	thm	FAILED
+RESULT	list	SET_TO_LIST_primitive_def	def	FAILED
+RESULT	machine_ieee	fp16_to_float_def	def	rw_metis
+RESULT	machine_ieee	fp16_to_float_n2w	thm	rw_simp_th
+RESULT	machine_ieee	fp32_to_float_def	def	rw_metis
+RESULT	machine_ieee	fp32_to_float_n2w	thm	rw_simp_th
+RESULT	machine_ieee	fp64_to_float_def	def	rw_metis
+RESULT	machine_ieee	fp64_to_float_n2w	thm	rw_simp_th
+RESULT	misc	app_list_inh	thm	FAILED
+RESULT	misc	app_list_wit	thm	FAILED
+RESULT	mlstring	app_list_ann_inh	thm	FAILED
+RESULT	mlstring	app_list_ann_wit	thm	FAILED
+RESULT	patternMatches	PMATCH_EXPAND_PRED_def	def	FAILED
+RESULT	patternMatches	PMATCH_INCOMPLETE_def	def	FAILED
+RESULT	patternMatches	PMATCH_INTRO_CATCHALL	thm	FAILED
+RESULT	patternMatches	PMATCH_PRED_UNROLL_NIL	thm	FAILED
+RESULT	patternMatches	PMATCH_REMOVE_ARB	thm	FAILED
+RESULT	patternMatches	PMATCH_REMOVE_ARB_NO_OVERLAP	thm	FAILED
+RESULT	pred_set	EXTENSIONAL	thm	FAILED
+RESULT	pred_set	EXTENSIONAL_EMPTY	thm	FAILED
+RESULT	pred_set	ITSET_def	thm	FAILED
+RESULT	relation	RESTRICT_DEF	thm	FAILED
+RESULT	setSpec	empty_def	def	FAILED
+RESULT	sptree	spt_wit	thm	FAILED
+RESULT	string	TOCHAR_def_primitive	def	FAILED
+DONE
+exit=0

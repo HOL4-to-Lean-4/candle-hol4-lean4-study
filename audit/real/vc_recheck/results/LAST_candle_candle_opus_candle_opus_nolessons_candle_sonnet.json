@@ -1,0 +1,434 @@
+{
+ "entry": {
+  "key_decl": "LAST",
+  "translations": [
+   "candle_opus",
+   "candle_opus_nolessons",
+   "candle_sonnet"
+  ],
+  "family": "candle",
+  "hol_const": "list$LAST",
+  "arity": 1,
+  "args": [
+   [
+    "l",
+    "'a list"
+   ]
+  ],
+  "P": "l = []",
+  "witnesses": [
+   {
+    "translation": "candle_opus",
+    "file": "baselines/rescore_v33/opus55_direct_translation.lean",
+    "line": 5,
+    "eq": "LAST ([] : List Nat) = ARB"
+   },
+   {
+    "translation": "candle_opus",
+    "file": "baselines/rescore_v33/opus55_direct_translation.lean",
+    "line": 6,
+    "eq": "HD ([] : List Nat) = LAST []"
+   },
+   {
+    "translation": "candle_opus_nolessons",
+    "file": "baselines/rescore_v33/opus55_nolessons.lean",
+    "line": 3,
+    "eq": "LAST ([] : List Nat) = ARB"
+   },
+   {
+    "translation": "candle_opus_nolessons",
+    "file": "baselines/rescore_v33/opus55_nolessons.lean",
+    "line": 4,
+    "eq": "HD ([] : List Nat) = LAST []"
+   },
+   {
+    "translation": "candle_sonnet",
+    "file": "baselines/rescore_v33/sonnet55_direct_translation.lean",
+    "line": 6,
+    "eq": "LAST ([] : List Nat) = 0"
+   }
+  ],
+  "note": "LAST_DEF (listScript.sml:2124) has only LAST (h::t) = if t = [] then h else LAST t. Witnesses LAST [] = ARB, HD [] = LAST [], LAST [] = 0, all at l = [].",
+  "doubt": "",
+  "P_wide": "l = []",
+  "type_instance": "",
+  "hol4_source": "E:/ts_ws/hol4src/src/list/src/listScript.sml:2124"
+ },
+ "cprime": "λvcx0. if vcx0 = [] then vc_g vcx0 else LAST vcx0 : :α list -> α",
+ "relevant": 54,
+ "checked": 54,
+ "proved": 47,
+ "not_proved": [
+  [
+   "list",
+   "GENLIST_LAST",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "rich_list",
+   "ELL",
+   "def",
+   "FAILED"
+  ],
+  [
+   "rich_list",
+   "ELL_compute",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "rich_list",
+   "FILTER_LAST",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "rich_list",
+   "FILTER_LAST_IFF",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "rich_list",
+   "LAST_LASTN_LAST",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "rich_list",
+   "MEM_LAST",
+   "thm",
+   "FAILED"
+  ]
+ ],
+ "results": [
+  [
+   "bitstring",
+   "word_bit_last_shiftr",
+   "thm",
+   "rw_simp_th"
+  ],
+  [
+   "bitstring",
+   "word_lsb_v2w",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "holSyntaxExtra",
+   "hypset_ok_append",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "indexedLists",
+   "fupdLast_FRONT_LAST",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "list",
+   "APPEND_FRONT_LAST",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "list",
+   "GENLIST_LAST",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "list",
+   "HD_REVERSE",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "list",
+   "LAST_APPEND_CONS",
+   "thm",
+   "rw"
+  ],
+  [
+   "list",
+   "LAST_compute",
+   "thm",
+   "rw"
+  ],
+  [
+   "list",
+   "LAST_CONS",
+   "thm",
+   "rw"
+  ],
+  [
+   "list",
+   "LAST_CONS_cond",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "list",
+   "LAST_DEF",
+   "def",
+   "rw_metis"
+  ],
+  [
+   "list",
+   "last_drop",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "list",
+   "LAST_EL",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "list",
+   "LAST_MAP",
+   "thm",
+   "rw"
+  ],
+  [
+   "list",
+   "LAST_REVERSE",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "list",
+   "LAST_SNOC",
+   "thm",
+   "rw"
+  ],
+  [
+   "list",
+   "SNOC_LAST_FRONT",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "misc",
+   "LAST_MAP_SND_steps_FOLDL",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "misc",
+   "LIST_REL_FRONT_LAST",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "misc",
+   "MAP_REVERSE_STEP",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "misc",
+   "splitlines_def",
+   "def",
+   "rw_simp_th"
+  ],
+  [
+   "numposrep",
+   "LOG_l2n",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "rich_list",
+   "ALL_DISTINCT_LAST_EL_IFF",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "rich_list",
+   "APPEND_BUTLAST_LAST",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "rich_list",
+   "DROP_PREn_LAST_CONS",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "rich_list",
+   "EL_PRE_LENGTH",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "rich_list",
+   "ELL",
+   "def",
+   "FAILED"
+  ],
+  [
+   "rich_list",
+   "ELL_compute",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "rich_list",
+   "ELL_LAST",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "rich_list",
+   "ELL_LENGTH_APPEND",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "rich_list",
+   "FILTER_LAST",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "rich_list",
+   "FILTER_LAST_IFF",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "rich_list",
+   "LAST",
+   "thm",
+   "rw"
+  ],
+  [
+   "rich_list",
+   "LAST_APPEND",
+   "thm",
+   "rw"
+  ],
+  [
+   "rich_list",
+   "LAST_APPEND_NOT_NIL",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "rich_list",
+   "LAST_CONS",
+   "thm",
+   "rw"
+  ],
+  [
+   "rich_list",
+   "LAST_EL_CONS",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "rich_list",
+   "LAST_EQ_HD",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "rich_list",
+   "LAST_LASTN_LAST",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "rich_list",
+   "LAST_MEM",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "rich_list",
+   "LAST_TAKE_EL",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "rich_list",
+   "LASTN_1",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "rich_list",
+   "MAX_LIST_MONO_INC",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "rich_list",
+   "MEM_FRONT_NOT_LAST",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "rich_list",
+   "MEM_LAST",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "rich_list",
+   "MEM_LAST_FRONT",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "rich_list",
+   "MEM_LAST_NOT_NIL",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "rich_list",
+   "MIN_LIST_MONO_DEC",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "rich_list",
+   "REVERSE_HD",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "rich_list",
+   "SNOC_LAST_FRONT'",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "rich_list",
+   "sublist_last_sing",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "sorting",
+   "SORTED_APPEND_GEN",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "string",
+   "TOKENS_FRONT",
+   "thm",
+   "rw_metis"
+  ]
+ ],
+ "verdict": "unsure",
+ "seconds": 60,
+ "log": "logs/LAST_candle_candle_opus_candle_opus_nolessons_candle_sonnet.log"
+}

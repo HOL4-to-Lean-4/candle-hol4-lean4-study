@@ -1,0 +1,66 @@
+
+val _ = List.app load ("smlTimeout" :: ["typeSoundTheory","weakeningTheory","typeSysPropsTheory","evaluatePropsTheory","semantics_minTheory","semanticPrimitivesPropsTheory","namespacePropsTheory","typeSoundInvariantsTheory"]);
+open HolKernel boolLib bossLib;
+val _ = new_theory "vcheck_scratch";
+val c0 = prim_mk_const {Thy = "typeSysProps", Name = "type_def_to_ctMap"};
+val n = 4;
+val (dom, rng) = strip_fun (type_of c0);
+val dom = List.take (dom, n);
+val rng = List.foldr (op -->) rng (List.drop (#1 (strip_fun (type_of c0)), n)) handle _ => rng;
+val xs = List.tabulate (n, fn i => mk_var ("vcx" ^ Int.toString i, List.nth (dom, i)));
+val g = mk_var ("vc_g", List.foldr (op -->) rng dom);
+val cprime =
+  if n = 0 then g else
+  let val P0 = Parse.Term [QUOTE "\\(tenvT:(mlstring, mlstring, tvarN list # type) namespace) (next_stamp:num) (tds:('a # 'b # (conN # ast_t list) list) list) (ids:'c list). tds = [] /\\ (?i. ids = [i])"]
+      val theta = match_type (type_of P0) (List.foldr (op -->) bool dom)
+      val P = inst theta P0
+      val body = mk_cond (rhs (concl (QCONV (DEPTH_CONV BETA_CONV) (list_mk_comb (P, xs)))),list_mk_comb (g, xs), list_mk_comb (c0, xs))
+  in list_mk_abs (xs, body) end;
+val _ = print ("CPRIME " ^ term_to_string cprime ^ " : " ^ type_to_string (type_of cprime) ^ "\n");
+fun same a b = is_const b andalso let val x = dest_thy_const a val y = dest_thy_const b in #Thy x = #Thy y andalso #Name x = #Name y end;
+fun repl_with subs t =
+  case List.find (fn (k, _) => same k t) subs of
+    SOME (k, v) => inst (match_type (type_of k) (type_of t)) v
+  | NONE =>
+    if is_comb t then mk_comb (repl_with subs (rator t), repl_with subs (rand t))
+    else if is_abs t then let val (v, b) = dest_abs t in mk_abs (v, repl_with subs b) end
+    else t;
+(* constants that must change together with c (their definitions use c): replacement given in closed form, with c inside *)
+val cov = map (fn (cthy, cname, s) =>
+  let val d0 = prim_mk_const {Thy = cthy, Name = cname}
+      val t0 = Parse.Term [QUOTE s]
+      val t1 = inst (match_type (type_of t0) (type_of d0)) t0
+  in (d0, repl_with [(c0, cprime)] t1) end) [];
+val subs = (c0, cprime) :: cov;
+val _ = List.app (fn (k, v) => print ("COVARY " ^ term_to_string k ^ " := " ^ term_to_string v ^ "\n")) cov;
+val repl = repl_with subs;
+fun is_c t = List.exists (fn (k, _) => same k t) subs;
+fun mentions th = List.exists (fn t => can (find_term is_c) t) (concl th :: hyp th);
+val thys = ancestry "-";
+val all = List.filter (fn ((th, _), _) => List.exists (fn x => x = th) thys) (DB.listDB ());
+val rel = List.filter (fn (_, (th, _)) => mentions th) all;
+val _ = print ("RELEVANT " ^ Int.toString (length rel) ^ "\n");
+fun cls DB.Thm = "thm" | cls DB.Axm = "axiom" | cls DB.Def = "def";
+fun try_tacs goal th =
+  let val tacs = [("rw", rw [] THEN gvs [] THEN NO_TAC),
+                  ("rw_metis", rw [] THEN gvs [] THEN metis_tac [th]),
+                  ("metis", metis_tac [th]),
+                  ("rw_simp_th", rw [] THEN gvs [th] THEN NO_TAC),
+                  ("split_metis", rpt strip_tac THEN rpt (COND_CASES_TAC THEN gvs []) THEN metis_tac [th])]
+      fun go [] = "FAILED"
+        | go ((nm, tac) :: rest) =
+            ((smlTimeout.timeout 15.0 (fn () => Tactical.TAC_PROOF (([], goal), tac)) (); nm)
+             handle _ => go rest)
+  in go tacs end;
+fun check ((thy, nm), (th, {class = cl, private = pv, loc = _} : DB.thminfo)) =
+  let val goal = gen_all (list_mk_imp (map repl (hyp th), repl (concl th)))
+      val r = if aconv goal (gen_all (list_mk_imp (hyp th, concl th))) then "unchanged" else try_tacs goal th
+  in print ("RESULT\t" ^ thy ^ "\t" ^ nm ^ "\t" ^ cls cl ^ (if pv then "/local" else "") ^ "\t" ^ r ^ "\n") end
+  handle e => print ("RESULT\t" ^ thy ^ "\t" ^ nm ^ "\t" ^ cls cl ^ (if pv then "/local" else "") ^ "\tERROR " ^ String.translate (fn #"\n" => " " | c => str c) (exn_to_string e) ^ "\n");
+val _ = List.app check rel;
+val _ = print "DONE\n";
+
+==== OUTPUT ====
+<<HOL message: Created theory "vcheck_scratch">>
+exit=1
+Uncaught exception at ~/candle_build/repo/_build/HOL/src/parse/Pretype.sml:264: HOL_ERR (HOL_ERROR {message = "type not a known type operator", origins = [{origin_function = "type parser", origin_structure = "Parse", source_location = Loc (LocP (0, 0, 43), LocP (0, 0, 46))}]})

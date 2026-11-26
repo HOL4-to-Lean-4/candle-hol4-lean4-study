@@ -3,6 +3,14 @@ Findings that match nothing are listed for adjudication."""
 import collections, io, json, os, re, sys
 HERE = os.path.dirname(os.path.abspath(__file__)).replace("\\", "/") + "/"
 K = json.load(io.open(HERE + "key.json", encoding="utf-8"))
+# V-C recheck (27 Nov, vc_recheck/RECHECK.md): errors marked "recheck" hold in every model of the HOL4 theory and leave the key.
+# AUDIT_KEY=pre_recheck keeps them (the key as run), for the sensitivity tables.
+PRE = os.environ.get("AUDIT_KEY") == "pre_recheck"
+DROPPED = []
+if not PRE:
+    for k in K:
+        DROPPED += [(k["unit"], e["declaration"]) for e in k["errors"] if e.get("recheck")]
+        k["errors"] = [e for e in k["errors"] if not e.get("recheck")]
 STEPS = ["S1", "S3a", "S3b"]
 REV = {"S1": "S4", "S3a": "S6"}
 

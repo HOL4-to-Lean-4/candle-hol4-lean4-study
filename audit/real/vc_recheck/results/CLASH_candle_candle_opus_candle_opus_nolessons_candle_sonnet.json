@@ -1,0 +1,86 @@
+{
+ "entry": {
+  "key_decl": "CLASH",
+  "translations": [
+   "candle_opus",
+   "candle_opus_nolessons",
+   "candle_sonnet"
+  ],
+  "family": "candle",
+  "hol_const": "holSyntaxLib$CLASH",
+  "arity": 1,
+  "args": [
+   [
+    "r",
+    "'a result"
+   ]
+  ],
+  "P": "?s. r = Result s",
+  "witnesses": [
+   {
+    "translation": "candle_opus",
+    "file": "baselines/rescore_v33/opus55_direct_translation.lean",
+    "line": 9,
+    "eq": "(s t : Nat) : CLASH (Result s) = RESULT (Clash t)"
+   },
+   {
+    "translation": "candle_opus_nolessons",
+    "file": "baselines/rescore_v33/opus55_nolessons.lean",
+    "line": 7,
+    "eq": "(s t : Nat) : CLASH (result.Result s) = RESULT (result.Clash t)"
+   },
+   {
+    "translation": "candle_sonnet",
+    "file": "baselines/rescore_v33/sonnet55_direct_translation.lean",
+    "line": 10,
+    "eq": "(t : Nat) : Candle.HolSyntaxLib.CLASH (.Result t) = t"
+   }
+  ],
+  "note": "HOL4: CLASH_def (holSyntaxLibScript.sml:92) has only CLASH (Clash t) = t. Constant is in theory holSyntaxLib (datatype result = Clash 'a | Result 'a), not holSyntax. Lean opus/nolessons: CLASH (Result s) = ARB; sonnet: CLASH (Result t) = t. All witnesses are CLASH applied to a Result, so P holds.",
+  "doubt": "",
+  "P_wide": "?s. r = Result s",
+  "type_instance": "",
+  "hol4_source": "E:/NUS/mcomp/Dissertation/candle_study/package/candle/syntax-lib/holSyntaxLibScript.sml:92"
+ },
+ "cprime": "λvcx0. if ∃s. vcx0 = Result s then vc_g vcx0 else CLASH vcx0 : :α result -> α",
+ "relevant": 3,
+ "checked": 3,
+ "proved": 1,
+ "not_proved": [
+  [
+   "holSyntax",
+   "INST_CORE_def",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "holSyntax",
+   "INST_CORE_ind",
+   "thm",
+   "FAILED"
+  ]
+ ],
+ "results": [
+  [
+   "holSyntax",
+   "INST_CORE_def",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "holSyntax",
+   "INST_CORE_ind",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "holSyntaxLib",
+   "CLASH_def",
+   "def",
+   "rw"
+  ]
+ ],
+ "verdict": "unsure",
+ "seconds": 105,
+ "log": "logs/CLASH_candle_candle_opus_candle_opus_nolessons_candle_sonnet.log"
+}

@@ -1,0 +1,66 @@
+{
+ "entry": {
+  "key_decl": "MAP3",
+  "translations": [
+   "ts_opus_nolessons"
+  ],
+  "family": "ts",
+  "hol_const": "misc$MAP3",
+  "arity": 4,
+  "args": [
+   [
+    "f",
+    "'a -> 'b -> 'c -> 'd"
+   ],
+   [
+    "l1",
+    "'a list"
+   ],
+   [
+    "l2",
+    "'b list"
+   ],
+   [
+    "l3",
+    "'c list"
+   ]
+  ],
+  "P": "l1 = [] /\\ ~(l2 = []) /\\ l3 = []",
+  "witnesses": [
+   {
+    "translation": "ts_opus_nolessons",
+    "file": "baselines/ts_runs_v2/opus_nolessons/witnesses.lean",
+    "line": 49,
+    "eq": "(f : Nat → Nat → Nat → Nat) : MAP3 f ([] : List Nat) [0] ([] : List Nat) = (ARB : List Nat)"
+   }
+  ],
+  "note": "Witness: MAP3 f [] [0] [] (f arbitrary): shape nil/cons/nil.",
+  "doubt": "",
+  "P_wide": "~((l1 = [] /\\ l2 = [] /\\ l3 = []) \\/ (?h1 t1 h2 t2 h3 t3. l1 = h1::t1 /\\ l2 = h2::t2 /\\ l3 = h3::t3))",
+  "type_instance": "",
+  "hol4_source": "E:/NUS/mcomp/Dissertation/candle_study/package_ts/miscScript.sml:74"
+ },
+ "cprime": "λvcx0 vcx1 vcx2 vcx3.",
+ "relevant": 1,
+ "checked": 1,
+ "proved": 0,
+ "not_proved": [
+  [
+   "misc",
+   "MAP3_def",
+   "thm",
+   "FAILED"
+  ]
+ ],
+ "results": [
+  [
+   "misc",
+   "MAP3_def",
+   "thm",
+   "FAILED"
+  ]
+ ],
+ "verdict": "unsure",
+ "seconds": 61,
+ "log": "logs/MAP3_ts_ts_opus_nolessons.log"
+}

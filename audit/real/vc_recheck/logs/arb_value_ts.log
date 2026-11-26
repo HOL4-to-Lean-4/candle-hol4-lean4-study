@@ -1,0 +1,68 @@
+﻿<<HOL message: Created theory "arbprobe">>
+EQS myMAP3 f [] [] [] = [] ∧
+myMAP3 f (h1::t1) (h2::t2) (h3::t3) = f h1 h2 h3::myMAP3 f t1 t2 t3
+<<HOL message: mk_functional: 
+  pattern completion has added 4 clauses to the original specification.>>
+<<HOL warning: Context.snapshot: ambient context read while a proof was running (in arbprobe)>>
+Saved definition ____ "myMAP3_def"
+Saved induction _____ "myMAP3_ind"
+PRIM ⊢ (∀x x0 x1 x2.
+     myMAP3 x x0 x1 x2 =
+     arbprobe$old2545->myMAP3_def_tupled<-old (x,x0,x1,x2)) ∧
+  arbprobe$old2545->myMAP3_def_tupled<-old =
+  WFREC
+    (@R. WF R ∧ ∀h3 h2 h1 t3 t2 t1 f. R (f,t1,t2,t3) (f,h1::t1,h2::t2,h3::t3))
+    (λmyMAP3_def_tupled a.
+       case a of
+         (f,[],[],[]) => I []
+       | (f,v12::v13,[],[]) => ARB
+       | (f,v2,[],v8::v9) => ARB
+       | (f,v2,h2::t2,[]) => ARB
+       | (f,[],h2::t2,h3::t3) => ARB
+       | (f,h1::t1,h2::t2,h3::t3) =>
+         I (f h1 h2 h3::myMAP3_def_tupled (f,t1,t2,t3)))
+EQS mytdc tenvT next_stamp [] [] = [] ∧
+mytdc tenvT next_stamp ((tvs,tn,ctors)::tds) (id::ids) =
+mytdc tenvT (next_stamp + 1) tds ids ++
+REVERSE
+  (MAP
+     (λ(cn,ts).
+        (TypeStamp cn next_stamp,tvs,MAP (type_name_subst tenvT) ts,id))
+     ctors)
+<<HOL message: mk_functional: 
+  pattern completion has added 2 clauses to the original specification.>>
+Saved definition ____ "mytdc_def"
+Saved induction _____ "mytdc_ind"
+PRIM ⊢ (∀x x0 x1 x2.
+     mytdc x x0 x1 x2 = arbprobe$old2547->mytdc_def_tupled<-old (x,x0,x1,x2)) ∧
+  arbprobe$old2547->mytdc_def_tupled<-old =
+  WFREC
+    (@R. WF R ∧
+         ∀id ctors tn tvs ids tds next_stamp tenvT.
+           R (tenvT,next_stamp + 1,tds,ids)
+             (tenvT,next_stamp,(tvs,tn,ctors)::tds,id::ids))
+    (λmytdc_def_tupled a.
+       case a of
+         (tenvT,next_stamp,[],[]) => I []
+       | (tenvT,next_stamp,[],v8::v9) => ARB
+       | (tenvT,next_stamp,v6::tds,[]) => ARB
+       | (tenvT,next_stamp,(tvs,tn,ctors)::tds,id::ids) =>
+         I
+           (mytdc_def_tupled (tenvT,next_stamp + 1,tds,ids) ++
+            REVERSE
+              (MAP
+                 (λ(cn,ts).
+                    (TypeStamp cn next_stamp,tvs,
+                     MAP (type_name_subst tenvT) ts,id)) ctors)))
+NAME myMAP3_def
+NAME myMAP3_def_curried
+NAME myMAP3_def_tupled_primitive
+NAME myMAP3_ind
+NAME mytdc_def
+NAME mytdc_def_curried
+NAME mytdc_def_tupled_primitive
+NAME mytdc_ind
+PROVED MAP3_a
+PROVED MAP3_b
+PROVED tdc
+exit=0

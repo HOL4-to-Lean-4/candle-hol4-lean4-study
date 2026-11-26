@@ -1,0 +1,66 @@
+{
+ "entry": {
+  "key_decl": "locncol",
+  "translations": [
+   "ts_opus",
+   "ts_sonnet"
+  ],
+  "family": "ts",
+  "hol_const": "location$locncol",
+  "arity": 1,
+  "args": [
+   [
+    "l",
+    "locn"
+   ]
+  ],
+  "P": "l = EOFpt",
+  "witnesses": [
+   {
+    "translation": "ts_opus",
+    "file": "baselines/ts_runs_v2/opus_lessons/witnesses.lean",
+    "line": 99,
+    "eq": "locncol locn.EOFpt = ARB"
+   },
+   {
+    "translation": "ts_opus",
+    "file": "baselines/ts_runs_v2/opus_lessons/witnesses.lean",
+    "line": 105,
+    "eq": "locnrow locn.UNKNOWNpt = locncol locn.EOFpt"
+   },
+   {
+    "translation": "ts_sonnet",
+    "file": "baselines/ts_runs_v2/sonnet_lessons/witnesses.lean",
+    "line": 68,
+    "eq": "locncol .EOFpt = ARB"
+   },
+   {
+    "translation": "ts_sonnet",
+    "file": "baselines/ts_runs_v2/sonnet_lessons/witnesses.lean",
+    "line": 109,
+    "eq": "FAPPLY (FEMPTY : FMap Nat Nat) 5 = locncol .EOFpt"
+   }
+  ],
+  "note": "Theory `location` defines locn = UNKNOWNpt | EOFpt | POSN num num (locationScript.sml:3) and the four accessors by single POSN clauses; add_record_field only gives syntax, so the constants are plain definitions location$locnrow etc. Witnesses: locncol EOFpt = ARB and the shared-ARB equations.",
+  "doubt": "",
+  "P_wide": "!r c. ~(l = POSN r c)",
+  "type_instance": "",
+  "hol4_source": "E:/NUS/mcomp/Dissertation/candle_study/package_ts/locationScript.sml:16"
+ },
+ "cprime": "λvcx0. if vcx0 = EOFpt then vc_g vcx0 else vcx0.col : :locn -> num",
+ "relevant": 1,
+ "checked": 1,
+ "proved": 1,
+ "not_proved": [],
+ "results": [
+  [
+   "location",
+   "locncol_def",
+   "def",
+   "rw_metis"
+  ]
+ ],
+ "verdict": "V-C",
+ "seconds": 16,
+ "log": "logs/locncol_ts_ts_opus_ts_sonnet.log"
+}

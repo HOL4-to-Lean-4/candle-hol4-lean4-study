@@ -1,0 +1,298 @@
+{
+ "entry": {
+  "key_decl": "int_mod",
+  "translations": [
+   "ts_opus"
+  ],
+  "family": "ts",
+  "hol_const": "integer$int_mod",
+  "arity": 2,
+  "args": [
+   [
+    "i",
+    "int"
+   ],
+   [
+    "j",
+    "int"
+   ]
+  ],
+  "P": "j = 0 /\\ (i = 1 \\/ i = 2)",
+  "witnesses": [
+   {
+    "translation": "ts_opus",
+    "file": "baselines/ts_runs_v2/opus_lessons/witnesses.lean",
+    "line": 45,
+    "eq": "int_mod 1 0 = int_mod 2 0"
+   },
+   {
+    "translation": "ts_opus",
+    "file": "baselines/ts_runs_v2/opus_lessons/witnesses.lean",
+    "line": 47,
+    "eq": "int_div 1 0 = int_mod 1 0"
+   }
+  ],
+  "note": "int_mod is a new_specification (integerScript.sml:2074), existence guarded by ~(j = 0) (int_mod_exists0). Witnesses int_mod 1 0 = int_mod 2 0 and int_div 1 0 = int_mod 1 0.",
+  "doubt": "Lean opus defines int_mod i 0 = ARB; HOL4's guarded spec has `~(j=0) ==> r = i - i / j * j`, so int_mod i 0 is free. A grep of integerScript.sml found no saved theorem about x / 0 or x % 0 without a nonzero guard (other HOL4 theories were not searched).",
+  "P_wide": "j = 0",
+  "type_instance": "",
+  "hol4_source": "E:/ts_ws/hol4src/src/integer/integerScript.sml:2074"
+ },
+ "cprime": "λvcx0 vcx1.",
+ "relevant": 35,
+ "checked": 35,
+ "proved": 29,
+ "not_proved": [
+  [
+   "integer",
+   "EMOD_DEF",
+   "def",
+   "FAILED"
+  ],
+  [
+   "integer",
+   "INT_MOD_REDUCE",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "integer_word",
+   "w2i_n2w_mod",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "integer_word",
+   "w2n_i2w",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "integer_word",
+   "word_msb_i2w",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "integer_word",
+   "word_smod_def",
+   "def",
+   "FAILED"
+  ]
+ ],
+ "results": [
+  [
+   "integer",
+   "EMOD_DEF",
+   "def",
+   "FAILED"
+  ],
+  [
+   "integer",
+   "INT_ADD_DIV",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "integer",
+   "INT_DIV_MUL_ID",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "integer",
+   "INT_DIVIDES_MOD0",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "integer",
+   "INT_DIVISION",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "integer",
+   "INT_EXP_MOD",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "integer",
+   "INT_LESS_MOD",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "integer",
+   "INT_MOD",
+   "thm",
+   "rw"
+  ],
+  [
+   "integer",
+   "int_mod",
+   "def",
+   "rw_metis"
+  ],
+  [
+   "integer",
+   "INT_MOD0",
+   "thm",
+   "rw"
+  ],
+  [
+   "integer",
+   "INT_MOD_1",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "integer",
+   "INT_MOD_ADD_MULTIPLES",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "integer",
+   "INT_MOD_BOUNDS",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "integer",
+   "INT_MOD_CALCULATE",
+   "thm",
+   "rw"
+  ],
+  [
+   "integer",
+   "INT_MOD_COMMON_FACTOR",
+   "thm",
+   "rw"
+  ],
+  [
+   "integer",
+   "INT_MOD_EMOD",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "integer",
+   "INT_MOD_EQ0",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "integer",
+   "INT_MOD_FORALL_P",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "integer",
+   "INT_MOD_ID",
+   "thm",
+   "rw"
+  ],
+  [
+   "integer",
+   "INT_MOD_MINUS1",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "integer",
+   "INT_MOD_MOD",
+   "thm",
+   "rw"
+  ],
+  [
+   "integer",
+   "INT_MOD_NEG",
+   "thm",
+   "rw"
+  ],
+  [
+   "integer",
+   "INT_MOD_NEG_NUMERATOR",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "integer",
+   "INT_MOD_P",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "integer",
+   "INT_MOD_PLUS",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "integer",
+   "INT_MOD_REDUCE",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "integer",
+   "INT_MOD_SUB",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "integer",
+   "INT_MOD_UNIQUE",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "integer",
+   "INT_MUL_DIV",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "integer",
+   "INT_REM_EQ_MOD",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "integer_word",
+   "w2i_n2w_mod",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "integer_word",
+   "w2n_i2w",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "integer_word",
+   "word_msb_i2w",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "integer_word",
+   "word_smod_def",
+   "def",
+   "FAILED"
+  ],
+  [
+   "semanticPrimitives",
+   "do_arith_def",
+   "thm",
+   "rw_simp_th"
+  ]
+ ],
+ "verdict": "unsure",
+ "seconds": 151,
+ "log": "logs/int_mod_ts_ts_opus.log"
+}

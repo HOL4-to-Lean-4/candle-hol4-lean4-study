@@ -1,6 +1,6 @@
 """Analysis of the author's check, fixed before any answer was given.  python audit/real/check/analyse.py FILLED_SHEET.csv [FILLED_SCORING_SHEET.csv]
 Needs check_key.csv (rebuild with make_sheet.py in a copy of the repository if it is lost). The optional second file is the filled 51-row sheet of
-baselines/ts_runs_v2/scoring (needs key.csv next to make_csv.py); it decides the 15 provisional statement errors. Writes CHECK_RESULTS.md next to this file."""
+baselines/ts_runs_v2/scoring (needs key.csv next to make_csv.py); it decides the 15 provisional statement errors. Writes CHECK_RESULTS.md next to this file with AUDIT_KEY=pre_recheck (the key as run: the fixed analysis), and CHECK_RESULTS_recheck.md with the key after the V-C recheck of 27 November."""
 import collections, csv, io, math, os, random, re, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__)).replace("\\", "/") + "/"
@@ -122,7 +122,7 @@ for need in (False, True):
     for a in ARMS:
         H[a, need] = hit(a, need)
     H["S8", need] = H["S3a", need] | H["S3b", need]
-w("\n| Arm | Known errors found before the check (105) | Kept errors (%d): found, difference real | found, reason also right |\n|---|---|---|---|" % len(keep))
+w("\n| Arm | Known errors found before the check (" + str(len(F.key)) + ") | Kept errors (%d): found, difference real | found, reason also right |\n|---|---|---|---|" % len(keep))
 for a in ARMS + ("S8",):
     b = F.hits["S3a"] | F.hits["S3b"] if a == "S8" else F.hits[a]
     w("| %s | %d | %d | %d |" % (a, len(b), len(H[a, False]), len(H[a, True])))
@@ -148,5 +148,13 @@ for st in sorted(D):
     y, n = sum("yes" in q for q in v), sum(set(q) == {"no"} for q in v)
     w("| %s | %d | %d | %d | %d |" % (st[13:], len(v), y, n, len(v) - y - n))
 w("\nStudy-1 findings outside the key are not in the sheet and are counted neither way.")
-io.open(HERE + "CHECK_RESULTS.md", "w", encoding="utf-8", newline="\n").write("\n".join(out) + "\n")
+if not F.s.PRE:
+    hh = set(F.s.DROPPED) | {("24717e82", "termsem0")}
+    rows = sorted(x for x in KEY if (KEY[x]["unit"], KEY[x]["declaration"].split(".")[-1]) in hh and SHEET[x]["claimed_class"] == "V-C")
+    w("\n## V-C recheck (27 November)\n")
+    w("This file uses the key after the V-C recheck (`../vc_recheck/RECHECK.md`). %d known errors and the new error `termsem0` (candle_fable) left the key: "
+      "the Lean equation holds in every model of the HOL4 theory, because TFL fills the missing patterns with ARB. The readers answered these rows "
+      "against the saved theorems, which do not state the ARB cases: %s. Answers q1: %s. The fixed analysis with the key as run is `CHECK_RESULTS.md`."
+      % (len(F.s.DROPPED), ", ".join(rows), dict(collections.Counter(A[x]["q1"] for x in rows))))
+io.open(HERE + ("CHECK_RESULTS.md" if F.s.PRE else "CHECK_RESULTS_recheck.md"), "w", encoding="utf-8", newline="\n").write("\n".join(out) + "\n")
 print("\n".join(out))

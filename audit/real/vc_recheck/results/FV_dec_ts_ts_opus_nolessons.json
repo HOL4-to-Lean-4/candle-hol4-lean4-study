@@ -1,0 +1,53 @@
+{
+ "entry": {
+  "key_decl": "FV_dec",
+  "translations": [
+   "ts_opus_nolessons"
+  ],
+  "family": "ts",
+  "hol_const": "semanticPrimitivesProps$FV_dec",
+  "arity": 1,
+  "args": [
+   [
+    "d",
+    "dec"
+   ]
+  ],
+  "P": "(?m. d = Dmod m []) \\/ d = Dlocal [] []",
+  "witnesses": [
+   {
+    "translation": "ts_opus_nolessons",
+    "file": "baselines/ts_runs_v2/opus_nolessons/witnesses.lean",
+    "line": 62,
+    "eq": "(m : modN) : FV_dec (dec.Dmod m []) = (ARB : Set (ident modN varN))"
+   },
+   {
+    "translation": "ts_opus_nolessons",
+    "file": "baselines/ts_runs_v2/opus_nolessons/witnesses.lean",
+    "line": 63,
+    "eq": "FV_dec (dec.Dlocal [] []) = (ARB : Set (ident modN varN))"
+   }
+  ],
+  "note": "Same HOL4 facts. Witnesses: FV_dec (Dmod m []) for every m, FV_dec (Dlocal [] []). Both points satisfy P.",
+  "doubt": "",
+  "P_wide": "(?m ds. d = Dmod m ds) \\/ (?a b. d = Dlocal a b) \\/ (?n. d = Denv n)",
+  "type_instance": "",
+  "hol4_source": "E:/NUS/mcomp/Dissertation/candle_study/package_ts/semanticPrimitivesPropsScript.sml:220"
+ },
+ "cprime": "λvcx0.",
+ "relevant": 1,
+ "checked": 1,
+ "proved": 1,
+ "not_proved": [],
+ "results": [
+  [
+   "semanticPrimitivesProps",
+   "FV_dec_def",
+   "def",
+   "rw"
+  ]
+ ],
+ "verdict": "V-C",
+ "seconds": 16,
+ "log": "logs/FV_dec_ts_ts_opus_nolessons.log"
+}

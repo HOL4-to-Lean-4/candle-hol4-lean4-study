@@ -1,0 +1,223 @@
+{
+ "entry": {
+  "key_decl": "dest_var",
+  "translations": [
+   "candle_opus",
+   "candle_opus_nolessons"
+  ],
+  "family": "candle",
+  "hol_const": "holSyntax$dest_var",
+  "arity": 1,
+  "args": [
+   [
+    "tm",
+    "term"
+   ]
+  ],
+  "P": "?a ty. tm = Const a ty",
+  "witnesses": [
+   {
+    "translation": "candle_opus",
+    "file": "baselines/rescore_v33/opus55_direct_translation.lean",
+    "line": 7,
+    "eq": "(a : mlstring) (t : type) : dest_var (Const a t) = ARB"
+   },
+   {
+    "translation": "candle_opus_nolessons",
+    "file": "baselines/rescore_v33/opus55_nolessons.lean",
+    "line": 5,
+    "eq": "(a : mlstring) (t : type) : dest_var (term.Const a t) = ARB"
+   }
+  ],
+  "note": "dest_var_def (holSyntaxScript.sml:57) has only dest_var (Var x ty) = (x,ty). Lean returns ARB for Const, Comb and Abs; both witnesses use `Const a t`.",
+  "doubt": "",
+  "P_wide": "!x ty. ~(tm = Var x ty)",
+  "type_instance": "",
+  "hol4_source": "E:/NUS/mcomp/Dissertation/candle_study/package/candle/standard/syntax/holSyntaxScript.sml:57"
+ },
+ "cprime": "λvcx0. if ∃a ty. vcx0 = Const a ty then vc_g vcx0 else dest_var vcx0 : :term -> mlstring # type",
+ "relevant": 15,
+ "checked": 15,
+ "proved": 1,
+ "not_proved": [
+  [
+   "holSemanticsExtra",
+   "termsem_simple_subst",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "holSemanticsExtra",
+   "termsem_VSUBST",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "holSyntax",
+   "INST_CORE_def",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "holSyntax",
+   "INST_CORE_ind",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "holSyntax",
+   "VSUBST_def",
+   "def",
+   "FAILED"
+  ],
+  [
+   "holSyntaxExtra",
+   "ALOOKUP_MAP_dest_var",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "holSyntaxExtra",
+   "bv_names_def",
+   "def",
+   "FAILED"
+  ],
+  [
+   "holSyntaxExtra",
+   "db_def",
+   "def",
+   "FAILED"
+  ],
+  [
+   "holSyntaxExtra",
+   "dbterm_def",
+   "def",
+   "FAILED"
+  ],
+  [
+   "holSyntaxExtra",
+   "INST_CORE_simple_inst",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "holSyntaxExtra",
+   "RACONV_dbterm",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "holSyntaxExtra",
+   "rename_bvars_def",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "holSyntaxExtra",
+   "rename_bvars_ind",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "holSyntaxExtra",
+   "VSUBST_thm",
+   "thm",
+   "FAILED"
+  ]
+ ],
+ "results": [
+  [
+   "holSemanticsExtra",
+   "termsem_simple_subst",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "holSemanticsExtra",
+   "termsem_VSUBST",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "holSyntax",
+   "dest_var_def",
+   "def",
+   "rw"
+  ],
+  [
+   "holSyntax",
+   "INST_CORE_def",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "holSyntax",
+   "INST_CORE_ind",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "holSyntax",
+   "VSUBST_def",
+   "def",
+   "FAILED"
+  ],
+  [
+   "holSyntaxExtra",
+   "ALOOKUP_MAP_dest_var",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "holSyntaxExtra",
+   "bv_names_def",
+   "def",
+   "FAILED"
+  ],
+  [
+   "holSyntaxExtra",
+   "db_def",
+   "def",
+   "FAILED"
+  ],
+  [
+   "holSyntaxExtra",
+   "dbterm_def",
+   "def",
+   "FAILED"
+  ],
+  [
+   "holSyntaxExtra",
+   "INST_CORE_simple_inst",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "holSyntaxExtra",
+   "RACONV_dbterm",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "holSyntaxExtra",
+   "rename_bvars_def",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "holSyntaxExtra",
+   "rename_bvars_ind",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "holSyntaxExtra",
+   "VSUBST_thm",
+   "thm",
+   "FAILED"
+  ]
+ ],
+ "verdict": "unsure",
+ "seconds": 423,
+ "log": "logs/dest_var_candle_candle_opus_candle_opus_nolessons.log"
+}

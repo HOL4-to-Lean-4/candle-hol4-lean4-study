@@ -1,0 +1,66 @@
+{
+ "entry": {
+  "key_decl": "locnrow",
+  "translations": [
+   "ts_opus",
+   "ts_sonnet"
+  ],
+  "family": "ts",
+  "hol_const": "location$locnrow",
+  "arity": 1,
+  "args": [
+   [
+    "l",
+    "locn"
+   ]
+  ],
+  "P": "l = UNKNOWNpt",
+  "witnesses": [
+   {
+    "translation": "ts_opus",
+    "file": "baselines/ts_runs_v2/opus_lessons/witnesses.lean",
+    "line": 97,
+    "eq": "locnrow locn.UNKNOWNpt = ARB"
+   },
+   {
+    "translation": "ts_opus",
+    "file": "baselines/ts_runs_v2/opus_lessons/witnesses.lean",
+    "line": 105,
+    "eq": "locnrow locn.UNKNOWNpt = locncol locn.EOFpt"
+   },
+   {
+    "translation": "ts_sonnet",
+    "file": "baselines/ts_runs_v2/sonnet_lessons/witnesses.lean",
+    "line": 65,
+    "eq": "locnrow .UNKNOWNpt = ARB"
+   },
+   {
+    "translation": "ts_sonnet",
+    "file": "baselines/ts_runs_v2/sonnet_lessons/witnesses.lean",
+    "line": 106,
+    "eq": "HD ([] : List Nat) = locnrow .UNKNOWNpt"
+   }
+  ],
+  "note": "Theory `location` defines locn = UNKNOWNpt | EOFpt | POSN num num (locationScript.sml:3) and the four accessors by single POSN clauses; add_record_field only gives syntax, so the constants are plain definitions location$locnrow etc. Witnesses: locnrow UNKNOWNpt = ARB, locnrow UNKNOWNpt = locncol EOFpt, = HD [].",
+  "doubt": "",
+  "P_wide": "!r c. ~(l = POSN r c)",
+  "type_instance": "",
+  "hol4_source": "E:/NUS/mcomp/Dissertation/candle_study/package_ts/locationScript.sml:6"
+ },
+ "cprime": "λvcx0. if vcx0 = UNKNOWNpt then vc_g vcx0 else vcx0.row : :locn -> num",
+ "relevant": 1,
+ "checked": 1,
+ "proved": 1,
+ "not_proved": [],
+ "results": [
+  [
+   "location",
+   "locnrow_def",
+   "def",
+   "rw_metis"
+  ]
+ ],
+ "verdict": "V-C",
+ "seconds": 14,
+ "log": "logs/locnrow_ts_ts_opus_ts_sonnet.log"
+}

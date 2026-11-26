@@ -1,0 +1,52 @@
+{
+ "entry": {
+  "key_decl": "type_def_to_ctMap",
+  "translations": [
+   "ts_sonnet"
+  ],
+  "family": "ts",
+  "hol_const": "typeSysProps$type_def_to_ctMap",
+  "arity": 4,
+  "args": [
+   [
+    "tenvT",
+    "(mlstring, mlstring, tvarN list # type) namespace"
+   ],
+   [
+    "next_stamp",
+    "num"
+   ],
+   [
+    "tds",
+    "('a # 'b # (conN # ast_t list) list) list"
+   ],
+   [
+    "ids",
+    "'c list"
+   ]
+  ],
+  "P": "next_stamp = 0 /\\ tds = [] /\\ (?i. ids = [i])",
+  "witnesses": [
+   {
+    "translation": "ts_sonnet",
+    "file": "baselines/ts_runs_v2/sonnet_lessons/witnesses.lean",
+    "line": 101,
+    "eq": "(ns : Namespace modN typeN (List tvarN × Ty)) : type_def_to_ctMap ns 0 [] [3] = ARB"
+   }
+  ],
+  "note": "Same HOL4 facts. Witness type_def_to_ctMap ns 0 [] [3] = ARB: next_stamp = 0, tds = [], ids a one-element list, tenvT any.",
+  "doubt": "Same typing caveat as above.",
+  "P_wide": "~((tds = [] /\\ ids = []) \\/ (?a b c d. tds = a::b /\\ ids = c::d))",
+  "type_instance": "",
+  "hol4_source": "E:/NUS/mcomp/Dissertation/candle_study/package_ts/typeSysPropsScript.sml:1502"
+ },
+ "cprime": null,
+ "relevant": null,
+ "checked": 0,
+ "proved": 0,
+ "not_proved": [],
+ "results": [],
+ "verdict": "error",
+ "seconds": 17,
+ "log": "logs/type_def_to_ctMap_ts_ts_sonnet.log"
+}

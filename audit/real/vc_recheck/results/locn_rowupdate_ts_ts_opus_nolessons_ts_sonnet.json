@@ -1,0 +1,58 @@
+{
+ "entry": {
+  "key_decl": "locn_rowupdate",
+  "translations": [
+   "ts_opus_nolessons",
+   "ts_sonnet"
+  ],
+  "family": "ts",
+  "hol_const": "location$locn_rowupdate",
+  "arity": 2,
+  "args": [
+   [
+    "f",
+    "num -> num"
+   ],
+   [
+    "l",
+    "locn"
+   ]
+  ],
+  "P": "l = EOFpt",
+  "witnesses": [
+   {
+    "translation": "ts_opus_nolessons",
+    "file": "baselines/ts_runs_v2/opus_nolessons/witnesses.lean",
+    "line": 31,
+    "eq": "(f : Nat → Nat) : locn_rowupdate f EOFpt = (ARB : locn)"
+   },
+   {
+    "translation": "ts_sonnet",
+    "file": "baselines/ts_runs_v2/sonnet_lessons/witnesses.lean",
+    "line": 71,
+    "eq": "(f : Nat → Nat) : locn_rowupdate f .EOFpt = ARB"
+   }
+  ],
+  "note": "Theory `location` defines locn = UNKNOWNpt | EOFpt | POSN num num (locationScript.sml:3) and the four accessors by single POSN clauses; add_record_field only gives syntax, so the constants are plain definitions location$locnrow etc. Witnesses locn_rowupdate f EOFpt = ARB for every f.",
+  "doubt": "",
+  "P_wide": "!r c. ~(l = POSN r c)",
+  "type_instance": "",
+  "hol4_source": "E:/NUS/mcomp/Dissertation/candle_study/package_ts/locationScript.sml:11"
+ },
+ "cprime": "λvcx0 vcx1.",
+ "relevant": 1,
+ "checked": 1,
+ "proved": 1,
+ "not_proved": [],
+ "results": [
+  [
+   "location",
+   "locn_rowupdate_def",
+   "def",
+   "rw_metis"
+  ]
+ ],
+ "verdict": "V-C",
+ "seconds": 14,
+ "log": "logs/locn_rowupdate_ts_ts_opus_nolessons_ts_sonnet.log"
+}

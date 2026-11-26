@@ -1,0 +1,116 @@
+{
+ "entry": {
+  "key_decl": "RESULT",
+  "translations": [
+   "candle_opus",
+   "candle_opus_nolessons",
+   "candle_sonnet"
+  ],
+  "family": "candle",
+  "hol_const": "holSyntaxLib$RESULT",
+  "arity": 1,
+  "args": [
+   [
+    "r",
+    "'a result"
+   ]
+  ],
+  "P": "?s. r = Clash s",
+  "witnesses": [
+   {
+    "translation": "candle_opus",
+    "file": "baselines/rescore_v33/opus55_direct_translation.lean",
+    "line": 8,
+    "eq": "(s t : Nat) : RESULT (Clash s) = RESULT (Clash t)"
+   },
+   {
+    "translation": "candle_opus",
+    "file": "baselines/rescore_v33/opus55_direct_translation.lean",
+    "line": 9,
+    "eq": "(s t : Nat) : CLASH (Result s) = RESULT (Clash t)"
+   },
+   {
+    "translation": "candle_opus_nolessons",
+    "file": "baselines/rescore_v33/opus55_nolessons.lean",
+    "line": 6,
+    "eq": "(s t : Nat) : RESULT (result.Clash s) = RESULT (result.Clash t)"
+   },
+   {
+    "translation": "candle_opus_nolessons",
+    "file": "baselines/rescore_v33/opus55_nolessons.lean",
+    "line": 7,
+    "eq": "(s t : Nat) : CLASH (result.Result s) = RESULT (result.Clash t)"
+   },
+   {
+    "translation": "candle_sonnet",
+    "file": "baselines/rescore_v33/sonnet55_direct_translation.lean",
+    "line": 9,
+    "eq": "(t : Nat) : Candle.HolSyntaxLib.RESULT (.Clash t) = t"
+   }
+  ],
+  "note": "RESULT_def (holSyntaxLibScript.sml:88) has only RESULT (Result t) = t; constant is in theory holSyntaxLib. Lean: RESULT (Clash t) = ARB (opus, nolessons) or = t (sonnet). All witnesses apply RESULT to a Clash.",
+  "doubt": "",
+  "P_wide": "?s. r = Clash s",
+  "type_instance": "",
+  "hol4_source": "E:/NUS/mcomp/Dissertation/candle_study/package/candle/syntax-lib/holSyntaxLibScript.sml:88"
+ },
+ "cprime": "λvcx0. if ∃s. vcx0 = Clash s then vc_g vcx0 else RESULT vcx0 : :α result -> α",
+ "relevant": 5,
+ "checked": 5,
+ "proved": 2,
+ "not_proved": [
+  [
+   "holSyntax",
+   "INST_CORE_def",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "holSyntax",
+   "INST_CORE_ind",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "holSyntax",
+   "INST_def",
+   "def",
+   "FAILED"
+  ]
+ ],
+ "results": [
+  [
+   "holSyntax",
+   "INST_CORE_def",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "holSyntax",
+   "INST_CORE_ind",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "holSyntax",
+   "INST_def",
+   "def",
+   "FAILED"
+  ],
+  [
+   "holSyntaxExtra",
+   "term_ok_INST_CORE",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "holSyntaxLib",
+   "RESULT_def",
+   "def",
+   "rw"
+  ]
+ ],
+ "verdict": "unsure",
+ "seconds": 106,
+ "log": "logs/RESULT_candle_candle_opus_candle_opus_nolessons_candle_sonnet.log"
+}

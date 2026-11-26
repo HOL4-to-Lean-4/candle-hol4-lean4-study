@@ -1,0 +1,21 @@
+﻿<<HOL message: Created theory "specprobe">>
+PROVED CHR_256 : ⊢ ∀g. (let
+         C n = if n = 256 then g n else CHR n
+       in
+         (∀a. C (ORD a) = a) ∧ ∀r. r < 256 ⇔ ORD (C r) = r)
+PROVED CHR_256_257 : ⊢ ∀g. (let
+         C n = if n = 256 ∨ n = 257 then g n else CHR n
+       in
+         (∀a. C (ORD a) = a) ∧ ∀r. r < 256 ⇔ ORD (C r) = r)
+PROVED CHR_300_301 : ⊢ ∀g. (let
+         C n = if n = 300 ∨ n = 301 then g n else CHR n
+       in
+         (∀a. C (ORD a) = a) ∧ ∀r. r < 256 ⇔ ORD (C r) = r)
+PROVED SEG_spec : ⊢ ∀a. (let
+         S m k l = TAKE m (DROP k l) ++ REPLICATE (m − (LENGTH l − k)) a
+       in
+         (∀k l. S 0 k l = []) ∧ (∀m x l. S (SUC m) 0 (x::l) = x::S m 0 l) ∧
+         ∀m k x l. S (SUC m) (SUC k) (x::l) = S (SUC m) k l)
+PROVED SEG_witness_fails : ⊢ ∀a. TAKE 1 (DROP 0 []) ++ REPLICATE (1 − (LENGTH [] − 0)) a ≠ []
+PROVED HD_spec : ⊢ ∀g. (let H l = if l = [] then g l else HD l in ∀h t. H (h::t) = h)
+exit=0

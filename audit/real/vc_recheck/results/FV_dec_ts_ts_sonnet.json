@@ -1,0 +1,59 @@
+{
+ "entry": {
+  "key_decl": "FV_dec",
+  "translations": [
+   "ts_sonnet"
+  ],
+  "family": "ts",
+  "hol_const": "semanticPrimitivesProps$FV_dec",
+  "arity": 1,
+  "args": [
+   [
+    "d",
+    "dec"
+   ]
+  ],
+  "P": "d = Denv (strlit \"\") \\/ d = Dmod (strlit \"\") [] \\/ d = Dlocal [] []",
+  "witnesses": [
+   {
+    "translation": "ts_sonnet",
+    "file": "baselines/ts_runs_v2/sonnet_lessons/witnesses.lean",
+    "line": 83,
+    "eq": "FV_dec (.Denv default) = ARB"
+   },
+   {
+    "translation": "ts_sonnet",
+    "file": "baselines/ts_runs_v2/sonnet_lessons/witnesses.lean",
+    "line": 86,
+    "eq": "FV_dec (.Dmod default []) = ARB"
+   },
+   {
+    "translation": "ts_sonnet",
+    "file": "baselines/ts_runs_v2/sonnet_lessons/witnesses.lean",
+    "line": 89,
+    "eq": "FV_dec (.Dlocal [] []) = ARB"
+   }
+  ],
+  "note": "Same HOL4 facts. Witnesses use Lean `default` for the name, which is mlstring.strlit [] (Mlstring.lean:24 in the sonnet translation), i.e. HOL4 strlit \"\" (the empty mlstring).",
+  "doubt": "Confirm the HOL4 spelling of the empty mlstring in the Term quotation (strlit \"\" or implode \"\"). Lean FV_dec is uniform in the name (`| _ => ARB`), so `?n. d = Denv n` etc. (P_wide) is also within what Lean fixes.",
+  "P_wide": "(?m ds. d = Dmod m ds) \\/ (?a b. d = Dlocal a b) \\/ (?n. d = Denv n)",
+  "type_instance": "",
+  "hol4_source": "E:/NUS/mcomp/Dissertation/candle_study/package_ts/semanticPrimitivesPropsScript.sml:220"
+ },
+ "cprime": "λvcx0.",
+ "relevant": 1,
+ "checked": 1,
+ "proved": 1,
+ "not_proved": [],
+ "results": [
+  [
+   "semanticPrimitivesProps",
+   "FV_dec_def",
+   "def",
+   "rw"
+  ]
+ ],
+ "verdict": "V-C",
+ "seconds": 14,
+ "log": "logs/FV_dec_ts_ts_sonnet.log"
+}

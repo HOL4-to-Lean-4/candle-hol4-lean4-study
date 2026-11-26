@@ -1,0 +1,304 @@
+{
+ "entry": {
+  "key_decl": "int_mod",
+  "translations": [
+   "ts_opus_nolessons"
+  ],
+  "family": "ts",
+  "hol_const": "integer$int_mod",
+  "arity": 2,
+  "args": [
+   [
+    "i",
+    "int"
+   ],
+   [
+    "j",
+    "int"
+   ]
+  ],
+  "P": "j = 0",
+  "witnesses": [
+   {
+    "translation": "ts_opus_nolessons",
+    "file": "baselines/ts_runs_v2/opus_nolessons/witnesses.lean",
+    "line": 110,
+    "eq": "(i : Int) : int_mod i 0 = ARB"
+   }
+  ],
+  "note": "Same HOL4 facts. Witness int_mod i 0 = ARB for every i.",
+  "doubt": "",
+  "P_wide": "j = 0",
+  "type_instance": "",
+  "hol4_source": "E:/ts_ws/hol4src/src/integer/integerScript.sml:2074"
+ },
+ "cprime": "λvcx0 vcx1. if vcx1 = 0 then vc_g vcx0 vcx1 else vcx0 % vcx1 : :int -> int -> int",
+ "relevant": 35,
+ "checked": 35,
+ "proved": 27,
+ "not_proved": [
+  [
+   "integer",
+   "EMOD_DEF",
+   "def",
+   "FAILED"
+  ],
+  [
+   "integer",
+   "INT_LESS_MOD",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "integer",
+   "INT_MOD_REDUCE",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "integer",
+   "INT_MOD_UNIQUE",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "integer_word",
+   "w2i_n2w_mod",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "integer_word",
+   "w2n_i2w",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "integer_word",
+   "word_msb_i2w",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "integer_word",
+   "word_smod_def",
+   "def",
+   "FAILED"
+  ]
+ ],
+ "results": [
+  [
+   "integer",
+   "EMOD_DEF",
+   "def",
+   "FAILED"
+  ],
+  [
+   "integer",
+   "INT_ADD_DIV",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "integer",
+   "INT_DIV_MUL_ID",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "integer",
+   "INT_DIVIDES_MOD0",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "integer",
+   "INT_DIVISION",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "integer",
+   "INT_EXP_MOD",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "integer",
+   "INT_LESS_MOD",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "integer",
+   "INT_MOD",
+   "thm",
+   "rw"
+  ],
+  [
+   "integer",
+   "int_mod",
+   "def",
+   "rw_metis"
+  ],
+  [
+   "integer",
+   "INT_MOD0",
+   "thm",
+   "rw"
+  ],
+  [
+   "integer",
+   "INT_MOD_1",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "integer",
+   "INT_MOD_ADD_MULTIPLES",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "integer",
+   "INT_MOD_BOUNDS",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "integer",
+   "INT_MOD_CALCULATE",
+   "thm",
+   "rw"
+  ],
+  [
+   "integer",
+   "INT_MOD_COMMON_FACTOR",
+   "thm",
+   "rw"
+  ],
+  [
+   "integer",
+   "INT_MOD_EMOD",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "integer",
+   "INT_MOD_EQ0",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "integer",
+   "INT_MOD_FORALL_P",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "integer",
+   "INT_MOD_ID",
+   "thm",
+   "rw"
+  ],
+  [
+   "integer",
+   "INT_MOD_MINUS1",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "integer",
+   "INT_MOD_MOD",
+   "thm",
+   "rw"
+  ],
+  [
+   "integer",
+   "INT_MOD_NEG",
+   "thm",
+   "rw"
+  ],
+  [
+   "integer",
+   "INT_MOD_NEG_NUMERATOR",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "integer",
+   "INT_MOD_P",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "integer",
+   "INT_MOD_PLUS",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "integer",
+   "INT_MOD_REDUCE",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "integer",
+   "INT_MOD_SUB",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "integer",
+   "INT_MOD_UNIQUE",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "integer",
+   "INT_MUL_DIV",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "integer",
+   "INT_REM_EQ_MOD",
+   "thm",
+   "rw_metis"
+  ],
+  [
+   "integer_word",
+   "w2i_n2w_mod",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "integer_word",
+   "w2n_i2w",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "integer_word",
+   "word_msb_i2w",
+   "thm",
+   "FAILED"
+  ],
+  [
+   "integer_word",
+   "word_smod_def",
+   "def",
+   "FAILED"
+  ],
+  [
+   "semanticPrimitives",
+   "do_arith_def",
+   "thm",
+   "rw_simp_th"
+  ]
+ ],
+ "verdict": "unsure",
+ "seconds": 49,
+ "log": "logs/int_mod_ts_ts_opus_nolessons.log"
+}
