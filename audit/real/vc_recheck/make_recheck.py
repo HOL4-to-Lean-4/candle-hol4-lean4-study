@@ -69,7 +69,13 @@ for e in S:
     cnt[v] += 1
     pairs[v] += len(e["translations"])
     sup = "%d of %d" % (r["proved"], r["relevant"]) if r and r["relevant"] is not None else "not run (argument type did not parse)"
-    rows.append("| %s | %s | %s | `%s` | %s | %s | %s | %s |" % (e["key_decl"], e["family"], ", ".join(e["translations"]), e["P"].replace("|", "\\|"), intro, evid, sup, v))
+    wit = []
+    for t in e["translations"]:
+        ws = [w for w in e["witnesses"] if w["translation"] == t]
+        live = [w for w in ws if not w.get("recheck")]
+        wit.append("%s: `%s`%s" % (t, (live or ws)[0]["eq"].split(" (stated")[0].replace("|", "\\|")[:90],
+                                    "" if len(live) == len(ws) else " (struck: `%s`, %s)" % (ws[[w.get("recheck") is not None for w in ws].index(True)]["eq"].replace("|", "\\|"), [w["recheck"] for w in ws if w.get("recheck")][0])))
+    rows.append("| %s | %s | %s | `%s` | %s | %s | %s | %s | %s |" % (e["key_decl"], e["family"], ", ".join(e["translations"]), e["P"].replace("|", "\\|"), intro, evid, "<br>".join(wit), sup, v))
 
 out = ["# V-C recheck (27 November 2026)", "",
        "Plan v3.4, section 3, asks that every counterexample behind a V-C label respect the saved HOL4 theorems and their dependencies, and that the label stay `unsure` where this is not verified. "
@@ -87,11 +93,12 @@ out = ["# V-C recheck (27 November 2026)", "",
        "Then the new interpretation is a model of the HOL4 theory, so every saved theorem holds in it (soundness of HOL with loose specifications; Candle proves this for its own kernel). The Lean equation e fixes c inside P, so it fails for a suitable g.",
        "3. ARB (A): ARB has no axiom, so varying ARB at one type gives a model too, but the TFL constant changes with it: c args = ARB holds in every model. "
        "HOL4 proves c args = ARB on P from the kernel definition. The theories here do not save that definition, so it was proved on a copy defined by the same `Define` from the saved equations (`arb_value_*.sml`); the copy's kernel definition is printed in the logs.",
+       "Every V-C pair names one Lean equation that the model falsifies (column \"Lean equation falsified\"): it mentions the changed constant inside P and, apart from it, only values the change leaves alone. A witness whose two sides change together is struck (one: `FAPPLY FEMPTY 0 = FAPPLY FEMPTY 1`, ts_sonnet; the pair keeps its other witness).",
        "4. Supplement: `vcheck.py` also rewrote every saved theorem that mentions c (with the ancestors; HD also changes EL) and tried fixed tactics with a 15 s limit (column \"theorems re-proved\"). "
        "A failure there is not a refutation: most failures are definitions of other constants built on c, which the model reinterprets, or tactic limits. This check alone would leave most entries `unsure`.",
        "", "## Entries", "",
-       "| Key declaration | Family | Translations | P (region varied) | How HOL4 introduces it | Evidence | Theorems re-proved (supplement) | Verdict |",
-       "|---|---|---|---|---|---|---|---|"] + rows + ["",
+       "| Key declaration | Family | Translations | P (region varied) | How HOL4 introduces it | Evidence | Lean equation falsified by the model, per translation | Theorems re-proved (supplement) | Verdict |",
+       "|---|---|---|---|---|---|---|---|---|"] + rows + ["",
        "## Limitations", "",
        "- The argument rests on soundness of HOL4 with loose specifications, not on a proof of each saved theorem in the new model. The type-soundness theories here come from a fast build (`--fast`), whose proofs are not re-run; their theorems are proved in CakeML's full build.",
        "- For the TFL constants the kernel definition was reproduced on a copy, not read from the theory. ARB-valued equations relating two open points (for example two list shapes of MAP3) also hold in HOL4, for the same reason.",

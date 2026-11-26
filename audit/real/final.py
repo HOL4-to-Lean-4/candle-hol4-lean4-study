@@ -25,7 +25,7 @@ for k in s.K:
             arms = [a] + ([s.REV[a]] if rv.get(f["id"]) == "accept" else [])
             used = False
             for i, e in enumerate(k["errors"]):
-                dup = sum(x["declaration"] == e["declaration"] for x in k["errors"]) > 1
+                dup = sum(x["declaration"] == e["declaration"] for x in k["errors"]) + s.DROPPED.count((u, e["declaration"])) > 1  # a dropped V-C entry keeps the class test
                 if any(n == e["declaration"] or ALIAS.get((u, n)) == e["declaration"] for n in nm) and (f["class"] == e["class"] or not dup):
                     used = True
                     for x in arms:

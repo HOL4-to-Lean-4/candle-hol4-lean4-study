@@ -300,7 +300,8 @@
     "translation": "ts_sonnet",
     "file": "baselines/ts_runs_v2/sonnet_lessons/witnesses.lean",
     "line": 33,
-    "eq": "FAPPLY (FEMPTY : FMap Nat Nat) 0 = FAPPLY (FEMPTY : FMap Nat Nat) 1"
+    "eq": "FAPPLY (FEMPTY : FMap Nat Nat) 0 = FAPPLY (FEMPTY : FMap Nat Nat) 1",
+    "recheck": "holds in HOL4: both sides are OUTL (INR one), so changing OUTL changes both (Astra, 27 Nov)"
    },
    {
     "translation": "ts_sonnet",
