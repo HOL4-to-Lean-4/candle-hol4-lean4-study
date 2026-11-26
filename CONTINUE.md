@@ -2,7 +2,7 @@
 
 Status: 26 November 2026. Read this file first, then `plan/v3/plan_v3.4.pdf` (draft, see "Open" below).
 
-**Blinding.** The author is still to score findings. Until that is done, this file and plan v3.4 hold no result by arm or row. Results: `audit/real/*.md`, `audit/pilot`, `baselines/ts_runs_v2/RESULTS.md`, `plan/v3/readiness_*`, older plans and commit messages. The author reads these after scoring.
+**Scoring done (26 November).** The author filled both sheets: `baselines/ts_runs_v2/scoring/scoring_sheet_filled.csv` and `audit/real/check/check_sheet_filled.csv`. The fixed analysis ran once: `audit/real/check/CHECK_RESULTS.md`. The minutes in the check sheet are marked as planning estimates.
 
 ## Set up
 
@@ -52,7 +52,7 @@ Status: 26 November 2026. Read this file first, then `plan/v3/plan_v3.4.pdf` (dr
 
 1. The author scores the 51 rows of `scoring_sheet.csv`: fill the last two columns. The statement entries of the key are provisional until then.
    `key.csv` (row to run) is not in the repository; after scoring, rebuild it with `make_csv.py`. It now stops if the sheet has answers. Still copy the filled sheet first (`*_filled.csv`).
-   Then the author fills the check sheet (`audit/real/check/README.md`), then `analyse.py`. Order matters.
+   Then the author fills the check sheet (`audit/real/check/README.md`), then `analyse.py`. Order matters. **Done 26 November.**
    The author decided on 25 November to do the check and stated that they had not seen the results printed earlier in the work. Blinding: no file listed under "Blinding" above is opened before both sheets are filled.
 2. Plan v3.4 is a draft. `plan/v3/plan.tex` (version 3.2) stays the adopted text until the author adopts v3.4. v3.4 makes the author the checker, which 3.2 said was not done; the paper states it.
 3. `interprets0` in the Candle base is still too specific (known, not repaired).
@@ -60,6 +60,9 @@ Status: 26 November 2026. Read this file first, then `plan/v3/plan_v3.4.pdf` (dr
 5. One run per cell, except two Opus audit runs, so there are no variance estimates.
 6. Readiness: Astra's answer of 25 November is in `plan/v3/readiness_astra_2026-11-25.md`. Its three points are met in the files; whether they are met in fact depends on the author's check. Astra is asked again after the author has read plan v3.4 and done the scoring.
 7. Record error: `audit/pilot/leantv_opus_lessons.tsv` was made from the repaired base, not the unrepaired one that the pilot used; the correct dump is `audit/real/tv/tv_ts_opus_lessons.tsv`.
+8. Next: recheck the V-C entries of the key and the V-C findings with the stricter test of plan v3.4, section 3 (all relevant saved theorems, not only the defining one; unchecked stays unsure).
+9. Theorem counts: study 1 has 269, this study 267; the two are `lookup_tenv_names` and `tenv_names_bind_var_list`, inside a comment block of `typeSysPropsScript.sml` (plan v3.4, section 4).
+10. Write-ups put limitations, deviations and disclosures at the very end (author, 26 November).
 
 ## Rules the author set
 

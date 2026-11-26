@@ -1,6 +1,6 @@
 # Audit on real translation errors (24 and 25 Nov 2026)
 
-Draft. Tables by script, with S0 (scripts alone) next to the arms, per translation, without the provisional errors, and with paired module-level tests: `TABLES.md` (`report.py`). Main result of the paper (author, 25 Nov); the author's check is `check/` (read `check/README.md`, not this file, before answering).
+Author's check (26 Nov): `check/CHECK_RESULTS.md`. Draft. Tables by script, with S0 (scripts alone) next to the arms, per translation, without the provisional errors, and with paired module-level tests: `TABLES.md` (`report.py`). Main result of the paper (author, 25 Nov); the author's check is `check/` (read `check/README.md`, not this file, before answering).
 
 63 modules from 8 translations: 51 with 105 known errors, 12 with none known ("controls"). Each auditor saw one comment-stripped module with the HOL4 sources, read-only, same brief.
 Errors were known before the run from the conservativity tests, the statement and type-variable scans and study 1 (`key.json`, `build_units.py`). A finding counts if it names the declaration (and the class, where a declaration has two errors); matched by script (`final.py`), not by a human scorer.
