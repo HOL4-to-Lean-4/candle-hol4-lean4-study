@@ -2,7 +2,7 @@
 
 Status: 26 November 2026. Read this file first, then `plan/v3/plan_v3.4.pdf` (draft, see "Open" below).
 
-**Scoring done (26 November).** The author filled both sheets: `baselines/ts_runs_v2/scoring/scoring_sheet_filled.csv` and `audit/real/check/check_sheet_filled.csv`. The fixed analysis ran once: `audit/real/check/CHECK_RESULTS.md`. The minutes in the check sheet are marked as planning estimates.
+**Scoring done (26 November).** The author and colleagues from a mathematics department (not named; rows shared in parallel) filled both sheets: `baselines/ts_runs_v2/scoring/scoring_sheet_filled.csv` and `audit/real/check/check_sheet_filled.csv`. The fixed analysis ran once: `audit/real/check/CHECK_RESULTS.md`. The minutes in the check sheet are each reader's estimate, not timed (column `minutes_basis`: "Estimate"; first written as "Planning estimate", corrected at the author's request on 27 November). No model drafted answers (author, 27 November).
 
 ## Set up
 

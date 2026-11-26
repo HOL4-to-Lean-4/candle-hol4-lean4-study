@@ -6,7 +6,7 @@
 \newcommand{\code}[1]{\texttt{#1}}
 \setlist{itemsep=2pt,topsep=3pt}
 \title{Migrating CakeML from HOL4 to Lean~4 with a three-family AI workflow: study plan}
-\author{Draft, version 3.4, 26 November 2026 (second revision). Supersedes version 3.2 once adopted.}
+\author{Draft, version 3.4, 27 November 2026 (third revision). Supersedes version 3.2 once adopted.}
 \date{}
 \begin{document}\sloppy
 \maketitle
@@ -15,7 +15,7 @@
 \begin{enumerate}
 \item The audit on real errors is the main result.
 \item The experiment with planted defects is dropped; its pilot is reported as a pilot.
-\item The author checks the reasons of the findings (Section~\ref{sec:check}).
+\item The author, with colleagues, checks the reasons of the findings (Section~\ref{sec:check}).
 \end{enumerate}
 Type soundness is part of Phase~1. Limitations, deviations and disclosures are collected in Section~\ref{sec:limits}, at the end.
 
@@ -27,7 +27,7 @@ The question is: \emph{in AI-made HOL4-to-Lean translations of two developments 
 \item Which of the known errors each arm finds, and which kinds it misses, with each arm's setting in full and the scripts (S0) beside the models, with and without the errors that were provisional.
 \item Errors found in the audit that were not in the key, and which of these a script would also have found.
 \item What a reviewer adds or removes.
-\item How often the stated reason is right, by the author's check of a selected set of findings (Section~\ref{sec:check}).
+\item How often the stated reason is right, by a human check of a selected set of findings (Section~\ref{sec:check}).
 \end{enumerate}
 
 The FormaliSE 2027 experience report (study~1) migrated CakeML's type-soundness closure with a Claude translator, a Gemini validator and a human expert who adjudicated every finding; proof attempts later exposed defects that this review missed. Study~1 counts 269 theorems and this study 267 for the same closure (Section~\ref{sec:counts}). What this study adds over study~1:
@@ -99,7 +99,7 @@ Reviewer & Google & Gemini Neon (\code{gemini-4-neon-high}) through \code{agy} &
 Auditor O & Anthropic & Claude Opus 5.5 & Same-family auditor (arms S3a, S3b).\\
 Reviewer O & Anthropic & Claude Opus 5.5, separate session & Same-family reviewer (arm S6).\\
 Prover & Anthropic & Claude Opus 5.5, high effort & Fills \code{sorry}; never sees HOL4 proofs.\\
-Checker & -- & the author & Scores the 51 statement rows and checks the reasons of findings, blinded (Section~\ref{sec:check}).\\
+Checkers & -- & the author and colleagues & Score the 51 statement rows and check the reasons of findings, blinded (Section~\ref{sec:check}).\\
 Oracle & (none) & HOL4 (typed export, queries) and the Lean kernel & Settles what it can (Section~\ref{sec:hol4}).\\
 \bottomrule
 \end{tabularx}}
@@ -140,11 +140,11 @@ All are scored against the contract of Section~\ref{sec:contract}, with the V-C 
 Arms reuse the audits: S4 uses S1, S6 uses S3a, S8 uses S3a and S3b.
 \paragraph{Tool access.} Every auditor worked in an isolated folder with the Lean module, its neighbours and the HOL4 sources, read-only, with file tools, and was told not to run Lean or HOL4.
 \paragraph{Measures.} Known errors found per arm and per kind, per translation, with and without the provisional statements; S0 alone and S0 together with an arm; findings outside the key, and which of them a script would also have flagged; review decisions; joint misses; cost per module and per error found. The comparison of S1 with S3a and with S8 is a paired bootstrap over modules, with sign flips, and leaving one translation out (\code{audit/real/TABLES.md}, \code{report.py}). Matching is by script on the declaration name and, where needed, the class; reasons are judged in the check.
-\paragraph{Findings outside the key.} Decided by the author's check (Section~\ref{sec:check}), with the Lean checks and HOL4 types in \code{audit/real/proofs} as evidence. Findings on study-1 modules outside the key are counted neither way.
+\paragraph{Findings outside the key.} Decided by the human check (Section~\ref{sec:check}), with the Lean checks and HOL4 types in \code{audit/real/proofs} as evidence. Findings on study-1 modules outside the key are counted neither way.
 \paragraph{Pilot with planted defects.} Ten units (\code{audit/pilot/RESULTS.md}), reported as a pilot.
 
-\section{Check of the reasons by the author}\label{sec:check}
-\paragraph{Who.} The author, who knows HOL4 and Lean, blinded to the run, the reviewer verdict, the translation and the results.
+\section{Human check of the reasons}\label{sec:check}
+\paragraph{Who.} The author and a group of colleagues from a university mathematics department, working on the rows in parallel, all blinded to the run, the reviewer verdict, the translation and the results. Each reader recorded an estimate of the minutes per row.
 \paragraph{Order.} First the 51-row sheet (\code{baselines/ts\_runs\_v2/scoring}), then the 108-row sheet (\code{audit/real/check}).
 \paragraph{Rows (fixed by script, seed \code{check-20261126}).} 108 rows, 91 declarations: findings of the three audit runs, chosen by rule, and some controls. The rule and the counts are in \code{audit/real/check/SPEC.md}.
 \paragraph{Questions.} Is the difference real; which kind; is the stated reason right, partly, or wrong.
@@ -156,7 +156,7 @@ Done (25 November), without HOL4 proofs, on the repaired base: 278 of 278 (Candl
 \section{Research questions}
 \begin{enumerate}[label=RQ\arabic*.]
 \item Which known errors do the audit arms find, by kind and translation, and how much of it would the scripts find?
-\item How often is the stated reason right, for the findings the author checks, and what does the check change in the key?
+\item How often is the stated reason right, for the findings checked by hand, and what does the check change in the key?
 \item What do a second run of the same model, and a reviewer of the same or another family, add or remove?
 \item Which errors do all arms miss, and what does proving expose that audits miss?
 \item What does each arm cost, per module and per known error found?
@@ -173,7 +173,7 @@ Item & US\$\\
 \midrule
 Type-soundness translation: Opus 5.5 (with and without lessons), Sonnet 5.5 & ledger\\
 Audit on real errors, Opus arms: S3a, S3b, S6 & 132.65\\
-Scoring and check by the author (no model) & 0\\
+Scoring and check by people (no model) & 0\\
 Claude proving run & ledger\\
 \bottomrule
 \end{tabularx}
@@ -229,7 +229,7 @@ The full loop that version~3.3 planned, kept for a later round:
 \item Translator Opus 5.5; Sonnet 5.5 also translates the type-soundness closure (22 and 24 Nov).
 \item Phase~2 order by milestones, repository \code{cakeml-lean4} (22 Nov).
 \item Neon is reviewer (arm S4); Astra is auditor (22 Nov); the Astra prover is dropped (24 Nov).
-\item Real-error audit is the main result, planted-defect experiment dropped, the author checks findings (25 Nov).
+\item Real-error audit is the main result, planted-defect experiment dropped, the author checks findings (25 Nov); colleagues share the check (26 Nov).
 \item Limitations, deviations and disclosures stand at the end of the plan, the paper and every write-up (author, 26 Nov).
 \item Target ITP 2027: abstract 8 Feb, paper 15 Feb 2027 (22 Nov).
 \end{enumerate}
@@ -237,17 +237,17 @@ The full loop that version~3.3 planned, kept for a later round:
 \section{Limitations, deviations and disclosures}\label{sec:limits}
 \paragraph{Status of the evidence.}
 \begin{itemize}
-\item All model runs were finished before this version was written; the analysis of known errors was chosen after the runs and is exploratory. Only the author's check was fixed in advance: its selection, questions and analysis were committed before the first answer.
+\item All model runs were finished before this version was written; the analysis of known errors was chosen after the runs and is exploratory. Only the human check was fixed in advance: its selection, questions and analysis were committed before the first answer.
 \item The workflow loop of Section~\ref{sec:workflow} was not run. What ran: translation, the structural scans, one audit of every module per run, one review pass, the repair of the Candle base for proving, and proving. Scripted grounding of findings was not run, so arms S2 (Neon alone), S5, S6g, A1+G and S7 of version~3.3 have no data.
 \item The planted-defect pilot is small (10 units) and reported only as a pilot.
 \end{itemize}
 \paragraph{People.}
 \begin{itemize}
-\item The author designed the study and the contract and is not independent of it. Version~3.2 said that the author does not adjudicate, and version~3.3 asked for an independent person; both were given up on 25 November. The author stated on 25 November that they had not seen the results printed earlier in the work, and the documents needed for the check held no result; a progress note did tell the author that the sheet has 8 controls.
+\item The author designed the study and the contract and is not independent of it. Version~3.2 said that the author does not adjudicate, and version~3.3 asked for an independent person; both were given up on 25 November. The author stated on 25 November that they had not seen the results printed earlier in the work, and the documents needed for the check held no result; a progress note did tell the author that the sheet has 8 controls. The colleagues who shared the check did not take part in the design; the split of rows between readers is not recorded in the sheet, and readers are not named.
 \item The key, the row selection and the sheets were made by Claude, not by the author. Claude also confirmed findings outside the key before the check.
-\item The minutes in the filled check sheet are marked as planning estimates, not measured time, so human effort for the check is not measured.
-\item The author sees the claim before answering, which can anchor the answer. A second reader is recommended and not arranged.
-\item The workflow has no human expert in the loop, but the author checks and scores; Claude drafts briefs, labels, checks and this plan for the author's approval.
+\item The minutes in the filled check sheet are each reader's estimate, not timed, so human effort for the check is approximate.
+\item Readers see the claim before answering, which can anchor the answer. The sheet does not record whether any row was read twice, so agreement between readers is not measured.
+\item The workflow has no human expert in the loop, but people check and score; Claude drafts briefs, labels, checks and this plan for the author's approval.
 \end{itemize}
 \paragraph{Deviations in the runs.}
 \begin{itemize}
