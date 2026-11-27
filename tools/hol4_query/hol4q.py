@@ -9,6 +9,8 @@
   options before the subcommand: --open THY[,THY..] adds theories to open (default: holSoundness
   ancestors as loaded). Every run is appended to out/query_log.jsonl (query, SML, output, time).
 Needs the package built in WSL at ~/candle_build/repo (scripts/build.sh native).
+On Linux (for example a cloud session) HOL4 runs directly; set HOL4Q_REPO to the built clone
+(default: this repository, whose _build/ scripts/build.sh native creates).
 """
 import json, os, subprocess, sys, tempfile, time
 
@@ -50,10 +52,16 @@ def main():
     t0 = time.time()
     script = os.path.join(tempfile.gettempdir(), "hol4q_%d.sml" % os.getpid())
     open(script, "w", encoding="utf-8", newline="\n").write(sml)
-    wsl_script = subprocess.run(["wsl.exe", "-e", "wslpath", "-a", script.replace("\\", "/")], capture_output=True).stdout.decode().replace("\0", "").strip()
-    sh = ('cd ~/candle_build/repo; B=$PWD/_build; export PATH=$B/polyml/bin:$B/HOL/bin:$PATH LD_LIBRARY_PATH=$B/polyml/lib HOLDIR=$B/HOL CAKEMLDIR=$PWD/package; '
+    native = os.name != "nt"
+    if native:
+        wsl_script = script
+        repo = os.environ.get("HOL4Q_REPO", os.path.dirname(os.path.dirname(HERE)))
+    else:
+        wsl_script = subprocess.run(["wsl.exe", "-e", "wslpath", "-a", script.replace("\\", "/")], capture_output=True).stdout.decode().replace("\0", "").strip()
+        repo = "~/candle_build/repo"
+    sh = ('cd ' + repo + '; B=$PWD/_build; export PATH=$B/polyml/bin:$B/HOL/bin:$PATH LD_LIBRARY_PATH=$B/polyml/lib HOLDIR=$B/HOL CAKEMLDIR=$PWD/package; '
           'cp "%s" package/candle/standard/semantics/_hol4q_PID.sml; cd package/candle/standard/semantics; timeout 90 hol run _hol4q_PID.sml; echo "exit=$?"; rm -f _hol4q_PID.sml' % wsl_script).replace('_PID', '_%d' % os.getpid())
-    r = subprocess.run(["wsl.exe", "-e", "sh", "-c", sh], capture_output=True)
+    r = subprocess.run((["sh"] if native else ["wsl.exe", "-e", "sh"]) + ["-c", sh], capture_output=True)
     out = (r.stdout + r.stderr).decode("utf-8", "replace").replace("\0", "")
     rec = dict(time=time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), kind=kind, args=args, sml=sml, output=out, seconds=round(time.time() - t0, 1))
     os.makedirs(os.path.join(HERE, "out"), exist_ok=True)

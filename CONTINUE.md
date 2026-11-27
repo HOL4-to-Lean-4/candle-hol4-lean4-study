@@ -6,6 +6,10 @@ Status: 26 November 2026. Read this file first, then `plan/v3/plan_v3.4.pdf` (dr
 
 ## Set up
 
+In a Linux cloud session: `sh scripts/setup_cloud.sh`, then see `CLOUD.md` (what works there and what still needs the PC, checked 27 November).
+
+On a Windows PC:
+
 1. Install Git, Python 3.10 or newer, elan (Lean 4.28.0 is fetched by each project's `lean-toolchain`), and, for HOL4, WSL or Docker.
 2. Clone to `E:\NUS\mcomp\Dissertation\candle_study`. The scripts use fixed `E:/` paths. Without an `E:` drive, first map a folder: `subst E: C:\work` (run it again after each restart).
    ```powershell
