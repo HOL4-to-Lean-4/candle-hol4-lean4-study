@@ -15,6 +15,10 @@ cd /e
   done
   find ts_ws/mut_work -maxdepth 1 -type f
   find NUS/mcomp/Dissertation/candle_study/audit -path "*runs*" \( -name "*.raw" -o -name "*.err" -o -name "*.last" \)
+  # the withheld scoring keys, so that cloud sessions can run analyse.py and make_csv.py
+  for f in NUS/mcomp/Dissertation/candle_study/baselines/ts_runs_v2/scoring/key.csv NUS/mcomp/Dissertation/candle_study/audit/real/check/check_key.csv; do
+    [ -f "$f" ] && echo "$f"
+  done
 } | sort -u > ts_ws/$N.files.txt
 if xargs -d '\n' grep -lIE "sk-(ant|proj)-[A-Za-z0-9_-]{10}|gh[po]_[A-Za-z0-9]{20}|AIza[0-9A-Za-z_-]{30}|ya29\.|\"(refresh|access)_token\"" < ts_ws/$N.files.txt; then
   echo "possible secrets in the files above; nothing uploaded"; exit 1
