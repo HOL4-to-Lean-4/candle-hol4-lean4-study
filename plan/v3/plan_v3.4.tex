@@ -6,7 +6,7 @@
 \newcommand{\code}[1]{\texttt{#1}}
 \setlist{itemsep=2pt,topsep=3pt}
 \title{Migrating CakeML from HOL4 to Lean~4 with a three-family AI workflow: study plan}
-\author{Draft, version 3.4, 27 November 2026 (fourth revision). Supersedes version 3.2 once adopted.}
+\author{Version 3.4, frozen 27 November 2026 (fourth revision). Supersedes version 3.2.}
 \date{}
 \begin{document}\sloppy
 \maketitle
@@ -17,7 +17,7 @@
 \item The experiment with planted defects is dropped; its pilot is reported as a pilot.
 \item The author, with volunteer readers, checks the reasons of the findings (Section~\ref{sec:check}).
 \end{enumerate}
-Type soundness is part of Phase~1. Limitations, deviations and disclosures are collected in Section~\ref{sec:limits}, at the end.
+On 27 November this version was amended with the saved-theorem reference of the contract (Section~\ref{sec:contract}), the reconciled theorem counts (Section~\ref{sec:scope}) and the decisions for Phase~2, the migration of the whole of CakeML (Section~\ref{sec:phase2}), and then frozen. Type soundness is part of Phase~1. Limitations, deviations and disclosures are collected in Section~\ref{sec:limits}, at the end.
 
 \section{Goal and framing}\label{sec:goal}
 The question is: \emph{in AI-made HOL4-to-Lean translations of two developments (eight translations), which fidelity errors do current model audits find, which do they miss, how often are their stated reasons right, and what is left after a check that needs no model?} The contribution is a measured audit of real translation errors, with a fidelity contract and a key of known errors. The word ``certification'' is not used: finding known errors does not show that none remain.
@@ -76,7 +76,7 @@ These runs show two things. First, a strong single model now translates this clo
 For a specification, (c) and (d) make the new interpretation a model of the HOL4 theory, with the constants defined from the changed one reinterpreted by their own definitions, so every saved theorem holds in it (soundness of HOL with loose specifications). For a TFL definition, only the constant changes and every saved theorem that mentions it is proved, so all saved theorems hold. Either way, two interpretations that satisfy one defining theorem but disagree with another saved theorem are excluded. A HOL4 proof of the negation of $e$ is not expected, and a failed HOL4 proof search is not evidence. Where (c) or (d) is missing, the label stays \emph{unsure}: it is not counted as V-C, and in the tables it counts as unresolved. The same rule holds for tier-2 cases and for V-C findings outside the key. As a supplement, a script rewrites every saved theorem that mentions the changed constant and tries fixed HOL4 tactics; its failures are not refutations. The V-C entries of the key were first made with the defining theorem only; the recheck with this test (27 November, \code{audit/real/vc\_recheck/RECHECK.md}) confirms all 63 pairs. For \code{termsem0}, the constants defined from it (\code{satisfies0}, \code{models0}, \code{entails0}) are redefined from the replacement, and all 25 saved theorems that mention any of the four are proved for it in HOL4.
 \paragraph{Re-scoring of the baselines.}\label{sec:rescore} The four baselines are scored against this contract with kernel checks where possible: for each constant fixed in \code{CONVENTIONS.md}, a Lean script tests whether a concrete equation not in $\Phi$ is provable, and the test above decides the label. Counts: V-P (by hand and HOL4 query), V-C, type deviations, encodings.
 
-\section{Scope}
+\section{Scope}\label{sec:scope}
 \paragraph{Phase 1 (this paper): Candle \code{proves\_sound} and CakeML type soundness.}
 \begin{itemize}
 \item Candle: the reduced HOL4 package in \code{candle-hol4-lean4-study/package/}, at CakeML \code{48ee98a7}, HOL4 \code{9783a499} and Poly/ML 5.9.2. It has 10 theories and 278 kernel-closure theorems, plus the definitions they need (114 definitions, 3 inductive relations and 6 datatypes listed as a minimum). The 278 theorems are the Candle manifest.
@@ -104,10 +104,10 @@ Oracle & (none) & HOL4 (typed export, queries) and the Lean kernel & Settles wha
 \bottomrule
 \end{tabularx}}
 
-Translator choice, isolation and place of run are as decided on 22 November: Opus 5.5 two-stage for Candle, everything on the author's PC, credentials never leave it. The Codex and \code{agy} versions, the exact model strings and settings are recorded in the repository.
+Translator choice and isolation are as decided on 22 November: Opus 5.5 two-stage for Candle. Phase~1 ran on the author's PC. From 27 November all work runs in cloud sessions: Opus and Sonnet through headless Claude Code, Astra through a gateway, Neon through \code{agy} in a separate session; no credentials are stored in the repositories. The Codex and \code{agy} versions, the exact model strings and settings are recorded in the repository.
 
 \section{HOL4 as oracle}\label{sec:hol4}
-HOL4 and the package are built on the PC (WSL Ubuntu, \code{scripts/build.sh native}; 10 theories, about 16 minutes, 24 November). Two tools live in \code{tools/hol4\_query/}.
+HOL4 and the package are built on the PC (WSL Ubuntu, \code{scripts/build.sh native}; 10 theories, about 16 minutes, 24 November) and in cloud sessions (\code{scripts/setup\_cloud.sh}, about 20 minutes). Two tools live in \code{tools/hol4\_query/}.
 \begin{itemize}
 \item \textbf{Typed kernel export.} Every target statement is printed as a raw kernel term (variables, constants as \code{Theory\$name}, application, abstraction, all types explicit), with hypotheses. 278 of 278 Candle statements were exported on 24 November, 0 with hypotheses, all well typed. The export is for reference and scans only; translators and auditors do not receive it. The exported terms and the HOL4 type signatures of constants are the ground truth for the structural scans (S0).
 \item \textbf{Query tool.} Four query kinds: print a theorem with types; parse a term and show what its constants resolve to; evaluate a ground term; try a short proof. A fifth, needed by the V-C test, lists the saved theorems that mention given constants. A failed short proof is never a refutation. Every query is logged.
@@ -183,6 +183,7 @@ No further model runs are planned except a second reading by Astra of the plan a
 \begin{tabularx}{\textwidth}{@{}lX@{}}
 \toprule
 26 Nov & Scoring and check done; \code{analyse.py} run once.\\
+27 Nov & Version 3.4 frozen; work moves to cloud sessions; Phase~2 starts with its first milestone.\\
 27 Nov--9 Dec & V-C entries of the key and V-C findings rechecked with the test of Section~\ref{sec:contract}; tables updated; readiness review by Astra.\\
 10--21 Dec & Optional: second S1 run, second reader on a sample; artifact assembly.\\
 22 Dec--3 Jan & Analysis text, figures, related work.\\
@@ -192,14 +193,29 @@ No further model runs are planned except a second reading by Astra of the plan a
 \bottomrule
 \end{tabularx}
 
-\section{Phase 2: more of CakeML (after this paper)}\label{sec:phase2}
-Phase~2 is not part of the ITP paper and contributes no evidence to it. Repository \code{cakeml-lean4} (decided 22 November), order by milestone theorems as decided there. Each milestone is sized from the ledger of the previous ones.
+\section{Phase 2: the whole of CakeML (after this paper)}\label{sec:phase2}
+Phase~2 is not part of the ITP paper and contributes no evidence to it. Its goal is a Lean~4 migration of all of CakeML, in the repository \code{cakeml-lean4} (decided 22 November). Candle and type soundness were the case studies that tested the workflow; Phase~2 applies it at scale. The fidelity contract of Section~\ref{sec:contract} applies unchanged, with the saved theorems as reference.
+
+\paragraph{Order.} By milestone theorems. For each milestone, its closure is translated bottom-up and reuses the modules of earlier milestones, towards compiler correctness.
+
+\paragraph{Each milestone} (author, 27 November):
+\begin{enumerate}
+\item \textbf{Translate twice.} Sonnet 5.5 and Opus 5.5 each translate the closure once. Translators see the full HOL4 scripts, proofs included.
+\item \textbf{Scripts.} The structural scans of Section~\ref{sec:workflow} and the build check run on both translations.
+\item \textbf{Audit and review.} Astra audits both translations, module by module. Neon reviews a sample of Astra's findings; the sample size is set once the first milestone's findings exist.
+\item \textbf{Fixes} to the Opus translation for accepted findings.
+\item \textbf{Prove} the Opus translation only. Provers never see HOL4 proofs; every prover brief states this rule and a script checks the workspace for it before the run.
+\item \textbf{Record and push.} Commit and push after the milestone, with its cost and token usage from the ledger.
+\end{enumerate}
+Astra and Neon start on a milestone once its translations are done. Aristotle is dropped (it no longer supports Lean), and Astra is not a second prover.
+
+\paragraph{Size.} Estimate for core CakeML (21{,}860 theorems; \code{plan/token\_estimate\_2026-11-27.md} in \code{cakeml-lean4}): about 7.7 billion tokens and US\$4{,}100 for the two translations and proving the Opus translation; Astra's audit of both translations about 310 million tokens. Opus and Sonnet have no spending limit; each milestone reports its cost, and later milestones are sized from the ledger of the earlier ones.
 
 \section{Workflow loop (planned, for a later round)}\label{sec:workflow}
 The full loop that version~3.3 planned, kept for a later round:
 \begin{enumerate}
 \item \textbf{Freeze.} Pin the commits, the manifest, the briefs, the model identifiers and settings, and the budgets.
-\item \textbf{Isolation.} Every model run starts in a fresh session on the PC that holds only its workspace; headless Claude Code (\code{claude -p}) in a separate directory; Codex and \code{agy} runs get only their input files. A script scans every transcript for paths outside the workspace and for web or git use.
+\item \textbf{Isolation.} Every model run starts in a fresh session that holds only its workspace; headless Claude Code (\code{claude -p}) in a separate directory; Codex and \code{agy} runs get only their input files. A script scans every transcript for paths outside the workspace and for web or git use.
 \item \textbf{Translation} in two stages (definitions plus \code{CONVENTIONS.md}, then statements); the result must build, and a kernel check confirms that exactly the targets use \code{sorry}.
 \item \textbf{Structural scans} on every revision: vacuous statements; definitions without bodies, \code{partial}, \code{opaque}, \code{axiom}, \code{native\_decide}, \code{decreasing\_by sorry}; extra or missing typeclass hypotheses; bound-variable types against HOL4's; byte identity of frozen statements.
 \item \textbf{Validation round $k$ (at most 3).} Astra audits the whole translation, module by module.
@@ -214,10 +230,12 @@ The full loop that version~3.3 planned, kept for a later round:
 
 \section{Open}\label{sec:open}
 \begin{enumerate}
-\item Adoption of this version by the author; until then version~3.2 is the adopted plan.
 \item Whether to run a second S1 (Astra) audit, and a second reader on a sample of the check.
 \item Whether to run the loop of Section~\ref{sec:workflow}.
 \item The two contract cases not settled: word width 0 and infinite word index types.
+\item The test of Section~\ref{sec:contract} for the 10 new errors found in the check and for the tier-2 (choice) cases.
+\item Whether an independent HOL4 and Lean reader signs off the disputed counterexamples (author's call).
+\item The size of Neon's sample in Phase~2.
 \end{enumerate}
 
 \section{Decisions taken}
@@ -232,6 +250,9 @@ The full loop that version~3.3 planned, kept for a later round:
 \item Real-error audit is the main result, planted-defect experiment dropped, the author checks findings (25 Nov); volunteer readers share the check, one reader per row (26 Nov).
 \item Limitations, deviations and disclosures stand at the end of the plan, the paper and every write-up (author, 26 Nov).
 \item Target ITP 2027: abstract 8 Feb, paper 15 Feb 2027 (22 Nov).
+\item Phase~2 is the migration of the whole of CakeML. Sonnet 5.5 and Opus 5.5 each translate every milestone once; Astra audits both translations and Neon reviews a sample, after each milestone; only the Opus translation is proved; Aristotle is dropped; Astra is not a second prover (author, 27 Nov).
+\item All work moves to cloud sessions; the repositories hold everything except credentials (author, 27 Nov).
+\item Version 3.4 is frozen after the author's two remaining points (theorem counts, the test of Section~\ref{sec:contract}) were met (27 Nov).
 \end{enumerate}
 
 \section{Limitations, deviations and disclosures}\label{sec:limits}

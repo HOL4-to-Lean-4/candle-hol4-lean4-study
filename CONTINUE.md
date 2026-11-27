@@ -1,6 +1,10 @@
-# Continue this work on another PC
+# Continue this work
 
-Status: 26 November 2026. Read this file first, then `plan/v3/plan_v3.4.pdf` (draft, see "Open" below).
+Status: 27 November 2026. Read this file first, then `plan/v3/plan_v3.4.pdf` (frozen 27 November) and `CLOUD.md`.
+
+**Where the work runs.** From 27 November all work runs in Linux cloud sessions (author). The PC is no longer needed: the repositories hold everything except credentials, and the raw files and withheld keys are in the private raw repository (`CLOUD.md`).
+
+**Next step.** Ask Astra whether the workflow is ready for the whole CakeML migration, with plan v3.4 frozen (`plan/v3/readiness_prompt_2026-11-27.md` is the last prompt; use `tools/astra_gateway/`). Then start milestone 1 in `HOL4-to-Lean-4/cakeml-lean4`, following plan v3.4, section "Phase 2", and that repository's `plan/DECISIONS.md`: Sonnet and Opus translate; scripts; Astra audits both translations and Neon reviews a sample; fixes; prove the Opus translation only; push and report the cost. In parallel, still open here: the section 3 test for the 10 new errors and the tier-2 cases.
 
 **Scoring done (26 November).** The author and volunteer readers from a university mathematics department (all familiar with Lean and HOL4; not named; one reader per row; readers saw only the four check files; the 51-row sheet filled together) filled both sheets: `baselines/ts_runs_v2/scoring/scoring_sheet_filled.csv` and `audit/real/check/check_sheet_filled.csv`. The fixed analysis ran once: `audit/real/check/CHECK_RESULTS.md`. The minutes in the check sheet are each reader's estimate, not timed (column `minutes_basis`: "Estimate"; first written as "Planning estimate", corrected at the author's request on 27 November). No model drafted answers (author, 27 November). Wording: "volunteer readers", not "colleagues"; no seniority; acknowledgements thank them as a group (author, 27 November). No second-reader agreement check (author: too time-consuming; stated as a limitation).
 
@@ -58,7 +62,7 @@ On a Windows PC:
    `key.csv` (row to run) is not in the repository; after scoring, rebuild it with `make_csv.py`. It now stops if the sheet has answers. Still copy the filled sheet first (`*_filled.csv`).
    Then the author fills the check sheet (`audit/real/check/README.md`), then `analyse.py`. Order matters. **Done 26 November.**
    The author decided on 25 November to do the check and stated that they had not seen the results printed earlier in the work. Blinding: no file listed under "Blinding" above is opened before both sheets are filled.
-2. Plan v3.4 is a draft. `plan/v3/plan.tex` (version 3.2) stays the adopted text until the author adopts v3.4. v3.4 makes the author the checker, which 3.2 said was not done; the paper states it.
+2. Plan v3.4 is frozen (27 November) and supersedes version 3.2 (`plan/v3/plan.tex`). It makes the author the checker, which 3.2 said was not done; the paper states it.
 3. `interprets0` in the Candle base is still too specific (known, not repaired).
 4. Open decisions for the author: a second S1 (Astra) audit run, a second reader on a sample, the workflow loop (see "Open" in plan v3.4).
 5. One run per cell, except two Opus audit runs, so there are no variance estimates.
