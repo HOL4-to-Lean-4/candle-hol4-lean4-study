@@ -1,0 +1,268 @@
+<<HOL message: Created theory "savedcandle">>
+DEFT termsemg g mem tmsig i v (Var x ty) = tmvof v (x,ty) ∧
+termsemg g mem tmsig i v (Const name ty) = instance tmsig i name ty (tyvof v) ∧
+termsemg g mem tmsig i v (Comb t1 t2) =
+termsemg g mem tmsig i v t1 ' (termsemg g mem tmsig i v t2) ∧
+termsemg g mem tmsig i v (Abs (Var x ty) b) =
+Abstract (typesem (tyaof i) (tyvof v) ty)
+  (typesem (tyaof i) (tyvof v) (typeof b))
+  (λm. termsemg g mem tmsig i (tyvof v,(tmvof v)⦇(x,ty) ↦ m⦈) b) ∧
+termsemg g mem tmsig i v t = g mem tmsig i v t
+<<HOL message: mk_functional: 
+  pattern completion has added 2 clauses to the original specification.>>
+<<HOL warning: Context.snapshot: ambient context read while a proof was running (in savedcandle)>>
+Saved definition ____ "termsemg_def"
+Saved induction _____ "termsemg_ind"
+Saved definition ____ "satg_def"
+Saved definition ____ "modelsg_def"
+Saved definition ____ "entailsg_def"
+PROVED open_value (tactic 1)
+PROVED welltyped_agree (tactic 1)
+PROVED satisfies_agree (tactic 1)
+PROVED models_agree (tactic 1)
+PROVED entails_agree (tactic 1)
+PROVED map_agree (tactic 1)
+PROVED holSemantics$entails_def (tactic 1)
+PROVED holSemantics$models_def (tactic 1)
+PROVED holSemantics$satisfies_def (tactic 1)
+PROVED holSemantics$termsem_def (tactic 1)
+Proof of 
+
+∀g mem g Γ i v t1 t2.
+  ACONV t1 t2 ∧ welltyped t1 ∧ welltyped t2 ⇒
+  termsemg g mem Γ i v t1 = termsemg g mem Γ i v t2
+
+failed.
+Proof of 
+
+∀g mem g Γ i v t1 t2.
+  ACONV t1 t2 ∧ welltyped t1 ∧ welltyped t2 ⇒
+  termsemg g mem Γ i v t1 = termsemg g mem Γ i v t2
+
+failed.
+PROVED holSemanticsExtra$termsem_aconv (tactic 3)
+PROVED holSemanticsExtra$termsem_Equal (tactic 1)
+PROVED holSemanticsExtra$termsem_equation (tactic 1)
+Proof of 
+
+∀g mem g Γ i t v1 v2.
+  welltyped t ∧ tyvof v1 = tyvof v2 ∧
+  (∀x ty. VFREE_IN (Var x ty) t ⇒ tmvof v1 (x,ty) = tmvof v2 (x,ty)) ⇒
+  termsemg g mem Γ i v1 t = termsemg g mem Γ i v2 t
+
+failed.
+Proof of 
+
+∀g mem g Γ i t v1 v2.
+  welltyped t ∧ tyvof v1 = tyvof v2 ∧
+  (∀x ty. VFREE_IN (Var x ty) t ⇒ tmvof v1 (x,ty) = tmvof v2 (x,ty)) ⇒
+  termsemg g mem Γ i v1 t = termsemg g mem Γ i v2 t
+
+failed.
+PROVED holSemanticsExtra$termsem_frees (tactic 3)
+Proof of 
+
+∀g mem g Γ tm tyin tmenv.
+  term_ok Γ tm ∧ tmenv = tmsof Γ ⇒
+  ∀i v.
+    termsemg g mem tmenv i v (INST tyin tm) =
+    termsemg g mem tmenv i
+      ((λx. typesem (tyaof i) (tyvof v) (TYPE_SUBST tyin (Tyvar x))),
+       (λ(x,ty). tmvof v (x,TYPE_SUBST tyin ty))) tm
+
+failed.
+Proof of 
+
+∀g mem g Γ tm tyin tmenv.
+  term_ok Γ tm ∧ tmenv = tmsof Γ ⇒
+  ∀i v.
+    termsemg g mem tmenv i v (INST tyin tm) =
+    termsemg g mem tmenv i
+      ((λx. typesem (tyaof i) (tyvof v) (TYPE_SUBST tyin (Tyvar x))),
+       (λ(x,ty). tmvof v (x,TYPE_SUBST tyin ty))) tm
+
+failed.
+PROVED holSemanticsExtra$termsem_INST (tactic 3)
+Proof of 
+
+∀g mem g env tp.
+  RACONV env tp ⇒
+  ∀Γ i v1 v2.
+    tyvof v1 = tyvof v2 ∧
+    (∀x1 ty1 x2 ty2.
+       ALPHAVARS env (Var x1 ty1,Var x2 ty2) ⇒
+       termsemg g mem Γ i v1 (Var x1 ty1) =
+       termsemg g mem Γ i v2 (Var x2 ty2)) ∧
+    EVERY (λ(x,y). welltyped x ∧ welltyped y ∧ typeof x = typeof y) env ∧
+    welltyped (FST tp) ∧ welltyped (SND tp) ⇒
+    termsemg g mem Γ i v1 (FST tp) = termsemg g mem Γ i v2 (SND tp)
+
+failed.
+Proof of 
+
+∀g mem g env tp.
+  RACONV env tp ⇒
+  ∀Γ i v1 v2.
+    tyvof v1 = tyvof v2 ∧
+    (∀x1 ty1 x2 ty2.
+       ALPHAVARS env (Var x1 ty1,Var x2 ty2) ⇒
+       termsemg g mem Γ i v1 (Var x1 ty1) =
+       termsemg g mem Γ i v2 (Var x2 ty2)) ∧
+    EVERY (λ(x,y). welltyped x ∧ welltyped y ∧ typeof x = typeof y) env ∧
+    welltyped (FST tp) ∧ welltyped (SND tp) ⇒
+    termsemg g mem Γ i v1 (FST tp) = termsemg g mem Γ i v2 (SND tp)
+
+failed.
+Proof of 
+
+∀g mem g env tp.
+  RACONV env tp ⇒
+  ∀Γ i v1 v2.
+    tyvof v1 = tyvof v2 ∧
+    (∀x1 ty1 x2 ty2.
+       ALPHAVARS env (Var x1 ty1,Var x2 ty2) ⇒
+       termsemg g mem Γ i v1 (Var x1 ty1) =
+       termsemg g mem Γ i v2 (Var x2 ty2)) ∧
+    EVERY (λ(x,y). welltyped x ∧ welltyped y ∧ typeof x = typeof y) env ∧
+    welltyped (FST tp) ∧ welltyped (SND tp) ⇒
+    termsemg g mem Γ i v1 (FST tp) = termsemg g mem Γ i v2 (SND tp)
+
+failed.
+PROVED holSemanticsExtra$termsem_raconv (tactic 4)
+Proof of 
+
+∀g mem g Γ tm tyin tmenv.
+  welltyped tm ∧ term_ok Γ tm ∧ ALL_DISTINCT (bv_names tm) ∧
+  DISJOINT (set (bv_names tm)) {x | (∃ty. VFREE_IN (Var x ty) tm)} ∧
+  tmenv = tmsof Γ ⇒
+  ∀i v.
+    termsemg g mem tmenv i v (simple_inst tyin tm) =
+    termsemg g mem tmenv i
+      ((λx. typesem (tyaof i) (tyvof v) (TYPE_SUBST tyin (Tyvar x))),
+       (λ(x,ty). tmvof v (x,TYPE_SUBST tyin ty))) tm
+
+failed.
+Proof of 
+
+∀g mem g Γ tm tyin tmenv.
+  welltyped tm ∧ term_ok Γ tm ∧ ALL_DISTINCT (bv_names tm) ∧
+  DISJOINT (set (bv_names tm)) {x | (∃ty. VFREE_IN (Var x ty) tm)} ∧
+  tmenv = tmsof Γ ⇒
+  ∀i v.
+    termsemg g mem tmenv i v (simple_inst tyin tm) =
+    termsemg g mem tmenv i
+      ((λx. typesem (tyaof i) (tyvof v) (TYPE_SUBST tyin (Tyvar x))),
+       (λ(x,ty). tmvof v (x,TYPE_SUBST tyin ty))) tm
+
+failed.
+PROVED holSemanticsExtra$termsem_simple_inst (tactic 3)
+PROVED holSemanticsExtra$termsem_simple_subst (tactic 1)
+Proof of 
+
+∀g g mem.
+  is_set_theory mem ⇒
+  ∀sig i tm v δ τ tmenv.
+    δ = tyaof i ∧ τ = tyvof v ∧ is_valuation (tysof sig) δ v ∧
+    is_interpretation sig i ∧ is_std_type_assignment δ ∧ term_ok sig tm ∧
+    tmenv = tmsof sig ⇒
+    termsemg g mem tmenv i v tm ⋲ typesem δ τ (typeof tm)
+
+failed.
+Proof of 
+
+∀g g mem.
+  is_set_theory mem ⇒
+  ∀sig i tm v δ τ tmenv.
+    δ = tyaof i ∧ τ = tyvof v ∧ is_valuation (tysof sig) δ v ∧
+    is_interpretation sig i ∧ is_std_type_assignment δ ∧ term_ok sig tm ∧
+    tmenv = tmsof sig ⇒
+    termsemg g mem tmenv i v tm ⋲ typesem δ τ (typeof tm)
+
+failed.
+PROVED holSemanticsExtra$termsem_typesem (tactic 3)
+Proof of 
+
+∀g mem g tm ilist.
+  welltyped tm ∧
+  (∀s s'. MEM (s',s) ilist ⇒ ∃x ty. s = Var x ty ∧ s' has_type ty) ⇒
+  ∀Γ i v.
+    termsemg g mem Γ i v (VSUBST ilist tm) =
+    termsemg g mem Γ i
+      (tyvof v,
+       tmvof v =++
+       MAP ((dest_var ## termsemg g mem Γ i v) ∘ (λ(s',s). (s,s')))
+         (REVERSE ilist)) tm
+
+failed.
+Proof of 
+
+∀g mem g tm ilist.
+  welltyped tm ∧
+  (∀s s'. MEM (s',s) ilist ⇒ ∃x ty. s = Var x ty ∧ s' has_type ty) ⇒
+  ∀Γ i v.
+    termsemg g mem Γ i v (VSUBST ilist tm) =
+    termsemg g mem Γ i
+      (tyvof v,
+       tmvof v =++
+       MAP ((dest_var ## termsemg g mem Γ i v) ∘ (λ(s',s). (s,s')))
+         (REVERSE ilist)) tm
+
+failed.
+PROVED holSemanticsExtra$termsem_VSUBST (tactic 3)
+PROVED holSoundness$ABS_correct (tactic 1)
+PROVED holSoundness$ASSUME_correct (tactic 1)
+PROVED holSoundness$BETA_correct (tactic 1)
+PROVED holSoundness$binary_inference_rule (tactic 1)
+Proof of 
+
+∀g g mem.
+  is_set_theory mem ⇒
+  ∀thy h1 p1 h2 p2.
+    entailsg g mem (thy,h1) p1 ∧ entailsg g mem (thy,h2) p2 ⇒
+    entailsg g mem (thy,term_union (term_remove p2 h1) (term_remove p1 h2))
+      (p1 === p2)
+
+failed.
+PROVED holSoundness$DEDUCT_ANTISYM_correct (tactic 2)
+Proof of 
+
+∀g g mem.
+  is_set_theory mem ⇒
+  ∀thy h1 h2 p q p'.
+    entailsg g mem (thy,h1) (p === q) ∧ entailsg g mem (thy,h2) p' ∧
+    ACONV p p' ⇒
+    entailsg g mem (thy,term_union h1 h2) q
+
+failed.
+PROVED holSoundness$EQ_MP_correct (tactic 2)
+Proof of 
+
+∀g g ilist mem.
+  is_set_theory mem ⇒
+  ∀thy h c.
+    (∀s s'.
+       MEM (s',s) ilist ⇒
+       ∃x ty. s = Var x ty ∧ s' has_type ty ∧ term_ok (sigof thy) s') ∧
+    entailsg g mem (thy,h) c ⇒
+    entailsg g mem (thy,term_image (VSUBST ilist) h) (VSUBST ilist c)
+
+failed.
+PROVED holSoundness$INST_correct (tactic 2)
+PROVED holSoundness$INST_TYPE_correct (tactic 1)
+PROVED holSoundness$MK_COMB_correct (tactic 1)
+Proof of 
+
+∀g g mem. is_set_theory mem ⇒ ∀thyh c. thyh |- c ⇒ entailsg g mem thyh c
+
+failed.
+PROVED holSoundness$proves_sound (tactic 2)
+Proof of 
+
+∀g g mem.
+  is_set_theory mem ⇒
+  ∀thy t.
+    theory_ok thy ∧ term_ok (sigof thy) t ⇒ entailsg g mem (thy,[]) (t === t)
+
+failed.
+PROVED holSoundness$REFL_correct (tactic 2)
+exit=0

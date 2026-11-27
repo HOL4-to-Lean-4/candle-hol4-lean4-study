@@ -83,7 +83,7 @@
     "declaration": "termsem0",
     "class": "V-C",
     "kind": "open value fixed",
-    "recheck": "unsure: under the saved-theorem reading a counterexample must satisfy the 13 saved theorems that mention termsem0, and satisfies (defined from it) changes too; these were not checked (vc_recheck/RECHECK.md)"
+    "recheck_note": "confirmed: under the saved-theorem reading the counterexample satisfies all 25 saved theorems that mention termsem0 or a constant defined from it (vc_recheck/saved_candle.sml)"
    },
    {
     "declaration": "interprets0",

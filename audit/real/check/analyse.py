@@ -148,12 +148,15 @@ for st in sorted(D):
     y, n = sum("yes" in q for q in v), sum(set(q) == {"no"} for q in v)
     w("| %s | %d | %d | %d | %d |" % (st[13:], len(v), y, n, len(v) - y - n))
 w("\nStudy-1 findings outside the key are not in the sheet and are counted neither way.")
-if not F.s.PRE:
-    hh = set(F.s.DROPPED) | {("24717e82", "termsem0")}
+if not F.s.PRE and F.s.DROPPED:
+    hh = set(F.s.DROPPED)
     rows = sorted(x for x in KEY if (KEY[x]["unit"], KEY[x]["declaration"].split(".")[-1]) in hh and SHEET[x]["claimed_class"] == "V-C")
     w("\n## V-C recheck (27 November)\n")
-    w("This file uses the key after the V-C recheck (`../vc_recheck/RECHECK.md`). %d known error(s) and the new error `termsem0` (candle_fable) stay unsure under the test of plan v3.4, section 3 (saved-theorem reading): "
-      "the saved theorems that mention `termsem0` were not all checked against a counterexample. They count as unresolved. Their rows: %s. Answers q1: %s. The fixed analysis with the key as run is `CHECK_RESULTS.md`."
+    w("This file uses the key after the V-C recheck (`../vc_recheck/RECHECK.md`). %d known error(s) stay unsure under the test of plan v3.4, section 3 (saved-theorem reading) and count as unresolved. "
+      "Their rows: %s. Answers q1: %s. The fixed analysis with the key as run is `CHECK_RESULTS.md`."
       % (len(F.s.DROPPED), ", ".join(rows), dict(collections.Counter(A[x]["q1"] for x in rows))))
+elif not F.s.PRE:
+    w("\n## V-C recheck (27 November)\n")
+    w("The V-C recheck (`../vc_recheck/RECHECK.md`) confirms every V-C label under the test of plan v3.4, section 3 (saved-theorem reading), so the key is unchanged and this file matches the fixed analysis, `CHECK_RESULTS.md`.")
 io.open(HERE + ("CHECK_RESULTS.md" if F.s.PRE else "CHECK_RESULTS_recheck.md"), "w", encoding="utf-8", newline="\n").write("\n".join(out) + "\n")
 print("\n".join(out))

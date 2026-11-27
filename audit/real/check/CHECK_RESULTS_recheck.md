@@ -44,17 +44,17 @@ Provisional statement errors by the 51-row sheet (it decides, because it is scor
 
 A hit in the checked strata counts only if the author found the difference real (q1 yes); "right reason" also needs q3 right. Hits that were not in the sheet (found by all three runs, outside the sample of 12) stay as they were.
 
-| Arm | Known errors found before the check (104) | Kept errors (104): found, difference real | found, reason also right |
+| Arm | Known errors found before the check (105) | Kept errors (105): found, difference real | found, reason also right |
 |---|---|---|---|
-| S1 | 100 | 100 | 100 |
+| S1 | 101 | 101 | 101 |
 | S3a | 63 | 63 | 63 |
 | S3b | 59 | 59 | 59 |
 | S8 | 64 | 64 | 64 |
 
 S1 against S8, difference in recall on the kept errors, interval from 10000 resamples of modules:
 
-- difference real: +0.35 [+0.15, +0.52]
-- reason also right: +0.35 [+0.15, +0.52]
+- difference real: +0.35 [+0.16, +0.53]
+- reason also right: +0.35 [+0.16, +0.53]
 
 ## Findings outside the key
 
@@ -70,4 +70,4 @@ Study-1 findings outside the key are not in the sheet and are counted neither wa
 
 ## V-C recheck (27 November)
 
-This file uses the key after the V-C recheck (`../vc_recheck/RECHECK.md`). 1 known error(s) and the new error `termsem0` (candle_fable) stay unsure under the test of plan v3.4, section 3 (saved-theorem reading): the saved theorems that mention `termsem0` were not all checked against a counterexample. They count as unresolved. Their rows: C054, C077, C078. Answers q1: {'yes': 3}. The fixed analysis with the key as run is `CHECK_RESULTS.md`.
+The V-C recheck (`../vc_recheck/RECHECK.md`) confirms every V-C label under the test of plan v3.4, section 3 (saved-theorem reading), so the key is unchanged and this file matches the fixed analysis, `CHECK_RESULTS.md`.

@@ -1,5 +1,5 @@
 """Write RECHECK.md: the V-C recheck of 27 November, one row per spec entry.  python make_recheck.py
-Reads spec.json, results/*.json (vcheck.py) and logs/{spec_manual,arb_value_ts,arb_value_candle,saved_ts}.log (run_sml.py)."""
+Reads spec.json, results/*.json (vcheck.py) and logs/{spec_manual,arb_value_ts,arb_value_candle,saved_ts,saved_candle}.log (run_sml.py)."""
 import collections, glob, io, json, os, re
 
 H = os.path.dirname(os.path.abspath(__file__)) + "/"
@@ -9,7 +9,7 @@ for f in glob.glob(H + "results/*.json"):
     r = json.load(io.open(f, encoding="utf-8"))
     R[(r["entry"]["key_decl"], r["entry"]["family"], tuple(r["entry"]["translations"]), r["entry"]["P"])] = r
 MAN = {}
-for f in ("spec_manual", "arb_value_ts", "arb_value_candle", "saved_ts"):
+for f in ("spec_manual", "arb_value_ts", "arb_value_candle", "saved_ts", "saved_candle"):
     for l in io.open(H + "logs/%s.log" % f, encoding="utf-8"):
         m = re.match(r"(PROVED|FAILED) (\S+)", l)
         if m:
@@ -46,6 +46,8 @@ CHR_P = {"n = 256": "CHR_256", "n = 256 \\/ n = 257": "CHR_256_257", "n = 300 \\
 ARBV = {"MAP3": {"(l1 = [] /\\ ~(l2 = []) /\\ l3 = []) \\/ (~(l1 = []) /\\ l2 = [] /\\ l3 = [])": ["MAP3_a", "MAP3_b"],
                  "l1 = [] /\\ ~(l2 = []) /\\ l3 = []": ["MAP3_a"], "~(l1 = []) /\\ l2 = [] /\\ l3 = []": ["MAP3_b"]}}
 
+# termsem0: the open value, 5 lemmas, and the 25 saved theorems that mention termsem0 or a constant defined from it (closure_candle.sml)
+TERMSEM = ["open_value", "welltyped_agree", "satisfies_agree", "models_agree", "entails_agree", "map_agree"] + sorted(n for n in MAN if "$" in n and MAN[n][1] == "saved_candle.sml")
 rows, cnt, pairs = [], collections.Counter(), collections.Counter()
 for e in S:
     r = R.get((e["key_decl"], e["family"], tuple(e["translations"]), e["P"]))
@@ -60,9 +62,11 @@ for e in S:
         names = {"CHR": [CHR_P.get(e["P"])], "SEG": ["SEG_spec", "SEG_witness_fails"],
                  "MAP3": ["MAP3_def"] + [x.replace("MAP3_", "MAP3_open_") for x in ARBV["MAP3"].get(e["P"], ["MAP3_missing"])],
                  "tdc": ["type_def_to_ctMap_def", "eq_len", "ctMap_ok_type_defs", "mem_type_def_to_ctMap", "type_def_to_ctMap_mem", "tdc_open"],
-                 "termsem": ["termsem0: 13 saved theorems, and satisfies (defined from termsem0), not checked"]}.get(ev, [ev])
+                 "termsem": TERMSEM}.get(ev, [ev])
         ok = all(n in MAN and MAN[n][0] == "PROVED" for n in names)
         evid = ", ".join("`%s` %s (%s)" % (n, MAN[n][0].lower(), MAN[n][1]) if n in MAN else "`%s` missing" % n for n in names)
+        if ev == "termsem" and ok:
+            evid = "`open_value` proved (whole region P); %d saved theorems that mention termsem0, satisfies0, models0 or entails0 all proved, through 5 lemmas (the replacement agrees with termsem0 on well-typed terms) (saved_candle.sml)" % (len(TERMSEM) - 6)
         if ev == "SEG":
             evid += "; SEG' m k l = TAKE m (DROP k l) ++ REPLICATE (m - (LENGTH l - k)) a"
     v = "V-C" if ok else "unsure"
@@ -83,7 +87,8 @@ out = ["# V-C recheck (27 November 2026)", "",
        "## Result", "",
        "| Verdict | Entries | Pairs |", "|---|---|---|"] + ["| %s | %d | %d |" % (k, cnt[k], pairs[k]) for k in ("V-C", "unsure")] + ["",
        "- **V-C** (%d pairs): the counterexample is a model of the HOL4 theory, so every saved theorem holds in it, and the Lean equation fails in it." % pairs["V-C"],
-       "- **unsure** (%d pair): `termsem0` (candle_opus). Not counted as V-C; unresolved in the tables (`key.json`, field `recheck`; key as run: `../TABLES_pre_recheck.md`). The new error `termsem0` (candle_fable) is unsure for the same reason." % pairs["unsure"],
+       ("- **unsure** (%d pairs): not counted as V-C; unresolved in the tables (`key.json`, field `recheck`)." % pairs["unsure"]) if pairs["unsure"] else
+       "- **unsure**: none. Every V-C label of the key stands, so the key is unchanged (105 errors). The new error `termsem0` (candle_fable) is confirmed by the same counterexample.",
        "", "## Method", "",
        "1. How each constant is introduced was read from the HOL4 and CakeML sources and from HOL4's definition code (`Defn.prim_mk_defn`, src/tfl/src/Defn.sml:1281). "
        "A one-argument pattern definition over a datatype goes through `Prim_rec.new_recursive_definition`, a `new_specification`: the missing cases are left open (loose). "
@@ -92,8 +97,8 @@ out = ["# V-C recheck (27 November 2026)", "",
        "HOL4 proves, for every g, that c' satisfies c's specification. Constants defined later from c are reinterpreted by their own definitions (a constant definition fixes them; a later specification is met by some witness, because its existence theorem holds in the new model). "
        "Then the new interpretation is a model of the HOL4 theory, so every saved theorem holds in it (soundness of HOL with loose specifications; Candle proves this for its own kernel). The Lean equation e fixes c inside P, so it fails for a suitable g.",
        "3. TFL constants (A), reference = the saved theorems (author, 27 November): the kernel definition, which fixes the missing cases to ARB, is not a saved theorem and does not count. "
-       "The counterexample is a constant defined by the saved clauses plus a catch-all clause with an arbitrary function g (`saved_ts.sml`). HOL4 proves every saved theorem that mentions the constant for it (MAP3: 1; type_def_to_ctMap: 4, three of them through a lemma that the replacement equals the constant when the lengths agree), and that its value on P is g. "
-       "Only the constant changes, and no other saved theorem mentions it, so all other saved theorems keep their truth value. For `termsem0` the 13 saved theorems that mention it were not all proved for such a replacement, and `satisfies`, defined from it, would change too: unsure. "
+       "The counterexample is a constant defined by the saved clauses plus a catch-all clause with an arbitrary function g (`saved_ts.sml`, `saved_candle.sml`). HOL4 proves every saved theorem that mentions the constant for it (MAP3: 1; type_def_to_ctMap: 4, three of them through a lemma that the replacement equals the constant when the lengths agree), and that its value on P is g. "
+       "Only the constant changes, and no other saved theorem mentions it, so all other saved theorems keep their truth value. For `termsem0` the constants defined from it (satisfies0, models0, entails0) are redefined from the replacement by their saved definitions; the 25 saved theorems up to holSoundness that mention any of the four (`closure_candle.sml`) are all proved for the replacement, for every g, mostly through a lemma that it agrees with termsem0 on well-typed terms. "
        "Under the kernel reading (the alternative the author did not adopt) these equations would hold in HOL4: `arb_value_*.sml` proves c args = ARB on P for copies of MAP3, type_def_to_ctMap and termsem0 made by the same `Define`.",
        "4. Supplement: `vcheck.py` also rewrote every saved theorem that mentions c (with the ancestors; HD also changes EL) and tried fixed tactics with a 15 s limit (column \"theorems re-proved\"). "
        "A failure there is not a refutation: most failures are definitions of other constants built on c, which the model reinterprets, or tactic limits. This check alone would leave most entries `unsure`.",

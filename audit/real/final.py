@@ -3,11 +3,11 @@ import collections, glob, json
 import score as s
 
 CATS = {
-    "new": [("e1b2254a", "PERMUTES"), ("a892cd34", "instance_"), ("a892cd34", "termsem")] + ([("24717e82", "termsem0")] if s.PRE else []) + [("224e706a", "FAPPLY"), ("8107facf", "thunk_op'"),
+    "new": [("e1b2254a", "PERMUTES"), ("a892cd34", "instance_"), ("a892cd34", "termsem"), ("24717e82", "termsem0"), ("224e706a", "FAPPLY"), ("8107facf", "thunk_op'"),
             ("be73a930", "tenv_val_ok_nsEmpty"), ("be73a930", "tenv_ctor_ok_nsEmpty"), ("be73a930", "tenv_abbrev_ok_nsEmpty"), ("7ddc7cb6", "type_env_conv_thm"), ("83e55f56", "fix_clock_do_eval_res")],
     "duplicate root": [("f6841e8b", "instInhabitedChar")],
     # V-C recheck (27 Nov): not verified under the test of plan v3.4, section 3, so unresolved; vc_recheck/RECHECK.md
-    "unsure (V-C recheck)": ([] if s.PRE else [("24717e82", "termsem0")]) + s.DROPPED,
+    "unsure (V-C recheck)": s.DROPPED,
     "tier 2": [("7a70c894", "instance_"), ("24717e82", "instance'"), ("7ae93bc8", "fresh"), ("430741ce", "OUTL"), ("e1b2254a", "LEAST"), ("53ea580b", "ARB"), ("53ea580b", "select")],
     "disputed": [("f21925dc", "word"), ("f21925dc", "dimindex"), ("f6841e8b", "word"), ("340d433a", "word_join"), ("340d433a", "word_concat")],
     "false": [("8107facf", "store_ffi")],
