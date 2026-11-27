@@ -1,6 +1,17 @@
 """Build the blinded sheet on which the author checks the reasons of audit findings.  python audit/real/check/make_sheet.py
 check_sheet.csv : one row per finding, arm, reviewer verdict, translation and status hidden.   check_key.csv : row -> source (do not open before scoring; not in git).
 Needs E:/auditreal (build_units.py). Selection and seed are fixed here; analyse.py holds the analysis. Never overwrites a sheet that has answers."""
+# Paths: set STUDY_ROOT (this repository), WORK_ROOT (folder holding ts_ws/, auditreal/, ...)
+# and DISS_ROOT to override. Defaults: the repo root; E:/ on Windows, ~/work/ elsewhere; parent of the repo.
+import os as _os
+def _repo_root():
+    d = _os.path.dirname(_os.path.abspath(__file__))
+    while not _os.path.exists(_os.path.join(d, "CLOUD.md")) and _os.path.dirname(d) != d:
+        d = _os.path.dirname(d)
+    return d
+_STUDY = _os.environ.get("STUDY_ROOT", _repo_root()).replace("\\", "/").rstrip("/")
+_WR = _os.environ.get("WORK_ROOT", "E:/" if _os.name == "nt" else _os.path.expanduser("~/work")).replace("\\", "/").rstrip("/") + "/"
+_DISS = _os.environ.get("DISS_ROOT", _os.path.dirname(_STUDY)).replace("\\", "/").rstrip("/") + "/"
 import collections, csv, io, os, random, re, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__)).replace("\\", "/") + "/"
@@ -8,7 +19,7 @@ sys.path.insert(0, HERE + "..")
 import final as F
 import score as s
 
-U = "E:/auditreal/"
+U = _WR + "auditreal/"
 rng = random.Random("check-20261126")
 ANS = ["q1_difference_real (yes / no / unsure)", "q2_kind (too specific / open value fixed / needs choice term / other meaning / harmless / none)",
        "q3_reason (right / partly / wrong / cannot tell)", "minutes", "comment"]

@@ -1,6 +1,17 @@
 """Scan a proving transcript: tool counts, paths outside the workspace, Lean programs that read files, any sight of HOL4 proof text."""
+# Paths: set STUDY_ROOT (this repository), WORK_ROOT (folder holding ts_ws/, auditreal/, ...)
+# and DISS_ROOT to override. Defaults: the repo root; E:/ on Windows, ~/work/ elsewhere; parent of the repo.
+import os as _os
+def _repo_root():
+    d = _os.path.dirname(_os.path.abspath(__file__))
+    while not _os.path.exists(_os.path.join(d, "CLOUD.md")) and _os.path.dirname(d) != d:
+        d = _os.path.dirname(d)
+    return d
+_STUDY = _os.environ.get("STUDY_ROOT", _repo_root()).replace("\\", "/").rstrip("/")
+_WR = _os.environ.get("WORK_ROOT", "E:/" if _os.name == "nt" else _os.path.expanduser("~/work")).replace("\\", "/").rstrip("/") + "/"
+_DISS = _os.environ.get("DISS_ROOT", _os.path.dirname(_STUDY)).replace("\\", "/").rstrip("/") + "/"
 import collections, glob, io, json, re, sys
-sys.path.insert(0, "E:/ts_ws/prove2_ctl")
+sys.path.insert(0, _WR + "ts_ws/prove2_ctl")
 from prooftext import N, regions
 k, scripts = sys.argv[1], sys.argv[2]
 H = set()
@@ -9,7 +20,7 @@ for p in glob.glob(scripts + "/**/*Script.sml", recursive=True):
         H |= {N(l) for l in r.split("\n") if len(N(l)) >= 25}
 tools, flags, seen, res, denied = collections.Counter(), collections.Counter(), collections.Counter(), {}, []
 WS = "e:/prove2/%s/ws" % k
-for f in sorted(glob.glob("E:/ts_ws/prove2_ctl/%s/run_*.jsonl" % k)):
+for f in sorted(glob.glob(_WR + "ts_ws/prove2_ctl/%s/run_*.jsonl" % k)):
     for l in io.open(f, encoding="utf-8"):
         try:
             o = json.loads(l)

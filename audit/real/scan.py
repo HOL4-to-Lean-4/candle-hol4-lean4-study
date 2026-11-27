@@ -1,4 +1,15 @@
 """Scan every pilot transcript for access outside the unit folder and for tools other than reading."""
+# Paths: set STUDY_ROOT (this repository), WORK_ROOT (folder holding ts_ws/, auditreal/, ...)
+# and DISS_ROOT to override. Defaults: the repo root; E:/ on Windows, ~/work/ elsewhere; parent of the repo.
+import os as _os
+def _repo_root():
+    d = _os.path.dirname(_os.path.abspath(__file__))
+    while not _os.path.exists(_os.path.join(d, "CLOUD.md")) and _os.path.dirname(d) != d:
+        d = _os.path.dirname(d)
+    return d
+_STUDY = _os.environ.get("STUDY_ROOT", _repo_root()).replace("\\", "/").rstrip("/")
+_WR = _os.environ.get("WORK_ROOT", "E:/" if _os.name == "nt" else _os.path.expanduser("~/work")).replace("\\", "/").rstrip("/") + "/"
+_DISS = _os.environ.get("DISS_ROOT", _os.path.dirname(_STUDY)).replace("\\", "/").rstrip("/") + "/"
 import collections, glob, io, json, os, re
 HERE = os.path.dirname(os.path.abspath(__file__)).replace("\\", "/") + "/"
 BS = chr(92)
@@ -23,7 +34,7 @@ for f in sorted(glob.glob(HERE + "runs/*/*.raw")):
             tools[(step, name)] += 1
             s2 = re.sub(BS + BS + "+", "/", s)
             for q in re.findall(r"([A-Za-z]:/[^\s\"'`,)]+|(?<![\w./])/[a-z]/[^\s\"'`,)]+|~/[^\s\"'`]+|\.\./[^\s\"'`]*|/home/[^\s\"'`]+)", s2):
-                if "powershell.exe" in q.lower() or q.lower().startswith(("e:/auditreal/" + u, "/e/auditreal/" + u)):
+                if "powershell.exe" in q.lower() or q.lower().startswith(("e:/auditreal/" + u, "/e/auditreal/" + u, (_WR + "auditreal/" + u).lower())):
                     continue
                 n += 1
                 print("OUTSIDE", u, step, name, q[:150])

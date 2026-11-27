@@ -1,6 +1,17 @@
 """Derive brief, review prompt, settings and runner from the pilot."""
+# Paths: set STUDY_ROOT (this repository), WORK_ROOT (folder holding ts_ws/, auditreal/, ...)
+# and DISS_ROOT to override. Defaults: the repo root; E:/ on Windows, ~/work/ elsewhere; parent of the repo.
+import os as _os
+def _repo_root():
+    d = _os.path.dirname(_os.path.abspath(__file__))
+    while not _os.path.exists(_os.path.join(d, "CLOUD.md")) and _os.path.dirname(d) != d:
+        d = _os.path.dirname(d)
+    return d
+_STUDY = _os.environ.get("STUDY_ROOT", _repo_root()).replace("\\", "/").rstrip("/")
+_WR = _os.environ.get("WORK_ROOT", "E:/" if _os.name == "nt" else _os.path.expanduser("~/work")).replace("\\", "/").rstrip("/") + "/"
+_DISS = _os.environ.get("DISS_ROOT", _os.path.dirname(_STUDY)).replace("\\", "/").rstrip("/") + "/"
 import io
-P = "E:/NUS/mcomp/Dissertation/candle_study/audit/"
+P = _STUDY + "/audit/"
 rd = lambda f: io.open(P + f, encoding="utf-8").read()
 
 
@@ -28,7 +39,7 @@ r = rep(r, "`lean/CandleLean/`, `lean/CONVENTIONS.md`, ", "`lean/`, ")
 wr("real/REVIEW.md", r)
 wr("real/settings_audit.json", rd("pilot/settings_audit.json"))
 u = rd("pilot/run.py")
-u = rep(u, '"E:/auditwork/"', '"E:/auditreal/"')
+u = rep(u, '_WR + "auditwork/"', '_WR + "auditreal/"')
 u = rep(u, 'assert d and ("findings" in d or "verdicts" in d), "no JSON"', 'if not (d and ("findings" in d or "verdicts" in d)):\n    sys.exit(3)')
 u = rep(u, "d = parse(final)", "try:\n    d = parse(final)\nexcept Exception:\n    d = None")
 wr("real/run.py", u)

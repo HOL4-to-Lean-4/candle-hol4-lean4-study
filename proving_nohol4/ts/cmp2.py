@@ -1,5 +1,16 @@
+# Paths: set STUDY_ROOT (this repository), WORK_ROOT (folder holding ts_ws/, auditreal/, ...)
+# and DISS_ROOT to override. Defaults: the repo root; E:/ on Windows, ~/work/ elsewhere; parent of the repo.
+import os as _os
+def _repo_root():
+    d = _os.path.dirname(_os.path.abspath(__file__))
+    while not _os.path.exists(_os.path.join(d, "CLOUD.md")) and _os.path.dirname(d) != d:
+        d = _os.path.dirname(d)
+    return d
+_STUDY = _os.environ.get("STUDY_ROOT", _repo_root()).replace("\\", "/").rstrip("/")
+_WR = _os.environ.get("WORK_ROOT", "E:/" if _os.name == "nt" else _os.path.expanduser("~/work")).replace("\\", "/").rstrip("/") + "/"
+_DISS = _os.environ.get("DISS_ROOT", _os.path.dirname(_STUDY)).replace("\\", "/").rstrip("/") + "/"
 import io,glob,os,difflib,re
-B="E:/ts_ws/prove2_ctl/ts/base_copy"; W="E:/prove2/ts/ws/lean/CmlTS"
+B=_WR + "ts_ws/prove2_ctl/ts/base_copy"; W=_WR + "prove2/ts/ws/lean/CmlTS"
 tot=sor=other=0; bad=[]
 for f in glob.glob(B+"/**/*.lean",recursive=True):
     r=os.path.relpath(f,B)
@@ -18,6 +29,6 @@ for f in glob.glob(B+"/**/*.lean",recursive=True):
                 if not (h.endswith(":= by") and any(q.startswith(h[:-2].strip()) for q in ys)): bad.append((r,l))
 print(tot,sor,other,bad)
 r=lambda p:{l.split("\t")[1]:l for l in open(p,encoding="utf-8").read().split("\n") if l}
-a,b=r("E:/ts_ws/prove2_ctl/ts/frozen_base.tsv"),r("E:/ts_ws/prove2_ctl/ts/frozen_end.tsv")
+a,b=r(_WR + "ts_ws/prove2_ctl/ts/frozen_base.tsv"),r(_WR + "ts_ws/prove2_ctl/ts/frozen_end.tsv")
 m=[n for n in a if n not in b]; print("missing",len(m),[n for n in m if "match_" not in n and "splitter" not in n]); print("changed",[(a[n],b[n]) for n in a if n in b and a[n]!=b[n]])
 print("new axioms/opaques",[b[n] for n in b if n not in a and b[n].startswith(("axiom","opaque"))])

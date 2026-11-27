@@ -1,4 +1,15 @@
 #!/usr/bin/env python3
+# Paths: set STUDY_ROOT (this repository), WORK_ROOT (folder holding ts_ws/, auditreal/, ...)
+# and DISS_ROOT to override. Defaults: the repo root; E:/ on Windows, ~/work/ elsewhere; parent of the repo.
+import os as _os
+def _repo_root():
+    d = _os.path.dirname(_os.path.abspath(__file__))
+    while not _os.path.exists(_os.path.join(d, "CLOUD.md")) and _os.path.dirname(d) != d:
+        d = _os.path.dirname(d)
+    return d
+_STUDY = _os.environ.get("STUDY_ROOT", _repo_root()).replace("\\", "/").rstrip("/")
+_WR = _os.environ.get("WORK_ROOT", "E:/" if _os.name == "nt" else _os.path.expanduser("~/work")).replace("\\", "/").rstrip("/") + "/"
+_DISS = _os.environ.get("DISS_ROOT", _os.path.dirname(_STUDY)).replace("\\", "/").rstrip("/") + "/"
 # -*- coding: utf-8 -*-
 """Scripted mutant and decoy generator for the audit experiment (see SPEC.md).
 
@@ -16,9 +27,9 @@ from collections import Counter, defaultdict, namedtuple
 from concurrent.futures import ThreadPoolExecutor
 
 SEED = 20261124
-BASE = 'E:/ts_ws/audit_base/lean'
-WORK = 'E:/ts_ws/mut_work'
-OUT = 'E:/NUS/mcomp/Dissertation/candle_study/audit/mutants'
+BASE = _WR + 'ts_ws/audit_base/lean'
+WORK = _WR + 'ts_ws/mut_work'
+OUT = _STUDY + '/audit/mutants'
 NWORK = 6
 POOL_TARGET = 180                      # >= 150 required
 SCOPE_SHARE = {'definition': 0.60, 'prelude': 0.25, 'statement': 0.15}

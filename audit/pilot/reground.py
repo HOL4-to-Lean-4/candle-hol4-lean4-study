@@ -1,6 +1,17 @@
 """Second HOL4 grounding pass (post hoc, after the default tactic proved 0 of 19): generic tactics with evaluation and rule inversion."""
+# Paths: set STUDY_ROOT (this repository), WORK_ROOT (folder holding ts_ws/, auditreal/, ...)
+# and DISS_ROOT to override. Defaults: the repo root; E:/ on Windows, ~/work/ elsewhere; parent of the repo.
+import os as _os
+def _repo_root():
+    d = _os.path.dirname(_os.path.abspath(__file__))
+    while not _os.path.exists(_os.path.join(d, "CLOUD.md")) and _os.path.dirname(d) != d:
+        d = _os.path.dirname(d)
+    return d
+_STUDY = _os.environ.get("STUDY_ROOT", _repo_root()).replace("\\", "/").rstrip("/")
+_WR = _os.environ.get("WORK_ROOT", "E:/" if _os.name == "nt" else _os.path.expanduser("~/work")).replace("\\", "/").rstrip("/") + "/"
+_DISS = _os.environ.get("DISS_ROOT", _os.path.dirname(_STUDY)).replace("\\", "/").rstrip("/") + "/"
 import glob, io, json, os, subprocess, sys
-Q = "E:/NUS/mcomp/Dissertation/candle_study/tools/hol4_query/hol4q.py"
+Q = _STUDY + "/tools/hol4_query/hol4q.py"
 TACS = ["(rpt strip_tac \\\\ EVAL_TAC)", "(EVAL_TAC \\\\ simp[] \\\\ metis_tac[])",
         "(rw[Once holSyntaxTheory.RACONV_cases, Once holSyntaxTheory.ACONV_def] \\\\ TRY (rw[Once holSyntaxTheory.RACONV_cases]) \\\\ EVAL_TAC)",
         "(rw[holSemanticsTheory.is_term_valuation0_def] \\\\ qexists_tac `implode \"a\"` \\\\ qexists_tac `Tyvar (implode \"a\")` \\\\ EVAL_TAC)"]

@@ -1,10 +1,21 @@
 """Run one arm step on one unit.  python run.py <step> <unit> ; steps: S1 S3a S3b S4 S6
 Outputs runs/<unit>/<step>.{raw,json,meta}. Skips finished steps. No spending cap (owner, 24 Nov)."""
+# Paths: set STUDY_ROOT (this repository), WORK_ROOT (folder holding ts_ws/, auditreal/, ...)
+# and DISS_ROOT to override. Defaults: the repo root; E:/ on Windows, ~/work/ elsewhere; parent of the repo.
+import os as _os
+def _repo_root():
+    d = _os.path.dirname(_os.path.abspath(__file__))
+    while not _os.path.exists(_os.path.join(d, "CLOUD.md")) and _os.path.dirname(d) != d:
+        d = _os.path.dirname(d)
+    return d
+_STUDY = _os.environ.get("STUDY_ROOT", _repo_root()).replace("\\", "/").rstrip("/")
+_WR = _os.environ.get("WORK_ROOT", "E:/" if _os.name == "nt" else _os.path.expanduser("~/work")).replace("\\", "/").rstrip("/") + "/"
+_DISS = _os.environ.get("DISS_ROOT", _os.path.dirname(_STUDY)).replace("\\", "/").rstrip("/") + "/"
 import io, json, os, re, shutil, subprocess, sys, time
 
 HERE = os.path.dirname(os.path.abspath(__file__)).replace("\\", "/") + "/"
 step, unit = sys.argv[1:3]
-W = "E:/auditreal/" + unit
+W = _WR + "auditreal/" + unit
 key = {k["unit"]: k for k in json.load(io.open(HERE + "key.json", encoding="utf-8"))}[unit]
 out = HERE + "runs/" + unit + "/"
 os.makedirs(out, exist_ok=True)
@@ -36,7 +47,8 @@ else:
     prompt = brief
 env = dict(os.environ)
 env.pop("CLAUDECODE", None)
-env["CLAUDE_CODE_GIT_BASH_PATH"] = "D:\\Git\\bin\\bash.exe"
+if _os.name == "nt":
+    env["CLAUDE_CODE_GIT_BASH_PATH"] = "D:\\Git\\bin\\bash.exe"
 if step == "S1":
     feats = "memories plugins apps browser_use computer_use multi_agent image_generation skill_search goals in_app_browser tool_suggest".split()
     cmd = [shutil.which("codex"), "exec", "-m", "gpt-6.2-astra", "-s", "read-only", "--skip-git-repo-check", "--ephemeral", "-c", "project_doc_max_bytes=0",

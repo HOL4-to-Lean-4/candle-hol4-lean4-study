@@ -1,8 +1,19 @@
+# Paths: set STUDY_ROOT (this repository), WORK_ROOT (folder holding ts_ws/, auditreal/, ...)
+# and DISS_ROOT to override. Defaults: the repo root; E:/ on Windows, ~/work/ elsewhere; parent of the repo.
+import os as _os
+def _repo_root():
+    d = _os.path.dirname(_os.path.abspath(__file__))
+    while not _os.path.exists(_os.path.join(d, "CLOUD.md")) and _os.path.dirname(d) != d:
+        d = _os.path.dirname(d)
+    return d
+_STUDY = _os.environ.get("STUDY_ROOT", _repo_root()).replace("\\", "/").rstrip("/")
+_WR = _os.environ.get("WORK_ROOT", "E:/" if _os.name == "nt" else _os.path.expanduser("~/work")).replace("\\", "/").rstrip("/") + "/"
+_DISS = _os.environ.get("DISS_ROOT", _os.path.dirname(_STUDY)).replace("\\", "/").rstrip("/") + "/"
 import csv, glob, io, json, os, shutil
-S = "E:/NUS/mcomp/Dissertation/candle_study/"
+S = _STUDY + "/"
 D = S + "proving_nohol4/"
-C = "E:/ts_ws/prove2_ctl/ts/"
-W = "E:/prove2/ts/ws/lean/"
+C = _WR + "ts_ws/prove2_ctl/ts/"
+W = _WR + "prove2/ts/ws/lean/"
 for n in ["BRIEF.md", "settings.json", "drive.sh", "PINS.txt", "Frozen.lean", "frozen_base.tsv", "frozen_end.tsv", "Ax267.lean", "cmp2.py", "starts.txt"]:
     shutil.copy(C + n, D + "ts/" + n)
 os.makedirs(D + "ts/lean", exist_ok=True)
@@ -11,8 +22,8 @@ for n in ["CmlTS.lean", "CONVENTIONS.md", "PROGRESS.tsv", "lakefile.lean", "lake
     shutil.copy(W + n, D + "ts/lean/" + n)
 rows = []
 for k, name, note in (("candle", "candle-proving-nohol4-opus55-repaired-base", "278 of 278 proved; no HOL4 sources or proof text"), ("ts", "ts-proving-nohol4-opus55-repaired-opus-lessons", "267 of 267 proved; no HOL4 sources or proof text")):
-    st = io.open("E:/ts_ws/prove2_ctl/%s/starts.txt" % k).read().split()
-    for l in io.open("E:/ts_ws/prove2_ctl/%s/run_1.jsonl" % k, encoding="utf-8"):
+    st = io.open(_WR + "ts_ws/prove2_ctl/%s/starts.txt" % k).read().split()
+    for l in io.open(_WR + "ts_ws/prove2_ctl/%s/run_1.jsonl" % k, encoding="utf-8"):
         o = json.loads(l) if l.startswith("{") else {}
         if o.get("type") == "result":
             u = o["usage"]

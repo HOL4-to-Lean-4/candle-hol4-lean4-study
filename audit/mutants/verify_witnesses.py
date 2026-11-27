@@ -4,12 +4,23 @@ Checks per MUT-xxxx.lean: compiles against the base with no error; no forbidden 
 (new_decl, whitespace-normalised, attributes and `private` ignored) occurs in the file (definition scopes); `witness` has only the
 standard axioms; the statement mentions something outside `Mut` (reported as a note when not).
 """
+# Paths: set STUDY_ROOT (this repository), WORK_ROOT (folder holding ts_ws/, auditreal/, ...)
+# and DISS_ROOT to override. Defaults: the repo root; E:/ on Windows, ~/work/ elsewhere; parent of the repo.
+import os as _os
+def _repo_root():
+    d = _os.path.dirname(_os.path.abspath(__file__))
+    while not _os.path.exists(_os.path.join(d, "CLOUD.md")) and _os.path.dirname(d) != d:
+        d = _os.path.dirname(d)
+    return d
+_STUDY = _os.environ.get("STUDY_ROOT", _repo_root()).replace("\\", "/").rstrip("/")
+_WR = _os.environ.get("WORK_ROOT", "E:/" if _os.name == "nt" else _os.path.expanduser("~/work")).replace("\\", "/").rstrip("/") + "/"
+_DISS = _os.environ.get("DISS_ROOT", _os.path.dirname(_STUDY)).replace("\\", "/").rstrip("/") + "/"
 import io, json, os, re, subprocess, sys
 from concurrent.futures import ThreadPoolExecutor
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 W = os.path.join(HERE, "witnesses")
-BASE = "E:/ts_ws/audit_base/lean"
+BASE = _WR + "ts_ws/audit_base/lean"
 P = {}
 for l in io.open(os.path.join(HERE, "pool.jsonl"), encoding="utf-8"):
     p = json.loads(l)

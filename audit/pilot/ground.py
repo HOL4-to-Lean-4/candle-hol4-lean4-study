@@ -1,10 +1,21 @@
 """Scripted grounding: run each finding's lean_check / hol4_check.  python ground.py <step> [unit ...]
 Writes runs/<unit>/<step>.ground.json : id -> {lean, lean_out, hol4, hol4_out}. Failure is recorded, never counted as a refutation by itself."""
+# Paths: set STUDY_ROOT (this repository), WORK_ROOT (folder holding ts_ws/, auditreal/, ...)
+# and DISS_ROOT to override. Defaults: the repo root; E:/ on Windows, ~/work/ elsewhere; parent of the repo.
+import os as _os
+def _repo_root():
+    d = _os.path.dirname(_os.path.abspath(__file__))
+    while not _os.path.exists(_os.path.join(d, "CLOUD.md")) and _os.path.dirname(d) != d:
+        d = _os.path.dirname(d)
+    return d
+_STUDY = _os.environ.get("STUDY_ROOT", _repo_root()).replace("\\", "/").rstrip("/")
+_WR = _os.environ.get("WORK_ROOT", "E:/" if _os.name == "nt" else _os.path.expanduser("~/work")).replace("\\", "/").rstrip("/") + "/"
+_DISS = _os.environ.get("DISS_ROOT", _os.path.dirname(_STUDY)).replace("\\", "/").rstrip("/") + "/"
 import io, json, os, re, shutil, subprocess, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__)).replace("\\", "/") + "/"
-ST = "E:/ts_ws/mut_work/stripped/"
-G = "E:/ts_ws/ground/"
+ST = _WR + "ts_ws/mut_work/stripped/"
+G = _WR + "ts_ws/ground/"
 step = sys.argv[1]
 units = sys.argv[2:] or [k["unit"] for k in json.load(io.open(HERE + "key.json", encoding="utf-8"))]
 env = dict(os.environ)
@@ -15,7 +26,7 @@ def project(u):
     p = G + u + "/"
     if not os.path.exists(p + "done"):
         shutil.rmtree(p, ignore_errors=True)
-        shutil.copytree("E:/auditwork/" + u + "/lean", p)
+        shutil.copytree(_WR + "auditwork/" + u + "/lean", p)
         shutil.copytree(ST + ".lake", p + ".lake")
         r = subprocess.run(["lake", "build"], cwd=p, env=env, capture_output=True, timeout=1800)
         assert r.returncode == 0, r.stdout[-2000:]
@@ -40,7 +51,7 @@ def lean(u, code):
 
 
 def hol(code):
-    r = subprocess.run([sys.executable, "E:/NUS/mcomp/Dissertation/candle_study/tools/hol4_query/hol4q.py", "prove", code],
+    r = subprocess.run([sys.executable, _STUDY + "/tools/hol4_query/hol4q.py", "prove", code],
                        capture_output=True, timeout=200)
     out = r.stdout.decode("utf-8", "replace")
     return ("proved" if "PROVED:" in out else "not proved"), out[-800:]

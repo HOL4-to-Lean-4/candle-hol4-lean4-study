@@ -1,12 +1,14 @@
-"""Recreate the work folders that the scripts expect outside the repository (Windows).
+"""Recreate the work folders that the scripts expect outside the repository (Windows or Linux).
 
-    python scripts/setup_pc.py [--study1]
+    python scripts/setup_pc.py [--study1] [--work DIR]
 
-The scripts use the fixed paths E:/ts_ws, E:/auditreal, E:/auditwork, E:/prove2 and
-E:/NUS/mcomp/Dissertation/candle_study. Clone this repository to the last one.
-Without an E: drive, first run:  subst E: C:\\some\\folder
-Existing folders are kept. --study1 also fetches the study-1 Lean project from the
-public CakeML fork (audit/real/build_units.py needs it). --work is for testing only.
+The scripts find this repository by themselves (or STUDY_ROOT) and put their work
+folders ts_ws/, auditreal/, auditwork/ and prove2/ under WORK_ROOT (default E:/ on
+Windows, ~/work elsewhere). The study-1 project goes under DISS_ROOT (default: the
+folder that holds this repository). --work overrides WORK_ROOT for this script; export
+the same WORK_ROOT before running the other scripts. Existing folders are kept.
+--study1 also fetches the study-1 Lean project from the public CakeML fork
+(audit/real/build_units.py needs it).
 """
 import argparse
 import io
@@ -18,7 +20,7 @@ import sys
 S = os.path.dirname(os.path.dirname(os.path.abspath(__file__))).replace("\\", "/") + "/"
 ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
 ap.add_argument("--study1", action="store_true")
-ap.add_argument("--work", default="E:/")
+ap.add_argument("--work", default=os.environ.get("WORK_ROOT", "E:/" if os.name == "nt" else os.path.expanduser("~/work")))
 a = ap.parse_args()
 E = a.work.rstrip("/") + "/"
 T = E + "ts_ws/"
@@ -50,8 +52,6 @@ def hol(dst):
     print("created", dst, n, "files")
 
 
-if (E + "NUS/mcomp/Dissertation/candle_study/").lower() != S.lower():
-    print("NOTE: this clone is in %s; the scripts expect %sNUS/mcomp/Dissertation/candle_study/" % (S, E))
 hol(T + "hol4src")
 tree(S + "audit_base/lean", T + "audit_base/lean")
 for x in ("opus55_direct_translation", "opus55_nolessons", "sonnet55_direct_translation", "fable52_direct_translation"):
@@ -76,7 +76,7 @@ if tree(S + "audit_base/lean", ST):
             t = io.open(p, encoding="utf-8").read()
             io.open(p, "w", encoding="utf-8", newline="\n").write(strip_comments(t))
 if a.study1:
-    r = E + "NUS/mcomp/Dissertation/r1check/0d1173557"
+    r = os.environ.get("DISS_ROOT", os.path.dirname(S.rstrip("/"))).replace("\\", "/").rstrip("/") + "/r1check/0d1173557"
     if os.path.exists(r):
         print("kept   ", r)
     else:

@@ -1,6 +1,17 @@
+# Paths: set STUDY_ROOT (this repository), WORK_ROOT (folder holding ts_ws/, auditreal/, ...)
+# and DISS_ROOT to override. Defaults: the repo root; E:/ on Windows, ~/work/ elsewhere; parent of the repo.
+import os as _os
+def _repo_root():
+    d = _os.path.dirname(_os.path.abspath(__file__))
+    while not _os.path.exists(_os.path.join(d, "CLOUD.md")) and _os.path.dirname(d) != d:
+        d = _os.path.dirname(d)
+    return d
+_STUDY = _os.environ.get("STUDY_ROOT", _repo_root()).replace("\\", "/").rstrip("/")
+_WR = _os.environ.get("WORK_ROOT", "E:/" if _os.name == "nt" else _os.path.expanduser("~/work")).replace("\\", "/").rstrip("/") + "/"
+_DISS = _os.environ.get("DISS_ROOT", _os.path.dirname(_STUDY)).replace("\\", "/").rstrip("/") + "/"
 import io,os,json,re,shutil,sys
-B='E:/NUS/mcomp/Dissertation/candle_study/baselines/'
-C='E:/ts_ws/common/'; mods=json.load(open(C+'mods.json')); order=mods['order']; MOD=mods['mod']
+B=_STUDY + '/baselines/'
+C=_WR + 'ts_ws/common/'; mods=json.load(open(C+'mods.json')); order=mods['order']; MOD=mods['mod']
 def sub(t,pairs):
     for a,b in pairs:
         assert a in t,(a[:70]); t=t.replace(a,b)
@@ -58,14 +69,15 @@ def restore(t):
     return t.replace("Keep it out of `lakefile.lean`.","Use `#eval`/`#reduce`/`example` to test definitions on small\n  inputs where that helps you check faithfulness.")
 for n in os.listdir(C+'briefs'):
     p=C+'briefs/'+n; s=io.open(p,encoding='utf-8').read(); io.open(p,'w',encoding='utf-8',newline='\n').write(restore(s) if 'stage1' in n else s)
-PKG='E:/NUS/mcomp/Dissertation/typesound_lean4_sorry/hol4-ultramin'
-PKGLIB='E:/ts_ws/real/opus55_direct_translation/.lake'
-SETTINGS={"permissions":{"allow":["Read(./**)","Edit(./**)","Write(./**)","Read(~/.elan/toolchains/leanprover--lean4---v4.28.0/**)","Glob","Grep","Bash(lake build:*)","Bash(lake env lean:*)","Bash(cd lean)","Bash(date -u:*)","Bash(ls:*)"],"deny":["Read(//e/NUS/**)","Edit(//e/NUS/**)","Read(~/.claude/**)","Read(~/.codex/**)","WebFetch","WebSearch","Task","Agent","Bash(git:*)","Bash(curl:*)","Bash(wget:*)","Bash(gh:*)"]}}
+PKG=_DISS + 'typesound_lean4_sorry/hol4-ultramin'
+PKGLIB=_WR + 'ts_ws/real/opus55_direct_translation/.lake'
+_abs = lambda p: "//" + (p[0].lower() + p[2:] if p[1:2] == ":" else p.lstrip("/")).rstrip("/")
+SETTINGS={"permissions":{"allow":["Read(./**)","Edit(./**)","Write(./**)","Read(~/.elan/toolchains/leanprover--lean4---v4.28.0/**)","Glob","Grep","Bash(lake build:*)","Bash(lake env lean:*)","Bash(cd lean)","Bash(date -u:*)","Bash(ls:*)"],"deny":["Read(%s/**)" % _abs(_DISS),"Edit(%s/**)" % _abs(_DISS),"Read(~/.claude/**)","Read(~/.codex/**)","WebFetch","WebSearch","Task","Agent","Bash(git:*)","Bash(curl:*)","Bash(wget:*)","Bash(gh:*)"]}}
 def make(run):
-    d='E:/ts_ws/runs/'+run+'/ws1'
+    d=_WR + 'ts_ws/runs/'+run+'/ws1'
     assert not os.path.exists(d),d
     os.makedirs(d+'/hol4'); shutil.copytree(PKG,d+'/hol4/package',ignore=shutil.ignore_patterns('Holmakefile','LICENSE'))
-    shutil.copytree('E:/ts_ws/hol4src',d+'/hol4/HOL4-src')
+    shutil.copytree(_WR + 'ts_ws/hol4src',d+'/hol4/HOL4-src')
     shutil.copy(C+'TARGETS.tsv',d)
     L=d+'/lean'; os.makedirs(L+'/CmlTS'); 
     shutil.copy(B+'opus55_direct_translation/lean/lean-toolchain',L)

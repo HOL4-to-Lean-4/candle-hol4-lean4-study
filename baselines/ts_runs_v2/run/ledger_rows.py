@@ -1,13 +1,24 @@
 """Append rows for the type-soundness runs to candle_study/ledger/costs.csv (idempotent by workflow+run)."""
+# Paths: set STUDY_ROOT (this repository), WORK_ROOT (folder holding ts_ws/, auditreal/, ...)
+# and DISS_ROOT to override. Defaults: the repo root; E:/ on Windows, ~/work/ elsewhere; parent of the repo.
+import os as _os
+def _repo_root():
+    d = _os.path.dirname(_os.path.abspath(__file__))
+    while not _os.path.exists(_os.path.join(d, "CLOUD.md")) and _os.path.dirname(d) != d:
+        d = _os.path.dirname(d)
+    return d
+_STUDY = _os.environ.get("STUDY_ROOT", _repo_root()).replace("\\", "/").rstrip("/")
+_WR = _os.environ.get("WORK_ROOT", "E:/" if _os.name == "nt" else _os.path.expanduser("~/work")).replace("\\", "/").rstrip("/") + "/"
+_DISS = _os.environ.get("DISS_ROOT", _os.path.dirname(_STUDY)).replace("\\", "/").rstrip("/") + "/"
 import csv, io, json, os, sys, glob, datetime
 
-LED = "E:/NUS/mcomp/Dissertation/candle_study/ledger/costs.csv"
+LED = _STUDY + "/ledger/costs.csv"
 rows = list(csv.reader(io.open(LED, encoding="utf-8", newline="")))
 H = rows[0]
 have = {(r[3], r[4]) for r in rows[1:]}
 new = []
 for run in ["opus_lessons", "opus_nolessons", "sonnet_lessons"]:
-    for base, tag in [("E:/ts_ws/runs_run0_incomplete_src/" + run, "run0"), ("E:/ts_ws/runs/" + run + "_v2", "v2")]:
+    for base, tag in [(_WR + "ts_ws/runs_run0_incomplete_src/" + run, "run0"), (_WR + "ts_ws/runs/" + run + "_v2", "v2")]:
         for k in ["stage1"] + ["stage2" + a for a in "ABCD"]:
             p = f"{base}/{k}.jsonl"
             if not os.path.exists(p):

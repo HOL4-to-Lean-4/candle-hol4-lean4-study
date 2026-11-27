@@ -1,9 +1,20 @@
 """usage: stage2.py make RUN | merge RUN | scan RUN"""
+# Paths: set STUDY_ROOT (this repository), WORK_ROOT (folder holding ts_ws/, auditreal/, ...)
+# and DISS_ROOT to override. Defaults: the repo root; E:/ on Windows, ~/work/ elsewhere; parent of the repo.
+import os as _os
+def _repo_root():
+    d = _os.path.dirname(_os.path.abspath(__file__))
+    while not _os.path.exists(_os.path.join(d, "CLOUD.md")) and _os.path.dirname(d) != d:
+        d = _os.path.dirname(d)
+    return d
+_STUDY = _os.environ.get("STUDY_ROOT", _repo_root()).replace("\\", "/").rstrip("/")
+_WR = _os.environ.get("WORK_ROOT", "E:/" if _os.name == "nt" else _os.path.expanduser("~/work")).replace("\\", "/").rstrip("/") + "/"
+_DISS = _os.environ.get("DISS_ROOT", _os.path.dirname(_STUDY)).replace("\\", "/").rstrip("/") + "/"
 import io, json, os, re, shutil, sys
 
-C = "E:/ts_ws/common/"
+C = _WR + "ts_ws/common/"
 cmd, run = sys.argv[1:3]
-D = f"E:/ts_ws/runs/{run}/"
+D = _WR + f"ts_ws/runs/{run}/"
 arm = "nolessons" if "nolessons" in run else "lessons"
 
 
@@ -31,7 +42,7 @@ def merge():
 
 
 def scan():
-    allowed = (f"e:/ts_ws/runs/{run}/".lower(), "/e/ts_ws/runs/" + run.lower() + "/")
+    allowed = (f"e:/ts_ws/runs/{run}/".lower(), "/e/ts_ws/runs/" + run.lower() + "/", (_WR + f"ts_ws/runs/{run}/").lower())
     for k in ["stage1"] + ["stage2" + a for a in "ABCD"]:
         p = D + k + ".jsonl"
         if not os.path.exists(p):

@@ -6,12 +6,12 @@ Status: 26 November 2026. Read this file first, then `plan/v3/plan_v3.4.pdf` (dr
 
 ## Set up
 
-In a Linux cloud session: `sh scripts/setup_cloud.sh`, then see `CLOUD.md` (what works there and what still needs the PC, checked 27 November).
+The work runs in Linux cloud sessions from 27 November (author). In a cloud session: `sh scripts/setup_cloud.sh`, then `export WORK_ROOT=~/work` and `python3 scripts/setup_pc.py --study1`. `CLOUD.md` says what works there and how the paths are set (`STUDY_ROOT`, `WORK_ROOT`, `DISS_ROOT`).
 
 On a Windows PC:
 
 1. Install Git, Python 3.10 or newer, elan (Lean 4.28.0 is fetched by each project's `lean-toolchain`), and, for HOL4, WSL or Docker.
-2. Clone to `E:\NUS\mcomp\Dissertation\candle_study`. The scripts use fixed `E:/` paths. Without an `E:` drive, first map a folder: `subst E: C:\work` (run it again after each restart).
+2. Clone anywhere. The work folders go under `WORK_ROOT` (default `E:/`; set it to any folder, see `CLOUD.md`, "Paths"). The paths below assume the defaults.
    ```powershell
    git clone https://github.com/HOL4-to-Lean-4/candle-hol4-lean4-study.git E:\NUS\mcomp\Dissertation\candle_study
    ```
@@ -22,9 +22,9 @@ On a Windows PC:
 4. Build any Lean project with `lake build` in its folder, for example `proving_nohol4/candle/lean`. Lake fetches Batteries.
 5. Only for HOL4 queries: in WSL, clone to `~/candle_build/repo` and run `sh scripts/build.sh native` (about 16 minutes). `tools/hol4_query/README.md` says more.
 6. Only for new model runs: install and sign in to the `claude`, `codex` and `agy` CLIs on that PC. Do not copy credentials between PCs. Versions used: Claude Code 2.1.325, Codex CLI 0.169.0, agy 1.5.16.
-   `run.py`, `drive.sh` and `launch.sh` contain `D:\Git\bin\bash.exe`; change it to where Git is on the new PC.
-7. Only to rebuild the audit units: `python audit/real/build_units.py` writes `E:\auditreal` (63 units, about 2 GB) and rewrites `audit/real/key.json`; `git diff` should then show no change in it (the one correction to the key is made in `final.py`).
-   The pilot's `build_units.py` writes `E:\auditwork`; `pilot/ground.py` and `mk_decoy.py` use it.
+   On Windows, `run.py`, `drive.sh` and `launch.sh` set `D:\Git\bin\bash.exe`; change it to where Git is on the new PC.
+7. Only to rebuild the audit units: `python audit/real/build_units.py` writes `$WORK_ROOT/auditreal` (63 units, about 2 GB) and rewrites `audit/real/key.json` with the same units and errors; the committed file also has the `recheck_note` fields, so run `git checkout audit/real/key.json` afterwards (the one correction to the key is made in `final.py`). The module order now follows the Windows listing on every OS, so Linux gives the same sample.
+   The pilot's `build_units.py` writes `$WORK_ROOT/auditwork`; `pilot/ground.py` and `mk_decoy.py` use it.
 
 ## Where things are
 
@@ -85,10 +85,10 @@ On a Windows PC:
 - Raw model transcripts and proving workspaces (2,367 files, 211 MB, 41 MB packed): they contain account details. They are in the private repository `HOL4-to-Lean-4/candle-hol4-lean4-raw` (folder `raw-2026-11-25/` and release `raw-2026-11-25`), and on the first PC.
   Findings, verdicts and usage extracted from them are here (`runs/<unit>/*.json`, `*.meta`). Restore after `setup_pc.py`, from Git Bash, with the newest date (or download the files from the release page in a browser):
   ```bash
-  cd /e/ts_ws && gh release download raw-2026-11-25 -R HOL4-to-Lean-4/candle-hol4-lean4-raw && sha256sum -c candle_raw_2026-11-25.tar.gz.sha256 && tar -xzf candle_raw_2026-11-25.tar.gz -C /e
+  cd "$WORK_ROOT" && gh release download raw-2026-11-25 -R HOL4-to-Lean-4/candle-hol4-lean4-raw && sha256sum -c candle_raw_2026-11-25.tar.gz.sha256 && tar -xzf candle_raw_2026-11-25.tar.gz -C "$WORK_ROOT"
   ```
   `gh` must be signed in to the author's account. The archive does not hold HOL4 sources or `.lake` builds. `bash scripts/backup_raw.sh` uploads a new dated archive; run it at each milestone that adds raw files.
 - Study 1's Lean project: `setup_pc.py --study1` fetches it from the public CakeML fork at `0d1173557`.
-- Mutant compile caches in `E:\ts_ws\mut_work`: in the raw-file archive.
-- The proving controls `E:\ts_ws\prove`, `E:\ts_ws\prove2_ctl`, `E:\prove2`: in the raw-file archive; the main files are also in `proving*/`. To rerun, copy the files back to the paths named in `drive.sh`.
+- Mutant compile caches in `$WORK_ROOT/ts_ws/mut_work`: in the raw-file archive.
+- The proving controls `$WORK_ROOT/ts_ws/prove`, `ts_ws/prove2_ctl`, `prove2`: in the raw-file archive; the main files are also in `proving*/`. To rerun, copy the files back to the paths named in `drive.sh`.
 - A first type-soundness run on incomplete HOL4 sources, discarded before scoring: in the raw-file archive, without the HOL4 sources.

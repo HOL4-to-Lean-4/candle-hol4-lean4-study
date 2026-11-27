@@ -1,23 +1,34 @@
 """Units for the audit on real errors: modules of our own, unrepaired translations (comments stripped) that hold at least one known error, plus modules with none known.
 key.json (secret): unit -> translation, module, known errors (declaration, class, kind, evidence)."""
+# Paths: set STUDY_ROOT (this repository), WORK_ROOT (folder holding ts_ws/, auditreal/, ...)
+# and DISS_ROOT to override. Defaults: the repo root; E:/ on Windows, ~/work/ elsewhere; parent of the repo.
+import os as _os
+def _repo_root():
+    d = _os.path.dirname(_os.path.abspath(__file__))
+    while not _os.path.exists(_os.path.join(d, "CLOUD.md")) and _os.path.dirname(d) != d:
+        d = _os.path.dirname(d)
+    return d
+_STUDY = _os.environ.get("STUDY_ROOT", _repo_root()).replace("\\", "/").rstrip("/")
+_WR = _os.environ.get("WORK_ROOT", "E:/" if _os.name == "nt" else _os.path.expanduser("~/work")).replace("\\", "/").rstrip("/") + "/"
+_DISS = _os.environ.get("DISS_ROOT", _os.path.dirname(_STUDY)).replace("\\", "/").rstrip("/") + "/"
 import glob, hashlib, io, json, os, random, re, shutil, sys
-sys.path.insert(0, "E:/ts_ws/mut_work")
+sys.path.insert(0, _WR + "ts_ws/mut_work")
 from stripper_test import strip_comments
 
 HERE = os.path.dirname(os.path.abspath(__file__)).replace("\\", "/") + "/"
-OUT = "E:/auditreal/"
+OUT = _WR + "auditreal/"
 P = HERE + "../pilot/"
 rng = random.Random("real-20261124")
-CAN = {"E:/NUS/mcomp/Dissertation/candle_study/package": "package"}
+CAN = {_STUDY + "/package": "package"}
 T = {  # translation -> (lean dir, root lib, hol4 package, hol4 src)
-    "candle_opus": ("E:/ts_ws/real/opus55_direct_translation", "CandleLean", "E:/NUS/mcomp/Dissertation/candle_study/package", "E:/ts_ws/hol4src"),
-    "candle_opus_nolessons": ("E:/ts_ws/real/opus55_nolessons", "CandleLean", "E:/NUS/mcomp/Dissertation/candle_study/package", "E:/ts_ws/hol4src"),
-    "candle_sonnet": ("E:/ts_ws/real/sonnet55_direct_translation", "CandleLean", "E:/NUS/mcomp/Dissertation/candle_study/package", "E:/ts_ws/hol4src"),
-    "candle_fable": ("E:/ts_ws/real/fable52_direct_translation", "CandleLean", "E:/NUS/mcomp/Dissertation/candle_study/package", "E:/ts_ws/hol4src"),
-    "ts_opus": ("E:/ts_ws/runs/opus_lessons_v2/merged", "CmlTS", "E:/ts_ws/runs/opus_lessons_v2/ws1/hol4/package", "E:/ts_ws/runs/opus_lessons_v2/ws1/hol4/HOL4-src"),
-    "ts_opus_nolessons": ("E:/ts_ws/runs/opus_nolessons_v2/merged", "CmlTS", "E:/ts_ws/runs/opus_lessons_v2/ws1/hol4/package", "E:/ts_ws/runs/opus_lessons_v2/ws1/hol4/HOL4-src"),
-    "ts_sonnet": ("E:/ts_ws/runs/sonnet_lessons_v2/merged", "CmlTS", "E:/ts_ws/runs/opus_lessons_v2/ws1/hol4/package", "E:/ts_ws/runs/opus_lessons_v2/ws1/hol4/HOL4-src"),
-    "study1": ("E:/NUS/mcomp/Dissertation/r1check/0d1173557/lean_type_sound", "LeanTypeSound", "E:/ts_ws/runs/opus_lessons_v2/ws1/hol4/package", "E:/ts_ws/runs/opus_lessons_v2/ws1/hol4/HOL4-src"),
+    "candle_opus": (_WR + "ts_ws/real/opus55_direct_translation", "CandleLean", _STUDY + "/package", _WR + "ts_ws/hol4src"),
+    "candle_opus_nolessons": (_WR + "ts_ws/real/opus55_nolessons", "CandleLean", _STUDY + "/package", _WR + "ts_ws/hol4src"),
+    "candle_sonnet": (_WR + "ts_ws/real/sonnet55_direct_translation", "CandleLean", _STUDY + "/package", _WR + "ts_ws/hol4src"),
+    "candle_fable": (_WR + "ts_ws/real/fable52_direct_translation", "CandleLean", _STUDY + "/package", _WR + "ts_ws/hol4src"),
+    "ts_opus": (_WR + "ts_ws/runs/opus_lessons_v2/merged", "CmlTS", _WR + "ts_ws/runs/opus_lessons_v2/ws1/hol4/package", _WR + "ts_ws/runs/opus_lessons_v2/ws1/hol4/HOL4-src"),
+    "ts_opus_nolessons": (_WR + "ts_ws/runs/opus_nolessons_v2/merged", "CmlTS", _WR + "ts_ws/runs/opus_lessons_v2/ws1/hol4/package", _WR + "ts_ws/runs/opus_lessons_v2/ws1/hol4/HOL4-src"),
+    "ts_sonnet": (_WR + "ts_ws/runs/sonnet_lessons_v2/merged", "CmlTS", _WR + "ts_ws/runs/opus_lessons_v2/ws1/hol4/package", _WR + "ts_ws/runs/opus_lessons_v2/ws1/hol4/HOL4-src"),
+    "study1": (_DISS + "r1check/0d1173557/lean_type_sound", "LeanTypeSound", _WR + "ts_ws/runs/opus_lessons_v2/ws1/hol4/package", _WR + "ts_ws/runs/opus_lessons_v2/ws1/hol4/HOL4-src"),
 }
 VC_TS = "HD CHR FAPPLY int_div int_mod MAP3 type_def_to_ctMap locnrow locncol locn_rowupdate locn_colupdate dest_Refv FV_dec".split()
 ERR = []  # translation, declaration, class, kind
@@ -48,10 +59,25 @@ add("study1", "CARD", "V-P", "study-1: list may have duplicates")
 add("study1", "do_app", "V-P", "study-1: Euclidean instead of floored division")
 
 
+def _ntfs_glob(root):
+    """glob(root/**/*.lean) in the order Windows (NTFS) lists it, so the unit sample is the same on every OS."""
+    ls = lambda p: sorted(os.listdir(p), key=str.upper)
+    dirs = []
+    def rec(p):
+        for n in ls(p):
+            q = os.path.join(p, n)
+            if os.path.isdir(q):
+                dirs.append(q)
+                rec(q)
+    dirs.append(root)
+    rec(root)
+    return [os.path.join(p, n) for p in dirs for n in ls(p) if n.endswith(".lean") and os.path.isfile(os.path.join(p, n))]
+
+
 def modules(t):
     d, lib, _, _ = T[t]
     out = {}
-    for f in glob.glob(d + "/" + lib + "/**/*.lean", recursive=True):
+    for f in _ntfs_glob(d + "/" + lib):
         f = f.replace("\\", "/")
         out[f[len(d) + 1:]] = io.open(f, encoding="utf-8").read()
     return out

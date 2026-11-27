@@ -15,7 +15,7 @@ mkdir -p "$2"; OUT="$(cd "$2" && pwd)"
 MAP="$(cd "$(dirname "$3")" && pwd)/$(basename "$3")"
 MANIFEST="${4:-}"
 ROOT="${S0_ROOT:-CmlTS}"
-HOL4="${S0_HOL4:-E:/NUS/mcomp/Dissertation/candle_study/tools/hol4_query/out_ts/statements.jsonl}"
+HOL4="${S0_HOL4:-$(win "${STUDY_ROOT:-$HERE/../../..}")/tools/hol4_query/out_ts/statements.jsonl}"
 PY="${PYTHON:-python3}"
 command -v "$PY" >/dev/null 2>&1 || PY=python
 

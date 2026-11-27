@@ -6,11 +6,22 @@
 Rows whose Lean name is not stated in CONVENTIONS but found by looking at the Lean environment get status `lookup`.
 usage: build_map.py RUN OUTFILE [LEAN_DUMP]
 """
+# Paths: set STUDY_ROOT (this repository), WORK_ROOT (folder holding ts_ws/, auditreal/, ...)
+# and DISS_ROOT to override. Defaults: the repo root; E:/ on Windows, ~/work/ elsewhere; parent of the repo.
+import os as _os
+def _repo_root():
+    d = _os.path.dirname(_os.path.abspath(__file__))
+    while not _os.path.exists(_os.path.join(d, "CLOUD.md")) and _os.path.dirname(d) != d:
+        d = _os.path.dirname(d)
+    return d
+_STUDY = _os.environ.get("STUDY_ROOT", _repo_root()).replace("\\", "/").rstrip("/")
+_WR = _os.environ.get("WORK_ROOT", "E:/" if _os.name == "nt" else _os.path.expanduser("~/work")).replace("\\", "/").rstrip("/") + "/"
+_DISS = _os.environ.get("DISS_ROOT", _os.path.dirname(_STUDY)).replace("\\", "/").rstrip("/") + "/"
 import json, sys
 
-HOL = 'E:/NUS/mcomp/Dissertation/candle_study/tools/hol4_query/out_ts/statements.jsonl'
+HOL = _STUDY + '/tools/hol4_query/out_ts/statements.jsonl'
 run, outp = sys.argv[1], sys.argv[2]
-dumpf = sys.argv[3] if len(sys.argv) > 3 else 'E:/ts_ws/s0/out/%s/lean_dump0.txt' % run
+dumpf = sys.argv[3] if len(sys.argv) > 3 else _WR + 'ts_ws/s0/out/%s/lean_dump0.txt' % run
 
 rows = [json.loads(l) for l in open(HOL, encoding='utf-8') if l.strip()]
 consts, types = {}, set()

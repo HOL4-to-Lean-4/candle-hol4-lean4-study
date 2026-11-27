@@ -1,7 +1,8 @@
 #!/bin/bash
 # one proving session; resumed after usage-limit stops; 12 h of active time, no spending cap
-export CLAUDE_CODE_GIT_BASH_PATH='D:\Git\bin\bash.exe'
-P=/e/ts_ws/prove; cd $P/ws || exit 1
+case "$(uname -s)" in MINGW*|MSYS*) export CLAUDE_CODE_GIT_BASH_PATH='D:\Git\bin\bash.exe';; esac
+W="${WORK_ROOT:-/e}"; W="${W%/}"   # folder holding ts_ws/ and prove2/ (default: E: drive in Git Bash)
+P=$W/ts_ws/prove; cd $P/ws || exit 1
 SID=$(cat $P/session_id 2>/dev/null); N=$(ls $P/run_*.jsonl 2>/dev/null | wc -l); ACTIVE=$(cat $P/active_s 2>/dev/null || echo 0)
 while [ $ACTIVE -lt 43200 ]; do
   N=$((N+1)); T0=$(date +%s); date -u +%FT%TZ >> $P/starts.txt
