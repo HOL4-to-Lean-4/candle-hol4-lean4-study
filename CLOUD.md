@@ -18,7 +18,7 @@ Each new cloud session starts from a fresh clone, so the setup runs again in eac
 | Candle package (`holSoundnessTheory`) | built | 1.5 min |
 | `tools/hol4_query/hol4q.py` print / eval / prove | work (Linux mode added: no WSL needed) | 10-20 s per query |
 | elan | installed | 1 min |
-| Lean 4.28.0 | On "Default": elan still fails (elan 4.4 downloads from `release.lean-lang.org`, which is not allowed), so the script fetches the GitHub release archive and links it. Without GitHub release downloads it builds from the v4.28.0 source tag | 17 s (34 min from source) |
+| Lean 4.28.0 | On "Default": elan installs it directly since `release.lean-lang.org` was allowed (27 Nov, 06:10 UTC; checked with v4.27.0). The script falls back to the GitHub release archive, then to the source tag. Without GitHub release downloads it builds from the v4.28.0 source tag | 17 s (34 min from source) |
 | `proving_nohol4/candle/lean` | `lake build` succeeds, 200 jobs, no `sorry` | 1 min |
 | `proving_nohol4/ts/lean` | `lake build` succeeds, 47 jobs, no `sorry` | 1 min |
 
@@ -30,7 +30,6 @@ Works on "Default" (27 Nov). `tools/astra_gateway/` has the client: `astra.py` (
 
 ## What does not work in the cloud yet
 
-- Lean through elan: elan 4.4 downloads toolchains from `release.lean-lang.org` (singular). Adding that host to "Default" lets `elan toolchain install` work directly; until then `setup_cloud.sh` uses the GitHub release archive, which is as fast.
 - Raw files: the private repository `Lee-Juntong/candle-hol4-lean4-raw` is in the personal account, outside the session's GitHub access. Moving it into the HOL4-to-Lean-4 organisation (kept private) and adding it to the project gives access. The archive (41 MB) is under GitHub's 100 MB file limit, so it can be committed as a file and fetched with `git clone`.
 - `audit/real/check/analyse.py` and `make_csv.py` need `check_key.csv` and `key.csv`, which are withheld from the repository (on the PC only).
 - Scripts that use fixed `E:/` paths (`build_units.py`, `run.py`, `mk_run.py`, `tv_candle.py`, `make_sheet.py`) need a path option before they run on Linux. For the audits, `codex_astra.sh` replaces the S1 call of `audit/real/run.py`.
