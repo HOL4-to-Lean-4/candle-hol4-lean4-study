@@ -26,11 +26,15 @@ HOL4 total: about 20 minutes. Lean from source: about 35 minutes; about 1 minute
 
 ## What does not work in the cloud yet
 
-- Astra (`gpt-6.2-astra`): no `codex` CLI or OpenAI credential, and `api.openai.com` and `chatgpt.com` are blocked. Astra runs stay on the PC until API access is set up for the cloud.
-- Aristotle: `ARISTOTLE_API_KEY` is not set, and `aristotle.harmonic.fun` is blocked.
-- Raw files: the private repository `Lee-Juntong/candle-hol4-lean4-raw` is outside the session's GitHub access, and GitHub release downloads are blocked.
+The project ran on the built-in cloud environment, which has no settings. The user's own cloud environment "Default" has what most of the missing pieces need.
+
+- Astra (`gpt-6.2-astra`): goes through the SSS gateway. Its settings (`SSS_BASE_URL`, `SSS_GPT_KEY`, host `api.ssstoken.net`) are in the "Default" environment only, so this session could not reach it and the smoke test is still to do. Select "Default" for the project; the next session runs the test.
+- Lean and GitHub release downloads: add `releases.lean-lang.org`, `github.com`, `release-assets.githubusercontent.com` and `objects.githubusercontent.com` to the allowed hosts of "Default". Then elan installs Lean 4.28.0 in about a minute.
+- Raw files: the private repository `Lee-Juntong/candle-hol4-lean4-raw` is in the personal account, outside the session's GitHub access. Moving it into the HOL4-to-Lean-4 organisation (kept private) and adding it to the project gives access. The archive (41 MB) is under GitHub's 100 MB file limit, so it can be committed as a file and fetched with `git clone`; release downloads need the hosts above.
 - `audit/real/check/analyse.py` and `make_csv.py` need `check_key.csv` and `key.csv`, which are withheld from the repository (on the PC only).
 - Scripts that use fixed `E:/` paths (`build_units.py`, `run.py`, `mk_run.py`, `tv_candle.py`, `make_sheet.py`) need a path option before they run on Linux.
+
+Aristotle has dropped Lean support (author, 27 November) and is no longer part of the setup.
 
 ## What works
 
