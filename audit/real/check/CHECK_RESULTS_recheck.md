@@ -44,17 +44,17 @@ Provisional statement errors by the 51-row sheet (it decides, because it is scor
 
 A hit in the checked strata counts only if the author found the difference real (q1 yes); "right reason" also needs q3 right. Hits that were not in the sheet (found by all three runs, outside the sample of 12) stay as they were.
 
-| Arm | Known errors found before the check (98) | Kept errors (98): found, difference real | found, reason also right |
+| Arm | Known errors found before the check (104) | Kept errors (104): found, difference real | found, reason also right |
 |---|---|---|---|
-| S1 | 94 | 94 | 94 |
+| S1 | 100 | 100 | 100 |
 | S3a | 63 | 63 | 63 |
 | S3b | 59 | 59 | 59 |
 | S8 | 64 | 64 | 64 |
 
 S1 against S8, difference in recall on the kept errors, interval from 10000 resamples of modules:
 
-- difference real: +0.31 [+0.11, +0.49]
-- reason also right: +0.31 [+0.11, +0.49]
+- difference real: +0.35 [+0.15, +0.52]
+- reason also right: +0.35 [+0.15, +0.52]
 
 ## Findings outside the key
 
@@ -70,4 +70,4 @@ Study-1 findings outside the key are not in the sheet and are counted neither wa
 
 ## V-C recheck (27 November)
 
-This file uses the key after the V-C recheck (`../vc_recheck/RECHECK.md`). 7 known errors and the new error `termsem0` (candle_fable) left the key: the Lean equation holds in every model of the HOL4 theory, because TFL fills the missing patterns with ARB. The readers answered these rows against the saved theorems, which do not state the ARB cases: C016, C041, C048, C054, C067, C071, C077, C078, C091. Answers q1: {'yes': 9}. The fixed analysis with the key as run is `CHECK_RESULTS.md`.
+This file uses the key after the V-C recheck (`../vc_recheck/RECHECK.md`). 1 known error(s) and the new error `termsem0` (candle_fable) stay unsure under the test of plan v3.4, section 3 (saved-theorem reading): the saved theorems that mention `termsem0` were not all checked against a counterexample. They count as unresolved. Their rows: C054, C077, C078. Answers q1: {'yes': 3}. The fixed analysis with the key as run is `CHECK_RESULTS.md`.

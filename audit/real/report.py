@@ -68,7 +68,7 @@ def row(name, h):
 tot = collections.Counter(F.g(e) for k, e in F.key.values())
 w("# Tables of the audit on real errors%s\n\nWritten by `report.py`. Known errors only; a hit means the finding names the declaration (reasons are not checked here).\n" % (" (key as run, before the V-C recheck)" if s.PRE else ""))
 w(("Key as run, before the V-C recheck of 27 November: 105 errors. The current key is in `TABLES.md`." if s.PRE else
-   "Key after the V-C recheck of 27 November (`vc_recheck/RECHECK.md`): %d errors. %d open-value errors left the key because the Lean equation holds in every model of the HOL4 theory (TFL fills missing patterns with ARB). The key as run (105) is in `TABLES_pre_recheck.md` (`AUDIT_KEY=pre_recheck python report.py`).\n" % (sum(len(k["errors"]) for k in s.K), len(s.DROPPED))))
+   "Key after the V-C recheck of 27 November (`vc_recheck/RECHECK.md`): %d errors. %d open-value error(s) stay unsure under the test of plan v3.4, section 3, and count as unresolved, not in the key. The key as run (105) is in `TABLES_pre_recheck.md` (`AUDIT_KEY=pre_recheck python report.py`).\n" % (sum(len(k["errors"]) for k in s.K), len(s.DROPPED))))
 w("## Known errors found\n")
 w("| Arm | All (%d) | Open value fixed (%d) | Type too specific, definitions (%d) | Type too specific, statements, provisional (%d) | Study 1 (%d) | Without provisional (%d) |" % (
     len(allk), *[tot[q] for q in G], len(allk - prov)))

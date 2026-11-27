@@ -1,5 +1,5 @@
 """Write RECHECK.md: the V-C recheck of 27 November, one row per spec entry.  python make_recheck.py
-Reads spec.json, results/*.json (vcheck.py) and logs/{spec_manual,arb_value_ts,arb_value_candle}.log (run_sml.py)."""
+Reads spec.json, results/*.json (vcheck.py) and logs/{spec_manual,arb_value_ts,arb_value_candle,saved_ts}.log (run_sml.py)."""
 import collections, glob, io, json, os, re
 
 H = os.path.dirname(os.path.abspath(__file__)) + "/"
@@ -9,14 +9,14 @@ for f in glob.glob(H + "results/*.json"):
     r = json.load(io.open(f, encoding="utf-8"))
     R[(r["entry"]["key_decl"], r["entry"]["family"], tuple(r["entry"]["translations"]), r["entry"]["P"])] = r
 MAN = {}
-for f in ("spec_manual", "arb_value_ts", "arb_value_candle"):
+for f in ("spec_manual", "arb_value_ts", "arb_value_candle", "saved_ts"):
     for l in io.open(H + "logs/%s.log" % f, encoding="utf-8"):
         m = re.match(r"(PROVED|FAILED) (\S+)", l)
         if m:
             MAN[m.group(2)] = (m.group(1), f + ".sml")
 
 # How HOL4 introduces the constant at kernel level (source lines in HOL4 / CakeML), and the evidence that the varied model keeps it true.
-# L: loose specification (vary the constant); A: TFL fills the missing pattern with ARB (the Lean equation then holds in HOL4).
+# L: loose specification (vary the constant); A: TFL definition whose kernel definition fills the missing pattern with ARB (not a saved theorem).
 INTRO = {
     "bool$ARB": ("L", "new_constant, no axiom (boolScript.sml:245)", None),
     "pred_set$CARD": ("L", "new_specification, guarded by FINITE (pred_setScript.sml:3428)", ("pred_set", "CARD_DEF")),
@@ -57,15 +57,15 @@ for e in S:
         ok = bool(hit) and hit[0][3] not in ("FAILED",) and not hit[0][3].startswith("ERROR")
         evid = "`%s` with the replacement: %s (vcheck.py)" % (ev[1], hit[0][3] if hit else "not found")
     else:
-        names = {"CHR": [CHR_P.get(e["P"])], "SEG": ["SEG_spec", "SEG_witness_fails"], "MAP3": ARBV["MAP3"].get(e["P"], [None])}.get(ev, [ev])
+        names = {"CHR": [CHR_P.get(e["P"])], "SEG": ["SEG_spec", "SEG_witness_fails"],
+                 "MAP3": ["MAP3_def"] + [x.replace("MAP3_", "MAP3_open_") for x in ARBV["MAP3"].get(e["P"], ["MAP3_missing"])],
+                 "tdc": ["type_def_to_ctMap_def", "eq_len", "ctMap_ok_type_defs", "mem_type_def_to_ctMap", "type_def_to_ctMap_mem", "tdc_open"],
+                 "termsem": ["termsem0: 13 saved theorems, and satisfies (defined from termsem0), not checked"]}.get(ev, [ev])
         ok = all(n in MAN and MAN[n][0] == "PROVED" for n in names)
         evid = ", ".join("`%s` %s (%s)" % (n, MAN[n][0].lower(), MAN[n][1]) if n in MAN else "`%s` missing" % n for n in names)
         if ev == "SEG":
             evid += "; SEG' m k l = TAKE m (DROP k l) ++ REPLICATE (m - (LENGTH l - k)) a"
-    if cat == "A":
-        v = "holds in HOL4" if ok else "unsure"
-    else:
-        v = "V-C" if ok else "unsure"
+    v = "V-C" if ok else "unsure"
     cnt[v] += 1
     pairs[v] += len(e["translations"])
     sup = "%d of %d" % (r["proved"], r["relevant"]) if r and r["relevant"] is not None else "not run (argument type did not parse)"
@@ -81,9 +81,9 @@ out = ["# V-C recheck (27 November 2026)", "",
        "Plan v3.4, section 3, asks that every counterexample behind a V-C label respect the saved HOL4 theorems and their dependencies, and that the label stay `unsure` where this is not verified. "
        "This file checks the %d HOL4 counterexamples behind the %d V-C (declaration, translation) pairs of the key." % (len(S), sum(len(e["translations"]) for e in S)), "",
        "## Result", "",
-       "| Verdict | Entries | Pairs |", "|---|---|---|"] + ["| %s | %d | %d |" % (k, cnt[k], pairs[k]) for k in ("V-C", "holds in HOL4", "unsure")] + ["",
+       "| Verdict | Entries | Pairs |", "|---|---|---|"] + ["| %s | %d | %d |" % (k, cnt[k], pairs[k]) for k in ("V-C", "unsure")] + ["",
        "- **V-C** (%d pairs): the counterexample is a model of the HOL4 theory, so every saved theorem holds in it, and the Lean equation fails in it." % pairs["V-C"],
-       "- **holds in HOL4** (%d pairs): HOL4's kernel definition fixes the value to ARB, and the Lean equation states exactly that. It is true in every model of the HOL4 theory, so it is not a V-C error. These leave the key (`key.json`, field `recheck`); the tables are recomputed (`../TABLES.md`; key as run: `../TABLES_pre_recheck.md`)." % pairs["holds in HOL4"],
+       "- **unsure** (%d pair): `termsem0` (candle_opus). Not counted as V-C; unresolved in the tables (`key.json`, field `recheck`; key as run: `../TABLES_pre_recheck.md`). The new error `termsem0` (candle_fable) is unsure for the same reason." % pairs["unsure"],
        "", "## Method", "",
        "1. How each constant is introduced was read from the HOL4 and CakeML sources and from HOL4's definition code (`Defn.prim_mk_defn`, src/tfl/src/Defn.sml:1281). "
        "A one-argument pattern definition over a datatype goes through `Prim_rec.new_recursive_definition`, a `new_specification`: the missing cases are left open (loose). "
@@ -91,9 +91,10 @@ out = ["# V-C recheck (27 November 2026)", "",
        "2. Loose (L): the counterexample replaces the constant c by c' = (\\x. if P x then g x else c x), with g arbitrary (for SEG a different closed form, since its specification ties the open values together). "
        "HOL4 proves, for every g, that c' satisfies c's specification. Constants defined later from c are reinterpreted by their own definitions (a constant definition fixes them; a later specification is met by some witness, because its existence theorem holds in the new model). "
        "Then the new interpretation is a model of the HOL4 theory, so every saved theorem holds in it (soundness of HOL with loose specifications; Candle proves this for its own kernel). The Lean equation e fixes c inside P, so it fails for a suitable g.",
-       "3. ARB (A): ARB has no axiom, so varying ARB at one type gives a model too, but the TFL constant changes with it: c args = ARB holds in every model. "
-       "HOL4 proves c args = ARB on P from the kernel definition. The theories here do not save that definition, so it was proved on a copy defined by the same `Define` from the saved equations (`arb_value_*.sml`); the copy's kernel definition is printed in the logs.",
-       "Every V-C pair names one Lean equation that the model falsifies (column \"Lean equation falsified\"): it mentions the changed constant inside P and, apart from it, only values the change leaves alone. A witness whose two sides change together is struck (one: `FAPPLY FEMPTY 0 = FAPPLY FEMPTY 1`, ts_sonnet; the pair keeps its other witness).",
+       "3. TFL constants (A), reference = the saved theorems (author, 27 November): the kernel definition, which fixes the missing cases to ARB, is not a saved theorem and does not count. "
+       "The counterexample is a constant defined by the saved clauses plus a catch-all clause with an arbitrary function g (`saved_ts.sml`). HOL4 proves every saved theorem that mentions the constant for it (MAP3: 1; type_def_to_ctMap: 4, three of them through a lemma that the replacement equals the constant when the lengths agree), and that its value on P is g. "
+       "Only the constant changes, and no other saved theorem mentions it, so all other saved theorems keep their truth value. For `termsem0` the 13 saved theorems that mention it were not all proved for such a replacement, and `satisfies`, defined from it, would change too: unsure. "
+       "Under the kernel reading (the alternative the author did not adopt) these equations would hold in HOL4: `arb_value_*.sml` proves c args = ARB on P for copies of MAP3, type_def_to_ctMap and termsem0 made by the same `Define`.",
        "4. Supplement: `vcheck.py` also rewrote every saved theorem that mentions c (with the ancestors; HD also changes EL) and tried fixed tactics with a 15 s limit (column \"theorems re-proved\"). "
        "A failure there is not a refutation: most failures are definitions of other constants built on c, which the model reinterprets, or tactic limits. This check alone would leave most entries `unsure`.",
        "", "## Entries", "",
@@ -101,8 +102,7 @@ out = ["# V-C recheck (27 November 2026)", "",
        "|---|---|---|---|---|---|---|---|---|"] + rows + ["",
        "## Limitations", "",
        "- The argument rests on soundness of HOL4 with loose specifications, not on a proof of each saved theorem in the new model. The type-soundness theories here come from a fast build (`--fast`), whose proofs are not re-run; their theorems are proved in CakeML's full build.",
-       "- For the TFL constants the kernel definition was reproduced on a copy, not read from the theory. ARB-valued equations relating two open points (for example two list shapes of MAP3) also hold in HOL4, for the same reason.",
-       "- The readers of the blinded check answered \"yes\" on the rows of the dropped pairs: they judged against the saved theorems, which do not state the ARB cases (`../check/CHECK_RESULTS_recheck.md`).",
+       "- The V-C label for the TFL constants depends on the reference: with the saved theorems (adopted) they are V-C; with the kernel definitions they would hold in HOL4 (`arb_value_*.sml`, on copies). Both readings are reported.",
        "- Varying ARB reinterprets the type `itself` with it (its carrier is {ARB}); this is a model change, not a theorem checked in HOL4.", ""]
 io.open(H + "RECHECK.md", "w", encoding="utf-8", newline="\n").write("\n".join(out))
 print(dict(cnt), dict(pairs))

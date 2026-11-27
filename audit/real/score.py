@@ -3,8 +3,8 @@ Findings that match nothing are listed for adjudication."""
 import collections, io, json, os, re, sys
 HERE = os.path.dirname(os.path.abspath(__file__)).replace("\\", "/") + "/"
 K = json.load(io.open(HERE + "key.json", encoding="utf-8"))
-# V-C recheck (27 Nov, vc_recheck/RECHECK.md): errors marked "recheck" hold in every model of the HOL4 theory and leave the key.
-# AUDIT_KEY=pre_recheck keeps them (the key as run), for the sensitivity tables.
+# V-C recheck (27 Nov, vc_recheck/RECHECK.md): errors marked "recheck" stay unsure under the test of plan v3.4, section 3, and count as
+# unresolved (out of the key). AUDIT_KEY=pre_recheck keeps them (the key as run), for comparison.
 PRE = os.environ.get("AUDIT_KEY") == "pre_recheck"
 DROPPED = []
 if not PRE:

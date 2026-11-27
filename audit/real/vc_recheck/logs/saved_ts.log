@@ -1,0 +1,41 @@
+<<HOL message: Created theory "savedts">>
+<<HOL message: mk_functional: 
+  pattern completion has added 3 clauses to the original specification.>>
+<<HOL warning: Context.snapshot: ambient context read while a proof was running (in savedts)>>
+Saved definition ____ "MAP3g_def"
+Saved induction _____ "MAP3g_ind"
+PROVED MAP3_def : ⊢ ∀g. (∀f. MAP3g g f [] [] [] = []) ∧
+      ∀t3 t2 t1 h3 h2 h1 f.
+        MAP3g g f (h1::t1) (h2::t2) (h3::t3) = f h1 h2 h3::MAP3g g f t1 t2 t3
+PROVED MAP3_open_a : ⊢ ∀g f h t. MAP3g g f [] (h::t) [] = g f [] (h::t) []
+PROVED MAP3_open_b : ⊢ ∀g f h t. MAP3g g f (h::t) [] [] = g f (h::t) [] []
+<<HOL message: mk_functional: 
+  pattern completion has added 1 clause to the original specification.>>
+Saved definition ____ "tdcg_def"
+Saved induction _____ "tdcg_ind"
+PROVED type_def_to_ctMap_def : ⊢ ∀g. (∀tenvT next_stamp. tdcg g tenvT next_stamp [] [] = []) ∧
+      ∀tvs tn tenvT tds next_stamp ids id ctors.
+        tdcg g tenvT next_stamp ((tvs,tn,ctors)::tds) (id::ids) =
+        tdcg g tenvT (next_stamp + 1) tds ids ++
+        REVERSE
+          (MAP
+             (λ(cn,ts).
+                (TypeStamp cn next_stamp,tvs,MAP (type_name_subst tenvT) ts,
+                 id)) ctors)
+PROVED eq_len : ⊢ ∀tds ids g tenvT n.
+    LENGTH tds = LENGTH ids ⇒
+    tdcg g tenvT n tds ids = type_def_to_ctMap tenvT n tds ids
+PROVED ctMap_ok_type_defs : ⊢ ∀g tenvT next tds tids.
+    ALL_DISTINCT tids ∧ DISJOINT (set tids) (set prim_type_nums) ∧
+    LENGTH tds = LENGTH tids ∧ check_ctor_tenv tenvT tds ∧
+    tenv_abbrev_ok tenvT ⇒
+    ctMap_ok (FEMPTY |++ REVERSE (tdcg g tenvT next tds tids))
+PROVED mem_type_def_to_ctMap : ⊢ ∀g tenvT next tds ids stamp x.
+    MEM (stamp,x) (tdcg g tenvT next tds ids) ∧ LENGTH tds = LENGTH ids ⇒
+    ∃cn i. stamp = TypeStamp cn i ∧ next ≤ i ∧ i < next + LENGTH tds
+PROVED type_def_to_ctMap_mem : ⊢ ∀g tenvT next tds tids k x.
+    ALOOKUP (tdcg g tenvT next tds tids) k = SOME x ∧
+    LENGTH tds = LENGTH tids ⇒
+    MEM (SND (SND x)) tids
+PROVED tdc_open : ⊢ ∀g tenvT n i is. tdcg g tenvT n [] (i::is) = g tenvT n [] (i::is)
+exit=0

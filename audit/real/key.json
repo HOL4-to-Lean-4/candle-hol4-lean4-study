@@ -83,7 +83,7 @@
     "declaration": "termsem0",
     "class": "V-C",
     "kind": "open value fixed",
-    "recheck": "TFL completes the missing patterns with ARB, so HOL4's kernel definition gives termsem0 ... (Abs a b) = ARB when a is not a Var; the Lean equation holds in every model of the HOL4 theory (vc_recheck/RECHECK.md)"
+    "recheck": "unsure: under the saved-theorem reading a counterexample must satisfy the 13 saved theorems that mention termsem0, and satisfies (defined from it) changes too; these were not checked (vc_recheck/RECHECK.md)"
    },
    {
     "declaration": "interprets0",
@@ -372,7 +372,7 @@
     "declaration": "MAP3",
     "class": "V-C",
     "kind": "open value fixed",
-    "recheck": "TFL completes the missing patterns with ARB, so HOL4's kernel definition gives MAP3 f l1 l2 l3 = ARB on unequal shapes; the Lean equation holds in every model of the HOL4 theory (vc_recheck/RECHECK.md)"
+    "recheck_note": "V-C confirmed by the recheck of 27 November under the saved-theorem reading: a replacement defined by the saved clauses plus an arbitrary catch-all satisfies every saved theorem that mentions the constant (vc_recheck/saved_ts.sml)"
    }
   ]
  },
@@ -686,7 +686,7 @@
     "declaration": "type_def_to_ctMap",
     "class": "V-C",
     "kind": "open value fixed",
-    "recheck": "TFL completes the missing patterns with ARB, so HOL4's kernel definition gives type_def_to_ctMap tenvT n [] (i::is) = ARB; the Lean equation holds in every model of the HOL4 theory (vc_recheck/RECHECK.md)"
+    "recheck_note": "V-C confirmed by the recheck of 27 November under the saved-theorem reading: a replacement defined by the saved clauses plus an arbitrary catch-all satisfies every saved theorem that mentions the constant (vc_recheck/saved_ts.sml)"
    },
    {
     "declaration": "type_def_to_ctMap",
@@ -822,7 +822,7 @@
     "declaration": "type_def_to_ctMap",
     "class": "V-C",
     "kind": "open value fixed",
-    "recheck": "TFL completes the missing patterns with ARB, so HOL4's kernel definition gives type_def_to_ctMap tenvT n [] (i::is) = ARB; the Lean equation holds in every model of the HOL4 theory (vc_recheck/RECHECK.md)"
+    "recheck_note": "V-C confirmed by the recheck of 27 November under the saved-theorem reading: a replacement defined by the saved clauses plus an arbitrary catch-all satisfies every saved theorem that mentions the constant (vc_recheck/saved_ts.sml)"
    }
   ]
  },
@@ -874,7 +874,7 @@
     "declaration": "type_def_to_ctMap",
     "class": "V-C",
     "kind": "open value fixed",
-    "recheck": "TFL completes the missing patterns with ARB, so HOL4's kernel definition gives type_def_to_ctMap tenvT n [] (i::is) = ARB; the Lean equation holds in every model of the HOL4 theory (vc_recheck/RECHECK.md)"
+    "recheck_note": "V-C confirmed by the recheck of 27 November under the saved-theorem reading: a replacement defined by the saved clauses plus an arbitrary catch-all satisfies every saved theorem that mentions the constant (vc_recheck/saved_ts.sml)"
    },
    {
     "declaration": "check_ctor_tenv_ok",
@@ -943,7 +943,7 @@
     "declaration": "MAP3",
     "class": "V-C",
     "kind": "open value fixed",
-    "recheck": "TFL completes the missing patterns with ARB, so HOL4's kernel definition gives MAP3 f l1 l2 l3 = ARB on unequal shapes; the Lean equation holds in every model of the HOL4 theory (vc_recheck/RECHECK.md)"
+    "recheck_note": "V-C confirmed by the recheck of 27 November under the saved-theorem reading: a replacement defined by the saved clauses plus an arbitrary catch-all satisfies every saved theorem that mentions the constant (vc_recheck/saved_ts.sml)"
    }
   ]
  },
@@ -1082,7 +1082,7 @@
     "declaration": "MAP3",
     "class": "V-C",
     "kind": "open value fixed",
-    "recheck": "TFL completes the missing patterns with ARB, so HOL4's kernel definition gives MAP3 f l1 l2 l3 = ARB on unequal shapes; the Lean equation holds in every model of the HOL4 theory (vc_recheck/RECHECK.md)"
+    "recheck_note": "V-C confirmed by the recheck of 27 November under the saved-theorem reading: a replacement defined by the saved clauses plus an arbitrary catch-all satisfies every saved theorem that mentions the constant (vc_recheck/saved_ts.sml)"
    }
   ]
  }
