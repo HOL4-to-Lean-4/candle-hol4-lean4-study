@@ -30,7 +30,6 @@ Works on "Default" (27 Nov). `tools/astra_gateway/` has the client: `astra.py` (
 
 ## What does not work in the cloud yet
 
-- Raw files: the private repository `Lee-Juntong/candle-hol4-lean4-raw` is in the personal account, outside the session's GitHub access. Moving it into the HOL4-to-Lean-4 organisation (kept private) and adding it to the project gives access. The archive (41 MB) is under GitHub's 100 MB file limit, so it can be committed as a file and fetched with `git clone`.
 - `audit/real/check/analyse.py` and `make_csv.py` need `check_key.csv` and `key.csv`, which are withheld from the repository (on the PC only).
 - Scripts that use fixed `E:/` paths (`build_units.py`, `run.py`, `mk_run.py`, `tv_candle.py`, `make_sheet.py`) need a path option before they run on Linux. For the audits, `codex_astra.sh` replaces the S1 call of `audit/real/run.py`.
 
@@ -41,5 +40,6 @@ Aristotle has dropped Lean support (author, 27 November) and is no longer part o
 - Claude Code with Opus 5.5 and Sonnet 5.5 (`claude -p --model ...`), Claude Code 2.1.332.
 - Gemini Neon: the separate cloud thread with `agy` (`tools/neon_cloud/`).
 - Astra (`gpt-6.2-astra`) through the SSS gateway, see above.
+- Raw files: the private repository `HOL4-to-Lean-4/candle-hol4-lean4-raw` (moved into the organisation 27 Nov) holds each archive as a plain file under `raw-<date>/`. In a session that has the repository: `git clone --depth 1 https://github.com/HOL4-to-Lean-4/candle-hol4-lean4-raw`, then `cd candle-hol4-lean4-raw/raw-2026-11-25 && sha256sum -c *.sha256 && tar -xzf candle_raw_2026-11-25.tar.gz -C <dest>`. `scripts/backup_raw.sh` commits new archives there and also uploads them to a release.
 - Python 3.13 scripts that read the repository (for example `audit/real/score.py`).
 - Git push to both repositories.

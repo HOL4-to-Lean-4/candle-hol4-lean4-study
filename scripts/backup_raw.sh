@@ -1,10 +1,12 @@
 #!/bin/bash
-# Pack the raw transcripts and work files that stay out of the public repository and copy them to
-# a release of the author's PRIVATE repository (needs gh, signed in).  Git Bash:  bash scripts/backup_raw.sh
+# Pack the raw transcripts and work files that stay out of the public repository and store them in
+# the PRIVATE repository HOL4-to-Lean-4/candle-hol4-lean4-raw (needs gh, signed in, and git push access):
+# committed as plain files under raw-<date>/ (so a cloud session gets them with git clone), and also
+# uploaded to the release raw-<date>.  Git Bash:  bash scripts/backup_raw.sh
 # Check the files for secrets before running it on new data. Never make that repository public.
 # Archives are dated and complete; to restore, only the newest one is needed (see CONTINUE.md).
 set -e -o pipefail
-N=candle_raw_$(date +%F); R=Lee-Juntong/candle-hol4-lean4-raw; T=raw-$(date +%F)
+N=candle_raw_$(date +%F); R=HOL4-to-Lean-4/candle-hol4-lean4-raw; T=raw-$(date +%F)
 [ "$(gh api repos/$R --jq .private)" = true ] || { echo "$R is not private; nothing uploaded"; exit 1; }
 cd /e
 {
@@ -23,3 +25,12 @@ sha256sum $N.tar.gz > $N.tar.gz.sha256
 gh release view $T -R $R >/dev/null 2>&1 || gh release create $T -R $R --title "Raw files, ${T#raw-}" --notes "Private: holds account details."
 gh release upload $T $N.tar.gz $N.tar.gz.sha256 $N.files.txt -R $R --clobber
 gh release view $T -R $R --json assets --jq '.assets[]|[.name,.size]|@tsv'
+# Commit the same files into the repository (GitHub refuses files over 100 MB; keep the release then).
+if [ "$(stat -c %s $N.tar.gz)" -lt 95000000 ]; then
+  C=$(mktemp -d); git clone -q --depth 1 https://github.com/$R.git "$C"
+  mkdir -p "$C/$T"; cp $N.tar.gz $N.tar.gz.sha256 $N.files.txt "$C/$T/"
+  git -C "$C" add "$T" && git -C "$C" commit -q -m "Raw files, ${T#raw-}" && git -C "$C" push -q origin HEAD:main
+  rm -rf "$C"
+else
+  echo "$N.tar.gz is over 95 MB: kept in the release only"
+fi
